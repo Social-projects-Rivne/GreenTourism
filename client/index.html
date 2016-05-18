@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="">
+<html ng-app="greenTourism">
   <head>
-     <meta charset="utf-8" />
+    <meta charset="utf-8" />
 
-     <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
-     <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.min.css" />
-     <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
-     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
 
-     <script src="libs/jquery/jquery.min.js"></script>
-     <script src="libs/angular/angular.min.js"></script>
-     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-     <script src="libs/leaflet/leaflet.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular/angular-route.min.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="libs/leaflet/leaflet.js"></script>
 
-     <title>Green Tourism</title>
+    <title>Green Tourism</title>
   </head>
   <body>
     <header>
-      <nav>
-      </nav>
+    <nav>
+    </nav>
     </header>
 
-    <main>
+    <main ng-view="">
     </main>
 
     <footer>
