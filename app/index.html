@@ -3,21 +3,27 @@
   <head>
     <meta charset="utf-8" />
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
 
+    <!-- Third-party scripts -->
     <script src="libs/jquery/jquery.min.js"></script>
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular/angular-route.min.js"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="libs/leaflet/leaflet.js"></script>
 
-    <script src="app.js"></script>
+    <!-- Main scripts -->
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
 
+    <!-- Shared components -->
     <script src="shared/map/map.component.js"></script>
 
+    <!-- Separated components -->
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-list/place-detail.component.js"></script>
 
@@ -25,9 +31,25 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-      </nav>
+
+    <header class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Green Tourism</a>
+        </div>
+
+        <nav class="nav navbar-nav">
+          <li><a href="#/places">Places</a></li>
+          <li><a href="#/tracks">About</a></li>
+          <li><a href="#/events">Events</a></li>
+        </nav>
+
+        <nav class="nav navbar-nav navbar-right">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Register</a></li>
+        </nav>
+
+      </div>
     </header>
 
     <main ng-view="">
@@ -35,7 +57,6 @@
 
     <footer>
     </footer>
-
 
   </body>
 </html>
