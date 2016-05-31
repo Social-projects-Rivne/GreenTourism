@@ -120,6 +120,12 @@ body{
     width: 150px;
     margin: 0 auto;
 }
+
+.carousel-inner img {
+	height: 400px;
+ }
+
+
 .panel-title {
     font-size:1.5em;
 }
