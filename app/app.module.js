@@ -1,1 +1,4 @@
-var app = angular.module('greenTourism', ['ngRoute']);
+var app = angular.module('greenTourism', [
+  'ngRoute',
+  'welcomePage'
+]);
