@@ -1,4 +1,5 @@
 var app = angular.module('greenTourism', [
   'ngRoute',
-  'welcomePage'
+  'welcomePage',
+  'events' // add events module
 ]);
