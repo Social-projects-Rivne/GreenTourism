@@ -13,6 +13,12 @@ app.config(function($routeProvider) {
 	when('/events', {
       template: '<events></events>'
     }).
+  when('/autorization/signup', {
+      template: '<signup></signup>'
+  }).
+  when('/autorization/login', {
+      template: '<login></login>'
+  }).
 	otherwise('/', {
       template: '<welcome-page></welcome-page>',
     });
