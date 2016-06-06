@@ -4,4 +4,5 @@ var app = angular.module('greenTourism', [
   'events', // add events module
   'signup',
   'login',
+  'placeList'
 ]);
