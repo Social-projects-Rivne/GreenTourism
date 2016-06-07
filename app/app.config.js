@@ -1,10 +1,10 @@
 app.config(function($routeProvider) {
   $routeProvider.
     when('/', {
-      template: '<welcome-page></welcome-page>',
+      template: '<welcome-page></welcome-page>'
     }).
     when('/places', {
-      template: '<place-list></place-list>',
+      template: '<place-list></place-list>'
     }).
     when('/places/:placeId', {
       template: '<place-detail></place-detail>'
@@ -20,6 +20,6 @@ app.config(function($routeProvider) {
       template: '<login></login>'
   }).
 	otherwise('/', {
-      template: '<welcome-page></welcome-page>',
+      template: '<welcome-page></welcome-page>'
     });
 });

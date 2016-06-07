@@ -15,59 +15,21 @@
                             <li><a href="#">Dropdown link</a></li>
                         </ul>
                     </div>
-                    <div class="btn-group col-xs-2 no-padding" role="group">
+                    <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterType">
                         <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Places category
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu col-xs-12">
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="camps" id="camps">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="camps">Camps</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="hostes" id="hostes">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="hostes">Hostes</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="services" id="services">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="services">Services</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="healthcare" id="healthcare">   
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="healthcare">Healthcare</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="featuredPlaces" id="featuredPlaces">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="featuredPlaces">Featured Places</label>
-                                </span>
-                            </li>
+                        <ul class="dropdown-menu col-xs-12 list-group">
+							<filter-type></filter-type>
                         </ul>
                     </div>
                     <button type="button" class="btn col-xs-2 btn-last" >Export</button>
                     <div class="col-xs-2"></div>
                 </div>
             </div> <!-- Filter container end -->
-            <div class="col-xs-12 no-padding" id="map"></div> <!-- Map container -->
+            <div class="col-xs-12 no-padding" id="map">
+			</div> <!-- Map container -->
             <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
                 <div class="col-xs-12 no-padding">
                     <h2>Popular Tracks in location</h2>

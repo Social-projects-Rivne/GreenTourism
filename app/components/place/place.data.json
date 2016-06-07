@@ -26,7 +26,7 @@
      "description": "description ......... for point3",
      "photo": ["/images/point3/img1.jpeg",
                "/images/point3/img2.jpeg"
-              ],
+              ],     
      "type": "Service"
    },
    {
@@ -36,7 +36,7 @@
      "description": "description ......... for point4",
      "photo": ["/images/point4/img1.jpeg",
                "/images/point4/img2.jpeg"
-              ],
+              ],     
      "type": "Camp"
    },
    {
@@ -46,7 +46,7 @@
      "description": "description ......... for point5",
      "photo": ["/images/point5/img1.jpeg",
                "/images/point5/img2.jpeg"
-              ],
+              ],     
      "type": "Hostes"
    },
    {
@@ -56,7 +56,7 @@
      "description": "description ......... for point6",
      "photo": ["/images/point6/img1.jpeg",
                "/images/point6/img2.jpeg"
-              ],
+              ],    
      "type": "Hostes"
    },
    {
@@ -66,7 +66,7 @@
      "description": "description ......... for point7",
      "photo": ["/images/point7/img1.jpeg",
                "/images/point7/img2.jpeg"
-              ],
+              ],     
      "type": "Service"
    },
    {
@@ -76,7 +76,7 @@
      "description": "description ......... for point8",
      "photo": ["/images/point8/img1.jpeg",
                "/images/point8/img2.jpeg"
-              ],
+              ],    
      "type": "Service"
    },
    {
@@ -86,7 +86,7 @@
      "description": "description ......... for point9",
      "photo": ["/images/point9/img1.jpeg",
                "/images/point9/img2.jpeg"
-              ],
+              ],     
      "type": "Camp"
    },
    {
@@ -96,8 +96,8 @@
      "description": "description ......... for point10",
      "photo": ["/images/point10/img1.jpeg",
                "/images/point10/img2.jpeg"
-              ],
-     "type": "Featured places"
+              ],    
+     "type": "FeaturedPlace"
    },
    {
      "lat": "50.6126",
@@ -106,7 +106,7 @@
      "description": "description ......... for point11",
      "photo": ["/images/point11/img1.jpeg",
                "/images/point11/img2.jpeg"
-              ],
+              ],     
      "type": "Healthcare"
    },
    {
@@ -116,7 +116,7 @@
      "description": "description ......... for point12",
      "photo": ["/images/point12/img1.jpeg",
                "/images/point12/img2.jpeg"
-              ],
+              ],     
      "type": "Service"
    },
    {
@@ -126,7 +126,7 @@
      "description": "description ......... for point13",
      "photo": ["/images/point13/img1.jpeg",
                "/images/point13/img2.jpeg"
-              ],
+              ],     
      "type": "Camp"
    },
    {
@@ -136,8 +136,8 @@
      "description": "description ......... for point14",
      "photo": ["/images/point14/img1.jpeg",
                "/images/point14/img2.jpeg"
-              ],
-     "type": "Featured places"
+              ],    
+     "type": "FeaturedPlace"
    },
    {
      "lat": "50.6210",
@@ -146,7 +146,7 @@
      "description": "description ......... for point15",
      "photo": ["/images/point15/img1.jpeg",
                "/images/point15/img2.jpeg"
-              ],
+              ],    
      "type": "Service"
    },
    {
@@ -156,7 +156,7 @@
      "description": "description ......... for point16",
      "photo": ["/images/point16/img1.jpeg",
                "/images/point16/img2.jpeg"
-              ],
+              ],    
      "type": "Camp"
    },
    {
@@ -166,7 +166,7 @@
      "description": "description ......... for point17",
      "photo": ["/images/point17/img1.jpeg",
                "/images/point17/img2.jpeg"
-              ],
+              ],    
      "type": "Healthcare"
    },
    {
@@ -176,8 +176,8 @@
      "description": "description ......... for point18",
      "photo": ["/images/point18/img1.jpeg",
                "/images/point18/img2.jpeg"
-              ],
-     "type": "Featured places"
+              ],    
+     "type": "FeaturedPlace"
    },
    {
      "lat": "50.6131",
@@ -186,7 +186,7 @@
      "description": "description ......... for point19",
      "photo": ["/images/point19/img1.jpeg",
                "/images/point19/img2.jpeg"
-              ],
+              ],    
      "type": "Healthcare"
    },
    {
@@ -196,7 +196,7 @@
      "description": "description ......... for point20",
      "photo": ["/images/point20/img1.jpeg",
                "/images/point20/img2.jpeg"
-              ],
+              ],  
      "type": "Service"
    }
 ]
