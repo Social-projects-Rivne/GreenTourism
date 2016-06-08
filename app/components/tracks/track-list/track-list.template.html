@@ -20,40 +20,9 @@
                             Tracks category
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu col-xs-12">
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="walking" id="walking" ng-change="$ctrl.showSpecificTracks($ctrl.walkingActive, 'walking')" ng-model="$ctrl.walkingActive" ng-checked="$ctrl.walkingActive">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="walking">Walking</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="car" id="car" ng-change="$ctrl.showSpecificTracks($ctrl.carActive, 'car')" ng-model="$ctrl.carActive" ng-checked="$ctrl.carActive">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="car">Car</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="bycicle" id="bycicle" ng-change="$ctrl.showSpecificTracks($ctrl.bycicleActive, 'bycicle')" ng-model="$ctrl.bycicleActive" ng-checked="$ctrl.bycicleActive">
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="bycicle">Bycicle</label>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-3">
-                                    <input type="checkbox" name="mixed" id="mixed" ng-change="$ctrl.showSpecificTracks($ctrl.mixedActive, 'mixed')" ng-model="$ctrl.mixedActive" ng-checked="$ctrl.mixedActive">   
-                                </span>
-                                <span class="col-xs-9">
-                                    <label for="mixed">Mixed</label>
-                                </span>
-                            </li>
-                        </ul>
+                        <ul class="dropdown-menu  col-xs-12">
+                            <track-filter></track-filter>
+                        </ul>    
                     </div>
                     <button type="button" class="btn col-xs-2 btn-last" >Export</button>
                     <div class="col-xs-2"></div>

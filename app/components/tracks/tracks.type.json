@@ -1,0 +1,18 @@
+[
+    {        
+        "type": "walking",
+        "color": "#f9ff0b"
+    },
+    {
+        "type": "bycicle",
+        "color": "#2f2fd0"
+    },
+    {
+        "type": "car",
+        "color": "#ff0a47"
+    },
+    {
+        "type": "mixed",
+        "color": "#0aff0a"
+    }
+]
