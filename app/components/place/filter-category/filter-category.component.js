@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('filterType',[])
-  .component('filterType', {
-    templateUrl: 'components/place/filter-type/filter-type.template.html',
+angular.module('filterCategory',[])
+  .component('filterCategory', {
+    templateUrl: 'components/place/filter-category/filter-category.template.html',
     controller: 
-      function FilterTypeController($http) {
+      function FilterCategoryController($http, $rootScope) {
         var self = this;
 
         //Get place.data
@@ -12,41 +12,32 @@ angular.module('filterType',[])
           self.points = response.data;
         });
 
-        //Get types data
+        //Get types.data
         $http.get('components/place/types.data.json').then(function(response) {
           self.types = response.data;
         });
 
-        //Show map
-        var map = L.map('map').setView([50.6234, 26.2189], 13);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        //Define array for markers and filterArray - with all data of point
         var filterArray = [];
         var markers = [];
-
         //Define method for show and hide all types of places    
         this.showhidePlaces = function(input) {
-          var inputButton = document.getElementsByName(input)[0]; //get element, which was clicked
-          var classSearch = inputButton.className;  //get className of search element
-          var spanCheck = inputButton.getElementsByTagName('span')[0];  //get span from clicked element, which add glyphicon icon for checked type
+          var inputButton = angular.element("#" + input);
+          var spanCheck = angular.element("#" + input + " span");
 
-          if (/checked/.test(classSearch)) {
-            spanCheck.className = '';
-            inputButton.className = inputButton.className.replace(" checked", "");
+          if (inputButton.hasClass('checked')) {
+            spanCheck.removeClass('glyphicon glyphicon-ok');
+            inputButton.removeClass('checked');
             for (var i = 0; i < filterArray.length; i++) {
               if (filterArray[i].type == input) {
-                map.removeLayer(markers[i]);
+                $rootScope.map.removeLayer(markers[i]);
                 markers.splice(i, 1);
                 filterArray.splice(i, 1);
                 i--;
               }
             }
           } else {
-              spanCheck.className = 'badge glyphicon glyphicon-ok';
-              inputButton.className += ' checked';
+              spanCheck.addClass('glyphicon glyphicon-ok');
+              inputButton.addClass('checked');
               for (var key in this.points) {
                 if (this.points[key].type == input) {
                   filterArray.push(this.points[key]);
@@ -60,7 +51,7 @@ angular.module('filterType',[])
                         iconAnchor: [12, 41],
                         popupAnchor: [1, -34],
                         shadowSize: [41, 41]
-                      })}).addTo(map);
+                      })}).addTo($rootScope.map);
                   }
                   markers.push(marker);
                 }
@@ -69,7 +60,7 @@ angular.module('filterType',[])
         };
 
         //Don't hide dropdown if clicked
-        $('#dropdownFilterType .dropdown-menu').on({
+        angular.element('#dropdownFilterCategory .dropdown-menu').on({
           "click":function(e){
             e.stopPropagation();
           }
