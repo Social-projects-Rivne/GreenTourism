@@ -196,3 +196,12 @@ body{
     text-align: center;
     border-top: 1px solid #009000;     
 }
+
+
+/*-------------- Map type and Places category filters --------------*/
+.filter span{
+    float: right;
+}
+.filter img{
+    width: 10px;
+}

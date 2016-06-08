@@ -12,7 +12,7 @@
 		"icon": "assets/img/places/marker/red.png"
 	},
 	{
-		"type": "FeaturedPlace",
+		"type": "Featured_Place",
 		"icon": "assets/img/places/marker/yellow.png"
 	},
 	{

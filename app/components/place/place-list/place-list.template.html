@@ -5,30 +5,31 @@
                 <div class="btn-group col-xs-12" role="group" id="buttons">
                     <div class="col-xs-2"></div>
                     <button type="button" class="btn col-xs-2 btn-first">Add place</button>
-                    <div class="btn-group col-xs-2 no-padding" role="group">
+                    <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
                         <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Map type
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu col-xs-12">
-                            <li><a href="#">Dropdown link</a></li>
-                            <li><a href="#">Dropdown link</a></li>
+                        <ul class="dropdown-menu col-xs-12 list-group no-padding">
+                            <filter-map-type></filter-map-type>
                         </ul>
                     </div>
-                    <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterType">
+                    <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterCategory">
                         <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Places category
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu col-xs-12 list-group">
-                            <filter-type></filter-type>
+                        <ul class="dropdown-menu col-xs-12 list-group no-padding">
+                            <filter-category></filter-category>
                         </ul>
                     </div>
                     <button type="button" class="btn col-xs-2 btn-last" >Export</button>
                     <div class="col-xs-2"></div>
                 </div>
             </div> <!-- Filter container end -->
-            <div class="col-xs-12 no-padding" id="map"></div> <!-- Map container -->
+            <div class="col-xs-12 no-padding"><!-- Map container start-->
+                <map></map>
+            </div> <!-- Map container end-->
             <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
                 <div class="col-xs-12 no-padding">
                     <h2>Popular Tracks in location</h2>
