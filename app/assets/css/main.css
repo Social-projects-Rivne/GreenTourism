@@ -194,7 +194,7 @@ body{
 #sidebarBottom {
     max-height: 315px;
     text-align: center;
-    border-top: 1px solid #009000;     
+    border-top: 1px solid #009000;
 }
 
 
@@ -204,4 +204,27 @@ body{
 }
 .filter img{
     width: 10px;
+}
+
+/********************************** User Profile *****************************/
+.user-page {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.user-page-sidebar {
+  border-right: 1px solid #ddd;
+}
+
+.user-page-avatar {
+  margin-bottom: 10px;
+}
+
+.user-page-avatar img {
+  max-width: 100%;
+  margin-bottom: 5px;
+}
+
+.user-page-avatar button {
+  width: 100%;
 }

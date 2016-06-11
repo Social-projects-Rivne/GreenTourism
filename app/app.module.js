@@ -4,5 +4,6 @@ var app = angular.module('greenTourism', [
   'events',
   'signup',
   'login',
-  'placeList'
+  'placeList',
+  'userProfile',
 ]);

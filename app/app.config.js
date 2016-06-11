@@ -19,6 +19,9 @@ app.config(function($routeProvider) {
   when('/autorization/login', {
       template: '<login></login>'
   }).
+  when('/profile', {
+    template: '<user-profile></user-profile>'
+  }).
 	otherwise('/', {
       template: '<welcome-page></welcome-page>'
     });
