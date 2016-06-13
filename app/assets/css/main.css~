@@ -224,10 +224,10 @@ body{
   max-width: 100%;
   margin-bottom: 5px;
 }
+
 .user-page-avatar button {
   width: 100%;
 }
-/************************************ Event page ************************************/
 .img-small {
     width: 64px;
     height: 64px;
