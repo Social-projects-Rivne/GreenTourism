@@ -22,6 +22,9 @@ app.config(function($routeProvider) {
   when('/profile', {
     template: '<user-profile></user-profile>'
   }).
+  when('/events/event', {
+    template: '<event></event>'
+  }).
 	otherwise('/', {
       template: '<welcome-page></welcome-page>'
     });
