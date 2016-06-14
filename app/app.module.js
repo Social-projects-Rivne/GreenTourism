@@ -1,9 +1,11 @@
 var app = angular.module('greenTourism', [
   'ngRoute',
   'welcomePage',
-  'events', // add events module
+  'events',
   'signup',
   'login',
   'placeList',
-  'trackList'
+  'trackList',
+  'userProfile',
+  'event'
 ]);

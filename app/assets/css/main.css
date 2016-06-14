@@ -139,7 +139,7 @@ body{
     background-image: linear-gradient(to bottom, rgba(51, 102, 102, 0.41) 0,#d9edf7 100%);
 }
 
-                                                        /*  -------- Places template ----------  */
+/*  -------- Places template ----------  */
 
 .no-padding {
     padding: 0;
@@ -194,7 +194,61 @@ body{
 #sidebarBottom {
     max-height: 315px;
     text-align: center;
-    border-top: 1px solid #009000;     
+    border-top: 1px solid #009000;
+}
+
+
+/*-------------- Map type and Places category filters --------------*/
+.filter span{
+    float: right;
+}
+.filter img{
+    width: 10px;
+}
+
+/********************************** User Profile *****************************/
+.user-page {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.user-page-sidebar {
+  border-right: 1px solid #ddd;
+}
+
+.user-page-avatar {
+  margin-bottom: 10px;
+}
+
+.user-page-avatar img {
+  max-width: 100%;
+  margin-bottom: 5px;
+}
+.user-page-avatar button {
+  width: 100%;
+}
+/************************************ Event page ************************************/
+.img-small {
+    width: 64px;
+    height: 64px;
+
+}
+.text-event p{
+    text-indent : 20px ;
+    padding: 0px 3% 5% ;
+}
+.text-event .input-group{
+    width: 100%;
+}
+
+.avatar {
+    height: 50px;
+    width:50px;
+    display: block;
+}
+
+.right-padding {
+    padding-left: 0px;
 }
 
 
