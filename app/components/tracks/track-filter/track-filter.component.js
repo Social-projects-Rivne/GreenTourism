@@ -1,18 +1,17 @@
 angular.module('trackFilter', [])
 .component('trackFilter', {
     templateUrl: 'components/tracks/track-filter/track-filter.template.html',
-    controller: function trackFilterController($http) {
+    controller: function trackFilterController($http, $rootScope) {
         var ctrlScope = this;
         var tracks = [];
         
         $http.get('components/tracks/tracks.data.json').then(function (data) {
             // fetching data about tracks from json
-            ctrlScope.tracks = data; 
-            
+            ctrlScope.tracks = data.data; 
             // adding all tracks on map
-            for (var i = 0; i < ctrlScope.tracks.data.length; i++) {
-                var polyline = L.polyline([ctrlScope.tracks.data[i].track_points], {color: ctrlScope.tracks.data[i].color}).addTo(mymap);
-                tracks.push([polyline, ctrlScope.tracks.data[i].type]);
+            for (var i = 0; i < ctrlScope.tracks.length; i++) {
+                var polyline = L.polyline(ctrlScope.tracks[i].track_points, {color: ctrlScope.tracks[i].color, opacity: 1}).addTo($rootScope.map);
+                tracks.push([polyline, ctrlScope.tracks[i].type]);
             } 
         }, function (data) {
             ctrlScope.tracks = "error";
@@ -21,32 +20,24 @@ angular.module('trackFilter', [])
         $http.get('components/tracks/tracks.type.json').then(function (data) {
             
             // fetching data about track types from json
-            ctrlScope.types = data; 
+            ctrlScope.types = data.data; 
         }, function (data) {
             ctrlScope.types = "error";
         });
-          
-        // creating map
-        var mymap = L.map('map').setView([50.61734, 26.25217], 13);
-               
-        //adding openstreetmap layer on the map
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a rel="nofollow" href="http://osm.org/copyright">OpenStreetMap</a> contributors | GreenTourism'
-        }).addTo(mymap);
+        
         
         // method for filtering tracks, which calls when user click on filter   
         ctrlScope.showSpecificTracks = function (inputValue) {
             var element = $("#" + inputValue);
             var icon = $("#gi" + inputValue);
-            console.log(icon[0]);
             for (var i = 0; i < tracks.length; i++) {
                 if (element[0].className == "") {                   
                     if (inputValue == tracks[i][1]) {
-                        tracks[i][0].addTo(mymap);
+                        tracks[i][0].addTo($rootScope.map);
                     } 
                 } else {
                     if (inputValue == tracks[i][1]) {
-                        mymap.removeLayer(tracks[i][0]);
+                        $rootScope.map.removeLayer(tracks[i][0]);
                     }
                 }
             }
