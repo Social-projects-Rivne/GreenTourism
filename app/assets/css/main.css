@@ -207,26 +207,28 @@ body{
 }
 
 /********************************** User Profile *****************************/
+
 .user-page {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.user-page-sidebar {
+.user-page__sidebar {
   border-right: 1px solid #ddd;
 }
 
-.user-page-avatar {
+.user-page__avatar {
   margin-bottom: 10px;
 }
 
-.user-page-avatar img {
+.user-page__avatar img {
   max-width: 100%;
   margin-bottom: 5px;
 }
-.user-page-avatar button {
+.user-page__avatar button {
   width: 100%;
 }
+
 /************************************ Event page ************************************/
 .img-small {
     width: 64px;
