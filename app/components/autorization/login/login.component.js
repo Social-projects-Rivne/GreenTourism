@@ -4,7 +4,7 @@ angular.module('login', [])
     templateUrl: 'components/autorization/login/login.template.html',
     controller: function msgCtrl($http) {
         $http.get('components/autorization/users.json').then(function(response) {
-             users = response.data;
+            users = response.data;
         });
             this.submit=function (userDetails) {
                 this.email = userDetails.email;

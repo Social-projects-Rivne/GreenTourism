@@ -3,36 +3,32 @@
 	<p>
 		It’s free and always will be
 	</p>
-	<form role="form">
+	<form role="form" name="signup" novalidate ng-submit="$ctrl.signup(user)">
 		<div class="form-group">
 			<label for="Name">Name:</label>
-			<input type="text" class="form-control">
+			<input type="text" class="form-control" ng-model="user.name" required >
 		</div>
 		<div class="form-group">
 			<label for="Name">User name:</label>
-			<input type="text" class="form-control">
+			<input type="text" class="form-control" ng-model="user.username">
 		</div>
 		<div class="form-group ">
 			<label for="email">Email:</label>
-			<input type="email" class="form-control" >
+			<input type="email" class="form-control" ng-model="user.useremail" required >
 		</div>
 		<div class="form-group ">
 			<label for="pwd">Password:</label>
-			<input type="password" class="form-control">
+			<input type="password" class="form-control" ng-model="user.password" required>
 		</div>
 		<div class="form-group ">
 			<label for="pwd">Confirm Password:</label>
-			<input type="password" class="form-control"  >
+			<input type="password" class="form-control"  ng-model="user.confirmpassword"  required>
 		</div>
-			<div class="checkbox">
 			<p>By clicking Sign Up, you agree to our Terms and Policy</p>
-		</div>
-		<button type="submit" class="btn btn-default" style="width: 315px">Sign Up</button>
+		<button type="submit" class="btn btn-default" ng-disabled="signup.$invalid" style="width: 315px">Sign Up</button>
 		<div>
-
-
-		<button type="submit" class="btn btn-default">Sign Up with Facebook</button>
-		<button type="submit" class="btn btn-default">Sign Up with Google</button>
+			<button type="submit" class="btn btn-default">Sign Up with Facebook</button>
+			<button type="submit" class="btn btn-default">Sign Up with Google</button>
 		</div>
 	</form>
 </div>
