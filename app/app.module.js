@@ -7,5 +7,6 @@ var app = angular.module('greenTourism', [
   'placeList',
   'trackList',
   'userProfile',
-  'event'
+  'event',
+  'blog'
 ]);

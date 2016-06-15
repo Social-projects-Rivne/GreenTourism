@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Blog_1 title",
+    "content": "Blog_1 content",
+    "author": "admin",
+    "date": "20.03.2016",
+    "category": "tourizm",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "title": "Blog_2 title",
+    "content": "Blog_2 content",
+    "author": "admin",
+    "date": "20.03.2016",
+    "category": "tourizm",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "title": "Blog_3 title",
+    "content": "Blog_3 content",
+    "author": "admin",
+    "date": "20.03.2016",
+    "category": "tourizm",
+    "images": "assets/img/blog/blog.jpg"
+  }
+]
