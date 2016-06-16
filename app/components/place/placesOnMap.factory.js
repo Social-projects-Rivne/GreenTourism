@@ -4,7 +4,7 @@ angular.module('greenTourism')
 .factory('placesOnMap', ['placeModel', '$rootScope', function(placeModel, $rootScope) {
   var placesOnMap = {};
     var self = this;
-    self.mainGroup = L.markerClusterGroup.layerSupport(); // obj for marker cluster
+    self.mainGroup = L.markerClusterGroup.layerSupport({showCoverageOnHover: false}); // obj for marker cluster
     self.groups = []; // Array of subgroups
     self.types = [];
     
@@ -16,7 +16,6 @@ angular.module('greenTourism')
     };
 
     placesOnMap.showPlacesOnLoad = function(arr, pointsType) {
-      console.log(arr);
       var i,j;
       var marker1;
       var placesArray = [];
@@ -56,13 +55,20 @@ angular.module('greenTourism')
       }
     };
 
+    placesOnMap.removeAllPlaces = function() {
+      for ( var i = 0; i < self.types.length; i++) {
+          self.mainGroup.removeLayer(self.groups[i]);
+          self.groups[i].clearLayers();
+      }
+    };
+
     placesOnMap.addPlaces = function(input) {
       var i,j;
       var marker;
       var placesArray = [];
       placesArray = placeModel.placesArray;
 
-      //self.mainGroup.addTo($rootScope.map);
+      self.mainGroup.addTo($rootScope.map);
       
       for (i = 0; i < self.types.length; i++) {
         if (self.types[i].type == input) {
@@ -81,7 +87,7 @@ angular.module('greenTourism')
             }
           }
         }
-        //self.mainGroup.checkIn(self.groups[i]);
+        self.mainGroup.checkIn(self.groups[i]);
         self.groups[i].addTo($rootScope.map);
       }
     };

@@ -10,7 +10,6 @@ angular.module('filterCategory',[])
         var firstCheck; // variable for first check onload
         var pointsTypeForShowOnLoad = 'Featured_Place';
         var arrPlaces = [];
-        var arrOnLoad = [];
         var placeObject = {};
 
         //Get place.data
@@ -43,6 +42,8 @@ angular.module('filterCategory',[])
           }
           placesOnMap.showPlacesOnLoad(arrPlaces, pointsType);
         };
+
+        placesOnMap.removeAllPlaces(); //Remove all places before use filters
 
         //Define method for show and hide all types of places
         this.showhidePlaces = function(input) {
