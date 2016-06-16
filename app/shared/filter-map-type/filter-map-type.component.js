@@ -2,7 +2,7 @@
 
 angular.module('filterMapType',[])
   .component('filterMapType', {
-    templateUrl: 'components/place/filter-map-type/filter-map-type.template.html',
+    templateUrl: 'shared/filter-map-type/filter-map-type.template.html',
     controller: 
       function FilterMapTypeController($rootScope) {
         this.maptype = ['Streets', 'Satellite', 'Outdoors'];

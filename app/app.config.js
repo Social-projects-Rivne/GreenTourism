@@ -13,6 +13,9 @@ app.config(function($routeProvider) {
 	when('/events', {
       template: '<events></events>'
     }).
+  when('/tracks', {
+      template: '<track-list></track-list>'
+  }).  
   when('/autorization/signup', {
       template: '<signup></signup>'
   }).
