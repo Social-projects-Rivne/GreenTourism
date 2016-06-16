@@ -2,6 +2,7 @@
    {
      "lat": "50.6202",
      "lon": "26.2516",
+     "id": "1",
      "name": "point1",
      "description": "description ......... for point2",
      "photo": ["/images/point1/img1.jpeg",
@@ -12,6 +13,7 @@
    {
      "lat": "50.6261",
      "lon": "26.2539",
+     "id": "2",
      "name": "point2",
      "description": "description ......... for point2",
      "photo": ["/images/point2/img1.jpeg",
@@ -22,181 +24,199 @@
    {
      "lat": "50.6163",
      "lon": "26.2409",
+     "id": "3",
      "name": "point3",
      "description": "description ......... for point3",
      "photo": ["/images/point3/img1.jpeg",
                "/images/point3/img2.jpeg"
-              ],     
+              ],
      "type": "Service"
    },
    {
      "lat": "50.6130",
      "lon": "26.2575",
+     "id": "4",
      "name": "point4",
      "description": "description ......... for point4",
      "photo": ["/images/point4/img1.jpeg",
                "/images/point4/img2.jpeg"
-              ],     
+              ],
      "type": "Camp"
    },
    {
      "lat": "50.6178",
      "lon": "26.2660",
+     "id": "5",
      "name": "point5",
      "description": "description ......... for point5",
      "photo": ["/images/point5/img1.jpeg",
                "/images/point5/img2.jpeg"
-              ],     
+              ],
      "type": "Hostes"
    },
    {
      "lat": "50.6033",
      "lon": "26.2843",
+     "id": "6",
      "name": "point6",
      "description": "description ......... for point6",
      "photo": ["/images/point6/img1.jpeg",
                "/images/point6/img2.jpeg"
-              ],    
+              ],
      "type": "Hostes"
    },
    {
      "lat": "50.6051",
      "lon": "26.2776",
+     "id": "7",
      "name": "point7",
      "description": "description ......... for point7",
      "photo": ["/images/point7/img1.jpeg",
                "/images/point7/img2.jpeg"
-              ],     
+              ],
      "type": "Service"
    },
    {
      "lat": "50.6150",
      "lon": "26.2840",
+     "id": "8",
      "name": "point8",
      "description": "description ......... for point8",
      "photo": ["/images/point8/img1.jpeg",
                "/images/point8/img2.jpeg"
-              ],    
+              ],
      "type": "Service"
    },
    {
      "lat": "50.6055",
      "lon": "26.2615",
+     "id": "9",
      "name": "point9",
      "description": "description ......... for point9",
      "photo": ["/images/point9/img1.jpeg",
                "/images/point9/img2.jpeg"
-              ],     
+              ],
      "type": "Camp"
    },
    {
      "lat": "50.6031",
      "lon": "26.2551",
+     "id": "10",
      "name": "point10",
      "description": "description ......... for point10",
      "photo": ["/images/point10/img1.jpeg",
                "/images/point10/img2.jpeg"
-              ],    
+              ],
      "type": "Featured_Place"
    },
    {
      "lat": "50.6126",
      "lon": "26.2395",
+     "id": "11",
      "name": "point11",
      "description": "description ......... for point11",
      "photo": ["/images/point11/img1.jpeg",
                "/images/point11/img2.jpeg"
-              ],     
+              ],
      "type": "Healthcare"
    },
    {
      "lat": "50.6298",
      "lon": "26.2713",
+     "id": "12",
      "name": "point12",
      "description": "description ......... for point12",
      "photo": ["/images/point12/img1.jpeg",
                "/images/point12/img2.jpeg"
-              ],     
+              ],
      "type": "Service"
    },
    {
      "lat": "50.6401",
      "lon": "26.2577",
+     "id": "13",
      "name": "point13",
      "description": "description ......... for point13",
      "photo": ["/images/point13/img1.jpeg",
                "/images/point13/img2.jpeg"
-              ],     
+              ],
      "type": "Camp"
    },
    {
      "lat": "50.6278",
      "lon": "26.2399",
+     "id": "14",
      "name": "point14",
      "description": "description ......... for point14",
      "photo": ["/images/point14/img1.jpeg",
                "/images/point14/img2.jpeg"
-              ],    
+              ],
      "type": "Featured_Place"
    },
    {
      "lat": "50.6210",
      "lon": "26.2316",
+     "id": "15",
      "name": "point15",
      "description": "description ......... for point15",
      "photo": ["/images/point15/img1.jpeg",
                "/images/point15/img2.jpeg"
-              ],    
+              ],
      "type": "Service"
    },
    {
      "lat": "50.6261",
      "lon": "26.2014",
+     "id": "16",
      "name": "point16",
      "description": "description ......... for point16",
      "photo": ["/images/point16/img1.jpeg",
                "/images/point16/img2.jpeg"
-              ],    
+              ],
      "type": "Camp"
    },
    {
      "lat": "50.6383",
      "lon": "26.2071",
+     "id": "17",
      "name": "point17",
      "description": "description ......... for point17",
      "photo": ["/images/point17/img1.jpeg",
                "/images/point17/img2.jpeg"
-              ],    
+              ],
      "type": "Healthcare"
    },
    {
      "lat": "50.6439",
      "lon": "26.2322",
+     "id": "18",
      "name": "point18",
      "description": "description ......... for point18",
      "photo": ["/images/point18/img1.jpeg",
                "/images/point18/img2.jpeg"
-              ],    
+              ],
      "type": "Featured_Place"
    },
    {
      "lat": "50.6131",
      "lon": "26.2125",
+     "id": "19",
      "name": "point19",
      "description": "description ......... for point19",
      "photo": ["/images/point19/img1.jpeg",
                "/images/point19/img2.jpeg"
-              ],    
+              ],
      "type": "Healthcare"
    },
    {
      "lat": "50.6087",
      "lon": "26.2293",
+     "id": "20",
      "name": "point20",
      "description": "description ......... for point20",
      "photo": ["/images/point20/img1.jpeg",
                "/images/point20/img2.jpeg"
-              ],  
+              ],
      "type": "Service"
    }
 ]
