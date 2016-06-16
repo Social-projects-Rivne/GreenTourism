@@ -15,12 +15,12 @@ app.config(function($routeProvider) {
     }).
   when('/tracks', {
       template: '<track-list></track-list>'
-  }).  
+  }).
   when('/autorization/signup', {
       template: '<signup></signup>'
   }).
-  when('/autorization/login', {
-      template: '<login></login>'
+  when('/autorization/signin', {
+      template: '<signin></signin>'
   }).
   when('/profile', {
     template: '<user-profile></user-profile>'
