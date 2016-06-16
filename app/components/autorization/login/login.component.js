@@ -12,11 +12,11 @@ angular.module('login', [])
                 for (var i = 0; i < users.length; i++){
                     var user = users[i];
                         if (this.email == user.email && this.password == user.password){
-                            window.location.hash = "/profile"
+                            window.location.hash = "/profile";
                         }else{
                             this.message = "No such user here";
-                        };
-                };
+                        }
+                }
             };
    },
   });

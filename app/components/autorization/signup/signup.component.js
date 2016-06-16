@@ -12,7 +12,9 @@ angular.module('signup', [])
             this.password = userDetails.password;
             this.confirmpassword = userDetails.confirmpassword;
             if ( this.password == this.confirmpassword ) {
-                     users.push ({})
+                     $http.post('components/autorization/users.json').then(function(response){
+                         users = response.headers;
+                     })
 
             }
 
