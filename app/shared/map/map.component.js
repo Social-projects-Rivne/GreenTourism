@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('map', [])
-.component('map', {
+angular.module('showMap', [])
+.component('showMap', {
   templateUrl: 'shared/map/map.template.html',
   controller: function($rootScope) {
     $rootScope.Outdoors = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
