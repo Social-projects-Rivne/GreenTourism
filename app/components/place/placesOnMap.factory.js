@@ -19,13 +19,13 @@ angular.module('greenTourism')
       var i,j;
       var marker1;
       var placesArray = [];
-      placesArray = arr;
-
+      placesArray = placeModel.placesArray;
+      
       //self.mainGroup.addTo($rootScope.map);
 
       for (i = 0; i < self.types.length; i++) {
         if (self.types[i].type == pointsType) {
-          for (j = 0; j < placesArray.length; j++) {  
+          for (j in placesArray) {  
             if (placesArray[j].type == pointsType) {
               marker1 = L.marker([placesArray[j].lat, placesArray[j].lon], {icon: 
                         L.icon ({
@@ -42,7 +42,6 @@ angular.module('greenTourism')
           //self.mainGroup.checkIn(self.groups[i]);
           self.groups[i].addTo($rootScope.map);
         }
-        
       }
     };
 
@@ -72,7 +71,7 @@ angular.module('greenTourism')
       
       for (i = 0; i < self.types.length; i++) {
         if (self.types[i].type == input) {
-          for (j = 0; j < placesArray.length; j++) {  
+          for (var j in placesArray) {  
             if (placesArray[j].type == input) {
               marker = L.marker([placesArray[j].lat, placesArray[j].lon], {icon: 
                         L.icon ({

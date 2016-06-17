@@ -40,6 +40,7 @@ angular.module('filterCategory',[])
               }
             }
           }
+          placeModel.setPlacesArray(arrPlaces);
           placesOnMap.showPlacesOnLoad(arrPlaces, pointsType);
         };
 
@@ -49,7 +50,6 @@ angular.module('filterCategory',[])
         this.showhidePlaces = function(input) {
           var inputButton = angular.element("#" + input);
           var spanCheck = angular.element("#" + input + " span");
-
           if (inputButton.hasClass('checked')) {
             firstCheck = false;
             spanCheck.removeClass('glyphicon glyphicon-ok');

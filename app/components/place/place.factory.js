@@ -6,6 +6,7 @@ angular.module('greenTourism')
 
     placeModel.setPlacesArray = function(arr) {
       placeModel.placesArray = arr;
+      console.log(placeModel.placesArray);
       return placeModel.placesArray;
     };
 
