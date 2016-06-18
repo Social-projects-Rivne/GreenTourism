@@ -5,8 +5,6 @@ app.use(express.static('app'));
 var logger = require('./logger');
 app.use(logger);
 
-var Sequelize = require('sequelize');
-
 /* Mongo:
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
@@ -15,6 +13,27 @@ mongoose.connect('mongodb://localhost/test');
 var Place = require('./models/place');
 
 app.get('/places', function(req, res) {
+  if (req.query.type) {
+    Place.findAll({where: {type: req.query.type}}).then(function(places) {
+      var arr = [];
+      for (var i = 0; i < places.length; i++) {
+        arr.push(places[i].get());
+      }
+
+      res.json(arr);
+    });
+
+  } else {
+    Place.findAll().then(function(places) {
+      var arr = [];
+      for (var i = 0; i < places.length; i++) {
+        arr.push(places[i].get());
+      }
+
+      res.json(arr);
+    });
+  }
+
   /* Mongo:
   Place.find(function(err, places) {
     if (err) {
@@ -24,15 +43,6 @@ app.get('/places', function(req, res) {
     res.json(places);
   });
   */
-
-  Place.findAll().then(function(places) {
-    var arr = [];
-    for (var i = 0; i < places.length; i++) {
-      arr.push(places[i].get());
-    }
-
-    res.json(arr);
-  });
 });
 
 app.get('/places/:id', function(req, res) {
