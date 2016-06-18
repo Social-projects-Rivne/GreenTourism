@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-app.use(express.static('app'));
+app.use(express.static(__dirname + '/../app'));
 
 var logger = require('./logger');
 app.use(logger);
