@@ -35,6 +35,16 @@ app.get('/places', function(req, res) {
   });
 });
 
+app.get('/places/:id', function(req, res) {
+  Place.findById(req.params.id).then(function(place) {
+    if (place) {
+      res.json(place);
+    } else {
+      res.status(404).send('Place with id ' + req.params.id + ' is not found!');
+    }
+  });
+});
+
 app.listen(3000, function() {
   console.log('Listening on port 3000...');
 });
