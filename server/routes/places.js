@@ -29,6 +29,8 @@ router.route('/')
     } else {
       Place.create(req.body).then(function(place) {
         res.status(201).json(place);
+      }).catch(function(err) {
+        res.status(400).json(err.errors);
       });
     }
   });
