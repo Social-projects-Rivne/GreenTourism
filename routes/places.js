@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+var jsonParser = bodyParser.json();
+
 var Place = require('../models/place');
 
 router.route('/')
@@ -14,24 +18,35 @@ router.route('/')
     }
 
     Place.findAll(query).then(function(places) {
-      var arr = [];
-      for (var i = 0; i < places.length; i++) {
-        arr.push(places[i].get());
-      }
-
-      res.json(arr);
+      res.json(places);
     });
+  })
+  .post(jsonParser, function(req, res) {
+    // TODO: Restrict creating points to logged in users only
+
+    if (!req.body) {
+      res.sendStatus(400);
+    } else {
+      Place.create(req.body).then(function(place) {
+        res.status(201).json(place);
+      });
+    }
   });
 
 router.route('/:id')
   .get(function(req, res) {
     Place.findById(req.params.id).then(function(place) {
-      if (place) {
-        res.json(place);
-      } else {
+      if (!place) {
         res.status(404).json('Place with id ' + req.params.id +
                              ' was not found!');
+      } else {
+        res.json(place);
       }
+    });
+  })
+  .delete(function(req, res) {
+    Place.destroy({where: {id: req.params.id}}).then(function() {
+      res.sendStatus(200);
     });
   });
 

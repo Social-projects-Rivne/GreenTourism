@@ -7,13 +7,15 @@ app.use(logger);
 
 /* Mongo:
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test_greentourism');
 */
 
 // Routes
 var places = require('./routes/places');
 app.use('/places', places);
 
-app.listen(3000, function() {
-  console.log('Listening on port 3000...');
+var port = process.env.PORT || 8080;
+
+app.listen(port, function() {
+  console.log('Listening on port ' + port + '...');
 });
