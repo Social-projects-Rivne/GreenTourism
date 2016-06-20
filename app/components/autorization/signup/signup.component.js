@@ -1,23 +1,64 @@
-//'use strict'
+'use strict';
 angular.module('signup', [])
 .component('signup', {
     templateUrl: 'components/autorization/signup/signup.template.html',
-    controller: function signupCtrl($http) {
-        $http.get('components/autorization/users.json').then(function(response){
-            users = response.data;
-        });
-        this.signup = function (userDetails) {
-            this.name = userDetails.name;
-            this.username = userDetails.username;
-            this.password = userDetails.password;
-            this.confirmpassword = userDetails.confirmpassword;
-            if ( this.password == this.confirmpassword ) {
-                     $http.post('components/autorization/users.json').then(function(response){
-                         users = response.headers;
-                     })
+    controller: function signupCtrl() {
 
+        //this.ppattern =new RegExp("/^(0|[1-9][0-9]*)$/");
+
+        this.signup = function (isvalid) {
+            if (isvalid) {
+                this.message ="Welcome to Green tourism";
+            } else {
+                this.message = "Please complete the form as required ";
+                this.showError = true;
             }
-
         };
+
+        this.getErrorpassword = function(error) {
+            if (angular.isDefined(error)) {
+                if (error.minlength) {
+                    return "Please input more then 7 characters";
+                } else if (error.maxlength) {
+                    return "Sorry, but less then 25 characters is allowed";
+                } else if (error.pattern) {
+                    return "sadfdgfdfhf"
+                } else if (error.validation){
+                    return "Password isn't match"
+                } else if (error.required) {
+                    return "Please fill up this field";
+                }
+            }
+        };
+
+        this.getError = function (error) {
+            if (angular.isDefined(error)) {
+                if (error.required) {
+                    return "Please fill up this field";
+                } else if (error.email) {
+                    return "Please input correct email";
+                } else if (error.minlength) {
+                    return "Please input more then 2 characters";
+                } else if (error.maxlength) {
+                    return "Sorry, but less then 15 characters is allowed";
+                } else if (error.pattern) {
+                    return "asdfds";
+                }
+            }
+        };
+
     },
-  });
+})
+.directive('confirmPassword', [function () {
+return {
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+        var password = '#' + attrs.confirmPassword;
+        elem.add(password).on('keyup', function () {
+            scope.$apply(function () {
+                ctrl.$setValidity('validation', elem.val() === $(password).val());
+            });
+        });
+    }
+}
+}]);
