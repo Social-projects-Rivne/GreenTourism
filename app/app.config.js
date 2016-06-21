@@ -22,7 +22,7 @@ app.config(function($routeProvider) {
     template: '<user-profile></user-profile>'
   }).	// add events and otherwise
   when('/events', {
-    template: '<event></event>'
+    template: '<events></events>'
   }).
   when('/events/event', {
     template: '<event></event>'

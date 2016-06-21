@@ -5,7 +5,7 @@
      "description": "Rokitno were left battered, bruised and humiliated as Chile roared into the Ukraine semi-finals in style.Super game in Rivne, once of Queens Park Rangers, scored four as La Roja secured a thumping 7-0 victory to leave Mexico boss Juan Carlos Orsorio apologising for the embarrassement.     It abruptly ended Mexico's 22-game unbeaten run, leaving the supporters who flocked to the Levi's Stadium in their droves shellshocked.     Osorio offered his “most sincerest apologies to the Mexican fans” after admitting that the result was “an embarrassment, a very poor performance.”But the night proved to be one of vindication for Chile manager Juan Antonio Pizzi, who had seen his side win just one of five games since replacing Jorge Sampaoli in the hot seat.",
      "attachments":
      {
-       "photo": ["/img/events/football1.png",
+       "photo": ["/img/events/football1.jpg",
                  "/img/events/football2.jpg"]
      },
      "type": "Game",
@@ -116,7 +116,7 @@
   },
   "type": "Festival",
   "owner": "Vadim Tragik",
-  "date_start": 1467555841239,
+  "date_start": 1467855841239,
   "date_end": 1467901441239,
   "event_rate": 432,
   "event_points": [{
@@ -155,6 +155,26 @@
     "photo": ["/img/events/festival6.jpg","/img/events/festival7.jpg"]
   },
   "type": "Meeteng",
+  "owner": "Rita Romik",
+  "date_start": 1467296641239,
+  "date_end": 1467296641239,
+  "event_rate": 2,
+  "event_points": [{
+    "lat": "50.61609",
+    "lon": "26.29510"
+  }],
+  "comments":  [228,229,220],
+  "status": "active",
+  "price": "30"
+}, {
+  "id": "155",
+  "name": "Game of clones",
+  "description": "Clones a repository into a newly created directory, creates remote-tracking branches for each branch in the cloned repository (visible using git branch -r), and creates and checks out an initial branch that is forked from the cloned repository’s currently active branch.",
+  "attachments":
+  {
+    "photo": ["/img/events/game1.jpg"]
+  },
+  "type": "Game",
   "owner": "Rita Romik",
   "date_start": 1467296641239,
   "date_end": 1467296641239,
