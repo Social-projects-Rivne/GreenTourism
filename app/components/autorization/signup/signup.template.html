@@ -8,8 +8,8 @@
 		<div class="well well-sm col-xs-12  col-md-7">
 			<div class="form-group">
 				<label for="Name"><span class="required">*</span>Name:</label>
-				<input type="text" name="name" class="form-control"  ng-model="user.name" ng-minlength="2" ng-maxlength="15" required ng-pattern="/^(0|[1-9][0-9]*)$/">
-				<div class="" ng-show="signup.name.$touched || signup.name.$dirty">
+				<input type="text" name="name" class="form-control"  ng-model="user.name" ng-minlength="2" ng-maxlength="15" required >
+				<div class="" ng-show="$ctrl.showError || signup.name.$touched || signup.name.$dirty">
 					{{$ctrl.getError(signup.name.$error)}}
 				</div>
 			</div>
@@ -20,26 +20,26 @@
 			<div class="form-group ">
 				<label for="email"><span class="required">*</span>Email:</label>
 				<input type="email" name="email" class="form-control" ng-model="user.useremail" required>
-				<div class=""  ng-show="signup.email.$touched || signup.email.$dirty">
+				<div class=""  ng-show="$ctrl.showError || signup.email.$touched || signup.email.$dirty">
 					{{$ctrl.getError(signup.email.$error)}}
 				</div>
 			</div>
 			<div class="form-group ">
 				<label for="password"><span class="required">*</span>Password:</label>
-				<input type="password" name="password" class="form-control" id="password" ng-model="user.password" ng-minlength="7" ng-maxlength="25"  required>
-				<div class=""  ng-show="signup.password.$touched || signup.password.$dirty">
+				<input type="password" name="password" class="form-control" id="password" ng-pattern="/^(0|[1-9][0-9]*)$/" ng-model="user.password" ng-minlength="7" ng-maxlength="25"  required>
+				<div class=""  ng-show="$ctrl.showError || signup.password.$touched || signup.password.$dirty">
 					{{$ctrl.getErrorpassword(signup.password.$error)}}
 				</div>
 			</div>
 			<div class="form-group ">
 				<label for="confirmpassword"><span class="required">*</span>Confirm Password:</label>
-				<input type="password" name="confirmpassword" class="form-control"  ng-model="user.confirmpassword" ng-minlength="7" ng-maxlength="25"  required  confirm-password="password">
-				<div class=""  ng-show="signup.confirmpassword.$touched || signup.confirmpassword.$dirty">
+				<input type="password" name="confirmpassword" class="form-control" ng-pattern="/^(0|[1-9][0-9]*)$/"  ng-model="user.confirmpassword" ng-minlength="7" ng-maxlength="25"  required  confirm-password="password">
+				<div class=""  ng-show="$ctrl.showError || signup.confirmpassword.$touched || signup.confirmpassword.$dirty">
 					{{$ctrl.getErrorpassword(signup.confirmpassword.$error)}}
 				</div>
 			</div>
 				<p>By clicking Sign Up, you agree to our Terms and Policy</p>
-			<button type="submit" class="btn btn-default" >Greate an account</button> <!-- ng-disabled="signup.$invalid"-->
+			<button type="submit" class="btn btn-default">Greate an account</button> <!-- ng-disabled="signup.$invalid"-->
 	   	</div>
 		<div class="well well-sm col-xs-12 col-sm-7 col-md-7">
 			<button type="submit" class="btn btn-default">Sign Up with Facebook</button>

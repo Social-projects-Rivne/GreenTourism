@@ -17,12 +17,12 @@ angular.module('signup', [])
 
         this.getErrorpassword = function(error) {
             if (angular.isDefined(error)) {
-                if (error.minlength) {
-                    return "Please input more then 7 characters";
+                if (error.pattern) {
+                    return "Only digits are allowed";
                 } else if (error.maxlength) {
                     return "Sorry, but less then 25 characters is allowed";
-                } else if (error.pattern) {
-                    return "sadfdgfdfhf"
+                } else if (error.minlength) {
+                    return "Please input more then 7 characters"
                 } else if (error.validation){
                     return "Password isn't match"
                 } else if (error.required) {
@@ -41,8 +41,6 @@ angular.module('signup', [])
                     return "Please input more then 2 characters";
                 } else if (error.maxlength) {
                     return "Sorry, but less then 15 characters is allowed";
-                } else if (error.pattern) {
-                    return "asdfds";
                 }
             }
         };
