@@ -25,7 +25,7 @@ router.route('/')
     } else {
       Place.create(req.body)
         .then(function(place) {
-          res.status(201).json({message: 'Place was successfully create!',
+          res.status(201).json({message: 'Place was successfully created!',
                                 place: place});
         })
         .catch(function(err) {
