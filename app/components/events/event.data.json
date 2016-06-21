@@ -1,0 +1,170 @@
+[
+   {
+     "id": "532",
+     "name": "Football match Rokitno - Dubno",
+     "description": "Rokitno were left battered, bruised and humiliated as Chile roared into the Ukraine semi-finals in style.Super game in Rivne, once of Queens Park Rangers, scored four as La Roja secured a thumping 7-0 victory to leave Mexico boss Juan Carlos Orsorio apologising for the embarrassement.     It abruptly ended Mexico's 22-game unbeaten run, leaving the supporters who flocked to the Levi's Stadium in their droves shellshocked.     Osorio offered his “most sincerest apologies to the Mexican fans” after admitting that the result was “an embarrassment, a very poor performance.”But the night proved to be one of vindication for Chile manager Juan Antonio Pizzi, who had seen his side win just one of five games since replacing Jorge Sampaoli in the hot seat.",
+     "attachments":
+     {
+       "photo": ["/img/events/football1.png",
+                 "/img/events/football2.jpg"]
+     },
+     "type": "Game",
+     "owner": "Veres-info Center",
+     "date_start": 1468853756239,
+     "date_end": 1468853756239,
+     "event_rate": 193,
+     "event_points": [{
+          "lat": "50.61625",
+          "lon": "26.24082"
+        }],
+     "comments":  [123,754,987],
+     "status": "active",
+     "price": "100"
+  },
+  {
+  "id": "541",
+  "name": "Football match Berezno - Goshca",
+  "description": "However, he limped out of their opening group game against Ukraine with a calf problem and may struggle to play any further part in the tournament.",
+  "attachments":
+  {
+    "photo": ["/img/events/football4.jpg",
+              "/img/events/football3.jpg",
+              "/img/events/football5.jpg"]
+  },
+  "type": "Game",
+  "owner": "Veres-info Center",
+  "date_start": 1471357441239,
+  "date_end": 1471357441239,
+  "event_rate": 112,
+  "event_points": [{
+    "lat": "50.61625",
+    "lon": "26.24082"
+  }],
+  "comments":  [23,454,437],
+  "status": "active",
+  "price": "120"
+},
+  {
+    "id": "590",
+    "name": "Football match Rivne - Goshca",
+    "description": "Final of Rivne: The Veres forward scored a second-half brace as Marc Wilmot's men cruised to victory to boost their chances of reaching",
+    "attachments":
+    {
+      "photo": ["/img/events/football7.jpg","/img/events/football6.jpg"]
+    },
+    "type": "Game",
+    "owner": "Veres-info Center",
+    "date_start": 1469024641239,
+    "date_end": 1469024641239,
+    "event_rate": 112,
+    "event_points": [{
+      "lat": "50.61625",
+      "lon": "26.24082"
+    }],
+    "comments":  [23,454,437],
+    "status": "active",
+    "price": "100"
+  },
+  {
+    "id": "320",
+    "name": "Shooting competition",
+    "description": "ractical Shooting IS competition. Competition necessarily requires that there be more than one person taking part, so the first step is to locate someone near you with whom to compete. Fortunately, USPSA has nearly 400 affiliated clubs located in or near most communities in the United States so it shouldn't be difficult. Click on the 'Match Schedule & Results' button on the left to find a club near you, then contact the local people and make arrangements to visit the club during a match or practice session.",
+    "attachments":
+    {
+      "photo": ["/img/events/shoot3.jpg","/img/events/shoot1.jpg","/img/events/shoot2.jpg"]
+    },
+    "type": "Game",
+    "owner": "Sport center of shooting",
+    "date_start": 1468592641239,
+    "date_end": 1468765441239,
+    "event_rate": 32,
+    "event_points": [{
+      "lat": "50.65100",
+      "lon": "26.26529"
+    }],
+    "comments":  [78,19,238],
+    "status": "active",
+    "price": "0"
+  },
+  {
+    "id": "147",
+    "name": "Swimming competition",
+    "description": "Sophie is swimming for her school, but gets a bad result by doing the wrong stroke!",
+    "attachments":
+    {
+      "photo": ["/img/events/swiming1.jpg"]
+    },
+    "type": "Game",
+    "owner": "Vadim Tragik",
+    "date_start": 1472912641239,
+    "date_end": 1472912641239,
+    "event_rate": 32,
+    "event_points": [{
+      "lat": "50.60362",
+      "lon": "26.25167"
+    }],
+    "comments":  [38,519,908],
+    "status": "active",
+    "price": "0"
+  },  {
+  "id": "845",
+  "name": "Music Festival",
+  "description": "The Summer Music Festival in Rivne is one of many musical-oriented events in the Ukraine. It features a string of open-air concerts on weekends late May through the middle of July at the Central Park of Culture and Resort. There’s everything from classic and modern performances to jazz.",
+  "attachments":
+  {
+    "photo": ["/img/events/festival1.jpg","/img/events/festival2.jpg"]
+  },
+  "type": "Festival",
+  "owner": "Vadim Tragik",
+  "date_start": 1467555841239,
+  "date_end": 1467901441239,
+  "event_rate": 432,
+  "event_points": [{
+    "lat": "50.61969",
+    "lon": "26.25136"
+  }],
+  "comments":  [328,559,308],
+  "status": "active",
+  "price": "0"
+}, {
+  "id": "745",
+  "name": "Ukraine’s independence",
+  "description": "A major public holiday on August 24, Ukraine’s independence from the USSR is celebrated with military displays and fireworks nationwide. Kiev’s independence Square is the best place to be, while all towns mark the occasion with a lineup of events including live concerts in Donetsk.",
+  "attachments":
+  {
+    "photo": ["/img/events/festival3.jpg","/img/events/festival4.jpg","/img/events/festival5.jpg"]
+  },
+  "type": "Festival",
+  "owner": "Rita Romik",
+  "date_start": 1472221441239,
+  "date_end": 1472221441239,
+  "event_rate": 7832,
+  "event_points": [{
+    "lat": "50.61632",
+    "lon": "26.25598"
+  }],
+  "comments":  [728,759,708],
+  "status": "active",
+  "price": "0"
+}, {
+  "id": "145",
+  "name": "More charter from Gosha",
+  "description": "Meet one more charter from Gosha! Croatia – is the high class vacation at a very affordable price! $ 100 discount in the first departure 23.06.2016 ",
+  "attachments":
+  {
+    "photo": ["/img/events/festival6.jpg","/img/events/festival7.jpg"]
+  },
+  "type": "Meeteng",
+  "owner": "Rita Romik",
+  "date_start": 1467296641239,
+  "date_end": 1467296641239,
+  "event_rate": 2,
+  "event_points": [{
+    "lat": "50.61609",
+    "lon": "26.29510"
+  }],
+  "comments":  [228,229,220],
+  "status": "active",
+  "price": "30"
+}
+]
