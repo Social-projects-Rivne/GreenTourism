@@ -1,85 +1,46 @@
 'use strict';
 
-angular.module('filterCategory',[])
+angular.module('filterCategory',['ngResource'])
   .component('filterCategory', {
     templateUrl: 'components/place/filter-category/filter-category.template.html',
-    controller:
-      function FilterCategoryController($http, $rootScope, placeModel, placesOnMap) {
+      controller:
+      function FilterCategoryController($http, $rootScope, placeModel, placesOnMap,$timeout,$scope) {
         var self = this;
         var i, j; // counters
-        var firstCheck; // variable for first check onload
+        var firstCheck=true; // variable for first check onload
         var pointsTypeForShowOnLoad = 'Featured_Place';
         var arrPlaces = [];
         var placeObject = {};
-
+        self.types = placeModel.getPlaceTypes.query();
         //Get place.data
-        $http.get('components/place/place.data.json').then(function(response) {
-          self.points = response.data;
-        });
 
-        //Get types.data
-        $http.get('components/place/types.data.json').then(function(response) {
-          self.types = response.data;
-
-          placesOnMap.initGroupsOfPlaces(self.types);
-
-          self.showPointsOnLoad(pointsTypeForShowOnLoad);
-        });
-
-        //Function for showing points onload by one of type
-        this.showPointsOnLoad = function(pointsType) {
-          for (i = 0; i < self.types.length; i++) {
-            if (self.types[i].type == pointsType) {
-              for (j = 0; j < self.points.length; j++) {
-                if (self.points[j].type == pointsType) {
-                  placeObject = {id: this.points[j].id, lat: this.points[j].lat, lon: this.points[j].lon, type: this.points[j].type};
-
-                  arrPlaces.push(placeObject);
-                  firstCheck = true;
-                }
-              }
-            }
-          }
-          placeModel.setPlacesArray(arrPlaces);
-          placesOnMap.showPlacesOnLoad(arrPlaces, pointsType);
-        };
-
-        placesOnMap.removeAllPlaces(); //Remove all places before use filters
-
+        var ischecked=false;
         //Define method for show and hide all types of places
         this.showhidePlaces = function(input) {
+         arrPlaces=placeModel.placesArray;
           var inputButton = angular.element("#" + input);
           var spanCheck = angular.element("#" + input + " span");
           if (inputButton.hasClass('checked')) {
             firstCheck = false;
+            ischecked=true;
             spanCheck.removeClass('glyphicon glyphicon-ok');
             inputButton.removeClass('checked');
-
             placesOnMap.removePlaces(input);
-
             for (j = 0; j < arrPlaces.length; j++) {
               if (arrPlaces[j].type == input) {
                 arrPlaces.splice(j--, 1);
               }
             }
+
           } else {
+              ischecked=false;
               spanCheck.addClass('glyphicon glyphicon-ok');
               inputButton.addClass('checked');
 
-              for (i = 0; i < this.types.length; i++) {
-                if (this.types[i].type == input) {
-                  for (j = 0; j < this.points.length; j++) {
-                    if (this.points[j].type == input) {
-                      placeObject = {id: this.points[j].id, lat: this.points[j].lat, lon: this.points[j].lon, type: this.points[j].type};
-
-                      arrPlaces.push(placeObject);
-                    }
-                  }
-                }
-              }
             }
-            placeModel.setPlacesArray(arrPlaces);
-            placesOnMap.addPlaces(input);
+
+            $scope.$emit('changetype',arrPlaces,ischecked,input,firstCheck);
+
         };
 
         //Don't hide dropdown if clicked
@@ -99,4 +60,5 @@ angular.module('filterCategory',[])
           }
         });
       }
+
   });
