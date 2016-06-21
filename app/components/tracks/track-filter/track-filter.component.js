@@ -3,7 +3,7 @@ angular.module('trackFilter', [])
     templateUrl: 'components/tracks/track-filter/track-filter.template.html',
     controller: function trackFilterController($http, $rootScope) {
         var ctrlScope = this;
-        var tracks = [];
+        $rootScope.tracks = [];
         
         $http.get('components/tracks/tracks.data.json').then(function (data) {
             // fetching data about tracks from json
@@ -11,7 +11,7 @@ angular.module('trackFilter', [])
             // adding all tracks on map
             for (var i = 0; i < ctrlScope.tracks.length; i++) {
                 var polyline = L.polyline(ctrlScope.tracks[i].track_points, {color: ctrlScope.tracks[i].color, opacity: 1}).addTo($rootScope.map);
-                tracks.push([polyline, ctrlScope.tracks[i].type]);
+                $rootScope.tracks.push([polyline, ctrlScope.tracks[i].type]);
             } 
         }, function (data) {
             ctrlScope.tracks = "error";
@@ -30,14 +30,14 @@ angular.module('trackFilter', [])
         ctrlScope.showSpecificTracks = function (inputValue) {
             var element = $("#" + inputValue);
             var icon = $("#gi" + inputValue);
-            for (var i = 0; i < tracks.length; i++) {
+            for (var i = 0; i < $rootScope.tracks.length; i++) {
                 if (element[0].className == "") {                   
-                    if (inputValue == tracks[i][1]) {
-                        tracks[i][0].addTo($rootScope.map);
+                    if (inputValue == $rootScope.tracks[i][1]) {
+                        $rootScope.tracks[i][0].addTo($rootScope.map);
                     } 
                 } else {
-                    if (inputValue == tracks[i][1]) {
-                        $rootScope.map.removeLayer(tracks[i][0]);
+                    if (inputValue == $rootScope.tracks[i][1]) {
+                        $rootScope.map.removeLayer($rootScope.tracks[i][0]);
                     }
                 }
             }

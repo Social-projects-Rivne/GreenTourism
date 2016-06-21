@@ -3,7 +3,7 @@
         "name": "Rivne city tour",
         "description": "",
         "type": "walking",
-        "track_rate": "",
+        "track_rate": 10,
         "track_points": [
             [50.62001, 26.25157],
             [50.61609, 26.25372],
@@ -18,10 +18,10 @@
         "color": "#f9ff0b"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 8",
         "description": "",
         "type": "walking",
-        "track_rate": "",
+        "track_rate": 5,
         "track_points": [
             [50.64903, 26.19106],
             [50.60677, 26.23398],
@@ -36,10 +36,10 @@
         "color": "#f9ff0b"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 2",
         "description": "",
         "type": "bycicle",
-        "track_rate": "",
+        "track_rate": 2,
         "track_points": [
             [50.61168, 26.21218],
             [50.61745, 26.24222],
@@ -54,10 +54,10 @@
         "color": "#2f2fd0"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 3",
         "description": "",
         "type": "bycicle",
-        "track_rate": "",
+        "track_rate": 7,
         "track_points": [
             [50.64260280028108, 26.26667976379394],
             [50.61641466426566, 26.2738037109375],
@@ -73,10 +73,10 @@
         "color": "#2f2fd0"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 4",
         "description": "",
         "type": "car",
-        "track_rate": "",
+        "track_rate": 25,
         "track_points": [
             [50.427768268027606, 25.74234008789062],
             [50.51517303835638, 26.008758544921875],
@@ -93,10 +93,10 @@
         "color": "#ff0a47"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 5",
         "description": "",
         "type": "car",
-        "track_rate": "",
+        "track_rate": 1,
         "track_points": [
             [50.616360203880646, 26.25732421875],
             [50.74340774029213, 25.988845825195312],
@@ -118,7 +118,7 @@
         "name": "Zoo trip",
         "description": "",
         "type": "mixed",
-        "track_rate": "",
+        "track_rate": 30,
         "track_points": [
             [50.61897423123324, 26.251659393310547],
             [50.61120320051133, 26.331342458724976],
@@ -147,10 +147,10 @@
         "color": "#0aff0a"
     },
     {
-        "name": "Rivne city tour",
+        "name": "Rivne city tour 10",
         "description": "",
         "type": "mixed",
-        "track_rate": "",
+        "track_rate": 6,
         "track_points": [
             [50.33231295699761, 26.50726318359375],
             [50.233151832472245, 25.750579833984375],

@@ -4,7 +4,7 @@
             <div class="col-xs-12 no-padding" id="filter">  <!-- Filter container start -->
                 <div class="btn-group col-xs-12" role="group" id="buttons">
                     <div class="col-xs-2"></div>
-                    <button type="button" class="btn col-xs-2 btn-first">Add track</button>
+                    <button type="button" class="btn col-xs-2 btn-first" ng-click="$ctrl.toggleMenu()">Add track</button>
                     <div class="btn-group col-xs-2 no-padding" role="group">
                         <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Map type
@@ -27,7 +27,8 @@
                     <div class="col-xs-2"></div>
                 </div>
             </div> <!-- Filter container end -->
-            <div class="col-xs-12 no-padding" id="map"> <!-- Map container start -->
+            <div class="col-xs-12 no-padding"> <!-- Map container start -->
+                <track-maker></track-maker>
                 <map></map>
             </div> <!-- Map container end -->
             <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->

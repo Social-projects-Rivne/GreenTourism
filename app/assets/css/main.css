@@ -260,3 +260,45 @@ track-filter li {
 track-filter li:hover {
     background-image: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
 }
+
+                                                /******************** Add Place ****************/
+#addMenu {
+    position: absolute;
+    top: 10px;
+    left: -420px;
+    width: 400px;
+    height: auto;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 2;
+    border: 1px solid #009000;
+    border-radius: 5px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+}
+    #addMenu .step {
+        min-height: 40px;
+        padding-top: 10px;
+    }
+    #addMenu h2 {
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+        background-color: #009000;
+        color: #fff;
+    }
+    #addMenu form > div > span {
+        float: right;
+        color: #009000;
+    }
+    span.alertInput {
+        font-size: 15px;
+    }
+#removeIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 25px;
+    color: #fff;
+}
