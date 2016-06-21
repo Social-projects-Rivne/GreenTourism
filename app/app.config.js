@@ -9,10 +9,6 @@ app.config(function($routeProvider) {
     when('/places/:placeId', {
       template: '<place-detail></place-detail>'
     }).
-	// add events and otherwise
-	when('/events', {
-      template: '<events></events>'
-    }).
   when('/tracks', {
       template: '<track-list></track-list>'
   }).
@@ -24,10 +20,21 @@ app.config(function($routeProvider) {
   }).
   when('/profile', {
     template: '<user-profile></user-profile>'
+  }).	// add events and otherwise
+  when('/events', {
+    template: '<events></events>'
   }).
   when('/events/event', {
     template: '<event></event>'
   }).
+  when('/events/:eventId',
+      {
+        template:'{{$ctrl.eventId}}<event></event>',
+      }).
+  when('/events/:eventId/:dataId',
+      {
+        template:'{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>',
+      }).
 	otherwise('/', {
       template: '<welcome-page></welcome-page>'
     });
