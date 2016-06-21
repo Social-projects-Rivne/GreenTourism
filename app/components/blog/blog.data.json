@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "title": "Blog_1 title",
     "content": "Blog_1 content",
     "author": "admin",
@@ -8,19 +9,40 @@
     "images": "assets/img/blog/blog.jpg"
   },
   {
+    "id": "2",
     "title": "Blog_2 title",
     "content": "Blog_2 content",
-    "author": "admin",
+    "author": "manager",
     "date": "20.03.2016",
-    "category": "tourizm",
+    "category": "news",
     "images": "assets/img/blog/blog.jpg"
   },
   {
+    "id": "3",
     "title": "Blog_3 title",
     "content": "Blog_3 content",
-    "author": "admin",
+    "author": "user",
     "date": "20.03.2016",
+    "category": "stories",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Blog_4 title",
+    "content": "Blog_4 content",
+    "author": "admin",
+    "date": "20.04.2016",
+    "category": "news",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "5",
+    "title": "Blog_5 title",
+    "content": "Blog_5 content",
+    "author": "admin",
+    "date": "05.05.2016",
     "category": "tourizm",
     "images": "assets/img/blog/blog.jpg"
   }
+
 ]

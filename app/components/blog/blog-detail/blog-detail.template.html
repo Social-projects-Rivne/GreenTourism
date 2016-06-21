@@ -1,0 +1,47 @@
+<div class="blog-item-page" ng-repeat="blog in $ctrl.blogs ">
+    <section class="blog-page-content">
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-md-12">
+                            <div class="blog-wrapper">
+                                <img ng-src="{{blog.images}}" alt="{{blog.title}}">
+
+                                <div class="">
+                                    <h3 class="blog-title">
+                                        {{blog.title}}
+                                    </h3>
+
+                                    <div class="blog-details">
+                                        By
+                        <span class="blog-author">
+                            <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
+                        </span>
+                                        <span class="blog-date">{{blog.date}}</span>
+                                        <a href="#" class="blog-category">{{blog.category}}</a>
+                                    </div>
+                                    <div class="blog-content">
+                                        {{blog.content}}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="related-posts">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fusion-title">
+                        <h3 class="title-heading-left">Related Posts</h3>
+                        <div class="title-sep-container">
+                            <div class="title-sep sep-double"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

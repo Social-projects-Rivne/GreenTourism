@@ -13,113 +13,37 @@
             <article>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                        <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp" >
                             <div class="thumbnail blog-list-item">
-                                <img src="assets/img/blog/blog.jpg" alt="...">
+                                <a href="#/blog/{{blog.id}}">
+                                    <img ng-src="{{blog.images}}" alt="{{blog.title}}">
+                                </a>
 
                                 <div class="caption">
                                     <h3 class="blog-title">
-                                        <a href="#">Blog Post Title</a>
+                                        <a href="#">{{blog.title}}</a>
                                     </h3>
 
                                     <div class="blog-details">
                                         By
                         <span class="blog-author">
-                            <a href="#" title="Posts by admin" rel="author">admin</a>
+                            <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
                         </span>
-                                        <span class="blog-date">May 23rd 2016</span>
-                                        <a href="#" class="blog-category">Tourizm</a>
+                                        <span class="blog-date">{{blog.date}}</span>
+                                        <a href="#" class="blog-category">{{blog.category}}</a>
                                     </div>
                                     <div class="blog-separator"></div>
 
                                     <div class="blog-content">
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description
+                                        {{blog.content}}
                                     </div>
 
                                     <p class="blog-meta">
-                                        <a href="#" class="blog-read-more">Read more
+                                        <a href="#/blog/{{blog.id}}" class="blog-read-more">Read more
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                         </a>
-                                        <a href="#comments" class="pull-right">
-                                            <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            2
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="thumbnail blog-list-item">
-                                <img src="assets/img/blog/blog.jpg" alt="...">
-
-                                <div class="caption">
-                                    <h3 class="blog-title">
-                                        <a href="#">Blog Post Title</a>
-                                    </h3>
-
-                                    <div class="blog-details">
-                                        By
-                        <span class="blog-author">
-                            <a href="#" title="Posts by admin" rel="author">admin</a>
-                        </span>
-                                        <span class="blog-date">May 23rd 2016</span>
-                                        <a href="#" class="blog-category">Tourizm</a>
-                                    </div>
-                                    <div class="blog-separator"></div>
-
-                                    <div class="blog-content">
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description
-                                    </div>
-
-                                    <p class="blog-meta">
-                                        <a href="#" class="blog-read-more">Read more
-                                            <i class="fa fa-book" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="#comments" class="pull-right">
-                                            <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            2
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="thumbnail blog-list-item">
-                                <img src="assets/img/blog/blog.jpg" alt="...">
-
-                                <div class="caption">
-                                    <h3 class="blog-title">
-                                        <a href="#">Blog Post Title</a>
-                                    </h3>
-
-                                    <div class="blog-details">
-                                        By
-                        <span class="blog-author">
-                            <a href="#" title="Posts by admin" rel="author">admin</a>
-                        </span>
-                                        <span class="blog-date">May 23rd 2016</span>
-                                        <a href="#" class="blog-category">Tourizm</a>
-                                    </div>
-                                    <div class="blog-separator"></div>
-
-                                    <div class="blog-content">
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description ...
-                                        Here will be some short description
-                                    </div>
-
-                                    <p class="blog-meta">
-                                        <a href="#" class="blog-read-more">Read more
-                                            <i class="fa fa-book" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="#comments" class="pull-right">
+                                        <a href="#/blog/{{blog.id}}" class="pull-right">
                                             <i class="fa fa-comments-o" aria-hidden="true"></i>
                                             2
                                         </a>
@@ -138,7 +62,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search blog">
+                                            <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog">
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -153,34 +77,10 @@
                                     <div class="col-md-12">
                                         <h3>Categories</h3>
                                         <ul>
-                                            <li>
-                                                <a href="#">
+                                            <li ng-repeat="category in $ctrl.blogs | orderBy: $ctrl.categoryProp | unique: $ctrl.categoryProp  ">
+                                                <a href="#" ng-click="selectCategory(item)">
                                                     <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    Category
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    Category
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    Category
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    Category
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    Category
+                                                    {{category}}
                                                 </a>
                                             </li>
                                         </ul>
@@ -205,100 +105,82 @@
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div class="tab-pane " id="panel-popular">
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
+                                                <div class="tab-pane active" id="panel-popular">
+                                                    <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp | limitTo:3">
+                                                        <a href="#/blog/{{blog.id}}" class="pull-left">
+                                                            <img alt="{{blog.title}}"
+                                                                 ng-src="{{blog.images}}" class="media-object"/>
                                                         </a>
+
                                                         <div class="media-body">
                                                             <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
+                                                                <a href="#/blog/{{blog.id}}">
+                                                                    {{blog.title}}
                                                                 </a>
                                                             </h4>
+
                                                             <div class="media-date">
-                                                                May 23 2016
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
-                                                                </a>
-                                                            </h4>
-                                                            <div class="media-date">
-                                                                May 23 2016
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
-                                                                </a>
-                                                            </h4>
-                                                            <div class="media-date">
-                                                                May 23 2016
+                                                                {{blog.date}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane active" id="panel-recent">
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
-                                                                </a>
-                                                            </h4>
-                                                            <div class="media-date">
-                                                                May 23 2016
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
-                                                                </a>
-                                                            </h4>
-                                                            <div class="media-date">
-                                                                May 23 2016
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="media blog-aside-items">
-                                                        <a href="#" class="pull-left">
-                                                            <img alt="Bootstrap Media Preview" src="assets/img/blog/blog.jpg" class="media-object"/>
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">
-                                                                <a href="#">
-                                                                    Blog title
-                                                                </a>
-                                                            </h4>
-                                                            <div class="media-date">
-                                                                May 23 2016
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <!--<div class="tab-pane active" id="panel-recent">-->
+                                                    <!--<div class="media blog-aside-items">-->
+                                                        <!--<a href="#" class="pull-left">-->
+                                                            <!--<img alt="Bootstrap Media Preview"-->
+                                                                 <!--src="assets/img/blog/blog.jpg" class="media-object"/>-->
+                                                        <!--</a>-->
+
+                                                        <!--<div class="media-body">-->
+                                                            <!--<h4 class="media-heading">-->
+                                                                <!--<a href="#">-->
+                                                                    <!--Blog title-->
+                                                                <!--</a>-->
+                                                            <!--</h4>-->
+
+                                                            <!--<div class="media-date">-->
+                                                                <!--May 23 2016-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="media blog-aside-items">-->
+                                                        <!--<a href="#" class="pull-left">-->
+                                                            <!--<img alt="Bootstrap Media Preview"-->
+                                                                 <!--src="assets/img/blog/blog.jpg" class="media-object"/>-->
+                                                        <!--</a>-->
+
+                                                        <!--<div class="media-body">-->
+                                                            <!--<h4 class="media-heading">-->
+                                                                <!--<a href="#">-->
+                                                                    <!--Blog title-->
+                                                                <!--</a>-->
+                                                            <!--</h4>-->
+
+                                                            <!--<div class="media-date">-->
+                                                                <!--May 23 2016-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="media blog-aside-items">-->
+                                                        <!--<a href="#" class="pull-left">-->
+                                                            <!--<img alt="Bootstrap Media Preview"-->
+                                                                 <!--src="assets/img/blog/blog.jpg" class="media-object"/>-->
+                                                        <!--</a>-->
+
+                                                        <!--<div class="media-body">-->
+                                                            <!--<h4 class="media-heading">-->
+                                                                <!--<a href="#">-->
+                                                                    <!--Blog title-->
+                                                                <!--</a>-->
+                                                            <!--</h4>-->
+
+                                                            <!--<div class="media-date">-->
+                                                                <!--May 23 2016-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -312,3 +194,14 @@
         </div>
     </div>
 </section>
+
+<!--<ul>-->
+    <!--<li ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.orderProp">-->
+        <!--<a href="#/blog/{{blog.id}}">-->
+            <!--<img ng-src="{{blog.images}}" alt="">-->
+        <!--</a>-->
+        <!--<span>{{blog.title}} + {{blog.date}}</span>-->
+
+        <!--<p>{{blog.content}}</p>-->
+    <!--</li>-->
+<!--</ul>-->

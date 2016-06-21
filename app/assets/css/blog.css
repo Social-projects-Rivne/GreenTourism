@@ -141,3 +141,19 @@
 .blog-list-item .caption .blog-meta {
   margin: 20px 0;
 }
+.blog-item-page .blog-page-content {
+  padding: 0;
+}
+.blog-item-page .blog-page-content .blog-wrapper img {
+  width: 100%;
+}
+.blog-item-page .blog-page-content .blog-wrapper .blog-title {
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 25px;
+}
+.blog-item-page .blog-page-content .title-sep.sep-double {
+  height: 6px;
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+}

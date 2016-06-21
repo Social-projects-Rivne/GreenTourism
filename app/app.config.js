@@ -30,7 +30,10 @@ app.config(function ($routeProvider) {
         }).
         //add blog
         when('/blog', {
-            template: '<blog></blog>'
+            template: '<blog-list></blog-list>'
+        }).
+        when('/blog/:blogId', {
+            template: '<blog-detail></blog-detail>'
         }).
         otherwise('/', {
             template: '<welcome-page></welcome-page>'
