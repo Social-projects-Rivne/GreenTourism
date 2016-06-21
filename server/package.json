@@ -2,8 +2,9 @@
   "name": "green-tourism",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "runserver.js",
   "scripts": {
+    "start": "node runserver.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
