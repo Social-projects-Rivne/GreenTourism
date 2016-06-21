@@ -2,11 +2,13 @@ var exports = module.exports = {};
 
 exports.list = function(model) {
   var listController = function(req, res) {
-    var whereClause = req.query ? {where: req.query} : {};
-
-    model.findAll(whereClause).then(function(places) {
-      res.json(places);
-    });
+    model.findAll({where: req.query})
+      .then(function(records) {
+        res.json(records);
+      })
+      .catch(function(err) {
+        res.status(400).json({message: err.message});
+      });
   };
 
   return listController;
@@ -14,12 +16,12 @@ exports.list = function(model) {
 
 exports.show = function(model) {
   var showController = function(req, res) {
-    model.findById(req.params.id).then(function(place) {
-      if (!place) {
+    model.findById(req.params.id).then(function(record) {
+      if (!record) {
         res.status(404).json({message: 'Record with id ' + req.params.id +
                              ' was not found!'});
       } else {
-        res.json(place);
+        res.json(record);
       }
     });
   };
@@ -33,12 +35,12 @@ exports.create = function(model) {
       res.sendStatus(400);
     } else {
       model.create(req.body)
-        .then(function(place) {
+        .then(function(record) {
           res.status(201).json({message: 'Record was successfully created!',
-                                place: place});
+                                record: record});
         })
         .catch(function(err) {
-          res.status(400).json({errors: err.errors});
+          res.status(400).json({message: err.message, errors: err.errors});
         });
     }
   };
@@ -57,7 +59,7 @@ exports.update = function(model) {
                                 ' was successfully updated'});
         })
         .catch(function(err) {
-          res.status(400).json({errors: err.errors});
+          res.status(400).json({message: err.message, errors: err.errors});
         });
     }
   };
@@ -73,7 +75,7 @@ exports.delete = function(model) {
                             ' was successfully deleted'});
     })
     .catch(function(err) {
-      res.status(400).json({errors: err.errors});
+      res.status(400).json({message: err.message});
     });
   };
 
