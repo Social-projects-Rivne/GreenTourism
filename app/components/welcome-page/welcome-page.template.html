@@ -16,11 +16,18 @@
                     tellus accumsan venenatis. Morbi mollis pharetra ligula vel volutpat. Pellentesque vulputate
                     fermentum ligula, vel faucibus risus efficitur ut. Integer ac tortor diam.</p>
             </div>
-            <div class="input-group col-xs-12 col-sm-3 col-md-3">
-                <input type="text" class="form-control" placeholder="Your email adress">
-                <input type="text" class="form-control" placeholder="Your password">
-                <button class="inputButton">Sign In for Green Tourism</button>
-            </div>
+            <form class="input-group col-xs-12 col-sm-3 col-md-3" name="login" novalidate ng-submit="$ctrl.login(user)">
+                <input type="email" class="form-control" name="email" placeholder="Your email adress" required ng-model="user.email">
+                <div class="" ng-show="login.email.$invalid && login.email.$dirty">
+                        <span ng-show="login.email.$error.email">Wrong e-mail</span>
+                        <span ng-show="login.email.$error.required">E-mail is required</span>
+                </div>
+                <input type="password" class="form-control" name="password" placeholder="Your password" required ng-model="user.password">
+                <div class="" ng-show="login.password.$dirty">
+                        <span ng-show="login.password.$error.required">Password is required</span>
+                </div>
+                <button type="submit" class="inputButton">Sign In for Green Tourism</button>
+            </form>
             <div class="col-xs-12 col-sm-3 col-md-3">
                 <button class="btn">Sign In for Green Tourism</button>
                 <button class="btn">Sign In for Green Tourism</button>

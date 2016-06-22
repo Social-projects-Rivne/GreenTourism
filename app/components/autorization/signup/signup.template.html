@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group ">
 				<label for="confirmpassword"><span class="required">*</span>Confirm Password:</label>
-				<input type="password" name="confirmpassword" class="form-control" ng-pattern="/^(0|[1-9][0-9]*)$/"  ng-model="user.confirmpassword" ng-minlength="7" ng-maxlength="25"  required  confirm-password="password">
+				<input type="password" name="confirmpassword" class="form-control" ng-model="user.confirmpassword"  required  confirm-password="password">
 				<div class=""  ng-show="$ctrl.showError || signup.confirmpassword.$touched || signup.confirmpassword.$dirty">
 					{{$ctrl.getErrorpassword(signup.confirmpassword.$error)}}
 				</div>
