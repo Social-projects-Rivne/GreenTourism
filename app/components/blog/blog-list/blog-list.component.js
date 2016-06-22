@@ -9,6 +9,15 @@ angular.module('blogList').component('blogList', {
         $http.get('components/blog/blog.data.json').then(function (response) {
             self.blogs = response.data;
         });
+        
+    self.tab = 1;
+    self.selectTab = function(setTab) {
+      self.tab = setTab;
+    };
+    self.isSelected = function(checkTab) {
+      return self.tab == checkTab;
+    };
+
     }
 });
 angular.module('blogCategory', [])
