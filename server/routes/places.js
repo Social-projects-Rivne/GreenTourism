@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var defaultControllers = require('../defaultControllers.js');
+var defaultControllers = require('../default-controllers.js');
 
 var Place = require('../models/place');
 
