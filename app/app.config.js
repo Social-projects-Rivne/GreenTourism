@@ -33,6 +33,12 @@ app.config(function($routeProvider) {
     .when('/events/:eventId/:dataId', {
       template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>',
     })
+    .when('/blog', {
+      template: '<blog-list></blog-list>'
+    })
+    .when('/blog/:blogId', {
+      template: '<blog-detail></blog-detail>'
+    })
     .otherwise('/', {
       template: '<welcome-page></welcome-page>'
     });
