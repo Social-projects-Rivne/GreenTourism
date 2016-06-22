@@ -1,4 +1,4 @@
-angular.module('trackList', ['trackFilter', 'filterMapType', 'trackMaker', 'map'])
+angular.module('trackList', ['trackFilter', 'filterMapType', 'trackMaker', 'map', 'popularTrack'])
 .component('trackList', {
     templateUrl: 'components/tracks/track-list/track-list.template.html',
     controller: function mapMenuController($rootScope) {
