@@ -1,41 +1,39 @@
 app.config(function($routeProvider) {
-  $routeProvider.
-    when('/', {
+  $routeProvider
+    .when('/', {
       template: '<welcome-page></welcome-page>'
-    }).
-    when('/places', {
+    })
+    .when('/places', {
       template: '<place-list></place-list>'
-    }).
-    when('/places/:placeId', {
+    })
+    .when('/places/:placeId', {
       template: '<place-detail></place-detail>'
-    }).
-  when('/tracks', {
+    })
+    .when('/tracks', {
       template: '<track-list></track-list>'
-  }).
-  when('/autorization/signup', {
+    })
+    .when('/autorization/signup', {
       template: '<signup></signup>'
-  }).
-  when('/autorization/signin', {
+    })
+    .when('/autorization/signin', {
       template: '<signin></signin>'
-  }).
-  when('/profile', {
-    template: '<user-profile></user-profile>'
-  }).	// add events and otherwise
-  when('/events', {
-    template: '<events></events>'
-  }).
-  when('/events/event', {
-    template: '<event></event>'
-  }).
-  when('/events/:eventId',
-      {
-        template:'{{$ctrl.eventId}}<event></event>',
-      }).
-  when('/events/:eventId/:dataId',
-      {
-        template:'{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>',
-      }).
-	otherwise('/', {
+    })
+    .when('/profile', {
+      template: '<user-profile></user-profile>'
+    })
+    .when('/events', {
+      template: '<events></events>'
+    })
+    .when('/events/event', {
+      template: '<event></event>'
+    })
+    .when('/events/:eventId', {
+      template: '{{$ctrl.eventId}}<event></event>',
+    })
+    .when('/events/:eventId/:dataId', {
+      template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>',
+    })
+    .otherwise('/', {
       template: '<welcome-page></welcome-page>'
     });
 });

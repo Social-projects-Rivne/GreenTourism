@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/components/blog/blog-detail/blog-detail.component.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/components/blog/blog-detail/blog-detail.template.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/components/blog/blog-list/blog-list.component.js" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
