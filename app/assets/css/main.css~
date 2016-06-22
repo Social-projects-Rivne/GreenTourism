@@ -450,9 +450,3 @@ track-filter li:hover {
     border-radius: 50%;
     line-height: 1.5857143;
 }
-.marker-image{
-    width:150px;
-}
-.marker-link{
-    cursor:pointer;
-}

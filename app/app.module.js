@@ -3,12 +3,12 @@ var app = angular.module('greenTourism', [
   'welcomePage',
   'events',
   'signup',
-  'login',
+  'signin',
   'placeList',
   'trackList',
   'userProfile',
   'event',
   'blogList',
   'blog',
-  'blogCategory'
+  'calendar'
 ]);

@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="well well-sm col-xs-12 col-md-7">
+		<h2>Green tourism</h2>
+		<h5 style="color:red">{{$ctrl.message}}</h5>
+	</div>
+	<form class="well well-sm col-xs-12 col-md-7" role="form" name="signin" novalidate ng-submit="$ctrl.login(user)">
+		<div class="form-group ">
+			<label for="email">Email:</label>
+			<input type="email" class="form-control" name="email"  ng-model="user.email" required>
+			<div class="error" ng-show="signin.email.$invalid && signin.email.$dirty">
+				<span ng-show="signin.email.$error.email">Please input correct email</span>
+				<span ng-show="signin.email.$error.required">Email is required</span>
+			</div>
+		</div>
+		<div class="form-group ">
+			<label for="pwd">Password:</label>
+			<input type="password" name="password" class="form-control" id="password" ng-model="user.password" required>
+			<div class="error" ng-show="signin.password.$dirty">
+				<span ng-show="signin.password.$error.required">Password is required</span>
+			</div>
+		</div>
+			<div class="checkbox">
+			<label><input type="checkbox"> Remember me</label>
+		</div>
+		<button type="submit" class="btn btn-default">Sign In</button>
+	</form>
+	<div class="well well-sm col-xs-12 col-md-7">
+		<h5>New to Green Tourism? <a href="#/autorization/signup">Create an account.</a></h5>
+	</div>
+</div>
