@@ -3,21 +3,14 @@ angular.module('calendar', []);
 angular.module('calendar').component('calendar', {
     templateUrl: 'components/calendar/calendar.template.html',
     controller: function ($scope,eventList) {
-
-        //$scope.give_event=give_event.vax ;
         $scope.give_event=eventList.th ;
-
-/*        this.calendar_carent_date = new Date();
-        this.calendar_show_date = this.calendar_carent_date ;*/
 
         this.calendar_carent_date = new Date();
         this.calendar_show_date = new Date($scope.give_event.date_current) ;
-        //console.log(this.calendar_show_date + ' = ' + $scope.give_event.date_current) ;
 
         this.calendar_init = function (some_date) {
             console.log(' some_date= ' + some_date) ;
             this.calendar_month = [];
-            //console.log(' input date : '+some_date) ;
 
             function getFirstWeekDayOfMonth(year, month) {
                 var date = new Date(year, month);
@@ -30,60 +23,37 @@ angular.module('calendar').component('calendar', {
 
             var start_mounth = getFirstWeekDayOfMonth(some_date.getFullYear(),(some_date.getMonth())) ;
             if (start_mounth==0) start_mounth=7 ;
-            //console.log('start_mounth: '+start_mounth) ;
             var end_mounth = getLastDateOfMonth(some_date.getFullYear(),(some_date.getMonth())) ;
-            //console.log('end_mounth: '+end_mounth) ;
 
             for (var i = 2 - start_mounth ; (i < end_mounth+1 || (i+start_mounth-2) % 7); i++) {
                 var d = new Date(some_date);
                 d.setDate(i) ;
-                //if (i>end_mounth-1) console.log(d + " i= " + i) ;
 
                 var push_obj = {};
                 push_obj.active = d.getMonth() == some_date.getMonth() ? 1 : 0;
                 push_obj.active = d.toDateString() == this.calendar_show_date.toDateString() ? 2 : push_obj.active;
                 push_obj.date = d;
 
-                //додаю подію
-                /*                var eventsArr = $scope.give_event.event.filter(function(event) {
-                 return event.date == push_obj.date;
-                 });*/
-
                 push_obj.events = $scope.give_event.find_date(push_obj.date) ;
 
-                /*                push_obj.events = $scope.give_event.event.filter(function(event) {
-                 var temp_date = new Date(event.date);
-                 //if (temp_date.toDateString() == push_obj.date.toDateString()) console.log(temp_date + " === " + push_obj.date) ;
-                 return temp_date.toDateString() == push_obj.date.toDateString();
-                 });
-
-                 console.log(" === " + push_obj.events) ;*/
                 this.calendar_month.push(push_obj);
             }
-            //console.log("this.calendar_show_date.getMonth()= " + this.calendar_show_date.getMonth()) ;
         };
 
         this.calendar_init(this.calendar_show_date);
-        //this.calendar_init(this.calendar_carent_date);
 
         this.carent_day = function (date) {
-            //alert(this.calendar_show_date + ' = ' + date) ;
             this.calendar_show_date =  new Date(date) ;
             this.calendar_init(this.calendar_show_date);
             $scope.give_event.date_current = this.calendar_show_date ;
         }
 
         this.chenge_mounth = function (step) {
-            //alert("saas") ;
             var it = this.calendar_show_date.getMonth() ;
-            //console.log("calendar_show_date= " + it) ;
-            //console.log(":"+this.calendar_show_date.getTime()) ;
             this.calendar_show_date.setMonth(it+step) ;
             this.calendar_init(this.calendar_show_date);
 
-            // данні уходять в інший контроллер
             $scope.give_event.date_current = this.calendar_show_date ;
-
         };
 
     }
@@ -94,8 +64,6 @@ angular.module('calendar').service('give_event', function ($http) {
     this.date_current = new Date();
     this.exampd = 'assa';
 
-    
-    
     this.event = [
         {
             name: 'Nexus S',
@@ -180,13 +148,11 @@ angular.module('calendar').service('give_event', function ($http) {
     this.find_date = function (dateFind, sort) {
         return this.event.filter(function (itEvent) {
             var temp_date = new Date(itEvent.date_start);
-            //console.log(temp_date.toDateString() + ' == ' + dateFind.toDateString()) ;
             if (sort == 1) return temp_date > dateFind;
             return temp_date.toDateString() == dateFind.toDateString();
         })
     };
 
-    // $scope.nam = 'sdsd' ;
     return {
         vax : this
     }

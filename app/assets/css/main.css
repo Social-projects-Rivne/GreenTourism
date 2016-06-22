@@ -336,12 +336,21 @@ body{
     cursor: pointer;
 }
 .bs-box div .menu_l {
-    height: 42px;
+    height: 27px;
     background-color: #2d9b76;
     color: white;
     padding: 5px;
     margin: 5px;
+    width: 90%;
+    display: block;
+    text-decoration: none;
 }
+
+.bs-box a:active, .bs-box a:hover, .bs-box a:focus{
+    text-decoration: none;
+}
+
+
 t5 {font-weight: bolder;}
 
 

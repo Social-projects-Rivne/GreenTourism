@@ -7,10 +7,8 @@
             <ul class="media-list">
                 <li class="media" ng-repeat="img in event.attachments.photo">
                     <div class="media-middle" >
-                        <a href="#">
                             <img src="assets{{img}}" ng-class="$first ? 'img-responsive' : 'media-object center-block img-small'"
                                  alt="{{event.name}}">
-                        </a>
                     </div>
                     <div ng-if="$first" class="media-body">
                         <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red"> {{event.event_rate}}</h4>
