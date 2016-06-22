@@ -1,4 +1,4 @@
-<div class="blog-item-page" ng-repeat="blog in $ctrl.blogs ">
+<div class="blog-item-page" ng-repeat="blog in $ctrl.blog ">
     <section class="blog-page-content">
         <div class="container">
             <div class="row">
@@ -17,7 +17,7 @@
                         <span class="blog-author">
                             <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
                         </span>
-                                        <span class="blog-date">{{blog.date}}</span>
+                                        <span class="blog-date">{{blog.date | date:'dd MMMM yyyy'}}</span>
                                         <a href="#" class="blog-category">{{blog.category}}</a>
                                     </div>
                                     <div class="blog-content">
@@ -39,9 +39,42 @@
                         <div class="title-sep-container">
                             <div class="title-sep sep-double"></div>
                         </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="blog in $ctrl.blogs | limitTo:3" >
+	                        <a href="#/blog/{{blog.id}}">
+		                        {{blog.title}}
+        	                    <img alt="{{blog.title}}" ng-src="{{blog.images}}" class="media-object" style="width:50px;height:50px;"/>
+	                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+	<br/>
+   <section class="post-comments" id="post-comments">
+        <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+		        <h3 class="title-heading-left">Comments</h3>
+                <div class="comment-item" ng-repeat="comment in blog.comments">
+ 		        <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">
+                    {{comment}}
+                </div>
+            </div>
+        </div>    
+         <div class="row">
+            <div class="col-md-12">
+                <form name="reviewForm" ng-submit=""> 
+                <div class="col-md-12">
+    			    <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">
+    			    {{newComment}}
+    			 </div>
+    		     <textarea ng-model="newComment"></textarea>
+    		     <input type="submit" value="Comment">
+		        </form>
+	        </div>
+	    </div>
+        </div>
+
+   </section>
 </div>
