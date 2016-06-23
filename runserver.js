@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/test_greentourism');
 
 // Routes
 var places = require('./server/routes/places');
-app.use('/places', places);
+app.use('/api/places', places);
 
 var port = process.env.PORT || 8080;
 
