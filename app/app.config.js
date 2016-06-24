@@ -1,4 +1,4 @@
-app.config(function($routeProvider) {
+angular.module('greenTourism').config(function($routeProvider) {
   $routeProvider
     .when('/', {
       template: '<welcome-page></welcome-page>'

@@ -1,4 +1,4 @@
-var app = angular.module('greenTourism', [
+angular.module('greenTourism', [
   'ngRoute',
   'welcomePage',
   'events',

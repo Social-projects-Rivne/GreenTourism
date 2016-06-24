@@ -1,4 +1,4 @@
-app.factory('User', function() {
+angular.module('greenTourism').factory('User', function() {
 
   function User(data) {
     if (data) {
