@@ -1,14 +1,19 @@
 # GreenTourism
 
-In order to run this app you need **Node 4.4.4** or higher and **NPM** installed.
+In order to run this app you need **Node.js 4.4.4** and **NPM** installed.
 
-**Run this command inside server folder:**
+**Run:**
 ```
 npm install
 ```
 
-**Then, run:**
+**To start server run:**
+```
+npm start
+```
+or
 ```
 node runserver.js
 ```
+
 and go to **localhost:8080/** to open index page.
