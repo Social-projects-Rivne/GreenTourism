@@ -2,24 +2,29 @@
   "name": "green-tourism",
   "version": "0.0.0",
   "description": "",
+  "private": true,
+  "main": "runserver.js",
+  "author": "Rv-017.UI",
+  "license": "ISC",
   "engines": {
     "node": "4.4.4"
   },
-  "main": "runserver.js",
-  "scripts": {
-    "start": "node runserver.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "homepage": "https://github.com/Social-projects-Rivne/GreenTourism#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Social-projects-Rivne/GreenTourism.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Social-projects-Rivne/GreenTourism/issues"
   },
-  "homepage": "https://github.com/Social-projects-Rivne/GreenTourism#readme",
+  "scripts": {
+    "postinstall": "bower install",
+
+    "prestart": "npm install",
+    "start": "node runserver.js",
+
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.14.0",
@@ -28,6 +33,7 @@
     "sequelize": "^3.23.3"
   },
   "devDependencies": {
+    "bower": "^1.7.9",
     "gulp": "^3.9.1",
     "gulp-less": "^3.1.0",
     "less": "^2.7.1"

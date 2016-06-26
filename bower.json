@@ -1,0 +1,33 @@
+{
+  "name": "green-tourism",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "main": [
+    "app.modules.js",
+    "assets/less/main.less"
+  ],
+  "authors": [
+    "Rv-017.UI"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Social-projects-Rivne/GreenTourism",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Social-projects-Rivne/GreenTourism.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^1.12.3",
+    "bootstrap": "^3.3.6",
+    "angular": "~1.5.5",
+    "angular-route": "~1.5.5",
+    "leaflet": "^0.7.7"
+  }
+}

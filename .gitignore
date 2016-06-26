@@ -35,3 +35,6 @@ node_modules
 
 # Temp css files
 *.css~
+
+# Bower
+bower_components
