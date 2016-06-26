@@ -5,7 +5,7 @@
   "private": true,
   "main": [
     "app.modules.js",
-    "assets/less/main.less"
+    "app/assets/less/main.less"
   ],
   "authors": [
     "Rv-017.UI"
@@ -19,7 +19,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "app/bower_components",
     "test",
     "tests"
   ],

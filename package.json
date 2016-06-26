@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "private": true,
-  "main": "runserver.js",
+  "main": "server/runserver.js",
   "author": "Rv-017.UI",
   "license": "ISC",
   "engines": {
@@ -20,7 +20,7 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "node runserver.js",
+    "start": "node server/runserver.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

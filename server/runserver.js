@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/../app'));
 
-var logger = require('./server/logger');
+var logger = require('./logger');
 app.use(logger);
 
 var bodyParser = require('body-parser');
@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/test_greentourism');
 */
 
 // Routes
-var places = require('./server/routes/places');
+var places = require('./routes/places');
 app.use('/api/places', places);
 
 var port = process.env.PORT || 8080;
