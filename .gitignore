@@ -1,8 +1,47 @@
-/.idea
 # Logs
-logs
+logs/
 *.log
-npm-debug.log*
+
+# Databases
+*.db
+*.sqlite
+
+# Node, NPM, Bower
+node_modules/
+bower_components/
+.npm
+.node_repl_history
+
+# Gulp and Grunt
+build/
+dist/
+.grunt
+
+# Sass and Less
+*.css.map
+.sass-cache
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehtumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
 # Runtime data
 pids
@@ -15,26 +54,11 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
 # node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directory
-node_modules
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
 # Temp css files
 *.css~
-
-# Bower
-bower_components
