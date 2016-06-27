@@ -79,9 +79,18 @@ gulp.task('copy-JSON', function() {
     .pipe(notify('JSON files copied!'));
 });
 
+// Copy all fonts and icons
+gulp.task('copy-fonts', function() {
+  return gulp.src(['app/bower_components/bootstrap/dist/fonts/*',
+                   'app/bower_components/font-awesome/fonts/*'])
+    .pipe(gulp.dest(DEST + 'fonts/'))
+    .pipe(notify('Fonts and icons copied!'));
+});
+
 // Copy all necessary files
 gulp.task('build-copy', function(cb) {
-  return runSequence('copy-images', 'copy-templates', 'copy-JSON', cb);
+  return runSequence('copy-images', 'copy-templates', 'copy-JSON',
+                     'copy-fonts', cb);
 });
 
 // Build project
