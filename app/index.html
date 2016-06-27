@@ -11,12 +11,11 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <!-- endbower -->
-
-    <link rel="stylesheet" href="libs/leaflet/MarkerCluster.css" />
-    <link rel="stylesheet" href="libs/leaflet/MarkerCluster.Default.css" />
     <!-- endbuild -->
-    
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans" />
 
@@ -28,13 +27,12 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/leaflet.markercluster.layersupport/leaflet.markercluster.layersupport-src.js"></script>
     <!-- endbower -->
-
-    <script src="libs/leaflet/leaflet.markercluster-src.js"></script>
-    <script src="libs/leaflet/leaflet.markercluster.layersupport-src.js"></script>
-    <script src="libs/angular/angular-resource.min.js"></script>
-    <script src="libs/angular/ui-bootstrap-tpls-1.3.3.min.js"></script>
-    <script src="libs/angular/angular-animate.js"></script>
     <!-- endbuild -->
 
     <!-- build:css assets/css/main.css -->
@@ -54,25 +52,31 @@
 
     <!-- Separated components -->
     <script src="components/welcome-page/welcome-page.component.js"></script>
+
     <script src="components/place/place.factory.js"></script>
     <script src="components/place/placesOnMap.factory.js"></script>
-    <script src="components/autorization/error.factory.js"></script>
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
     <script src="components/place/filter-category/filter-category.component.js"></script>
-    <script src="components/autorization/signup/signup.component.js"></script>
-    <script src="components/autorization/signin/signin.component.js"></script>
+    <script src="components/place/place-list/marker-places.component.js"></script>
+
     <script src="components/tracks/track-list/track-list.component.js"></script>
     <script src="components/tracks/track-filter/track-filter.component.js"></script>
-    <script src="components/user-profile/user-profile.component.js"></script>
-    <script src="components/place/place-list/marker-places.component.js"></script>
+
+    <script src="components/calendar/calendar.component.js"></script>
+    <script src="components/events/events.component.js"></script>
     <script src="components/event/event-list.js"></script>
     <script src="components/event/event.component.js"></script>
+
     <script src="components/blog/blog-list/blog-list.component.js"></script>
     <script src="components/blog/blog-detail/blog-detail.component.js"></script>
     <script src="components/blog/blog-filter.component.js"></script>
-    <script src="components/events/events.component.js"></script>
-    <script src="components/calendar/calendar.component.js"></script>
+
+    <script src="components/autorization/error.factory.js"></script>
+    <script src="components/autorization/signup/signup.component.js"></script>
+    <script src="components/autorization/signin/signin.component.js"></script>
+
+    <script src="components/user-profile/user-profile.component.js"></script>
     <!-- endbuild -->
 
     <title>Green Tourism</title>
