@@ -201,6 +201,25 @@ body {
 .filter img {
   width: 10px;
 }
+/*--places ------*/
+.marker-image {
+  width: 150px;
+}
+div.place {
+  margin: 10px;
+}
+.place-container img {
+  width: 250px;
+}
+.place img {
+  width: 130px;
+  padding-bottom: 5px;
+}
+.place img.profile {
+  width: 80px;
+  height: 80px;
+}
+/* place */
 /*  -------- Tracks filter ----------  */
 track-filter li {
   padding: 3px 20px;
@@ -575,27 +594,3 @@ t5 {
 .user-page__avatar button {
   width: 100%;
 }
-.marker-image{
-  width:150px;
-}
-.marker-link{
-  cursor:pointer;
-}
-/*--places ------*/
-.marker-image{
-  width:150px;
-}
-div.place{
-  margin:10px;
-}
-.place-container img{
-  width:250px;
-}
-.place img{width:130px;
-  padding-bottom:5px;
-}
-.place img.profile{
-  width:80px;
-  height:80px;
-}
-/* place */
