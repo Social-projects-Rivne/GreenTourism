@@ -14,5 +14,5 @@ npm start
 
 **Build project:**
 ```
-npm build
+gulp build
 ```
