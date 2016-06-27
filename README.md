@@ -11,3 +11,8 @@ npm install
 ```
 npm start
 ```
+
+**Build project:**
+```
+npm build
+```
