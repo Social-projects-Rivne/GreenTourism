@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- build:css vendor/vendor.css -->
     <!-- Third-party stylesheets -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -14,10 +15,12 @@
 
     <link rel="stylesheet" href="libs/leaflet/MarkerCluster.css" />
     <link rel="stylesheet" href="libs/leaflet/MarkerCluster.Default.css" />
-
+    <!-- endbuild -->
+    
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans" />
 
+    <!-- build:js vendor/vendor.js -->
     <!-- Third-party scripts -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -32,11 +35,14 @@
     <script src="libs/angular/angular-resource.min.js"></script>
     <script src="libs/angular/ui-bootstrap-tpls-1.3.3.min.js"></script>
     <script src="libs/angular/angular-animate.js"></script>
+    <!-- endbuild -->
 
+    <!-- build:css assets/css/main.css -->
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="assets/css/main.css" />
+    <!-- endbuild -->
 
-    <!-- inject:js -->
+    <!-- build:js app.js -->
     <!-- Main scripts -->
     <script src="app.module.js"></script>
     <script src="app.routes.js"></script>
@@ -67,7 +73,8 @@
     <script src="components/blog/blog-filter.component.js"></script>
     <script src="components/events/events.component.js"></script>
     <script src="components/calendar/calendar.component.js"></script>
-    <!-- endinject -->
+    <!-- endbuild -->
+
     <title>Green Tourism</title>
   </head>
 
