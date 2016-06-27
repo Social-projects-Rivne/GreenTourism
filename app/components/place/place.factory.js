@@ -10,6 +10,9 @@ angular.module('greenTourism')
     placeModel.getPlaceTypes= $resource('components/place/types.data.json', {}, {
         'query': {method: 'GET', isArray: true}
     });
+    placeModel.getOnePlace = $resource('components/place/place1.data.json', {}, {
+        'query': {method: 'GET', isArray: true}
+    });
     var placesArray={};
      placeModel.setPlacesArray = function(arr) {
       placeModel.placesArray = arr;

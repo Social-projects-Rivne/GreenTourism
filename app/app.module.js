@@ -10,5 +10,10 @@ angular.module('greenTourism', [
   'event',
   'blogList',
   'blog',
-  'calendar'
+  'calendar',
+  'ngAnimate',
+  'ui.bootstrap',
+  'locationPlaces',
+  'popularPlaces',
+  'placeDetail'
 ]);
