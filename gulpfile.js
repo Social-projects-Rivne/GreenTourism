@@ -7,6 +7,7 @@ var notify = require('gulp-notify');
 var clean = require('gulp-clean');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
+var autoprefixer = require('gulp-autoprefixer');
 
 // Minification
 var uglify = require('gulp-uglify');
@@ -53,6 +54,8 @@ gulp.task('build-assets', ['bower', 'less'], function() {
       .pipe(useref())
       .pipe(gulpif('*.js', ngAnnotate()))
       .pipe(gulpif('*.js', uglify()))
+      .pipe(gulpif('*.css', autoprefixer({browsers: ['last 2 versions'],
+                                          cascade: false})))
       .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
       .pipe(gulp.dest(DEST))
       .pipe(notify('Assets builded!'));
