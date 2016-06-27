@@ -30,5 +30,13 @@
     "angular-route": "~1.5.5",
     "leaflet": "^0.7.7",
     "font-awesome": "^4.6.3"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": ["dist/css/bootstrap.css", "dist/js/bootstrap.js"]
+    },
+    "font-awesome": {
+      "main": "css/font-awesome.css"
+    }
   }
 }

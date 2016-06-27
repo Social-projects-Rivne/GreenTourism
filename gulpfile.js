@@ -8,8 +8,17 @@ var concat = require('gulp-concat');
 //var inject = require('gulp-inject');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
+var wiredep = require('wiredep').stream;
 
-var DEST = 'dist';
+var DEST = 'dist/';
+
+gulp.task('bower', function() {
+  gulp.src('app/index.html')
+    .pipe(wiredep({
+      directory: 'app/bower_components'
+    }))
+    .pipe(gulp.dest('app/'));
+});
 
 gulp.task('less', function() {
   return gulp.src('app/assets/less/main.less')
@@ -48,10 +57,10 @@ gulp.task('js', function() {
 //    .pipe(gulp.dest(DEST));
 //});
 
-gulp.task('bower', function() {
-  return gulp.src('app/bower_components/**')
-    .pipe(gulp.dest(DEST + '/bower_components'));
-});
+//gulp.task('bower', function() {
+//  return gulp.src('app/bower_components/**')
+//    .pipe(gulp.dest(DEST + 'bower_components/'));
+//});
 
 //gulp.task('libs', function() {
 //  return gulp.src('app/libs/**')
@@ -65,6 +74,7 @@ gulp.task('bower', function() {
 
 gulp.task('watch', function() {
   gulp.watch('app/assets/less/**/*.less', ['less']);
+  gulp.watch('bower.json', ['bower']);
   //
   //  gulp.watch(['app/app.module.js', 'app/app.routes.js', 'app.models.js',
   //              'app/shared/**/*.js', 'app/components/**/*.js'],
