@@ -1,14 +1,17 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var wiredep = require('wiredep').stream;
-var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
+var clean = require('gulp-clean');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
-var minifyCss = require('gulp-clean-css');
-var clean = require('gulp-clean');
+
+// Minification
+var uglify = require('gulp-uglify');
+var ngAnnotate = require('gulp-ng-annotate');
+var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
 //var templateCache = require('gulp-angular-templatecache');
@@ -41,15 +44,16 @@ gulp.task('bower', function() {
 gulp.task('clean', function() {
   return gulp.src(DEST, {read: false})
     .pipe(clean())
-    .pipe(notify('Destination folder cleared!'));
+    .pipe(notify('Destination folder deleted!'));
 });
 
 // Build index.html, css, js
 gulp.task('build-assets', ['bower', 'less'], function() {
   return gulp.src('app/*.html')
       .pipe(useref())
-      .pipe(gulpif('*.js', uglify({mangle: false}))) // Consider using Google Closure Compiler instead
-      .pipe(gulpif('*.css', minifyCss()))
+      .pipe(gulpif('*.js', ngAnnotate()))
+      .pipe(gulpif('*.js', uglify()))
+      .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
       .pipe(gulp.dest(DEST))
       .pipe(notify('Assets builded!'));
 });
