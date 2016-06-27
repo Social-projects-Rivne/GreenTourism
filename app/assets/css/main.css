@@ -7,6 +7,11 @@
 .dropdown-menu > .active > a:focus {
   color: #336666;
 }
+.btn {
+  border: 1px solid #009000;
+  background-color: #fff;
+  color: #009000;
+}
 .nav > li > a {
   font-size: 22px;
 }
@@ -162,11 +167,6 @@
 }
 #buttons {
   margin: 10px 0;
-}
-.btn {
-  border: 1px solid #009000;
-  background-color: #fff;
-  color: #009000;
 }
 .btn-first {
   border-radius: 5px 0 0 5px !important;

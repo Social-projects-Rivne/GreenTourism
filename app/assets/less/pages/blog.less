@@ -1,9 +1,7 @@
 /*blog list style*/
-@text-color: #747474;
-@prim-color: #a0ce4e;
 
 .blog-page-header {
-  color: @text-color;
+  color: @blog-text-color;
   background-color: #f6f6f6;
   border-bottom: 1px solid #d2d3d4;
   h1 {
@@ -14,7 +12,7 @@
 .blog-page-content {
   padding: 50px 0;
   a {
-    color: @text-color;
+    color: @blog-text-color;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -ms-transition: all 0.5s;
@@ -22,7 +20,7 @@
     transition: all 0.5s;
     &:hover {
       text-decoration: none;
-      color: @prim-color;
+      color: @blog-prim-color;
     }
   }
   aside {
@@ -36,16 +34,16 @@
       }
       .btn{
         border-radius: 0;
-        background: @prim-color;
-        color: @text-color;
-        border: 1px solid @prim-color;
+        background: @blog-prim-color;
+        color: @blog-text-color;
+        border: 1px solid @blog-prim-color;
       }
     }
     .blog-category-list{
       margin-bottom: 45px;
       h3{
         margin: 0 0 18px 0;
-        color: @text-color;
+        color: @blog-text-color;
       }
       ul{
         list-style-type: none;
@@ -91,7 +89,7 @@
           &.active{
             a{
               background: #fff;
-              border-top: 3px solid @prim-color;
+              border-top: 3px solid @blog-prim-color;
             }
           }
         }
@@ -115,7 +113,7 @@
             font-size: 15px;
           }
           .media-date{
-            color: @text-color;
+            color: @blog-text-color;
             font-size: 13px;
           }
         }
@@ -126,7 +124,7 @@
 
 .blog-list-item {
   font-family: 'PT Sans', sans-serif;
-  color: lighten(@text-color, 5%);
+  color: lighten(@blog-text-color, 5%);
   border: none;
   border-radius: 0;
   padding: 0;
