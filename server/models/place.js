@@ -1,25 +1,14 @@
-var Sequelize = require('sequelize');
-var db = require('../database');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var Place = db.define('place', {
-  name: {type: Sequelize.STRING, allowNull: false},
-  description: {type: Sequelize.TEXT, allowNull: false},
-  latitude: {type: Sequelize.STRING, allowNull: false},
-  longitude: {type: Sequelize.STRING, allowNull: false},
-  type: {type: Sequelize.STRING, allowNull: false} //type: Sequelize.INTEGER,
-  //ownerId: Sequelize.INTEGER
+var PlaceSchema = new Schema({
+  name: String,
+  description: String,
+  lat: String,
+  lon: String,
+  type: String, //type: Number,
+  photo: Array,
+  userId: String
 });
 
-// Create table
-Place.sync({force: false}); /*.then(function() {
-  return Place.create({
-    latitude: '50.6202',
-    longitude: '26.2516',
-    name: 'point1',
-    description: 'description ......... for point2',
-    type: 'Camp'
-  });
-});
-*/
-
-module.exports = Place;
+module.exports = mongoose.model('Place', PlaceSchema);

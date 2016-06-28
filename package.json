@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "private": true,
-  "main": "server/runserver.js",
+  "main": "server/server.js",
   "author": "Rv-017.UI",
   "license": "ISC",
   "engines": {
@@ -20,14 +20,20 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "node server/runserver.js",
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
     "express": "^4.14.0",
     "mongoose": "^4.5.0",
+    "morgan": "^1.7.0",
     "mysql": "^2.11.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^3.23.3"
   },
   "devDependencies": {

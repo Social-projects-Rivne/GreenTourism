@@ -1,5 +1,4 @@
-var exports = module.exports = {};
-
+// TODO: Add limit and offset
 exports.list = function(model) {
   var listController = function(req, res) {
     model.findAll({where: req.query})

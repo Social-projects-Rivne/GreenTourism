@@ -1,20 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-var defaultControllers = require('../default-controllers.js');
+// var defaultController = require('../controllers/default-controller');
+var defaultOwnerController = require('../controllers/default-owner-controller');
+var authController = require('../auth/auth');
 
 var Place = require('../models/place');
 
 router.route('/')
-  .get(defaultControllers.list(Place))
+  .get(authController.isAuthenticated, defaultOwnerController.list(Place))
   // TODO: Restrict creating places to logged in users only
-  .post(defaultControllers.create(Place));
+  .post(authController.isAuthenticated, defaultOwnerController.create(Place));
 
 router.route('/:id')
-  .get(defaultControllers.show(Place))
+  .get(authController.isAuthenticated, defaultOwnerController.show(Place))
   // TODO: Restrict updating places to logged in users only
-  .put(defaultControllers.update(Place))
+  .put(authController.isAuthenticated, defaultOwnerController.update(Place))
   // TODO: Restrict deleting places to logged in users only
-  .delete(defaultControllers.delete(Place));
+  .delete(authController.isAuthenticated, defaultOwnerController.delete(Place));
 
 module.exports = router;
