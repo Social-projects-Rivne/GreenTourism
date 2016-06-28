@@ -19,13 +19,19 @@ var imagemin = require('gulp-imagemin');
 
 var DEST = 'dist/';  // Destination folder
 
+// Error notification
+var onError = function(err) {
+  notify.onError({
+    message: 'Error: <%= error.message %>'
+  })(err);
+
+  this.emit('end');
+};
+
 // Compile less files
 gulp.task('less', function() {
   return gulp.src('app/assets/less/main.less')
-    .pipe(plumber(function(err) {
-      // TODO: Add some error feedback
-      this.emit('end');
-    }))
+    .pipe(plumber({errorHandler: onError}))
     .pipe(less())
     .pipe(gulp.dest('app/assets/css'))
     .pipe(notify('Less compiled!'));
@@ -34,6 +40,7 @@ gulp.task('less', function() {
 // Add bower deps to index.html
 gulp.task('bower', function() {
   return gulp.src('app/index.html')
+    .pipe(plumber({errorHandler: onError}))
     .pipe(wiredep({
       directory: 'app/bower_components'
     }))
@@ -58,7 +65,7 @@ gulp.task('build-assets', ['bower', 'less'], function() {
                                           cascade: false})))
       .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
       .pipe(gulp.dest(DEST))
-      .pipe(notify('Assets builded!'));
+      .pipe(notify({message: 'Assets builded!', onLast: true}));
 });
 
 // Copy all images and minify them
@@ -66,7 +73,7 @@ gulp.task('copy-images', function() {
   return gulp.src('app/assets/img/**/*', {base: 'app'})
     .pipe(imagemin())
     .pipe(gulp.dest(DEST))
-    .pipe(notify('Images copied!'));
+    .pipe(notify({message: 'Images copied!', onLast: true}));
 });
 
 // Copy all angular templates and minify them
@@ -75,7 +82,7 @@ gulp.task('copy-templates', function() {
                   {base: 'app'})
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(DEST))
-    .pipe(notify('Templates copied!'));
+    .pipe(notify({message: 'Templates copied!', onLast: true}));
 });
 
 // Copy all JSON fixtures
@@ -83,7 +90,7 @@ gulp.task('copy-JSON', function() {
   return gulp.src(['app/components/**/*.json', 'app/shared/**/*.json'],
                    {base: 'app'})
     .pipe(gulp.dest(DEST))
-    .pipe(notify('JSON files copied!'));
+    .pipe(notify({message: 'JSON files copied!', onLast: true}));
 });
 
 // Copy all fonts and icons
@@ -91,7 +98,7 @@ gulp.task('copy-fonts', function() {
   return gulp.src(['app/bower_components/bootstrap/dist/fonts/*',
                    'app/bower_components/font-awesome/fonts/*'])
     .pipe(gulp.dest(DEST + 'fonts/'))
-    .pipe(notify('Fonts and icons copied!'));
+    .pipe(notify({message: 'Fonts and icons copied!', onLast: true}));
 });
 
 // Copy all necessary files
