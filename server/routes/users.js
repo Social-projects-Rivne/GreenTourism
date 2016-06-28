@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var defaultController = require('../controllers/default-controller');
+var defaultController = require('../controllers/default-crud-controller');
 var authController = require('../auth/auth');
 
 var User = require('../models/user');
