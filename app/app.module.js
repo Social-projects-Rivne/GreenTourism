@@ -1,5 +1,9 @@
 angular.module('greenTourism', [
   'ngRoute',
+  'ngResource',
+  'ngAnimate',
+  'ui.bootstrap',
+
   'welcomePage',
   'events',
   'signup',
@@ -11,8 +15,6 @@ angular.module('greenTourism', [
   'blogList',
   'blog',
   'calendar',
-  'ngAnimate',
-  'ui.bootstrap',
   'locationPlaces',
   'popularPlaces',
   'placeDetail'
