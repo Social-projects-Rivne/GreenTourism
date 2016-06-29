@@ -1,22 +1,22 @@
 angular.module('events', [])
-.component('events', {
+  .component('events', {
     templateUrl: 'components/events/events.template.html',
-    controller: function($scope,$http,eventList) {
+    controller: function($scope, $http, eventList) {
 
-        $scope.eventL = eventList.th ;
-        $scope.eventL.date_current =  new Date() ;
+      $scope.eventL = eventList.th;
+      $scope.eventL.date_current = new Date();
 
-        this.data = $http.get('components/events/event.data.json').success(function (data) {
-            $scope.eventList=data;
-            $scope.eventL.event=data;
+      this.data = $http.get('components/events/event.data.json').success(function(data) {
+        $scope.eventList = data;
+        $scope.eventL.event = data;
 
-            return data;
-        }, function (data) {
-            console.log('Error : Could not load JSON Event in angular.module - event ') ;
-            return 'error' ;
-        });
+        return data;
+      }, function(data) {
+        console.log('Error : Could not load JSON Event in angular.module - event ');
+        return 'error';
+      });
 
-        $scope.give_event=eventList.th ;
-        this.danni = $scope.give_event.event ;
+      $scope.give_event = eventList.th;
+      this.danni = $scope.give_event.event;
     }
   });
