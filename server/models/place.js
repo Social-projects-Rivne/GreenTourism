@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 var PlaceSchema = new Schema({
   name: String,
   description: String,
-  lat: String,
-  lon: String,
+  latitude: String,
+  longitude: String,
   type: String, //type: Number,
   photo: Array,
   userId: String
