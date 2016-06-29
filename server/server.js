@@ -3,7 +3,7 @@ var app = express();
 var morgan = require('morgan');  // Logger
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
 
 var PORT = process.env.PORT || 8080;
 
@@ -17,6 +17,7 @@ app.use(express.static(__dirname + '/../app'));
 var mongoose = require('mongoose');
 // TODO: Hide username and password
 var dbUrl = 'mongodb://user:qwerty1234@ds019664.mlab.com:19664/test_greentourism';
+var dbLocalUrl = 'mongodb://localhost/test_greentourism';
 mongoose.connect(dbUrl);
 
 // Routes
