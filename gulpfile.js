@@ -8,6 +8,7 @@ var clean = require('gulp-clean');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
+var beautify = require('gulp-beautify');
 
 // Minification
 var uglify = require('gulp-uglify');
@@ -27,6 +28,14 @@ var onError = function(err) {
 
   this.emit('end');
 };
+
+// Beautify source files
+gulp.task('beautify', function() {
+  gulp.src(['app/**/*.js', '!app/bower_components/**/*.js'])
+    .pipe(beautify())
+    .pipe(gulp.dest('app/'))
+    .pipe(notify({message: 'Beautification done!', onLast: true}));
+});
 
 // Compile less files
 gulp.task('less', function() {
