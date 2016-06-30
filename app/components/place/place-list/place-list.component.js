@@ -23,8 +23,8 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
         document.forms.addPlace.reset();
         this.newPlace = {};
 
-        this.addPlaceOnMap(L.latLng(parseFloat(place.latitude),
-                                    parseFloat(place.longitude)));
+        this.addPlaceOnMap(L.latLng(place.latitude,
+                                    place.longitude));
       };
 
       // TODO: Move this inside map
