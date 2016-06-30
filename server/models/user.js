@@ -1,10 +1,8 @@
-// Load required packages
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 var SALT_ROUNDS = 5;
 
-// Define our user schema
 var UserSchema = new Schema({
   username: {
     type: String,
@@ -43,5 +41,4 @@ UserSchema.methods.verifyPassword = function(password, callback) {
   });
 };
 
-// Export the Mongoose model
 module.exports = mongoose.model('User', UserSchema);
