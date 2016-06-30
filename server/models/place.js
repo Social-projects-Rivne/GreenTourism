@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 var PlaceSchema = new Schema({
   name: String,
   description: String,
-  latitude: String,
-  longitude: String,
+  latitude: Number,
+  longitude: Number,
   type: String, //type: Number,
   photo: Array,
-  userId: String
+  //userId: String
 });
 
 module.exports = mongoose.model('Place', PlaceSchema);
