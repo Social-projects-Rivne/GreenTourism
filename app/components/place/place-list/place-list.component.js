@@ -2,7 +2,8 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
                              'ngResource', 'ui.bootstrap'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: function(placeModel, placesOnMap, $scope, $compile, Place) {
+    controller: function(placeModel, placesOnMap, $scope, $compile, $rootScope,
+                         Place) {
 
       this.addPlaceState = false;
 
@@ -22,9 +23,15 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
         document.forms.addPlace.reset();
         this.newPlace = {};
 
-        //setMarker(place);
+        this.addPlaceOnMap(L.latLng(parseFloat(place.latitude),
+                                    parseFloat(place.longitude)));
       };
 
+      // TODO: Move this inside map
+      this.addPlaceOnMap = function(latLng) {
+        L.marker(latLng).addTo($rootScope.map);
+        $rootScope.map.setView(latLng);
+      };
 
 
       var arrPlaces = [];
