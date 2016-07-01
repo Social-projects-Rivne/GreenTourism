@@ -14,7 +14,7 @@
      "date_end": 1468853756239,
      "event_rate": 193,
      "event_points": [{
-          "lat": "50.61625",
+          "lat": "50.71625",
           "lon": "26.24082"
         }],
      "comments":  [123,754,987],
@@ -37,8 +37,8 @@
   "date_end": 1471357441239,
   "event_rate": 112,
   "event_points": [{
-    "lat": "50.61625",
-    "lon": "26.24082"
+    "lat": "50.99485",
+    "lon": "26.76012"
   }],
   "comments":  [23,454,437],
   "status": "active",
@@ -46,8 +46,8 @@
 },
   {
     "id": "590",
-    "name": "Football match Rivne - Goshca",
-    "description": "Final of Rivne: The Veres forward scored a second-half brace as Marc Wilmot's men cruised to victory to boost their chances of reaching",
+    "name": "Football match Goshca - Rivne",
+    "description": "Game in Goshca of Rivne: The Veres forward scored a second-half brace as Marc Wilmot's men cruised to victory to boost their chances of reaching",
     "attachments":
     {
       "photo": ["/img/events/football7.jpg","/img/events/football6.jpg"]
@@ -58,8 +58,8 @@
     "date_end": 1469024641239,
     "event_rate": 112,
     "event_points": [{
-      "lat": "50.61625",
-      "lon": "26.24082"
+      "lat": "50.57887",
+      "lon": "26.67171"
     }],
     "comments":  [23,454,437],
     "status": "active",
@@ -160,8 +160,8 @@
   "date_end": 1467296641239,
   "event_rate": 2,
   "event_points": [{
-    "lat": "50.61609",
-    "lon": "26.29510"
+    "lat": "50.60590",
+    "lon": "26.66484"
   }],
   "comments":  [228,229,220],
   "status": "active",
@@ -186,5 +186,25 @@
   "comments":  [228,229,220],
   "status": "active",
   "price": "30"
+}, {
+  "id": "156",
+  "name": "Research historican places",
+  "description": "Events are an important motivator of tourism, andﬁgure prominently in the development and marketing plansof most destinations. The roles and impacts of plannedevents within tourism have been well documented, and areof increasing importance for destination competitiveness.Yet it was only a few decades ago that ‘event tourism.",
+  "attachments":
+  {
+    "photo": ["/img/events/research1.jpg"]
+  },
+  "type": "Research",
+  "owner": "Timoty",
+  "date_start": 1467296641239,
+  "date_end": 1467296641239,
+  "event_rate": 2,
+  "event_points": [{
+    "lat": "50.34195",
+    "lon": "25.31799"
+  }],
+  "comments":  [218,129,120,567],
+  "status": "active",
+  "price": "2000"
 }
 ]

@@ -12,6 +12,7 @@
                     </div>
                     <div ng-if="$first" class="media-body">
                         <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red"> {{event.event_rate}}</h4>
+                        <a href="#/eventsmap/{{event.event_points[0].lat}}/{{event.event_points[0].lon}}/{{event.type}}/{{event.date_start}}"><h2 class="text-center center-block glyphicon glyphicon-globe" style="color: green; font-size : 50px;"></h2></a>
                     </div>
                 </li>
             </ul>
