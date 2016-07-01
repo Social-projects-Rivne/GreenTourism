@@ -41,7 +41,6 @@ angular.module('eventsMap', ['calendar','eventMapType'])
             $scope.eventL.clear() ;
             $scope.eventL.Item_type_menu = this.type ;
             $scope.eventL.CalendarValue[0] = this.date_start ;
-            console.log(' this.date_start= ' + this.date_start ) ;
             $scope.eventL.CalendarValue[1] = + this.date_start + 31*24*60*60*1000;
 
             this.data = $http.get('components/events/event.data.json').success(function (data) {
@@ -56,7 +55,6 @@ angular.module('eventsMap', ['calendar','eventMapType'])
                 $scope.eventL.event=data;
 
                 $scope.eventL.all_type() ;
-                console.log('$scope.eventL.Type_menu' + $scope.eventL.Type_menu) ;
                 $scope.eventL.Type_menu[$scope.eventL.Type.indexOf($scope.eventL.Item_type_menu)].active = true ;
 
                 return data;
@@ -85,7 +83,6 @@ angular.module('eventsMap', ['calendar','eventMapType'])
             }
 
             this.temp_click = function () {
-                console.log(' $scope.eventL.active_type().length= ' + $scope.eventL.active_type().length) ;
                 if ($scope.eventL.active_type().length != 0) $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendar_show_date,$scope.eventL.CalendarName[1].calendar_show_date,$scope.eventL.active_type()) ;
                 else {
                     if (this.type) {
@@ -162,7 +159,7 @@ angular.module('eventsMap', ['calendar','eventMapType'])
                     }
 
                     var id = $scope.filters[i].id ;
-                    var marker1 = L.marker([ $scope.filters[i].event_points[0].lat, $scope.filters[i].event_points[0].lon], {icon: greenIcon}).on('click',function onClick(e) {console.log(this.getLatLng().lat);$scope.marker_click(this.getLatLng().lat,this.getLatLng().lng)});
+                    var marker1 = L.marker([ $scope.filters[i].event_points[0].lat, $scope.filters[i].event_points[0].lon], {icon: greenIcon}).on('click',function onClick(e) {$scope.marker_click(this.getLatLng().lat,this.getLatLng().lng)});
 
                     marker1.addTo($scope.groups);
                 }

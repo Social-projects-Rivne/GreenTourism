@@ -14,19 +14,13 @@ angular.module('calendar').component('calendar', {
 
         if ($scope.give_event.mainControllerName=='MapEvent') {
             if ($scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]) this.calendar_show_date = new Date(+$scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]);
-            console.log('CalendarValue[' + $scope.give_event.CalendarName.length + ']= ' + $scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]);
-
-            console.log('CalendarValue[' + $scope.give_event.CalendarName.length + ']= ' + new Date(+$scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]));
-        }
+         }
          /**/
 
         $scope.give_event.CalendarName.push(this) ;
 
-        console.log(' this.name = ' + this.name + '  > $scope.give_event.CalendarName[0].calendar_show_date= ' + $scope.give_event.CalendarName[0].calendar_show_date) ;
-
         this.calendar_init = function (some_date) {
-            console.log(' some_date= ' + some_date + ' this.calendar_show_date=' + this.calendar_show_date) ;
-            this.calendar_month = [];
+             this.calendar_month = [];
 
             function getFirstWeekDayOfMonth(year, month) {
                 var date = new Date(year, month);
@@ -79,7 +73,6 @@ angular.module('calendar').component('calendar', {
         if ((this.name == '1') && ($scope.give_event.mainControllerName=='MapEvent'))
         {
             $scope.give_event.mainController.temp_click() ;
-            console.log(' Fire') ;
         }
 
     }

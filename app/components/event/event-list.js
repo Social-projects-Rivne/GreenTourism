@@ -16,7 +16,6 @@ angular.module('event').service('eventList', function ($http){
     this.find_date = function (dateFind, sort) {
         return this.event.filter(function (itEvent) {
             var temp_date = new Date(itEvent.date_start);
-            //console.log(temp_date.toDateString() + ' == ' + dateFind.toDateString()) ;
             if (sort == 1) return temp_date > dateFind;
             return temp_date.toDateString() == dateFind.toDateString();
         })
@@ -26,7 +25,6 @@ angular.module('event').service('eventList', function ($http){
         function compareEvent(eventA, eventB) {
             var comperA = +Math.pow(Math.abs(+eventA.event_points[0].lat-lat),2)+Math.pow(Math.abs(+eventA.event_points[0].lon-lng),2) ;
             var comperB = + Math.pow(Math.abs(+eventB.event_points[0].lat-lat),2)+ Math.pow(Math.abs(+eventB.event_points[0].lon-lng),2) ;
-            console.log(' comperA - comperB= ' + (comperA - comperB)) ;
             return comperA - comperB ;
         }
         return event.sort(compareEvent);
@@ -37,8 +35,6 @@ angular.module('event').service('eventList', function ($http){
             var _start_date = new Date(itEvent.date_start);
             var _end_date = new Date(itEvent.date_end);
             var _type = itEvent.type;
-            //console.log(temp_date.toDateString() + ' == ' + dateFind.toDateString()) ;
-            //console.log(_start_date + ' == ' + dateStart)  ;
             if (_start_date >= dateStart && _end_date <= dateEnd)
             {
                 for (i=0;i<type.length;i++)

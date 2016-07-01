@@ -156,8 +156,8 @@
   },
   "type": "Meeteng",
   "owner": "Rita Romik",
-  "date_start": 1467296641239,
-  "date_end": 1467296641239,
+  "date_start": 1473068750000,
+  "date_end": 1473068750000,
   "event_rate": 2,
   "event_points": [{
     "lat": "50.60590",
@@ -176,9 +176,9 @@
   },
   "type": "Game",
   "owner": "Rita Romik",
-  "date_start": 1467296641239,
-  "date_end": 1467296641239,
-  "event_rate": 2,
+  "date_start": 1469439950000,
+  "date_end": 1469439950000,
+  "event_rate": 222,
   "event_points": [{
     "lat": "50.61609",
     "lon": "26.29510"
@@ -196,8 +196,8 @@
   },
   "type": "Research",
   "owner": "Timoty",
-  "date_start": 1467296641239,
-  "date_end": 1467296641239,
+  "date_start": 1469699150000,
+  "date_end": 1469699150000,
   "event_rate": 2,
   "event_points": [{
     "lat": "50.34195",
@@ -206,5 +206,45 @@
   "comments":  [218,129,120,567],
   "status": "active",
   "price": "2000"
+}, {
+  "id": "157",
+  "name": "Research ambers places",
+  "description": "Events Research ambers places in Rokitno region was veri important! The roles and impacts of plannedevents within tourism have been well documented, and areof increasing importance for destination competitiveness.Yet it was only a few decades ago that ‘event tourism.",
+  "attachments":
+  {
+    "photo": ["/img/events/research3.jpg","/img/events/research2.jpg"]
+  },
+  "type": "Research",
+  "owner": "Anonimus",
+  "date_start": 1469439950000,
+  "date_end": 1469439950000,
+  "event_rate": 207,
+  "event_points": [{
+    "lat": "51.43432",
+    "lon": "26.38092"
+  }],
+  "comments":  [218,129,120,567],
+  "status": "active",
+  "price": "500"
+},  {
+  "id": "158",
+  "name": "Folk Festival",
+  "description": "From the rich color and deep symbolism of the delicate “pysanka” (Ukrainian Easter Egg) to the thunderous, climatic, power, rhythm and strength of “HOPAK” – the world’s most exciting ethnic dance, and every brilliant “Kolomiyka” (polka) and soulful folk song in between, we invite you to experience the Annual Ukranian Folk Festival",
+  "attachments":
+  {
+    "photo": ["/img/events/festival8.jpg","/img/events/festival9.jpg"]
+  },
+  "type": "Festival",
+  "owner": "Vadim Tragik",
+  "date_start": 1471254350000,
+  "date_end": 1471254350000,
+  "event_rate": 432,
+  "event_points": [{
+    "lat": "50.32858",
+    "lon": "26.52168"
+  }],
+  "comments":  [328,559,308],
+  "status": "active",
+  "price": "0"
 }
 ]
