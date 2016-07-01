@@ -1,0 +1,53 @@
+{
+  "name": "green-tourism",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "main": [
+    "app.modules.js",
+    "app/assets/less/main.less"
+  ],
+  "authors": [
+    "Rv-017.UI"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Social-projects-Rivne/GreenTourism",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Social-projects-Rivne/GreenTourism.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^1.12.3",
+    "bootstrap": "^3.3.6",
+    "angular": "~1.5.5",
+    "angular-route": "~1.5.5",
+    "leaflet": "^0.7.7",
+    "font-awesome": "^4.6.3",
+    "leaflet.markercluster": "^0.5.0",
+    "angular-animate": "^1.5.7",
+    "angular-resource": "^1.5.7",
+    "angular-bootstrap": "^1.3.3",
+    "leaflet.markercluster.layersupport": "https://github.com/ghybs/Leaflet.MarkerCluster.LayerSupport.git#leaflet-0.7"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": "css/font-awesome.css"
+    },
+    "leaflet.markercluster.layersupport": {
+      "main": "leaflet.markercluster.layersupport-src.js"
+    }
+  }
+}

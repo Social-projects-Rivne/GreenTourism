@@ -1,0 +1,70 @@
+<div class="col-md-9">
+    <div  ng-if="give_event.find_date(give_event.date_current).length>0" class="panel panel-success ">
+        <div class="panel-heading">
+            <h3 class="panel-title">Events of selected days</h3>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3" ng-repeat="dan in give_event.find_date(give_event.date_current) | limitTo:4 ">
+            <a href="#/events/{{dan.id}}/{{dan.date_start}}">
+            <div class="event_block">
+                <img src="assets{{dan.attachments.photo[0]}}" alt="{{dan.name}}" title="{{dan.name}}">
+
+                <div class="info">
+                    <div class="date_event">{{dan.date | date:'dd MMMM yyyy'}}</div>
+                    <div class="title_event hoverer">{{dan.name}}</div>
+                    <div class="description_event">{{dan.description}}</div>
+                    <div class="description_event"><t5>Type: </t5>{{dan.type}}</div>
+                    <div class="description_event"><t5>Write by: </t5>{{dan.owner}}</div>
+                    <div class="date_place hoverer"><t5>Price: </t5>{{dan.price}}</div>
+                    <a class="date_place hoverer" href="#/eventsmap/{{dan.event_points[0].lat}}/{{dan.event_points[0].lon}}/{{dan.type}}/{{dan.date_start}}"><h4 class="text-center center-block glyphicon glyphicon-globe" style="color: blue; font-size : 25px;"> On map</h4></a>
+                    <div class="tag_area info">
+                        <div class="tag_event" ng-class="$odd ? 'tag_event_right' : 'tag_event_left'"
+                             ng-repeat="tag in dan.tags">{{tag}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+    <!-- ng-click="$ctrl.cli()">{{give_event.date_current}}</div -->
+    <div class="panel panel-success ">
+        <div class="panel-heading">
+            <h3 class="panel-title">Most earlier events for selected days</h3>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="col-md-3"
+         ng-repeat="dan in give_event.find_date(give_event.date_current,1) | orderBy: 'date_start' | limitTo:4 ">
+        <div style="display: none">{{give_event.find_date(give_event.date_current,1)}}</div>
+        <a href="#/events/{{dan.id}}/{{dan.date_start}}">
+        <div class="event_block">
+            <img src="assets{{dan.attachments.photo[0]}}" alt="{{dan.name}}" title="{{dan.name}}">
+            <div class="info">
+                <div class="date_event">{{dan.date_start | date:'dd MMMM yyyy'}}</div>
+                <div class="title_event hoverer">{{dan.name}}</div>
+                <div class="description_event">{{dan.description}}</div>
+                <div class="description_event"><p>Type: {{dan.type}}</p>
+                <p>Write by: {{dan.owner}}</p><p>Price: {{dan.price}}</p></div>
+                <a class="date_place hoverer" href="#/eventsmap/{{dan.event_points[0].lat}}/{{dan.event_points[0].lon}}/{{dan.type}}/{{dan.date_start}}"><h4 class="text-center center-block glyphicon glyphicon-globe" style="color: blue; font-size : 25px;"> On map</h4></a>
+                <div class="tag_area info">
+                    <div class="tag_event" ng-class="$odd ? 'tag_event_right' : 'tag_event_left'"
+                         ng-repeat="tag in dan.tags">{{tag}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class="row"></div>
+</div>
+<div class="col-md-2">
+    <calendar></calendar>
+</div>
+<div class="row">
+    <div class="row">
+        <div class="row">
+</div></div></div>

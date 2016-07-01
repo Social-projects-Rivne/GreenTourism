@@ -1,0 +1,6 @@
+{
+  "directory": "app/bower_components",
+  "scripts": {
+    "postinstall": "gulp bower"
+  }
+}

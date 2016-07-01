@@ -1,0 +1,61 @@
+<div class="container-fluid places">
+    <div class="row places">
+        <div class="col-xs-9 no-padding" id="main-content">
+            <div class="col-xs-12 no-padding" id="filter">  <!-- Filter container start -->
+                <div class="btn-group col-xs-12" role="group" id="buttons">
+                    <div class="col-xs-2"></div>
+                    <button type="button" class="btn col-xs-2 btn-first" ng-click="$ctrl.toggleMenu()">Add track</button>
+                    <div class="btn-group col-xs-2 no-padding" role="group">
+                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Map type
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu col-xs-12">
+                            <filter-map-type></filter-map-type>
+                        </ul>
+                    </div>
+                    <div class="btn-group col-xs-2 no-padding" role="group">
+                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tracks category
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu  col-xs-12">
+                            <track-filter></track-filter>
+                        </ul>    
+                    </div>
+                    <button type="button" class="btn col-xs-2 btn-last" >Export</button>
+                    <div class="col-xs-2"></div>
+                </div>
+            </div> <!-- Filter container end -->
+            <div class="col-xs-12 no-padding" id="map"> <!-- Map container start -->
+                <track-maker></track-maker>
+                <show-map></show-map>
+            </div> <!-- Map container end -->
+            <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
+                <div class="col-xs-12 no-padding">
+                    <h2>Popular Places in location</h2>
+                </div>
+                <div class="col-xs-12 no-padding">
+                    <div class="col-xs-4 place-wrapper">
+                        <div class="place-container">
+                            
+                        </div>                                    
+                    </div>
+                    <div class="col-xs-4 place-wrapper">
+                        <div class="place-container">
+                            
+                        </div>                
+                    </div>
+                    <div class="col-xs-4 place-wrapper">
+                        <div class="place-container">
+                            
+                        </div>                
+                    </div>
+                </div>
+            </div> <!-- Related tracks container end -->
+        </div>
+        <div class="col-xs-3 no-padding" id="sidebar">
+            <popular-track></popular-track>
+        </div>
+    </div>
+</div>

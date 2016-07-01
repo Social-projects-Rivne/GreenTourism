@@ -1,0 +1,59 @@
+{
+  "name": "green-tourism",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "main": "server/server.js",
+  "author": "Rv-017.UI",
+  "license": "ISC",
+  "engines": {
+    "node": "4.4.4"
+  },
+  "homepage": "https://github.com/Social-projects-Rivne/GreenTourism#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Social-projects-Rivne/GreenTourism.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Social-projects-Rivne/GreenTourism/issues"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.0",
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.23.3"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-beautify": "^2.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-less": "^3.1.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-uglify": "^1.5.4",
+    "gulp-useref": "^3.1.0",
+    "less": "^2.7.1",
+    "run-sequence": "^1.2.1",
+    "wiredep": "^4.0.0"
+  }
+}
