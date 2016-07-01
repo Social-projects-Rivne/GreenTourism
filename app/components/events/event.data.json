@@ -14,7 +14,7 @@
      "date_end": 1468853756239,
      "event_rate": 193,
      "event_points": [{
-          "lat": "50.61625",
+          "lat": "50.71625",
           "lon": "26.24082"
         }],
      "comments":  [123,754,987],
@@ -37,8 +37,8 @@
   "date_end": 1471357441239,
   "event_rate": 112,
   "event_points": [{
-    "lat": "50.61625",
-    "lon": "26.24082"
+    "lat": "50.99485",
+    "lon": "26.76012"
   }],
   "comments":  [23,454,437],
   "status": "active",
@@ -46,8 +46,8 @@
 },
   {
     "id": "590",
-    "name": "Football match Rivne - Goshca",
-    "description": "Final of Rivne: The Veres forward scored a second-half brace as Marc Wilmot's men cruised to victory to boost their chances of reaching",
+    "name": "Football match Goshca - Rivne",
+    "description": "Game in Goshca of Rivne: The Veres forward scored a second-half brace as Marc Wilmot's men cruised to victory to boost their chances of reaching",
     "attachments":
     {
       "photo": ["/img/events/football7.jpg","/img/events/football6.jpg"]
@@ -58,8 +58,8 @@
     "date_end": 1469024641239,
     "event_rate": 112,
     "event_points": [{
-      "lat": "50.61625",
-      "lon": "26.24082"
+      "lat": "50.57887",
+      "lon": "26.67171"
     }],
     "comments":  [23,454,437],
     "status": "active",
@@ -156,12 +156,12 @@
   },
   "type": "Meeteng",
   "owner": "Rita Romik",
-  "date_start": 1467296641239,
-  "date_end": 1467296641239,
+  "date_start": 1473068750000,
+  "date_end": 1473068750000,
   "event_rate": 2,
   "event_points": [{
-    "lat": "50.61609",
-    "lon": "26.29510"
+    "lat": "50.60590",
+    "lon": "26.66484"
   }],
   "comments":  [228,229,220],
   "status": "active",
@@ -176,9 +176,9 @@
   },
   "type": "Game",
   "owner": "Rita Romik",
-  "date_start": 1467296641239,
-  "date_end": 1467296641239,
-  "event_rate": 2,
+  "date_start": 1469439950000,
+  "date_end": 1469439950000,
+  "event_rate": 222,
   "event_points": [{
     "lat": "50.61609",
     "lon": "26.29510"
@@ -186,5 +186,65 @@
   "comments":  [228,229,220],
   "status": "active",
   "price": "30"
+}, {
+  "id": "156",
+  "name": "Research historican places",
+  "description": "Events are an important motivator of tourism, andﬁgure prominently in the development and marketing plansof most destinations. The roles and impacts of plannedevents within tourism have been well documented, and areof increasing importance for destination competitiveness.Yet it was only a few decades ago that ‘event tourism.",
+  "attachments":
+  {
+    "photo": ["/img/events/research1.jpg"]
+  },
+  "type": "Research",
+  "owner": "Timoty",
+  "date_start": 1469699150000,
+  "date_end": 1469699150000,
+  "event_rate": 2,
+  "event_points": [{
+    "lat": "50.34195",
+    "lon": "25.31799"
+  }],
+  "comments":  [218,129,120,567],
+  "status": "active",
+  "price": "2000"
+}, {
+  "id": "157",
+  "name": "Research ambers places",
+  "description": "Events Research ambers places in Rokitno region was veri important! The roles and impacts of plannedevents within tourism have been well documented, and areof increasing importance for destination competitiveness.Yet it was only a few decades ago that ‘event tourism.",
+  "attachments":
+  {
+    "photo": ["/img/events/research3.jpg","/img/events/research2.jpg"]
+  },
+  "type": "Research",
+  "owner": "Anonimus",
+  "date_start": 1469439950000,
+  "date_end": 1469439950000,
+  "event_rate": 207,
+  "event_points": [{
+    "lat": "51.43432",
+    "lon": "26.38092"
+  }],
+  "comments":  [218,129,120,567],
+  "status": "active",
+  "price": "500"
+},  {
+  "id": "158",
+  "name": "Folk Festival",
+  "description": "From the rich color and deep symbolism of the delicate “pysanka” (Ukrainian Easter Egg) to the thunderous, climatic, power, rhythm and strength of “HOPAK” – the world’s most exciting ethnic dance, and every brilliant “Kolomiyka” (polka) and soulful folk song in between, we invite you to experience the Annual Ukranian Folk Festival",
+  "attachments":
+  {
+    "photo": ["/img/events/festival8.jpg","/img/events/festival9.jpg"]
+  },
+  "type": "Festival",
+  "owner": "Vadim Tragik",
+  "date_start": 1471254350000,
+  "date_end": 1471254350000,
+  "event_rate": 432,
+  "event_points": [{
+    "lat": "50.32858",
+    "lon": "26.52168"
+  }],
+  "comments":  [328,559,308],
+  "status": "active",
+  "price": "0"
 }
 ]

@@ -27,6 +27,12 @@ angular.module('greenTourism').config(function($routeProvider) {
     .when('/events/event', {
       template: '<event></event>'
     })
+      .when('/eventsmap', {
+        template: '<events-map></events-map>'
+      })
+      .when('/eventsmap/:lat/:lng/:type/:date_start', {
+        template: '{{$ctrl.lat}}{{$ctrl.lng}}{{$ctrl.type}}{{$ctrl.date_start}}<events-map></events-map>'
+      })
     .when('/events/:eventId', {
       template: '{{$ctrl.eventId}}<event></event>',
     })
