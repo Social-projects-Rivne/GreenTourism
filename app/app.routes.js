@@ -17,11 +17,29 @@ angular.module('greenTourism').config(function($routeProvider) {
     .when('/places', {
       template: '<place-list></place-list>'
     })
-    /*
+
     .when('/places/:placeId', {
-      template: '<place-detail></place-detail>'
+      template: '<place-detail place="$resolve.place"></place-detail>',
+      resolve: {
+        place: function getPlace($route, Place) {
+          return Place.get({id: $route.current.params.placeId});
+          // TODO: Add 404 handling through promise
+          /*
+          .$promise.then(function(place) {
+            // If promise was fulfilled
+
+            return place;
+          }, function(reason) {
+            // If promise was rejected
+
+            if (reason.status === 404) {
+              // Render 404 template
+            }
+          });
+          */
+        }
+      }
     })
-    */
 
     .when('/tracks', {
       template: '<track-list></track-list>'

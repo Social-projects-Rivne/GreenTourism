@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
 // TODO: Hide username and password
 var dbUrl = 'mongodb://user:qwerty1234@ds019664.mlab.com:19664/test_greentourism';
 var dbLocalUrl = 'mongodb://localhost/test_greentourism';
-mongoose.connect(dbLocalUrl);
+mongoose.connect(dbUrl);
 
 // Routes
 app.use('/api/places', require('./routes/places'));
