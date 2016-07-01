@@ -21,16 +21,16 @@ angular.module('showMap', [])
       $rootScope.map.addLayer($rootScope.Streets);
       angular.element("#Streets span").addClass('glyphicon glyphicon-ok');
 
-    /*$rootScope.map.locate({setView: true, maxZoom: 14});
+      /*$rootScope.map.locate({setView: true, maxZoom: 14});
 
-    function onLocationFound(e) {
+      function onLocationFound(e) {
 
-        L.marker(e.latlng).addTo($rootScope.map)
-            .bindPopup("You are here").openPopup();
+          L.marker(e.latlng).addTo($rootScope.map)
+              .bindPopup("You are here").openPopup();
 
-        $rootScope.userLocationArea = L.circle(e.latlng, 3000).addTo($rootScope.map);
+          $rootScope.userLocationArea = L.circle(e.latlng, 3000).addTo($rootScope.map);
+      }
+
+      $rootScope.map.on('locationfound', onLocationFound);*/
     }
-
-    $rootScope.map.on('locationfound', onLocationFound);*/
-  }
-});
+  });

@@ -1,9 +1,10 @@
 angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
-                             'ngResource', 'ui.bootstrap'])
+    'ngResource', 'ui.bootstrap'
+  ])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: function(placeModel, placesOnMap, $scope, $compile, $rootScope,
-                         Place) {
+      Place) {
 
       this.addPlaceState = false;
 
@@ -24,7 +25,7 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
         this.newPlace = {};
 
         this.addPlaceOnMap(L.latLng(place.latitude,
-                                    place.longitude));
+          place.longitude));
       };
 
       // TODO: Move this inside map
@@ -43,7 +44,7 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
 
         placesOnMap.initGroupsOfPlaces(self.types);
         placesOnMap.showPoints(pointsTypeForShowOnLoad, self.types,
-                               self.points, true);
+          self.points, true);
         placesOnMap.showPlacesOnLoad(arrPlaces, pointsTypeForShowOnLoad);
         var placearr = placeModel.placesArray;
         for (var j = 0; j < placearr.length; j++) {
