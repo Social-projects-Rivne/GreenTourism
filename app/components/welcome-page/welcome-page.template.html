@@ -16,21 +16,27 @@
                     tellus accumsan venenatis. Morbi mollis pharetra ligula vel volutpat. Pellentesque vulputate
                     fermentum ligula, vel faucibus risus efficitur ut. Integer ac tortor diam.</p>
             </div>
-            <form class="input-group col-xs-12 col-sm-3 col-md-3" name="login" novalidate ng-submit="$ctrl.login(user)">
-                <input type="email" class="form-control" name="email" placeholder="Your email adress" required ng-model="user.email">
-                <div class="" ng-show="login.email.$invalid && login.email.$dirty">
+            <form class="form-group col-xs-12 col-sm-3 col-md-3" name="login" novalidate ng-submit="$ctrl.login(user)">
+                <div class="input-group margin-bottom-sm">
+                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                    <input type="email" class="form-control" name="email" placeholder="Your email adress" required ng-model="user.email">
+                </div>
+                <div class="error" ng-show="login.email.$invalid && login.email.$dirty">
                         <span ng-show="login.email.$error.email">Wrong e-mail</span>
                         <span ng-show="login.email.$error.required">E-mail is required</span>
                 </div>
-                <input type="password" class="form-control" name="password" placeholder="Your password" required ng-model="user.password">
-                <div class="" ng-show="login.password.$dirty">
+                <div class="input-group margin-bottom-sm">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                 <input type="password" class="form-control" name="password" placeholder="Your password" required ng-model="user.password">
+                </div>
+                <div class="error" ng-show="login.password.$dirty">
                         <span ng-show="login.password.$error.required">Password is required</span>
                 </div>
                 <button type="submit" class="inputButton">Sign In for Green Tourism</button>
             </form>
             <div class="col-xs-12 col-sm-3 col-md-3">
-                <button class="btn">Sign In for Green Tourism</button>
-                <button class="btn">Sign In for Green Tourism</button>
+                <a class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span>Sign in with facebook</a>
+                <a class="btn btn-block btn-social btn-google"><span class="fa fa-google"></span>Sign in with google</a>
             </div>
         </div>
         <div class="carousel-inner" role="listbox">

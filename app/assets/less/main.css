@@ -597,12 +597,6 @@ t5 {
 .user-page__avatar button {
   width: 100%;
 }
-@media screen and (min-width: 750px) {
-  .forms {
-    left: 25%;
-    width: 50%;
-  }
-}
-.error {
+#text {
   color: red;
 }
