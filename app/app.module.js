@@ -1,22 +1,29 @@
 angular.module('greenTourism', [
-  'ngRoute',
-  'ngResource',
-  'ngAnimate',
-  'ui.bootstrap',
+  'ngRoute',  // Routing
+  'ngResource',  // API communication and models
+  'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
+  'ui.bootstrap',  // TODO: Is this necessary for greenTourism main module?
 
   'welcomePage',
+
   'signup',
-  'signin',
-  'placeList',
-  'trackList',
+  'signin',  // TODO: Rename to login
   'userProfile',
-  'events',
-  'event',
+
+  'placeList',
+  //'placeDetail',
+  'placeModal',  // TODO: Move this to placeList
+  'locationPlaces',  // TODO: Move this to places dependencies (or remove)
+  'popularPlaces',  // TODO: Move this to places dependencies (or remove)
+
+  'trackList',
+  //'trackDetail',
+
+  'events', // TODO: Rename to eventList
+  'event',  // TODO: Rename to eventDetail
   'eventsMap',
+  'calendar',  // TODO: Move this to events dependencies
+
   'blogList',
-  'blog',
-  'calendar',
-  'locationPlaces',
-  'popularPlaces',
-  'placeDetail'
+  'blog'  // TODO: Rename to blogDetail
 ]);

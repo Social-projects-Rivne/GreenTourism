@@ -1,6 +1,6 @@
-angular.module('placeDetail', [])
+angular.module('placeModal', [])
   .component('placeModal', {
-    templateUrl: 'components/place/place-detail/place-detail.template.html',
+    templateUrl: 'components/place/place-modal/place-modal.template.html',
     bindings: {
       $close: '&',
       $dismiss: '&',

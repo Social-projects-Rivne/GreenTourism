@@ -1,7 +1,7 @@
 //'use strict';
 angular.module('signin', [])
   .component('signin', {
-    templateUrl: 'components/autorization/signin/signin.template.html',
+    templateUrl: 'components/authorization/signin/signin.template.html',
     controller: function signinCtrl($http) {
       this.login = function(userDetails) {
         this.email = userDetails.email;

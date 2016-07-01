@@ -3,49 +3,57 @@ angular.module('greenTourism').config(function($routeProvider) {
     .when('/', {
       template: '<welcome-page></welcome-page>'
     })
-    .when('/places', {
-      template: '<place-list></place-list>'
-    })
-    .when('/places/:placeId', {
-      template: '<place-detail></place-detail>'
-    })
-    .when('/tracks', {
-      template: '<track-list></track-list>'
-    })
-    .when('/autorization/signup', {
+
+    .when('/signup', {
       template: '<signup></signup>'
     })
-    .when('/autorization/signin', {
+    .when('/signin', {  // TODO: Rename to login
       template: '<signin></signin>'
     })
     .when('/profile', {
       template: '<user-profile></user-profile>'
     })
-    .when('/events', {
+
+    .when('/places', {
+      template: '<place-list></place-list>'
+    })
+    /*
+    .when('/places/:placeId', {
+      template: '<place-detail></place-detail>'
+    })
+    */
+
+    .when('/tracks', {
+      template: '<track-list></track-list>'
+    })
+
+    .when('/events', {  // TODO: Rename to eventList
       template: '<events></events>'
     })
-    .when('/events/event', {
-      template: '<event></event>'
+    .when('/events/:eventId', {
+      template: '{{$ctrl.eventId}}<event></event>',  // TODO: Remove $ctrl.eventId from here (use $routeParams instead)
     })
     .when('/eventsmap', {
       template: '<events-map></events-map>'
     })
-    .when('/eventsmap/:lat/:lng/:type/:date_start', {
-      template: '{{$ctrl.lat}}{{$ctrl.lng}}{{$ctrl.type}}{{$ctrl.date_start}}<events-map></events-map>'
+    .when('/events/event', {  // TODO: Remove this from routes
+      template: '<event></event>'
     })
-    .when('/events/:eventId', {
-      template: '{{$ctrl.eventId}}<event></event>',
+    .when('/eventsmap/:lat/:lng/:type/:date_start', {  // TODO: Remove this from routes (use query strings instead)
+      template: '{{$ctrl.lat}}{{$ctrl.lng}}{{$ctrl.type}}{{$ctrl.date_start}}<events-map></events-map>'  // TODO: Leave only <events-map> here
     })
-    .when('/events/:eventId/:dataId', {
+    .when('/events/:eventId/:dataId', { // TODO: Remove this from routes (use query strings instead)
       template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>',
     })
-    .when('/blog', {
+
+    .when('/blog', {  // TODO: Rename to blogs
       template: '<blog-list></blog-list>'
     })
-    .when('/blog/:blogId', {
+    .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
       template: '<blog-detail></blog-detail>'
     })
-    .otherwise('/', {
-      template: '<welcome-page></welcome-page>'
+
+    .otherwise({
+      templateUrl: '404.html'
     });
 });
