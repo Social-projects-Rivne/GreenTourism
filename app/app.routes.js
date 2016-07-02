@@ -22,21 +22,7 @@ angular.module('greenTourism').config(function($routeProvider) {
       template: '<place-detail place="$resolve.place"></place-detail>',
       resolve: {
         place: function getPlace($route, Place) {
-          return Place.get({id: $route.current.params.placeId});
-          // TODO: Add 404 handling through promise
-          /*
-          .$promise.then(function(place) {
-            // If promise was fulfilled
-
-            return place;
-          }, function(reason) {
-            // If promise was rejected
-
-            if (reason.status === 404) {
-              // Render 404 template
-            }
-          });
-          */
+          return Place.get({id: $route.current.params.placeId}).$promise;
         }
       }
     })
@@ -69,6 +55,13 @@ angular.module('greenTourism').config(function($routeProvider) {
     })
     .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
       template: '<blog-detail></blog-detail>'
+    })
+
+    .when('/404', {
+      templateUrl: '404.html'
+    })
+    .when('/500', {
+      templateUrl: '500.html'
     })
 
     .otherwise({

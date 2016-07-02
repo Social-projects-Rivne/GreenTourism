@@ -140,7 +140,15 @@
       </nav>
     </header>
 
-    <main ng-view="">
+    <main ng-controller="MainCtrl as main" id="main">
+      <div ng-hide="main.routeChangeError" ng-view=""></div>
+      <div ng-show="main.routeChangeError">
+        <div ng-show="main.statusCode === 404" ng-include="'404.html'"></div>
+        <div ng-show="main.statusCode === 500" ng-include="'500.html'"></div>
+        <div ng-show="main.statusCode == null">
+          <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">
