@@ -141,11 +141,11 @@
     </header>
 
     <main ng-controller="MainCtrl as main" id="main">
-      <div ng-hide="main.routeChangeError" ng-view=""></div>
-      <div ng-show="main.routeChangeError">
-        <div ng-show="main.statusCode === 404" ng-include="'404.html'"></div>
-        <div ng-show="main.statusCode === 500" ng-include="'500.html'"></div>
-        <div ng-show="main.statusCode == null">
+      <div ng-if="!main.routeChangeError" ng-view=""></div>
+      <div ng-if="main.routeChangeError">
+        <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
+        <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
+        <div ng-if="main.statusCode == null">
           <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
         </div>
       </div>
