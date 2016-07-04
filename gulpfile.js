@@ -9,6 +9,7 @@ var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
 var beautify = require('gulp-beautify');
+var eslint = require('gulp-eslint');
 
 // Minification
 var uglify = require('gulp-uglify');
@@ -19,6 +20,7 @@ var imagemin = require('gulp-imagemin');
 //var templateCache = require('gulp-angular-templatecache');
 
 var DEST = 'dist/';  // Destination folder
+var jsFiles = ['./**/*.js', '!node_modules/**', '!app/bower_components/**'];
 
 // Error notification
 var onError = function(err) {
@@ -29,9 +31,16 @@ var onError = function(err) {
   this.emit('end');
 };
 
+gulp.task('lint', function() {
+  return gulp.src(jsFiles)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(notify({message: 'Linting done!', onLast: true}));
+});
+
 // Beautify source files
 gulp.task('beautify', function() {
-  gulp.src(['app/**/*.js', '!app/bower_components/**/*.js'])
+  gulp.src(jsFiles)
     .pipe(beautify())
     .pipe(gulp.dest('app/'))
     .pipe(notify({message: 'Beautification done!', onLast: true}));
