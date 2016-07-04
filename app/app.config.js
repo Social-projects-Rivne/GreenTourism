@@ -5,10 +5,8 @@
   });
 */
 
-angular.module('greenTourism').config(function($resourceProvider) {
-  $resourceProvider.defaults.actions.update = {
-    method: 'PUT'
-  };
+angular.module('greenTourism').config(function(RestangularProvider) {
+  RestangularProvider.setBaseUrl('/api');
 });
 
 angular.module('greenTourism')

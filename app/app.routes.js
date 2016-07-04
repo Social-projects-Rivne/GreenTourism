@@ -22,7 +22,10 @@ angular.module('greenTourism').config(function($routeProvider) {
       template: '<place-detail place="$resolve.place"></place-detail>',
       resolve: {
         place: function getPlace($route, Place) {
-          return Place.get({id: $route.current.params.placeId}).$promise;
+          return Place.one($route.current.params.placeId).get()
+            .then(function(place) {
+              return place;
+            });
         }
       }
     })

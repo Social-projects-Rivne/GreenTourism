@@ -1,6 +1,7 @@
 angular.module('greenTourism', [
   'ngRoute',  // Routing
-  'ngResource',  // API communication and models
+  'ngResource',  // FIXME: (Deprecated, use Restangular instead)
+  'restangular',
   'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
   'welcomePage',
 
