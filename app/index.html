@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
+    <link rel="stylesheet" href="bower_components/fancybox/source/jquery.fancybox.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -40,12 +41,19 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/leaflet.markercluster.layersupport/leaflet.markercluster.layersupport-src.js"></script>
+    <script src="bower_components/fancybox/source/jquery.fancybox.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!-- REMOVE THIS TWO LINES ON PRODUCTION AND UNCOMMENT MAIN CSS! -->
+    <link rel="stylesheet/less" type="text/css" href="assets/less/main.less" />
+    <script src="bower_components/less/dist/less.js" type="text/javascript"></script>
+
     <!-- Main stylesheet -->
     <!-- build:css assets/css/main.css -->
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <!--link rel="stylesheet" href="assets/css/main.css" /-->
     <!-- endbuild -->
 
     <!-- Main scripts -->
@@ -70,9 +78,10 @@
     <script src="components/place/placesOnMap.factory.js"></script>
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
+    <script src="components/place/place-modal/place-modal.component.js"></script>
     <script src="components/place/filter-category/filter-category.component.js"></script>
     <script src="components/place/place-list/marker-places.component.js"></script>
-    <script src="components/place/place-detail/place-detail.component.js"></script>
+    <script src="components/place/place-modal/place-modal.component.js"></script>
     <script src="components/place/popular-places/popularPlaces.component.js"></script>
     <script src="components/place/places-location/locationPlaces.component.js"></script>
 
@@ -81,21 +90,20 @@
     <script src="components/tracks/track-maker/track-maker.component.js"></script>
     <script src="components/tracks/popular-track/popular-track.component.js"></script>
     <script src="components/user-profile/user-profile.component.js"></script>
-    
-	<script src="components/calendar/calendar.component.js"></script>
+
+	  <script src="components/calendar/calendar.component.js"></script>
     <script src="components/events/events.component.js"></script>
     <script src="components/event/event-list.js"></script>
     <script src="components/event/event.component.js"></script>
     <script src="components/events-map/event-map.component.js"></script>
-    <script src="components/events-map/events-map-type/event-map-type.component.js"></script>	
+    <script src="components/events-map/events-map-type/event-map-type.component.js"></script>
 
     <script src="components/blog/blog-list/blog-list.component.js"></script>
     <script src="components/blog/blog-detail/blog-detail.component.js"></script>
     <script src="components/blog/blog-filter.component.js"></script>
 
-    <script src="components/autorization/error.factory.js"></script>
-    <script src="components/autorization/signup/signup.component.js"></script>
-    <script src="components/autorization/signin/signin.component.js"></script>
+    <script src="components/authorization/signup/signup.component.js"></script>
+    <script src="components/authorization/signin/signin.component.js"></script>
 
     <script src="components/user-profile/user-profile.component.js"></script>
     <!-- endbuild -->
@@ -127,8 +135,8 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#/autorization/signin">Sign In</a></li>
-              <li><a href="#/autorization/signup">Sign Up</a></li>
+              <li><a href="#/signin">Log in</a></li> <!-- Rename to #/login -->
+              <li><a href="#/signup">Sign up</a></li>
             </ul>
           </div>
 
@@ -136,7 +144,15 @@
       </nav>
     </header>
 
-    <main ng-view="">
+    <main ng-controller="MainCtrl as main" id="main">
+      <div ng-if="!main.routeChangeError" ng-view=""></div>
+      <div ng-if="main.routeChangeError">
+        <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
+        <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
+        <div ng-if="main.statusCode == null">
+          <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">

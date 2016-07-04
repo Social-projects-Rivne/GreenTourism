@@ -3,9 +3,9 @@
         <div class="col-xs-9 no-padding" id="main-content">
             <div class="col-xs-12 no-padding" id="filter">  <!-- Filter container start -->
                 <div class="btn-group col-xs-12" role="group" id="buttons">
-                    <button type="button" class="btn col-xs-2 btn-first" ng-click="$ctrl.temp_click()">Add place</button>
+                    <button type="button" class="btn btn-default col-xs-2 btn-first" ng-click="$ctrl.temp_click()">Add place</button>
                     <!--div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
-                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Map type
                             <span class="caret"></span>
                         </button>
@@ -14,7 +14,7 @@
                         </ul>
                     </div-->
                     <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
-                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Event type
                             <span class="caret"></span>
                         </button>
@@ -23,7 +23,7 @@
                         </ul>
                     </div>
                     <div class="btn-group col-xs-2 no-padding" role="group">
-                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             From:
                             <span class="caret"></span>
                             {{eventL.CalendarName[0].calendar_show_date | date:'dd MM yy' }}
@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                     <div class="btn-group col-xs-2 no-padding" role="group">
-                        <button type="button" class="btn dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             To:
                             <span class="caret"></span>
                             {{eventL.CalendarName[1].calendar_show_date | date:'dd MM yy' }}
@@ -42,7 +42,7 @@
                             <calendar></calendar>
                         </ul>
                     </div>
-                    <button type="button" class="btn col-xs-2 btn-last" >Export</button>
+                    <button type="button" class="btn btn-default col-xs-2 btn-last" >Export</button>
                     <div class="col-xs-2"></div>
                 </div>
             </div> <!-- Filter container end -->

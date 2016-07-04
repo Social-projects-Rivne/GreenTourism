@@ -1,7 +1,7 @@
 'use strict';
 angular.module('signup', [])
   .component('signup', {
-    templateUrl: 'components/autorization/signup/signup.template.html',
+    templateUrl: 'components/authorization/signup/signup.template.html',
     controller: function signupCtrl() {
 
       //this.ppattern =new RegExp("/^(0|[1-9][0-9]*)$/");

@@ -1,4 +1,4 @@
-angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
+angular.module('placeList', ['filterCategory', 'filterMapType',
     'ngResource', 'ui.bootstrap'
   ])
   .component('placeList', {

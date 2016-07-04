@@ -1,10 +1,15 @@
 angular.module('greenTourism')
-  .factory('User', function($resource) {
-    var User = $resource('/api/users/:id');
+  .factory('User', ['Restangular', function User(Restangular) {
+    var User = Restangular.service('users');
 
-    User.prototype.getFullName = function() {
-      return this.firstName + ' ' + this.lastName;
-    };
+    // Custom methods goes here
+    Restangular.extendModel('places', function(model) {
+      model.getFullName = function() {
+        return this.firstName + ' ' + this.lastName;
+      };
+
+      return model;
+    });
 
     return User;
-  });
+  }]);
