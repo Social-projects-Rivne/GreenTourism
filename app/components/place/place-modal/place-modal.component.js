@@ -1,4 +1,4 @@
-angular.module('placeModal', [])
+angular.module('placeModal', ['ui.bootstrap'])
   .component('placeModal', {
     templateUrl: 'components/place/place-modal/place-modal.template.html',
     bindings: {
