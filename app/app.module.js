@@ -2,8 +2,6 @@ angular.module('greenTourism', [
   'ngRoute',  // Routing
   'ngResource',  // API communication and models
   'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
-  'ui.bootstrap',  // TODO: Is this necessary for greenTourism main module?
-
   'welcomePage',
 
   'signup',
