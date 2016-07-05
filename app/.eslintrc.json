@@ -3,9 +3,17 @@
     "angular"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "node": false
   },
   "globals": {
+    "$": true,
     "L": true
+  },
+  "rules": {
+    "angular/controller-as-vm": [2, "ctrl"],
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
+    "angular/di": [2,"array"],
+    "angular/on-watch": 0
   }
 }

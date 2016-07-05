@@ -1,13 +1,13 @@
 angular.module('events', [])
   .component('events', {
-    templateUrl: 'components/events/events.template.html',
+    templateUrl: 'components/event/events/events.template.html',
     controller: function($scope, $http, eventList) {
 
       $scope.eventL = eventList.th;
       $scope.eventL.mainControllerName = 'Events';
       $scope.eventL.date_current = new Date();
 
-      this.data = $http.get('components/events/event.data.json').success(function(data) {
+      this.data = $http.get('components/event/events/event.data.json').success(function(data) {
         $scope.eventList = data;
         $scope.eventL.event = data;
 

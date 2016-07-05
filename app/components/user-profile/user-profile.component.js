@@ -17,7 +17,7 @@ angular.module('userProfile').component('userProfile', {
     };
 
     this.isSelected = function(checkTab) {
-      return this.tab == checkTab;
+      return this.tab === checkTab;
     };
   }
 });

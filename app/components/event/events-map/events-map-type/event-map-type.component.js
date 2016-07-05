@@ -1,10 +1,10 @@
 angular.module('eventMapType', ['event'])
   .component('eventMapType', {
-    templateUrl: 'components/events-map/events-map-type/event-map-type.template.html',
+    templateUrl: 'components/event/events-map/events-map-type/event-map-type.template.html',
     controller: function($scope, $http, $rootScope, eventList) {
       $scope.eventL = eventList.th;
 
-      this.data = $http.get('components/events/event.data.json').success(function(data) {
+      this.data = $http.get('components/event/events/event.data.json').success(function(data) {
         $scope.eventL.event = data;
         $scope.eventList = $scope.eventL.all_type();
         $scope.eventL.Type_menu[$scope.eventL.Type.indexOf($scope.eventL.Item_type_menu)].active = true;

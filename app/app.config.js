@@ -1,16 +1,10 @@
-/*angular.module('greenTourism')
-  .config(function($lcationProvider, $routeProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('!');
-    $routeProvider.caseInsensitiveMatch = true;
-  });
-*/
-
-angular.module('greenTourism').config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('/api');
-});
+angular.module('greenTourism')
+  .config(['RestangularProvider', function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api');
+  }]);
 
 angular.module('greenTourism')
-  .controller('MainCtrl', function MainCtrl($rootScope) {
+  .controller('MainCtrl', ['$rootScope', function MainCtrl($rootScope) {
     var ctrl = this;
 
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
@@ -23,4 +17,4 @@ angular.module('greenTourism')
       ctrl.routeChangeError = true;
       ctrl.statusCode = rejection.status;
     });
-  });
+  }]);

@@ -1,7 +1,7 @@
 angular.module('calendar', []);
 
 angular.module('calendar').component('calendar', {
-  templateUrl: 'components/calendar/calendar.template.html',
+  templateUrl: 'components/event/calendar/calendar.template.html',
   controller: function($http, $scope, eventList) {
     $scope.give_event = eventList.th;
 

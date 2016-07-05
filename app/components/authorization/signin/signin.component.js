@@ -17,7 +17,7 @@ angular.module('signin', [])
       };
 
 
-      $http.get('components/autorization/users.json').then(function(response) {
+      $http.get('components/authorization/users.json').then(function(response) {
         users = response.data;
       });
     },

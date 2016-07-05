@@ -2,7 +2,7 @@
 
 angular.module('eventsMap', ['calendar', 'eventMapType'])
   .component('eventsMap', {
-    templateUrl: 'components/events-map/event-map.template.html',
+    templateUrl: 'components/event/events-map/event-map.template.html',
     controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventList',
       function($scope, $routeParams, $http, eventMapService, eventList) {
         $scope.mapDanni = eventMapService.th_;
@@ -58,7 +58,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         $scope.eventL.CalendarValue[0] = this.date_start;
         $scope.eventL.CalendarValue[1] = +this.date_start + 31 * 24 * 60 * 60 * 1000;
 
-        this.data = $http.get('components/events/event.data.json').success(function(data) {
+        this.data = $http.get('components/event/events/event.data.json').success(function(data) {
           $scope.eventL.event = data;
           return data;
         }, function(data) {
@@ -66,7 +66,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
           return 'error';
         });
 
-        $http.get('components/events/event.data.json').success(function(data) {
+        $http.get('components/event/events/event.data.json').success(function(data) {
           $scope.eventL.event = data;
 
           $scope.eventL.all_type();

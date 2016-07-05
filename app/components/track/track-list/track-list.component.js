@@ -1,6 +1,6 @@
 angular.module('trackList', ['trackFilter', 'filterMapType', 'trackMaker', 'mapModule', 'popularTrack'])
   .component('trackList', {
-    templateUrl: 'components/tracks/track-list/track-list.template.html',
+    templateUrl: 'components/track/track-list/track-list.template.html',
     controller: function mapMenuController($rootScope) {
       var ctrlScope = this;
       $rootScope.menuOpen = false;

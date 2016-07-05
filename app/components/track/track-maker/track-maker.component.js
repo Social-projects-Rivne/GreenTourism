@@ -1,6 +1,6 @@
 angular.module('trackMaker', [])
   .component('trackMaker', {
-    templateUrl: 'components/tracks/track-maker/track-maker.template.html',
+    templateUrl: 'components/track/track-maker/track-maker.template.html',
     controller: function trackMakerController($http, $rootScope) {
 
       var ctrlScope = this;
@@ -44,7 +44,7 @@ angular.module('trackMaker', [])
         iconAnchor: [2, 49]
       });
 
-      $http.get("components/tracks/tracks.type.json").then(function(data) {
+      $http.get("components/track/tracks.type.json").then(function(data) {
         ctrlScope.types = data.data;
       }, function() {
         console.log("Error: fetching type json");

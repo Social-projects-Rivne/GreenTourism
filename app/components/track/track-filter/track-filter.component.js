@@ -1,11 +1,11 @@
 angular.module('trackFilter', [])
   .component('trackFilter', {
-    templateUrl: 'components/tracks/track-filter/track-filter.template.html',
+    templateUrl: 'components/track/track-filter/track-filter.template.html',
     controller: function trackFilterController($http, $rootScope) {
       var ctrlScope = this;
       $rootScope.tracks = [];
 
-      $http.get('components/tracks/tracks.data.json').then(function(data) {
+      $http.get('components/track/tracks.data.json').then(function(data) {
         // fetching data about tracks from json
         ctrlScope.tracks = data.data;
         // adding all tracks on map
@@ -20,7 +20,7 @@ angular.module('trackFilter', [])
         ctrlScope.tracks = "error";
       });
 
-      $http.get('components/tracks/tracks.type.json').then(function(data) {
+      $http.get('components/track/tracks.type.json').then(function(data) {
 
         // fetching data about track types from json
         ctrlScope.types = data.data;
@@ -29,7 +29,7 @@ angular.module('trackFilter', [])
       });
 
 
-      // method for filtering tracks, which calls when user click on filter   
+      // method for filtering tracks, which calls when user click on filter
       ctrlScope.showSpecificTracks = function(inputValue) {
         var element = $("#" + inputValue);
         var icon = $("#gi" + inputValue);

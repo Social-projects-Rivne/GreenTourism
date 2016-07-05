@@ -1,11 +1,11 @@
 angular.module('popularTrack', [])
   .component('popularTrack', {
-    templateUrl: 'components/tracks/popular-track/popular-track.template.html',
+    templateUrl: 'components/track/popular-track/popular-track.template.html',
     controller: function popularTrackController($http, $rootScope) {
       var popularTrackScope = this;
       popularTrackScope.search = "";
 
-      $http.get('components/tracks/tracks.data.json').then(function(data) {
+      $http.get('components/track/tracks.data.json').then(function(data) {
         popularTrackScope.tracks = data.data;
 
         console.log($rootScope.tracks[0][0]._latlngs);

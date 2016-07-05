@@ -1,5 +1,5 @@
 angular.module('event').component('event', {
-  templateUrl: 'components/event/event.template.html',
+  templateUrl: 'components/event/event/event.template.html',
   controller: ['$scope', '$routeParams', '$http', 'eventList',
     function($scope, $routeParams, $http, eventList) {
       this.id = $routeParams.eventId;
@@ -11,7 +11,7 @@ angular.module('event').component('event', {
 
       $scope.eventL.date_current = new Date(this.date);
 
-      this.data = $http.get('components/events/event.data.json').success(function(data) {
+      this.data = $http.get('components/event/events/event.data.json').success(function(data) {
         $scope.eventList = data;
         $scope.eventL.event = data;
         return data;
