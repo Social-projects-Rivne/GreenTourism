@@ -55,10 +55,18 @@ gulp.task('lint-fix', function() {
 
 // Beautify source files
 gulp.task('beautify', function() {
-  gulp.src(jsFiles)
+  return gulp.src(jsFiles)
     .pipe(beautify())
     .pipe(gulp.dest('./'))
     .pipe(notify({message: 'Beautification done!', onLast: true}));
+});
+
+// Add AngularJS dependency injection annotations
+gulp.task('ng-annotate', function() {
+  return gulp.src(jsFiles)
+    .pipe(ngAnnotate())
+    .pipe(gulp.dest('./'))
+    .pipe(notify({message: 'Angular files annotated!', onLast: true}));
 });
 
 // Compile less files
