@@ -58,6 +58,7 @@
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.routes.js"></script>
+    <script src="nav.controller.js"></script>
 
     <script src="models/user.js"></script>
     <script src="models/place.js"></script>
@@ -109,7 +110,7 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavController as nav">
           <div class="container-fluid">
 
           <div class="navbar-header">
@@ -124,15 +125,15 @@
 
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-              <li><a href="#/places">Places</a></li>
-              <li><a href="#/tracks">Tracks</a></li>
-              <li><a href="#/events">Events</a></li>
-              <li><a href="#/blog">Blog</a></li>
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#/places">Places</a></li>
+              <li ng-class="{ active: nav.isActive('/tracks')}"><a href="#/tracks">Tracks</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#/blog">Blog</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#/signin">Log in</a></li> <!-- Rename to #/login -->
-              <li><a href="#/signup">Sign up</a></li>
+              <li ng-class="{ active: nav.isActive('/signin')}"><a href="#/signin">Log in</a></li> <!-- Rename to #/login -->
+              <li ng-class="{ active: nav.isActive('/signup')}"><a href="#/signup">Sign up</a></li>
             </ul>
           </div>
 
