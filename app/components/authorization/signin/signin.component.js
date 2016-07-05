@@ -9,16 +9,15 @@ angular.module('signin', [])
         for (var i = 0; i < users.length; i++) {
           var user = users[i];
           if (this.email == user.email && this.password == user.password) {
-            window.location.hash = "/profile";
+            window.location.hash = '/profile';
           } else {
-            this.message = "Email or password is incorrect";
+            this.message = 'Email or password is incorrect';
           }
         }
       };
 
-
       $http.get('components/authorization/users.json').then(function(response) {
         users = response.data;
       });
-    },
+    }
   });

@@ -1,5 +1,5 @@
 angular.module('blogCategory', [])
-  .filter("unique", function() {
+  .filter('unique', function() {
     return function(data, propertyName) {
       if (angular.isArray(data) && angular.isString(propertyName)) {
         var results = [];
@@ -15,6 +15,5 @@ angular.module('blogCategory', [])
       } else {
         return data;
       }
-    }
-
+    };
   });

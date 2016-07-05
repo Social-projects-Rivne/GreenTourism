@@ -1,7 +1,6 @@
 angular.module('event', []);
 
 angular.module('event').service('eventList', function($http) {
-
   if (!this.date_current) new Date();
   this.CalendarName = [];
   this.CalendarValue = [];
@@ -18,7 +17,7 @@ angular.module('event').service('eventList', function($http) {
       var temp_date = new Date(itEvent.date_start);
       if (sort == 1) return temp_date > dateFind;
       return temp_date.toDateString() == dateFind.toDateString();
-    })
+    });
   };
 
   this.find_distanse = function(lat, lng, event) {
@@ -39,7 +38,7 @@ angular.module('event').service('eventList', function($http) {
         for (i = 0; i < type.length; i++)
           if (_type == type[i]) return true;
       }
-    })
+    });
   };
 
   this.all_type = function() {
@@ -64,7 +63,6 @@ angular.module('event').service('eventList', function($http) {
   };
 
   this.clear = function() {
-
     this.CalendarName = [];
     this.Type = [];
     this.mainController = 'Noname';

@@ -2,7 +2,6 @@ angular.module('trackMaker', [])
   .component('trackMaker', {
     templateUrl: 'components/track/track-maker/track-maker.template.html',
     controller: function trackMakerController($http, $rootScope) {
-
       var ctrlScope = this;
       ctrlScope.stepOneDisabled = false;
       $rootScope.stepOneActive = true;
@@ -14,20 +13,20 @@ angular.module('trackMaker', [])
       ctrlScope.trackNameAlert = false;
       ctrlScope.trackTypeAlert = false;
 
-      ctrlScope.newTrackName = "";
+      ctrlScope.newTrackName = '';
       ctrlScope.newTrackPoints = [];
-      ctrlScope.newTrackType = "";
-      ctrlScope.newTrackDescription = "";
+      ctrlScope.newTrackType = '';
+      ctrlScope.newTrackDescription = '';
 
       var newTrack;
       var newTrackObj = {
-        name: "",
-        description: "",
-        type: "",
-        track_rate: "",
+        name: '',
+        description: '',
+        type: '',
+        track_rate: '',
         track_points: [],
         comments: [{}],
-        color: ""
+        color: ''
       };
       var newTrackPointsCounter = 0;
       var newTrackFirstPoint;
@@ -44,27 +43,27 @@ angular.module('trackMaker', [])
         iconAnchor: [2, 49]
       });
 
-      $http.get("components/track/tracks.type.json").then(function(data) {
+      $http.get('components/track/tracks.type.json').then(function(data) {
         ctrlScope.types = data.data;
       }, function() {
-        console.log("Error: fetching type json");
+        console.log('Error: fetching type json');
       });
 
       ctrlScope.hideMenu = function() {
-        $("#addMenu").animate({
-          left: "-420px"
+        $('#addMenu').animate({
+          left: '-420px'
         });
         if ($rootScope.stepOneActive) {
           $rootScope.map.off('click', ctrlScope.addPointForNewTrack);
         }
         $rootScope.menuOpen = false;
-      }
+      };
 
       $rootScope.startStepOne = function() {
         if ($rootScope.stepOneActive) {
           $rootScope.map.on('click', ctrlScope.addPointForNewTrack);
         }
-      }
+      };
 
       ctrlScope.addPointForNewTrack = function(e) {
         if (newTrackPointsCounter == 0) {
@@ -80,11 +79,11 @@ angular.module('trackMaker', [])
             $rootScope.map.removeLayer(newTrack);
           }
           newTrack = L.polyline(ctrlScope.newTrackPoints, {
-            color: "#000",
+            color: '#000',
             opacity: 1
           }).addTo($rootScope.map);
         }
-      }
+      };
 
       ctrlScope.startStepTwo = function() {
         if (newTrackPointsCounter > 1) {
@@ -99,18 +98,17 @@ angular.module('trackMaker', [])
         } else {
           ctrlScope.trackPointsAlert = true;
         }
-      }
+      };
 
       ctrlScope.startStepThree = function() {
-        if (ctrlScope.newTrackName != "") {
+        if (ctrlScope.newTrackName != '') {
           ctrlScope.trackNameAlert = false;
           ctrlScope.stepTwoDisabled = true;
           ctrlScope.stepThreeDisabled = false;
-
         } else {
           ctrlScope.trackNameAlert = true;
         }
-      }
+      };
 
       ctrlScope.selectNewPlaceType = function() {
         for (var i = 0; i < ctrlScope.types.length; i++) {
@@ -122,17 +120,17 @@ angular.module('trackMaker', [])
             }).addTo($rootScope.map);
           }
         }
-      }
+      };
 
       ctrlScope.startStepFour = function() {
-        if (ctrlScope.newTrackType != "") {
+        if (ctrlScope.newTrackType != '') {
           ctrlScope.trackTypeAlert = false;
           ctrlScope.stepThreeDisabled = true;
           ctrlScope.stepFourDisabled = false;
         } else {
           ctrlScope.trackTypeAlert = true;
         }
-      }
+      };
 
       ctrlScope.resetForm = function(isCreating) {
         ctrlScope.stepOneDisabled = false;
@@ -141,10 +139,10 @@ angular.module('trackMaker', [])
         ctrlScope.stepThreeDisabled = true;
         ctrlScope.stepFourDisabled = true;
 
-        ctrlScope.newTrackName = "";
+        ctrlScope.newTrackName = '';
         ctrlScope.newTrackPoints = [];
-        ctrlScope.newTrackType = "";
-        ctrlScope.newTrackDescription = "";
+        ctrlScope.newTrackType = '';
+        ctrlScope.newTrackDescription = '';
         newTrackObj = {};
 
         $rootScope.map.removeLayer(newTrack);
@@ -153,11 +151,11 @@ angular.module('trackMaker', [])
         newTrackPointsCounter = 0;
 
         $rootScope.map.on('click', ctrlScope.addPointForNewTrack);
-      }
+      };
 
       ctrlScope.successCreating = function() {
         $rootScope.tracks.push([newTrack, ctrlScope.newTrackType.type]);
-        newTrack = "";
+        newTrack = '';
         newTrackObj.track_points = ctrlScope.newTrackPoints;
         newTrackObj.name = ctrlScope.newTrackName;
         newTrackObj.type = ctrlScope.newTrackType.type;
@@ -166,6 +164,6 @@ angular.module('trackMaker', [])
         console.log(newTrackObj);
         ctrlScope.resetForm(true);
         console.log(newTrackObj);
-      }
+      };
     }
   });

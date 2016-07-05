@@ -86,7 +86,6 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
           var sort_arr = [];
 
           for (var i = 0; i < $scope.filters.length; i++) {
-
             if (($scope.filters[i].event_points[0].lat == lat) && ($scope.filters[i].event_points[0].lon == lng)) {
               clicks_arr.push($scope.filters[i]); //alert($scope.filters[i].name);
               sort_arr.push($scope.filters[i].date_start - $scope.eventL.CalendarName[0].calendar_show_date);
@@ -95,7 +94,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
 
           var better_event = Math.min.apply(null, sort_arr);
           location.href = '#/events/' + clicks_arr[sort_arr.indexOf(better_event)].id;
-        }
+        };
 
         this.temp_click = function() {
           if ($scope.eventL.active_type().length != 0) $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendar_show_date, $scope.eventL.CalendarName[1].calendar_show_date, $scope.eventL.active_type());
@@ -177,7 +176,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
             var marker1 = L.marker([$scope.filters[i].event_points[0].lat, $scope.filters[i].event_points[0].lon], {
               icon: greenIcon
             }).on('click', function onClick(e) {
-              $scope.marker_click(this.getLatLng().lat, this.getLatLng().lng)
+              $scope.marker_click(this.getLatLng().lat, this.getLatLng().lng);
             });
 
             marker1.addTo($scope.groups);
@@ -190,12 +189,11 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         var chamgeEvents = function() {
           $scope.closeEvent = $scope.eventL.find_distanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
           $scope.$apply();
-        }
+        };
 
         $scope.map.on('moveend', function(e) {
           chamgeEvents();
         });
-
       }
     ]
   });

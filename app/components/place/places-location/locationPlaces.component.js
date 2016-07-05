@@ -4,7 +4,7 @@ function locationplacesCtrl($scope, $uibModal, $rootScope, Place) {
   this.placesFilter = function(value) {
     ctrl.type = $rootScope.type;
     return value.type == ctrl.type && value.rate;
-  }
+  };
   $ctrl = this;
   $ctrl.placemyid = this.placeid;
   $ctrl.dataPlace = Place.query($ctrl.placemyid);
@@ -30,9 +30,7 @@ function locationplacesCtrl($scope, $uibModal, $rootScope, Place) {
         //console.info("I was dimissed, so do what I need to do myContent's controller now and reason was->"+reason);
       });
     };
-
   });
-
 }
 
 angular.module('locationPlaces', []).

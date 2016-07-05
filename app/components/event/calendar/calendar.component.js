@@ -61,7 +61,7 @@ angular.module('calendar').component('calendar', {
       this.calendar_show_date = new Date(date);
       this.calendar_init(this.calendar_show_date);
       $scope.give_event.date_current = this.calendar_show_date;
-    }
+    };
 
     this.chenge_mounth = function(step) {
       var it = this.calendar_show_date.getMonth();
@@ -74,6 +74,5 @@ angular.module('calendar').component('calendar', {
     if ((this.name == '1') && ($scope.give_event.mainControllerName == 'MapEvent')) {
       $scope.give_event.mainController.temp_click();
     }
-
   }
 });

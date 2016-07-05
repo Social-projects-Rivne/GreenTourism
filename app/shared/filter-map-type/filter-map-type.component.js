@@ -22,8 +22,8 @@ angular.module('filterMapType', [])
       this.showTileLayer = function(input) {
         for (var i = 0; i < this.maptype.length; i++) {
           if (this.maptype[i] == input)
-            $("#" + input + " span").addClass('glyphicon glyphicon-ok');
-          else $("#" + this.maptype[i] + " span")
+            $('#' + input + ' span').addClass('glyphicon glyphicon-ok');
+          else $('#' + this.maptype[i] + ' span')
                 .removeClass('glyphicon glyphicon-ok');
         }
 
@@ -46,7 +46,7 @@ angular.module('filterMapType', [])
 
       //Don't hide dropdown if clicked
       $('#dropdownFilterMapType .dropdown-menu').on({
-        "click": function(e) {
+        'click': function(e) {
           e.stopPropagation();
         }
       });

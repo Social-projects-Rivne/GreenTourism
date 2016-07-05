@@ -13,13 +13,13 @@ angular.module('placeModal', ['ui.bootstrap'])
       console.log(photosarr);
 
       $ctrl.handleClose = function() {
-        console.info("in handle close");
+        console.info('in handle close');
         $ctrl.$close({
           result: $ctrl.modalData
         });
       };
       $ctrl.handleDismiss = function() {
-        console.info("in handle dismiss");
+        console.info('in handle dismiss');
         $ctrl.$dismiss({
           reason: 'cancel'
         });

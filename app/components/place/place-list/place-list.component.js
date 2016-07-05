@@ -47,7 +47,6 @@ angular.module('placeList', ['filterMapType'])
       //---START---- ShowPlacesOnLoad
       // TODO: Move this inside resolve
       Place.getList({type: placesOnLoad}).then(function(result) {
-
         places = result;
         counter = 1;
         for (i = 0; i < places.length; i++) {
@@ -59,20 +58,20 @@ angular.module('placeList', ['filterMapType'])
         placesOnMap.setPlaceArray(arrPlaces);
         placesOnMap.showPlaces(placesOnLoad);
 
-        $("#" + placesOnLoad + " span").addClass('glyphicon glyphicon-ok');
-        $("#Streets span").addClass('glyphicon glyphicon-ok');
+        $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
+        $('#Streets span').addClass('glyphicon glyphicon-ok');
       });
       //----END---- ShowPlacesOnLoad
 
       //----START---- FilterByOneOfType
       this.checkType = function(input) {
-        var spanCheck = $("#" + input + " span");
+        var spanCheck = $('#' + input + ' span');
 
         if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
           counter--;
 
           spanCheck.removeClass('glyphicon glyphicon-ok');
-          $("#all span").removeClass('glyphicon glyphicon-ok');
+          $('#all span').removeClass('glyphicon glyphicon-ok');
 
           placesOnMap.removePlaces(input);
 
@@ -86,7 +85,7 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.addClass('glyphicon glyphicon-ok');
 
           if (counter == this.types.length)
-            $("#all span").addClass('glyphicon glyphicon-ok');
+            $('#all span').addClass('glyphicon glyphicon-ok');
 
           Place.getList({type: input}).then(function(result) {
             places = result;
@@ -107,7 +106,7 @@ angular.module('placeList', ['filterMapType'])
 
       //----START---- FilterCheckAll
       this.checkAll = function() {
-        var spanCheck = $("#all span");
+        var spanCheck = $('#all span');
 
         if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
           counter = 0;
@@ -115,7 +114,7 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.removeClass('glyphicon glyphicon-ok');
 
           for (i = 0; i < this.types.length; i++) {
-            $("#" + this.types[i].type + " span")
+            $('#' + this.types[i].type + ' span')
               .removeClass('glyphicon glyphicon-ok');
           }
           placesOnMap.removePlaces();
@@ -129,7 +128,7 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.addClass('glyphicon glyphicon-ok');
 
           for (i = 0; i < this.types.length; i++) {
-            $("#" + this.types[i].type + " span")
+            $('#' + this.types[i].type + ' span')
               .addClass('glyphicon glyphicon-ok');
           }
 
@@ -153,7 +152,7 @@ angular.module('placeList', ['filterMapType'])
 
       //Don't hide dropdown if clicked
       $('#dropdownFilterCategory .dropdown-menu').on({
-        "click": function(e) {
+        'click': function(e) {
           e.stopPropagation();
         }
 

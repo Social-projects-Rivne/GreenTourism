@@ -15,6 +15,6 @@ angular.module('blog').component('blogDetail', {
     self.newComment = {};
     self.addComment = function(blog) {
       blog.comments.push(self.newComment);
-    }
+    };
   }
 });

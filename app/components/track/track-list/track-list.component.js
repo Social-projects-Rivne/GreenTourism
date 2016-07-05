@@ -6,20 +6,20 @@ angular.module('trackList', ['trackFilter', 'filterMapType', 'trackMaker', 'mapM
       $rootScope.menuOpen = false;
       ctrlScope.toggleMenu = function() {
         if ($rootScope.menuOpen) {
-          $("#addMenu").animate({
-            left: "-420px"
+          $('#addMenu').animate({
+            left: '-420px'
           });
           if ($rootScope.stepOneActive) {
             $rootScope.map.off('click', ctrlScope.addPointForNewTrack);
           }
           $rootScope.menuOpen = false;
         } else {
-          $("#addMenu").animate({
-            left: "46px"
+          $('#addMenu').animate({
+            left: '46px'
           });
           $rootScope.startStepOne();
           $rootScope.menuOpen = true;
         }
-      }
+      };
     }
   });

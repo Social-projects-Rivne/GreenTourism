@@ -45,6 +45,7 @@ gulp.task('lint', function() {
     .pipe(notify({message: 'Linting done!', onLast: true}));
 });
 
+// Fix linting errors if possible
 gulp.task('lint-fix', function() {
   return gulp.src(jsFiles)
     .pipe(eslint({fix: true, rules: {'spaced-comment': 0}}))

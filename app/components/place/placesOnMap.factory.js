@@ -10,7 +10,7 @@ angular.module('mapModule')
 
   var marker = function(lat, lon, icon) {
     return L.marker([lat, lon], {icon:
-                    L.icon ({
+                    L.icon({
                       iconUrl: icon,
                       shadowUrl: 'assets/img/places/marker/marker-shadow.png',
                       iconSize: [25, 41],
