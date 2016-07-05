@@ -10,8 +10,8 @@ angular.module('placeDetail', [])
       this.marker = L.marker(this.location).addTo(this.map);
 
       this.marker.bindPopup('<div><h3>' + this.place.name +
-      '</h3><a><img class="marker-image" src="' + 'assets/img/places' +
-      this.place.photo[0] + '" \/></a><br />').openPopup();
+      '</h3><a><img class="marker-image" src="' + this.place.photo[0] +
+      '" /></a><br />').openPopup();
 
       this.map.setView(this.location);
     }
