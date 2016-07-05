@@ -1,7 +1,7 @@
 angular.module('trackFilter', [])
   .component('trackFilter', {
     templateUrl: 'components/track/track-filter/track-filter.template.html',
-    controller: function trackFilterController($http, $rootScope) {
+    controller: ["$http", "$rootScope", function trackFilterController($http, $rootScope) {
       var ctrlScope = this;
       $rootScope.tracks = [];
 
@@ -57,5 +57,5 @@ angular.module('trackFilter', [])
           e.stopPropagation();
         }
       });
-    }
+    }]
   });

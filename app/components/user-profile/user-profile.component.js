@@ -2,7 +2,7 @@ angular.module('userProfile', []);
 
 angular.module('userProfile').component('userProfile', {
   templateUrl: 'components/user-profile/user-profile.template.html',
-  controller: function(User) {
+  controller: ["User", function(User) {
     this.user = new User({
       firstName: 'John',
       lastName: 'Snow',
@@ -19,5 +19,5 @@ angular.module('userProfile').component('userProfile', {
     this.isSelected = function(checkTab) {
       return this.tab === checkTab;
     };
-  }
+  }]
 });

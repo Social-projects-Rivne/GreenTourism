@@ -198,7 +198,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
     ]
   });
 
-angular.module('eventsMap').service('eventMapService', function($http) {
+angular.module('eventsMap').service('eventMapService', ["$http", function($http) {
   this.layerMap = 'Streets';
   this.x = 50.6234;
   this.y = 26.2189;
@@ -207,4 +207,4 @@ angular.module('eventsMap').service('eventMapService', function($http) {
   return {
     th_: this
   };
-});
+}]);

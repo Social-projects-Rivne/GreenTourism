@@ -2,7 +2,7 @@ angular.module('blogList', []);
 
 angular.module('blogList').component('blogList', {
   templateUrl: 'components/blog/blog-list/blog-list.template.html',
-  controller: function BlogListController($http) {
+  controller: ["$http", function BlogListController($http) {
     var self = this;
     self.dateProp = 'date';
     self.categoryProp = 'category';
@@ -17,7 +17,7 @@ angular.module('blogList').component('blogList', {
     self.isSelected = function(checkTab) {
       return self.tab == checkTab;
     };
-  }
+  }]
 });
 angular.module('blogCategory', [])
   .filter('unique', function() {

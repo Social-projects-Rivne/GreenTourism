@@ -1,7 +1,7 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: function(placesOnMap, placesType, Place) {
+    controller: ["placesOnMap", "placesType", "Place", function(placesOnMap, placesType, Place) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
@@ -157,5 +157,5 @@ angular.module('placeList', ['filterMapType'])
         }
 
       });
-    }
+    }]
   });

@@ -1,4 +1,5 @@
-function locationplacesCtrl($scope, $uibModal, $rootScope, Place) {
+
+locationplacesCtrl.$inject = ["$scope", "$uibModal", "$rootScope", "Place"];function locationplacesCtrl($scope, $uibModal, $rootScope, Place) {
   var ctrl = this;
   ctrl.places = Place.query();
   this.placesFilter = function(value) {

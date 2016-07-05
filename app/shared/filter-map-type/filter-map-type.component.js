@@ -1,7 +1,7 @@
 angular.module('filterMapType', [])
   .component('filterMapType', {
     templateUrl: 'shared/filter-map-type/filter-map-type.template.html',
-    controller: function FilterMapTypeController(mapFactory) {
+    controller: ["mapFactory", function FilterMapTypeController(mapFactory) {
       var map;
       this.maptype = ['Streets', 'Satellite', 'Outdoors'];
 
@@ -50,5 +50,5 @@ angular.module('filterMapType', [])
           e.stopPropagation();
         }
       });
-    }
+    }]
   });

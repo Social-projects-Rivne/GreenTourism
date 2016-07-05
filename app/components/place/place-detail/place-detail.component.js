@@ -4,7 +4,7 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl($route, mapFactory) {
+    controller: ["$route", "mapFactory", function placeDetailCtrl($route, mapFactory) {
       this.map = mapFactory.showMap();
       this.location = this.place.getLocation();
       this.marker = L.marker(this.location).addTo(this.map);
@@ -14,5 +14,5 @@ angular.module('placeDetail', [])
       '" /></a><br />').openPopup();
 
       this.map.setView(this.location);
-    }
+    }]
   });

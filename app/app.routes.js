@@ -24,12 +24,12 @@ angular.module('greenTourism')
       .when('/places/:placeId', {
         template: '<place-detail place="$resolve.place"></place-detail>',
         resolve: {
-          place: function getPlace($route, Place) {
+          place: ["$route", "Place", function getPlace($route, Place) {
             return Place.one($route.current.params.placeId).get()
               .then(function(place) {
                 return place;
               });
-          }
+          }]
         }
       })
 

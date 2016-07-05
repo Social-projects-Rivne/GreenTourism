@@ -2,7 +2,7 @@
 angular.module('signin', [])
   .component('signin', {
     templateUrl: 'components/authorization/signin/signin.template.html',
-    controller: function signinCtrl($http) {
+    controller: ["$http", function signinCtrl($http) {
       this.login = function(userDetails) {
         this.email = userDetails.email;
         this.password = userDetails.password;
@@ -19,5 +19,5 @@ angular.module('signin', [])
       $http.get('components/authorization/users.json').then(function(response) {
         users = response.data;
       });
-    }
+    }]
   });

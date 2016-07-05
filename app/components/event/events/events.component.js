@@ -1,7 +1,7 @@
 angular.module('events', [])
   .component('events', {
     templateUrl: 'components/event/events/events.template.html',
-    controller: function($scope, $http, eventList) {
+    controller: ["$scope", "$http", "eventList", function($scope, $http, eventList) {
       $scope.eventL = eventList.th;
       $scope.eventL.mainControllerName = 'Events';
       $scope.eventL.date_current = new Date();
@@ -18,5 +18,5 @@ angular.module('events', [])
 
       $scope.give_event = eventList.th;
       this.danni = $scope.give_event.event;
-    }
+    }]
   });

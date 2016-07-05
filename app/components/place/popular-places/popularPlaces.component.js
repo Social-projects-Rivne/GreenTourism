@@ -1,4 +1,5 @@
-function popularplacesCtrl(placeModel) {
+
+popularplacesCtrl.$inject = ["placeModel"];function popularplacesCtrl(placeModel) {
   var ctrl = this;
   ctrl.places = placeModel.getPlaceList.query();
 
