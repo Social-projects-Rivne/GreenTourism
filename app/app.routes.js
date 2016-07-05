@@ -17,11 +17,18 @@ angular.module('greenTourism').config(function($routeProvider) {
     .when('/places', {
       template: '<place-list></place-list>'
     })
-    /*
+
     .when('/places/:placeId', {
-      template: '<place-detail></place-detail>'
+      template: '<place-detail place="$resolve.place"></place-detail>',
+      resolve: {
+        place: function getPlace($route, Place) {
+          return Place.one($route.current.params.placeId).get()
+            .then(function(place) {
+              return place;
+            });
+        }
+      }
     })
-    */
 
     .when('/tracks', {
       template: '<track-list></track-list>'
@@ -51,6 +58,13 @@ angular.module('greenTourism').config(function($routeProvider) {
     })
     .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
       template: '<blog-detail></blog-detail>'
+    })
+
+    .when('/404', {
+      templateUrl: '404.html'
+    })
+    .when('/500', {
+      templateUrl: '500.html'
     })
 
     .otherwise({

@@ -45,23 +45,23 @@ angular.module('placeList', ['filterMapType'])
       placesOnMap.initGroupsOfPlaces(this.types);
 
       //---START---- ShowPlacesOnLoad
-      Place.query({type: placesOnLoad}).$promise
-        .then(function(result) {
+      // TODO: Move this inside resolve
+      Place.getList({type: placesOnLoad}).then(function(result) {
 
-          places = result;
-          counter = 1;
-          for (i = 0; i < places.length; i++) {
-            placeObject = {id: places[i].id, latitude: places[i].latitude,
-            longitude: places[i].longitude, type: places[i].type};
+        places = result;
+        counter = 1;
+        for (i = 0; i < places.length; i++) {
+          placeObject = {id: places[i].id, latitude: places[i].latitude,
+          longitude: places[i].longitude, type: places[i].type};
 
-            arrPlaces.push(placeObject);
-          }
-          placesOnMap.setPlaceArray(arrPlaces);
-          placesOnMap.showPlaces(placesOnLoad);
+          arrPlaces.push(placeObject);
+        }
+        placesOnMap.setPlaceArray(arrPlaces);
+        placesOnMap.showPlaces(placesOnLoad);
 
-          $("#" + placesOnLoad + " span").addClass('glyphicon glyphicon-ok');
-          $("#Streets span").addClass('glyphicon glyphicon-ok');
-        });
+        $("#" + placesOnLoad + " span").addClass('glyphicon glyphicon-ok');
+        $("#Streets span").addClass('glyphicon glyphicon-ok');
+      });
       //----END---- ShowPlacesOnLoad
 
       //----START---- FilterByOneOfType
@@ -88,20 +88,19 @@ angular.module('placeList', ['filterMapType'])
           if (counter == this.types.length)
             $("#all span").addClass('glyphicon glyphicon-ok');
 
-          Place.query({type: input}).$promise
-            .then(function(result) {
-              places = result;
+          Place.getList({type: input}).then(function(result) {
+            places = result;
 
-              for (i = 0; i < places.length; i++) {
-                placeObject = {id: places[i].id, latitude: places[i].latitude,
-                longitude: places[i].longitude, type: places[i].type};
+            for (i = 0; i < places.length; i++) {
+              placeObject = {id: places[i].id, latitude: places[i].latitude,
+              longitude: places[i].longitude, type: places[i].type};
 
-                arrPlaces.push(placeObject);
-              }
+              arrPlaces.push(placeObject);
+            }
 
-              placesOnMap.setPlaceArray(arrPlaces);
-              placesOnMap.showPlaces(input);
-            });
+            placesOnMap.setPlaceArray(arrPlaces);
+            placesOnMap.showPlaces(input);
+          });
         }
       };
       //----END---- FilterByOneOfType
@@ -134,7 +133,7 @@ angular.module('placeList', ['filterMapType'])
               .addClass('glyphicon glyphicon-ok');
           }
 
-          Place.query().$promise.then(function(result) {
+          Place.getList().then(function(result) {
             places = result;
 
             for (i = 0; i < places.length; i++) {
@@ -157,6 +156,7 @@ angular.module('placeList', ['filterMapType'])
         "click": function(e) {
           e.stopPropagation();
         }
+
       });
     }
   });

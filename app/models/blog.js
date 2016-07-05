@@ -1,8 +1,8 @@
 angular.module('greenTourism')
-  .factory('Blog', function($resource) {
-    var Blog = $resource('/api/blogs/:id');
+  .factory('Blog', ['Restangular', function Blog(Restangular) {
+    var Blog = Restangular.service('blogs');
 
     // Custom methods goes here
 
     return Blog;
-  });
+  }]);

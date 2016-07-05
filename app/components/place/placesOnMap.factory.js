@@ -50,6 +50,8 @@ angular.module('mapModule')
                 .addTo(groups[i]);
             }
           }
+          //self.mainGroup.checkIn(self.groups[i]);
+          self.groups[i].addTo($rootScope.map);
         }
       } else {
         for (j in places) {

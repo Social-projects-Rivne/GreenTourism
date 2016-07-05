@@ -1,9 +1,7 @@
 angular.module('greenTourism', [
   'ngRoute',  // Routing
-  'ngResource',  // API communication and models
+  'restangular',  // REST communication with server
   'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
-  'ui.bootstrap',  // TODO: Is this necessary for greenTourism main module?
-
   'welcomePage',
 
   'signup',
@@ -11,10 +9,11 @@ angular.module('greenTourism', [
   'userProfile',
 
   'placeList',
-  //'placeDetail',
+  'placeDetail',
   'placeModal',  // TODO: Move this to placeList
   'locationPlaces',  // TODO: Move this to places dependencies (or remove)
   'popularPlaces',  // TODO: Move this to places dependencies (or remove)
+  'mapModule',
 
   'trackList',
   //'trackDetail',
