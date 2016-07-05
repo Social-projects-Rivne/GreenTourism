@@ -1,36 +1,46 @@
-'use strict';
-
 angular.module('filterMapType', [])
   .component('filterMapType', {
     templateUrl: 'shared/filter-map-type/filter-map-type.template.html',
-    controller: function FilterMapTypeController($rootScope) {
+    controller: function FilterMapTypeController(mapFactory) {
+      var map;
       this.maptype = ['Streets', 'Satellite', 'Outdoors'];
 
-      this.showTileLayer = function(input) {
-        var Streets = $rootScope.Streets;
-        var Satellite = $rootScope.Satellite;
-        var Outdoors = $rootScope.Outdoors;
+      var Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      });
+      var Outdoors = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
 
+      var Satellite = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+      });
+
+      map = mapFactory.map;
+      map.addLayer(Streets);
+
+      this.showTileLayer = function(input) {
         for (var i = 0; i < this.maptype.length; i++) {
           if (this.maptype[i] == input)
-            angular.element("#" + input + " span").addClass('glyphicon glyphicon-ok');
-          else angular.element("#" + this.maptype[i] + " span").removeClass('glyphicon glyphicon-ok');
+            $("#" + input + " span").addClass('glyphicon glyphicon-ok');
+          else $("#" + this.maptype[i] + " span")
+                .removeClass('glyphicon glyphicon-ok');
         }
 
         if (input == 'Streets') {
-          $rootScope.map.removeLayer(Satellite);
-          $rootScope.map.removeLayer(Outdoors);
-          $rootScope.map.addLayer(Streets);
+          map.removeLayer(Satellite);
+          map.removeLayer(Outdoors);
+          map.addLayer(Streets);
         }
         if (input == 'Satellite') {
-          $rootScope.map.removeLayer(Outdoors);
-          $rootScope.map.removeLayer(Streets);
-          $rootScope.map.addLayer(Satellite);
+          map.removeLayer(Outdoors);
+          map.removeLayer(Streets);
+          map.addLayer(Satellite);
         }
         if (input == 'Outdoors') {
-          $rootScope.map.removeLayer(Satellite);
-          $rootScope.map.removeLayer(Streets);
-          $rootScope.map.addLayer(Outdoors);
+          map.removeLayer(Satellite);
+          map.removeLayer(Streets);
+          map.addLayer(Outdoors);
         }
       };
 

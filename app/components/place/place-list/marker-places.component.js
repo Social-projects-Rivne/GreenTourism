@@ -4,10 +4,10 @@ angular.module('placeList')
       placeid: '='
     },
     template: '<br /><button class="btn btn-primary btn-md center-block"  type="button"  ng-click="$ctrl.open($ctrl.placeid)">OPEN</button>',
-    controller: function markerController($compile, $scope, $uibModal, placeModel) {
+    controller: function markerController($compile, $scope, $uibModal, Place) {
       $ctrl = this;
       $ctrl.placemyid = this.placeid;
-      $ctrl.dataPlace = placeModel.getOnePlace.query($ctrl.placemyid);
+      $ctrl.dataPlace = Place.query($ctrl.placemyid);
       $ctrl.dataPlace.$promise.then(function(result) {
         $ctrl.dataPlace = result;
         $ctrl.dataPlace = $ctrl.dataPlace[0];
