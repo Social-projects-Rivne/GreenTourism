@@ -4,8 +4,11 @@
   ],
   "env": {
     "browser": true
+<<<<<<< HEAD
   },
   "globals": {
     "L": true
+=======
+>>>>>>> dev
   }
 }
