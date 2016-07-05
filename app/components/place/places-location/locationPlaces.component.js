@@ -1,13 +1,13 @@
-function locationplacesCtrl(placeModel, $scope, $uibModal, $rootScope) {
+function locationplacesCtrl($scope, $uibModal, $rootScope, Place) {
   var ctrl = this;
-  ctrl.places = placeModel.getPlaceList.query();
+  ctrl.places = Place.query();
   this.placesFilter = function(value) {
     ctrl.type = $rootScope.type;
     return value.type == ctrl.type && value.rate;
   }
   $ctrl = this;
   $ctrl.placemyid = this.placeid;
-  $ctrl.dataPlace = placeModel.getOnePlace.query($ctrl.placemyid);
+  $ctrl.dataPlace = Place.query($ctrl.placemyid);
   $ctrl.dataPlace.$promise.then(function(result) {
     $ctrl.dataPlace = result;
     $ctrl.dataPlace = $ctrl.dataPlace[0];

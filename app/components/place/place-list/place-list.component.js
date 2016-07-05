@@ -1,11 +1,15 @@
-angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
-    'ngResource', 'ui.bootstrap'
-  ])
+angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: function(placeModel, placesOnMap, $scope, $compile, $rootScope,
-      Place) {
+    controller: function(placesOnMap, placesType, Place) {
+      var i;
+      var placesOnLoad = 'featuredPlace';
+      var arrPlaces = [];
+      var places = [];
+      var placeObject = {};
+      var counter;
 
+      //-----START ADD Place-----
       this.addPlaceState = false;
 
       this.toggleAddPlace = function() {
@@ -33,60 +37,126 @@ angular.module('placeList', ['filterCategory', 'filterMapType', 'showMap',
         L.marker(latLng).addTo($rootScope.map);
         $rootScope.map.setView(latLng);
       };
+      //-----END ADD Place-----
 
+      this.types = placesType;
+      placesOnMap.removePlaces();
+      placesOnMap.showMap();
+      placesOnMap.initGroupsOfPlaces(this.types);
 
-      var arrPlaces = [];
-      var pointsTypeForShowOnLoad = 'Featured_Place';
-      self.types = placeModel.getPlaceTypes.query();
-      self.points = placeModel.getPlaceList.query();
-      self.points.$promise.then(function(result) {
-        self.points = result;
+      //---START---- ShowPlacesOnLoad
+      Place.query({type: placesOnLoad}).$promise
+        .then(function(result) {
 
-        placesOnMap.initGroupsOfPlaces(self.types);
-        placesOnMap.showPoints(pointsTypeForShowOnLoad, self.types,
-          self.points, true);
-        placesOnMap.showPlacesOnLoad(arrPlaces, pointsTypeForShowOnLoad);
-        var placearr = placeModel.placesArray;
-        for (var j = 0; j < placearr.length; j++) {
-          setMarker(placearr[j]);
-        }
-      });
+          places = result;
+          counter = 1;
+          for (i = 0; i < places.length; i++) {
+            placeObject = {id: places[i].id, latitude: places[i].latitude,
+            longitude: places[i].longitude, type: places[i].type};
 
+            arrPlaces.push(placeObject);
+          }
+          placesOnMap.setPlaceArray(arrPlaces);
+          placesOnMap.showPlaces(placesOnLoad);
 
-
-      //placesOnMap.removeAllPlaces();
-      function setMarker(point) {
-        var URL = 'assets/';
-        var placeid = point.id;
-        var title = point.name;
-        var image = point.photo;
-        var marker = point.marker;
-        var L = point.l;
-        var myPopup = L.DomUtil.create('div', 'marker-link' + placeid);
-        marker.bindPopup(myPopup);
-        marker.on('mouseover', function(e) {
-          var linkFn = $compile(
-            '<div><h3>' + title + '</h3><a><img class="marker-image" src="' +
-            URL + image + '" \/></a><br /><marker  placeid="' + placeid +
-            '" id="info-marker' + placeid + '"></marker></div>')($scope);
-
-          var element = linkFn;
-          this._popup.setContent(element[0]);
-          this.openPopup();
+          $("#" + placesOnLoad + " span").addClass('glyphicon glyphicon-ok');
+          $("#Streets span").addClass('glyphicon glyphicon-ok');
         });
+      //----END---- ShowPlacesOnLoad
 
-      }
+      //----START---- FilterByOneOfType
+      this.checkType = function(input) {
+        var spanCheck = $("#" + input + " span");
 
-      $scope.$on('changetype', function(event, placearr, ischecked, input) {
-        if (!ischecked) {
-          placesOnMap.showPoints(input, self.types, self.points, ischecked);
+        if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+          counter--;
+
+          spanCheck.removeClass('glyphicon glyphicon-ok');
+          $("#all span").removeClass('glyphicon glyphicon-ok');
+
+          placesOnMap.removePlaces(input);
+
+          for (i = 0; i < arrPlaces.length; i++) {
+            if (arrPlaces[i].type == input) {
+              arrPlaces.splice(i--, 1);
+            }
+          }
+        } else {
+          counter++;
+          spanCheck.addClass('glyphicon glyphicon-ok');
+
+          if (counter == this.types.length)
+            $("#all span").addClass('glyphicon glyphicon-ok');
+
+          Place.query({type: input}).$promise
+            .then(function(result) {
+              places = result;
+
+              for (i = 0; i < places.length; i++) {
+                placeObject = {id: places[i].id, latitude: places[i].latitude,
+                longitude: places[i].longitude, type: places[i].type};
+
+                arrPlaces.push(placeObject);
+              }
+
+              placesOnMap.setPlaceArray(arrPlaces);
+              placesOnMap.showPlaces(input);
+            });
         }
+      };
+      //----END---- FilterByOneOfType
 
-        placesOnMap.addPlaces(input);
-        for (var j = 0; j < placearr.length; j++) {
-          setMarker(placearr[j]);
+      //----START---- FilterCheckAll
+      this.checkAll = function() {
+        var spanCheck = $("#all span");
+
+        if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+          counter = 0;
+
+          spanCheck.removeClass('glyphicon glyphicon-ok');
+
+          for (i = 0; i < this.types.length; i++) {
+            $("#" + this.types[i].type + " span")
+              .removeClass('glyphicon glyphicon-ok');
+          }
+          placesOnMap.removePlaces();
+          arrPlaces = [];
+        } else {
+          counter = 5;
+
+          placesOnMap.removePlaces();
+          arrPlaces = [];
+
+          spanCheck.addClass('glyphicon glyphicon-ok');
+
+          for (i = 0; i < this.types.length; i++) {
+            $("#" + this.types[i].type + " span")
+              .addClass('glyphicon glyphicon-ok');
+          }
+
+          Place.query().$promise.then(function(result) {
+            places = result;
+
+            for (i = 0; i < places.length; i++) {
+              placeObject = {id: places[i].id, latitude: places[i].latitude,
+                  longitude: places[i].longitude, type: places[i].type
+                  };
+
+              arrPlaces.push(placeObject);
+            }
+
+            placesOnMap.setPlaceArray(arrPlaces);
+            placesOnMap.showPlaces();
+          });
         }
+      };
+      //----END---- FilterCheckAll
 
+      //Don't hide dropdown if clicked
+      $('#dropdownFilterCategory .dropdown-menu').on({
+        "click": function(e) {
+          e.stopPropagation();
+        }
       });
     }
   });

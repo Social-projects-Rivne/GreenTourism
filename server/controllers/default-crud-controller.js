@@ -2,7 +2,7 @@
 // TODO: Add query filtering
 exports.list = function(Model) {
   return function(req, res) {
-    Model.find(function(err, records) {
+    Model.find(req.query, function(err, records) {
       if (err) {
         res.status(400).json(err);
       } else {
