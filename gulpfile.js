@@ -20,7 +20,8 @@ var imagemin = require('gulp-imagemin');
 //var templateCache = require('gulp-angular-templatecache');
 
 var DEST = 'dist/';  // Destination folder
-var jsFiles = ['./**/*.js', '!node_modules/**', '!app/bower_components/**'];
+var jsFiles = ['./**/*.js', '!node_modules/**', '!app/bower_components/**',
+               '!gulpfile.js'];
 
 // Error notification
 var onError = function(err) {
@@ -31,6 +32,12 @@ var onError = function(err) {
   this.emit('end');
 };
 
+// Check if linter fixed problems
+function isFixed(file) {
+  return file.eslint !== null && file.eslint.fixed;
+}
+
+// Lint files with ESLint
 gulp.task('lint', function() {
   return gulp.src(jsFiles)
     .pipe(eslint())
@@ -38,11 +45,18 @@ gulp.task('lint', function() {
     .pipe(notify({message: 'Linting done!', onLast: true}));
 });
 
+gulp.task('lint-fix', function() {
+  return gulp.src(jsFiles)
+    .pipe(eslint({fix: true, rules: {'spaced-comment': 0}}))
+    .pipe(gulpif(isFixed, gulp.dest('./')))
+    .pipe(notify({message: 'Possible lint errors fixed!', onLast: true}));
+});
+
 // Beautify source files
 gulp.task('beautify', function() {
   gulp.src(jsFiles)
     .pipe(beautify())
-    .pipe(gulp.dest('app/'))
+    .pipe(gulp.dest('./'))
     .pipe(notify({message: 'Beautification done!', onLast: true}));
 });
 

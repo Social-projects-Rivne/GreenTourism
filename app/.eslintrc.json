@@ -4,10 +4,10 @@
   ],
   "env": {
     "browser": true,
+    "jquery": true,
     "node": false
   },
   "globals": {
-    "$": true,
     "L": true
   },
   "rules": {
