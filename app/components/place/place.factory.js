@@ -1,3 +1,5 @@
+// TODO: REMOVE THIS FILE. USE models/place INSTEAD
+
 'use strict';
 
 angular.module('greenTourism')
