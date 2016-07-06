@@ -3,6 +3,7 @@
 		<h2>Green tourism</h2>
 		<h5 class="error">{{$ctrl.message}}</h5>
 	</div>
+  
 	<form class="well well-sm" role="form" name="login" novalidate ng-submit="$ctrl.login(user)">
 		<div class="input-group margin-bottom-sm">
 			<!-- <label for="email">Email:</label> -->
@@ -22,7 +23,7 @@
 		<div class="error" ng-show="login.password.$dirty">
 			<span ng-show="login.password.$error.required">Password is required</span>
 		</div>
-		
+
 		<div class="checkbox">
 			<label><input type="checkbox"> Remember me</label>
 		</div>

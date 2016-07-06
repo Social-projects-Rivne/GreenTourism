@@ -1,6 +1,18 @@
 angular.module('auth').component('signup', {
   templateUrl: 'components/auth/signup/signup.template.html',
-  controller: function signupCtrl() {
+  controller: ['User', '$location', function signupCtrl(User, $location) {
+    this.newUser = {};
+
+    this.signup = function() {
+      User.post(this.newUser).then(function() {
+        console.log('Object saved OK');
+        $location.path('/profile');
+      }, function(err) {
+        console.log('There was an error saving: ', err);
+      });
+    };
+
+    /*
     this.signup = function(isvalid) {
       if (isvalid) {
         this.message = 'Welcome to Green tourism';
@@ -39,9 +51,12 @@ angular.module('auth').component('signup', {
         }
       }
     };
-  }
+    */
+  }]
 });
 
+// TODO: Replace this with simple function
+/*
 angular.module('auth').directive('confirmPassword', [function() {
   return {
     require: 'ngModel',
@@ -55,3 +70,4 @@ angular.module('auth').directive('confirmPassword', [function() {
     }
   };
 }]);
+*/
