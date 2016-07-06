@@ -1,5 +1,5 @@
-angular.module('blog', []);
-angular.module('blog').component('blogDetail', {
+angular.module('blogDetail', []);
+angular.module('blogDetail').component('blogDetail', {
   templateUrl: 'components/blog/blog-detail/blog-detail.template.html',
   controller: ["$http", "$filter", "$routeParams", function BlogDetailController($http, $filter, $routeParams) {
     var self = this;
