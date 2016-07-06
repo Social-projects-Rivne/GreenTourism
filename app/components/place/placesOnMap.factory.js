@@ -78,13 +78,13 @@ angular.module('mapModule')
     }
   };
 
-  /*** START tracks factory ***/
+  /* ** START tracks factory ** */
   var tracks = [];
-  var polyline = function (trackPoints, color) {
+  var polyline = function(trackPoints, color) {
     return L.polyline(trackPoints, {
-             color: color,
-             opacity: 1
-           });
+      color: color,
+      opacity: 1
+    });
   };
 
   placesOnMap.showTracks = function(tracksArray) {
@@ -97,9 +97,15 @@ angular.module('mapModule')
 
   placesOnMap.removeTracks = function(tracksType) {
     for (var i = 0; i < tracks.length; i++) {
-      if (tracks[i][1] == tracksType) {
+      if (tracks[i][1] === tracksType) {
         map.removeLayer(tracks[i][0]);
       }
+    }
+  };
+
+  placesOnMap.removeAllTracks = function() {
+    for (var i = 0; i < tracks.length; i++) {
+      map.removeLayer(tracks[i][0]);
     }
   };
 

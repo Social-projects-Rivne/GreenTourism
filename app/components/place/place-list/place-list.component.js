@@ -168,45 +168,39 @@ angular.module('placeList', ['filterMapType'])
       });
 
       this.showSpecificTracks = function(tracksType) {
-        var element = angular.element("#" + tracksType);
-        var checkedIcon = angular.element("#gi" + tracksType);
+        var element = angular.element('#' + tracksType);
+        var checkedIcon = angular.element('#gi' + tracksType);
 
         if (element.hasClass('active')) {
           element.removeClass('active');
-          checkedIcon.removeClass('glyphicon glyphicon-ok');
+          checkedIcon.removeClass('glyphicon-ok');
           placesOnMap.removeTracks(tracksType);
         } else {
           element.addClass('active');
-          checkedIcon.addClass('glyphicon glyphicon-ok');
+          checkedIcon.addClass('glyphicon-ok');
           Track.getList({type: tracksType}).then(function(result) {
             tracks = result;
             placesOnMap.showTracks(tracks);
           });
         }
-        /*Track.getList({type: tracksType}).then(function(result) {
-          tracks = result;
-          placesOnMap.showTracks(tracks);
-        });
-        var element = $('#' + tracksType);
-        var icon = $('#gi' + tracksType);
-        for (var i = 0; i < $rootScope.tracks.length; i++) {
-          if (element[0].className == '') {
-            if (tracksType == $rootScope.tracks[i][1]) {
-              $rootScope.tracks[i][0].addTo($rootScope.map);
-            }
-          } else {
-            if (tracksType == $rootScope.tracks[i][1]) {
-              $rootScope.map.removeLayer($rootScope.tracks[i][0]);
-            }
-          }
-        }
-        if (element[0].className == 'active') {
-          element.removeClass('active');
-          icon.removeClass('glyphicon glyphicon-ok');
+      };
+
+      this.checkAllTracks = function() {
+        var checkAllElement = angular.element('#allTracks');
+        var allLiElements = angular.element(document).find('#tracksFilter li > a');
+        var allGI = angular.element('#tracksFilter li span.glyphicon');
+        if (checkAllElement.hasClass('active')) {
+          allLiElements.removeClass('active');
+          allGI.removeClass('glyphicon-ok');
+          placesOnMap.removeAllTracks();
         } else {
-          element.addClass('active');
-          icon.addClass('glyphicon glyphicon-ok');
-        }*/
-      }
+          allLiElements.addClass('active');
+          allGI.addClass('glyphicon-ok');
+          Track.getList().then(function(result) {
+            tracks = result;
+            placesOnMap.showTracks(tracks);
+          });
+        }
+      };
     }]
   });
