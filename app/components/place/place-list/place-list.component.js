@@ -1,7 +1,7 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ["placesOnMap", "placesType", "Place", function(placesOnMap, placesType, Place) {
+    controller: ["placesOnMap", "mapMarkingTypes", "Place", function(placesOnMap, mapMarkingTypes, Place) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
@@ -39,10 +39,10 @@ angular.module('placeList', ['filterMapType'])
       };
       //-----END ADD Place-----
 
-      this.types = placesType;
+      this.placesType = mapMarkingTypes.placesType;  //DG: Rename types to placesType
       placesOnMap.removePlaces();
       placesOnMap.showMap();
-      placesOnMap.initGroupsOfPlaces(this.types);
+      placesOnMap.initGroupsOfPlaces(this.placesType);
 
       //---START---- ShowPlacesOnLoad
       // TODO: Move this inside resolve
@@ -84,7 +84,7 @@ angular.module('placeList', ['filterMapType'])
           counter++;
           spanCheck.addClass('glyphicon glyphicon-ok');
 
-          if (counter == this.types.length)
+          if (counter == this.placesType.length)
             $('#all span').addClass('glyphicon glyphicon-ok');
 
           Place.getList({type: input}).then(function(result) {
@@ -113,8 +113,8 @@ angular.module('placeList', ['filterMapType'])
 
           spanCheck.removeClass('glyphicon glyphicon-ok');
 
-          for (i = 0; i < this.types.length; i++) {
-            $('#' + this.types[i].type + ' span')
+          for (i = 0; i < this.placesType.length; i++) {
+            $('#' + this.placesType[i].type + ' span')
               .removeClass('glyphicon glyphicon-ok');
           }
           placesOnMap.removePlaces();
@@ -127,8 +127,8 @@ angular.module('placeList', ['filterMapType'])
 
           spanCheck.addClass('glyphicon glyphicon-ok');
 
-          for (i = 0; i < this.types.length; i++) {
-            $('#' + this.types[i].type + ' span')
+          for (i = 0; i < this.placesType.length; i++) {
+            $('#' + this.placesType[i].type + ' span')
               .addClass('glyphicon glyphicon-ok');
           }
 
@@ -151,11 +151,16 @@ angular.module('placeList', ['filterMapType'])
       //----END---- FilterCheckAll
 
       //Don't hide dropdown if clicked
-      $('#dropdownFilterCategory .dropdown-menu').on({
+      $('.dropdown-menu').on({  // DG: change selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
         }
 
       });
+
+
+      /*** START tracks controller ***/
+      this.tracksType = mapMarkingTypes.tracksType;
+      console.log(this.tracksType);
     }]
   });

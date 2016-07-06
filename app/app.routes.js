@@ -33,9 +33,6 @@ angular.module('greenTourism')
         }
       })
 
-      .when('/tracks', {
-        template: '<track-list></track-list>'
-      })
 
       .when('/events', {  // TODO: Rename to eventList
         template: '<events></events>'

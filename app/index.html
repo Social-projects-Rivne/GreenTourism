@@ -82,7 +82,7 @@
 
     <!-- PLACE -->
     <script src="components/place/placesOnMap.factory.js"></script>
-    <script src="components/place/placesType.factory.js"></script>
+    <script src="components/place/mapMarkingTypes.factory.js"></script> <!--  Renamed factory name to mapMarkingTypes -->
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
     <script src="components/place/place-modal/place-modal.component.js"></script>
@@ -131,8 +131,7 @@
 
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-              <li ng-class="{ active: nav.isActive('/places')}"><a href="#/places">Places</a></li>
-              <li ng-class="{ active: nav.isActive('/tracks')}"><a href="#/tracks">Tracks</a></li>
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#/places">Map</a></li>
               <li ng-class="{ active: nav.isActive('/events')}"><a href="#/events">Events</a></li>
               <li ng-class="{ active: nav.isActive('/blog')}"><a href="#/blog">Blog</a></li>
             </ul>

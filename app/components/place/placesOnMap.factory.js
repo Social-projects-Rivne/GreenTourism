@@ -78,5 +78,8 @@ angular.module('mapModule')
     }
   };
 
+  /*** START tracks factory ***/
+  
+
   return placesOnMap;
 }]);

@@ -15,7 +15,6 @@ angular.module('greenTourism', [
   'popularPlaces',  // TODO: Move this to places dependencies (or remove)
   'mapModule',
 
-  'trackList',
   //'trackDetail',
 
   'events', // TODO: Rename to eventList
