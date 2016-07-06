@@ -11,8 +11,8 @@ angular.module('greenTourism')
       .when('/signup', {
         template: '<signup></signup>'
       })
-      .when('/signin', {  // TODO: Rename to login
-        template: '<signin></signin>'
+      .when('/login', {
+        template: '<login></login>'
       })
       .when('/profile', {
         template: '<user-profile></user-profile>'

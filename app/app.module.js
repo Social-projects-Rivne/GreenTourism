@@ -3,8 +3,7 @@ angular.module('greenTourism', [
   'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
   'welcomePage',
 
-  'signup',
-  'signin',  // TODO: Rename to login
+  'auth',
   'userProfile',
 
   'place',

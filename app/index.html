@@ -76,9 +76,10 @@
     <!-- Separated components -->
     <script src="components/welcome-page/welcome-page.component.js"></script>
 
-    <!-- USER AND AUTHORIZATION -->
-    <script src="components/authorization/signup/signup.component.js"></script>
-    <script src="components/authorization/signin/signin.component.js"></script>
+    <!-- USER AND AUTH -->
+    <script src="components/auth/auth.module.js"></script>
+    <script src="components/auth/signup/signup.component.js"></script>
+    <script src="components/auth/login/login.component.js"></script>
     <script src="components/user-profile/user-profile.component.js"></script>
 
     <!-- PLACE -->
@@ -143,7 +144,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li> <!-- Rename to #!/login -->
+              <li ng-class="{ active: nav.isActive('/login')}"><a href="#!/login">Log in</a></li> <!-- Rename to #!/login -->
               <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
             </ul>
           </div>
