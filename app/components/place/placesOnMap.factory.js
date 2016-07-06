@@ -79,7 +79,29 @@ angular.module('mapModule')
   };
 
   /*** START tracks factory ***/
-  
+  var tracks = [];
+  var polyline = function (trackPoints, color) {
+    return L.polyline(trackPoints, {
+             color: color,
+             opacity: 1
+           });
+  };
+
+  placesOnMap.showTracks = function(tracksArray) {
+    var trackForAdding;
+    for (var i = 0; i < tracksArray.length; i++) {
+      trackForAdding = polyline(tracksArray[i].track_points, tracksArray[i].color).addTo(map);
+      tracks.push([trackForAdding, tracksArray[i].type]);
+    }
+  };
+
+  placesOnMap.removeTracks = function(tracksType) {
+    for (var i = 0; i < tracks.length; i++) {
+      if (tracks[i][1] == tracksType) {
+        map.removeLayer(tracks[i][0]);
+      }
+    }
+  };
 
   return placesOnMap;
 }]);

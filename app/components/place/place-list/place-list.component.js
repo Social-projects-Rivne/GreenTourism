@@ -1,11 +1,12 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ["placesOnMap", "mapMarkingTypes", "Place", function(placesOnMap, mapMarkingTypes, Place) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', function(placesOnMap, mapMarkingTypes, Place, Track) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
       var places = [];
+      var tracks = [];
       var placeObject = {};
       var counter;
 
@@ -161,6 +162,51 @@ angular.module('placeList', ['filterMapType'])
 
       /*** START tracks controller ***/
       this.tracksType = mapMarkingTypes.tracksType;
-      console.log(this.tracksType);
+      Track.getList().then(function(result) {
+        tracks = result;
+        placesOnMap.showTracks(tracks);
+      });
+
+      this.showSpecificTracks = function(tracksType) {
+        var element = angular.element("#" + tracksType);
+        var checkedIcon = angular.element("#gi" + tracksType);
+
+        if (element.hasClass('active')) {
+          element.removeClass('active');
+          checkedIcon.removeClass('glyphicon glyphicon-ok');
+          placesOnMap.removeTracks(tracksType);
+        } else {
+          element.addClass('active');
+          checkedIcon.addClass('glyphicon glyphicon-ok');
+          Track.getList({type: tracksType}).then(function(result) {
+            tracks = result;
+            placesOnMap.showTracks(tracks);
+          });
+        }
+        /*Track.getList({type: tracksType}).then(function(result) {
+          tracks = result;
+          placesOnMap.showTracks(tracks);
+        });
+        var element = $('#' + tracksType);
+        var icon = $('#gi' + tracksType);
+        for (var i = 0; i < $rootScope.tracks.length; i++) {
+          if (element[0].className == '') {
+            if (tracksType == $rootScope.tracks[i][1]) {
+              $rootScope.tracks[i][0].addTo($rootScope.map);
+            }
+          } else {
+            if (tracksType == $rootScope.tracks[i][1]) {
+              $rootScope.map.removeLayer($rootScope.tracks[i][0]);
+            }
+          }
+        }
+        if (element[0].className == 'active') {
+          element.removeClass('active');
+          icon.removeClass('glyphicon glyphicon-ok');
+        } else {
+          element.addClass('active');
+          icon.addClass('glyphicon glyphicon-ok');
+        }*/
+      }
     }]
   });

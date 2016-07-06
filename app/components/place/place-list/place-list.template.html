@@ -32,7 +32,7 @@
               </a>
             </ul>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group">
+          <div id="tracksFilter" class="btn-group col-xs-2 no-padding" role="group">
               <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Tracks
                 <span class="caret"></span>
@@ -41,7 +41,7 @@
                 <li ng-repeat="type in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type.type)"> 
                   <a href=""  class="active" id="{{type.type}}">
                     <span class="col-xs-9" style="border-left: 5px solid {{type.color}}">
-                      {{type.type | uppercase}}
+                      {{type.name}}
                     </span>
                     <span id="gi{{type.type}}" class="col-xs-3 glyphicon glyphicon-ok">
                     </span>
