@@ -1,27 +1,53 @@
-/*  -------- Bottstrap 3 ----------  */
-.navbar-default .navbar-brand, .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>li>a
-{
-    color: @dark-green;
+/***************************************************************
+  NAVBAR
+****************************************************************/
+.navtop {
+  padding-top: 5px;
+  a {
+    color: @base-green-color;
+  }
 }
 
-.dropdown-menu>.active>a:focus
-{
-    color: @dark-green;
+.navbar-right.navtop {
+  text-align: right;
+  padding-right: 25px;
+}
+
+.logo {
+  text-align: center;
+  a {
+    font-size: 28px;
+    font-weight: bolder;
+  }
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: bolder;
+  color: @base-green-color;
 }
 
 /***************************************************************
-  STICKY FOOTER
+  FOOTER
 ****************************************************************/
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: @footer-bg;
-}
-
-.footer p {
-  margin: 20px 0;
+  height: 170px;
+  background-color: @footer-bg-color;
+  .row div {
+    padding: 30px 0 0 40px;
+  }
+  p {
+    font-size: 20px;
+    color: @base-white-color;
+    span {
+      color: @base-green-color;
+    }
+  }
+  ul {
+    list-style-type: none;
+    a {
+      color: @base-green-color;
+    }
+  }
 }
