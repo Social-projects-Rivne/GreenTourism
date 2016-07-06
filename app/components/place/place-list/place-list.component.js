@@ -91,8 +91,8 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-              placeObject = {id: places[i].id, latitude: places[i].latitude,
-              longitude: places[i].longitude, type: places[i].type};
+             placeObject = {id: places[i].id, latitude: places[i].latitude,
+             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0]};
 
               arrPlaces.push(placeObject);
             }
@@ -137,8 +137,7 @@ angular.module('placeList', ['filterMapType'])
 
             for (i = 0; i < places.length; i++) {
               placeObject = {id: places[i].id, latitude: places[i].latitude,
-                  longitude: places[i].longitude, type: places[i].type
-                  };
+              longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0]};
 
               arrPlaces.push(placeObject);
             }
