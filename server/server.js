@@ -24,6 +24,7 @@ mongoose.connect(dbUrl);
 // Routes
 app.use('/api/places', require('./routes/places'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/tracks', require('./routes/tracks'));
 
 app.listen(PORT, function() {
   console.log('Listening on port ' + PORT + '...');
