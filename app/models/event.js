@@ -1,4 +1,4 @@
-angular.module('greenTourism')
+angular.module('eventModel', ['restangular'])
   .factory('Event', ['Restangular', function Event(Restangular) {
     var Event = Restangular.service('events');
 

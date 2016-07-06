@@ -1,6 +1,5 @@
 angular.module('greenTourism', [
   'ngRoute',  // Routing
-  'restangular',  // REST communication with server
   'ngAnimate',  // TODO: Is this necessary for greenTourism main module?
   'welcomePage',
 
@@ -12,5 +11,4 @@ angular.module('greenTourism', [
   'track',
   'event',
   'blog'
-
 ]);
