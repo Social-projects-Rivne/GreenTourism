@@ -48,7 +48,7 @@ angular.module('mapModule')
               marker(places[j].latitude, places[j].longitude, types[i].icon)
                   .addTo(groups[i])
                   .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='" + places[j] + "' \/></a>" +
-                      "<button type='button' class='btn btn-default btn-lg center-block'> <a href='#/places/"+places[j].id+"'>Details >></a> </button></div>")
+                      "<button type='button' class='btn btn-default btn-lg center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>")
                   .openPopup(autopan);
 
             }
@@ -60,7 +60,7 @@ angular.module('mapModule')
             marker(places[j].latitude, places[j].longitude, types[i].icon)
               .addTo(groups[i])
                 .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='" + places[j] + "' \/></a>" +
-                    "<button type='button' class='btn btn-default btn-lg center-block'> <a href='#/places/"+places[j].id+"'>Details >></a> </button></div>")
+                    "<button type='button' class='btn btn-default btn-lg center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>")
                 .openPopup(autopan);
           }
         }

@@ -1,5 +1,6 @@
 angular.module('greenTourism')
-  .config(['$routeProvider', function($routeProvider) {
+  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $locationProvider.hashPrefix('!');
     $routeProvider.caseInsensitiveMatch = true;
 
     $routeProvider

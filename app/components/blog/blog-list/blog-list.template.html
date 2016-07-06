@@ -16,7 +16,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true" >
                             <div class="thumbnail blog-list-item">
-                                <a href="#/blog/{{blog.id}}">
+                                <a href="#!/blog/{{blog.id}}">
                                     <img ng-src="{{blog.images}}" alt="{{blog.title}}">
                                 </a>
 
@@ -42,10 +42,10 @@
                                     </div>
 
                                     <p class="blog-meta">
-                                        <a href="#/blog/{{blog.id}}" class="blog-read-more">Read more
+                                        <a href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                         </a>
-                                        <a href="#/blog/{{blog.id}}#post-comments" class="pull-right">
+                                        <a href="#!/blog/{{blog.id}}#post-comments" class="pull-right">
                                             <i class="fa fa-comments-o" aria-hidden="true"></i>
                                             {{blog.comments.length}}
                                         </a>
@@ -109,14 +109,14 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }" id="panel-popular">
                                                     <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp | limitTo:3">
-                                                        <a href="#/blog/{{blog.id}}" class="pull-left">
+                                                        <a href="#!/blog/{{blog.id}}" class="pull-left">
                                                             <img alt="{{blog.title}}"
                                                                  ng-src="{{blog.images}}" class="media-object"/>
                                                         </a>
 
                                                         <div class="media-body">
                                                             <h4 class="media-heading">
-                                                                <a href="#/blog/{{blog.id}}">
+                                                                <a href="#!/blog/{{blog.id}}">
                                                                     {{blog.title}}
                                                                 </a>
                                                             </h4>
@@ -129,14 +129,14 @@
                                                 </div>
                                                 <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }" id="panel-recent">
                                                    <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp:true | limitTo:3">
-                                                        <a href="#/blog/{{blog.id}}" class="pull-left">
+                                                        <a href="#!/blog/{{blog.id}}" class="pull-left">
                                                             <img alt="{{blog.title}}"
                                                                  ng-src="{{blog.images}}" class="media-object"/>
                                                         </a>
 
                                                         <div class="media-body">
                                                             <h4 class="media-heading">
-                                                                <a href="#/blog/{{blog.id}}">
+                                                                <a href="#!/blog/{{blog.id}}">
                                                                     {{blog.title}}
                                                                 </a>
                                                             </h4>

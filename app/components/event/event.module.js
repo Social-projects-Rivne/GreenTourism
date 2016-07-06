@@ -1,4 +1,5 @@
 angular.module('event', [
+  'eventModel',
   'eventList',
   'eventDetail',
   'eventsMap',

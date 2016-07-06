@@ -93,7 +93,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
           }
 
           var better_event = Math.min.apply(null, sort_arr);
-          location.href = '#/events/' + clicks_arr[sort_arr.indexOf(better_event)].id;
+          location.href = '#!/events/' + clicks_arr[sort_arr.indexOf(better_event)].id;
         };
 
         this.temp_click = function() {

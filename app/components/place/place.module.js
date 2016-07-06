@@ -1,4 +1,5 @@
 angular.module('place', [
+  'placeModel',
   'placeList',
   'placeDetail',
   'placeModal',  // TODO: Move this to placeList
