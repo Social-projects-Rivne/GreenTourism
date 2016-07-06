@@ -1,4 +1,4 @@
-<li ng-repeat="events in eventList" ng-click="$ctrl.changeActive(events.type)">
+<li ng-repeat="events in eventListService" ng-click="$ctrl.changeActive(events.type)">
     <a href=""  class="active" id="{{events.type}}">
         <span class="col-xs-9">
             {{events.type}}

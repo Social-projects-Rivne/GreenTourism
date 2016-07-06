@@ -37,23 +37,20 @@ angular.module('greenTourism')
         template: '<track-list></track-list>'
       })
 
-      .when('/events', {  // TODO: Rename to eventList
-        template: '<events></events>'
+      .when('/events', {
+        template: '<event-list></event-list>'
       })
       .when('/events/:eventId', {
-        template: '{{$ctrl.eventId}}<event></event>'  // TODO: Remove $ctrl.eventId from here (use $routeParams instead)
+        template: '{{$ctrl.eventId}}<event-detail></event-detail>'  // TODO: Remove $ctrl.eventId from here (use resolve instead)
       })
       .when('/eventsmap', {
         template: '<events-map></events-map>'
-      })
-      .when('/events/event', {  // TODO: Remove this from routes
-        template: '<event></event>'
       })
       .when('/eventsmap/:lat/:lng/:type/:date_start', {  // TODO: Remove this from routes (use query strings instead)
         template: '{{$ctrl.lat}}{{$ctrl.lng}}{{$ctrl.type}}{{$ctrl.date_start}}<events-map></events-map>'  // TODO: Leave only <events-map> here
       })
       .when('/events/:eventId/:dataId', { // TODO: Remove this from routes (use query strings instead)
-        template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event></event>'
+        template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event-detail></event-detail>'
       })
 
       .when('/blog', {  // TODO: Rename to blogs

@@ -3,8 +3,8 @@
 angular.module('eventsMap', ['calendar', 'eventMapType'])
   .component('eventsMap', {
     templateUrl: 'components/event/events-map/event-map.template.html',
-    controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventList',
-      function($scope, $routeParams, $http, eventMapService, eventList) {
+    controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventListService',
+      function($scope, $routeParams, $http, eventMapService, eventListService) {
         $scope.mapDanni = eventMapService.th_;
 
         this.lat = $routeParams.lat;
@@ -52,7 +52,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         $scope.map.addLayer(Streets);
         $scope.map.setView(new L.LatLng($scope.mapDanni.x, $scope.mapDanni.y), $scope.mapDanni.z);
 
-        $scope.eventL = eventList.th;
+        $scope.eventL = eventListService.th;
         $scope.eventL.clear();
         $scope.eventL.Item_type_menu = this.type;
         $scope.eventL.CalendarValue[0] = this.date_start;

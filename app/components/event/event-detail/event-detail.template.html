@@ -1,4 +1,4 @@
-<div class="page" ng-repeat="event in eventList | filter:{id:$ctrl.id}">
+<div class="page" ng-repeat="event in eventListService | filter:{id:$ctrl.id}">
     <div class="row">
         <div class="page-header text-center">
             <h3>{{event.name}}</h3>
