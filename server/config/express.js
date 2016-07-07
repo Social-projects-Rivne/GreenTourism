@@ -1,10 +1,10 @@
 var config = require('./config');
 var express = require('express');
 var morgan = require('morgan');  // Logger
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
 
 module.exports = function() {
   var app = express();
@@ -15,11 +15,11 @@ module.exports = function() {
     // app.use(compress());
   }
 
+  app.use(cookieParser());
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   // app.use(methodOverride());
-
-  // app.use(passport.initialize());
 
   app.use(session({
     saveUninitialized: true,
@@ -27,9 +27,17 @@ module.exports = function() {
     secret: config.sessionSecret
   }));
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   // Routes
-  app.use('/api/places', require('../app/routes/places'));
-  app.use('/api/users', require('../app/routes/users'));
+  var router = express.Router();  // eslint-disable-line new-cap
+
+  router.use('/', require('../app/routes/auth'));
+  router.use('/places', require('../app/routes/places'));
+  router.use('/users', require('../app/routes/users'));
+
+  app.use('/api', router);
 
   app.use(express.static('./client'));
 
