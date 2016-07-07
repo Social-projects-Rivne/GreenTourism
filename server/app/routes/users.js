@@ -4,7 +4,7 @@ var router = express.Router();
 var defaultController = require('../controllers/default-crud-controller');
 //var authController = require('../auth/auth');
 
-var User = require('../models/user');
+var User = require('mongoose').model('User');
 
 router.route('/')
   // TODO: Make users can't see user list!

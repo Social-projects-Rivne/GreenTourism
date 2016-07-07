@@ -5,7 +5,7 @@ var defaultController = require('../controllers/default-crud-controller');
 //var defaultControllerWithOwner = require('../controllers/default-crud-controller-with-owner');
 //var authController = require('../auth/auth');
 
-var Place = require('../models/place');
+var Place = require('mongoose').model('Place');
 
 router.route('/')
   .get(defaultController.list(Place))
