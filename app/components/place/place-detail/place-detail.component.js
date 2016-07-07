@@ -5,7 +5,9 @@ angular.module('placeDetail', [])
       place: '<'
     },
     controller: function placeDetailCtrl(mapFactory) {
-        this.map1 = mapFactory.showMap();
+        map1 = L.map('map', {
+        center: [50.6234, 26.2189],
+        zoom: 14
         Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
