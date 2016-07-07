@@ -8,6 +8,7 @@ angular.module('placeDetail', [])
         map1 = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
+        });
         Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
