@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-xs-12 no-padding">
                     <div class="col-xs-4 place-wrapper" ng-repeat="event in closeEvent | limitTo:3">
-                        <a href="#/events/{{event.id}}/{{event.date_start}}">
+                        <a href="#!/events/{{event.id}}/{{event.date_start}}">
                         <div class="place-container">
                             <img src="assets{{event.attachments.photo[0]}}" style="width : 100%; height: 200px;" alt="{{event.name}}" title="{{event.name}}">
                             <h6>{{event.name}}</h6>

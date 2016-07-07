@@ -1,4 +1,4 @@
-angular.module('greenTourism')
+angular.module('trackModel', ['restangular'])
   .factory('Track', ['Restangular', function Track(Restangular) {
     var Track = Restangular.service('tracks');
 

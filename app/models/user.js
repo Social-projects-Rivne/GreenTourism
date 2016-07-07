@@ -1,4 +1,4 @@
-angular.module('greenTourism')
+angular.module('userModel', ['restangular'])
   .factory('User', ['Restangular', function User(Restangular) {
     var User = Restangular.service('users');
 

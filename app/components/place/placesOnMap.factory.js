@@ -35,19 +35,21 @@ angular.module('mapModule')
     }
   };
 
-  placesOnMap.showPlaces = function(input) {
+   placesOnMap.showPlaces = function(input) {
     var i;
     var j;
-
     mainGroup.addTo(map);
-
     for (i = 0; i < types.length; i++) {
       if (input) {
         if (types[i].type == input) {
           for (j in places) {
             if (places[j].type == input) {
               marker(places[j].latitude, places[j].longitude, types[i].icon)
-                .addTo(groups[i]);
+                  .addTo(groups[i])
+                  .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
+                      "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                  .openPopup();
+
             }
           }
         }
@@ -55,12 +57,19 @@ angular.module('mapModule')
         for (j in places) {
           if (places[j].type == types[i].type) {
             marker(places[j].latitude, places[j].longitude, types[i].icon)
-              .addTo(groups[i]);
+              .addTo(groups[i])
+                .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
+                    "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                .openPopup();
           }
         }
       }
       mainGroup.checkIn(groups[i]);
       groups[i].addTo(map);
+      map.on('click move', function(){
+      map.closePopup()
+      });
+
     }
   };
 

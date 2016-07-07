@@ -1,4 +1,4 @@
-angular.module('greenTourism')
+angular.module('placeModel', ['restangular'])
   .factory('Place', ['Restangular', function Place(Restangular) {
     var Place = Restangular.service('places');
 
