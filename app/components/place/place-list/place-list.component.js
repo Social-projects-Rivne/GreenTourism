@@ -160,6 +160,8 @@ angular.module('placeList', ['filterMapType'])
 
 
       /*** START tracks controller ***/
+      var activeLiCounter = 4;
+
       this.tracksType = mapMarkingTypes.tracksType;
       Track.getList().then(function(result) {
         tracks = result;
@@ -169,14 +171,27 @@ angular.module('placeList', ['filterMapType'])
       this.showSpecificTracks = function(tracksType) {
         var element = angular.element('#' + tracksType);
         var checkedIcon = angular.element('#gi' + tracksType);
+        var allGI = angular.element('#tracksFilter li span.glyphicon');
+        var checkAllElement = angular.element('#allTracks');
 
         if (element.hasClass('active')) {
           element.removeClass('active');
           checkedIcon.removeClass('glyphicon-ok');
+          activeLiCounter -= 1;
+          console.log(activeLiCounter);
+          if (activeLiCounter === 0) {
+            allGI.removeClass('glyphicon-ok');
+            checkAllElement.removeClass('active');
+          }
           placesOnMap.removeTracks(tracksType);
         } else {
           element.addClass('active');
           checkedIcon.addClass('glyphicon-ok');
+          activeLiCounter++;
+          if (activeLiCounter === 4) {
+            allGI.addClass('glyphicon-ok');
+            checkAllElement.addClass('active');
+          }
           Track.getList({type: tracksType}).then(function(result) {
             tracks = result;
             placesOnMap.showTracks(tracks);
@@ -191,10 +206,12 @@ angular.module('placeList', ['filterMapType'])
         if (checkAllElement.hasClass('active')) {
           allLiElements.removeClass('active');
           allGI.removeClass('glyphicon-ok');
+          activeLiCounter = 0;
           placesOnMap.removeAllTracks();
         } else {
           allLiElements.addClass('active');
           allGI.addClass('glyphicon-ok');
+          activeLiCounter = 4;
           Track.getList().then(function(result) {
             tracks = result;
             placesOnMap.showTracks(tracks);
