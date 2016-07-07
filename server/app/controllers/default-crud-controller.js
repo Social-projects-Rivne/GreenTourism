@@ -1,17 +1,19 @@
-// TODO: Add limit and offset
-// TODO: Add query filtering
 exports.list = function(Model) {
   return function(req, res) {
     var limit = req.query.limit;
     delete req.query.limit;
 
-    Model.find(req.query, function(err, records) {
-      if (err) {
-        res.status(400).json(err);
-      } else {
-        res.json(records);
-      }
-    }).limit(limit);
+    var skip = req.query.skip;
+    delete req.query.skip;
+
+    Model.find(req.query, null, {limit: limit, skip: skip},
+        function(err, records) {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.json(records);
+          }
+        });
   };
 };
 
@@ -50,7 +52,9 @@ exports.update = function(Model) {
         res.status(400).json(err);
       } else {
         for (var key in req.body) {
-          record.set(key, req.body[key]);
+          if ({}.hasOwnProperty.call(req.body, key)) {
+            record.set(key, req.body[key]);
+          }
         }
 
         record.save(function(err) {
