@@ -1,22 +1,21 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router(); // eslint-disable-line new-cap
 
-var defaultController = require('../controllers/default-crud-controller');
+var Place = require('../models/place');
+var placeController = require('../controllers/default-crud-controller')(Place);
 //var defaultControllerWithOwner = require('../controllers/default-crud-controller-with-owner');
 //var authController = require('../auth/auth');
 
-var Place = require('../models/place');
-
 router.route('/')
-  .get(defaultController.list(Place))
+  .get(placeController.list)
   // TODO: Restrict creating places to logged in users only
-  .post(defaultController.create(Place));
+  .post(placeController.create);
 
 router.route('/:id')
-  .get(defaultController.show(Place))
+  .get(placeController.show)
   // TODO: Restrict updating places to logged in users only
-  .put(defaultController.update(Place))
+  .put(placeController.update)
   // TODO: Restrict deleting places to logged in users only
-  .delete(defaultController.delete(Place));
+  .delete(placeController.delete);
 
 module.exports = router;

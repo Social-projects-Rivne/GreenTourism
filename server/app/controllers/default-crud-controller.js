@@ -1,5 +1,7 @@
-exports.list = function(Model) {
-  return function(req, res) {
+module.exports = function(Model) {
+  var controller = {};
+
+  controller.list = function(req, res) {
     var limit = req.query.limit;
     delete req.query.limit;
 
@@ -15,10 +17,8 @@ exports.list = function(Model) {
           }
         });
   };
-};
 
-exports.show = function(Model) {
-  return function(req, res) {
+  controller.show = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
         res.status(404).json(err);
@@ -27,10 +27,8 @@ exports.show = function(Model) {
       }
     });
   };
-};
 
-exports.create = function(Model) {
-  return function(req, res) {
+  controller.create = function(req, res) {
     var record = new Model(req.body);
 
     record.save(function(err) {
@@ -42,11 +40,8 @@ exports.create = function(Model) {
       }
     });
   };
-};
 
-// TODO: Show error if wrong fields sent
-exports.update = function(Model) {
-  return function(req, res) {
+  controller.update = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
         res.status(400).json(err);
@@ -67,10 +62,8 @@ exports.update = function(Model) {
       }
     });
   };
-};
 
-exports.delete = function(Model) {
-  return function(req, res) {
+  controller.delete = function(req, res) {
     Model.findByIdAndRemove(req.params.id, function(err) {
       if (err) {
         res.status(400).json(err);
@@ -80,4 +73,6 @@ exports.delete = function(Model) {
       }
     });
   };
+
+  return controller;
 };

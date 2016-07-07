@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 var SALT_ROUNDS = 5;
 
 var UserSchema = new Schema({
-  email: {
+  email: {  // TODO: Add email validation
     type: String,
     unique: true,
     required: true
