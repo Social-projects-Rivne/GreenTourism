@@ -20,7 +20,7 @@ var imagemin = require('gulp-imagemin');
 //var templateCache = require('gulp-angular-templatecache');
 
 var DEST = 'dist/';  // Destination folder
-var jsFiles = ['./**/*.js', '!node_modules/**', '!app/bower_components/**',
+var jsFiles = ['./**/*.js', '!node_modules/**', '!client/bower_components/**',
                '!gulpfile.js'];
 
 // Error notification
@@ -71,21 +71,21 @@ gulp.task('ng-annotate', function() {
 
 // Compile less files
 gulp.task('less', function() {
-  return gulp.src('app/assets/less/main.less')
+  return gulp.src('client/assets/less/main.less')
     .pipe(plumber({errorHandler: onError}))
     .pipe(less())
-    .pipe(gulp.dest('app/assets/css'))
+    .pipe(gulp.dest('client/assets/css'))
     .pipe(notify('Less compiled!'));
 });
 
 // Add bower deps to index.html
 gulp.task('bower', function() {
-  return gulp.src('app/index.html')
+  return gulp.src('client/index.html')
     .pipe(plumber({errorHandler: onError}))
     .pipe(wiredep({
-      directory: 'app/bower_components'
+      directory: 'client/bower_components'
     }))
-    .pipe(gulp.dest('app/'))
+    .pipe(gulp.dest('client/'))
     .pipe(notify('Bower dependencies injected!'));
 });
 
@@ -98,7 +98,7 @@ gulp.task('clean', function() {
 
 // Build index.html, css, js
 gulp.task('build-assets', ['bower', 'less'], function() {
-  return gulp.src('app/*.html')
+  return gulp.src('client/*.html')
       .pipe(useref())
       .pipe(gulpif('*.js', ngAnnotate()))
       .pipe(gulpif('*.js', uglify()))
@@ -111,7 +111,7 @@ gulp.task('build-assets', ['bower', 'less'], function() {
 
 // Copy all images and minify them
 gulp.task('copy-images', function() {
-  return gulp.src('app/assets/img/**/*', {base: 'app'})
+  return gulp.src('client/assets/img/**/*', {base: 'client'})
     .pipe(imagemin())
     .pipe(gulp.dest(DEST))
     .pipe(notify({message: 'Images copied!', onLast: true}));
@@ -119,8 +119,8 @@ gulp.task('copy-images', function() {
 
 // Copy all angular templates and minify them
 gulp.task('copy-templates', function() {
-  return gulp.src(['app/components/**/*.html', 'app/shared/**/*.html'],
-                  {base: 'app'})
+  return gulp.src(['client/components/**/*.html', 'client/shared/**/*.html'],
+                  {base: 'client'})
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(DEST))
     .pipe(notify({message: 'Templates copied!', onLast: true}));
@@ -128,16 +128,16 @@ gulp.task('copy-templates', function() {
 
 // Copy all JSON fixtures
 gulp.task('copy-JSON', function() {
-  return gulp.src(['app/components/**/*.json', 'app/shared/**/*.json'],
-                   {base: 'app'})
+  return gulp.src(['client/components/**/*.json', 'client/shared/**/*.json'],
+                   {base: 'client'})
     .pipe(gulp.dest(DEST))
     .pipe(notify({message: 'JSON files copied!', onLast: true}));
 });
 
 // Copy all fonts and icons
 gulp.task('copy-fonts', function() {
-  return gulp.src(['app/bower_components/bootstrap/dist/fonts/*',
-                   'app/bower_components/font-awesome/fonts/*'])
+  return gulp.src(['client/bower_components/bootstrap/dist/fonts/*',
+                   'client/bower_components/font-awesome/fonts/*'])
     .pipe(gulp.dest(DEST + 'fonts/'))
     .pipe(notify({message: 'Fonts and icons copied!', onLast: true}));
 });
@@ -155,6 +155,6 @@ gulp.task('build', function(cb) {
 
 // Automatically recompile less and index.html
 gulp.task('watch', function() {
-  gulp.watch('app/assets/less/**/*.less', ['less']);
+  gulp.watch('client/assets/less/**/*.less', ['less']);
   gulp.watch('bower.json', ['bower']);
 });
