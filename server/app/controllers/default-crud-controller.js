@@ -1,19 +1,24 @@
-// TODO: Add limit and offset
-// TODO: Add query filtering
-exports.list = function(Model) {
-  return function(req, res) {
-    Model.find(req.query, function(err, records) {
-      if (err) {
-        res.status(400).json(err);
-      } else {
-        res.json(records);
-      }
-    });
-  };
-};
+module.exports = function(Model) {
+  var controller = {};
 
-exports.show = function(Model) {
-  return function(req, res) {
+  controller.list = function(req, res) {
+    var limit = req.query.limit;
+    delete req.query.limit;
+
+    var skip = req.query.skip;
+    delete req.query.skip;
+
+    Model.find(req.query, null, {limit: limit, skip: skip},
+        function(err, records) {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.json(records);
+          }
+        });
+  };
+
+  controller.show = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
         res.status(404).json(err);
@@ -22,10 +27,8 @@ exports.show = function(Model) {
       }
     });
   };
-};
 
-exports.create = function(Model) {
-  return function(req, res) {
+  controller.create = function(req, res) {
     var record = new Model(req.body);
 
     record.save(function(err) {
@@ -37,17 +40,16 @@ exports.create = function(Model) {
       }
     });
   };
-};
 
-// TODO: Show error if wrong fields sent
-exports.update = function(Model) {
-  return function(req, res) {
+  controller.update = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
         res.status(400).json(err);
       } else {
         for (var key in req.body) {
-          record.set(key, req.body[key]);
+          if ({}.hasOwnProperty.call(req.body, key)) {
+            record.set(key, req.body[key]);
+          }
         }
 
         record.save(function(err) {
@@ -60,10 +62,8 @@ exports.update = function(Model) {
       }
     });
   };
-};
 
-exports.delete = function(Model) {
-  return function(req, res) {
+  controller.delete = function(req, res) {
     Model.findByIdAndRemove(req.params.id, function(err) {
       if (err) {
         res.status(400).json(err);
@@ -73,4 +73,6 @@ exports.delete = function(Model) {
       }
     });
   };
+
+  return controller;
 };
