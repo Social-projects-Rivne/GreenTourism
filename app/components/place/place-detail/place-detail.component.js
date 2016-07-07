@@ -5,7 +5,7 @@ angular.module('placeDetail', [])
       place: '<'
     },
     controller: function placeDetailCtrl(mapFactory) {
-        this.map = L.map('map1', {
+        this.map = L.map('map', {
         center: [50.6234, 26.2189],
         zoom: 14
         });
