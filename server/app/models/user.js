@@ -13,11 +13,11 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  first_name: {  // eslint-disable-line camelcase
+  firstName: {
     type: String,
     required: true
   },
-  last_name: {  // eslint-disable-line camelcase
+  lastName: {
     type: String,
     required: true
   }
