@@ -57,7 +57,22 @@
     }
   }
   .welcome-page-section-img {
+    max-width: 585px;
     height: 375px;
+    max-height: 375px;
     padding: 0 0;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .welcome-page-section-img-name {
+      position: absolute; opacity: 0.5; background: #3da268; font-size:20px; color: #fff; padding: 0 4px; font-weight: bold;top: 0px; right: 0px;
+    }
+    .welcome-page-section-img-location {
+      position: absolute; margin: 0; opacity: 0.5; background: #3da268; font-size:20px; color: #fff; padding: 0 4px; font-weight: bold;bottom: 0px; right: 0px;
+    }
+    a {
+      color: @base-white-color;
+    }
   }
 }
