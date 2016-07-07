@@ -2,13 +2,16 @@
 // TODO: Add query filtering
 exports.list = function(Model) {
   return function(req, res) {
+    var limit = req.query.limit;
+    delete req.query.limit;
+
     Model.find(req.query, function(err, records) {
       if (err) {
         res.status(400).json(err);
       } else {
         res.json(records);
       }
-    });
+    }).limit(limit);
   };
 };
 
