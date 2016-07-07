@@ -50,8 +50,8 @@ angular.module('placeList', ['filterMapType'])
         places = result;
         counter = 1;
         for (i = 0; i < places.length; i++) {
-          placeObject = {id: places[i].id, latitude: places[i].latitude,
-          longitude: places[i].longitude, type: places[i].type};
+          placeObject = {id: places[i]._id, latitude: places[i].latitude,
+             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
 
           arrPlaces.push(placeObject);
         }
