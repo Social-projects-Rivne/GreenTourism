@@ -11,7 +11,6 @@ angular.module('placeDetail', [])
         });
         Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        });
         this.map1.addLayer(Streets);
 
         this.location = this.place.getLocation();
