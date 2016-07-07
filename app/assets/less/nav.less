@@ -2,52 +2,44 @@
   NAVBAR
 ****************************************************************/
 .navtop {
-  padding-top: 5px;
-  a {
-    color: @base-green-color;
-  }
-}
-
-.navbar-right.navtop {
-  text-align: right;
-  padding-right: 25px;
+  color: @brand-dark;
 }
 
 .logo {
   text-align: center;
-  a {
-    font-size: 28px;
-    font-weight: bolder;
-  }
-}
-
-.footer-logo {
-  font-size: 26px;
   font-weight: bolder;
-  color: @base-green-color;
+  padding-top: 5px;
+  a {
+    color: @brand-dark;
+  }
 }
 
 /***************************************************************
   FOOTER
 ****************************************************************/
-
 .footer {
-  height: 170px;
   background-color: @footer-bg-color;
+  height: 170px;
   .row div {
     padding: 30px 0 0 40px;
+    ul {
+      padding: 0;
+      list-style-type: none;
+      a {
+        color: @brand-dark;
+      }
+    }
   }
   p {
-    font-size: 20px;
-    color: @base-white-color;
+    font-size: 18px;
+    color: @brand-light;
     span {
-      color: @base-green-color;
+      color: @brand-dark;
     }
   }
-  ul {
-    list-style-type: none;
-    a {
-      color: @base-green-color;
-    }
+  .footer-logo {
+    font-size: 24px;
+    font-weight: bolder;
+    color: @brand-dark;
   }
 }

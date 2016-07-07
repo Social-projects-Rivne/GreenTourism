@@ -2,7 +2,7 @@
   background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
   .parallax-background-opacity {
     opacity: 0.5;
-    background: @base-green-color;
+    background: @brand-dark;
     height: 100vh;
   }
   .aligncenter {
@@ -18,61 +18,74 @@
       font-size: 70px;
       font-weight: bold;
       text-align: center;
-      color: @base-white-color;
+      color: @brand-light;
     }
   }
   a {
     font-size: 70px;
     text-align: center;
     display: block;
-    color: @base-white-color;
+    color: @brand-light;
     bottom: 5%;
     .aligncenter;
   }
 }
-#main-page-content {
+
+@supports (-ms-accelerator:true) {
+  .parallax a{
+    display: none;
+  }
+}
+
+#welcome-page-content {
+  img {
+    width: 100%;
+  }
+  .welcome-page-section-img {
+    padding: 0;
+    .name-location {
+      font-size:20px;
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      background-color: rgba(61,162,104,0.5);
+      position: absolute;
+    }
+    .welcome-page-section-img-name {
+      .name-location;
+      top: 4px;
+      right: 4px;
+    }
+    .welcome-page-section-img-location {
+      .name-location;
+      bottom: 4px;
+      right: 4px;
+    }
+  }
   .welcome-page-section-text {
-    max-width: 585px;
-    height: 375px;
-    background-color: #f7f4ea;
-    border-bottom: 1px @footer-bg-color solid;
+    text-align: justify;
+    min-height: 375px;
     padding: 20px 40px 40px 40px;
     h2 {
       font-weight: bold;
       margin-bottom: 20px;
       text-align: center;
       a {
-        color: @base-green-color;
+        color: @footer-bg-color;
       }
     }
-    p {
-      height: 200px;
-    }
     div {
-      text-align: right;
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
       a {
         font-weight: bold;
-        color: @base-green-color;
+        color: @brand-dark;
       }
     }
   }
-  .welcome-page-section-img {
-    max-width: 585px;
-    height: 375px;
-    max-height: 375px;
-    padding: 0 0;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    .welcome-page-section-img-name {
-      position: absolute; opacity: 0.5; background: #3da268; font-size:20px; color: #fff; padding: 0 4px; font-weight: bold;top: 0px; right: 0px;
-    }
-    .welcome-page-section-img-location {
-      position: absolute; margin: 0; opacity: 0.5; background: #3da268; font-size:20px; color: #fff; padding: 0 4px; font-weight: bold;bottom: 0px; right: 0px;
-    }
-    a {
-      color: @base-white-color;
-    }
+  .row {
+    background-color: #f7f4ea;
+    border-bottom: 1px @footer-bg-color solid;
   }
 }

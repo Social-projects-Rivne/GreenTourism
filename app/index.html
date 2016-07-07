@@ -120,55 +120,68 @@
 </head>
 
 <body>
-<div class="wrapper">
-  <header>
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-4 navtop">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i></a>
-            <ul class="dropdown-menu nav">
+
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header hidden-sm hidden-md hidden-lg">
+        <button type="button" class="navbar-toggle collapsed navtop" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar" ></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#!/">GreenTourism</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
               <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li>
               <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
             </ul>
-          </div>
+          </li>
+        </ul>
 
-          <div class="col-xs-4 navtop logo"><a href="#!/">GreenTourism</a></div>
-          <div class="col-xs-4 navbar-right navtop">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <ul class="dropdown-menu nav">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
               <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Places</a></li>
               <li ng-class="{ active: nav.isActive('/tracks')}"><a href="#!/tracks">Tracks</a></li>
               <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
               <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main ng-controller="MainCtrl as main" id="main">
-    <div ng-if="!main.routeChangeError" ng-view=""></div>
-    <div ng-if="main.routeChangeError">
-      <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
-      <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
-      <div ng-if="main.statusCode == null">
-        <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+          </li>
+        </ul>
+        <div class="hidden-xs logo"><a href="#!/">GreenTourism</a></div>
       </div>
     </div>
-  </main>
-</div>
+  </nav>
+</header>
+
+<main ng-controller="MainCtrl as main" id="main">
+  <div ng-if="!main.routeChangeError" ng-view=""></div>
+  <div ng-if="main.routeChangeError">
+    <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
+    <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
+    <div ng-if="main.statusCode == null">
+      <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+    </div>
+  </div>
+</main>
 
 <footer class="footer">
   <div class="container">
     <div class="row">
-      <div class="col-xs-9 navtop">
-        <a href="#/" class="footer-logo">GreenTourism</a>
+      <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+        <a class="footer-logo" href="#/">GreenTourism</a>
         <p>© 2001 - 2016 <span>The GreenTourism Team</span></p>
         <p><a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank">We are on GitHub</a></p>
       </div>
-      <div class="col-xs-3">
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
         <ul>
           <li><h4><a href="#">Twitter</a></h4></li>
           <li><h4><a href="#">Google+</a></h4></li>
