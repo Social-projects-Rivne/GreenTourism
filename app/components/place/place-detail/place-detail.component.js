@@ -5,7 +5,7 @@ angular.module('placeDetail', [])
       place: '<'
     },
     controller: function placeDetailCtrl(mapFactory) {
-        map1 = L.map('map', {
+        map1 = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
         Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
