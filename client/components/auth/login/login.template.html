@@ -3,15 +3,16 @@
 		<h2>Green tourism</h2>
 		<h5 class="error">{{$ctrl.message}}</h5>
 	</div>
-	<form class="well well-sm" role="form" name="signin" novalidate ng-submit="$ctrl.login(user)">
+  
+	<form class="well well-sm" role="form" name="login" novalidate ng-submit="$ctrl.login(user)">
 		<div class="input-group margin-bottom-sm">
 			<!-- <label for="email">Email:</label> -->
 			<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
 			<input type="email" class="form-control" name="email"  ng-model="user.email" placeholder="Email" required>
 		</div>
-		<div class="error" ng-show="signin.email.$invalid && signin.email.$dirty">
-			<span ng-show="signin.email.$error.email">Please input correct email</span>
-			<span ng-show="signin.email.$error.required">Email is required</span>
+		<div class="error" ng-show="login.email.$invalid && login.email.$dirty">
+			<span ng-show="login.email.$error.email">Please input correct email</span>
+			<span ng-show="login.email.$error.required">Email is required</span>
 		</div>
 		<br/>
 		<div class="input-group margin-bottom-sm">
@@ -19,10 +20,10 @@
 			<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
 			<input type="password" name="password" class="form-control" id="password" ng-model="user.password" placeholder="Password" required>
 		</div>
-		<div class="error" ng-show="signin.password.$dirty">
-			<span ng-show="signin.password.$error.required">Password is required</span>
+		<div class="error" ng-show="login.password.$dirty">
+			<span ng-show="login.password.$error.required">Password is required</span>
 		</div>
-		
+
 		<div class="checkbox">
 			<label><input type="checkbox"> Remember me</label>
 		</div>
