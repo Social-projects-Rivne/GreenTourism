@@ -4,15 +4,21 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: ["$route", "mapFactory", function placeDetailCtrl($route, mapFactory) {
-      this.map = mapFactory.showMap();
-      this.location = this.place.getLocation();
-      this.marker = L.marker(this.location).addTo(this.map);
+    controller: function placeDetailCtrl(mapFactory) {
+        this.map = mapFactory.showMap();
+        Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        });
+        this.map.addLayer(Streets);
 
-      this.marker.bindPopup('<div><h3>' + this.place.name +
-      '</h3><a><img class="marker-image" src="' + this.place.photo[0] +
-      '" /></a><br />').openPopup();
+        this.location = this.place.getLocation();
+        this.marker = L.marker(this.location).addTo(this.map);
 
-      this.map.setView(this.location);
-    }]
+        this.marker.bindPopup('<div><h3>' + this.place.name +
+        '</h3><a><img class="marker-image" src="assets/' + this.place.photo[0] +
+        '" /></a><br />').openPopup();
+
+        this.map.setView(this.location);
+    }
   });
+
