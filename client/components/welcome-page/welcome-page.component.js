@@ -5,7 +5,7 @@ angular.module('welcomePage', [])
       var self = this;
 
       Place.getList({sort: 'rate', skip: 18}).then(function(result) {
-        self.popplace = result;
+        self.popularPlaces = result;
       });
 
       // Animation on click arrow
