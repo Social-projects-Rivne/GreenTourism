@@ -1,10 +1,8 @@
 angular.module('auth').component('signup', {
   templateUrl: 'components/auth/signup/signup.template.html',
   controller: ['User', '$location', function signupCtrl(User, $location) {
-    this.newUser = {};
-
-    this.signup = function() {
-      User.post(this.newUser).then(function() {
+    this.signup = function(user) {
+      User.post(user).then(function() {
         console.log('Object saved OK');
         $location.path('/profile');
       }, function(err) {

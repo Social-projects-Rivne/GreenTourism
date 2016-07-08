@@ -1,33 +1,31 @@
 <div class="container">
-  <form name="form" class="well" role="form" novalidate>
+  <form name="form" class="well" role="form" novalidate ng-submit="$ctrl.signup($ctrl.user)">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="$ctrl.newUser.firstName" name="firstname" placeholder="First name" required="" />
+          <input type="text" class="form-control" ng-model="$ctrl.user.firstName" name="firstname" placeholder="First name" required="" />
           <p class="help-block">Help text here.</p>
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="$ctrl.newUser.lastName" name="lastname" placeholder="Last name" required="" />
+          <input type="text" class="form-control" ng-model="$ctrl.user.lastName" name="lastname" placeholder="Last name" required="" />
           <p class="help-block">Help text here.</p>
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <input type="email" class="form-control" ng-model="$ctrl.newUser.email" name="email" placeholder="Email" required="" />
+      <input type="email" class="form-control" ng-model="$ctrl.user.email" name="email" placeholder="Email" required="" />
       <p class="help-block">Help text here.</p>
     </div>
 
     <div class="form-group">
-      <input type="password" class="form-control" ng-model="$ctrl.newUser.password" name="password" placeholder="Password" required="" />
+      <input type="password" class="form-control" ng-model="$ctrl.user.password" name="password" placeholder="Password" required="" />
       <p class="help-block">Help text here.</p>
     </div>
 
-    <input type="submit" class="btn btn-default" ng-click="$ctrl.signup($ctrl.newUser)" value="Submit" />
+    <input type="submit" class="btn btn-default" value="Signup" />
   </form>
-
-  <pre>newUser = {{$ctrl.newUser | json}}</pre>
 </div>

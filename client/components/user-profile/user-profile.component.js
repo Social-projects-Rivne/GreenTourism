@@ -2,13 +2,9 @@ angular.module('userProfile', []);
 
 angular.module('userProfile').component('userProfile', {
   templateUrl: 'components/user-profile/user-profile.template.html',
-  controller: ["User", function(User) {
-    this.user = new User({
-      firstName: 'John',
-      lastName: 'Snow',
-      nickname: 'johnsnow',
-      avatar: 'assets/img/user-profile/avatar.png'
-    });
+  controller: ['User', '$rootScope', function(User, $rootScope) {
+    console.log($rootScope.globals.currentUser);
+    this.user = $rootScope.globals.currentUser;
 
     this.tab = 1;
 
