@@ -1,11 +1,12 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ["placesOnMap", "placesType", "Place", function(placesOnMap, placesType, Place) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', function(placesOnMap, mapMarkingTypes, Place, Track) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
       var places = [];
+      var tracks = [];
       var placeObject = {};
       var counter;
 
@@ -39,10 +40,10 @@ angular.module('placeList', ['filterMapType'])
       };
       //-----END ADD Place-----
 
-      this.types = placesType;
+      this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
       placesOnMap.removePlaces();
       placesOnMap.showMap();
-      placesOnMap.initGroupsOfPlaces(this.types);
+      placesOnMap.initGroupsOfPlaces(this.placesType);
 
       //---START---- ShowPlacesOnLoad
       // TODO: Move this inside resolve
@@ -84,7 +85,7 @@ angular.module('placeList', ['filterMapType'])
           counter++;
           spanCheck.addClass('glyphicon glyphicon-ok');
 
-          if (counter == this.types.length)
+          if (counter == this.placesType.length)
             $('#all span').addClass('glyphicon glyphicon-ok');
 
           Place.getList({type: input}).then(function(result) {
@@ -113,8 +114,8 @@ angular.module('placeList', ['filterMapType'])
 
           spanCheck.removeClass('glyphicon glyphicon-ok');
 
-          for (i = 0; i < this.types.length; i++) {
-            $('#' + this.types[i].type + ' span')
+          for (i = 0; i < this.placesType.length; i++) {
+            $('#' + this.placesType[i].type + ' span')
               .removeClass('glyphicon glyphicon-ok');
           }
           placesOnMap.removePlaces();
@@ -127,8 +128,8 @@ angular.module('placeList', ['filterMapType'])
 
           spanCheck.addClass('glyphicon glyphicon-ok');
 
-          for (i = 0; i < this.types.length; i++) {
-            $('#' + this.types[i].type + ' span')
+          for (i = 0; i < this.placesType.length; i++) {
+            $('#' + this.placesType[i].type + ' span')
               .addClass('glyphicon glyphicon-ok');
           }
 
@@ -150,11 +151,71 @@ angular.module('placeList', ['filterMapType'])
       //----END---- FilterCheckAll
       this.places=arrPlaces;
       //Don't hide dropdown if clicked
-      $('#dropdownFilterCategory .dropdown-menu').on({
+      $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
         }
 
       });
+
+
+      /*** START tracks controller ***/
+      var activeLiCounter = 4;
+
+      this.tracksType = mapMarkingTypes.tracksType;
+      Track.getList().then(function(result) {
+        tracks = result;
+        placesOnMap.showTracks(tracks);
+      });
+
+      this.showSpecificTracks = function(tracksType) {
+        var element = angular.element('#' + tracksType);
+        var checkedIcon = angular.element('#gi' + tracksType);
+        var allGI = angular.element('#tracks-filter li span.glyphicon');
+        var checkAllElement = angular.element('#all-tracks');
+
+        if (element.hasClass('active')) {
+          element.removeClass('active');
+          checkedIcon.removeClass('glyphicon-ok');
+          activeLiCounter -= 1;
+          if (activeLiCounter === 0) {
+            allGI.removeClass('glyphicon-ok');
+            checkAllElement.removeClass('active');
+          }
+          placesOnMap.removeTracks(tracksType);
+        } else {
+          element.addClass('active');
+          checkedIcon.addClass('glyphicon-ok');
+          activeLiCounter++;
+          if (activeLiCounter === 4) {
+            allGI.addClass('glyphicon-ok');
+            checkAllElement.addClass('active');
+          }
+          Track.getList({type: tracksType}).then(function(result) {
+            tracks = result;
+            placesOnMap.showTracks(tracks);
+          });
+        }
+      };
+
+      this.checkAllTracks = function() {
+        var checkAllElement = angular.element('#all-tracks');
+        var allLiElements = angular.element(document).find('#tracks-filter li > a');
+        var allGI = angular.element('#tracks-filter li span.glyphicon');
+        if (checkAllElement.hasClass('active')) {
+          allLiElements.removeClass('active');
+          allGI.removeClass('glyphicon-ok');
+          activeLiCounter = 0;
+          placesOnMap.removeAllTracks();
+        } else {
+          allLiElements.addClass('active');
+          allGI.addClass('glyphicon-ok');
+          activeLiCounter = 4;
+          Track.getList().then(function(result) {
+            tracks = result;
+            placesOnMap.showTracks(tracks);
+          });
+        }
+      };
     }]
   });

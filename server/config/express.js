@@ -30,6 +30,7 @@ module.exports = function() {
   // Routes
   app.use('/api/places', require('../app/routes/places'));
   app.use('/api/users', require('../app/routes/users'));
+  app.use('/api/tracks', require('../app/routes/tracks'));
 
   app.use(express.static('./client'));
 

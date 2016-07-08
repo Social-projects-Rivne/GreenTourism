@@ -1,6 +1,7 @@
 angular.module('greenTourism')
-  .factory('placesType', function() {
-    var placesType = [
+  .factory('mapMarkingTypes', function() {  //Renamed factory to mapMarkingTypes
+    var mapMarkingTypes = {};
+    mapMarkingTypes.placesType = [
       {
         type: 'camp',
         name: 'Camp',
@@ -27,5 +28,28 @@ angular.module('greenTourism')
         icon: 'assets/img/places/marker/violet.png'
       }
     ];
-    return placesType;
+
+    mapMarkingTypes.tracksType = [
+      {
+        type: 'bicycle',
+        name: 'Bicycle',
+        color: '#2f2fd0'
+      },
+      {
+        type: 'car',
+        name: 'Car',
+        color: '#ff0a47'
+      },
+      {
+        type: 'walking',
+        name: 'Walking',
+        color: '#f9ff0b'
+      },
+      {
+        type: 'mixed',
+        name: 'Mixed',
+        color: '#0aff0a'
+      }
+    ];
+    return mapMarkingTypes;
   });
