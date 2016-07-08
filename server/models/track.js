@@ -5,11 +5,11 @@ var TrackSchema = new Schema({
   id: Number,
   name: String,
   description: String,
-  track_points: Array,
+  trackPoints: Array,
   type: String,
   photo: Array,
   userId: Number,
-  track_rate: Number,
+  trackRate: Number,
   color: String
 });
 

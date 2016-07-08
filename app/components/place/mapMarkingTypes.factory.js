@@ -31,8 +31,8 @@ angular.module('greenTourism')
 
     mapMarkingTypes.tracksType = [
       {
-        type: 'bycicle',
-        name: 'Bycicle',
+        type: 'bicycle',
+        name: 'Bicycle',
         color: '#2f2fd0'
       },
       {

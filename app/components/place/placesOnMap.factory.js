@@ -99,7 +99,7 @@ angular.module('mapModule')
   placesOnMap.showTracks = function(tracksArray) {
     var trackForAdding;
     for (var i = 0; i < tracksArray.length; i++) {
-      trackForAdding = polyline(tracksArray[i].track_points, tracksArray[i].color).addTo(map);
+      trackForAdding = polyline(tracksArray[i].trackPoints, tracksArray[i].color).addTo(map);
       tracks.push([trackForAdding, tracksArray[i].type]);
     }
   };

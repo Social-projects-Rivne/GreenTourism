@@ -40,7 +40,7 @@ angular.module('placeList', ['filterMapType'])
       };
       //-----END ADD Place-----
 
-      this.placesType = mapMarkingTypes.placesType;  //DG: Rename types to placesType
+      this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
       placesOnMap.removePlaces();
       placesOnMap.showMap();
       placesOnMap.initGroupsOfPlaces(this.placesType);
@@ -151,7 +151,7 @@ angular.module('placeList', ['filterMapType'])
       //----END---- FilterCheckAll
       this.places=arrPlaces;
       //Don't hide dropdown if clicked
-      $('.dropdown-menu').on({  // DG: change selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+      $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
         }
