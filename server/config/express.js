@@ -36,6 +36,7 @@ module.exports = function() {
   router.use('/', require('../app/routes/auth'));
   router.use('/places', require('../app/routes/places'));
   router.use('/users', require('../app/routes/users'));
+  router.use('/tracks', require('../app/routes/tracks'));
 
   app.use('/api', router);
 

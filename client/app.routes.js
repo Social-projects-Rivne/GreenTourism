@@ -34,9 +34,6 @@ angular.module('greenTourism')
         }
       })
 
-      .when('/tracks', {
-        template: '<track-list></track-list>'
-      })
 
       .when('/events', {
         template: '<event-list></event-list>'
