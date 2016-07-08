@@ -5,10 +5,13 @@ module.exports = function(Model) {
     var limit = req.query.limit;
     delete req.query.limit;
 
+    var sort = req.query.sort;
+    delete req.query.sort;
+
     var skip = req.query.skip;
     delete req.query.skip;
 
-    Model.find(req.query, null, {limit: limit, skip: skip},
+    Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
         function(err, records) {
           if (err) {
             res.status(400).json(err);
