@@ -10,10 +10,10 @@
 
 <div class="container" id="welcome-page-content">
   <div class="row">
-    <div class="col-lg-6 welcome-page-section-img">
+    <div class="col-md-6 welcome-page-section-img">
       <img src="/assets/img/welcome-page/m1.jpg" >
     </div>
-    <div class="col-lg-6 welcome-page-section-text">
+    <div class="col-md-6 welcome-page-section-text">
       <h2><a href="#">Find place</a></h2>
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
         sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
@@ -28,7 +28,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-6 welcome-page-section-text">
+    <div class="col-md-6 col-md-push-6 welcome-page-section-img">
+      <img src="/assets/img/welcome-page/m2.jpg" >
+    </div>
+    <div class="col-md-6 col-md-pull-6 welcome-page-section-text">
       <h2><a href="#">Plan your track</a></h2>
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna sed
         aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris nec
@@ -38,15 +41,13 @@
         <a href="#">Go to search</a>
       </div>
     </div>
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m2.jpg" >
-    </div>
+
   </div>
   <div class="row">
-    <div class="col-lg-6 welcome-page-section-img">
+    <div class="col-md-6 welcome-page-section-img">
       <img src="/assets/img/welcome-page/m3.jpg" >
     </div>
-    <div class="col-lg-6 welcome-page-section-text">
+    <div class="col-md-6 welcome-page-section-text">
       <h2><a href="#">Fun on events</a></h2>
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
         sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
@@ -62,7 +63,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-6 welcome-page-section-img" ng-repeat="place in $ctrl.popularPlaces">
+    <div class="col-md-6 welcome-page-section-img" ng-repeat="place in $ctrl.popularPlaces">
       <img src="/assets/img/welcome-page/m1.jpg" title="{{place.name}}" alt="{{place.name}}">
       <a class="welcome-page-section-img-name" href="#!/places/{{place._id}}">{{place.name}}</a>
       <a class="welcome-page-section-img-location" href="#!/places/{{place._id}}">

@@ -122,19 +122,33 @@
 <body>
 
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
     <div class="container">
-      <div class="navbar-header hidden-sm hidden-md hidden-lg">
-        <button type="button" class="navbar-toggle collapsed navtop" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar" ></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#!/">GreenTourism</a>
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="logo"><a href="#!/">GreenTourism</a></div>
+        <ul class="nav left-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li>
+              <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav right-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul" >
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>

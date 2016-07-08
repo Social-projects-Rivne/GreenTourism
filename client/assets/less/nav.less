@@ -4,9 +4,16 @@
 .navtop {
   color: @brand-dark;
 }
-
+.navbar-header button {
+  margin-right: 0;
+}
 .nav-ul{
   font-size: 20px;
+  .active {
+    a {
+      background-color: @brand-dark;
+    }
+  }
 }
 
 .logo {
@@ -18,6 +25,20 @@
   }
 }
 
+.left-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.right-mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 5px;
+  ul {
+    left: -110px;
+  }
+}
 /***************************************************************
   FOOTER
 ****************************************************************/
