@@ -62,16 +62,13 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m1.jpg" title="" alt="">
-      <a class="welcome-page-section-img-name" href="#">Some name of place</a>
-      <a class="welcome-page-section-img-location" href="#">Location</a>
-
-    </div>
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m2.jpg" title="" alt="">
-      <a class="welcome-page-section-img-name" href="#">Some name of place</a>
-      <a class="welcome-page-section-img-location" href="#">Location</a>
+    <div class="col-lg-6 welcome-page-section-img" ng-repeat="ph in $ctrl.popplace">
+      <img src="/assets/img/welcome-page/m1.jpg" title="{{ph.name}}" alt="{{ph.name}}">
+      <a class="welcome-page-section-img-name" href="#!/places/{{ph._id}}">{{ph.name}}</a>
+      <a class="welcome-page-section-img-location" href="#!/places/{{ph._id}}">
+        <img src="assets/img/places/marker/green.png">
+        {{ph.latitude}}, {{ph.longitude}}
+      </a>
     </div>
   </div>
 </div>
