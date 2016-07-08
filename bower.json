@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "main": [
-    "app.modules.js",
-    "app/assets/less/main.less"
+    "client/app.modules.js",
+    "client/assets/less/main.less"
   ],
   "authors": [
     "Rv-017.UI"
