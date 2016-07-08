@@ -3,9 +3,22 @@ angular.module('welcomePage', [])
     templateUrl: 'components/welcome-page/welcome-page.template.html',
     controller: function (Place) {
       var self = this;
+      var random;
+      var existRandom;
+      var i = 0;
+      self.outputPopularPlaces = [];
 
-      Place.getList({sort: 'rate', skip: 18}).then(function(result) {
+      Place.getList({sort: '-rate', limit: 10}).then(function(result) {
         self.popularPlaces = result;
+
+        while (i < 2) {
+          random = Math.floor(Math.random() * self.popularPlaces.length);
+          if (existRandom != random) {
+            self.outputPopularPlaces.push(self.popularPlaces[random]);
+            i++;
+          }
+          existRandom = random;
+        }
       });
 
       // Animation on click arrow

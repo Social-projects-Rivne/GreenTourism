@@ -43,12 +43,28 @@
   }
   .welcome-page-section-img {
     padding: 0;
+    overflow: hidden;
+    img {
+      width:100%;
+      height:auto;
+      max-height:100%;
+    }
+    .popular-places-gradient {
+      position: absolute;
+      top: 0;
+      padding-left: 50%;
+      width: 100%;
+      height: 100%;
+      background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+      background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
+    }
     .name-location {
       font-size:20px;
       padding: 0 4px;
       font-weight: bold;
       color: @brand-light;
-      background-color: rgba(61,162,104,0.5);
       position: absolute;
     }
     .welcome-page-section-img-name {
@@ -91,5 +107,11 @@
   .row {
     background-color: #f7f4ea;
     border-bottom: 1px @footer-bg-color solid;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .welcome-page-section-img {
+    max-height: 375px;
   }
 }
