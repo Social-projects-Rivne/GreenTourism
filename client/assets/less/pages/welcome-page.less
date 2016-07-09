@@ -1,0 +1,117 @@
+.parallax {
+  background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
+  .parallax-background-opacity {
+    opacity: 0.3;
+    background: @brand-dark;
+    height: 100vh;
+  }
+  .aligncenter {
+    position: absolute;
+    margin: 0 auto 0 auto;
+    left: 0;
+    right: 0;
+  }
+  .parallax-title {
+    top: 40%;
+    .aligncenter;
+    h2 {
+      font-size: 70px;
+      font-weight: bold;
+      text-align: center;
+      color: @brand-light;
+    }
+  }
+  a {
+    font-size: 70px;
+    text-align: center;
+    display: block;
+    color: @brand-light;
+    bottom: 5%;
+    .aligncenter;
+  }
+}
+
+#welcome-page-content {
+  img {
+    width: 100%;
+  }
+  .welcome-page-section-img {
+    padding: 0;
+    overflow: hidden;
+    img {
+      width:100%;
+      height:auto;
+      max-height:100%;
+    }
+    .popular-places-gradient {
+      position: absolute;
+      top: 0;
+      padding-left: 50%;
+      width: 100%;
+      height: 100%;
+      background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+      background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
+    }
+    .name-location {
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      position: absolute;
+    }
+    .welcome-page-section-img-name {
+      .name-location;
+      font-size:18px;
+      top: 4px;
+      right: 4px;
+    }
+    .welcome-page-section-img-location {
+      .name-location;
+      font-size:12px;
+      bottom: 4px;
+      right: 4px;
+      text-align: right;
+      img {
+        width:12px;
+      }
+    }
+  }
+  .welcome-page-section-text {
+    text-align: justify;
+    min-height: 375px;
+    padding: 20px 40px 40px 40px;
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      a {
+        color: @footer-bg-color;
+      }
+    }
+    div {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      a {
+        font-weight: bold;
+        color: @brand-dark;
+      }
+    }
+  }
+  .row {
+    background-color: #f7f4ea;
+    border-bottom: 1px @footer-bg-color solid;
+  }
+}
+@supports (-ms-accelerator:true) {
+  .parallax a{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .welcome-page-section-img {
+    max-height: 375px;
+  }
+}

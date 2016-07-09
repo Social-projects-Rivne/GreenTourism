@@ -1,0 +1,35 @@
+<div class="container col-xs-12 col-md-6 centered forms">
+	<div class="well well-sm">
+		<h2>Green tourism</h2>
+		<h5 class="error">{{$ctrl.message}}</h5>
+	</div>
+  
+	<form class="well well-sm" role="form" name="login" novalidate ng-submit="$ctrl.login(user)">
+		<div class="input-group margin-bottom-sm">
+			<!-- <label for="email">Email:</label> -->
+			<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+			<input type="email" class="form-control" name="email"  ng-model="user.email" placeholder="Email" required>
+		</div>
+		<div class="error" ng-show="login.email.$invalid && login.email.$dirty">
+			<span ng-show="login.email.$error.email">Please input correct email</span>
+			<span ng-show="login.email.$error.required">Email is required</span>
+		</div>
+		<br/>
+		<div class="input-group margin-bottom-sm">
+			<!-- <label for="password">Password:</label> -->
+			<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+			<input type="password" name="password" class="form-control" id="password" ng-model="user.password" placeholder="Password" required>
+		</div>
+		<div class="error" ng-show="login.password.$dirty">
+			<span ng-show="login.password.$error.required">Password is required</span>
+		</div>
+
+		<div class="checkbox">
+			<label><input type="checkbox"> Remember me</label>
+		</div>
+		<button type="submit" class="btn btn-default" class="">Sign In</button>
+	</form>
+	<div class="well well-sm">
+		<h5>New to Green Tourism? <a href="#!/autorization/signup">Create an account.</a></h5>
+	</div>
+</div>
