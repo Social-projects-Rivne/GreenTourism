@@ -1,7 +1,7 @@
 angular.module('welcomePage', [])
   .component('welcomePage', {
     templateUrl: 'components/welcome-page/welcome-page.template.html',
-    controller: function (Place, Restangular) {
+    controller: ['Place', 'Restangular', function (Place, Restangular) {
       var self = this;
       var random;
       var existRandom;
@@ -20,7 +20,7 @@ angular.module('welcomePage', [])
               name: self.popularPlaces[random].name,
               latitude: self.popularPlaces[random].latitude,
               longitude: self.popularPlaces[random].longitude,
-              photo: self.popularPlaces[random].photo[0],
+              photo: self.popularPlaces[random].photos[0],
               location: ''
             };
 
@@ -50,4 +50,4 @@ angular.module('welcomePage', [])
         return false;
       });
     }
-  });
+  ]});

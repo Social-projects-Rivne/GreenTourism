@@ -7,9 +7,9 @@ var PlaceSchema = new Schema({
   latitude: Number,
   longitude: Number,
   type: String,
-  photo: Array,
-  like: Array,
-  user_id: Number,
+  photos: [Schema.Types.Mixed],
+  likes: [Schema.Types.Mixed],
+  userId: String,
   rate: Number
 }, {
   toObject: {
@@ -21,7 +21,7 @@ var PlaceSchema = new Schema({
 });
 
 PlaceSchema.virtual('stars').get(function () {
-  this.rate = this.like.length;
+  this.rate = this.likes.length;
   this.save();
 });
 
