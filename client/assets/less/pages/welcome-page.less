@@ -1,7 +1,7 @@
 .parallax {
   background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
   .parallax-background-opacity {
-    opacity: 0.5;
+    opacity: 0.3;
     background: @brand-dark;
     height: 100vh;
   }
@@ -31,12 +31,6 @@
   }
 }
 
-@supports (-ms-accelerator:true) {
-  .parallax a{
-    display: none;
-  }
-}
-
 #welcome-page-content {
   img {
     width: 100%;
@@ -61,7 +55,6 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
     }
     .name-location {
-      font-size:20px;
       padding: 0 4px;
       font-weight: bold;
       color: @brand-light;
@@ -69,14 +62,16 @@
     }
     .welcome-page-section-img-name {
       .name-location;
+      font-size:18px;
       top: 4px;
       right: 4px;
     }
     .welcome-page-section-img-location {
       .name-location;
-      font-size:16px;
+      font-size:12px;
       bottom: 4px;
       right: 4px;
+      text-align: right;
       img {
         width:12px;
       }
@@ -107,6 +102,11 @@
   .row {
     background-color: #f7f4ea;
     border-bottom: 1px @footer-bg-color solid;
+  }
+}
+@supports (-ms-accelerator:true) {
+  .parallax a{
+    display: none;
   }
 }
 
