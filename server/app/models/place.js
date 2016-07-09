@@ -8,8 +8,21 @@ var PlaceSchema = new Schema({
   longitude: Number,
   type: String,
   photo: Array,
-  userId: Number,
+  like: Array,
+  user_id: Number,
   rate: Number
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
+
+PlaceSchema.virtual('stars').get(function () {
+  this.rate = this.like.length;
+  this.save();
 });
 
 module.exports = mongoose.model('Place', PlaceSchema);
