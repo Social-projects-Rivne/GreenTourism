@@ -23,7 +23,8 @@
     <section class="col-md-9">
       <div ng-show="$ctrl.isSelected(1)">
         <h1 class="page-header">Profile</h1>
-        <h3>{{$ctrl.user.firstName + ' ' + $ctrl.user.lastName}}</h3>
+        <h3>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h3>
+        <p>{{$ctrl.user.email}}</p>
         <button type="button" class="btn btn-default">Edit</button>
       </div>
       <div ng-show="$ctrl.isSelected(2)">
