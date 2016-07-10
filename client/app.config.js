@@ -4,9 +4,8 @@ angular.module('greenTourism')
   }]);
 
 angular.module('greenTourism')
-  .controller('MainCtrl', ['$rootScope', function MainCtrl($rootScope) {
+  .controller('MainCtrl', ['$rootScope','$location' , function MainCtrl($rootScope, $location) {
     var ctrl = this;
-
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
       ctrl.routeChangeError = false;
       ctrl.statusCode = 200;
@@ -18,3 +17,11 @@ angular.module('greenTourism')
       ctrl.statusCode = rejection.status;
     });
   }]);
+angular.module('greenTourism')
+    .controller('placeDetailCtrl',function ($scope) {
+      $scope.pageClass='page-detail';
+      $scope.$on('closePage', function (event, data) {
+      $scope.pageClass='page-detail ng-leave';
+      location.href="#!/places";
+      });
+    });

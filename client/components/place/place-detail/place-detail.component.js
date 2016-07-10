@@ -4,7 +4,7 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl(mapFactory) {
+    controller: function placeDetailCtrl(mapFactory, $scope) {
         this.map = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
@@ -17,10 +17,21 @@ angular.module('placeDetail', [])
         this.marker = L.marker(this.location).addTo(this.map);
 
         this.marker.bindPopup('<div><h3>' + this.place.name +
-        '</h3><a><img class="marker-image" src="assets/' + this.place.photo[0] +
+        '</h3><a><img class="marker-image" src="assets/' + this.place.photos[0] +
         '" /></a><br />').openPopup();
 
         this.map.setView(this.location);
+       /* $( "#close" ).click(function() {
+        //alert("fdgdfg");
+           $(".page-detail").toggleClass( "page-detail ng-leave" );
+
+        });*/
+        this.closePage=function(){
+            console.log("CLOSE PAGE");
+            $scope.$emit('closePage', 'pageClass');
+
+        }
+
     }
   });
 

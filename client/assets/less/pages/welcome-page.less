@@ -1,20 +1,32 @@
 .parallax {
-  background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
+
   .parallax-background-opacity {
-    opacity: 0.5;
-    background: @brand-dark;
+
     height: 100vh;
   }
   .aligncenter {
-    position: absolute;
+
     margin: 0 auto 0 auto;
     left: 0;
     right: 0;
+    width:100%;
+  }
+  #myvideo{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -9999;
+
   }
   .parallax-title {
+    position:absolute;
     top: 40%;
     .aligncenter;
-    h2 {
+    h2{
       font-size: 70px;
       font-weight: bold;
       text-align: center;
@@ -22,22 +34,30 @@
     }
   }
   a {
+    .aligncenter;
+    position:absolute;
+    top:60%;
     font-size: 70px;
     text-align: center;
     display: block;
     color: @brand-light;
-    bottom: 5%;
-    .aligncenter;
+    bottom: 0;
+    z-index:1000000000;
+
   }
 }
 
 @supports (-ms-accelerator:true) {
   .parallax a{
-    display: none;
+    display: visible;
+    bottom: 7%;
+  }
+  .parallax {
+
   }
 }
 
-#welcome-page-content {
+#welcome-page-content{
   img {
     width: 100%;
   }

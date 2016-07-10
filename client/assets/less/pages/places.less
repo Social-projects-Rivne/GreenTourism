@@ -79,7 +79,14 @@
   width:150px;
 }
 div.place{
-  margin:10px;
+  margin:0px;
+  .vertical-align{
+    padding:5px 10px;
+  }
+  h2{
+    color:#3da268;
+    text-transform: capitalize;
+  }
 }
 .place-container img{
   width:250px;
@@ -88,20 +95,82 @@ div.place{
   width:130px;
   padding-bottom:5px;
 }
-.place .img_modal{
-  width: 550px;
-}
 .place img.profile{
   width:80px;
   height:80px;
 }
-.place-container img{
-  cursor:pointer;
-}
 .fancybox a img{
   width:120px;
 }
-.pull-left{
- float:none;
-}
+
 /* place */
+/* place-page */
+.page-detail {
+  bottom:0;
+  padding-top:50px;
+  position:absolute;
+  text-align:center;
+  width:100%;
+  top:0;
+
+}
+
+@keyframes rotateFall {
+  0%      { transform: rotateZ(0deg); }
+  20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+  40%     { transform: rotateZ(17deg); }
+  60%     { transform: rotateZ(16deg); }
+  100%    { transform: translateY(100%) rotateZ(17deg); }
+}
+@keyframes slideInUp {
+  from    { transform:translateY(100%); }
+  to      { transform: translateY(0); }
+}
+@keyframes slideInOut {
+  from    { transform:translateY(0%); }
+  to      { transform: translateY(100%); }
+}
+@keyframes scaleUp {
+  from    { opacity: 0.3; -webkit-transform: scale(0.8); }
+}
+
+
+.page-detail.ng-enter          { animation:slideInUp 0.5s both ease-in; z-index: 8888; }
+.page-detail.ng-leave            { animation: slideInOut 0.5s both ease-in; z-index: 9999; }
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+#map1{
+  width:100%;
+  height:450px;
+  margin-bottom:30px;
+}
+
+#upfile1{
+  width:57px;
+}
+button#post{
+  border-radius: 0px !important;
+  background-color:#3da268;
+  color:white;
+  width:150px;
+}
+img#close{
+  cursor:pointer;
+  width:30px;
+}
+div.container_page{
+  padding:20px 20px;
+}
+.comment{
+  padding:10px 0;
+  text-align:justify;
+  h3{
+    text-align:left;
+  }
+  img{
+    margin-right:15px;
+  }
+}
+/* place-page */
