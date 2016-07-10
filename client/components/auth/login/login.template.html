@@ -1,10 +1,11 @@
-<div class="container col-xs-12 col-md-6 centered forms">
+<!-- div class="container col-xs-12 col-md-6 centered forms" -->
+<div class="container">
 	<div class="well well-sm">
 		<h2>Green tourism</h2>
 		<h5 class="error">{{$ctrl.message}}</h5>
 	</div>
-
-	<form class="well well-sm" role="form" name="login" novalidate ng-submit="$ctrl.login($ctrl.user)">
+  <!-- ng-submit="$ctrl.login($ctrl.user)" -->
+	<form class="well well-sm" role="form" name="login" novalidate method="POST" action="/api/login">
     <div class="form-group">
   		<div class="input-group">
         <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>

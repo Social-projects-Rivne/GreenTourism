@@ -1,9 +1,10 @@
 var config = require('./config');
+var path = require('path');
 var express = require('express');
 var morgan = require('morgan');  // Logger
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 var passport = require('passport');
 
 module.exports = function() {
@@ -15,11 +16,12 @@ module.exports = function() {
     // app.use(compress());
   }
 
-  app.use(cookieParser());
-
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   // app.use(methodOverride());
+
+  app.set('views', path.join(__dirname, '../app/views'));
+  app.set('view engine', 'ejs');
 
   app.use(session({
     saveUninitialized: true,
@@ -27,20 +29,28 @@ module.exports = function() {
     secret: config.sessionSecret
   }));
 
+  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use(express.static(path.join(__dirname, '../../client')));
+
   // Routes
-  var router = express.Router();  // eslint-disable-line new-cap
+  var api = express.Router();  // eslint-disable-line new-cap
 
-  router.use('/', require('../app/routes/auth'));
-  router.use('/places', require('../app/routes/places'));
-  router.use('/users', require('../app/routes/users'));
-  router.use('/tracks', require('../app/routes/tracks'));
+  api.use('/', require('../app/routes/auth'));
+  api.use('/places', require('../app/routes/places'));
+  api.use('/users', require('../app/routes/users'));
+  api.use('/tracks', require('../app/routes/tracks'));
 
-  app.use('/api', router);
+  app.use('/api', api);
 
-  app.use(express.static('./client'));
+  app.get('/', function(req, res) {
+    res.render('index', {
+      messages: req.flash('error') || req.flash('info'),
+      user: JSON.stringify(req.user)
+    });
+  });
 
   return app;
 };

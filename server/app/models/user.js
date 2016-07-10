@@ -28,6 +28,12 @@ var UserSchema = new Schema({
     type: String,
     required: 'Last name is required'
   },
+  provider: {
+    type: String,
+    required: 'Provider is required'
+  },
+  providerId: String,
+  providerData: {},
   createdAt: {
     type: Date,
     default: Date.now

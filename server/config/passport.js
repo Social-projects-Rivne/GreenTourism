@@ -15,5 +15,4 @@ module.exports = function() {
   });
 
   require('./strategies/local.js')();
-  require('./strategies/basic-http.js')();
 };

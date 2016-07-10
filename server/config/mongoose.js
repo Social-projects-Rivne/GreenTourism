@@ -7,6 +7,7 @@ module.exports = function() {
   // Import models
   require('../app/models/user');
   require('../app/models/place');
+  require('../app/models/track');
 
   return db;
 };

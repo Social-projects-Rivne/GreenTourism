@@ -1,14 +1,6 @@
 angular.module('auth').component('signup', {
   templateUrl: 'components/auth/signup/signup.template.html',
-  controller: ['User', '$location', function signupCtrl(User, $location) {
-    this.signup = function(user) {
-      User.post(user).then(function() {
-        console.log('Object saved OK');
-        $location.path('/profile');
-      }, function(err) {
-        console.log('There was an error saving: ', err);
-      });
-    };
+  controller: function signupCtrl() {
 
     /*
     this.signup = function(isvalid) {
