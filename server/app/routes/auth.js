@@ -45,17 +45,17 @@ router.route('/signup').post(function(req, res, next) {
           return next(err);
         }
 
-        return res.redirect('/');
+        return res.redirect('/#!/profile');
       });
     });
   } else {
-    return res.redirect('/');
+    return res.redirect('/#!/profile');
   }
 });
 
 router.route('/login').post(
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/#!/profile',
     failureRedirect: '/#!/login',
     failureFlash: 'Invalid email or password!'
   })

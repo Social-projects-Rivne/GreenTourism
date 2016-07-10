@@ -1,16 +1,22 @@
 angular.module('user').component('userProfile', {
   templateUrl: 'components/user/user-profile/user-profile.template.html',
-  controller: ['CurrentUser', function(CurrentUser) {
-    this.user = CurrentUser;
+  controller: ['currentUser', '$location',
+    function(currentUser, $location) {
+      if (currentUser) {
+        this.user = currentUser;
+      } else {
+        $location.path('/login');
+      }
 
-    this.tab = 1;
+      this.tab = 1;
 
-    this.selectTab = function(setTab) {
-      this.tab = setTab;
-    };
+      this.selectTab = function(setTab) {
+        this.tab = setTab;
+      };
 
-    this.isSelected = function(checkTab) {
-      return this.tab === checkTab;
-    };
-  }]
+      this.isSelected = function(checkTab) {
+        return this.tab === checkTab;
+      };
+    }
+  ]
 });
