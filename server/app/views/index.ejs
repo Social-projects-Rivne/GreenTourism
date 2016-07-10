@@ -79,11 +79,11 @@
     <script src="components/welcome-page/welcome-page.component.js"></script>
 
     <!-- USER AND AUTH -->
-    <script src="components/auth/auth.module.js"></script>
-    <script src="components/auth/auth.service.js"></script>
-    <script src="components/auth/signup/signup.component.js"></script>
-    <script src="components/auth/login/login.component.js"></script>
-    <script src="components/user-profile/user-profile.component.js"></script>
+    <script src="components/user/user.module.js"></script>
+    <script src="components/user/current-user.service.js"></script>
+    <script src="components/user/signup/signup.component.js"></script>
+    <script src="components/user/login/login.component.js"></script>
+    <script src="components/user/user-profile/user-profile.component.js"></script>
 
     <!-- PLACE -->
     <script src="components/place/place.module.js"></script>
@@ -169,7 +169,7 @@
 </header>
 
 <main ng-controller="MainCtrl as main" id="main">
-  <% for(var i in messages) { %>
+  <% for (var i in messages) { %>
     <div class="alert alert-danger text-center">
       <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <%= messages[i] %>

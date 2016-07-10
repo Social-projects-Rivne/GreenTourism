@@ -1,5 +1,5 @@
-angular.module('auth').component('signup', {
-  templateUrl: 'components/auth/signup/signup.template.html',
+angular.module('user').component('signup', {
+  templateUrl: 'components/user/signup/signup.template.html',
   controller: function signupCtrl() {
 
     /*
@@ -42,7 +42,7 @@ angular.module('auth').component('signup', {
       }
     };
     */
-  }]
+  }
 });
 
 // TODO: Replace this with simple function
