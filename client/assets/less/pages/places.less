@@ -13,7 +13,7 @@
 #sidebar {
   text-align: center;
   overflow: hidden;
-  border-left: 1px solid @light-green;
+
 }
 
 #search {
@@ -30,16 +30,21 @@
   padding: 0;
 }
 
-.place-container {
-  margin: 5px;
-  height: 240px;
-  border: 1px solid #000;
-  overflow:hidden;
+#locationPlaces {
+  h2 {
+    color: @brand-dark;
+  }
+  .place-container {
+    margin:5px 5px;
+    height: 155px;
+    overflow: hidden;
+    a {
+      color: white;
+    }
+  }
 }
-
 #filter {
   height: auto;
-  border-bottom: 1px solid @light-green;
 }
 
 #buttons {
@@ -88,9 +93,7 @@ div.place{
     text-transform: capitalize;
   }
 }
-.place-container img{
-  width:250px;
-}
+
 .place img{
   width:130px;
   padding-bottom:5px;
@@ -143,8 +146,8 @@ div.place{
 }
 #map1{
   width:100%;
-  height:450px;
-  margin-bottom:30px;
+  height:430px;
+  margin-bottom:20px;
 }
 
 #upfile1{
