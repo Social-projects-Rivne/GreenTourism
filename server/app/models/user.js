@@ -28,6 +28,9 @@ var UserSchema = new Schema({
     type: String,
     required: 'Last name is required'
   },
+  avatar: {
+    type: String
+  },
   provider: {
     type: String,
     required: 'Provider is required'

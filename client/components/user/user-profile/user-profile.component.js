@@ -1,22 +1,24 @@
 angular.module('user').component('userProfile', {
   templateUrl: 'components/user/user-profile/user-profile.template.html',
-  controller: ['currentUser', '$location',
-    function(currentUser, $location) {
-      if (currentUser) {
-        this.user = currentUser;
-      } else {
-        $location.path('/login');
-      }
+  bindings: {
+    user: '<'
+  },
+  controller: ['$location', function($location) {
+    var ctrl = this;
 
-      this.tab = 1;
+    ctrl.changeAvatar = function() {
+      ctrl.user.avatar = prompt('Enter new avatar url');
+      ctrl.user.save();
+    };
 
-      this.selectTab = function(setTab) {
-        this.tab = setTab;
-      };
+    ctrl.tab = 1;
 
-      this.isSelected = function(checkTab) {
-        return this.tab === checkTab;
-      };
-    }
-  ]
+    ctrl.selectTab = function(setTab) {
+      this.tab = setTab;
+    };
+
+    ctrl.isSelected = function(checkTab) {
+      return this.tab === checkTab;
+    };
+  }]
 });

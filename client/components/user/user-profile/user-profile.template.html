@@ -3,7 +3,7 @@
     <section class="col-md-3 user-page__sidebar">
       <div class="user-page__avatar">
         <img ng-src="{{$ctrl.user.avatar}}" alt="User profile picture" class="img-rounded img-responsive" />
-        <button type="button" class="btn btn-default">Change</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.changeAvatar()">Change</button>
       </div>
       <ul class="nav nav-pills nav-stacked">
         <li ng-class="{ active: $ctrl.isSelected(1) }">
