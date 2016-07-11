@@ -1,6 +1,9 @@
 /***************************************************************
   NAVBAR
 ****************************************************************/
+.nav-padding {
+  padding-left: 0;
+}
 .navtop {
   color: @brand-dark;
 }
@@ -29,6 +32,12 @@
   position: fixed;
   top: 0;
   left: 5px;
+  ul {
+	margin-top: 0px;
+  }
+  li a {
+	padding-bottom: 9px;
+  }
 }
 
 .right-mobile-menu {
@@ -37,6 +46,10 @@
   right: 5px;
   ul {
     left: -110px;
+	margin-top: 0px;
+  }
+  li a {
+	padding-bottom: 9px;
   }
 }
 /***************************************************************
@@ -45,15 +58,15 @@
 .footer {
   background-color: @footer-bg-color;
   height: 170px;
-  .row div {
-    padding: 30px 0 0 40px;
-    ul {
-      padding: 0;
-      list-style-type: none;
-      a {
-        color: @brand-dark;
-      }
-    }
+  .footer-content {
+	padding: 30px 0 0 30px;
+	ul {
+	  padding: 0;
+	  list-style-type: none;
+	  a {
+		color: @brand-dark;
+	  }
+	}
   }
   p {
     font-size: 18px;
