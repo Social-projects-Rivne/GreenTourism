@@ -17,17 +17,12 @@ angular.module('mapModule', [])
       }
 
       function locationArea(coords) {
-        L.circle(coords, 3000).addTo(map);
         if (userLocation) {
           map.setView(coords, 14);
         }
       }
 
       function onLocationFound(e) {
-
-        var marker = L.marker(e.latlng).addTo(map)
-                .bindPopup('You are here');
-        marker.openPopup();
         locationArea(e.latlng);
         userLocation = e.latlng;
       }

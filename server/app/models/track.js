@@ -1,11 +1,27 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var locSchema = new Schema({
+  type: {
+    type: String,
+    required: true
+  },
+  coordinates: {
+    type: Array,
+    required: true
+  }
+});
 
 var TrackSchema = new Schema({
-  name: String,
+  name: { 
+    type: String,
+    required: true
+  },
   description: String,
-  trackPoints: Array,
-  type: String,
+  loc: locSchema,
+  type: {
+    type: String,
+    required: true
+  },
   photos: Array,
   userId: Number,
   trackRate: Number
