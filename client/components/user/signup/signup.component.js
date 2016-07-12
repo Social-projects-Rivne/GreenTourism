@@ -6,7 +6,7 @@ angular.module('user').component('signup', {
         $location.path('/profile');
       }
 
-      /*
+      
       this.signup = function(isvalid) {
         if (isvalid) {
           this.message = 'Welcome to Green tourism';
@@ -19,7 +19,7 @@ angular.module('user').component('signup', {
       this.getErrorpassword = function(error) {
         if (angular.isDefined(error)) {
           if (error.pattern) {
-            return 'Only digits are allowed';
+            return '1 Alphabet, 1 Number and 1 Special Character';
           } else if (error.maxlength) {
             return 'Sorry, but less then 25 characters is allowed';
           } else if (error.minlength) {
@@ -40,19 +40,21 @@ angular.module('user').component('signup', {
             return 'Please input correct email';
           } else if (error.minlength) {
             return 'Please input more then 2 characters';
+          } else if (error.pattern) {
+            return 'Only alphabet is required';
           } else if (error.maxlength) {
             return 'Sorry, but less then 15 characters is allowed';
           }
         }
       };
-      */
+      
     }
   ]
 });
 
 // TODO: Replace this with simple function
-/*
-angular.module('auth').directive('confirmPassword', [function() {
+
+angular.module('user').directive('confirmPassword', [function() {
   return {
     require: 'ngModel',
     link: function(scope, elem, attrs, ctrl) {
@@ -65,4 +67,4 @@ angular.module('auth').directive('confirmPassword', [function() {
     }
   };
 }]);
-*/
+

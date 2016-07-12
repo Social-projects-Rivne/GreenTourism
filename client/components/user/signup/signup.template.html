@@ -1,32 +1,46 @@
-<div class="container">
-  <!-- ng-submit="$ctrl.signup($ctrl.user)" -->
-  <form name="form" class="well" role="form" novalidate method="POST" action="/api/signup">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input type="text" class="form-control" ng-model="$ctrl.user.firstName" name="firstName" placeholder="First name" required="" />
-          <p class="help-block">Help text here.</p>
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input type="text" class="form-control" ng-model="$ctrl.user.lastName" name="lastName" placeholder="Last name" required="" />
-          <p class="help-block">Help text here.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <input type="email" class="form-control" ng-model="$ctrl.user.email" name="email" placeholder="Email" required="" />
-      <p class="help-block">Help text here.</p>
-    </div>
-
-    <div class="form-group">
-      <input type="password" class="form-control" ng-model="$ctrl.user.password" name="password" placeholder="Password" required="" />
-      <p class="help-block">Help text here.</p>
-    </div>
-
-    <input type="submit" class="btn btn-default" value="Signup" />
-  </form>
+<div class="signhead" >
+    <h5 class="logotype">Green tourism</h5>
+    <span class="fa fa-circle fa-5x circleuser"></span>
+    <span class="fa fa-user fa-5x user"></span>
+    <h5 id="informlog"><a href="">Back to login form</a></h5>
 </div>
+<div class="container signup">
+	<form class="" role="form" name="signup" novalidate ng-submit="$ctrl.signup(signup.$valid)">
+		<div class="form-group">
+			<label for="Name">Name:</label>
+			<input type="text" name="name" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="user.name" ng-minlength="2" ng-maxlength="15" required >
+			<p class="error" ng-show="$ctrl.showError || signup.name.$touched || signup.name.$dirty">
+				{{$ctrl.getError(signup.name.$error)}}
+			</p>
+			<p class="tip">Is your real name, sign under comments, posts</p>
+		</div>
+		
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="email" name="email" class="form-control" ng-model="user.useremail" required>
+			<p class="error" ng-show="$ctrl.showError || signup.email.$touched || signup.email.$dirty">
+				{{$ctrl.getError(signup.email.$error)}}
+			</p>
+		</div>
+		
+		<div class="form-group ">
+			<label for="password">Password:</label>
+			<input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{3,}$/" ng-model="user.password" ng-minlength="7" ng-maxlength="25"  required>
+			<p class="error" ng-show="$ctrl.showError || signup.password.$touched || signup.password.$dirty">
+				{{$ctrl.getErrorpassword(signup.password.$error)}}
+			</p>
+			<p class="tip">At least min 7 characters required 1 Alphabet, 1 Number and 1 Special Character</p>
+		</div>
+		
+		<div class="form-group ">
+			<label for="confirmpassword">Confirm Password:</label>
+			<input type="password" name="confirmpassword" class="form-control" ng-model="user.confirmpassword" required  confirm-password="password">
+			<p class="error"  ng-show="$ctrl.showError || signup.confirmpassword.$touched || signup.confirmpassword.$dirty">
+				{{$ctrl.getErrorpassword(signup.confirmpassword.$error)}}
+			</p>
+			<p class="tip">Please input your password again</p>
+		</div>
+			<h4>By clicking Sign Up, you agree to our Terms and Policy</h4>
+		<button type="submit" class="btn btn-block submit-btn">Greate an account</button><!-- ng-disabled="signup.$invalid"-->
+	</form>
+</div">

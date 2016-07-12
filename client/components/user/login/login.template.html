@@ -1,42 +1,36 @@
-<!-- div class="container col-xs-12 col-md-6 centered forms" -->
-<div class="container">
-	<div class="well well-sm">
-		<h2>Green tourism</h2>
-		<h5 class="error">{{$ctrl.message}}</h5>
-	</div>
-  <!-- ng-submit="$ctrl.login($ctrl.user)" -->
-	<form class="well well-sm" role="form" name="login" novalidate method="POST" action="/api/login">
-    <div class="form-group">
-  		<div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-  			<input type="email" name="email" class="form-control"  ng-model="$ctrl.user.email" placeholder="Email" required>
-      </div>
+<div class="signhead" ng-hide="signup">
+    <h5 class="logotype">Green tourism</h5>
+    <span class="fa fa-circle fa-5x circleuser"></span>
+    <span class="fa fa-user fa-5x user"></span>
+    <h5 id="informlog">Log in into your account our use your social account</h5>
+</div>
+<div class="container login">
+	<form class="" role="form" name="login" novalidate method="POST" action="/api/login">
+    <div class="form-group email">
+        <label for="email">E-mail</label>
+  			<input type="email" name="email" class="form-control"  ng-model="$ctrl.user.email" required>
       <p class="help-block error" ng-show="login.email.$invalid && login.email.$dirty">
         <span ng-show="login.email.$error.email">Please input correct email</span>
         <span ng-show="login.email.$error.required">Email is required</span>
       </p>
     </div>
-
-    <div class="form-group">
-  		<div class="input-group">
-    		<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-        <input type="password" name="password" class="form-control" ng-model="$ctrl.user.password" placeholder="Password" required>
-      </div>
+    <div class="form-group password">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" ng-model="$ctrl.user.password" required>
       <p class="help-block error" ng-show="login.password.$dirty">
         <span ng-show="login.password.$error.required">Password is required</span>
       </p>
     </div>
-
-    <div class="form-group">
-  		<div class="checkbox">
-  			<label><input type="checkbox" ng-model="$ctrl.user.rememberMe">Remember me</label>
-  		</div>
-    </div>
-
-		<input type="submit" class="btn btn-default" value="Login" />
-	</form>
-
-	<div class="well well-sm">
-		<h5>New to Green Tourism? <a href="#!/signup">Create an account.</a></h5>
-	</div>
+		  <button type="submit" class="btn btn-block submit-btn">Login</button>
+  </form>
+		<h4 class="no-account">No an account?<a href="" ng-click="signup=!signup" class="link"> Registrate</a> now</h4>
+    <hr/>
+    <a class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span>Login with facebook</a>
+    <hr/>
+    <a class="btn btn-block btn-social btn-google"><span class="fa fa-google"></span>Login with google</a>
 </div>
+<div ng-show="signup"><signup></signup></div>
+
+
+
+
