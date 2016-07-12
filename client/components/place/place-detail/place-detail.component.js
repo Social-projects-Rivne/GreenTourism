@@ -4,7 +4,7 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl(mapFactory, $scope) {
+    controller: function placeDetailCtrl($scope) {
         this.map = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
@@ -21,11 +21,6 @@ angular.module('placeDetail', [])
         '" /></a><br />').openPopup();
 
         this.map.setView(this.location);
-       /* $( "#close" ).click(function() {
-        //alert("fdgdfg");
-           $(".page-detail").toggleClass( "page-detail ng-leave" );
-
-        });*/
         this.closePage=function(){
             console.log("CLOSE PAGE");
             $scope.$emit('closePage', 'pageClass');

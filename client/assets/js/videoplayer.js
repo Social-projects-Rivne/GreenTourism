@@ -10,7 +10,7 @@ $(document).ready(function(){
        // $( "#playpause" ).animate({
          //   opacity: 0
       //  }, 100);
-        if (video.paused) {
+        if (video.paused&&video) {
             video.play();
             //$("#playpause").text("STOP");
         } else {
