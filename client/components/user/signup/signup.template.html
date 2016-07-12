@@ -1,0 +1,46 @@
+<div class="signhead" >
+    <h5 class="logotype">Green tourism</h5>
+    <span class="fa fa-circle fa-5x circleuser"></span>
+    <span class="fa fa-user fa-5x user"></span>
+    <h5 id="informlog"><a href="">Back to login form</a></h5>
+</div>
+<div class="container signup">
+	<form class="" role="form" name="signup" novalidate ng-submit="$ctrl.signup(signup.$valid)">
+		<div class="form-group">
+			<label for="Name">Name:</label>
+			<input type="text" name="name" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="user.name" ng-minlength="2" ng-maxlength="15" required >
+			<p class="error" ng-show="signup.name.$touched && ($ctrl.showError || signup.name.$dirty)">
+				{{$ctrl.getError(signup.name.$error)}}
+			</p>
+			<p class="tip">Is your real name, sign under comments, posts</p>
+		</div>
+		
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="email" name="email" class="form-control" ng-model="user.useremail" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/"required>
+			<p class="error" ng-show="signup.email.$touched && ($ctrl.showError || signup.email.$dirty)">
+				{{$ctrl.getErroremail(signup.email.$error)}}
+			</p>
+		</div>
+		
+		<div class="form-group ">
+			<label for="password">Password:</label>
+			<input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{3,}$/" ng-model="user.password" ng-minlength="7" ng-maxlength="25"  required>
+			<p class="error" ng-show="signup.password.$touched && ($ctrl.showError || signup.password.$dirty)">
+				{{$ctrl.getErrorpassword(signup.password.$error)}}
+			</p>
+			<p class="tip">At least min 7 characters required 1 Alphabet, 1 Number and 1 Special Character</p>
+		</div>
+		
+		<div class="form-group ">
+			<label for="confirmpassword">Confirm Password:</label>
+			<input type="password" name="confirmpassword" class="form-control" ng-model="user.confirmpassword" required  confirm-password="password">
+			<p class="error"  ng-show="signup.confirmpassword.$touched && ($ctrl.showError || signup.confirmpassword.$dirty)">
+				{{$ctrl.getErrorpassword(signup.confirmpassword.$error)}}
+			</p>
+			<p class="tip">Please input your password again</p>
+		</div>
+			<h4>By clicking Sign Up, you agree to our Terms and Policy</h4>
+		<button type="submit" class="btn btn-block submit-btn">Greate an account</button><!-- ng-disabled="signup.$invalid"-->
+	</form>
+</div">

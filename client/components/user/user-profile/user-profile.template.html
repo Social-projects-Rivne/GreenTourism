@@ -1,0 +1,41 @@
+<div class="container user-page">
+  <div class="row">
+    <section class="col-md-3 user-page__sidebar">
+      <div class="user-page__avatar">
+        <img ng-src="{{$ctrl.user.avatar}}" alt="User profile picture" class="img-rounded img-responsive" />
+        <button type="button" class="btn btn-default" ng-click="$ctrl.changeAvatar()">Change</button>
+      </div>
+      <ul class="nav nav-pills nav-stacked">
+        <li ng-class="{ active: $ctrl.isSelected(1) }">
+          <a href="" ng-click="$ctrl.selectTab(1)">Profile</a>
+        </li>
+        <li ng-class="{ active: $ctrl.isSelected(2) }">
+          <a href="" ng-click="$ctrl.selectTab(2)">My Points</a>
+        </li>
+        <li ng-class="{ active: $ctrl.isSelected(3) }">
+          <a href="" ng-click="$ctrl.selectTab(3)">My Tracks</a>
+        </li>
+        <li ng-class="{ active: $ctrl.isSelected(4) }">
+          <a href="" ng-click="$ctrl.selectTab(4)">Favorite Events</a>
+        </li>
+      </ul>
+    </section>
+    <section class="col-md-9">
+      <div ng-show="$ctrl.isSelected(1)">
+        <h1 class="page-header">Profile</h1>
+        <h3>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h3>
+        <p>{{$ctrl.user.email}}</p>
+        <button type="button" class="btn btn-default">Edit</button>
+      </div>
+      <div ng-show="$ctrl.isSelected(2)">
+        <h1 class="page-header">My Points</h1>
+      </div>
+      <div ng-show="$ctrl.isSelected(3)">
+        <h1 class="page-header">My Tracks</h1>
+      </div>
+      <div ng-show="$ctrl.isSelected(4)">
+        <h1 class="page-header">Favorite Events</h1>
+      </div>
+    </section>
+  </div>
+</div>

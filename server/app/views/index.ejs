@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="greenTourism">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Third-party stylesheets -->
+    <!-- build:css vendor/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
+    <link rel="stylesheet" href="bower_components/fancybox/source/jquery.fancybox.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans" />
+
+    <!-- Third-party scripts -->
+    <!-- build:js vendor/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/leaflet.markercluster.layersupport/leaflet.markercluster.layersupport-src.js"></script>
+    <script src="bower_components/fancybox/source/jquery.fancybox.js"></script>
+    <script src="bower_components/js-md5/js/md5.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- REMOVE THIS TWO LINES ON PRODUCTION AND UNCOMMENT MAIN CSS! -->
+    <link rel="stylesheet/less" type="text/css" href="assets/less/main.less" />
+    <script src="bower_components/less/dist/less.js" type="text/javascript"></script>
+
+
+    <!-- Main stylesheet -->
+    <!-- build:css assets/css/main.css -->
+    <!--link rel="stylesheet" href="assets/css/main.css" /-->
+    <!-- endbuild -->
+
+    <!-- Main scripts -->
+    <!-- build:js app.js -->
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="app.routes.js"></script>
+    <script src="nav.controller.js"></script>
+
+    <script src="models/user.model.js"></script>
+    <script src="models/place.model.js"></script>
+    <script src="models/track.model.js"></script>
+    <script src="models/event.model.js"></script>
+    <script src="models/blog.model.js"></script>
+
+    <!-- Shared components -->
+    <script src="shared/map/map.factory.js"></script>
+    <script src="shared/filter-map-type/filter-map-type.component.js"></script>
+
+    <!-- Separated components -->
+    <script src="components/welcome-page/welcome-page.component.js"></script>
+
+    <!-- USER AND AUTH -->
+    <script src="components/user/user.module.js"></script>
+    <script src="components/user/current-user.service.js"></script>
+    <script src="components/user/signup/signup.component.js"></script>
+    <script src="components/user/login/login.component.js"></script>
+    <script src="components/user/user-profile/user-profile.component.js"></script>
+
+    <!-- PLACE -->
+    <script src="components/place/place.module.js"></script>
+    <script src="components/place/placesOnMap.factory.js"></script>
+    <script src="components/place/mapMarkingTypes.factory.js"></script> <!--  Renamed factory name to mapMarkingTypes -->
+    <script src="components/place/place-list/place-list.component.js"></script>
+    <script src="components/place/place-detail/place-detail.component.js"></script>
+    <script src="components/place/place-modal/place-modal.component.js"></script>
+    <script src="components/place/place-list/marker-places.component.js"></script>
+    <script src="components/place/place-modal/place-modal.component.js"></script>
+    <script src="components/place/popular-places/popularPlaces.component.js"></script>
+    <script src="components/place/places-location/locationPlaces.component.js"></script>
+
+    <!-- TRACK -->
+    <script src="components/track/track.module.js"></script>
+    <script src="components/track/track-list/track-list.component.js"></script>
+    <script src="components/track/track-maker/track-maker.component.js"></script>
+    <script src="components/track/popular-track/popular-track.component.js"></script>
+
+    <!-- EVENT -->
+    <script src="components/event/event.module.js"></script>
+    <script src="components/event/event-list/events.component.js"></script>
+    <script src="components/event/event-detail/event-list.js"></script>
+    <script src="components/event/event-detail/event-detail.component.js"></script>
+    <script src="components/event/calendar/calendar.component.js"></script>
+    <script src="components/event/events-map/event-map.component.js"></script>
+    <script src="components/event/events-map/events-map-type/event-map-type.component.js"></script>
+
+    <!-- BLOG -->
+    <script src="components/blog/blog.module.js"></script>
+    <script src="components/blog/blog-list/blog-list.component.js"></script>
+    <script src="components/blog/blog-detail/blog-detail.component.js"></script>
+    <script src="components/blog/blog-filter.component.js"></script>
+    <!-- endbuild -->
+
+    <title>Green Tourism</title>
+  </head>
+
+<body>
+
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header hidden-sm hidden-md hidden-lg">
+        <button type="button" class="navbar-toggle collapsed navtop" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar" ></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#!/">GreenTourism</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <% if (user) { %>
+                <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
+                <li><a href="/api/logout">Log out</a></li>
+              <% } else { %>
+                <login><login>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="hidden-xs logo"><a href="#!/">GreenTourism</a></div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main ng-controller="MainCtrl as main" id="main">
+  <% for (var i in messages) { %>
+    <div class="alert alert-danger text-center">
+      <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= messages[i] %>
+    </div>
+  <% } %>
+
+  <div ng-if="!main.routeChangeError" ng-view=""></div>
+  <div ng-if="main.routeChangeError">
+    <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
+    <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
+    <div ng-if="main.statusCode == null">
+      <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+        <a class="footer-logo" href="#/">GreenTourism</a>
+        <p>© 2001 - 2016 <span>The GreenTourism Team</span></p>
+        <p><a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank">We are on GitHub</a></p>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+        <ul>
+          <li><h4><a href="#">Twitter</a></h4></li>
+          <li><h4><a href="#">Google+</a></h4></li>
+          <li><h4><a href="#">Facebook</a></h4></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.user = <%- user || 'null' %>;
+</script>
+</body>
+</html>
