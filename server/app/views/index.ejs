@@ -118,7 +118,7 @@
     <script src="components/blog/blog-detail/blog-detail.component.js"></script>
     <script src="components/blog/blog-filter.component.js"></script>
     <!-- endbuild -->
-
+    <script src="assets/js/videoplayer.js"></script>
     <title>Green Tourism</title>
   </head>
 
@@ -170,6 +170,9 @@
 </header>
 
 <main ng-controller="MainCtrl as main" id="main">
+<<<<<<< HEAD:client/index.html
+  <div ng-if="!main.routeChangeError" ng-view class="page {{pageClass}}"></div>
+=======
   <% for (var i in messages) { %>
     <div class="alert alert-danger text-center">
       <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -178,6 +181,7 @@
   <% } %>
 
   <div ng-if="!main.routeChangeError" ng-view=""></div>
+>>>>>>> origin/dev:server/app/views/index.ejs
   <div ng-if="main.routeChangeError">
     <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
     <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
@@ -186,8 +190,8 @@
     </div>
   </div>
 </main>
-
-<footer class="footer">
+<div ng-controller="NavCtrl as nav">
+<footer class="footer"  ng-if="!nav.isShowFooter('/places','')">
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
@@ -205,9 +209,13 @@
     </div>
   </div>
 </footer>
+<<<<<<< HEAD:client/index.html
+</div>
+=======
 
 <script>
   window.user = <%- user || 'null' %>;
 </script>
+>>>>>>> origin/dev:server/app/views/index.ejs
 </body>
 </html>

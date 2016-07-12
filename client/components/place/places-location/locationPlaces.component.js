@@ -2,7 +2,9 @@
 function locationplacesCtrl(mapFactory, $scope) {
   var ctrl = $scope;
   ctrl.places=this.places;
+
   $scope.placesByLocation=ctrl.places;
+
   $scope.map = mapFactory.map;
   $scope.map.on('moveend', setLocationPlaces);
   function setLocationPlaces(){
@@ -13,8 +15,10 @@ function locationplacesCtrl(mapFactory, $scope) {
     $scope.placesByLocation=[];
     for (i = 0; i < ctrl.places.length; i++) {
       if(ctrl.places[i].latitude>min.lat&&ctrl.places[i].longitude>min.lng&&ctrl.places[i].latitude<max.lat&&ctrl.places[i].longitude<max.lng){
+
         $scope.placesByLocation.push(ctrl.places[i]);
         $scope.$apply();
+
       }
 
     }
@@ -23,8 +27,6 @@ function locationplacesCtrl(mapFactory, $scope) {
   {
     return value.type=="featuredPlace"||value.type=="service";
   }
-
-
 
 }
 

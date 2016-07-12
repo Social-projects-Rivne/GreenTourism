@@ -46,7 +46,7 @@ angular.module('mapModule')
             if (places[j].type == input) {
               marker(places[j].latitude, places[j].longitude, types[i].icon)
                   .addTo(groups[i])
-                  .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
+                  .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo[0] + "' \/></a>" +
                       "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
                   .openPopup();
 
@@ -58,7 +58,7 @@ angular.module('mapModule')
           if (places[j].type == types[i].type) {
             marker(places[j].latitude, places[j].longitude, types[i].icon)
               .addTo(groups[i])
-                .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
+                .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo[0] + "' \/></a>" +
                     "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
                 .openPopup();
           }
