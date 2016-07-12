@@ -8,12 +8,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '<welcome-page></welcome-page>'
       })
 
-      .when('/signup', {
-        template: '<signup></signup>'
-      })
-      .when('/login', {
-        template: '<login></login>'
-      })
+
       .when('/profile', {
         template: '<user-profile user="$resolve.user"></user-profile>',
         resolve: {

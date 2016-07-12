@@ -1,4 +1,4 @@
-<div class="signhead" ng-hide="signup">
+<div class="signhead" >
     <h5 class="logotype">Green tourism</h5>
     <span class="fa fa-circle fa-5x circleuser"></span>
     <span class="fa fa-user fa-5x user"></span>
@@ -9,15 +9,15 @@
     <div class="form-group email">
         <label for="email">E-mail</label>
   			<input type="email" name="email" class="form-control" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" ng-model="$ctrl.user.email" required>
-      <p class="help-block error" ng-show="login.email.$invalid && login.email.$dirty">
-        <span ng-show="login.email.$touched && (login.email.$error.pattern)">Please input correct email</span>
-        <span ng-show="login.email.$touched && (login.email.$error.required)">Email is required</span>
+      <p class="help-block error" ng-show="login.email.$touched && (login.email.$invalid && login.email.$dirty)">
+        <span ng-show="login.email.$error.pattern">Please input correct email</span>
+        <span ng-show="login.email.$error.required">Email is required</span>
       </p>
     </div>
     <div class="form-group password">
         <label for="password">Password</label>
         <input type="password" name="password" class="form-control" ng-model="$ctrl.user.password" required>
-      <p class="help-block error" ng-show="login.password.$dirty">
+      <p class="help-block error" ng-show="login.password.$touched && login.password.$dirty">
         <span ng-show="login.password.$touched && login.password.$error.required">Password is required</span>
       </p>
     </div>
