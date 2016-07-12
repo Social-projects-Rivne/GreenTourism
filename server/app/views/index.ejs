@@ -121,26 +121,42 @@
 
     <title>Green Tourism</title>
   </head>
-
 <body>
 
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header hidden-sm hidden-md hidden-lg">
-        <button type="button" class="navbar-toggle collapsed navtop" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar" ></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#!/">GreenTourism</a>
+  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
+    <div class="container nav-padding">
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="logo"><a href="#!/">GreenTourism</a></div>
+        <ul class="nav left-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li>
+              <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav right-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
             <ul class="dropdown-menu nav-ul">
               <% if (user) { %>
                 <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
@@ -155,7 +171,8 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
             <ul class="dropdown-menu nav-ul">
               <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
               <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
@@ -191,16 +208,20 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
-        <a class="footer-logo" href="#/">GreenTourism</a>
-        <p>© 2001 - 2016 <span>The GreenTourism Team</span></p>
-        <p><a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank">We are on GitHub</a></p>
+        <div class="footer-content">
+          <a class="footer-logo" href="#/">GreenTourism</a>
+          <p>© 2001 - 2016 <a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank"><span>The GreenTourism Team</span></a>
+          </p>
+        </div>
       </div>
       <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
-        <ul>
-          <li><h4><a href="#">Twitter</a></h4></li>
-          <li><h4><a href="#">Google+</a></h4></li>
-          <li><h4><a href="#">Facebook</a></h4></li>
-        </ul>
+        <div class="footer-content">
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Google+</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

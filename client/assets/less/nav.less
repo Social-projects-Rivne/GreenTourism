@@ -1,12 +1,26 @@
 /***************************************************************
   NAVBAR
 ****************************************************************/
+.nav-padding {
+  padding-left: 0;
+}
+
 .navtop {
   color: @brand-dark;
 }
 
-.nav-ul{
+.navbar-header button {
+  margin-right: 0;
+}
+
+.nav-ul {
+  background-color: #f8f8f8;
   font-size: 20px;
+  .active {
+    a {
+      background-color: @brand-dark;
+    }
+  }
 }
 
 .logo {
@@ -18,18 +32,51 @@
   }
 }
 
+.left-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  ul {
+    margin-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+  li a {
+    padding-bottom: 9px;
+  }
+}
+
+.right-mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  ul {
+    right: 0;
+    left: auto;
+    margin-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+  li a {
+    padding-bottom: 9px;
+  }
+}
+
 /***************************************************************
   FOOTER
 ****************************************************************/
 .footer {
   background-color: @footer-bg-color;
   height: 170px;
-  .row div {
-    padding: 30px 0 0 40px;
+  .footer-content {
+    padding: 30px 0 0 30px;
     ul {
       padding: 0;
       list-style-type: none;
       a {
+        font-size: 18px;
         color: @brand-dark;
       }
     }
@@ -45,5 +92,11 @@
     font-size: 24px;
     font-weight: bolder;
     color: @brand-dark;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .footer .footer-content {
+    padding: 30px 0px 0px 0px;
   }
 }
