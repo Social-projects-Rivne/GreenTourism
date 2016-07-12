@@ -22,7 +22,6 @@ angular.module('placeDetail', [])
 
         this.map.setView(this.location);
         this.closePage=function(){
-            console.log("CLOSE PAGE");
             $scope.$emit('closePage', 'pageClass');
 
         }
