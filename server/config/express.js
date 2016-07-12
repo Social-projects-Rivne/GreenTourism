@@ -20,7 +20,7 @@ module.exports = function() {
   app.use(bodyParser.urlencoded({extended: true}));
   // app.use(methodOverride());
 
-  app.set('views', path.join(__dirname, '../app/views'));
+  app.set('views', path.join(__dirname, '../../client'));
   app.set('view engine', 'ejs');
 
   app.use(session({
