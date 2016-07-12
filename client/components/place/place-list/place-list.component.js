@@ -10,7 +10,7 @@ angular.module('placeList', ['filterMapType'])
       var placeObject = {};
       var counter;
 
-      //-----START ADD Place-----
+      // -----START ADD Place-----
       this.addPlaceState = false;
 
       this.toggleAddPlace = function() {
@@ -38,14 +38,14 @@ angular.module('placeList', ['filterMapType'])
         L.marker(latLng).addTo($rootScope.map);
         $rootScope.map.setView(latLng);
       };
-      //-----END ADD Place-----
+      // -----END ADD Place-----
 
-      this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
+      this.placesType = mapMarkingTypes.placesType;  // Renamed types to placesType
       placesOnMap.removePlaces();
       placesOnMap.showMap();
       placesOnMap.initGroupsOfPlaces(this.placesType);
 
-      //---START---- ShowPlacesOnLoad
+      // ---START---- ShowPlacesOnLoad
       // TODO: Move this inside resolve
       Place.getList({type: placesOnLoad}).then(function(result) {
         places = result;
@@ -62,9 +62,9 @@ angular.module('placeList', ['filterMapType'])
         $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
         $('#Streets span').addClass('glyphicon glyphicon-ok');
       });
-      //----END---- ShowPlacesOnLoad
+      // ----END---- ShowPlacesOnLoad
 
-      //----START---- FilterByOneOfType
+      // ----START---- FilterByOneOfType
       this.checkType = function(input) {
         var spanCheck = $('#' + input + ' span');
 
@@ -92,7 +92,7 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-             placeObject = {id: places[i]._id, latitude: places[i].latitude,
+              placeObject = {id: places[i]._id, latitude: places[i].latitude,
              longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
@@ -103,9 +103,9 @@ angular.module('placeList', ['filterMapType'])
           });
         }
       };
-      //----END---- FilterByOneOfType
+      // ----END---- FilterByOneOfType
 
-      //----START---- FilterCheckAll
+      // ----START---- FilterCheckAll
       this.checkAll = function() {
         var spanCheck = $('#all span');
 
@@ -148,9 +148,9 @@ angular.module('placeList', ['filterMapType'])
           });
         }
       };
-      //----END---- FilterCheckAll
-      this.places=arrPlaces;
-      //Don't hide dropdown if clicked
+      // ----END---- FilterCheckAll
+      this.places = arrPlaces;
+      // Don't hide dropdown if clicked
       $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
@@ -159,8 +159,18 @@ angular.module('placeList', ['filterMapType'])
       });
 
 
-      /*** START tracks controller ***/
+      /** * START tracks controller ***/
       var activeLiCounter = 4;
+
+      function checkTrackColor(tracksType) {
+        var color;
+        for (var i = 0; i < this.tracksType.length; i++) {
+          if (tracksType === this.tracksType[i].type) {
+            color = this.tracksType.color;
+            return color;
+          }
+        }
+      }
 
       this.tracksType = mapMarkingTypes.tracksType;
       Track.getList().then(function(result) {
@@ -192,6 +202,7 @@ angular.module('placeList', ['filterMapType'])
             checkAllElement.addClass('active');
           }
           Track.getList({type: tracksType}).then(function(result) {
+            var color;
             tracks = result;
             placesOnMap.showTracks(tracks);
           });

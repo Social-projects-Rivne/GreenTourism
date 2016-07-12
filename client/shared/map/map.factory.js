@@ -20,7 +20,6 @@ angular.module('mapModule', [])
         L.circle(coords, 3000).addTo(map);
         if (userLocation) {
           map.setView(coords, 14);
-          console.log("yes");
         }
       }
 

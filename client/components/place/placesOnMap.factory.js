@@ -1,5 +1,5 @@
 angular.module('mapModule')
-.factory('placesOnMap', ['mapFactory', function(mapFactory) {
+.factory('placesOnMap', ['mapFactory', 'mapMarkingTypes', function(mapFactory, mapMarkingTypes) {
   var placesOnMap = {};
   var mainGroup = L.markerClusterGroup
                     .layerSupport({showCoverageOnHover: false});
@@ -35,19 +35,19 @@ angular.module('mapModule')
     }
   };
 
-   placesOnMap.showPlaces = function(input) {
+  placesOnMap.showPlaces = function(input) {
     var i;
     var j;
     mainGroup.addTo(map);
     for (i = 0; i < types.length; i++) {
-      if (input) {
+       if (input) {
         if (types[i].type == input) {
           for (j in places) {
             if (places[j].type == input) {
               marker(places[j].latitude, places[j].longitude, types[i].icon)
                   .addTo(groups[i])
-                  .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
-                      "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                  .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
+                      '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + places[j].id + '\'>Details >></a> </button></div>', {autoPan: false})
                   .openPopup();
 
             }
@@ -58,19 +58,19 @@ angular.module('mapModule')
           if (places[j].type == types[i].type) {
             marker(places[j].latitude, places[j].longitude, types[i].icon)
               .addTo(groups[i])
-                .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
-                    "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
+                    '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + places[j].id + '\'>Details >></a> </button></div>', {autoPan: false})
                 .openPopup();
           }
         }
       }
-      mainGroup.checkIn(groups[i]);
-      groups[i].addTo(map);
-      map.on('click move', function(){
-      map.closePopup()
+       mainGroup.checkIn(groups[i]);
+       groups[i].addTo(map);
+       map.on('click move', function() {
+        map.closePopup();
       });
 
-    }
+     }
   };
 
   placesOnMap.removePlaces = function(input) {
@@ -89,6 +89,7 @@ angular.module('mapModule')
 
   /* ** START tracks factory ** */
   var tracks = [];
+  var tracksType = mapMarkingTypes.tracksType;
   var polyline = function(trackPoints, color) {
     return L.polyline(trackPoints, {
       color: color,
@@ -98,8 +99,14 @@ angular.module('mapModule')
 
   placesOnMap.showTracks = function(tracksArray) {
     var trackForAdding;
+    var color;
     for (var i = 0; i < tracksArray.length; i++) {
-      trackForAdding = polyline(tracksArray[i].track_points, tracksArray[i].color).addTo(map);
+      for (var j = 0; j < tracksType.length; j++) {      
+        if (tracksArray[i].type === tracksType[j].type) {
+          color = tracksType[j].color;
+        }
+      }
+      trackForAdding = polyline(tracksArray[i].loc.coordinates, color).addTo(map);
       tracks.push([trackForAdding, tracksArray[i].type]);
     }
   };
