@@ -27,7 +27,7 @@ angular.module('user').component('userProfile', {
 
     ctrl.editUser = function() {
       // TODO: Validate before saving
-      ctrl.user = angular.copy(ctrl.editedUser);
+      angular.merge(ctrl.user, ctrl.editedUser);
       ctrl.user.save();
       delete ctrl.user.password;  // Password must not be stored in app
 
