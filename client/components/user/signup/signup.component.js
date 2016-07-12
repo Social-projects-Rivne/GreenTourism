@@ -8,10 +8,7 @@ angular.module('user').component('signup', {
 
       
       this.signup = function(isvalid) {
-        if (isvalid) {
-          this.message = 'Welcome to Green tourism';
-        } else {
-          this.message = 'Please complete the form as required ';
+        if (!isvalid) {
           this.showError = true;
         }
       };
@@ -31,13 +28,22 @@ angular.module('user').component('signup', {
           }
         }
       };
-
-      this.getError = function(error) {
+         this.getErroremail = function(error) {
         if (angular.isDefined(error)) {
           if (error.required) {
             return 'Please fill up this field';
           } else if (error.email) {
             return 'Please input correct email';
+          } else if (error.pattern) {
+            return 'Only first domen email is allowed';
+          } 
+        }
+      };
+
+      this.getError = function(error) {
+        if (angular.isDefined(error)) {
+          if (error.required) {
+            return 'Please fill up this field';
           } else if (error.minlength) {
             return 'Please input more then 2 characters';
           } else if (error.pattern) {
