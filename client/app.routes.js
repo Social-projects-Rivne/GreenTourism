@@ -22,7 +22,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
               if (currentUser) {
                 return User.one(currentUser._id).get()
                   .then(function(user) {
-                    // FIXME: Make user do PUT on /users/:id, not /users
                     return user;
                   });
               }

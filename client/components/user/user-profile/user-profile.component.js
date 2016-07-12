@@ -6,6 +6,8 @@ angular.module('user').component('userProfile', {
   controller: ['$location', function($location) {
     var ctrl = this;
 
+    console.log(ctrl.user);
+
     ctrl.changeAvatar = function() {
       ctrl.user.avatar = prompt('Enter new avatar url');
       ctrl.user.save();
