@@ -1,10 +1,11 @@
 var config = require('./config');
+var path = require('path');
 var express = require('express');
 var morgan = require('morgan');  // Logger
 var bodyParser = require('body-parser');
 var session = require('express-session');
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+var passport = require('passport');
 
 module.exports = function() {
   var app = express();
@@ -19,7 +20,8 @@ module.exports = function() {
   app.use(bodyParser.urlencoded({extended: true}));
   // app.use(methodOverride());
 
-  // app.use(passport.initialize());
+  app.set('views', path.join(__dirname, '../app/views'));
+  app.set('view engine', 'ejs');
 
   app.use(session({
     saveUninitialized: true,
@@ -27,12 +29,28 @@ module.exports = function() {
     secret: config.sessionSecret
   }));
 
-  // Routes
-  app.use('/api/places', require('../app/routes/places'));
-  app.use('/api/users', require('../app/routes/users'));
-  app.use('/api/tracks', require('../app/routes/tracks'));
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-  app.use(express.static('./client'));
+  app.use(express.static(path.join(__dirname, '../../client')));
+
+  // Routes
+  var api = express.Router();  // eslint-disable-line new-cap
+
+  api.use('/', require('../app/routes/auth'));
+  api.use('/places', require('../app/routes/places'));
+  api.use('/users', require('../app/routes/users'));
+  api.use('/tracks', require('../app/routes/tracks'));
+
+  app.use('/api', api);
+
+  app.get('/', function(req, res) {
+    res.render('index', {
+      messages: req.flash('error') || req.flash('info'),
+      user: JSON.stringify(req.user)
+    });
+  });
 
   return app;
 };

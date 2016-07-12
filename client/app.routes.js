@@ -1,5 +1,5 @@
-angular.module('greenTourism')
-  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider.caseInsensitiveMatch = true;
 
@@ -15,7 +15,22 @@ angular.module('greenTourism')
         template: '<login></login>'
       })
       .when('/profile', {
-        template: '<user-profile></user-profile>'
+        template: '<user-profile user="$resolve.user"></user-profile>',
+        resolve: {
+          user: ['User', 'currentUser', '$location',
+            function getPlace(User, currentUser, $location) {
+              if (currentUser) {
+                return User.one(currentUser._id).get()
+                  .then(function(user) {
+                    // FIXME: Make user do PUT on /users/:id, not /users
+                    return user;
+                  });
+              }
+
+              $location.path('/login');
+            }
+          ]
+        }
       })
 
       .when('/places', {
@@ -26,7 +41,7 @@ angular.module('greenTourism')
         template: '<div><place-detail place="$resolve.place"></place-detail></div>',
         controller: 'placeDetailCtrl',
         resolve: {
-          place: ["$route", "Place", function getPlace($route, Place) {
+          place: ['$route', 'Place', function getPlace($route, Place) {
             return Place.one($route.current.params.placeId).get()
               .then(function(place) {
                 return place;
@@ -34,7 +49,6 @@ angular.module('greenTourism')
           }]
         }
       })
-
 
       .when('/events', {
         template: '<event-list></event-list>'
