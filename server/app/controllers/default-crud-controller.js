@@ -11,14 +11,43 @@ module.exports = function(Model) {
     var skip = req.query.skip;
     delete req.query.skip;
 
-    Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
+    var location = req.query.location;
+    delete req.query.location;
+
+    console.log(location == undefined);
+
+    if (location == undefined) {
+      console.log('No');
+      Model.find(req.query, null, {limit: limit, skip: skip, sort: sort, location: location},
         function(err, records) {
           if (err) {
             res.status(400).json(err);
           } else {
             res.json(records);
           }
-        });
+        }
+      );
+    } else {
+      console.log('Yes');
+      Model.find({
+        loc: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates: location
+            },
+            $maxDistance: 5000,
+            $minDistance: 0
+          }
+        }
+      }, function(err, records) {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.json(records);
+        }
+      });
+    }
   };
 
   controller.show = function(req, res) {

@@ -25,6 +25,7 @@ angular.module('mapModule', [])
       function onLocationFound(e) {
         locationArea(e.latlng);
         userLocation = e.latlng;
+        console.log(userLocation);
       }
 
       map.on('locationfound', onLocationFound);
