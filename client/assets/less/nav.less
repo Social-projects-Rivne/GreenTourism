@@ -4,13 +4,16 @@
 .nav-padding {
   padding-left: 0;
 }
+
 .navtop {
   color: @brand-dark;
 }
+
 .navbar-header button {
   margin-right: 0;
 }
-.nav-ul{
+
+.nav-ul {
   font-size: 20px;
   .active {
     a {
@@ -31,27 +34,35 @@
 .left-mobile-menu {
   position: fixed;
   top: 0;
-  left: 5px;
+  left: 0;
   ul {
-	margin-top: 0px;
+    margin-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
   }
   li a {
-	padding-bottom: 9px;
+    padding-bottom: 9px;
   }
 }
 
 .right-mobile-menu {
   position: fixed;
   top: 0;
-  right: 5px;
+  right: 0;
   ul {
-    left: -110px;
-	margin-top: 0px;
+    right: 0;
+    left: auto;
+    margin-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
   }
   li a {
-	padding-bottom: 9px;
+    padding-bottom: 9px;
   }
 }
+
 /***************************************************************
   FOOTER
 ****************************************************************/
@@ -59,14 +70,15 @@
   background-color: @footer-bg-color;
   height: 170px;
   .footer-content {
-	padding: 30px 0 0 30px;
-	ul {
-	  padding: 0;
-	  list-style-type: none;
-	  a {
-		color: @brand-dark;
-	  }
-	}
+    padding: 30px 0 0 30px;
+    ul {
+      padding: 0;
+      list-style-type: none;
+      a {
+        font-size: 18px;
+        color: @brand-dark;
+      }
+    }
   }
   p {
     font-size: 18px;
@@ -79,5 +91,11 @@
     font-size: 24px;
     font-weight: bolder;
     color: @brand-dark;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .footer .footer-content {
+    padding: 30px 0px 0px 0px;
   }
 }
