@@ -80,12 +80,12 @@ gulp.task('less', function() {
 
 // Add bower deps to index.html
 gulp.task('bower', function() {
-  return gulp.src('client/index.html')
+  return gulp.src('server/app/views/index.ejs')
     .pipe(plumber({errorHandler: onError}))
     .pipe(wiredep({
       directory: 'client/bower_components'
     }))
-    .pipe(gulp.dest('client/'))
+    .pipe(gulp.dest('server/app/views'))
     .pipe(notify('Bower dependencies injected!'));
 });
 
