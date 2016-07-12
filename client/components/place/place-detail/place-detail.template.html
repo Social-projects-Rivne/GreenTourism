@@ -1,0 +1,92 @@
+<div class="row place">
+
+
+    <div class="col-xs-12 col-lg-12 col-md-12" style="min-width:365px;">
+        <div class="row vertical-align">
+            <div class="col-xs-4 no-padding">
+                <p class="text-left">
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
+                </button>
+                </p>
+             </div>
+            <div class="col-xs-4 no-padding">
+                <h2 class="titlem text-center">{{$ctrl.place.name}}   </h2>
+            </div>
+            <div class="col-xs-4 no-padding  pull-right" >
+                <p class="text-right"><img src="assets/img/places/close.jpg"  id="close" ng-click="$ctrl.closePage()" /></p>
+            </div>
+        </div>
+        <div class="row">
+                <div id="map1"></div>
+        </div>
+    </div>
+    <div class="container_page">
+    <div  class="col-lg-8 col-md-8   col-xs-12">
+                <p>{{$ctrl.place.description}}</p>
+                <br>
+                <br>
+        <div class="row vertical-align" style="border:1px solid green;">
+            <div class="pull-left"><img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="profile" /></div>
+            <div class="col-xs-11">
+                <form  class="form-inline">
+                    <div class="form-group"  class="col-xs-11">
+                        <label class="sr-only" for="comment">Email address</label>
+                        <textarea  class="form-control col-xs-9" id="comment" rows="3" cols="75"  style="border:1px solid green;" placeholder="Leave your comments for other..."></textarea>
+                     </div>
+                    <div class="form-group">
+                        <img src="assets/img/places/uploadButton.png" onclick="upload()"  onmouseover="this.src='assets/img/places/uploadButton_up.png'" onmouseout="this.src='assets/img/places/uploadButton.png'" id="upfile1" style="cursor:pointer" />
+                        <input type="file" class="btn btn-default form-control" id="file1" style="display:none"  />
+                     </div>
+                    <button type="submit" class="btn btn-md form-control" id="post">Post</button>
+                </form>
+
+              </div>
+            <script>
+                function upload(){
+                    document.getElementById("file1").click();
+                }
+            </script>
+        </div>
+        <div  class="comment">
+                <div class="pull-left"><img src="assets/img/user-profile/avatar.png" alt="Aniston" class="profile" /></div>
+                <h4>Somebody's name</h4>
+                <p class="clearfix" >Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1</p>
+        </div>
+        <div  class="comment">
+                <div class="pull-left"><img src="assets/img/user-profile/avatar.png" alt="Aniston" class="profile" /></div>
+                <p class="clearfix">Comment2 Comment2  Comment2  Comment2  Comment2  Comment2  Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 </p>
+        </div>
+
+
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-12 " style="overflow: hidden">
+        <div class="row">
+            <a class="fancybox" rel="gallery1" href="assets/{{$ctrl.place.photos[0]}}" title="{{$ctrl.place.name}}">
+                <img src="assets/{{$ctrl.place.photos[0]}}" alt=""  style="min-width:300px; max-width:600px; width:400px; margin-left:20px;"  />
+            </a>
+        </div>
+
+        <div class="row">
+            <a  ng-repeat="photo in $ctrl.place.photos" ng-if="$index>=1" class="fancybox" rel="gallery1" href="assets/{{photo}}" title="{{$ctrl.place.name}}">
+                <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}" />
+            </a>
+            <!-- to delete- it is for demonstrate without data in DB -->
+            <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
+                <img src="assets/img/places/new_1.jpg" />
+            </a>
+            <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg" >
+                <img src="assets/img/places/new2.jpg" />
+            </a>
+            <!-- to delete- it is for demonstrate without data in DB -->
+        </div>
+
+    </div>
+</div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".fancybox").fancybox();
+        });
+    </script>
+

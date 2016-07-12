@@ -1,0 +1,115 @@
+.parallax {
+  position:relative;
+  .parallax-background-opacity {
+
+    height: 100vh;
+  }
+  .aligncenter {
+
+    margin: 0 auto 0 auto;
+    left: 0;
+    right: 0;
+    width:100%;
+  }
+  #myvideo{
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -9999;
+
+  }
+  .parallax-title {
+    position:absolute;
+    top: 40%;
+    .aligncenter;
+    h2{
+      font-size: 70px;
+      font-weight: bold;
+      text-align: center;
+      color: @brand-light;
+    }
+  }
+  a {
+    .aligncenter;
+    position:absolute;
+    top:60%;
+    font-size: 70px;
+    text-align: center;
+    display: block;
+    color: @brand-light;
+
+
+  }
+}
+
+@supports (-ms-accelerator:true) {
+  .parallax a{
+    display: visible;
+    bottom: 7%;
+  }
+  .parallax {
+
+  }
+}
+
+#welcome-page-content{
+  padding-top:130px;
+  position:relative;
+  img {
+    width: 100%;
+  }
+  .welcome-page-section-img {
+    padding: 0;
+    .name-location {
+      font-size:20px;
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      background-color: rgba(61,162,104,0.5);
+      position: absolute;
+    }
+    .welcome-page-section-img-name {
+      .name-location;
+      top: 4px;
+      right: 4px;
+    }
+    .welcome-page-section-img-location {
+      .name-location;
+      font-size:16px;
+      bottom: 4px;
+      right: 4px;
+      img {
+        width:12px;
+      }
+    }
+  }
+  .welcome-page-section-text {
+    text-align: justify;
+    min-height: 375px;
+    padding: 20px 40px 40px 40px;
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      a {
+        color: @footer-bg-color;
+      }
+    }
+    div {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      a {
+        font-weight: bold;
+        color: @brand-dark;
+      }
+    }
+  }
+  .row {
+    background-color: #f7f4ea;
+    border-bottom: 1px @footer-bg-color solid;
+  }
+}
