@@ -1,11 +1,16 @@
 angular.module('greenTourism')
   .config(['RestangularProvider', function(RestangularProvider) {
     RestangularProvider.setBaseUrl('/api');
+    RestangularProvider.setRestangularFields({
+      id: '_id'
+    });
   }]);
 
 angular.module('greenTourism')
   .controller('MainCtrl', ['$rootScope', function MainCtrl($rootScope) {
     var ctrl = this;
+
+    // TODO: Add flash messages hiding when changing route
 
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
       ctrl.routeChangeError = false;

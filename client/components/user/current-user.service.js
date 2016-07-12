@@ -1,5 +1,8 @@
 angular.module('user').factory('currentUser', ['$window',
   function($window) {
-    return $window.user;
+    var user = $window.user;
+    delete $window.user;
+
+    return user;
   }
 ]);

@@ -62,3 +62,6 @@ build/Release
 
 # Temp css files
 *.css~
+
+# Ctags
+.tags*
