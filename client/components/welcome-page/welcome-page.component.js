@@ -42,7 +42,7 @@ angular.module('welcomePage', [])
 
       // Animation on click arrow
       var page = angular.element('html, body');
-      angular.element('a[href="#welcome-page-content"]').click(function () {
+      angular.element('a[href="#welcome-page-content"]').click(function() {
         var heightScroll = page.outerHeight();
         page.animate({
           scrollTop: heightScroll
