@@ -14,10 +14,7 @@ module.exports = function(Model) {
     var location = req.query.location;
     delete req.query.location;
 
-    console.log(location == undefined);
-
     if (location == undefined) {
-      console.log('No');
       Model.find(req.query, null, {limit: limit, skip: skip, sort: sort, location: location},
         function(err, records) {
           if (err) {

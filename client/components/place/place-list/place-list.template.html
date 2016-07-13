@@ -58,7 +58,7 @@
               </li>
             </ul>    
           </div>
-          <button type="button" class="btn btn-default col-xs-2 btn-last" >Export</button>
+          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
           <div class="col-xs-2"></div>
         </div>
       </div> <!-- Filter container end -->
@@ -101,16 +101,9 @@
           <h2>Popular Tracks in location</h2>
         </div>
         <div class="col-xs-12 no-padding">
-          <div class="col-xs-4 place-wrapper">
+          <div class="col-xs-4 place-wrapper" ng-repeat="track in popularTracks">
             <div class="place-container">
-            </div>
-          </div>
-          <div class="col-xs-4 place-wrapper">
-            <div class="place-container">
-            </div>
-          </div>
-          <div class="col-xs-4 place-wrapper">
-            <div class="place-container">
+              <h3>{{track.name}}</h3>
             </div>
           </div>
         </div>
