@@ -96,18 +96,7 @@
         <div id="map"></div>
       </div> <!-- Map container end-->
 
-      <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
-        <div class="col-xs-12 no-padding">
-          <h2>Popular Tracks in location</h2>
-        </div>
-        <div class="col-xs-12 no-padding">
-          <div class="col-xs-4 place-wrapper" ng-repeat="track in popularTracks">
-            <div class="place-container">
-              <h3>{{track.name}}</h3>
-            </div>
-          </div>
-        </div>
-      </div> <!-- Related tracks container end -->
+      <popular-tracks></popular-tracks>
     </div>
     <div class="col-xs-3 no-padding" id="sidebar">
       <div class="col-xs-12" id="search">

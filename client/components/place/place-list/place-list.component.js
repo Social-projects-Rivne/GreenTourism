@@ -1,7 +1,7 @@
-angular.module('placeList', ['filterMapType'])
+angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'mapFactory', '$scope', function(placesOnMap, mapMarkingTypes, Place, Track, mapFactory, $scope) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', function(placesOnMap, mapMarkingTypes, Place, Track) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
@@ -161,8 +161,6 @@ angular.module('placeList', ['filterMapType'])
 
       /* ** START tracks controller ** */
       var activeLiCounter = 4;
-      var userLocation;
-      $scope.popularTracks = [];
 
       function checkTrackColor(tracksType) {
         var color;
@@ -231,19 +229,7 @@ angular.module('placeList', ['filterMapType'])
         }
       };
       /* ** Popular tracks ** */
-      var getPopularTracks = function () {
-        Track.getList({location: [userLocation.lat, userLocation.lng]}).then(function(result) {
-          $scope.popularTracks = result;
-          console.log($scope.popularTracks);
-        });
-      }
-      function onLocationFound(e) {
-        userLocation = e.latlng;
-        getPopularTracks();
-      //this.popularTracks = popularTracks;
-      }
-      this.getPopularTracks = getPopularTracks;
-      mapFactory.map.on('locationfound', onLocationFound);
+      
       
 
       /* ** END tracks controller ** */
