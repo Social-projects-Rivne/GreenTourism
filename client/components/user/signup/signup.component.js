@@ -2,9 +2,6 @@ angular.module('user').component('signup', {
   templateUrl: 'components/user/signup/signup.template.html',
   controller: ['currentUser', '$location',
     function signupCtrl(currentUser, $location) {
-      if (currentUser) {
-        $location.path('/profile');
-      }
 
       /*
       this.signup = function(isvalid) {
