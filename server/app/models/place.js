@@ -1,15 +1,43 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var CommentSchema = new Schema({
+  comment: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+}, {
+  timestamps: true
+});
+
+var locationSchema = new Schema({
+  type: {
+    type: String,
+    required: true
+  },
+  coordinates: {
+    type: Array,
+    required: true
+  }
+});
+
 var PlaceSchema = new Schema({
   name: String,
   description: String,
-  latitude: Number,
-  longitude: Number,
+  loc: locationSchema,
   type: String,
-  photos: [Schema.Types.Mixed],
-  likes: [Schema.Types.Mixed],
-  userId: String,
+  photos: [String],
+  likes: [String],
+  comments: [CommentSchema],
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   rate: Number
 }, {
   toObject: {
@@ -20,7 +48,13 @@ var PlaceSchema = new Schema({
   }
 });
 
-PlaceSchema.virtual('stars').get(function () {
+var autoPopulateLead = function(next) {
+  this.populate('comments.author');
+  next();
+};
+PlaceSchema.pre('findOne', autoPopulateLead).pre('find', autoPopulateLead);
+
+PlaceSchema.virtual('stars').get(function() {
   this.rate = this.likes.length;
   this.save();
 });

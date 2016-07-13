@@ -10,7 +10,7 @@
               Map type
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding">
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
               <filter-map-type></filter-map-type>
             </ul>
           </div>
@@ -19,7 +19,7 @@
               Places
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding">
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
               <a href="" id="{{typ.type}}" class="list-group-item filter"  ng-repeat="typ in $ctrl.placesType" ng-click="$ctrl.checkType(typ.type)"> <!--DG: rename types to placesType -->
                 <img ng-src="{{typ.icon}}">
                 {{typ.name}}
@@ -37,7 +37,7 @@
               Tracks
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu  col-xs-12">
+            <ul class="dropdown-menu col-xs-12 dropdownFilter">
               <li ng-repeat="type in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type.type)">
                 <a href=""  class="active" id="{{type.type}}">
                   <span class="col-xs-9" style="border-left: 5px solid {{type.color}}">

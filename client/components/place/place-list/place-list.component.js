@@ -54,8 +54,8 @@ angular.module('placeList', ['filterMapType'])
         places = result;
         counter = 1;
         for (i = 0; i < places.length; i++) {
-          placeObject = {id: places[i]._id, latitude: places[i].latitude,
-             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
+          placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
+             longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
           arrPlaces.push(placeObject);
         }
@@ -95,8 +95,8 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-             placeObject = {id: places[i]._id, latitude: places[i].latitude,
-             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
+             placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
+             longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
             }
@@ -140,8 +140,8 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-              placeObject = {id: places[i]._id, latitude: places[i].latitude,
-              longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
+              placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
+              longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
             }
@@ -154,7 +154,7 @@ angular.module('placeList', ['filterMapType'])
       //----END---- FilterCheckAll
       this.places=arrPlaces;
       //Don't hide dropdown if clicked
-      $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+      $('.dropdownFilter').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
         }
