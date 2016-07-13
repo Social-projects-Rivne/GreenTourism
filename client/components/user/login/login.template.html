@@ -1,10 +1,10 @@
-<div class="signhead" >
+<div class="signhead">
     <h5 class="logotype">Green tourism</h5>
     <span class="fa fa-circle fa-5x circleuser"></span>
     <span class="fa fa-user fa-5x user"></span>
-    <h5 id="informlog">Log in into your account our use your social account</h5>
+    <h5 id="informlog"><a href="" class="link">login </a>or <a href="" ng-click="signup=!signup" class="link">Signup</a></h5>
 </div>
-<div class="container login">
+<div class="container login" >
 	<form class="" role="form" name="login" novalidate method="POST" action="/api/login">
     <div class="form-group email">
         <label for="email">E-mail</label>
@@ -21,9 +21,9 @@
         <span ng-show="login.password.$touched && login.password.$error.required">Password is required</span>
       </p>
     </div>
-		  <button type="submit" class="btn btn-block submit-btn">Login</button>
+		  <button type="submit" class="btn btn-success btn-block submit-btn">Login</button>
   </form>
-		<h4 class="no-account">No an account?<a href="" ng-click="signup=!signup" class="link"> Registrate</a> now</h4>
+<!-- 		<h4 class="no-account">No an account?<a href="" ng-click="signup=!signup" class="link"> Registrate</a> now</h4> -->
     <hr/>
     <a class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span>Login with facebook</a>
     <hr/>

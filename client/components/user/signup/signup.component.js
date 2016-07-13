@@ -35,7 +35,7 @@ angular.module('user').component('signup', {
           } else if (error.email) {
             return 'Please input correct email';
           } else if (error.pattern) {
-            return 'Only first domen email is allowed';
+            return 'Only top level domein is allowed';
           } 
         }
       };
