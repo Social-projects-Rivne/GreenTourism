@@ -5,7 +5,8 @@ angular.module('user').component('login', {
       if (currentUser) {
         $location.path('/profile');
       }
-		$('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+		
+		$('.dropdown-menu').on({
 		'click': function(e) {
 		  e.stopPropagation();
 		}
