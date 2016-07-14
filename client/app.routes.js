@@ -8,7 +8,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '<welcome-page></welcome-page>'
       })
 
-
       .when('/profile', {
         template: '<user-profile user="$resolve.user"></user-profile>',
         resolve: {
@@ -21,7 +20,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
                   });
               }
 
-              $location.path('/login');
+              $location.path('/');
             }
           ]
         }

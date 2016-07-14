@@ -1,7 +1,8 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', function(placesOnMap, mapMarkingTypes, Place, Track) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
+    function(placesOnMap, mapMarkingTypes, Place, Track, currentUser) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var arrPlaces = [];
@@ -9,6 +10,8 @@ angular.module('placeList', ['filterMapType'])
       var tracks = [];
       var placeObject = {};
       var counter;
+
+      this.user = currentUser;
 
       //-----START ADD Place-----
       this.addPlaceState = false;
