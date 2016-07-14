@@ -1,0 +1,133 @@
+<div class="container-fluid places">
+  <div class="row places">
+    <div class="col-xs-9 no-padding" id="main-content">
+      <div class="col-xs-12 no-padding" id="filter">  <!-- Filter container start -->
+        <div class="btn-group col-xs-12" role="group" id="buttons">
+          <div class="col-xs-1"></div>
+          <button type="button" class="btn btn-default col-xs-2 btn-first" ng-disabled="!$ctrl.user" ng-click="$ctrl.toggleAddPlace();">Add place</button>
+          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Map type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
+              <filter-map-type></filter-map-type>
+            </ul>
+          </div>
+          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterCategory">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Places
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
+              <a href="" id="{{typ.type}}" class="list-group-item filter"  ng-repeat="typ in $ctrl.placesType" ng-click="$ctrl.checkType(typ.type)"> <!--DG: rename types to placesType -->
+                <img ng-src="{{typ.icon}}">
+                {{typ.name}}
+                <span></span>
+              </a>
+              <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
+                <img >
+                Check all
+                <span></span>
+              </a>
+            </ul>
+          </div>
+          <div id="tracks-filter" class="btn-group col-xs-2 no-padding" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tracks
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu col-xs-12 dropdownFilter">
+              <li ng-repeat="type in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type.type)">
+                <a href=""  class="active" id="{{type.type}}">
+                  <span class="col-xs-9" style="border-left: 5px solid {{type.color}}">
+                    {{type.name}}
+                  </span>
+                  <span id="gi{{type.type}}" class="col-xs-3 glyphicon glyphicon-ok">
+                  </span>
+                </a>
+              </li>
+            <li ng-click="$ctrl.checkAllTracks()">
+                <a href=""  class="active" id="all-tracks">
+                  <span class="col-xs-9">
+                    Check all tracks
+                  </span>
+                  <span id="gi-all" class="col-xs-3 glyphicon glyphicon-ok">
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-default col-xs-2 btn-last" >Export</button>
+          <div class="col-xs-2"></div>
+        </div>
+      </div> <!-- Filter container end -->
+
+      <!-- New place form -->
+      <div style="margin-top: 55px;" ng-show="$ctrl.addPlaceState">
+        <form name="addPlace" novalidate role="form" class="simple-form well">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" ng-model="$ctrl.newPlace.name" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" ng-model="$ctrl.newPlace.description" />
+          </div>
+          <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="number" step="any" name="latitude" ng-model="$ctrl.newPlace.latitude" />
+          </div>
+          <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="number" step="any" name="longitude" ng-model="$ctrl.newPlace.longitude" />
+          </div>
+          <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" name="type" ng-model="$ctrl.newPlace.type" />
+          </div>
+          <input type="submit" ng-click="$ctrl.addNewPlace($ctrl.newPlace)" class="btn btn-default" value="Submit" />
+        </form>
+        <pre>place = {{$ctrl.newPlace | json}}</pre>
+      </div>
+      <!-- New place form end -->
+
+      <div class="col-xs-12 no-padding"><!-- Map container start-->
+        <div id="map"></div>
+      </div> <!-- Map container end-->
+
+      <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
+        <div class="col-xs-12 no-padding">
+          <h2>Popular Tracks in location</h2>
+        </div>
+        <div class="col-xs-12 no-padding">
+          <div class="col-xs-4 place-wrapper">
+            <div class="place-container">
+            </div>
+          </div>
+          <div class="col-xs-4 place-wrapper">
+            <div class="place-container">
+            </div>
+          </div>
+          <div class="col-xs-4 place-wrapper">
+            <div class="place-container">
+            </div>
+          </div>
+        </div>
+      </div> <!-- Related tracks container end -->
+    </div>
+    <div class="col-xs-3 no-padding" id="sidebar">
+      <div class="col-xs-12" id="search">
+        <div class="input-group col-xs-offset-1 col-xs-10">
+          <input class="form-control" type="text" name="search">
+          <span class="input-group-btn">
+            <button class="btn" type="button">Search</button>
+          </span>
+        </div>
+      </div>
+        <div class="col-xs-12 no-padding" id="popularPlaces">
+          <location-places places="$ctrl.places"></location-places>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<section class="blog-page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blog</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog-page-content">
+    <div class="container">
+        <div class="row">
+            <article>
+                <div class="col-md-8">
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true" >
+                            <div class="thumbnail blog-list-item">
+                                <a href="#!/blog/{{blog.id}}">
+                                    <img ng-src="{{blog.images}}" alt="{{blog.title}}">
+                                </a>
+
+                                <div class="caption">
+                                    <h3 class="blog-title">
+                                        <a href="#">{{blog.title}}</a>
+                                    </h3>
+
+                                    <div class="blog-details">
+                                        By
+                        <span class="blog-author">
+                            <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
+                        </span>
+                                        <span class="blog-date">
+								{{blog.date | date:'dd MMMM yyyy'}}
+					</span>
+                                        <a href="#" class="blog-category">{{blog.category}}</a>
+                                    </div>
+                                    <div class="blog-separator"></div>
+
+                                    <div class="blog-content">
+                                        {{blog.content}}
+                                    </div>
+
+                                    <p class="blog-meta">
+                                        <a href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
+                                            <i class="fa fa-book" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#!/blog/{{blog.id}}#post-comments" class="pull-right">
+                                            <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                            {{blog.comments.length}}
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <aside>
+                <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-find">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                  </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog-category-list">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Categories</h3>
+                                        <ul>
+                                            <li ng-repeat="category in $ctrl.blogs | orderBy: $ctrl.categoryProp | unique: $ctrl.categoryProp  ">
+                                                <a href="#" ng-click="selectCategory(item)">
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
+                                                    {{category}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-panel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tabbable" id="tabs-blog">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active" ng-class="{ active: $ctrl.isSelected(1) }">
+                                                    <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(1)">
+                                                        Popular
+                                                    </a>
+                                                </li>
+                                                <li ng-class="{ active: $ctrl.isSelected(2) }">
+                                                    <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)" >
+                                                        Recent
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }" id="panel-popular">
+                                                    <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp | limitTo:3">
+                                                        <a href="#!/blog/{{blog.id}}" class="pull-left">
+                                                            <img alt="{{blog.title}}"
+                                                                 ng-src="{{blog.images}}" class="media-object"/>
+                                                        </a>
+
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading">
+                                                                <a href="#!/blog/{{blog.id}}">
+                                                                    {{blog.title}}
+                                                                </a>
+                                                            </h4>
+
+                                                            <div class="media-date">
+								{{blog.date | date:'dd MMMM yyyy'}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }" id="panel-recent">
+                                                   <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp:true | limitTo:3">
+                                                        <a href="#!/blog/{{blog.id}}" class="pull-left">
+                                                            <img alt="{{blog.title}}"
+                                                                 ng-src="{{blog.images}}" class="media-object"/>
+                                                        </a>
+
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading">
+                                                                <a href="#!/blog/{{blog.id}}">
+                                                                    {{blog.title}}
+                                                                </a>
+                                                            </h4>
+
+                                                            <div class="media-date">
+								{{blog.date | date:'dd MMMM yyyy'}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
