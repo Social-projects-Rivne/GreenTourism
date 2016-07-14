@@ -1,5 +1,5 @@
-angular.module('greenTourism')
-  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider.caseInsensitiveMatch = true;
 
@@ -9,13 +9,45 @@ angular.module('greenTourism')
       })
 
       .when('/signup', {
-        template: '<signup></signup>'
+        template: '<signup></signup>',
+        resolve: {
+          user: ['currentUser', '$location',
+            function checkUser(currentUser, $location) {
+              if (currentUser) {
+                $location.path('/profile');
+              }
+            }
+          ]
+        }
       })
       .when('/login', {
-        template: '<login></login>'
+        template: '<login></login>',
+        resolve: {
+          user: ['currentUser', '$location',
+            function checkUser(currentUser, $location) {
+              if (currentUser) {
+                $location.path('/profile');
+              }
+            }
+          ]
+        }
       })
       .when('/profile', {
-        template: '<user-profile></user-profile>'
+        template: '<user-profile user="$resolve.user"></user-profile>',
+        resolve: {
+          user: ['User', 'currentUser', '$location',
+            function getPlace(User, currentUser, $location) {
+              if (currentUser) {
+                return User.one(currentUser._id).get()
+                  .then(function(user) {
+                    return user;
+                  });
+              }
+
+              $location.path('/login');
+            }
+          ]
+        }
       })
 
       .when('/places', {
@@ -26,7 +58,7 @@ angular.module('greenTourism')
         template: '<div><place-detail place="$resolve.place"></place-detail></div>',
         controller: 'placeDetailCtrl',
         resolve: {
-          place: ["$route", "Place", function getPlace($route, Place) {
+          place: ['$route', 'Place', function getPlace($route, Place) {
             return Place.one($route.current.params.placeId).get()
               .then(function(place) {
                 return place;
@@ -34,7 +66,6 @@ angular.module('greenTourism')
           }]
         }
       })
-
 
       .when('/events', {
         template: '<event-list></event-list>'

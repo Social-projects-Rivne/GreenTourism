@@ -5,26 +5,6 @@
   text-align: center;
   width: 100%;
   top: 0;
-
-}
-
-@keyframes rotateFall {
-  0% {
-    transform: rotateZ(0deg);
-  }
-  20% {
-    transform: rotateZ(10deg);
-    animation-timing-function: ease-out;
-  }
-  40% {
-    transform: rotateZ(17deg);
-  }
-  60% {
-    transform: rotateZ(16deg);
-  }
-  100% {
-    transform: translateY(100%) rotateZ(17deg);
-  }
 }
 
 @keyframes slideInUp {
@@ -64,7 +44,7 @@ div.place {
     background-color: @brand-dark;
   }
   h2 {
-    color: #3da268;
+    color: @brand-dark;
     text-transform: capitalize;
   }
   .container_page {

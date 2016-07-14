@@ -56,12 +56,15 @@
     <!--link rel="stylesheet" href="assets/css/main.css" /-->
     <!-- endbuild -->
 
+    <script>window.user = <%- user || 'null' %>;</script>
+
     <!-- Main scripts -->
     <!-- build:js app.js -->
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.routes.js"></script>
     <script src="nav.controller.js"></script>
+    <script src="current-user.service.js"></script>
 
     <script src="models/user.model.js"></script>
     <script src="models/place.model.js"></script>
@@ -77,10 +80,10 @@
     <script src="components/welcome-page/welcome-page.component.js"></script>
 
     <!-- USER AND AUTH -->
-    <script src="components/auth/auth.module.js"></script>
-    <script src="components/auth/signup/signup.component.js"></script>
-    <script src="components/auth/login/login.component.js"></script>
-    <script src="components/user-profile/user-profile.component.js"></script>
+    <script src="components/user/user.module.js"></script>
+    <script src="components/user/signup/signup.component.js"></script>
+    <script src="components/user/login/login.component.js"></script>
+    <script src="components/user/user-profile/user-profile.component.js"></script>
 
     <!-- PLACE -->
     <script src="components/place/place.module.js"></script>
@@ -115,26 +118,17 @@
 
     <title>Green Tourism</title>
   </head>
-
 <body>
 
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header hidden-sm hidden-md hidden-lg">
-        <button type="button" class="navbar-toggle collapsed navtop" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar" ></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#!/">GreenTourism</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
+    <div class="container nav-padding">
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="logo"><a href="#!/">GreenTourism</a></div>
+        <ul class="nav left-mobile-menu">
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
             <ul class="dropdown-menu nav-ul">
               <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li>
               <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
@@ -142,9 +136,40 @@
           </li>
         </ul>
 
+        <ul class="nav right-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <% if (user) { %>
+                <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
+                <li><a href="/api/logout">Log out</a></li>
+              <% } else { %>
+                <li ng-class="{ active: nav.isActive('/login')}"><a href="#!/login">Login</a></li>
+                <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
+
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
             <ul class="dropdown-menu nav-ul">
               <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
               <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
@@ -160,6 +185,13 @@
 
 <main ng-controller="MainCtrl as main" id="main">
   <div ng-if="!main.routeChangeError" ng-view class="page {{pageClass}}"></div>
+  <% for (var i in messages) { %>
+    <div class="alert alert-danger text-center">
+      <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= messages[i] %>
+    </div>
+  <% } %>
+  <div ng-if="!main.routeChangeError" ng-view=""></div>
   <div ng-if="main.routeChangeError">
     <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
     <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
@@ -169,7 +201,27 @@
   </div>
 </main>
 <div ng-controller="NavCtrl as nav">
-
-</div>
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+        <div class="footer-content">
+          <a class="footer-logo" href="#/">GreenTourism</a>
+          <p>© 2001 - 2016 <a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank"><span>The GreenTourism Team</span></a>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+        <div class="footer-content">
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Google+</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

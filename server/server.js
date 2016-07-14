@@ -6,6 +6,7 @@ var express = require('./config/express');
 
 var db = mongoose(); // eslint-disable-line no-unused-vars
 var app = express();
+var passport = require('./config/passport')(); // eslint-disable-line no-unused-vars
 
 app.listen(process.env.PORT, function() {
   console.log('Server running at http://localhost:' + process.env.PORT + '/');
