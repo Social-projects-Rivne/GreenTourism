@@ -19,10 +19,10 @@
               Places
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
-              <a href="" id="{{typ.type}}" class="list-group-item filter"  ng-repeat="typ in $ctrl.placesType" ng-click="$ctrl.checkType(typ.type)"> <!--DG: rename types to placesType -->
-                <img ng-src="{{typ.icon}}">
-                {{typ.name}}
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
+              <a href="" id="{{placeType.type}}" class="list-group-item filter"  ng-repeat="placeType in $ctrl.placesType" ng-click="$ctrl.checkType(placeType.type)">
+                <img ng-src="{{placeType.icon}}">
+                {{placeType.name}}
                 <span></span>
               </a>
               <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
