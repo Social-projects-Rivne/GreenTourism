@@ -36,13 +36,8 @@ var UserSchema = new Schema({
     required: 'Provider is required'
   },
   providerId: String,
-  providerData: {},
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-  // updatedAt
-});
+  providerData: {}
+}, {timestamps: true});
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(next) {
