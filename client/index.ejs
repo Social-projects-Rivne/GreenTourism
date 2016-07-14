@@ -56,12 +56,15 @@
     <!--link rel="stylesheet" href="assets/css/main.css" /-->
     <!-- endbuild -->
 
+    <script>window.user = <%- user || 'null' %>;</script>
+
     <!-- Main scripts -->
     <!-- build:js app.js -->
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.routes.js"></script>
     <script src="nav.controller.js"></script>
+    <script src="current-user.service.js"></script>
 
     <script src="models/user.model.js"></script>
     <script src="models/place.model.js"></script>
@@ -78,7 +81,6 @@
 
     <!-- USER AND AUTH -->
     <script src="components/user/user.module.js"></script>
-    <script src="components/user/current-user.service.js"></script>
     <script src="components/user/signup/signup.component.js"></script>
     <script src="components/user/login/login.component.js"></script>
     <script src="components/user/user-profile/user-profile.component.js"></script>
@@ -224,9 +226,5 @@
     </div>
   </div>
 </footer>
-
-<script>
-  window.user = <%- user || 'null' %>;
-</script>
 </body>
 </html>
