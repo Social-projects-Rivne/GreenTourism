@@ -1,27 +1,22 @@
-$(document).ready(function(){
-    var controls = {
-        video: $("#myvideo")
-       // playpause: $("#playpause")
-    };
-    var video = controls.video[0];
+angular.element(document).ready(function () {
+  var controls = {
+    video: angular.element("#myvideo")
+  };
+  var video = controls.video[0];
 
-    $(document).on('click',$("#myvideo"), function(){
-        video=$("#myvideo")[0];
-       // $( "#playpause" ).animate({
-         //   opacity: 0
-      //  }, 100);
-        if (video.paused&&video) {
-            video.play();
-            //$("#playpause").text("STOP");
-        } else {
+  angular.element(document).on('click', angular.element("#myvideo"), function () {
+    video = angular.element("#myvideo")[0];
 
-            video.pause();
-           // $("#playpause").text("Play");
-        }
+    if (video.paused && video) {
+      video.play();
 
-       // $("#playpause").toggleClass("paused");
-       // $("#playpause").toggleClass("paused");
-    });
+    } else {
+
+      video.pause();
+
+    }
+
+  });
 
 
 });

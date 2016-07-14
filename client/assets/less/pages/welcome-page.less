@@ -1,5 +1,5 @@
 .parallax {
-  position:relative;
+  position: relative;
   .parallax-background-opacity {
 
     height: 100vh;
@@ -9,9 +9,10 @@
     margin: 0 auto 0 auto;
     left: 0;
     right: 0;
-    width:100%;
+    width: 100%;
   }
-  #myvideo{
+  #myvideo {
+    margin: 0 auto 0 auto;
     right: 0;
     bottom: 0;
     min-width: 100%;
@@ -22,10 +23,10 @@
 
   }
   .parallax-title {
-    position:absolute;
+    position: absolute;
     top: 40%;
     .aligncenter;
-    h2{
+    h2 {
       font-size: 70px;
       font-weight: bold;
       text-align: center;
@@ -34,41 +35,41 @@
   }
   a {
     .aligncenter;
-    position:absolute;
-    top:60%;
+    position: absolute;
+    top: 60%;
     font-size: 70px;
     text-align: center;
     display: block;
     color: @brand-light;
 
-
   }
 }
 
 @supports (-ms-accelerator:true) {
-  .parallax a{
-    display: visible;
+  .parallax a {
+    display: hidden;
     bottom: 7%;
   }
+
   .parallax {
 
   }
 }
 
-#welcome-page-content{
-  padding-top:130px;
-  position:relative;
+#welcome-page-content {
+  padding-top: 130px;
+  position: relative;
   img {
     width: 100%;
   }
   .welcome-page-section-img {
     padding: 0;
     .name-location {
-      font-size:20px;
+      font-size: 20px;
       padding: 0 4px;
       font-weight: bold;
       color: @brand-light;
-      background-color: rgba(61,162,104,0.5);
+      background-color: rgba(61, 162, 104, 0.5);
       position: absolute;
     }
     .welcome-page-section-img-name {
@@ -78,11 +79,11 @@
     }
     .welcome-page-section-img-location {
       .name-location;
-      font-size:16px;
+      font-size: 16px;
       bottom: 4px;
       right: 4px;
       img {
-        width:12px;
+        width: 12px;
       }
     }
   }

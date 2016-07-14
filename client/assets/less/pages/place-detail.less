@@ -1,0 +1,121 @@
+.page-detail {
+  bottom: 0;
+  padding-top: 50px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 0;
+
+}
+
+@keyframes rotateFall {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+    animation-timing-function: ease-out;
+  }
+  40% {
+    transform: rotateZ(17deg);
+  }
+  60% {
+    transform: rotateZ(16deg);
+  }
+  100% {
+    transform: translateY(100%) rotateZ(17deg);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInOut {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.page-detail.ng-enter {
+  animation: slideInUp 0.5s both ease-in;
+  z-index: 8888;
+}
+
+.page-detail.ng-leave {
+  animation: slideInOut 0.5s both ease-in;
+  z-index: 9999;
+}
+
+div.place {
+  margin: 0px;
+  .vertical-align {
+    padding: 5px 10px;
+  }
+  button.glyphicon-heart {
+    background-color: @brand-dark;
+  }
+  h2 {
+    color: #3da268;
+    text-transform: capitalize;
+  }
+  .container_page {
+    padding: 20px 20px;
+    div .vertical-align {
+      border: 1px solid @brand-dark;
+
+    }
+    textarea {
+      border: 1px solid @brand-dark;
+    }
+    button#post {
+      border-radius: 0px;
+      background-color: @brand-dark;
+      color: white;
+      width: 150px;
+    }
+    i.fa {
+      color: @brand-dark;
+    }
+    img {
+      width: 130px;
+      padding-bottom: 5px;
+    }
+    img.profile {
+      width: 80px;
+      height: 80px;
+    }
+    .fancybox a img {
+      width: 120px;
+    }
+
+  }
+  #map1 {
+    width: 100%;
+    height: 430px;
+    margin-bottom: 20px;
+  }
+  i#close, i.fa {
+    cursor: pointer;
+  }
+  .comment {
+    padding: 10px 0;
+    text-align: justify;
+    h3 {
+      text-align: left;
+    }
+    img {
+      margin-right: 15px;
+    }
+  }
+}
+
+/* place-page */

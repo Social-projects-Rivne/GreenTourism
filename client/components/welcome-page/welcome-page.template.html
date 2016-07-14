@@ -1,82 +1,122 @@
+<script src="assets/js/videoplayer.js"></script>
 <div class="parallax hidden-xs hidden-sm">
-  <div class="parallax-background-opacity">
-    <video  id="myvideo"  autoplay  poster="assets/img/welcome-page/main.jpg"  preload>
-     <source src="assets/img/video1.mp4" type="video/mp4" />
-    </video>
-  </div>
-  <div class="parallax-title">
-    <h2>Find. Plan. Travel </h2>
-    <p>
-    <div id="controls">
-      <!--<img src="/assets/img/welcome-page/preload.gif"  id="playpause"/> -->
+    <div class="parallax-background-opacity">
+        <video id="myvideo" autoplay poster="assets/img/welcome-page/main.jpg" preload>
+            <source src="assets/img/video1.mp4" type="video/mp4"/>
+        </video>
     </div>
-  </div>
-  <a href="#welcome-page-content">
-    <i class="fa fa-angle-down" aria-hidden="true"></i>
-  </a>
+    <div class="parallax-title">
+        <h2>Find. Plan. Travel </h2>
+
+        <p>
+
+        <div id="controls">
+            <!--<img src="/assets/img/welcome-page/preload.gif"  id="playpause"/> -->
+        </div>
+    </div>
+    <a href="#welcome-page-content">
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+    </a>
 </div>
 
 <div class="container" id="welcome-page-content">
-  <div class="row">
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m1.jpg" >
-    </div>
-    <div class="col-lg-6 welcome-page-section-text">
-      <h2><a href="#">Find place</a></h2>
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
-        sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
-        nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam sodales
-        non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis. Morbi
-        mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus efficitur ut.
-        Integer ac tortor diam."</p>
-      <div>
-        <a href="#">Go to search</a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 welcome-page-section-text">
-      <h2><a href="#">Plan your track</a></h2>
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna sed
-        aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris nec
-        bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        "</p>
-      <div>
-        <a href="#">Go to search</a>
-      </div>
-    </div>
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m2.jpg" >
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 welcome-page-section-img">
-      <img src="/assets/img/welcome-page/m3.jpg" >
-    </div>
-    <div class="col-lg-6 welcome-page-section-text">
-      <h2><a href="#">Fun on events</a></h2>
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
-        sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
-        nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam sodales
-        non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis. Morbi
-        mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus efficitur ut.
-        Integer ac tortor diam."</p>
-      <div>
-        <a href="#">Go to search</a>
-      </div>
-    </div>
-  </div>
+    <div class="row">
+        <div class="col-lg-6 welcome-page-section-img">
+            <img src="/assets/img/welcome-page/m1.jpg">
+        </div>
+        <div class="col-lg-6 welcome-page-section-text">
+            <h2><a href="#">Find place</a></h2>
 
-  <div class="row">
-    <div class="col-lg-6 welcome-page-section-img" ng-repeat="place in $ctrl.popularPlaces">
-      <img src="/assets/img/welcome-page/m1.jpg" title="{{place.name}}" alt="{{place.name}}">
-      <a class="welcome-page-section-img-name" href="#!/places/{{place._id}}">{{place.name}}</a>
-      <a class="welcome-page-section-img-location" href="#!/places/{{place._id}}">
-        <img src="assets/img/places/marker/green.png">
-        {{place.latitude}}, {{place.longitude}}
-      </a>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
+                sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo
+                mauris
+                nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta
+                pulvinar
+                egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam
+                sodales
+                non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis.
+                Morbi
+                mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus
+                efficitur ut.
+                Integer ac tortor diam."</p>
+
+            <div>
+                <a href="#">Go to search</a>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-lg-6 welcome-page-section-text">
+            <h2><a href="#">Plan your track</a></h2>
+
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna sed
+                aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
+                nec
+                bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta
+                pulvinar
+                "</p>
+
+            <div>
+                <a href="#">Go to search</a>
+            </div>
+        </div>
+        <div class="col-lg-6 welcome-page-section-img">
+            <img src="/assets/img/welcome-page/m2.jpg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 welcome-page-section-img">
+            <img src="/assets/img/welcome-page/m3.jpg">
+        </div>
+        <div class="col-lg-6 welcome-page-section-text">
+            <h2><a href="#">Fun on events</a></h2>
+
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
+                sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo
+                mauris
+                nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta
+                pulvinar
+                egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam
+                sodales
+                non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis.
+                Morbi
+                mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus
+                efficitur ut.
+                Integer ac tortor diam."</p>
+
+            <div>
+                <a href="#">Go to search</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 welcome-page-section-img" ng-repeat="place in $ctrl.outputPopularPlaces">
+            <img src="/assets/{{place.photo}}" title="{{place.name}}" alt="{{place.name}}">
+            <a href="#!/places/{{place._id}}"><div class="popular-places-gradient"></div></a>
+            <a class="welcome-page-section-img-name" href="#!/places/{{place._id}}">{{place.name}}</a>
+            <a class="welcome-page-section-img-location" href="#!/places/{{place._id}}">
+                <img src="assets/img/places/marker/green.png">
+                {{place.location}}
+            </a>
+        </div>
+    </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+                <a class="footer-logo" href="#/">GreenTourism</a>
+                <p>© 2001 - 2016 <span>The GreenTourism Team</span></p>
+                <p><a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank">We are on GitHub</a></p>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                <ul>
+                    <li><h4><a href="#">Twitter</a></h4></li>
+                    <li><h4><a href="#">Google+</a></h4></li>
+                    <li><h4><a href="#">Facebook</a></h4></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
