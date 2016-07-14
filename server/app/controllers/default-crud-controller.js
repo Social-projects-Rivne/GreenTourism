@@ -14,18 +14,7 @@ module.exports = function(Model) {
     var location = req.query.location;
     delete req.query.location;
 
-    if (location == undefined) {
-      Model.find(req.query, null, {limit: limit, skip: skip, sort: sort, location: location},
-        function(err, records) {
-          if (err) {
-            res.status(400).json(err);
-          } else {
-            res.json(records);
-          }
-        }
-      );
-    } else {
-      console.log('Yes');
+    if (location) {
       Model.find({
         loc: {
           $near: {
@@ -44,6 +33,16 @@ module.exports = function(Model) {
           res.json(records);
         }
       });
+    } else {
+      Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
+        function(err, records) {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.json(records);
+          }
+        }
+      );
     }
   };
 
