@@ -1,30 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
-var CommentSchema = new Schema({
-  content: {
-    type: String,
-    required: true
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  }
-}, {
-  timestamps: true
-});
-
-var LocationSchema = new Schema({
-  type: {
-    type: String,
-    required: true
-  },
-  coordinates: {
-    type: Array,
-    required: true
-  }
-});
+var CommentSchema = require('./schema/comment');
+var LocationSchema = require('./schema/location');
 
 var PlaceSchema = new Schema({
   name: String,
