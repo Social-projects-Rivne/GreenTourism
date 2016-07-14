@@ -5,19 +5,27 @@
     <h5 id="informlog"><a href="" ng-click="login=!login" class="link">login </a>or <a href="" ng-click="login=!login" class="link">Signup</a></h5>
 </div>
 <div class="container signup" ng-hide="login">
-	<form class="" role="form" name="signup" novalidate ng-submit="$ctrl.signup(signup.$valid)">
+	<form class="" role="form" name="signup" method="POST" action="/api/signup" novalidate ng-submit="$ctrl.signup(signup.$valid)">
+		
 		<div class="form-group">
-			<label for="Name">Name:</label>
-			<input type="text" name="name" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="user.name" ng-minlength="2" ng-maxlength="15" required >
-			<p class="error" ng-show="signup.name.$touched && ($ctrl.showError || signup.name.$dirty)">
-				{{$ctrl.getError(signup.name.$error)}}
+			<label for="Name">First Name:</label>
+			<input type="text" name="firstname" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.firstName" ng-minlength="2" ng-maxlength="15" required >
+			<p class="error" ng-show="signup.firstname.$touched && ($ctrl.showError || signup.firstname.$dirty)">
+				{{$ctrl.getError(signup.firstname.$error)}}
 			</p>
 			<p class="tip">Is your real name, sign under comments, posts</p>
 		</div>
-		
+		<div class="form-group">
+			<label for="last Name">Last Name:</label>
+			<input type="text" name="lastname" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.lastName" ng-minlength="2" ng-maxlength="15" required >
+			<p class="error" ng-show="signup.lastname.$touched && ($ctrl.showError || signup.lastname.$dirty)">
+				{{$ctrl.getError(signup.lastname.$error)}}
+			</p>
+			<p class="tip">Is your real family name</p>
+		</div>
 		<div class="form-group">
 			<label for="email">Email:</label>
-			<input type="email" name="email" class="form-control" ng-model="user.useremail" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/"required>
+			<input type="email" name="email" class="form-control" ng-model="$ctrl.user.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/"required>
 			<p class="error" ng-show="signup.email.$touched && ($ctrl.showError || signup.email.$dirty)">
 				{{$ctrl.getErroremail(signup.email.$error)}}
 			</p>
@@ -25,7 +33,7 @@
 		
 		<div class="form-group ">
 			<label for="password">Password:</label>
-			<input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{3,}$/" ng-model="user.password" ng-minlength="7" ng-maxlength="25"  required>
+			<input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{3,}$/" ng-model="$ctrl.user.password" ng-minlength="7" ng-maxlength="25"  required>
 			<p class="error" ng-show="signup.password.$touched && ($ctrl.showError || signup.password.$dirty)">
 				{{$ctrl.getErrorpassword(signup.password.$error)}}
 			</p>
@@ -34,7 +42,7 @@
 		
 		<div class="form-group ">
 			<label for="confirmpassword">Confirm Password:</label>
-			<input type="password" name="confirmpassword" class="form-control" ng-model="user.confirmpassword" required  confirm-password="password">
+			<input type="password" name="confirmpassword" class="form-control" ng-model="$ctrl.user.confirmpassword" required  confirm-password="password">
 			<p class="error"  ng-show="signup.confirmpassword.$touched && ($ctrl.showError || signup.confirmpassword.$dirty)">
 				{{$ctrl.getErrorpassword(signup.confirmpassword.$error)}}
 			</p>
