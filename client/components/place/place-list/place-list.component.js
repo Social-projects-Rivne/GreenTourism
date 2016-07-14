@@ -54,28 +54,28 @@ angular.module('placeList', ['filterMapType'])
         places = result;
         counter = 1;
         for (i = 0; i < places.length; i++) {
-          placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
-             longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
+          placeObject = {id: places[i]._id, latitude: places[i].location.coordinates[0],
+             longitude: places[i].location.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
           arrPlaces.push(placeObject);
         }
         placesOnMap.setPlaceArray(arrPlaces);
         placesOnMap.showPlaces(placesOnLoad);
 
-        $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
-        $('#Streets span').addClass('glyphicon glyphicon-ok');
+        angular.element('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
+        angular.element('#Streets span').addClass('glyphicon glyphicon-ok');
       });
       //----END---- ShowPlacesOnLoad
 
       //----START---- FilterByOneOfType
       this.checkType = function(input) {
-        var spanCheck = $('#' + input + ' span');
+        var spanCheck = angular.element('#' + input + ' span');
 
         if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
           counter--;
 
           spanCheck.removeClass('glyphicon glyphicon-ok');
-          $('#all span').removeClass('glyphicon glyphicon-ok');
+          angular.element('#all span').removeClass('glyphicon glyphicon-ok');
 
           placesOnMap.removePlaces(input);
 
@@ -89,14 +89,14 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.addClass('glyphicon glyphicon-ok');
 
           if (counter == this.placesType.length)
-            $('#all span').addClass('glyphicon glyphicon-ok');
+            angular.element('#all span').addClass('glyphicon glyphicon-ok');
 
           Place.getList({type: input}).then(function(result) {
             places = result;
 
             for (i = 0; i < places.length; i++) {
-             placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
-             longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
+             placeObject = {id: places[i]._id, latitude: places[i].location.coordinates[0],
+             longitude: places[i].location.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
             }
@@ -110,7 +110,7 @@ angular.module('placeList', ['filterMapType'])
 
       //----START---- FilterCheckAll
       this.checkAll = function() {
-        var spanCheck = $('#all span');
+        var spanCheck = angular.element('#all span');
 
         if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
           counter = 0;
@@ -118,7 +118,7 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.removeClass('glyphicon glyphicon-ok');
 
           for (i = 0; i < this.placesType.length; i++) {
-            $('#' + this.placesType[i].type + ' span')
+            angular.element('#' + this.placesType[i].type + ' span')
               .removeClass('glyphicon glyphicon-ok');
           }
           placesOnMap.removePlaces();
@@ -132,7 +132,7 @@ angular.module('placeList', ['filterMapType'])
           spanCheck.addClass('glyphicon glyphicon-ok');
 
           for (i = 0; i < this.placesType.length; i++) {
-            $('#' + this.placesType[i].type + ' span')
+            angular.element('#' + this.placesType[i].type + ' span')
               .addClass('glyphicon glyphicon-ok');
           }
 
@@ -140,8 +140,8 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-              placeObject = {id: places[i]._id, latitude: places[i].loc.coordinates[0],
-              longitude: places[i].loc.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
+              placeObject = {id: places[i]._id, latitude: places[i].location.coordinates[0],
+              longitude: places[i].location.coordinates[1], type: places[i].type, name: places[i].name, photo: places[i].photos[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
             }
@@ -154,7 +154,7 @@ angular.module('placeList', ['filterMapType'])
       //----END---- FilterCheckAll
       this.places=arrPlaces;
       //Don't hide dropdown if clicked
-      $('.dropdownFilter').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+      angular.element('.dropdownFilter').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
         }
