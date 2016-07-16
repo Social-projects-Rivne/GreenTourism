@@ -66,4 +66,15 @@ router.route('/logout').get(function(req, res) {
   res.redirect('/');
 });
 
+//FACEBOOK
+router.route('/auth/facebook').get(
+  passport.authenticate('facebook'));
+
+router.route('/auth/facebook/callback').get(
+  passport.authenticate('facebook', { successRedirect: '/#!/profile',
+                                      failureRedirect: '/#!/login' }));
+
+
+
+
 module.exports = router;

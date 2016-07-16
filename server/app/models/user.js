@@ -40,8 +40,13 @@ var UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
   }
-  // updatedAt
 });
 
 // Execute before each user.save() call
