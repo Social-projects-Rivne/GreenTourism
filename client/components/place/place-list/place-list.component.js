@@ -14,33 +14,7 @@ angular.module('placeList', ['filterMapType'])
       this.user = currentUser;
 
       //-----START ADD Place-----
-      this.addPlaceState = false;
-
-      this.toggleAddPlace = function() {
-        this.addPlaceState = !this.addPlaceState;
-      };
-
-      // TODO: Move this to it's own contoller (or component)
-      this.newPlace = {};
-
-      this.addNewPlace = function(newPlace) {
-        var place = new Place(newPlace);
-        place.$save();
-        alert('Place saved to db!');
-
-        this.toggleAddPlace();
-        document.forms.addPlace.reset();
-        this.newPlace = {};
-
-        this.addPlaceOnMap(L.latLng(place.latitude,
-          place.longitude));
-      };
-
-      // TODO: Move this inside map
-      this.addPlaceOnMap = function(latLng) {
-        L.marker(latLng).addTo($rootScope.map);
-        $rootScope.map.setView(latLng);
-      };
+      
       //-----END ADD Place-----
 
       this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
