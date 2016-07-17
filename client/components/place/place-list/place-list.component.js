@@ -164,16 +164,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
       /* ** START tracks controller ** */
       var activeLiCounter = 4;
 
-      function checkTrackColor(tracksType) {
-        var color;
-        for (var i = 0; i < this.tracksType.length; i++) {
-          if (tracksType === this.tracksType[i].type) {
-            color = this.tracksType.color;
-            return color;
-          }
-        }
-      }
-
       this.tracksType = mapMarkingTypes.tracksType;
       Track.getList().then(function(result) {
         tracks = result;
@@ -204,7 +194,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             checkAllElement.addClass('active');
           }
           Track.getList({type: tracksType}).then(function(result) {
-            var color;
             tracks = result;
             placesOnMap.showTracks(tracks);
           });
@@ -230,7 +219,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           });
         }
       };      
-      
 
       /* ** END tracks controller ** */
     }]

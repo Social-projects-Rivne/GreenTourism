@@ -40,10 +40,10 @@ angular.module('mapModule')
     var j;
     mainGroup.addTo(map);
     for (i = 0; i < types.length; i++) {
-       if (input) {
+      if (input) {
         if (types[i].type == input) {
           for (j in places) {
-            if (places[j].type == input) {
+             if (places[j].type == input) {
               marker(places[j].latitude, places[j].longitude, types[i].icon)
                   .addTo(groups[i])
                   .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
@@ -51,26 +51,26 @@ angular.module('mapModule')
                   .openPopup();
 
             }
-          }
+           }
         }
       } else {
         for (j in places) {
           if (places[j].type == types[i].type) {
-            marker(places[j].latitude, places[j].longitude, types[i].icon)
+             marker(places[j].latitude, places[j].longitude, types[i].icon)
               .addTo(groups[i])
                 .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
                     '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + places[j].id + '\'>Details >></a> </button></div>', {autoPan: false})
                 .openPopup();
-          }
+           }
         }
       }
-       mainGroup.checkIn(groups[i]);
-       groups[i].addTo(map);
-       map.on('click move', function() {
+      mainGroup.checkIn(groups[i]);
+      groups[i].addTo(map);
+      map.on('click move', function() {
         map.closePopup();
       });
 
-     }
+    }
   };
 
   placesOnMap.removePlaces = function(input) {
@@ -89,6 +89,7 @@ angular.module('mapModule')
 
   /* ** START tracks factory ** */
   var tracks = [];
+  var trackForAdding;
   var tracksType = mapMarkingTypes.tracksType;
   var polyline = function(trackPoints, color) {
     return L.polyline(trackPoints, {
@@ -97,32 +98,39 @@ angular.module('mapModule')
     });
   };
 
-  placesOnMap.showTracks = function(tracksArray) {
-    var trackForAdding;
-    var color;
-    for (var i = 0; i < tracksArray.length; i++) {
-      for (var j = 0; j < tracksType.length; j++) {      
-        if (tracksArray[i].type === tracksType[j].type) {
-          color = tracksType[j].color;
-        }
+  var getColor = function(track) {
+    var type = tracksType.filter(function(trackType) {
+      return trackType.type == track.type;
+    });
+    return type[0].color;
+  };
+
+  var addTrack = function(track) {
+    var color = getColor(track);
+    trackForAdding = polyline(track.loc.coordinates, color).addTo(map);
+    tracks.push([trackForAdding, track.type]);
+  };
+
+  var removeTrack = function(track) {
+    if (this == 'all') {
+      map.removeLayer(track[0]);
+    } else {
+      if (track[1] == this) {
+        map.removeLayer(track[0]);
       }
-      trackForAdding = polyline(tracksArray[i].loc.coordinates, color).addTo(map);
-      tracks.push([trackForAdding, tracksArray[i].type]);
-    }
+    };
+  };
+
+  placesOnMap.showTracks = function(tracksArray) {
+    tracksArray.forEach(addTrack);
   };
 
   placesOnMap.removeTracks = function(tracksType) {
-    for (var i = 0; i < tracks.length; i++) {
-      if (tracks[i][1] === tracksType) {
-        map.removeLayer(tracks[i][0]);
-      }
-    }
+    tracks.forEach(removeTrack, tracksType);
   };
 
   placesOnMap.removeAllTracks = function() {
-    for (var i = 0; i < tracks.length; i++) {
-      map.removeLayer(tracks[i][0]);
-    }
+    tracks.forEach(removeTrack, 'all');
   };
 
   return placesOnMap;

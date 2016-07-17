@@ -27,13 +27,14 @@ angular.module('mapModule', [])
 
       function locationArea(coords) {
         if (userLocation) {
-          map.setView(coords, 14);
+          map.setView(coords);
         }
       }
 
       function onLocationFound(e) {
-        locationArea(e.latlng);
-        userLocation = e.latlng;
+        var coords = e.latlng;
+        locationArea(coords);
+        userLocation = coords;
         getPopularTracks();
       }
 
