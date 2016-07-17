@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "angular"
+  ],
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "node": false
+  },
+  "globals": {
+    "L": true
+  },
+  "rules": {
+    "angular/controller-as-vm": [2, "ctrl"],
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
+    "angular/di": [2,"array"],
+    "angular/on-watch": 0
+  }
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "title": "Blog_1 title",
+    "comments": ["1 comment 1", "1 comment 2"],
+    "content": "Blog_1 content",
+    "author": "admin",
+    "date": "1460853756239",
+    "category": "tourizm",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "2",
+    "title": "Blog_2 title",
+    "comments": ["2 comment 1", "2 comment 2", "2 comment 3", "2 comment 4"],
+    "content": "Blog_2 content",
+    "author": "manager",
+    "date": "1458852756209",
+    "category": "news",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "3",
+    "title": "Blog_3 title",
+    "comments": ["3 comment 1"],
+    "content": "Blog_3 content",
+    "author": "user",
+    "date": "1408853756239",
+    "category": "stories",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Blog_4 title",
+    "comments": ["4 comment 1", "4 comment 2", "4 comment 3"],
+    "content": "Blog_4 content",
+    "author": "admin",
+    "date": "1398853756239",
+    "category": "news",
+    "images": "assets/img/blog/blog.jpg"
+  },
+  {
+    "id": "5",
+    "title": "Blog_5 title",
+    "comments": ["5 comment 1", "5 comment 2", "5 comment 3", "5 comment 3", "5 comment 3"],
+    "content": "Blog_5 content",
+    "author": "admin",
+    "date": "1378853756239",
+    "category": "tourizm",
+    "images": "assets/img/blog/blog.jpg"
+  }
+
+]
