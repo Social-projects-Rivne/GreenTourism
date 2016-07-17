@@ -14,6 +14,9 @@ module.exports = function(Model) {
     var location = req.query.location;
     delete req.query.location;
 
+    var radius = req.query.radius;
+    delete req.query.radius;
+
     if (location) {
       Model.find({
         loc: {
@@ -22,7 +25,7 @@ module.exports = function(Model) {
               type: 'Point',
               coordinates: location
             },
-            $maxDistance: 5000,
+            $maxDistance: radius,
             $minDistance: 0
           }
         }
