@@ -63,35 +63,6 @@
         </div>
       </div> <!-- Filter container end -->
 
-      <!-- New place form -->
-      <div style="margin-top: 55px;" ng-show="$ctrl.addPlaceState">
-        <form name="addPlace" novalidate role="form" class="simple-form well">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" ng-model="$ctrl.newPlace.name" />
-          </div>
-          <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" ng-model="$ctrl.newPlace.description" />
-          </div>
-          <div class="form-group">
-            <label for="latitude">Latitude:</label>
-            <input type="number" step="any" name="latitude" ng-model="$ctrl.newPlace.latitude" />
-          </div>
-          <div class="form-group">
-            <label for="longitude">Longitude:</label>
-            <input type="number" step="any" name="longitude" ng-model="$ctrl.newPlace.longitude" />
-          </div>
-          <div class="form-group">
-            <label for="type">Type:</label>
-            <input type="text" name="type" ng-model="$ctrl.newPlace.type" />
-          </div>
-          <input type="submit" ng-click="$ctrl.addNewPlace($ctrl.newPlace)" class="btn btn-default" value="Submit" />
-        </form>
-        <pre>place = {{$ctrl.newPlace | json}}</pre>
-      </div>
-      <!-- New place form end -->
-
       <div class="col-xs-12 no-padding"><!-- Map container start-->
         <div id="map"></div>
       </div> <!-- Map container end-->
