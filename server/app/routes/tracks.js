@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router(); // eslint-disable-line new-cap
 
 var Track = require('mongoose').model('Track');
-var trackController = require('../controllers/default-crud-controller')(Track);
+var trackController = require('../controllers/track-crud-controller')(Track);
 
 router.route('/')
   .get(trackController.list)
