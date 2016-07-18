@@ -92,7 +92,7 @@ exports.delete = function(req, res) {
   };
 
   if (req.user.role === 'admin') {
-    User.findById(req.params.id, callback);
+    User.findByIdAndRemove(req.params.id, callback);
   } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
     User.findByIdAndRemove(req.user._id, callback);
   }
