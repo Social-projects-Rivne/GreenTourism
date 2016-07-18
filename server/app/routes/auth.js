@@ -78,14 +78,11 @@ router.route('/auth/facebook/callback').get(
 
 //google
 router.route('/auth/google').get(
-  passport.authenticate('google', { scope: [
-       'https://www.googleapis.com/auth/plus.login',
-       'https://www.googleapis.com/auth/plus.profile.emails.read'] 
- }));
+  passport.authenticate('google'));
 
 router.route('/auth/google/callback').get(
   passport.authenticate( 'google', { successRedirect: '/#!/profile',
-                                      failureRedirect: '/#!/login' }));
+                                     failureRedirect: '/#!/login' }));
 
 
 module.exports = router;
