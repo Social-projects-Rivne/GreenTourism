@@ -124,7 +124,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         });
 
         this.showSpecificTracks = function(tracksType) {
-          console.log(tracksType);
           var element = angular.element('#' + tracksType);
           var checkedIcon = angular.element('#gi' + tracksType);
           var allGI = angular.element('#tracks-filter li span.glyphicon');
