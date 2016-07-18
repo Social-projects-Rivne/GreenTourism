@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var CommentSchema = require('./schema/comment');
+
 var locSchema = new Schema({
   type: {
     type: String,
@@ -16,15 +18,25 @@ var TrackSchema = new Schema({
     type: String,
     required: true
   },
-  description: String,
-  loc: locSchema,
   type: {
     type: String,
     required: true
   },
-  photos: Array,
-  userId: Number,
-  trackRate: Number
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  location: {
+    type: locSchema,
+    required: true
+  },
+  description: String,
+  trackRate: Number,
+  likes: [Schema.Types.ObjectId],
+  address: String,
+  photos: [String],
+  comments: [CommentSchema]
 });
 
 module.exports = mongoose.model('Track', TrackSchema);
