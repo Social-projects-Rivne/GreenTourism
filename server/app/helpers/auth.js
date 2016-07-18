@@ -1,35 +1,43 @@
-exports.requiresLogin = function(req, res, next) {
+function isAuthenticated(req, res) {
   if (!req.isAuthenticated()) {
-    return res.status(401).json({
+    res.status(401).json({
       message: 'User is not logged in'
     });
+
+    return false;
   }
 
-  next();
+  return true;
+}
+
+exports.isLoggedIn = function(req, res, next) {
+  if (isAuthenticated(req, res)) {
+    next();
+  }
 };
 
 exports.hasAuthorization = function(req, res, next) {
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({
-      message: 'User is not logged in'
-    });
+  if (isAuthenticated(req, res)) {
+    if (req.user.role === 'admin') {
+      next();
+    } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
+      next();
+    } else {
+      return res.status(403).json({
+        message: 'User is not authorized'
+      });
+    }
   }
-
-  if (req.user.role !== 'admin' || req.params.id !== req.user._id) {
-    return res.status(403).json({
-      message: 'User is not authorized'
-    });
-  }
-
-  next();
 };
 
 exports.isAdmin = function(req, res, next) {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({
-      message: 'User is not an admin'
-    });
-  }
+  if (isAuthenticated(req, res)) {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        message: 'User is not an admin'
+      });
+    }
 
-  next();
+    next();
+  }
 };
