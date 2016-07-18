@@ -7,6 +7,9 @@ var auth = require('../helpers/auth.js');
 router.route('/')
   .get(auth.isAdmin, controller.list);
 
+router.route('/me')
+  .get(auth.isLoggedIn, controller.showMe);
+
 router.route('/:id')
   .get(auth.hasAuthorization, controller.show)
   .put(auth.hasAuthorization, controller.update)
