@@ -13,8 +13,8 @@ var UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: 'E-mail must be unique',
-    required: 'E-mail is required',
+    unique: 'Email must be unique',
+    required: 'Email is required',
     // TODO: E-mail should not have special characters (except -, _, .), replace dots
     match: [/.+@.+\..+/, 'Please fill a valid e-mail address'],
     trim: true
