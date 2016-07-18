@@ -10,19 +10,174 @@ angular.module('placeList', ['filterMapType'])
       var tracks = [];
       var placeObject = {};
       var counter;
+      var addPlaceMenu = angular.element('#add-place');
+      var addTrackMenu = angular.element('#add-track');
+      var newPlaceLongitude = angular.element('#longitude');
+      var newPlaceLatitude = angular.element('#latitude');
+      var addPlaceForm = angular.element('form[name="placeMaker"]');
+      var addTrackForm = angular.element('form[name="trackMaker"]');
+      var addPlaceMenuIsOpen = false;
+      var addTrackMenuIsOpen = false;
+      this.placesType = mapMarkingTypes.placesType;
 
       this.user = currentUser;
 
-      //-----START ADD Place-----
-      
-      //-----END ADD Place-----
+      // -----START ADD Place-----
+      this.newPlace = {
+        name: '',
+        type: '',
+        description: '',
+        location: {
+          type: 'Point',
+          coordinates: []
+        },
+        photos: [],
+        userId: ''
+      };
+      var emptyPlaceObject = {
+        name: '',
+        type: '',
+        description: '',
+        location: {
+          type: 'Point',
+          coordinates: []
+        },
+        photos: [],
+        userId: ''
+      };
+      this.newPlaceType = '';
+      this.newPlacePhoto = '';
+      this.formNewPlaceSubmitted = false;
 
-      this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
+      function openAddPlaceMenu() {
+        addPlaceMenu.css({
+          display: 'block'
+        });
+        addPlaceMenuIsOpen = true;
+        placesOnMap.openAddPlaceMenu();
+      }
+
+      this.closeAddPlaceMenu = function() {
+        addPlaceMenu.css({
+          display: 'none'
+        });
+        addPlaceMenuIsOpen = false;
+        placesOnMap.closeAddPlaceMenu();
+        addPlaceMenuIsOpen = false;
+      };
+
+      this.addPlace = function() {
+        if (addPlaceMenuIsOpen) {
+          this.closeAddPlaceMenu();
+        } else {
+          this.closeAddTrackMenu();
+          openAddPlaceMenu();
+        }
+      };
+
+      this.createNewPlace = function(form) {
+        this.formNewPlaceSubmitted = true;
+        if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
+          this.newPlace.type = this.newPlaceType.type;
+          this.newPlace.userId = this.user._id;
+          this.newPlace.location.coordinates = placesOnMap.coords;
+          console.log(this.newPlace);
+          this.resetAddPlaceForm(form);
+        }
+      };
+
+      this.resetAddPlaceForm = function(form) {
+        if (form) {
+          this.newPlace = angular.copy(emptyPlaceObject);
+          this.newPlaceType = '';
+          form.$setPristine();
+          form.$setUntouched();
+          this.formNewPlaceSubmitted = false;
+          newPlaceLongitude.text('');
+          newPlaceLatitude.text('');
+          placesOnMap.removeNewMarker();
+        }
+      };
+      // -----END ADD Place-----
+
+      // -----START ADD Track-----
+      this.newTrack = {
+        name: '',
+        type: '',
+        description: '',
+        location: {
+          type: 'LineString',
+          coordinates: []
+        },
+        photos: [],
+        userId: ''
+      };
+      var emptyTrackObject = {
+        name: '',
+        type: '',
+        description: '',
+        location: {
+          type: 'LineString',
+          coordinates: []
+        },
+        photos: [],
+        userId: ''
+      };
+      this.newTrackType = '';
+      this.formNewTrackSubmitted = false;
+
+      function openAddTrackMenu() {
+        addTrackMenu.css({
+          display: 'block'
+        });
+        addTrackMenuIsOpen = true;
+        placesOnMap.openAddTrackMenu();
+      }
+
+      this.closeAddTrackMenu = function() {
+        addTrackMenu.css({
+          display: 'none'
+        });
+        addTrackMenuIsOpen = false;
+        placesOnMap.closeAddTrackMenu();
+        addTrackMenuIsOpen = false;
+      };
+
+      this.addTrack = function() {
+        if (addTrackMenuIsOpen) {
+          this.closeAddTrackMenu();
+        } else {
+          this.closeAddPlaceMenu();
+          openAddTrackMenu();
+        }
+      };
+
+      this.createNewTrack = function(form) {
+        this.formNewTrackSubmitted = true;
+        if (addTrackForm.hasClass('ng-valid')) {
+          this.newTrack.type = this.newTrackType.type;
+          this.newTrack.userId = this.user._id;
+          //this.newPlace.location.coordinates = placesOnMap.coords;
+          console.log(this.newPlace);
+          this.resetAddTrackForm(form);
+        }
+      };
+
+      this.resetAddTrackForm = function(form) {
+        if (form) {
+          this.newTrack = angular.copy(emptyTrackObject);
+          this.newTrackType = '';
+          form.$setPristine();
+          form.$setUntouched();
+          this.formNewTrackSubmitted = false;
+        }
+      };
+      // -----END ADD Track-----
       placesOnMap.removePlaces();
       placesOnMap.showMap();
       placesOnMap.initGroupsOfPlaces(this.placesType);
 
-      //---START---- ShowPlacesOnLoad
+      // ---START---- ShowPlacesOnLoad
       // TODO: Move this inside resolve
       Place.getList({type: placesOnLoad}).then(function(result) {
         places = result;
@@ -39,9 +194,9 @@ angular.module('placeList', ['filterMapType'])
         $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
         $('#Streets span').addClass('glyphicon glyphicon-ok');
       });
-      //----END---- ShowPlacesOnLoad
+      // ----END---- ShowPlacesOnLoad
 
-      //----START---- FilterByOneOfType
+      // ----START---- FilterByOneOfType
       this.checkType = function(input) {
         var spanCheck = $('#' + input + ' span');
 
@@ -69,7 +224,7 @@ angular.module('placeList', ['filterMapType'])
             places = result;
 
             for (i = 0; i < places.length; i++) {
-             placeObject = {id: places[i]._id, latitude: places[i].latitude,
+              placeObject = {id: places[i]._id, latitude: places[i].latitude,
              longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
 
               arrPlaces.push(placeObject);
@@ -80,9 +235,9 @@ angular.module('placeList', ['filterMapType'])
           });
         }
       };
-      //----END---- FilterByOneOfType
+      // ----END---- FilterByOneOfType
 
-      //----START---- FilterCheckAll
+      // ----START---- FilterCheckAll
       this.checkAll = function() {
         var spanCheck = $('#all span');
 
@@ -125,9 +280,9 @@ angular.module('placeList', ['filterMapType'])
           });
         }
       };
-      //----END---- FilterCheckAll
-      this.places=arrPlaces;
-      //Don't hide dropdown if clicked
+      // ----END---- FilterCheckAll
+      this.places = arrPlaces;
+      // Don't hide dropdown if clicked
       $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
         'click': function(e) {
           e.stopPropagation();
@@ -135,8 +290,7 @@ angular.module('placeList', ['filterMapType'])
 
       });
 
-
-      /*** START tracks controller ***/
+      /** * START tracks controller ***/
       var activeLiCounter = 4;
 
       this.tracksType = mapMarkingTypes.tracksType;

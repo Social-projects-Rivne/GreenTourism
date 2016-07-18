@@ -35,19 +35,19 @@ angular.module('mapModule')
     }
   };
 
-   placesOnMap.showPlaces = function(input) {
+  placesOnMap.showPlaces = function(input) {
     var i;
     var j;
     mainGroup.addTo(map);
     for (i = 0; i < types.length; i++) {
-      if (input) {
+       if (input) {
         if (types[i].type == input) {
           for (j in places) {
             if (places[j].type == input) {
               marker(places[j].latitude, places[j].longitude, types[i].icon)
                   .addTo(groups[i])
-                  .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
-                      "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                  .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
+                      '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + places[j].id + '\'>Details >></a> </button></div>', {autoPan: false})
                   .openPopup();
 
             }
@@ -58,19 +58,19 @@ angular.module('mapModule')
           if (places[j].type == types[i].type) {
             marker(places[j].latitude, places[j].longitude, types[i].icon)
               .addTo(groups[i])
-                .bindPopup("<div class='popup  center-block'><h3>" + places[j].name + "</h3><a><img class='marker-image' src='assets/" + places[j].photo + "' \/></a>" +
-                    "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/"+places[j].id+"'>Details >></a> </button></div>", {autoPan:false})
+                .bindPopup('<div class=\'popup  center-block\'><h3>' + places[j].name + '</h3><a><img class=\'marker-image\' src=\'assets/' + places[j].photo + '\' \/></a>' +
+                    '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + places[j].id + '\'>Details >></a> </button></div>', {autoPan: false})
                 .openPopup();
           }
         }
       }
-      mainGroup.checkIn(groups[i]);
-      groups[i].addTo(map);
-      map.on('click move', function(){
-      map.closePopup()
+       mainGroup.checkIn(groups[i]);
+       groups[i].addTo(map);
+       map.on('click move', function() {
+        map.closePopup();
       });
 
-    }
+     }
   };
 
   placesOnMap.removePlaces = function(input) {
@@ -118,5 +118,46 @@ angular.module('mapModule')
     }
   };
 
+  /* ** START add place factory ** */
+  var newMarker;
+  var latitudeContainer = angular.element('#latitude');
+  var longitudeContainer = angular.element('#longitude');
+  placesOnMap.openAddPlaceMenu = function() {
+    map.on('click', addNewPlace);
+  };
+
+  placesOnMap.closeAddPlaceMenu = function() {
+    map.off('click', addNewPlace);
+  };
+
+  function addNewPlace(e) {
+    placesOnMap.coords = [e.latlng.lat, e.latlng.lng];
+    if (newMarker) {
+      map.removeLayer(newMarker);
+    }
+    newMarker = L.marker(placesOnMap.coords).addTo(map);
+    latitudeContainer.text('Latitude: ' + newMarker._latlng.lat);
+    longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
+  }
+
+  placesOnMap.removeNewMarker = function() {
+    if (newMarker) {
+      map.removeLayer(newMarker);
+    }
+  };
+
+  placesOnMap.openAddTrackMenu = function() {
+    map.on('click', addNewTrack);
+  };
+
+  placesOnMap.closeAddTrackMenu = function() {
+    map.off('click', addNewTrack);
+  };
+
+  function addNewTrack(e) {
+    console.log(true);
+  }
+
   return placesOnMap;
 }]);
+

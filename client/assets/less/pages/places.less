@@ -1,5 +1,10 @@
 /*  -------- Places template ----------  */
-
+.places {
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
 .no-padding {
   padding: 0;
 }
@@ -105,3 +110,59 @@ div.place{
  float:none;
 }
 /* place */
+
+/*-------------- Add place --------------*/
+.alert-input {
+  color: #f00;
+}
+#add-place {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: auto;
+  width: 25%;
+  z-index: 1000;
+  border: 1px solid @light-green;
+  background-color: #fff;
+  padding: 15px;
+  display: none;
+  h2 {
+    text-align: center;
+  }
+  .removeIcon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 25px;
+    color: @light-green;
+  }
+  .title {
+    font-weight: bold;
+  }
+}
+
+#add-track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: auto;
+  width: 25%;
+  z-index: 1000;
+  border: 1px solid @light-green;
+  background-color: #fff;
+  padding: 15px;
+  display: none;
+  h2 {
+    text-align: center;
+  }
+  .removeIcon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 25px;
+    color: @light-green;
+  }
+  .title {
+    font-weight: bold;
+  }
+}
