@@ -124,6 +124,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         });
 
         this.showSpecificTracks = function(tracksType) {
+          var tracksTypeInLowerCase = tracksType.toLowerCase();
           var element = angular.element('#' + tracksType);
           var checkedIcon = angular.element('#gi' + tracksType);
           var allGI = angular.element('#tracks-filter li span.glyphicon');
@@ -137,7 +138,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
               allGI.removeClass('glyphicon-ok');
               checkAllElement.removeClass('active');
             }
-            placesOnMap.removeTracks(tracksType);
+            placesOnMap.removeTracks(tracksTypeInLowerCase);
           } else {
             element.addClass('active');
             checkedIcon.addClass('glyphicon-ok');
@@ -146,7 +147,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
               allGI.addClass('glyphicon-ok');
               checkAllElement.addClass('active');
             }
-            Track.getList({type: tracksType}).then(function(result) {
+            Track.getList({type: tracksTypeInLowerCase}).then(function(result) {
               tracks = result;
               placesOnMap.showTracks(tracks);
             });

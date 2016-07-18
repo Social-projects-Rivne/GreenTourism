@@ -31,22 +31,18 @@ angular.module('greenTourism')
 
     types.tracks = {
       bicycle: {
-        type: 'bicycle',
         name: 'Bicycle',
         color: '#2f2fd0'
       },
       car: {
-        type: 'car',
         name: 'Car',
         color: '#ff0a47'
       },
       walking: {
-        type: 'walking',
         name: 'Walking',
         color: '#f9ff0b'
       },
       mixed: {
-        type: 'mixed',
         name: 'Mixed',
         color: '#0aff0a'
       }
