@@ -19,7 +19,7 @@ module.exports = function(Model) {
 
     if (location) {
       Model.find({
-        loc: {
+        location: {
           $near: {
             $geometry: {
               type: 'Point',
