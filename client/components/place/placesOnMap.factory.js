@@ -83,7 +83,6 @@ angular.module('mapModule')
   /* ** START tracks factory ** */
   var tracks = [];
   var trackForAdding;
-  var tracksType = mapMarkingTypes.tracksType;
   var polyline = function(trackPoints, color) {
     return L.polyline(trackPoints, {
       color: color,
@@ -91,15 +90,8 @@ angular.module('mapModule')
     });
   };
 
-  var getColor = function(track) {
-    var type = tracksType.filter(function(trackType) {
-      return trackType.type == track.type;
-    });
-    return type[0].color;
-  };
-
   var addTrack = function(track) {
-    var color = getColor(track);
+    var color = mapMarkingTypes.tracks[track.type].color;
     trackForAdding = polyline(track.loc.coordinates, color).addTo(map);
     tracks.push([trackForAdding, track.type]);
   };
