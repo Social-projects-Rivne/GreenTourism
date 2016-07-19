@@ -14,10 +14,11 @@
                 <div class="col-md-8">
                     <div class="row">
 
-                        <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true" >
+                        <div class="col-md-6 col-sm-6 col-xs-12"
+                             ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true">
                             <div class="thumbnail blog-list-item">
                                 <a href="#!/blog/{{blog.id}}">
-                                    <img ng-src="{{blog.images}}" alt="{{blog.title}}">
+                                    <img ng-src="{{blog.blogPhoto.url}}" alt="{{blog.title}}">
                                 </a>
 
                                 <div class="caption">
@@ -28,27 +29,27 @@
                                     <div class="blog-details">
                                         By
                         <span class="blog-author">
-                            <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
+                            <a href="#" title="Posts by admin" rel="author">{{blog.userId}}</a>
                         </span>
                                         <span class="blog-date">
-								{{blog.date | date:'dd MMMM yyyy'}}
+								{{blog.createdAt | date:'dd MMMM yyyy'}}
 					</span>
-                                        <a href="#" class="blog-category">{{blog.category}}</a>
+                                        <a href="#" class="blog-category">{{blog.category.name}}</a>
                                     </div>
                                     <div class="blog-separator"></div>
 
                                     <div class="blog-content">
-                                        {{blog.content}}
+                                        {{blog.content | limitTo: 5}}{{blog.content.length>5 ? '...' : ''}}
                                     </div>
 
                                     <p class="blog-meta">
                                         <a href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                         </a>
-                                        <a href="#!/blog/{{blog.id}}#post-comments" class="pull-right">
+                                        <span class="pull-right">
                                             <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            {{blog.comments.length}}
-                                        </a>
+                                            {{blog.blogComments.length}}
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -64,7 +65,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog">
+                                            <input ng-model="$ctrl.query" type="text" class="form-control"
+                                                   placeholder="Search blog">
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -74,21 +76,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="blog-category-list">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>Categories</h3>
-                                        <ul>
-                                            <li ng-repeat="category in $ctrl.blogs | orderBy: $ctrl.categoryProp | unique: $ctrl.categoryProp  ">
-                                                <a href="#" ng-click="selectCategory(item)">
-                                                    <i class="fa fa-bicycle" aria-hidden="true"></i>
-                                                    {{category}}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--<div class="blog-category-list">-->
+                            <!--<div class="row">-->
+                            <!--<div class="col-md-12">-->
+                            <!--<h3>Categories</h3>-->
+                            <!--<ul>-->
+                            <!--<li ng-repeat="category in $ctrl.blogs | orderBy: $ctrl.categoryProp | unique: $ctrl.categoryProp  ">-->
+                            <!--<a href="#" ng-click="selectCategory(item)">-->
+                            <!--<i class="fa fa-bicycle" aria-hidden="true"></i>-->
+                            <!--{{category}}-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
 
                             <div class="blog-panel">
                                 <div class="row">
@@ -101,17 +103,19 @@
                                                     </a>
                                                 </li>
                                                 <li ng-class="{ active: $ctrl.isSelected(2) }">
-                                                    <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)" >
-                                                        Recent
+                                                    <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)">
+                                                        Most discussed
                                                     </a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }" id="panel-popular">
-                                                    <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp | limitTo:3">
+                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }"
+                                                     id="panel-popular">
+                                                    <div class="media blog-aside-items"
+                                                         ng-repeat="blog in $ctrl.blogs | orderBy: 'blogLikes':true | limitTo:3 ">
                                                         <a href="#!/blog/{{blog.id}}" class="pull-left">
                                                             <img alt="{{blog.title}}"
-                                                                 ng-src="{{blog.images}}" class="media-object"/>
+                                                                 ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
                                                         </a>
 
                                                         <div class="media-body">
@@ -122,16 +126,18 @@
                                                             </h4>
 
                                                             <div class="media-date">
-								{{blog.date | date:'dd MMMM yyyy'}}
+                                                                {{blog.createdAt | date:'dd MMMM yyyy'}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }" id="panel-recent">
-                                                   <div class="media blog-aside-items" ng-repeat="blog in $ctrl.blogs | orderBy:$ctrl.dateProp:true | limitTo:3">
+                                                <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }"
+                                                     id="panel-recent">
+                                                    <div class="media blog-aside-items"
+                                                         ng-repeat="blog in $ctrl.blogs | orderBy: 'blogComments':true | limitTo:3">
                                                         <a href="#!/blog/{{blog.id}}" class="pull-left">
                                                             <img alt="{{blog.title}}"
-                                                                 ng-src="{{blog.images}}" class="media-object"/>
+                                                                 ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
                                                         </a>
 
                                                         <div class="media-body">
@@ -142,16 +148,16 @@
                                                             </h4>
 
                                                             <div class="media-date">
-								{{blog.date | date:'dd MMMM yyyy'}}
+                                                                {{blog.createdAt | date:'dd MMMM yyyy'}}
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
