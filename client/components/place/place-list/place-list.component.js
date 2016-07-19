@@ -1,45 +1,37 @@
 angular.module('placeList', ['filterMapType'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'Restangular',
-      function (placesOnMap, mapMarkingTypes, Place, Track, currentUser, Restangular) {
-        var i;
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', '$scope',
+      function (placesOnMap, mapMarkingTypes, Place, Track, currentUser, $scope) {
         var placesOnLoad = 'featuredPlace';
-        var arrPlaces = [];
+        var checkedClass = 'glyphicon glyphicon-ok';
         var places = [];
         var tracks = [];
-        var placeObject = {};
         var counter;
-        var ctrl = this;
         this.user = currentUser;
+
         //-----START ADD Place-----
-        this.addPlaceState = false;
-
-        this.toggleAddPlace = function () {
-          this.addPlaceState = !this.addPlaceState;
-        };
-
-        // TODO: Move this to it's own contoller (or component)
-        this.newPlace = {};
-
-        this.addNewPlace = function (newPlace) {
-          var place = new Place(newPlace);
-          place.$save();
-          alert('Place saved to db!');
-
-          this.toggleAddPlace();
-          document.forms.addPlace.reset();
-          this.newPlace = {};
-
-          this.addPlaceOnMap(L.latLng(place.latitude,
-            place.longitude));
-        };
-
-        // TODO: Move this inside map
-        this.addPlaceOnMap = function (latLng) {
-          L.marker(latLng).addTo($rootScope.map);
-          $rootScope.map.setView(latLng);
-        };
+        /*this.addPlaceState = false;
+         this.toggleAddPlace = function() {
+         this.addPlaceState = !this.addPlaceState;
+         };
+         // TODO: Move this to it's own contoller (or component)
+         this.newPlace = {};
+         this.addNewPlace = function(newPlace) {
+         var place = new Place(newPlace);
+         place.$save();
+         alert('Place saved to db!');
+         this.toggleAddPlace();
+         document.forms.addPlace.reset();
+         this.newPlace = {};
+         this.addPlaceOnMap(L.latLng(place.latitude,
+         place.longitude));
+         };
+         // TODO: Move this inside map
+         this.addPlaceOnMap = function(latLng) {
+         L.marker(latLng).addTo($rootScope.map);
+         $rootScope.map.setView(latLng);
+         };*/
         //-----END ADD Place-----
 
         this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
@@ -50,78 +42,37 @@ angular.module('placeList', ['filterMapType'])
         //---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
         Place.getList({type: placesOnLoad}).then(function (result) {
-          places = result;
           counter = 1;
-          for (i = 0; i < places.length; i++) {
-            placeObject = {
-              id: places[i]._id,
-              latitude: places[i].latitude,
-              longitude: places[i].longitude,
-              type: places[i].type,
-              name: places[i].name,
-              photo: places[i].photos,
-              rate: places[i].rate
-            };
-
-            arrPlaces.push(placeObject);
-          }
-          placesOnMap.setPlaceArray(arrPlaces);
-          placesOnMap.showPlaces(placesOnLoad);
-          ctrl.places = arrPlaces;
-          var idPopularPlace = 0;
-          getLocation(idPopularPlace, ctrl.places);
-
-          $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
-          $('#Streets span').addClass('glyphicon glyphicon-ok');
+          places = result.concat(places);
+          placesOnMap.setPlaceArr(places);
+          placesOnMap.showPlaces(places, placesOnLoad);
+          angular.element('#' + placesOnLoad + ' span').addClass(checkedClass);
+          angular.element('#Streets span').addClass(checkedClass);
         });
         //----END---- ShowPlacesOnLoad
 
         //----START---- FilterByOneOfType
         this.checkType = function (input) {
-          var spanCheck = $('#' + input + ' span');
-
-          if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+          var spanCheck = angular.element('#' + input + ' span');
+          if (spanCheck.hasClass(checkedClass)) {
             counter--;
-
-            spanCheck.removeClass('glyphicon glyphicon-ok');
-            $('#all span').removeClass('glyphicon glyphicon-ok');
-
+            spanCheck.removeClass(checkedClass);
+            angular.element('#all span').removeClass(checkedClass);
             placesOnMap.removePlaces(input);
-
-            for (i = 0; i < arrPlaces.length; i++) {
-              if (arrPlaces[i].type == input) {
-                arrPlaces.splice(i--, 1);
-              }
-            }
+            places = places.filter(function (place) {
+              return place.type != input;
+            });
           } else {
             counter++;
-            spanCheck.addClass('glyphicon glyphicon-ok');
+            spanCheck.addClass(checkedClass);
 
             if (counter == this.placesType.length)
-              $('#all span').addClass('glyphicon glyphicon-ok');
+              angular.element('#all span').addClass(checkedClass);
 
             Place.getList({type: input}).then(function (result) {
-              places = result;
-
-              for (i = 0; i < places.length; i++) {
-                placeObject = {
-                  id: places[i]._id,
-                  latitude: places[i].latitude,
-                  longitude: places[i].longitude,
-                  type: places[i].type,
-                  name: places[i].name,
-                  photo: places[i].photos,
-                  rate: places[i].rate
-                };
-
-                arrPlaces.push(placeObject);
-              }
-
-              placesOnMap.setPlaceArray(arrPlaces);
-              placesOnMap.showPlaces(input);
-              ctrl.places = arrPlaces;
-              var idPopularPlace = 0;
-              getLocation(idPopularPlace, ctrl.places);
+              places = result.concat(places);
+              placesOnMap.showPlaces(places, input);
+              placesOnMap.setPlaceArr(places);
             });
           }
         };
@@ -129,79 +80,30 @@ angular.module('placeList', ['filterMapType'])
 
         //----START---- FilterCheckAll
         this.checkAll = function () {
-          var spanCheck = $('#all span');
-
-          if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+          var spanCheck = angular.element('#all span');
+          if (spanCheck.hasClass(checkedClass)) {
             counter = 0;
-
-            spanCheck.removeClass('glyphicon glyphicon-ok');
-
-            for (i = 0; i < this.placesType.length; i++) {
-              $('#' + this.placesType[i].type + ' span')
-                .removeClass('glyphicon glyphicon-ok');
-            }
+            angular.element('.placeFilter a span').removeClass(checkedClass);
             placesOnMap.removePlaces();
-            arrPlaces = [];
+            places = [];
           } else {
-            counter = 5;
-
+            counter = this.placesType.length;
             placesOnMap.removePlaces();
-            arrPlaces = [];
-
-            spanCheck.addClass('glyphicon glyphicon-ok');
-
-            for (i = 0; i < this.placesType.length; i++) {
-              $('#' + this.placesType[i].type + ' span')
-                .addClass('glyphicon glyphicon-ok');
-            }
-
+            places = [];
+            angular.element('.placeFilter a span').addClass(checkedClass);
             Place.getList().then(function (result) {
-              places = result;
-
-              for (i = 0; i < places.length; i++) {
-                placeObject = {
-                  id: places[i]._id,
-                  latitude: places[i].latitude,
-                  longitude: places[i].longitude,
-                  type: places[i].type,
-                  name: places[i].name,
-                  photo: places[i].photos,
-                  rate: places[i].rate
-                };
-
-                arrPlaces.push(placeObject);
-              }
-              ctrl.places = arrPlaces;
-              var idPopularPlace = 0;
-              getLocation(idPopularPlace, ctrl.places);
-              placesOnMap.setPlaceArray(arrPlaces);
-              placesOnMap.showPlaces();
+              places = result.concat(places);
+              placesOnMap.showPlaces(places);
+              placesOnMap.setPlaceArr(places);
             });
           }
         };
         //----END---- FilterCheckAll
-
-        function getLocation(idPopularPlace, placesArr) {
-          if (idPopularPlace < placesArr.length) {
-            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesArr[idPopularPlace].latitude +
-              '&lon=' + placesArr[idPopularPlace].longitude + '&addressdetails=0').get().then(function (result) {
-
-              placesArr[idPopularPlace].location = result.display_name.split(',').slice(2, 4).join(',');
-              console.log(placesArr[idPopularPlace].location);
-              idPopularPlace++;
-              getLocation(idPopularPlace, placesArr);
-            })
-
-          }
-        }
-
-        ctrl.places = arrPlaces;
         //Don't hide dropdown if clicked
-        $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+        angular.element('.dropdownFilter').on({
           'click': function (e) {
             e.stopPropagation();
           }
-
         });
 
 

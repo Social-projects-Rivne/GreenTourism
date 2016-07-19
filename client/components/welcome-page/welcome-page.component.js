@@ -12,15 +12,15 @@ angular.module('welcomePage', [])
       var idPopularPlace = 0;
       Place.getList({sort: '-rate', limit: 10}).then(function (result) {
         self.popularPlaces = result;
-
+        console.log(self.popularPlaces);
         while (i < numberOfPopularPlaces) {
           random = Math.floor(Math.random() * self.popularPlaces.length);
           if (existRandom != random) {
             obj = {
               _id: self.popularPlaces[random]._id,
               name: self.popularPlaces[random].name,
-              latitude: self.popularPlaces[random].latitude,
-              longitude: self.popularPlaces[random].longitude,
+              latitude: self.popularPlaces[random].location.coordinates[0],
+              longitude: self.popularPlaces[random].location.coordinates[1],
               photo: self.popularPlaces[random].photos[0],
               location: ''
             };
@@ -40,6 +40,7 @@ angular.module('welcomePage', [])
           Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[idPopularPlace].latitude +
             '&lon=' + self.outputPopularPlaces[idPopularPlace].longitude + '&addressdetails=0&zoom=10').get().then(function (result) {
             self.outputPopularPlaces[idPopularPlace].location = result.display_name;
+            console.log(result.display_name);
             idPopularPlace++;
             getLocation(idPopularPlace, numberOfPopularPlaces);
           })

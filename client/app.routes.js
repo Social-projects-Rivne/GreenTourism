@@ -55,7 +55,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
       })
 
       .when('/places/:placeId', {
-        template: '<div><place-detail place="$resolve.place"></place-detail></div>',
+        template: '<div><place-detail    place="$resolve.place"></place-detail></div>',
         controller: 'placeDetailCtrl',
         resolve: {
           place: ['$route', 'Place', function getPlace($route, Place) {
