@@ -1,7 +1,7 @@
 <div class="signhead">
   <h5 class="logotype">Green tourism</h5>
-  <span class="fa fa-circle fa-3x circleuser"></span>
-  <span class="fa fa-user fa-3x user"></span>
+  <span class="fa fa-circle fa-2x circleuser"></span>
+  <span class="fa fa-user fa-2x user"></span>
   <h5 id="informlog">
     <a href="" ng-click="login=!login" class="link">login
     </a>or
@@ -21,14 +21,14 @@
       <p class="tip">Is your real name, sign under comments, posts</p>
     </div>
 
-    <!--<div class="input-group-sm">
+    <div class="input-group-sm">
       <label for="lastName">Last Name:</label>
       <input type="text" name="lastName" class="form-control" ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.lastName" ng-minlength="2" ng-maxlength="15" required>
       <p class="error" ng-show="signup.lastName.$touched && ($ctrl.showError || signup.lastName.$dirty)">
         {{$ctrl.getError(signup.lastName.$error)}}
       </p>
       <p class="tip">Is your real family name</p>
-    </div>-->
+    </div>
 
     <div class="input-group-sm">
       <label for="email">Email:</label>
@@ -40,7 +40,7 @@
 
     <div class="input-group-sm">
       <label for="password">Password:</label>
-      <input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{3,}$/" ng-model="$ctrl.user.password" ng-minlength="7" ng-maxlength="25" required>
+      <input type="password" name="password" class="form-control" id="password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,}$/" ng-model="$ctrl.user.password" ng-minlength="7" ng-maxlength="25" required>
       <p class="error" ng-show="signup.password.$touched && ($ctrl.showError || signup.password.$dirty)">
         {{$ctrl.getErrorpassword(signup.password.$error)}}
       </p>
@@ -49,7 +49,7 @@
 
     <div class="input-group-sm">
       <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" name="confirmPassword" class="form-control" ng-model="$ctrl.user.confirmPassword" required confirm-password="password">
+      <input type="password" name="confirmPassword" class="form-control" ng-model="$ctrl.user.confirmPassword" required match="signup.password">
       <p class="error" ng-show="signup.confirmPassword.$touched && ($ctrl.showError || signup.confirmPassword.$dirty)">
         {{$ctrl.getErrorpassword(signup.confirmPassword.$error)}}
       </p>
