@@ -1,7 +1,7 @@
 angular.module('welcomePage', [])
   .component('welcomePage', {
     templateUrl: 'components/welcome-page/welcome-page.template.html',
-    controller: ['Place', 'Restangular', function (Place, Restangular) {
+    controller: ['Place', 'Restangular', function(Place, Restangular) {
       var self = this;
       var random;
       var existRandom;
@@ -10,7 +10,7 @@ angular.module('welcomePage', [])
       self.outputPopularPlaces = [];
       var numberOfPopularPlaces = 2;
       var idPopularPlace = 0;
-      Place.getList({sort: '-rate', limit: 10}).then(function (result) {
+      Place.getList({sort: '-rate', limit: 10}).then(function(result) {
         self.popularPlaces = result;
         while (i < numberOfPopularPlaces) {
           random = Math.floor(Math.random() * self.popularPlaces.length);
@@ -30,14 +30,14 @@ angular.module('welcomePage', [])
           existRandom = random;
         }
       }).then(
-        function (result) {
+        function(result) {
           getLocation(idPopularPlace, numberOfPopularPlaces);
 
         });
       function getLocation(idPopularPlace, numberOfPopularPlaces) {
         if (idPopularPlace < numberOfPopularPlaces) {
           Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[idPopularPlace].latitude +
-            '&lon=' + self.outputPopularPlaces[idPopularPlace].longitude + '&addressdetails=0&zoom=10').get().then(function (result) {
+            '&lon=' + self.outputPopularPlaces[idPopularPlace].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
             self.outputPopularPlaces[idPopularPlace].location = result.display_name;
             idPopularPlace++;
             getLocation(idPopularPlace, numberOfPopularPlaces);
@@ -49,7 +49,7 @@ angular.module('welcomePage', [])
 
       // Animation on click arrow
       var page = angular.element('html, body');
-      angular.element('a[href="#welcome-page-content"]').click(function () {
+      angular.element('a[href="#welcome-page-content"]').click(function() {
         var heightScroll = page.outerHeight();
         page.animate({
           scrollTop: heightScroll

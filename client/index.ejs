@@ -25,9 +25,6 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans" />
-
     <!-- Third-party scripts -->
     <!-- build:js vendor/vendor.js -->
     <!-- bower:js -->
@@ -43,6 +40,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/leaflet.markercluster.layersupport/leaflet.markercluster.layersupport-src.js"></script>
     <script src="bower_components/fancybox/source/jquery.fancybox.js"></script>
+    <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -79,16 +77,17 @@
     <!-- Separated components -->
     <script src="components/welcome-page/welcome-page.component.js"></script>
 
-    <!-- USER AND AUTH -->
+    <!-- USER -->
     <script src="components/user/user.module.js"></script>
-    <script src="components/user/signup/signup.component.js"></script>
-    <script src="components/user/login/login.component.js"></script>
+    <script src="components/user/auth/auth/auth.component.js"></script>
+    <script src="components/user/auth/signup/signup.component.js"></script>
+    <script src="components/user/auth/login/login.component.js"></script>
     <script src="components/user/user-profile/user-profile.component.js"></script>
 
     <!-- PLACE -->
     <script src="components/place/place.module.js"></script>
     <script src="components/place/placesOnMap.factory.js"></script>
-    <script src="components/place/mapMarkingTypes.factory.js"></script> <!--  Renamed factory name to mapMarkingTypes -->
+    <script src="components/place/mapMarkingTypes.factory.js"></script>
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
     <script src="components/place/search-place.component.js"></script>
@@ -117,72 +116,75 @@
     <script src="components/blog/blog-detail/blog-detail.component.js"></script>
     <script src="components/blog/blog-filter.component.js"></script>
     <!-- endbuild -->
-
+    <script src="assets/js/videoplayer.js"></script>
     <title>Green Tourism</title>
 </head>
 <body>
 
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
-        <div class="container nav-padding">
-            <div class="hidden-sm hidden-md hidden-lg">
-                <div class="logo"><a href="#!/">GreenTourism</a></div>
-                <ul class="nav left-mobile-menu">
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu nav-ul">
-                            <li ng-class="{ active: nav.isActive('/signin')}"><a href="#!/signin">Log in</a></li>
-                            <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
-                        </ul>
-                    </li>
-                </ul>
+  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
+    <div class="container nav-padding">
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="logo"><a href="#!/">GreenTourism</a></div>
+        <ul class="nav left-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <% if (user) { %>
+                <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
+                <li><a href="/api/logout">Log out</a></li>
+              <% } else { %>
+                <auth></auth>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
 
-                <ul class="nav right-mobile-menu">
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu nav-ul">
-                            <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
-                            <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
-                            <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <ul class="nav right-mobile-menu">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu nav-ul">
-                            <% if (user) { %>
-                            <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
-                            <li><a href="/api/logout">Log out</a></li>
-                            <% } else { %>
-                            <li ng-class="{ active: nav.isActive('/login')}"><a href="#!/login">Login</a></li>
-                            <li ng-class="{ active: nav.isActive('/signup')}"><a href="#!/signup">Sign up</a></li>
-                            <% } %>
-                        </ul>
-                    </li>
-                </ul>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <% if (user) { %>
+                <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
+                <li><a href="/api/logout">Log out</a></li>
+              <% } else { %>
+                <auth></auth>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu nav-ul">
-                            <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
-                            <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
-                            <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="hidden-xs logo"><a href="#!/">GreenTourism</a></div>
-            </div>
-        </div>
-    </nav>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fa fa-bars navtop" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu nav-ul">
+              <li ng-class="{ active: nav.isActive('/places')}"><a href="#!/places">Map</a></li>
+              <li ng-class="{ active: nav.isActive('/events')}"><a href="#!/events">Events</a></li>
+              <li ng-class="{ active: nav.isActive('/blog')}"><a href="#!/blog">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="hidden-xs logo"><a href="#!/">GreenTourism</a></div>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <main ng-controller="MainCtrl as main" id="main">

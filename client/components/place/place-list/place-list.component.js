@@ -1,79 +1,54 @@
 angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
-      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser) {
-        var placesOnLoad = 'featuredPlace';
-        var checkedClass = 'glyphicon glyphicon-ok';
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'constants',
+      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser, constants) {
         var places = [];
         var tracks = [];
         var counter;
+        var typesLength;
 
         this.user = currentUser;
 
-        //-----START ADD Place-----
-        /*this.addPlaceState = false;
-         this.toggleAddPlace = function() {
-         this.addPlaceState = !this.addPlaceState;
-         };
-         // TODO: Move this to it's own contoller (or component)
-         this.newPlace = {};
-         this.addNewPlace = function(newPlace) {
-         var place = new Place(newPlace);
-         place.$save();
-         alert('Place saved to db!');
-         this.toggleAddPlace();
-         document.forms.addPlace.reset();
-         this.newPlace = {};
-         this.addPlaceOnMap(L.latLng(place.latitude,
-         place.longitude));
-         };
-         // TODO: Move this inside map
-         this.addPlaceOnMap = function(latLng) {
-         L.marker(latLng).addTo($rootScope.map);
-         $rootScope.map.setView(latLng);
-         };*/
-        //-----END ADD Place-----
-
-        this.placesType = mapMarkingTypes.placesType;
+        this.placesType = mapMarkingTypes.places;
+        typesLength = Object.keys(this.placesType).length;
         placesOnMap.removePlaces();
         placesOnMap.showMap();
         placesOnMap.initGroupsOfPlaces(this.placesType);
 
         //---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: placesOnLoad}).then(function(result) {
+        Place.getList({type: constants.placesOnLoad}).then(function(result) {
           counter = 1;
           places = result.concat(places);
           placesOnMap.setPlaceArr(places);
-          placesOnMap.showPlaces(places, placesOnLoad);
-          angular.element('#' + placesOnLoad + ' span').addClass(checkedClass);
-          angular.element('#Streets span').addClass(checkedClass);
+          placesOnMap.showPlaces(result, constants.placesOnLoad);
+          angular.element('#' + constants.placesOnLoad + ' span').addClass(constants.checkedClass);
+          angular.element('#Streets span').addClass(constants.checkedClass);
         });
         //----END---- ShowPlacesOnLoad
 
         //----START---- FilterByOneOfType
         this.checkType = function(input) {
           var spanCheck = angular.element('#' + input + ' span');
-          if (spanCheck.hasClass(checkedClass)) {
+          if (spanCheck.hasClass(constants.checkedClass)) {
             counter--;
-            spanCheck.removeClass(checkedClass);
-            angular.element('#all span').removeClass(checkedClass);
+            spanCheck.removeClass(constants.checkedClass);
+            angular.element('#all span').removeClass(constants.checkedClass);
             placesOnMap.removePlaces(input);
             places = places.filter(function(place) {
               return place.type != input;
             });
           } else {
             counter++;
-            spanCheck.addClass(checkedClass);
+            spanCheck.addClass(constants.checkedClass);
 
-            if (counter == this.placesType.length)
-              angular.element('#all span').addClass(checkedClass);
+            if (counter == typesLength)
+              angular.element('#all span').addClass(constants.checkedClass);
 
             Place.getList({type: input}).then(function(result) {
               places = result.concat(places);
-              placesOnMap.showPlaces(places, input);
-              placesOnMap.setPlaceArr(places);
+              placesOnMap.showPlaces(result, input);
             });
           }
         };
@@ -82,25 +57,26 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         //----START---- FilterCheckAll
         this.checkAll = function() {
           var spanCheck = angular.element('#all span');
-          if (spanCheck.hasClass(checkedClass)) {
+          if (spanCheck.hasClass(constants.checkedClass)) {
             counter = 0;
-            angular.element('.placeFilter a span').removeClass(checkedClass);
+            angular.element('.placeFilter a span').removeClass(constants.checkedClass);
             placesOnMap.removePlaces();
             places = [];
           } else {
-            counter = this.placesType.length;
+            counter = typesLength;
             placesOnMap.removePlaces();
             places = [];
-            angular.element('.placeFilter a span').addClass(checkedClass);
+            angular.element('.placeFilter a span').addClass(constants.checkedClass);
 
             Place.getList().then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(places);
-              placesOnMap.setPlaceArr(places);
             });
           }
         };
         //----END---- FilterCheckAll
+
+        this.places = places;
 
         //Don't hide dropdown if clicked
         angular.element('.dropdownFilter').on({

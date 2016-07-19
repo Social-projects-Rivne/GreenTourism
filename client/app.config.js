@@ -20,6 +20,7 @@ angular.module('greenTourism')
       ctrl.statusCode = rejection.status;
     });
   }]);
+
 angular.module('greenTourism')
   .controller('placeDetailCtrl', function($scope) {
     $scope.pageClass = 'page-detail';

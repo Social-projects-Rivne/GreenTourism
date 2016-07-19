@@ -24,14 +24,13 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
-
-              <a href="" id="{{placeType.type}}" class="list-group-item filter"  ng-repeat="placeType in $ctrl.placesType" ng-click="$ctrl.checkType(placeType.type)">
-                <img ng-src="{{placeType.icon}}">
-                {{placeType.name}}
+              <a href="" id="{{placeType}}" class="list-group-item filter"
+                 ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType" ng-click="$ctrl.checkType(placeType)">
+                <img ng-src="{{placeTypeValue.icon}}">
+                {{placeTypeValue.name}}
                 <span></span>
               </a>
               <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
-                <img>
                 Check all
                 <span></span>
               </a>
@@ -46,7 +45,7 @@
             <ul class="dropdown-menu col-xs-12 dropdownFilter">
 
               <li ng-repeat="(type, typeObj) in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type)">
-                <a href=""  class="active" id="{{type}}">
+                <a href="" class="active" id="{{type}}">
                   <span class="col-xs-9" style="border-left: 5px solid {{typeObj.color}}">
                     {{typeObj.name}}
                   </span>

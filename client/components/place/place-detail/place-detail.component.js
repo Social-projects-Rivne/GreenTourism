@@ -5,6 +5,13 @@ angular.module('placeDetail', [])
       place: '<'
     },
     controller: function placeDetailCtrl($scope, constants) {
+      $(document).ready(function() {
+        $(".fancybox").fancybox();
+      });
+      function upload() {
+        document.getElementById("file1").click();
+      }
+
       this.map = L.map('map1', {
         center: constants.mapCenter,
         zoom: constants.defaultZoom
@@ -23,6 +30,5 @@ angular.module('placeDetail', [])
         $scope.$emit('closePage', 'pageClass');
 
       }
-
     }
   });

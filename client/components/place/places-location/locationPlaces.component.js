@@ -28,7 +28,7 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants) {
   }
 
   this.placesFilter = function(value) {
-    return value.type == constants.defaultPlaceType1 || value.type == constants.defaultPlaceType2;
+    return value.type == constants.placesOnLoad;
   }
 }
 
