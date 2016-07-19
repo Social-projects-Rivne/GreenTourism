@@ -77,10 +77,10 @@ router.route('/auth/facebook/callback').get(
 
 
 //google
-router.route('/auth/google').get(
+router.route('/auth/google').post(
   passport.authenticate('google'));
 
-router.route('/auth/google/callback').get(
+router.route('/auth/google/callback').post(
   passport.authenticate( 'google', { successRedirect: '/#!/profile',
                                      failureRedirect: '/#!/login' }));
 

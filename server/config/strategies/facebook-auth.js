@@ -14,7 +14,6 @@ module.exports = function() {
       User.findOne({'facebook.id': profile.id}, function(err, user){
         if (err)
           return done(err);
-          console.log('smth went wrong');
         if (user)
           return done(null, user);
      });
