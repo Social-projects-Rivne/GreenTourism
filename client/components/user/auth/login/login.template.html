@@ -1,19 +1,8 @@
-<div class="signhead">
-  <h5 class="logotype">Green tourism</h5>
-  <span class="fa fa-circle fa-2x circleuser"></span>
-  <span class="fa fa-user fa-2x user"></span>
-  <h5 id="informlog">
-    <a href="" ng-click="signup=!signup" class="link">login</a>
-    or
-    <a href="" ng-click="signup=!signup" class="link">Signup</a>
-  </h5>
-</div>
-
 <div class="container login">
   <form role="form" name="login" novalidate method="POST" action="/api/login">
     <div class="form-group input-group-sm">
       <label for="email">E-mail</label>
-      <input type="email" name="email" class="form-control" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,}$/" ng-model="$ctrl.user.email" required>
+      <input type="email" name="email" class="form-control" ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/" ng-model="$ctrl.user.email" required>
       <p class="help-block error" ng-show="login.email.$touched && (login.email.$invalid && login.email.$dirty)">
         <span ng-show="login.email.$error.pattern">Please input correct email</span>
         <span ng-show="login.email.$error.required">Email is required</span>
@@ -35,8 +24,4 @@
   <hr/>
   <a class="btn btn-block btn-social btn-google">
     <span class="fa fa-google"></span>Login with google</a>
-</div>
-
-<div ng-show="signup">
-  <signup></signup>
 </div>

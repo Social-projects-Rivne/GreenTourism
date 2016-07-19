@@ -1,5 +1,5 @@
 angular.module('user').component('signup', {
-  templateUrl: 'components/user/signup/signup.template.html',
+  templateUrl: 'components/user/auth/signup/signup.template.html',
   controller: [function signupCtrl() {
     this.signup = function(isvalid) {
       if (!isvalid) {

@@ -79,8 +79,9 @@
 
     <!-- USER -->
     <script src="components/user/user.module.js"></script>
-    <script src="components/user/signup/signup.component.js"></script>
-    <script src="components/user/login/login.component.js"></script>
+    <script src="components/user/auth/auth/auth.component.js"></script>
+    <script src="components/user/auth/signup/signup.component.js"></script>
+    <script src="components/user/auth/login/login.component.js"></script>
     <script src="components/user/user-profile/user-profile.component.js"></script>
 
     <!-- PLACE -->
@@ -159,7 +160,7 @@
                 <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
                 <li><a href="/api/logout">Log out</a></li>
               <% } else { %>
-                <login><login>
+                <auth></auth>
               <% } %>
             </ul>
           </li>
