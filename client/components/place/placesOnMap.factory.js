@@ -2,7 +2,7 @@ angular.module('mapModule')
   .factory('placesOnMap', ['mapFactory', 'mapMarkingTypes', function(mapFactory, mapMarkingTypes) {
     var placesOnMap = {};
     var mainGroup = L.markerClusterGroup
-                      .layerSupport({showCoverageOnHover: false});
+      .layerSupport({showCoverageOnHover: false});
     var groups = [];
     var types = [];
     var places = [];
@@ -28,7 +28,9 @@ angular.module('mapModule')
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
       types = inpTypes;
       for (var key in types) {
-        groups[key] = L.layerGroup();
+        if ({}.hasOwnProperty.call(types, key)) {
+          groups[key] = L.layerGroup();
+        }
       }
     };
 

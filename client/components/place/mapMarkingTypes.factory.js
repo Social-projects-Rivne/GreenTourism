@@ -14,7 +14,7 @@ angular.module('greenTourism')
         name: 'Hostes',
         icon: 'assets/img/places/marker/red.png'
       },
-      featuredPlace: {
+      featuredplace: {
         name: 'Featured Place',
         icon: 'assets/img/places/marker/yellow.png'
       },

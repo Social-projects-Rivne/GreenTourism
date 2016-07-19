@@ -20,9 +20,9 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
-              <a href="" id="{{key}}" class="list-group-item filter"  ng-repeat="(key, value) in $ctrl.placesType" ng-click="$ctrl.checkType(key)">
-                <img ng-src="{{value.icon}}">
-                {{value.name}}
+              <a href="" id="{{placeType}}" class="list-group-item filter"  ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType" ng-click="$ctrl.checkType(placeType)">
+                <img ng-src="{{placeTypeValue.icon}}">
+                {{placeTypeValue.name}}
                 <span></span>
               </a>
               <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
