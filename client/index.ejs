@@ -132,7 +132,12 @@
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
             <ul class="dropdown-menu nav-ul">
-              <login><login>
+              <% if (user) { %>
+                <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
+                <li><a href="/api/logout">Log out</a></li>
+              <% } else { %>
+                <auth></auth>
+              <% } %>
             </ul>
           </li>
         </ul>
