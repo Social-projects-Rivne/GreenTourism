@@ -197,6 +197,8 @@
 
   <div ng-if="!main.routeChangeError" ng-view=""></div>
   <div ng-if="main.routeChangeError">
+    <div ng-if="main.statusCode === 401" ng-include="'401.html'"></div>
+    <div ng-if="main.statusCode === 403" ng-include="'403.html'"></div>
     <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
     <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
     <div ng-if="main.statusCode == null">

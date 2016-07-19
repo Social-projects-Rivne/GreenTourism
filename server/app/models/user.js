@@ -4,19 +4,27 @@ var bcrypt = require('bcrypt-nodejs');
 var SALT_ROUNDS = 5;
 
 var UserSchema = new Schema({
+  role: {
+    type: String,
+    lowercase: true,
+    enum: ['user', 'manager', 'admin'],
+    default: 'user',
+    required: true
+  },
   email: {
     type: String,
-    unique: 'E-mail must be unique',
-    required: 'E-mail is required',
-    // TODO: E-mail should not have special characters (except -, _, .), replace dots
-    match: [/.+@.+\..+/, 'Please fill a valid e-mail address']
+    unique: 'Email must be unique',
+    required: 'Email is required',
+    match: [/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/,
+            'Please fill a valid e-mail address'],
+    trim: true
   },
   password: {
     type: String,
     required: 'Password is required',
     validate: [
       function(password) {
-        return password && password.length >= 6;
+        return password && password.length >= 8;
       }, 'Password should be longer'
     ]
   },
@@ -28,6 +36,17 @@ var UserSchema = new Schema({
     type: String,
     required: 'Last name is required'
   },
+  nickname: {
+    type: String
+  },
+  phone: {
+    type: String,
+    match: [/\+\d{1,4}\d{9}/, 'Invalid phone number'],
+    trim: true
+  },
+  address: {
+    type: String
+  },
   avatar: {
     type: String
   },
@@ -36,13 +55,8 @@ var UserSchema = new Schema({
     required: 'Provider is required'
   },
   providerId: String,
-  providerData: {},
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-  // updatedAt
-});
+  providerData: {}
+}, {timestamps: true});
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(next) {

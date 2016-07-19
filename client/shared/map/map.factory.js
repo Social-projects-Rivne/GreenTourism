@@ -1,5 +1,5 @@
 angular.module('mapModule', [])
-  .factory('mapFactory',['Track', 'constants', function(Track, constants) {
+  .factory('mapFactory', ['Track', 'constants', function(Track, constants) {
     var mapFactory = {};
     var map;
     var userLocation;
@@ -18,11 +18,12 @@ angular.module('mapModule', [])
       }
 
       function getPopularTracks() {
-        Track.getList({location: [userLocation.lat, userLocation.lng], radius: constants.radiusForPopularItems}).then(function(result) {
-          popularTracks = result;
-          mapFactory.popularTracks = popularTracks;
-        });
-      };
+        Track.getList({location: [userLocation.lat, userLocation.lng], radius:
+          constants.radiusForPopularItems}).then(function(result) {
+            popularTracks = result;
+            mapFactory.popularTracks = popularTracks;
+          });
+      }
 
       function locationArea(coords) {
         if (userLocation) {
