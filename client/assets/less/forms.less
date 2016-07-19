@@ -45,6 +45,10 @@
 	text-align: center;
 	margin-top: 60px;
 }
+input {
+	margin-top: -5px;
+	margin-bottom: 0px;
+}
 input[type=text]:focus {
     border: 3px solid green;
 }
@@ -105,7 +109,28 @@ label{
 .policy{
 	font-size: 9px;
 }
-input {
-	margin-top: -5px;
-	margin-bottom: 0px;
+
+@media screen and (max-width: 480px) {
+	.logotype{
+		display: none;	
+	}
+	.signhead {
+		height: 53px;
+	}
+	.circleuser{
+	    display: none;
+	}
+	.user{
+		display: none;
+	}
+	.login {
+		top: 103px;
+	}
+	.signup {
+		top: 103px;
+	}
+	#informlog{
+		margin-top: 18px;
+		font-size: 14px;
+	}
 }
