@@ -15,8 +15,8 @@ var UserSchema = new Schema({
     type: String,
     unique: 'Email must be unique',
     required: 'Email is required',
-    // TODO: E-mail should not have special characters (except -, _, .), replace dots
-    match: [/.+@.+\..+/, 'Please fill a valid e-mail address'],
+    match: [/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/,
+            'Please fill a valid e-mail address'],
     trim: true
   },
   password: {
@@ -24,7 +24,7 @@ var UserSchema = new Schema({
     required: 'Password is required',
     validate: [
       function(password) {
-        return password && password.length >= 6;
+        return password && password.length >= 8;
       }, 'Password should be longer'
     ]
   },
