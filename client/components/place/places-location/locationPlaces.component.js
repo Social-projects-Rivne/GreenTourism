@@ -1,4 +1,4 @@
-function locationplacesCtrl(mapFactory, $scope, placesOnMap) {
+function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants) {
   var ctrl = $scope;
   var latitude;
   var longitude;
@@ -16,9 +16,9 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap) {
     $scope.placesByLocation = [];
     ctrl.places = placesOnMap.getPlaceArr();
     var placesArr = ctrl.places;
-    placesArr.forEach(function (place) {
-      latitude=place.location.coordinates[0];
-      longitude=place.location.coordinates[1];
+    placesArr.forEach(function(place) {
+      latitude = place.location.coordinates[0];
+      longitude = place.location.coordinates[1];
       if (latitude > min.lat && longitude > min.lng
         && latitude < max.lat && longitude < max.lng) {
         $scope.placesByLocation.push(place);
@@ -27,8 +27,8 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap) {
     });
   }
 
-  this.placesFilter = function (value) {
-    return value.type == "featuredPlace" || value.type == "service";
+  this.placesFilter = function(value) {
+    return value.type == constants.defaultPlaceType1 || value.type == constants.defaultPlaceType2;
   }
 }
 

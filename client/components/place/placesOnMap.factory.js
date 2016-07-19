@@ -32,10 +32,10 @@ angular.module('mapModule')
       });
     };
     placesOnMap.placeArr = [];
-    placesOnMap.setPlaceArr = function (place) {
+    placesOnMap.setPlaceArr = function(place) {
       placesOnMap.placeArr = place;
     };
-    placesOnMap.getPlaceArr = function () {
+    placesOnMap.getPlaceArr = function() {
       return placesOnMap.placeArr;
     };
     placesOnMap.showPlaces = function(places, input) {
