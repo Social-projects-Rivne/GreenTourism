@@ -8,6 +8,6 @@ angular.module('greenTourism')
     constants.mapCenter = [50.6234, 26.2189];
     // For Places
     constants.checkedClass = 'glyphicon glyphicon-ok';
-    constants.placesOnLoad = 'featuredplace';
+    constants.placesOnLoad = 'featured';
     return constants;
   });
