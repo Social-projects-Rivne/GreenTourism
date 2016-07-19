@@ -4,14 +4,16 @@ var CommentSchema = require('./schema/comment');
 var LocationSchema = require('./schema/location');
 
 var PlaceSchema = new Schema({
+  // TODO: add required for almost all fields
   name: String,
   description: String,
   location: LocationSchema,
+  address: String,
   type: String,
   photos: [String],
-  likes: [String],
+  likes: [Schema.Types.ObjectId],
   comments: [CommentSchema],
-  userId: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },

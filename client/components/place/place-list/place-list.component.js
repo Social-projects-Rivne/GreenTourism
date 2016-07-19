@@ -1,13 +1,14 @@
-angular.module('placeList', ['filterMapType'])
+angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', '$scope',
-      function (placesOnMap, mapMarkingTypes, Place, Track, currentUser, $scope) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
+      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser) {
         var placesOnLoad = 'featuredPlace';
         var checkedClass = 'glyphicon glyphicon-ok';
         var places = [];
         var tracks = [];
         var counter;
+
         this.user = currentUser;
 
         //-----START ADD Place-----
@@ -34,14 +35,14 @@ angular.module('placeList', ['filterMapType'])
          };*/
         //-----END ADD Place-----
 
-        this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
+        this.placesType = mapMarkingTypes.placesType;
         placesOnMap.removePlaces();
         placesOnMap.showMap();
         placesOnMap.initGroupsOfPlaces(this.placesType);
 
         //---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: placesOnLoad}).then(function (result) {
+        Place.getList({type: placesOnLoad}).then(function(result) {
           counter = 1;
           places = result.concat(places);
           placesOnMap.setPlaceArr(places);
@@ -52,14 +53,14 @@ angular.module('placeList', ['filterMapType'])
         //----END---- ShowPlacesOnLoad
 
         //----START---- FilterByOneOfType
-        this.checkType = function (input) {
+        this.checkType = function(input) {
           var spanCheck = angular.element('#' + input + ' span');
           if (spanCheck.hasClass(checkedClass)) {
             counter--;
             spanCheck.removeClass(checkedClass);
             angular.element('#all span').removeClass(checkedClass);
             placesOnMap.removePlaces(input);
-            places = places.filter(function (place) {
+            places = places.filter(function(place) {
               return place.type != input;
             });
           } else {
@@ -69,7 +70,7 @@ angular.module('placeList', ['filterMapType'])
             if (counter == this.placesType.length)
               angular.element('#all span').addClass(checkedClass);
 
-            Place.getList({type: input}).then(function (result) {
+            Place.getList({type: input}).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(places, input);
               placesOnMap.setPlaceArr(places);
@@ -79,7 +80,7 @@ angular.module('placeList', ['filterMapType'])
         //----END---- FilterByOneOfType
 
         //----START---- FilterCheckAll
-        this.checkAll = function () {
+        this.checkAll = function() {
           var spanCheck = angular.element('#all span');
           if (spanCheck.hasClass(checkedClass)) {
             counter = 0;
@@ -91,7 +92,8 @@ angular.module('placeList', ['filterMapType'])
             placesOnMap.removePlaces();
             places = [];
             angular.element('.placeFilter a span').addClass(checkedClass);
-            Place.getList().then(function (result) {
+
+            Place.getList().then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(places);
               placesOnMap.setPlaceArr(places);
@@ -99,9 +101,10 @@ angular.module('placeList', ['filterMapType'])
           }
         };
         //----END---- FilterCheckAll
+
         //Don't hide dropdown if clicked
         angular.element('.dropdownFilter').on({
-          'click': function (e) {
+          'click': function(e) {
             e.stopPropagation();
           }
         });
@@ -109,14 +112,13 @@ angular.module('placeList', ['filterMapType'])
 
         /*** START tracks controller ***/
         var activeLiCounter = 4;
-
-        this.tracksType = mapMarkingTypes.tracksType;
-        Track.getList().then(function (result) {
+        this.tracksType = mapMarkingTypes.tracks;
+        Track.getList().then(function(result) {
           tracks = result;
           placesOnMap.showTracks(tracks);
         });
 
-        this.showSpecificTracks = function (tracksType) {
+        this.showSpecificTracks = function(tracksType) {
           var element = angular.element('#' + tracksType);
           var checkedIcon = angular.element('#gi' + tracksType);
           var allGI = angular.element('#tracks-filter li span.glyphicon');
@@ -139,14 +141,14 @@ angular.module('placeList', ['filterMapType'])
               allGI.addClass('glyphicon-ok');
               checkAllElement.addClass('active');
             }
-            Track.getList({type: tracksType}).then(function (result) {
+            Track.getList({type: tracksType}).then(function(result) {
               tracks = result;
               placesOnMap.showTracks(tracks);
             });
           }
         };
 
-        this.checkAllTracks = function () {
+        this.checkAllTracks = function() {
           var checkAllElement = angular.element('#all-tracks');
           var allLiElements = angular.element(document).find('#tracks-filter li > a');
           var allGI = angular.element('#tracks-filter li span.glyphicon');
@@ -159,7 +161,7 @@ angular.module('placeList', ['filterMapType'])
             allLiElements.addClass('active');
             allGI.addClass('glyphicon-ok');
             activeLiCounter = 4;
-            Track.getList().then(function (result) {
+            Track.getList().then(function(result) {
               tracks = result;
               placesOnMap.showTracks(tracks);
             });

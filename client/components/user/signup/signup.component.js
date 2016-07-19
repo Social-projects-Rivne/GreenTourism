@@ -22,7 +22,7 @@ angular.module('user').component('signup', {
           } else if (error.minlength) {
             return 'Please input more then 7 characters';
           } else if (error.validation) {
-            return 'Password isn\'t match';
+            return 'Password isn"t match';
           } else if (error.required) {
             return 'Please fill up this field';
           }

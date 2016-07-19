@@ -4,6 +4,7 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap) {
   var longitude;
   ctrl.places = placesOnMap.getPlaceArr();
   $scope.placesByLocation = ctrl.places;
+  console.log(ctrl.places);
   $scope.map = mapFactory.map;
   $scope.map.on('moveend', setLocationPlaces);
 
