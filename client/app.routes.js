@@ -8,30 +8,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '<welcome-page></welcome-page>'
       })
 
-      .when('/signup', {
-        template: '<signup></signup>',
-        resolve: {
-          user: ['currentUser', '$location',
-            function checkUser(currentUser, $location) {
-              if (currentUser) {
-                $location.path('/profile');
-              }
-            }
-          ]
-        }
-      })
-      .when('/login', {
-        template: '<login></login>',
-        resolve: {
-          user: ['currentUser', '$location',
-            function checkUser(currentUser, $location) {
-              if (currentUser) {
-                $location.path('/profile');
-              }
-            }
-          ]
-        }
-      })
       .when('/profile', {
         template: '<user-profile user="$resolve.user"></user-profile>',
         resolve: {
@@ -44,7 +20,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
                   });
               }
 
-              $location.path('/login');
+              $location.path('/');
             }
           ]
         }

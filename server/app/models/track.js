@@ -14,7 +14,7 @@ var locSchema = new Schema({
 });
 
 var TrackSchema = new Schema({
-  name: { 
+  name: {
     type: String,
     required: true
   },

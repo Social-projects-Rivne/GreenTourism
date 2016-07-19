@@ -1,14 +1,15 @@
 angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
-    function(placesOnMap, mapMarkingTypes, Place, Track, currentUser) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'constants',
+    function(placesOnMap, mapMarkingTypes, Place, Track, currentUser, constants) {
       var i;
       var placesOnLoad = 'featuredPlace';
       var checkedClass = 'glyphicon glyphicon-ok';
       var places = [];
       var tracks = [];
       var counter;
+      var typesLength;
       var addPlaceMenu = angular.element('#add-place');
       var addTrackMenu = angular.element('#add-track');
       var newPlaceLongitude = angular.element('#longitude');
@@ -175,39 +176,40 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
       };
       // -----END ADD Track-----
 
-      self.placesType = mapMarkingTypes.placesType;
+      self.placesType = mapMarkingTypes.places;
+      typesLength = Object.keys(this.placesType).length;
       placesOnMap.removePlaces();
       placesOnMap.showMap();
       placesOnMap.initGroupsOfPlaces(self.placesType);
 
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-      Place.getList({type: placesOnLoad}).then(function(result) {
+      Place.getList({type: constants.placesOnLoad}).then(function(result) {
         counter = 1;
         places = result.concat(places);
-        placesOnMap.showPlaces(places, placesOnLoad);
-        angular.element('#' + placesOnLoad + ' span').addClass(checkedClass);
-        angular.element('#Streets span').addClass(checkedClass);
+        placesOnMap.showPlaces(result, constants.placesOnLoad);
+        angular.element('#' + constants.placesOnLoad + ' span').addClass(constants.checkedClass);
+        angular.element('#Streets span').addClass(constants.checkedClass);
       });
         // ----END---- ShowPlacesOnLoad
 
         // ----START---- FilterByOneOfType
       self.checkType = function(input) {
         var spanCheck = angular.element('#' + input + ' span');
-        if (spanCheck.hasClass(checkedClass)) {
+        if (spanCheck.hasClass(constants.checkedClass)) {
           counter--;
-          spanCheck.removeClass(checkedClass);
-          angular.element('#all span').removeClass(checkedClass);
+          spanCheck.removeClass(constants.checkedClass);
+          angular.element('#all span').removeClass(constants.checkedClass);
           placesOnMap.removePlaces(input);
           places = places.filter(function(place) {
             return place.type != input;
           });
         } else {
           counter++;
-          spanCheck.addClass(checkedClass);
+          spanCheck.addClass(constants.checkedClass);
 
-          if (counter == self.placesType.length)
-            angular.element('#all span').addClass(checkedClass);
+          if (counter == typesLength)
+            angular.element('#all span').addClass(constants.checkedClass);
 
           Place.getList({type: input}).then(function(result) {
             places = result.concat(places);
@@ -220,16 +222,16 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         // ----START---- FilterCheckAll
       self.checkAll = function() {
         var spanCheck = angular.element('#all span');
-        if (spanCheck.hasClass(checkedClass)) {
+        if (spanCheck.hasClass(constants.checkedClass)) {
           counter = 0;
-          angular.element('.placeFilter a span').removeClass(checkedClass);
+          angular.element('.placeFilter a span').removeClass(constants.checkedClass);
           placesOnMap.removePlaces();
           places = [];
         } else {
-          counter = self.placesType.length;
+          counter = typesLength;
           placesOnMap.removePlaces();
           places = [];
-          angular.element('.placeFilter a span').addClass(checkedClass);
+          angular.element('.placeFilter a span').addClass(constants.checkedClass);
 
           Place.getList().then(function(result) {
             places = result.concat(places);

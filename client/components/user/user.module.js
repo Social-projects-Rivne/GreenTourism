@@ -1,3 +1,4 @@
 angular.module('user', [
-  'userModel'
+  'userModel', 
+  'validation.match'
 ]);
