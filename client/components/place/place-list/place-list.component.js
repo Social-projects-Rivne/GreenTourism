@@ -1,4 +1,4 @@
-angular.module('placeList', ['filterMapType'])
+angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
@@ -41,7 +41,7 @@ angular.module('placeList', ['filterMapType'])
         };*/
         //-----END ADD Place-----
 
-        this.placesType = mapMarkingTypes.placesType;  //Renamed types to placesType
+        this.placesType = mapMarkingTypes.placesType;
         placesOnMap.removePlaces();
         placesOnMap.showMap();
         placesOnMap.initGroupsOfPlaces(this.placesType);
@@ -117,8 +117,7 @@ angular.module('placeList', ['filterMapType'])
 
         /*** START tracks controller ***/
         var activeLiCounter = 4;
-
-        this.tracksType = mapMarkingTypes.tracksType;
+        this.tracksType = mapMarkingTypes.tracks;
         Track.getList().then(function(result) {
           tracks = result;
           placesOnMap.showTracks(tracks);

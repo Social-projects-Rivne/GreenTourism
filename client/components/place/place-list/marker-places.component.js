@@ -24,10 +24,10 @@ angular.module('placeList')
               modalData: $ctrl.dataPlace
             }
           }).result.then(function(result) {
-            console.info('I was closed, so do what I need to do myContent\'s controller now and result was->');
+            console.info('I was closed, so do what I need to do myContent"s controller now and result was->');
             console.info(result);
           }, function(reason) {
-            console.info('I was dimissed, so do what I need to do myContent\'s controller now and reason was->' + reason);
+            console.info('I was dimissed, so do what I need to do myContent"s controller now and reason was->' + reason);
           });
         };
       });

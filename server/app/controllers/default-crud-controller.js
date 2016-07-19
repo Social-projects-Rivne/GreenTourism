@@ -12,13 +12,14 @@ module.exports = function(Model) {
     delete req.query.skip;
 
     Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
-        function(err, records) {
-          if (err) {
-            res.status(400).json(err);
-          } else {
-            res.json(records);
-          }
-        });
+      function(err, records) {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.json(records);
+        }
+      }
+    );
   };
 
   controller.show = function(req, res) {
