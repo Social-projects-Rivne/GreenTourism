@@ -17,15 +17,34 @@
       </form>
     </div>
   </div>
-  <div class="alert alert-info" ng-if="!$ctrl.currentUser">Please, <a href="#!/login">login</a> for comment!</div>
+  <div class="alert alert-info" ng-if="!$ctrl.currentUser">Please, <a href="#!/login">login</a> for comment or delete
+    message!
+  </div>
   <div class="row show-comments" ng-repeat="comment in $ctrl.object.comments | orderBy:'-createdAt'">
     <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
       <img ng-src="{{comment.author.avatar}}"/>
     </div>
     <div class="col-md-11 col-sm-11 col-xs-11">
       <p><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong></p>
-      <p class="show-comments-content">{{comment.content}}</p>
-      <p class="show-comments-timestamp">Added: {{comment.updatedAt}}</p>
+      <div class="dropdown comment-menu"
+           ng-if="$ctrl.currentUser._id === comment.author._id">
+        <a class="dropdown-toggle" id="commentMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-option-horizontal"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="commentMenu">
+          <li><a href="" ng-click="$ctrl.editComment(comment._id)">Edit</a></li>
+          <li><a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a></li>
+        </ul>
+      </div>
+      <p class="show-comments-content" ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
+      <div ng-if="$ctrl.checkCommentId === comment._id">
+        <textarea style="resize: vertical;" class="form-control"
+                  rows="2" required maxlength="1000" ng-model="comment.content">{{comment.content}}</textarea>
+        <button type="button" ng-click="$ctrl.updateComment(comment._id, comment.content)" class="btn btn-default"
+                ng-disabled="!comment.content">Update
+        </button>
+      </div>
+      <p class="show-comments-timestamp">Added: {{comment.createdAt}}</p>
     </div>
   </div>
 </div>

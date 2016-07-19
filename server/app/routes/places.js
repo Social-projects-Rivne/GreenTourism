@@ -18,4 +18,12 @@ router.route('/:id')
   // TODO: Restrict deleting places to logged in users only
   .delete(placeController.delete);
 
+router.route('/:id/comments')
+  .get(placeController.showComments);
+
+router.route('/:id/comments/:commentId')
+  .get(placeController.showComment)
+  .put(placeController.updateComment)
+  .delete(placeController.deleteComment);
+
 module.exports = router;
