@@ -66,21 +66,20 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
       };
 
       this.createNewPlace = function(form) {
+        var createdPlaceType;
         this.formNewPlaceSubmitted = true;
         if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
           this.newPlace.type = this.newPlaceType.type;
+          createdPlaceType = this.newPlaceType.type;
           this.newPlace.owner = this.user._id;
           this.newPlace.location.coordinates = placesOnMap.coords;
           var newPlaces = [];
           newPlaces.push(this.newPlace);
-          placesOnMap.showPlaces(newPlaces);
-          Place.post(this.newPlace).then(function() {
-            console.log('success');
-          }, function() {
-            console.log('fail');
-          });
-          console.log(this.newPlace);
+          //placesOnMap.showPlaces(newPlaces);
+          Place.post(this.newPlace);
+          this.checkType(createdPlaceType);
           this.resetAddPlaceForm(form);
+          console.log(this.newPlace);
         }
       };
 
@@ -190,6 +189,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
 
         // ----START---- FilterByOneOfType
       this.checkType = function(input) {
+        console.log(input);
         var spanCheck = angular.element('#' + input + ' span');
         if (spanCheck.hasClass(checkedClass)) {
           counter--;
