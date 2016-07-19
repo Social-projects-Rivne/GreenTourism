@@ -20,7 +20,7 @@
               Map type
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding">
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
               <filter-map-type></filter-map-type>
             </ul>
           </div>
@@ -29,10 +29,10 @@
               Places
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding">
-              <a href="" id="{{typ.type}}" class="list-group-item filter"  ng-repeat="typ in $ctrl.placesType" ng-click="$ctrl.checkType(typ.type)"> 
-                <img ng-src="{{typ.icon}}">
-                {{typ.name}}
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
+              <a href="" id="{{placeType.type}}" class="list-group-item filter"  ng-repeat="placeType in $ctrl.placesType" ng-click="$ctrl.checkType(placeType.type)">
+                <img ng-src="{{placeType.icon}}">
+                {{placeType.name}}
                 <span></span>
               </a>
               <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
@@ -47,13 +47,13 @@
               Tracks
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu  col-xs-12">
-              <li ng-repeat="type in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type.type)">
-                <a href=""  class="active" id="{{type.type}}">
-                  <span class="col-xs-9" style="border-left: 5px solid {{type.color}}">
-                    {{type.name}}
+            <ul class="dropdown-menu col-xs-12 dropdownFilter">
+              <li ng-repeat="(type, typeObj) in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type)">
+                <a href=""  class="active" id="{{type}}">
+                  <span class="col-xs-9" style="border-left: 5px solid {{typeObj.color}}">
+                    {{typeObj.name}}
                   </span>
-                  <span id="gi{{type.type}}" class="col-xs-3 glyphicon glyphicon-ok">
+                  <span id="gi{{type}}" class="col-xs-3 glyphicon glyphicon-ok">
                   </span>
                 </a>
               </li>
@@ -68,7 +68,7 @@
               </li>
             </ul>
           </div>
-          <button type="button" class="btn btn-default col-xs-2 btn-last" >Export</button>
+          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
           <div class="col-xs-2"></div>
         </div>
       </div> <!-- Filter container end -->
@@ -77,25 +77,7 @@
         <div id="map"></div>
       </div> <!-- Map container end-->
 
-      <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
-        <div class="col-xs-12 no-padding">
-          <h2>Popular Tracks in location</h2>
-        </div>
-        <div class="col-xs-12 no-padding">
-          <div class="col-xs-4 place-wrapper">
-            <div class="place-container">
-            </div>
-          </div>
-          <div class="col-xs-4 place-wrapper">
-            <div class="place-container">
-            </div>
-          </div>
-          <div class="col-xs-4 place-wrapper">
-            <div class="place-container">
-            </div>
-          </div>
-        </div>
-      </div> <!-- Related tracks container end -->
+      <popular-tracks></popular-tracks>
     </div>
     <div class="col-xs-3 no-padding" id="sidebar">
       <div class="col-xs-12" id="search">
@@ -110,7 +92,7 @@
           <location-places places="$ctrl.places"></location-places>
         </div>
     </div>
-    <div id="add-place">
+    <div id="add-place" class="add-item-menu">
       <h2>New Place</h2>
       <a href="" ng-click="$ctrl.closeAddPlaceMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
       <form name="placeMaker" novalidate>
@@ -153,7 +135,7 @@
           </div>
       </form>
     </div>
-    <div id="add-track">
+    <div id="add-track" class="add-item-menu">
       <h2>New Track</h2>
       <a href="" ng-click="$ctrl.closeAddTrackMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
       <form name="trackMaker">

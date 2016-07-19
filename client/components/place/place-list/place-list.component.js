@@ -1,14 +1,13 @@
-angular.module('placeList', ['filterMapType'])
+angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser',
     function(placesOnMap, mapMarkingTypes, Place, Track, currentUser) {
       var i;
       var placesOnLoad = 'featuredPlace';
-      var arrPlaces = [];
+      var checkedClass = 'glyphicon glyphicon-ok';
       var places = [];
       var tracks = [];
-      var placeObject = {};
       var counter;
       var addPlaceMenu = angular.element('#add-place');
       var addTrackMenu = angular.element('#add-track');
@@ -18,7 +17,6 @@ angular.module('placeList', ['filterMapType'])
       var addTrackForm = angular.element('form[name="trackMaker"]');
       var addPlaceMenuIsOpen = false;
       var addTrackMenuIsOpen = false;
-      this.placesType = mapMarkingTypes.placesType;
 
       this.user = currentUser;
 
@@ -32,19 +30,11 @@ angular.module('placeList', ['filterMapType'])
           coordinates: []
         },
         photos: [],
-        userId: ''
+        owner: '',
+        rate: 0,
+        address: ''
       };
-      var emptyPlaceObject = {
-        name: '',
-        type: '',
-        description: '',
-        location: {
-          type: 'Point',
-          coordinates: []
-        },
-        photos: [],
-        userId: ''
-      };
+      var emptyPlaceObject = angular.copy(this.newPlace);
       this.newPlaceType = '';
       this.newPlacePhoto = '';
       this.formNewPlaceSubmitted = false;
@@ -79,7 +69,7 @@ angular.module('placeList', ['filterMapType'])
         this.formNewPlaceSubmitted = true;
         if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
           this.newPlace.type = this.newPlaceType.type;
-          this.newPlace.userId = this.user._id;
+          this.newPlace.owner = this.user._id;
           this.newPlace.location.coordinates = placesOnMap.coords;
           console.log(this.newPlace);
           this.resetAddPlaceForm(form);
@@ -157,7 +147,7 @@ angular.module('placeList', ['filterMapType'])
         if (addTrackForm.hasClass('ng-valid')) {
           this.newTrack.type = this.newTrackType.type;
           this.newTrack.userId = this.user._id;
-          //this.newPlace.location.coordinates = placesOnMap.coords;
+          // this.newPlace.location.coordinates = placesOnMap.coords;
           console.log(this.newPlace);
           this.resetAddTrackForm(form);
         }
@@ -173,127 +163,83 @@ angular.module('placeList', ['filterMapType'])
         }
       };
       // -----END ADD Track-----
+
+      this.placesType = mapMarkingTypes.placesType;
       placesOnMap.removePlaces();
       placesOnMap.showMap();
       placesOnMap.initGroupsOfPlaces(this.placesType);
 
-      // ---START---- ShowPlacesOnLoad
-      // TODO: Move this inside resolve
+        // ---START---- ShowPlacesOnLoad
+        // TODO: Move this inside resolve
       Place.getList({type: placesOnLoad}).then(function(result) {
-        places = result;
         counter = 1;
-        for (i = 0; i < places.length; i++) {
-          placeObject = {id: places[i]._id, latitude: places[i].latitude,
-             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
-
-          arrPlaces.push(placeObject);
-        }
-        placesOnMap.setPlaceArray(arrPlaces);
-        placesOnMap.showPlaces(placesOnLoad);
-
-        $('#' + placesOnLoad + ' span').addClass('glyphicon glyphicon-ok');
-        $('#Streets span').addClass('glyphicon glyphicon-ok');
+        places = result.concat(places);
+        placesOnMap.showPlaces(places, placesOnLoad);
+        angular.element('#' + placesOnLoad + ' span').addClass(checkedClass);
+        angular.element('#Streets span').addClass(checkedClass);
       });
-      // ----END---- ShowPlacesOnLoad
+        // ----END---- ShowPlacesOnLoad
 
-      // ----START---- FilterByOneOfType
+        // ----START---- FilterByOneOfType
       this.checkType = function(input) {
-        var spanCheck = $('#' + input + ' span');
-
-        if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+        var spanCheck = angular.element('#' + input + ' span');
+        if (spanCheck.hasClass(checkedClass)) {
           counter--;
-
-          spanCheck.removeClass('glyphicon glyphicon-ok');
-          $('#all span').removeClass('glyphicon glyphicon-ok');
-
+          spanCheck.removeClass(checkedClass);
+          angular.element('#all span').removeClass(checkedClass);
           placesOnMap.removePlaces(input);
-
-          for (i = 0; i < arrPlaces.length; i++) {
-            if (arrPlaces[i].type == input) {
-              arrPlaces.splice(i--, 1);
-            }
-          }
+          places = places.filter(function(place) {
+            return place.type != input;
+          });
         } else {
           counter++;
-          spanCheck.addClass('glyphicon glyphicon-ok');
+          spanCheck.addClass(checkedClass);
 
           if (counter == this.placesType.length)
-            $('#all span').addClass('glyphicon glyphicon-ok');
+            angular.element('#all span').addClass(checkedClass);
 
           Place.getList({type: input}).then(function(result) {
-            places = result;
-
-            for (i = 0; i < places.length; i++) {
-              placeObject = {id: places[i]._id, latitude: places[i].latitude,
-             longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
-
-              arrPlaces.push(placeObject);
-            }
-
-            placesOnMap.setPlaceArray(arrPlaces);
-            placesOnMap.showPlaces(input);
+            places = result.concat(places);
+            placesOnMap.showPlaces(places, input);
           });
         }
       };
-      // ----END---- FilterByOneOfType
+        // ----END---- FilterByOneOfType
 
-      // ----START---- FilterCheckAll
+        // ----START---- FilterCheckAll
       this.checkAll = function() {
-        var spanCheck = $('#all span');
-
-        if (spanCheck.hasClass('glyphicon glyphicon-ok')) {
+        var spanCheck = angular.element('#all span');
+        if (spanCheck.hasClass(checkedClass)) {
           counter = 0;
-
-          spanCheck.removeClass('glyphicon glyphicon-ok');
-
-          for (i = 0; i < this.placesType.length; i++) {
-            $('#' + this.placesType[i].type + ' span')
-              .removeClass('glyphicon glyphicon-ok');
-          }
+          angular.element('.placeFilter a span').removeClass(checkedClass);
           placesOnMap.removePlaces();
-          arrPlaces = [];
+          places = [];
         } else {
-          counter = 5;
-
+          counter = this.placesType.length;
           placesOnMap.removePlaces();
-          arrPlaces = [];
-
-          spanCheck.addClass('glyphicon glyphicon-ok');
-
-          for (i = 0; i < this.placesType.length; i++) {
-            $('#' + this.placesType[i].type + ' span')
-              .addClass('glyphicon glyphicon-ok');
-          }
+          places = [];
+          angular.element('.placeFilter a span').addClass(checkedClass);
 
           Place.getList().then(function(result) {
-            places = result;
-
-            for (i = 0; i < places.length; i++) {
-              placeObject = {id: places[i]._id, latitude: places[i].latitude,
-              longitude: places[i].longitude, type: places[i].type, name: places[i].name, photo: places[i].photo[0], rate: places[i].rate};
-
-              arrPlaces.push(placeObject);
-            }
-
-            placesOnMap.setPlaceArray(arrPlaces);
-            placesOnMap.showPlaces();
+            places = result.concat(places);
+            placesOnMap.showPlaces(places);
           });
         }
       };
-      // ----END---- FilterCheckAll
-      this.places = arrPlaces;
-      // Don't hide dropdown if clicked
-      $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
+        // ----END---- FilterCheckAll
+
+      this.places = places;
+
+        // Don't hide dropdown if clicked
+      angular.element('.dropdownFilter').on({
         'click': function(e) {
           e.stopPropagation();
         }
-
       });
 
-      /** * START tracks controller ***/
+        /** * START tracks controller ***/
       var activeLiCounter = 4;
-
-      this.tracksType = mapMarkingTypes.tracksType;
+      this.tracksType = mapMarkingTypes.tracks;
       Track.getList().then(function(result) {
         tracks = result;
         placesOnMap.showTracks(tracks);

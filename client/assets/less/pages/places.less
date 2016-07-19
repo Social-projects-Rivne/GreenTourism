@@ -10,15 +10,12 @@
 }
 
 #sidebar, #main-content {
-  max-height: 1000px;
   text-align: center;
   overflow: hidden;
 }
 
-#sidebar {
-  text-align: center;
-  overflow: hidden;
-  border-left: 1px solid @light-green;
+#main-content {
+  border-right: 1px solid @light-green;
 }
 
 #search {
@@ -113,54 +110,29 @@ div.place{
 
 /*-------------- Add place --------------*/
 .alert-input {
-  color: #f00;
+  color: #fff;
 }
-#add-place {
+.add-item-menu {
   position: absolute;
   top: 0;
   right: 0;
-  height: auto;
+  height: 100%;
   width: 25%;
   z-index: 1000;
   border: 1px solid @light-green;
-  background-color: #fff;
+  //background-color: #fff;
+  background: linear-gradient(180deg, @light-green, #fff);
   padding: 15px;
   display: none;
-  h2 {
-    text-align: center;
-  }
   .removeIcon {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 15px;
+    left: 10px;
     font-size: 25px;
-    color: @light-green;
+    color: #fff;
   }
-  .title {
-    font-weight: bold;
-  }
-}
-
-#add-track {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: auto;
-  width: 25%;
-  z-index: 1000;
-  border: 1px solid @light-green;
-  background-color: #fff;
-  padding: 15px;
-  display: none;
   h2 {
     text-align: center;
-  }
-  .removeIcon {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 25px;
-    color: @light-green;
   }
   .title {
     font-weight: bold;
