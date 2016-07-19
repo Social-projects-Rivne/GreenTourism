@@ -71,6 +71,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           this.newPlace.type = this.newPlaceType.type;
           this.newPlace.owner = this.user._id;
           this.newPlace.location.coordinates = placesOnMap.coords;
+          var newPlaces = [];
+          newPlaces.push(this.newPlace);
+          placesOnMap.showPlaces(newPlaces);
+          Place.post(this.newPlace).then(function() {
+            console.log('success');
+          }, function() {
+            console.log('fail');
+          });
           console.log(this.newPlace);
           this.resetAddPlaceForm(form);
         }
