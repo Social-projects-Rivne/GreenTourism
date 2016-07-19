@@ -49,8 +49,6 @@ angular.module('welcomePage', [])
         }, 1000);
         return false;
       });
-      });
-
     }
     ]
   });
