@@ -18,8 +18,8 @@ angular.module('welcomePage', [])
             obj = {
               _id: self.popularPlaces[random]._id,
               name: self.popularPlaces[random].name,
-              latitude: self.popularPlaces[random].latitude,
-              longitude: self.popularPlaces[random].longitude,
+              latitude: self.popularPlaces[random].location.coordinates[0],
+              longitude: self.popularPlaces[random].location.coordinates[1],
               photo: self.popularPlaces[random].photos[0],
               location: ''
             };
