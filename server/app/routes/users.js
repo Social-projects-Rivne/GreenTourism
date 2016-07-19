@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router(); // eslint-disable-line new-cap
 
-var User = require('mongoose').model('User');
-var userController = require('../controllers/default-crud-controller')(User);
+var controller = require('../controllers/users');
+var auth = require('../helpers/auth.js');
 
 router.route('/')
-  // TODO: Make users can't see user list!
-  .get(userController.list)
-  .post(userController.create);
+  .get(auth.isAdmin, controller.list);
 
-// TODO: Make user can see, edit and delete only himself!
+router.route('/me')
+  .get(auth.isLoggedIn, controller.showMe);
+
 router.route('/:id')
-  .get(userController.show)
-  .put(userController.update)
-  .delete(userController.delete);
+  .get(auth.hasAuthorization, controller.show)
+  .put(auth.hasAuthorization, controller.update)
+  .delete(auth.hasAuthorization, controller.delete);
 
 module.exports = router;

@@ -1,26 +1,48 @@
 angular.module('mapModule', [])
-  .factory('mapFactory', function() {
+  .factory('mapFactory', ['Track', 'constants', function(Track, constants) {
     var mapFactory = {};
     var map;
+    var userLocation;
+    var popularTracks = [];
     mapFactory.showMap = function() {
       map = L.map('map', {
-        center: [50.6234, 26.2189],
-        zoom: 14
+        center: constants.mapCenter,
+        zoom: constants.defaultZoom
       });
+
+      if (userLocation) {
+        locationArea(userLocation);
+        getPopularTracks();
+      } else {
+        map.locate({setView: true, maxZoom: constants.defaultZoom});
+      }
+
+      function getPopularTracks() {
+        Track.getList({location: [userLocation.lat, userLocation.lng], radius:
+          constants.radiusForPopularItems}).then(function(result) {
+            popularTracks = result;
+            mapFactory.popularTracks = popularTracks;
+          });
+      }
+
+      function locationArea(coords) {
+        if (userLocation) {
+          map.setView(coords);
+        }
+      }
+
+      function onLocationFound(e) {
+        var coords = e.latlng;
+        locationArea(coords);
+        userLocation = coords;
+        getPopularTracks();
+      }
+
+      map.on('locationfound', onLocationFound);
       mapFactory.map = map;
+      mapFactory.userLocation = userLocation;
       return map;
     };
 
-      /* $rootScope.map.locate({setView: true, maxZoom: 14});
-
-      function onLocationFound(e) {
-
-          L.marker(e.latlng).addTo($rootScope.map)
-              .bindPopup("You are here").openPopup();
-
-          $rootScope.userLocationArea = L.circle(e.latlng, 3000).addTo($rootScope.map);
-      }
-
-      $rootScope.map.on('locationfound', onLocationFound);*/
     return mapFactory;
-  });
+  }]);

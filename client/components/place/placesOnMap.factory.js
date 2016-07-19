@@ -1,5 +1,5 @@
 angular.module('mapModule')
-  .factory('placesOnMap', ['mapFactory', function(mapFactory) {
+  .factory('placesOnMap', ['mapFactory', 'mapMarkingTypes', function(mapFactory, mapMarkingTypes) {
     var placesOnMap = {};
     var mainGroup = L.markerClusterGroup
       .layerSupport({showCoverageOnHover: false});
@@ -27,62 +27,57 @@ angular.module('mapModule')
 
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
       types = inpTypes;
-      types.forEach(function(type, i) {
-        groups[i] = L.layerGroup();
-      });
+      for (var key in types) {
+        if ({}.hasOwnProperty.call(types, key)) {
+          groups[key] = L.layerGroup();
+        }
+      }
     };
 
     placesOnMap.showPlaces = function(places, input) {
       mainGroup.addTo(map);
-
-      types.forEach(function(placeType, i) {
-        if (input) {
-          if (placeType.type == input) {
-            places.forEach(function(place) {
-              if (place.type == input) {
-                marker(place.location.coordinates[0], place.location.coordinates[1], placeType.icon)
-                  .addTo(groups[i])
-                  .bindPopup("<div class='popup  center-block'><h3>" + place.name + "</h3><a><img class='marker-image' src='assets/" + place.photos[0] + "' \/></a>" +
-                    "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/" + place._id + "'>Details >></a> </button></div>", {autoPan: false})
-                  .openPopup();
-              }
-            });
-          }
-        } else {
-          places.forEach(function(place) {
-            if (place.type == placeType.type) {
-              marker(place.location.coordinates[0], place.location.coordinates[1], placeType.icon)
-                .addTo(groups[i])
-                .bindPopup("<div class='popup  center-block'><h3>" + place.name + "</h3><a><img class='marker-image' src='assets/" + place.photos[0] + "' \/></a>" +
-                  "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/" + place._id + "'>Details >></a> </button></div>", {autoPan: false})
-                .openPopup();
-            }
-          });
-        }
-        mainGroup.checkIn(groups[i]);
-        groups[i].addTo(map);
-        map.on('click move', function() {
-          map.closePopup()
+      if (input) {
+        places.forEach(function(place) {
+          marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
+            .addTo(groups[input])
+            .bindPopup("<div class='popup  center-block'><h3>" + place.name + "</h3><a><img class='marker-image' src='assets/" + place.photos[0] + "' \/></a>" +
+              "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/" + place._id + "'>Details >></a> </button></div>", {autoPan: false});
         });
+        mainGroup.checkIn(groups[input]);
+        groups[input].addTo(map);
+      } else {
+        places.forEach(function(place) {
+          marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
+            .addTo(groups[place.type])
+            .bindPopup("<div class='popup  center-block'><h3>" + place.name + "</h3><a><img class='marker-image' src='assets/" + place.photos[0] + "' \/></a>" +
+              "<br /><br /><button type='button' class='btn btn-default btn-md center-block'> <a href='#!/places/" + place._id + "'>Details >></a> </button></div>", {autoPan: false})
+        });
+        for (var key in types) {
+          mainGroup.checkIn(groups[key]);
+          groups[key].addTo(map);
+        }
+      }
+
+      map.on('click move', function() {
+        map.closePopup()
       });
     };
 
     placesOnMap.removePlaces = function(input) {
-      types.forEach(function(placeType, i) {
-        if (input) {
-          if (placeType.type == input) {
-            mainGroup.checkOut(groups[i]);
-            groups[i].clearLayers();
-          }
-        } else {
-          mainGroup.checkOut(groups[i]);
-          groups[i].clearLayers();
+      if (input) {
+        mainGroup.checkOut(groups[input]);
+        groups[input].clearLayers();
+      } else {
+        for (var key in types) {
+          mainGroup.checkOut(groups[key]);
+          groups[key].clearLayers();
         }
-      })
+      }
     };
 
     /* ** START tracks factory ** */
     var tracks = [];
+    var trackForAdding;
     var polyline = function(trackPoints, color) {
       return L.polyline(trackPoints, {
         color: color,
@@ -90,26 +85,32 @@ angular.module('mapModule')
       });
     };
 
-    placesOnMap.showTracks = function(tracksArray) {
-      var trackForAdding;
-      for (var i = 0; i < tracksArray.length; i++) {
-        trackForAdding = polyline(tracksArray[i].track_points, tracksArray[i].color).addTo(map);
-        tracks.push([trackForAdding, tracksArray[i].type]);
-      }
+    var addTrack = function(track) {
+      var color = mapMarkingTypes.tracks[track.type].color;
+      trackForAdding = polyline(track.location.coordinates, color).addTo(map);
+      tracks.push([trackForAdding, track.type]);
     };
 
-    placesOnMap.removeTracks = function(tracksType) {
-      for (var i = 0; i < tracks.length; i++) {
-        if (tracks[i][1] === tracksType) {
-          map.removeLayer(tracks[i][0]);
+    var removeTrack = function(track) {
+      if (this == 'all') {
+        map.removeLayer(track[0]);
+      } else {
+        if (track[1] == this) {
+          map.removeLayer(track[0]);
         }
       }
     };
 
+    placesOnMap.showTracks = function(tracksArray) {
+      tracksArray.forEach(addTrack);
+    };
+
+    placesOnMap.removeTracks = function(tracksType) {
+      tracks.forEach(removeTrack, tracksType);
+    };
+
     placesOnMap.removeAllTracks = function() {
-      for (var i = 0; i < tracks.length; i++) {
-        map.removeLayer(tracks[i][0]);
-      }
+      tracks.forEach(removeTrack, 'all');
     };
 
     return placesOnMap;
