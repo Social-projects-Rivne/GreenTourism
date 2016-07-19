@@ -49,14 +49,6 @@ angular.module('welcomePage', [])
         }, 1000);
         return false;
       });
-
-        $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
-        'click': function(e) {
-          e.stopPropagation();
-        }
-
-      });
-
     }
     ]
   });
