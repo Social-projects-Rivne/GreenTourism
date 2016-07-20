@@ -94,8 +94,58 @@
                 </article>
                 <aside>
                     <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-                        Categoties
-                        Related Posts
+                        <div class="blog-find">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input ng-model="$ctrl.query" type="text" class="form-control"
+                                               placeholder="Search blog">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                  </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-panel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!--<div class="tabbable" id="tabs-blog">-->
+                                        <!--<ul class="nav nav-tabs">-->
+                                            <!--<li class="active">-->
+                                                <!--<a href="" data-toggle="tab">-->
+                                                    <!--Related Post-->
+                                                <!--</a>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--<div class="tab-content">-->
+                                            <!--<div class="tab-pane active"-->
+                                                 <!--id="panel-popular">-->
+                                                <!--<div class="media blog-aside-items" >-->
+                                                    <!--<a href="#" class="pull-left">-->
+                                                        <!--<img alt="{{blog.title}}"-->
+                                                             <!--ng-src="/assets/img/blog/blog.jpg" class="media-object"/>-->
+                                                    <!--</a>-->
+                                                    <!--<div class="media-body">-->
+                                                        <!--<h4 class="media-heading">-->
+                                                            <!--<a href="#">-->
+                                                                <!--blog.title-->
+                                                            <!--</a>-->
+                                                        <!--</h4>-->
+
+                                                        <!--<div class="media-date">-->
+                                                            <!--blog.createdAt | date:'dd MMMM yyyy'-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </aside>
             </div>

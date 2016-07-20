@@ -30,7 +30,7 @@
                                     <div class="blog-separator"></div>
 
                                     <div class="blog-content">
-                                        {{blog.content | limitTo: 5}}{{blog.content.length>5 ? '...' : ''}}
+                                        {{blog.content | limitTo: 140}}{{blog.content.length>140 ? '...' : ''}}
                                     </div>
 
                                     <p class="blog-meta">
