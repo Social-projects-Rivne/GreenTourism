@@ -113,10 +113,8 @@ angular.module('mapModule')
       tracks.forEach(removeTrack, 'all');
     };
 
-  /* ** START add place factory ** */
+    /* ** START add place factory ** */
     var newMarker;
-    var latitudeContainer = angular.element('#latitude');
-    var longitudeContainer = angular.element('#longitude');
     placesOnMap.openAddPlaceMenu = function() {
       map.on('click', addNewPlace);
     };
@@ -126,7 +124,10 @@ angular.module('mapModule')
     };
 
     function addNewPlace(e) {
+      var latitudeContainer = angular.element('#latitude');
+      var longitudeContainer = angular.element('#longitude');
       placesOnMap.coords = [e.latlng.lat, e.latlng.lng];
+      placesOnMap.coordsIsDefined = true;
       if (newMarker) {
         map.removeLayer(newMarker);
       }
@@ -134,6 +135,8 @@ angular.module('mapModule')
       latitudeContainer.text('Latitude: ' + newMarker._latlng.lat);
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
+
+    /* ** START add track factory ** */
 
     placesOnMap.removeNewMarker = function() {
       if (newMarker) {

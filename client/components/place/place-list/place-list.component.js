@@ -20,20 +20,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         self.user = currentUser;
 
         // -----START ADD Place-----
-        self.newPlace = {
-          name: '',
-          type: '',
-          description: '',
-          location: {
-            type: 'Point',
-            coordinates: []
-          },
-          photos: [],
-          owner: '',
-          rate: 0,
-          address: ''
-        };
-        var emptyPlaceObject = angular.copy(self.newPlace);
+        self.newPlace = angular.copy(constants.emptyPlaceModel);
         self.newPlaceType = '';
         self.newPlacePhoto = '';
         self.formNewPlaceSubmitted = false;
@@ -67,6 +54,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         self.createNewPlace = function(form) {
           var checkActiveType;
           var newPlaces = [];
+          self.coordsIsDefined = placesOnMap.coordsIsDefined;
           self.formNewPlaceSubmitted = true;
           if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
             self.newPlace.type = self.newPlaceType;
@@ -87,13 +75,15 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
 
         self.resetAddPlaceForm = function(form) {
           if (form) {
-            self.newPlace = angular.copy(emptyPlaceObject);
+            self.newPlace = angular.copy(constants.emptyPlaceModel);
             self.newPlaceType = '';
             form.$setPristine();
             form.$setUntouched();
             self.formNewPlaceSubmitted = false;
             newPlaceLongitude.text('');
             newPlaceLatitude.text('');
+            placesOnMap.coords = [];
+            placesOnMap.coordsIsDefined = false;
             placesOnMap.removeNewMarker();
           }
         };
