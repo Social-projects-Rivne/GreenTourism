@@ -14,7 +14,7 @@
     </div>
     <div class="row"></div>
     <div class="bs-day bs-active{{dan.active}}" ng-repeat="dan in $ctrl.calendar_month"
-      ng-click="$ctrl.carent_day(dan.date)">
+        ng-click="$ctrl.carent_day(dan.date)">
       <div class="circle" ng-if="dan.events.length" ng-mousedown="$ctrl.show=dan.events">
         {{dan.date | date:'dd'}}
       </div>

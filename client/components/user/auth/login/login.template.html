@@ -3,7 +3,7 @@
     <div class="form-group input-group-sm">
       <label for="email">E-mail</label>
       <input type="email" name="email" class="form-control" ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/"
-        ng-model="$ctrl.user.email" required>
+          ng-model="$ctrl.user.email" required>
       <p class="help-block error" ng-show="login.email.$touched && (login.email.$invalid && login.email.$dirty)">
         <span ng-show="login.email.$error.pattern">Please input correct email</span>
         <span ng-show="login.email.$error.required">Email is required</span>
@@ -12,7 +12,7 @@
     <div class="form-group input-group-sm">
       <label for="password">Password</label>
       <input type="password" name="password" class="form-control" ng-model="$ctrl.user.password"
-        required>
+          required>
       <p class="help-block error" ng-show="login.password.$touched && login.password.$dirty">
         <span ng-show="login.password.$touched && login.password.$error.required">Password is required</span>
       </p>

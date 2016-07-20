@@ -16,7 +16,7 @@
                     </div-->
           <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
             <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
               Event type
               <span class="caret"></span>
             </button>
@@ -26,7 +26,7 @@
           </div>
           <div class="btn-group col-xs-2 no-padding" role="group">
             <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
               From:
               <span class="caret"></span>
               {{eventL.CalendarName[0].calendar_show_date | date:'dd MM yy' }}
@@ -37,7 +37,7 @@
           </div>
           <div class="btn-group col-xs-2 no-padding" role="group">
             <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
               To:
               <span class="caret"></span>
               {{eventL.CalendarName[1].calendar_show_date | date:'dd MM yy' }}
@@ -66,7 +66,7 @@
             <a href="#!/events/{{event.id}}/{{event.date_start}}">
               <div class="place-container">
                 <img src="assets{{event.attachments.photo[0]}}" style="width : 100%; height: 200px;"
-                  alt="{{event.name}}" title="{{event.name}}">
+                    alt="{{event.name}}" title="{{event.name}}">
                 <h6>{{event.name}}</h6>
               </div>
             </a>
