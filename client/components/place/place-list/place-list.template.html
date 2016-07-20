@@ -1,6 +1,6 @@
 <div class="container-fluid places">
   <div class="row places">
-    <div class="col-xs-9 no-padding" id="main-content">
+    <div class="col-xs-12 col-md-6 col-lg-9  no-padding" id="main-content">
       <div class="col-xs-12 no-padding" id="filter">  <!-- Filter container start -->
         <div class="btn-group col-xs-12" role="group" id="buttons">
           <div class="col-xs-1"></div>
@@ -16,7 +16,8 @@
             </ul>
           </div>
           <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
               Map type
               <span class="caret"></span>
             </button>
@@ -25,7 +26,8 @@
             </ul>
           </div>
           <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterCategory">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
               Places
               <span class="caret"></span>
             </button>
@@ -36,20 +38,21 @@
                 <span></span>
               </a>
               <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
-                <img >
                 Check all
                 <span></span>
               </a>
             </ul>
           </div>
           <div id="tracks-filter" class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
               Tracks
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu col-xs-12 dropdownFilter">
+
               <li ng-repeat="(type, typeObj) in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type)">
-                <a href=""  class="active" id="{{type}}">
+                <a href="" class="active" id="{{type}}">
                   <span class="col-xs-9" style="border-left: 5px solid {{typeObj.color}}">
                     {{typeObj.name}}
                   </span>
@@ -57,8 +60,8 @@
                   </span>
                 </a>
               </li>
-            <li ng-click="$ctrl.checkAllTracks()">
-                <a href=""  class="active" id="all-tracks">
+              <li ng-click="$ctrl.checkAllTracks()">
+                <a href="" class="active" id="all-tracks">
                   <span class="col-xs-9">
                     Check all tracks
                   </span>
@@ -72,25 +75,18 @@
           <div class="col-xs-2"></div>
         </div>
       </div> <!-- Filter container end -->
-
       <div class="col-xs-12 no-padding"><!-- Map container start-->
         <div id="map"></div>
       </div> <!-- Map container end-->
 
       <popular-tracks></popular-tracks>
     </div>
-    <div class="col-xs-3 no-padding" id="sidebar">
-      <div class="col-xs-12" id="search">
-        <div class="input-group col-xs-offset-1 col-xs-10">
-          <input class="form-control" type="text" name="search">
-          <span class="input-group-btn">
-            <button class="btn" type="button">Search</button>
-          </span>
-        </div>
+
+    <div class="col-xs-12 col-md-5 col-lg-3 no-padding" id="sidebar">
+      <search-place></search-place>
+      <div class="col-xs-12 no-padding" id="locationPlaces">
+        <location-places places="$ctrl.places"></location-places>
       </div>
-        <div class="col-xs-12 no-padding" id="popularPlaces">
-          <location-places places="$ctrl.places"></location-places>
-        </div>
     </div>
     <div id="add-place" class="add-item-menu">
       <h2>New Place</h2>

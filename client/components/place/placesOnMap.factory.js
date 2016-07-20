@@ -33,7 +33,13 @@ angular.module('mapModule')
         }
       }
     };
-
+    placesOnMap.placeArr = [];
+    placesOnMap.setPlaceArr = function(place) {
+      placesOnMap.placeArr = place;
+    };
+    placesOnMap.getPlaceArr = function() {
+      return placesOnMap.placeArr;
+    };
     placesOnMap.showPlaces = function(places, input) {
       mainGroup.addTo(map);
       if (input) {

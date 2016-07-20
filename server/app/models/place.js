@@ -39,3 +39,4 @@ PlaceSchema.virtual('stars').get(function() {
 });
 
 module.exports = mongoose.model('Place', PlaceSchema);
+

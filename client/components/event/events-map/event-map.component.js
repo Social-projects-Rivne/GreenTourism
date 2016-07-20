@@ -7,6 +7,11 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
       function($scope, $routeParams, $http, eventMapService, eventListService) {
         $scope.mapDanni = eventMapService.th_;
 
+        this.id = $routeParams.eventId;
+        if ($routeParams.dataId) this.date = +$routeParams.dataId;
+        else this.date = new Date();
+
+
         this.lat = $routeParams.lat;
         if (!$routeParams.lat) this.lat = 50.6234;
         else $scope.mapDanni.x = $routeParams.lat;
@@ -125,10 +130,10 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
                 break;
               case 'Festival':
                 var greenIcon = L.icon({
-                  iconUrl: 'assets/img/events/icon_type/festival.gif',
+                  iconUrl: 'assets/img/events/icon_type/festival.png',
                   shadowUrl: 'assets/img/events/festival1.jpg',
 
-                  iconSize: [45, 65], // size of the icon
+                  iconSize: [65, 45], // size of the icon
                   shadowSize: [0, 0], // size of the shadow
                   iconAnchor: [12, 14], // point of the icon which will correspond to marker's location
                   shadowAnchor: [4, 22], // the same for the shadow
@@ -137,7 +142,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
                 break;
               case 'Meeteng':
                 var greenIcon = L.icon({
-                  iconUrl: 'assets/img/events/icon_type/meetings.gif',
+                  iconUrl: 'assets/img/events/icon_type/meetings.png',
                   shadowUrl: 'assets/img/events/festival1.jpg',
 
                   iconSize: [65, 45], // size of the icon
@@ -152,7 +157,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
                   iconUrl: 'assets/img/events/icon_type/research.png',
                   shadowUrl: 'assets/img/events/festival1.jpg',
 
-                  iconSize: [40, 65], // size of the icon
+                  iconSize: [65, 45], // size of the icon
                   shadowSize: [0, 0], // size of the shadow
                   iconAnchor: [12, 14], // point of the icon which will correspond to marker's location
                   shadowAnchor: [4, 22], // the same for the shadow
@@ -161,10 +166,10 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
                 break;
               default:
                 var greenIcon = L.icon({
-                  iconUrl: 'assets/img/events/icon_type/festival.gif',
+                  iconUrl: 'assets/img/events/icon_type/festival.png',
                   shadowUrl: 'assets/img/events/festival1.jpg',
 
-                  iconSize: [45, 65], // size of the icon
+                  iconSize: [65, 45], // size of the icon
                   shadowSize: [0, 0], // size of the shadow
                   iconAnchor: [12, 14], // point of the icon which will correspond to marker's location
                   shadowAnchor: [4, 22], // the same for the shadow

@@ -8,11 +8,11 @@ angular.module('welcomePage', [])
       var obj = {};
       var i = 0;
       self.outputPopularPlaces = [];
-
+      var numberOfPopularPlaces = 2;
+      var idPopularPlace = 0;
       Place.getList({sort: '-rate', limit: 10}).then(function(result) {
         self.popularPlaces = result;
-
-        while (i < 2) {
+        while (i < numberOfPopularPlaces) {
           random = Math.floor(Math.random() * self.popularPlaces.length);
           if (existRandom != random) {
             obj = {
@@ -29,16 +29,23 @@ angular.module('welcomePage', [])
           }
           existRandom = random;
         }
-      }).then(function() {
-        Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[0].latitude +
-          '&lon=' + self.outputPopularPlaces[0].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[0].location = result.display_name;
+      }).then(
+        function(result) {
+          getLocation(idPopularPlace, numberOfPopularPlaces);
+
         });
-        Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[1].latitude +
-          '&lon=' + self.outputPopularPlaces[1].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[1].location = result.display_name;
-        });
-      });
+      function getLocation(idPopularPlace, numberOfPopularPlaces) {
+        if (idPopularPlace < numberOfPopularPlaces) {
+          Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[idPopularPlace].latitude +
+            '&lon=' + self.outputPopularPlaces[idPopularPlace].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
+            self.outputPopularPlaces[idPopularPlace].location = result.display_name;
+            idPopularPlace++;
+            getLocation(idPopularPlace, numberOfPopularPlaces);
+          })
+
+        }
+
+      }
 
       // Animation on click arrow
       var page = angular.element('html, body');

@@ -1,10 +1,9 @@
 /* ---------------- calendar style ----------------------- */
 
 .bs-box {
-  background-image: linear-gradient(to top left, rgb(13, 255, 156),
-  rgb(115, 180, 216), rgb(102, 255, 157));
-  width: 275px;
-  min-height: 250px;
+  background-image: white;
+  width: 205px;
+  min-height: 200px;
   margin: 0px auto;
   margin-bottom: 30px;
   box-shadow: black 1px 1px;
@@ -15,45 +14,35 @@
 /*big block*/
 .bs-date {
   margin: 0 auto;
-  width: 273px;
+  width: 200px;
   min-height: 140px;
   margin-bottom: 10px;
 }
 
 .bs-date-header {
-  margin-bottom: 10px;
   min-height: 20px;
+  padding-top: 3px;
+  padding-bottom: 0px;
 }
 
 /*small block*/
 .bs-day {
-  width: 38px;
-  height: 24px;
+  width: 28px;
+  height: 26px;
   padding: 0px 2px;
-  background-color: rgba(207, 255, 236, 0.29);
-  /*    border: outset 1px #dbf0ea;*/
   float: left;
   margin: 0.5px 0;
   text-align: center;
+  font-size: 12px;
+  color: white;
 }
 
 .bs-day:hover {
-  /* background-color: rgba(207, 255, 236, 1);*/
-  margin: 0.5px;
-  margin-right: 1px;
-  width: 36px;
-  padding: 0px 1px;
   cursor: pointer;
 }
 
 .bs-active0 {
   color: white;
-}
-
-.bs-active2 {
-  background-image: linear-gradient(to top, rgb(157, 255, 200),
-  rgb(26, 173, 119), rgb(157, 255, 200));
-  padding: 2px;
 }
 
 .mounth-line div {
@@ -65,10 +54,26 @@
   width: 270px;
   margin: 0px auto;
 }
+.mounth-line button {
+  margin: 2px 0.5px 0 0.5px;
+  float: left;
+}
+
+.bs-active2 button{
+  background: #3da268;
+  color: white;
+}
+
+.btn-event-link {
+  margin-top: 3px;
+}
 
 .mounth {
-  width: 150px;
   text-align: center;
+  width: 90px;
+  height: 25px;
+  float: left;
+  margin: 3px 1px;
 }
 
 .mounth-line .glyphicon {
