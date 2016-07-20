@@ -8,7 +8,10 @@ var clean = require('gulp-clean');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
+
+// Code quality
 var beautify = require('gulp-beautify');
+var csscomb = require('gulp-csscomb');
 var eslint = require('gulp-eslint');
 
 // Minification
@@ -17,11 +20,28 @@ var ngAnnotate = require('gulp-ng-annotate');
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
-//var templateCache = require('gulp-angular-templatecache');
+// var templateCache = require('gulp-angular-templatecache');
 
 var DEST = 'dist/';  // Destination folder
-var jsFiles = ['./**/*.js', '!node_modules/**', '!client/bower_components/**',
-               '!gulpfile.js'];
+
+var IGNORE = [
+  '!./node_modules/**',
+  '!./client/bower_components/**',
+  '!./gulpfile.js'
+];
+
+var HTML_PATH = IGNORE.concat([
+  './**/*.html'
+]);
+
+var CSS_PATH = IGNORE.concat([
+  './**/*.css',
+  './**/*.less'
+]);
+
+var JAVASCRIPT_PATH = IGNORE.concat([
+  './**/*.js'
+]);
 
 // Error notification
 var onError = function(err) {
@@ -39,7 +59,7 @@ function isFixed(file) {
 
 // Lint files with ESLint
 gulp.task('lint', function() {
-  return gulp.src(jsFiles)
+  return gulp.src(JAVASCRIPT_PATH)
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(notify({message: 'Linting done!', onLast: true}));
@@ -47,24 +67,40 @@ gulp.task('lint', function() {
 
 // Fix linting errors if possible
 gulp.task('lint-fix', function() {
-  return gulp.src(jsFiles)
+  return gulp.src(JAVASCRIPT_PATH)
     .pipe(eslint({fix: true, rules: {'spaced-comment': 0}}))
     .pipe(gulpif(isFixed, gulp.dest('./')))
     .pipe(notify({message: 'Possible lint errors fixed!', onLast: true}));
 });
 
-// Beautify source files
-gulp.task('beautify', function() {
-  return gulp.src(jsFiles)
+// Beautify javascript files
+gulp.task('js-beautify', function() {
+  return gulp.src(JAVASCRIPT_PATH)
     .pipe(beautify())
     .pipe(gulp.dest('./'))
-    .pipe(notify({message: 'Beautification done!', onLast: true}));
+    .pipe(notify({message: 'Javascript beautification done!', onLast: true}));
+});
+
+// Beautify html files
+gulp.task('html-beautify', function() {
+  return gulp.src(HTML_PATH)
+    .pipe(beautify())
+    .pipe(gulp.dest('./'))
+    .pipe(notify({message: 'HTML beautification done!', onLast: true}));
+});
+
+// Beautify css files
+gulp.task('css-beautify', function() {
+  return gulp.src(CSS_PATH)
+    .pipe(csscomb())
+    .pipe(gulp.dest('./'))
+    .pipe(notify({message: 'CSS beautification done!', onLast: true}));
 });
 
 // Add AngularJS dependency injection annotations
 gulp.task('ng-annotate', function() {
-  return gulp.src(jsFiles)
-    .pipe(ngAnnotate())
+  return gulp.src(JAVASCRIPT_PATH)
+    .pipe(ngAnnotate({single_quotes: true})) // eslint-disable-line camelcase
     .pipe(gulp.dest('./'))
     .pipe(notify({message: 'Angular files annotated!', onLast: true}));
 });
