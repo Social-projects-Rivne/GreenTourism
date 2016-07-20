@@ -11,11 +11,15 @@ angular.module('blogSidebar').component('blogSidebar', {
     ctrl.isSelected = function(checkTab) {
       return ctrl.tab === checkTab;
     };
+
     Blog.one('category').get().then(function(responce) {
       ctrl.categoryList = responce;
       console.log(ctrl.categoryList);
     });
 
-
+    Blog.one('popular').get().then(function(responce) {
+      ctrl.popularList = responce;
+      console.log(ctrl.popularList);
+    });
   }]
 });

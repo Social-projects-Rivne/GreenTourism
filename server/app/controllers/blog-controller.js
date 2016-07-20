@@ -52,12 +52,9 @@ exports.category = function(req, res) {
       res.status(400).json({message: err.message});
     });
 };
-
 exports.popular = function(req, res) {
   Blog.blog.findAll({
     where: req.query,
-    order: 'createdAt ASC',
-    limit: 3,
     include: [
       {model: Blog.photos},
       {model: Blog.comment},
@@ -71,7 +68,6 @@ exports.popular = function(req, res) {
       res.status(400).json({message: err.message});
     });
 };
-
 
 exports.create = function(req, res) {
   if (!req.body) {

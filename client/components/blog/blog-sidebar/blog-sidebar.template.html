@@ -49,19 +49,17 @@
                     <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }"
                          id="panel-popular">
                         <div class="media blog-aside-items"
-                             ng-repeat="blog in $ctrl.blogs | orderBy: 'blogLikes':true | limitTo:3 ">
+                             ng-repeat="blog in $ctrl.popularList | orderBy: 'blogLikes':true | limitTo: 3">
                             <a href="#!/blog/{{blog.id}}" class="pull-left">
                                 <img alt="{{blog.title}}"
                                      ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
                             </a>
-
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <a href="#!/blog/{{blog.id}}">
                                         {{blog.title}}
                                     </a>
                                 </h4>
-
                                 <div class="media-date">
                                     {{blog.createdAt | date:'dd MMMM yyyy'}}
                                 </div>
@@ -71,19 +69,17 @@
                     <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }"
                          id="panel-recent">
                         <div class="media blog-aside-items"
-                             ng-repeat="blog in $ctrl.blogs | orderBy: 'blogComments':true | limitTo:3">
+                             ng-repeat="blog in $ctrl.popularList | orderBy: 'blogComments':true | limitTo: 3">
                             <a href="#!/blog/{{blog.id}}" class="pull-left">
                                 <img alt="{{blog.title}}"
                                      ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
                             </a>
-
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <a href="#!/blog/{{blog.id}}">
                                         {{blog.title}}
                                     </a>
                                 </h4>
-
                                 <div class="media-date">
                                     {{blog.createdAt | date:'dd MMMM yyyy'}}
                                 </div>
