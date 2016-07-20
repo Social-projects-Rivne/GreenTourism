@@ -6,14 +6,13 @@ angular.module('blogList').component('blogList', {
     var ctrl = this;
     Blog.getList().then(function(responce) {
       ctrl.blogs = responce;
-      console.log(responce);
     });
-    ctrl.tab = 1;
-    ctrl.selectTab = function(setTab) {
-      ctrl.tab = setTab;
-    };
-    ctrl.isSelected = function(checkTab) {
-      return ctrl.tab === checkTab;
-    };
+    //ctrl.tab = 1;
+    //ctrl.selectTab = function(setTab) {
+    //  ctrl.tab = setTab;
+    //};
+    //ctrl.isSelected = function(checkTab) {
+    //  return ctrl.tab === checkTab;
+    //};
   }]
 });

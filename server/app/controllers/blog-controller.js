@@ -41,6 +41,38 @@ exports.show = function(req, res) {
     });
 };
 
+exports.category = function(req, res) {
+  Blog.categories.findAll({
+    where: req.query
+  })
+    .then(function(records) {
+      res.json(records);
+    })
+    .catch(function(err) {
+      res.status(400).json({message: err.message});
+    });
+};
+
+exports.popular = function(req, res) {
+  Blog.blog.findAll({
+    where: req.query,
+    order: 'createdAt ASC',
+    limit: 3,
+    include: [
+      {model: Blog.photos},
+      {model: Blog.comment},
+      {model: Blog.likes}
+    ]
+  })
+    .then(function(records) {
+      res.json(records);
+    })
+    .catch(function(err) {
+      res.status(400).json({message: err.message});
+    });
+};
+
+
 exports.create = function(req, res) {
   if (!req.body) {
     res.sendStatus(400);
