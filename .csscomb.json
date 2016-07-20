@@ -4,7 +4,7 @@
     "node_modules/**",
     "bower_components/**"
   ],
-  "rules-delimiter": 1,
+  "rule-delimiter": "\n",
   "remove-empty-rulesets": true,
   "always-semicolon": true,
   "color-case": "lower",
