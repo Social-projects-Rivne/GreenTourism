@@ -4,6 +4,7 @@
     "node_modules/**",
     "bower_components/**"
   ],
+  "rule-delimiter": "\n",
   "remove-empty-rulesets": true,
   "always-semicolon": true,
   "color-case": "lower",
@@ -24,7 +25,6 @@
   "space-after-selector-delimiter": "\n",
   "space-before-selector-delimiter": "",
   "space-before-closing-brace": "\n",
-  "space-after-closing-brace": "\n",
   "strip-spaces": true,
   "tab-size": true,
   "unitless-zero": true
