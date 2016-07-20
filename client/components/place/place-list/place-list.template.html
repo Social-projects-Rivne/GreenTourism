@@ -24,8 +24,7 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
-              <a href="" id="{{placeType}}" class="list-group-item filter"
-                 ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType" ng-click="$ctrl.checkType(placeType)">
+              <a href="" id="{{placeType}}" class="list-group-item filter"  ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType" ng-click="$ctrl.checkType(placeType)">
                 <img ng-src="{{placeTypeValue.icon}}">
                 {{placeTypeValue.name}}
                 <span></span>
