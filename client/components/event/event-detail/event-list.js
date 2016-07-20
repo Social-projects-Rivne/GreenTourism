@@ -46,7 +46,7 @@ angular.module('eventDetail').service('eventListService', ["$http", function($ht
       if (this.Type.indexOf(this.event[j].type) == -1) {
         this.Type.push(this.event[j].type);
         var push_obj = {};
-        push_obj.active = false;
+        push_obj.active = true;
         push_obj.type = this.event[j].type;
         this.Type_menu.push(push_obj);
       }
