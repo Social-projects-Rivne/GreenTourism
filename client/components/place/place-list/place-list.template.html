@@ -9,10 +9,10 @@
               New item
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding">
-              <li><a href="" ng-click="$ctrl.addPlace()">Add place</a></li>
-              <li><a href="" ng-click="$ctrl.addTrack()">Add track</a></li>
-              <li><a href="">Add event</a></li>
+            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
+              <a href="" class="list-group-item filter" ng-click="$ctrl.addPlace()">Add place</a>
+              <a href="" class="list-group-item filter" ng-click="$ctrl.addTrack()">Add track</a>
+              <a href="" class="list-group-item filter">Add event</a>
             </ul>
           </div>
           <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
