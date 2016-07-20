@@ -69,13 +69,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           var newPlaces = [];
           self.formNewPlaceSubmitted = true;
           if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
-            self.newPlace.type = self.newPlaceType.type;
+            self.newPlace.type = self.newPlaceType;
             self.newPlace.owner = self.user._id;
             self.newPlace.location.coordinates = placesOnMap.coords;
             newPlaces.push(self.newPlace);
             Place.post(self.newPlace).then(function() {
               checkActiveType = angular.element('#' + self.newPlace.type + ' span');
-              if (checkActiveType.hasClass(checkedClass)) {
+              if (checkActiveType.hasClass(constants.checkedClass)) {
                 placesOnMap.showPlaces(newPlaces);
               } else {
                 self.checkType(self.newPlace.type);

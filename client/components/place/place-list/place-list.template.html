@@ -111,7 +111,7 @@
           </div>
           <div class="form-group col-xs-12">
               <label for="newPlaceType"><span class="title">3. Select place type:</span></label>
-              <select name="newPlaceType" class="form-control" ng-options="type.name for type in $ctrl.placesType track by type.type"
+              <select name="newPlaceType" class="form-control" ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
                       ng-model="$ctrl.newPlaceType" ng-required="true">
                       <option value="">-- Choose place type --</option>
               </select>
