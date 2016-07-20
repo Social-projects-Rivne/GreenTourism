@@ -1,6 +1,6 @@
 angular.module('eventDetail', []);
 
-angular.module('eventDetail').service('eventListService', ["$http", function($http) {
+angular.module('eventDetail').service('eventListService', ['$http', function($http) {
   if (!this.date_current) new Date();
   this.CalendarName = [];
   this.CalendarValue = [];

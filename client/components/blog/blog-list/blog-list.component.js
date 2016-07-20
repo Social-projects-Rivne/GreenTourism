@@ -2,7 +2,7 @@ angular.module('blogList', []);
 
 angular.module('blogList').component('blogList', {
   templateUrl: 'components/blog/blog-list/blog-list.template.html',
-  controller: ["$http", function BlogListController($http) {
+  controller: ['$http', function BlogListController($http) {
     var self = this;
     self.dateProp = 'date';
     self.categoryProp = 'category';
