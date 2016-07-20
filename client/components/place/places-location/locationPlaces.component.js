@@ -1,4 +1,5 @@
 
+locationplacesCtrl.$inject = ['mapFactory', '$scope'];
 function locationplacesCtrl(mapFactory, $scope) {
   var ctrl = $scope;
   ctrl.places=this.places;

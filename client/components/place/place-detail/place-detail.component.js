@@ -4,7 +4,7 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl(mapFactory) {
+    controller: ['mapFactory', function placeDetailCtrl(mapFactory) {
         this.map = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
@@ -21,6 +21,6 @@ angular.module('placeDetail', [])
         '" /></a><br />').openPopup();
 
         this.map.setView(this.location);
-    }
+    }]
   });
 
