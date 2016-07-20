@@ -17,9 +17,7 @@
       </form>
     </div>
   </div>
-  <div class="alert alert-info" ng-if="!$ctrl.currentUser">Please, <a href="#!/login">login</a> for comment or delete
-    message!
-  </div>
+  <div class="alert alert-info" ng-if="!$ctrl.currentUser">Please, login for comment, update or delete message!</div>
   <div class="row show-comments" ng-repeat="comment in $ctrl.object.comments | orderBy:'-createdAt'">
     <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
       <img ng-src="{{comment.author.avatar}}"/>

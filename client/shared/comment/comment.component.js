@@ -1,17 +1,18 @@
 angular.module('comment', [])
   .component('comment', {
-    templateUrl: 'components/comment/comment.template.html',
+    templateUrl: 'shared/comment/comment.template.html',
     bindings: {
       object: '<'
     },
-    controller: function commentCtrl(currentUser, Restangular) {
+    controller: ['currentUser', 'Restangular', function commentCtrl(currentUser, Restangular) {
       var self = this;
+      var MAX_COMMENT_CONTENT_LENGTH = 1000;
 
       this.currentUser = currentUser;
-      var type = 'places';
+      var type = 'places'; //TODO: Refactoring after demo
 
       this.addComment = function(content) {
-        if (content.length <= 1000) {
+        if (content.length <= MAX_COMMENT_CONTENT_LENGTH) {
           Restangular.one(type, this.object._id).get().then(function(obj) {
             self.object.comments.push({
               content: content,
@@ -27,7 +28,7 @@ angular.module('comment', [])
           });
         }
         this.content = '';
-        self.checkCommentId = false;
+        self.checkCommentId = null;
       };
 
       this.removeComment = function(id) {
@@ -46,15 +47,15 @@ angular.module('comment', [])
       };
 
       this.updateComment = function(id, content) {
-        if (content.length <= 1000) {
+        if (content.length <= MAX_COMMENT_CONTENT_LENGTH) {
           Restangular.one(type + '/' + this.object._id + '/comments', id)
             .get().then(function(obj) {
               obj.content = content;
               obj.put();
-              self.checkCommentId = false;
+              self.checkCommentId = null;
             });
         }
       };
     }
-  });
+  ]});
 

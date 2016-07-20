@@ -1,7 +1,7 @@
 module.exports = function(Model) {
   var controller = {};
 
-  controller.showComments = function(req, res) {
+  controller.listComments = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
         return res.status(404).json(err);
@@ -27,7 +27,6 @@ module.exports = function(Model) {
       record.comments.id(req.params.commentId).remove();
       record.comments.push(req.body);
       record.save(function(err, resp) {
-        if (err) throw err;
         res.json(resp);
       });
     });
@@ -40,7 +39,6 @@ module.exports = function(Model) {
       }
       record.comments.id(req.params.commentId).remove();
       record.save(function(err, resp) {
-        if (err) throw err;
         res.json(resp);
       });
     });
