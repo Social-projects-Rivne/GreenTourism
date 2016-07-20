@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "google"
+  ],
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "require-jsdoc": 0
+  }
+}
