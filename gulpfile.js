@@ -40,7 +40,7 @@ var CSS_PATH = IGNORE.concat([
 ]);
 
 var JAVASCRIPT_PATH = IGNORE.concat([
-  './*.js'
+  './**/*.js'
 ]);
 
 // Error notification
