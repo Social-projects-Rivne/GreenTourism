@@ -1,63 +1,66 @@
 <div class="page" ng-repeat="event in eventListService | filter:{id:$ctrl.id}">
-    <div class="row">
-        <div class="page-header text-center">
-            <h3>{{event.name}}</h3>
-        </div>
-        <div class="col-md-2">
-            <ul class="media-list">
-                <li class="media" ng-repeat="img in event.attachments.photo">
-                    <div class="media-middle" >
-                            <img src="assets{{img}}" ng-class="$first ? 'img-responsive' : 'media-object center-block img-small'"
-                                 alt="{{event.name}}">
-                    </div>
-                    <div ng-if="$first" class="media-body">
-                        <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red"> {{event.event_rate}}</h4>
-                        <a href="#!/eventsmap/{{event.event_points[0].lat}}/{{event.event_points[0].lon}}/{{event.type}}/{{event.date_start}}"><h2 class="text-center center-block glyphicon glyphicon-globe" style="color: green; font-size : 50px;"></h2></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-7 text-event">
-            <p>{{event.description}}</p>
-            <form class="form-inline center-block">
-                <div class="page-header text-center">
-                    <h3>Comments</h3>
-                </div>
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Add comment" aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon2">Add comment</span>
-                </div>
-            </form>
-            <p></p>
-            <div class="row"></div>
-            <div class="row" ng-repeat="comment in event.comments">
-                <div class="col-md-1 right-padding">
-                    <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">
-                </div>
-                <div class="alert alert-info col-md-11" role="alert">Comment id {{comment}}</div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <calendar></calendar>
-            <ul class="media-list">
-                <li class="media">
-                    <div class="media-middle">
-                        <a href="#">
-                            <img src="assets/img/welcome-page/avatar.png" class="img-responsive avatar_big" alt="Responsive image">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <button class="btn btn-default center-block">Profile</button>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="media-middle">
-                        <a href="#">
-                            <img class="img-responsive" src="assets/img/welcome-page/weather.jpg" alt="...">
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+  <div class="row">
+    <div class="page-header text-center">
+      <h3>{{event.name}}</h3>
     </div>
+    <div class="col-md-2">
+      <ul class="media-list">
+        <li class="media" ng-repeat="img in event.attachments.photo">
+          <div class="media-middle">
+            <img src="assets{{img}}" ng-class="$first ? 'img-responsive' : 'media-object center-block img-small'"
+              alt="{{event.name}}">
+          </div>
+          <div ng-if="$first" class="media-body">
+            <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red">
+              {{event.event_rate}}</h4>
+            <a href="#!/eventsmap/{{event.event_points[0].lat}}/{{event.event_points[0].lon}}/{{event.type}}/{{event.date_start}}">
+              <h2 class="text-center center-block glyphicon glyphicon-globe" style="color: green; font-size : 50px;"></h2>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-7 text-event">
+      <p>{{event.description}}</p>
+      <form class="form-inline center-block">
+        <div class="page-header text-center">
+          <h3>Comments</h3>
+        </div>
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" placeholder="Add comment" aria-describedby="basic-addon2">
+          <span class="input-group-addon" id="basic-addon2">Add comment</span>
+        </div>
+      </form>
+      <p></p>
+      <div class="row"></div>
+      <div class="row" ng-repeat="comment in event.comments">
+        <div class="col-md-1 right-padding">
+          <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">
+        </div>
+        <div class="alert alert-info col-md-11" role="alert">Comment id {{comment}}</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <calendar></calendar>
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-middle">
+            <a href="#">
+              <img src="assets/img/welcome-page/avatar.png" class="img-responsive avatar_big" alt="Responsive image">
+            </a>
+          </div>
+          <div class="media-body">
+            <button class="btn btn-default center-block">Profile</button>
+          </div>
+        </li>
+        <li class="media">
+          <div class="media-middle">
+            <a href="#">
+              <img class="img-responsive" src="assets/img/welcome-page/weather.jpg" alt="...">
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
