@@ -10,7 +10,7 @@ var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
 
 // Code quality
-var beautify = require('gulp-beautify');
+var beautify = require('gulp-jsbeautifier');
 var csscomb = require('gulp-csscomb');
 var eslint = require('gulp-eslint');
 
@@ -40,7 +40,7 @@ var CSS_PATH = IGNORE.concat([
 ]);
 
 var JAVASCRIPT_PATH = IGNORE.concat([
-  './**/*.js'
+  './*.js'
 ]);
 
 // Error notification
