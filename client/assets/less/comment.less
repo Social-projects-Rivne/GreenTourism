@@ -1,0 +1,60 @@
+.comment {
+  color: @brand-dark;
+  .add-comment {
+    border: 2px @brand-dark solid;
+    padding: 8px;
+    margin-bottom: 20px;
+    .add-comment-textarea {
+      textarea {
+        width: 100%;
+        resize: vertical;
+      }
+      .add-comment-button {
+        margin-top: 5px;
+        button {
+          font-size: 18px;
+          color: #fff;
+          background-color: @brand-dark;
+          border: none;
+          width: 100px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  .show-comments {
+    margin-bottom: 10px;
+    padding: 8px;
+    .show-comments-content {
+      text-align: justify;
+    }
+    .show-comments-timestamp {
+      font-size: 10px;
+      color: #777;
+    }
+    .comment-menu {
+      position: absolute;
+      right: 0;
+      #commentMenu {
+        span {
+          color: @brand-dark;
+        }
+      }
+      ul {
+        right: 0;
+        left: auto;
+      }
+    }
+    button {
+      position: absolute;
+      right: 5%;
+    }
+  }
+  .comment-image {
+    padding-right: 0;
+    padding-left: 0;
+    img {
+      width: 100%;
+    }
+  }
+}

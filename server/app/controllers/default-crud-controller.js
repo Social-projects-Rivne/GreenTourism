@@ -1,6 +1,49 @@
 module.exports = function(Model) {
   var controller = {};
 
+  controller.listComments = function(req, res) {
+    Model.findById(req.params.id, function(err, record) {
+      if (err) {
+        return res.status(404).json(err);
+      }
+      return res.json(record.comments);
+    });
+  };
+
+  controller.showComment = function(req, res) {
+    Model.findById(req.params.id, function(err, record) {
+      if (err) {
+        return res.status(404).json(err);
+      }
+      return res.json(record.comments.id(req.params.commentId));
+    });
+  };
+
+  controller.updateComment = function(req, res) {
+    Model.findById(req.params.id, function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      record.comments.id(req.params.commentId).remove();
+      record.comments.push(req.body);
+      record.save(function(err, resp) {
+        res.json(resp);
+      });
+    });
+  };
+
+  controller.deleteComment = function(req, res) {
+    Model.findById(req.params.id, function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      record.comments.id(req.params.commentId).remove();
+      record.save(function(err, resp) {
+        res.json(resp);
+      });
+    });
+  };
+
   controller.list = function(req, res) {
     var limit = req.query.limit;
     delete req.query.limit;
