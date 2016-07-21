@@ -21,6 +21,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         Place.getList({type: constants.placesOnLoad}).then(function(result) {
           counter = 1;
           places = result.concat(places);
+          placesOnMap.setPlaceArr(places);
           placesOnMap.showPlaces(result, constants.placesOnLoad);
           angular.element('#' + constants.placesOnLoad + ' span').addClass(constants.checkedClass);
           angular.element('#Streets span').addClass(constants.checkedClass);

@@ -1,10 +1,13 @@
-<h2>Places in location</h2>
-
-<div class="col-xs-12 place-wrapper"  ng-repeat="place in placesByLocation | filter:$ctrl.placesFilter | limitTo:4  | orderBy : 'rate'">
-    <div class="place-container">
-        <div class="row">
-            <h3 class="text-center"><a href="#!/places/{{place.id}}">{{place.name}}</a></h3>
-            <a href="#!/places/{{place.id}}" ><img src="assets/{{place.photo}}" alt="{{place.name}}"  /></a>
+<h2>Popular places in location</h2>
+<div class="col-xs-12"
+     ng-repeat="place in placesByLocation | filter:$ctrl.placesFilter | limitTo:4  | orderBy : 'rate'">
+    <div class="place-container" style="background-image:url('/assets/{{place.photos[0]}}'); background-size:cover;">
+        <div class="row  pull-right">
+            <a class="name-location" href="#!/places/{{place.id}}" style="top: 10px; right:20px;">{{place.name}}</a>
+            <a class="name-location" href="#!/places/{{place.id}}" style="bottom: 10px; right:20px;">
+                <img src="assets/img/places/marker/green.png" style="width:15px;">
+                {{(place.location.coordinates[0] | number:4)}}, {{place.location.coordinates[1] | number:4}}
+            </a>
         </div>
     </div>
 </div>
