@@ -8,22 +8,19 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         var counter;
         var typesLength;
         var addPlaceMenu = angular.element('#add-place');
-        var addTrackMenu = angular.element('#add-track');
         var newPlaceLongitude = angular.element('#longitude');
         var newPlaceLatitude = angular.element('#latitude');
         var addPlaceForm = angular.element('form[name="placeMaker"]');
-        var addTrackForm = angular.element('form[name="trackMaker"]');
         var addPlaceMenuIsOpen = false;
-        var addTrackMenuIsOpen = false;
-        var self = this;
+        var ctrl = this;
 
-        self.user = currentUser;
+        ctrl.user = currentUser;
 
         // -----START ADD Place-----
-        self.newPlace = angular.copy(constants.emptyPlaceModel);
-        self.newPlaceType = '';
-        self.newPlacePhoto = '';
-        self.formNewPlaceSubmitted = false;
+        ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
+        ctrl.newPlaceType = '';
+        ctrl.newPlacePhoto = '';
+        ctrl.formNewPlaceSubmitted = false;
 
         function openAddPlaceMenu() {
           addPlaceMenu.css({
@@ -33,7 +30,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           placesOnMap.openAddPlaceMenu();
         }
 
-        self.closeAddPlaceMenu = function() {
+        ctrl.closeAddPlaceMenu = function() {
           addPlaceMenu.css({
             display: 'none'
           });
@@ -42,44 +39,44 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           addPlaceMenuIsOpen = false;
         };
 
-        self.addPlace = function() {
+        ctrl.addPlace = function() {
           if (addPlaceMenuIsOpen) {
-            self.closeAddPlaceMenu();
+            ctrl.closeAddPlaceMenu();
           } else {
-            self.closeAddTrackMenu();
+            // ctrl.closeAddTrackMenu();
             openAddPlaceMenu();
           }
         };
 
-        self.createNewPlace = function(form) {
+        ctrl.createNewPlace = function(form) {
           var checkActiveType;
           var newPlaces = [];
-          self.coordsIsDefined = placesOnMap.coordsIsDefined;
-          self.formNewPlaceSubmitted = true;
+          ctrl.coordsIsDefined = placesOnMap.coordsIsDefined;
+          ctrl.formNewPlaceSubmitted = true;
           if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
-            self.newPlace.type = self.newPlaceType;
-            self.newPlace.owner = self.user._id;
-            self.newPlace.location.coordinates = placesOnMap.coords;
-            newPlaces.push(self.newPlace);
-            Place.post(self.newPlace).then(function() {
-              checkActiveType = angular.element('#' + self.newPlace.type + ' span');
+            ctrl.newPlace.type = ctrl.newPlaceType;
+            ctrl.newPlace.owner = ctrl.user._id;
+            ctrl.newPlace.location.coordinates = placesOnMap.coords;
+            newPlaces.push(ctrl.newPlace);
+            Place.post(ctrl.newPlace).then(function() {
+              checkActiveType = angular.element('#' + ctrl.newPlace.type + ' span');
               if (checkActiveType.hasClass(constants.checkedClass)) {
                 placesOnMap.showPlaces(newPlaces);
               } else {
-                self.checkType(self.newPlace.type);
+                ctrl.checkType(ctrl.newPlace.type);
               }
-              self.resetAddPlaceForm(form);
+              ctrl.resetAddPlaceForm(form);
             });
           }
         };
 
-        self.resetAddPlaceForm = function(form) {
+        ctrl.resetAddPlaceForm = function(form) {
           if (form) {
-            self.newPlace = angular.copy(constants.emptyPlaceModel);
-            self.newPlaceType = '';
+            ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
+            ctrl.newPlaceType = '';
             form.$setPristine();
             form.$setUntouched();
-            self.formNewPlaceSubmitted = false;
+            ctrl.formNewPlaceSubmitted = false;
             newPlaceLongitude.text('');
             newPlaceLatitude.text('');
             placesOnMap.coords = [];
@@ -89,85 +86,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         };
         // -----END ADD Place-----
 
-        // -----START ADD Track-----
-        self.newTrack = {
-          name: '',
-          type: '',
-          description: '',
-          location: {
-            type: 'LineString',
-            coordinates: []
-          },
-          photos: [],
-          userId: ''
-        };
-        var emptyTrackObject = {
-          name: '',
-          type: '',
-          description: '',
-          location: {
-            type: 'LineString',
-            coordinates: []
-          },
-          photos: [],
-          userId: ''
-        };
-        self.newTrackType = '';
-        self.formNewTrackSubmitted = false;
-
-        function openAddTrackMenu() {
-          addTrackMenu.css({
-            display: 'block'
-          });
-          addTrackMenuIsOpen = true;
-          placesOnMap.openAddTrackMenu();
-        }
-
-        self.closeAddTrackMenu = function() {
-          addTrackMenu.css({
-            display: 'none'
-          });
-          addTrackMenuIsOpen = false;
-          placesOnMap.closeAddTrackMenu();
-          addTrackMenuIsOpen = false;
-        };
-
-        self.addTrack = function() {
-          if (addTrackMenuIsOpen) {
-            self.closeAddTrackMenu();
-          } else {
-            self.closeAddPlaceMenu();
-            openAddTrackMenu();
-          }
-        };
-
-        self.createNewTrack = function(form) {
-          self.formNewTrackSubmitted = true;
-          if (addTrackForm.hasClass('ng-valid')) {
-            self.newTrack.type = self.newTrackType.type;
-            self.newTrack.userId = self.user._id;
-            // self.newPlace.location.coordinates = placesOnMap.coords;
-            console.log(self.newPlace);
-            self.resetAddTrackForm(form);
-          }
-        };
-
-        self.resetAddTrackForm = function(form) {
-          if (form) {
-            self.newTrack = angular.copy(emptyTrackObject);
-            self.newTrackType = '';
-            form.$setPristine();
-            form.$setUntouched();
-            self.formNewTrackSubmitted = false;
-          }
-        };
-        // -----END ADD Track-----
-
-        self.placesType = mapMarkingTypes.places;
-        typesLength = Object.keys(self.placesType).length;
+        ctrl.placesType = mapMarkingTypes.places;
+        typesLength = Object.keys(ctrl.placesType).length;
         placesOnMap.removePlaces();
         placesOnMap.showMap();
-        placesOnMap.initGroupsOfPlaces(self.placesType);
+        placesOnMap.initGroupsOfPlaces(ctrl.placesType);
 
         //---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
@@ -181,7 +104,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         //----END---- ShowPlacesOnLoad
 
         //----START---- FilterByOneOfType
-        self.checkType = function(input) {
+        ctrl.checkType = function(input) {
           var spanCheck = angular.element('#' + input + ' span');
           if (spanCheck.hasClass(constants.checkedClass)) {
             counter--;
@@ -207,7 +130,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         //----END---- FilterByOneOfType
 
         //----START---- FilterCheckAll
-        self.checkAll = function() {
+        ctrl.checkAll = function() {
           var spanCheck = angular.element('#all span');
           if (spanCheck.hasClass(constants.checkedClass)) {
             counter = 0;
@@ -228,7 +151,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         };
         //----END---- FilterCheckAll
 
-        self.places = places;
+        ctrl.places = places;
 
         //Don't hide dropdown if clicked
         angular.element('.dropdownFilter').on({
@@ -238,15 +161,15 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         });
 
 
-        /*** START tracks controller ***/
+        // *** START tracks controller ***
         var activeLiCounter = 4;
-        self.tracksType = mapMarkingTypes.tracks;
+        ctrl.tracksType = mapMarkingTypes.tracks;
         Track.getList().then(function(result) {
           tracks = result;
           placesOnMap.showTracks(tracks);
         });
 
-        self.showSpecificTracks = function(tracksType) {
+        ctrl.showSpecificTracks = function(tracksType) {
           var element = angular.element('#' + tracksType);
           var checkedIcon = angular.element('#gi' + tracksType);
           var allGI = angular.element('#tracks-filter li span.glyphicon');
@@ -276,7 +199,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           }
         };
 
-        self.checkAllTracks = function() {
+        ctrl.checkAllTracks = function() {
           var checkAllElement = angular.element('#all-tracks');
           var allLiElements = angular.element(document).find('#tracks-filter li > a');
           var allGI = angular.element('#tracks-filter li span.glyphicon');
@@ -295,5 +218,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             });
           }
         };
+        // *** END tracks controller ***
       }]
   });
