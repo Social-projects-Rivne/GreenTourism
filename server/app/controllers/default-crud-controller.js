@@ -10,6 +10,18 @@ module.exports = function(Model) {
     });
   };
 
+  controller.createComment = function(req, res) {
+    Model.findById(req.params.id, function(err, record) {
+      if (err) {
+        return res.status(404).json(err);
+      }
+      if (req.body.content.length <= 1000) {
+        record.comments.push(req.body);
+        return res.json(record);
+      }
+    });
+  };
+
   controller.showComment = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
@@ -24,11 +36,13 @@ module.exports = function(Model) {
       if (err) {
         return res.status(400).json(err);
       }
-      record.comments.id(req.params.commentId).remove();
-      record.comments.push(req.body);
-      record.save(function(err, resp) {
-        res.json(resp);
-      });
+      if (req.body.content.length <= 1000) {
+        record.comments.id(req.params.commentId).remove();
+        record.comments.push(req.body);
+        record.save(function(err, resp) {
+          res.json(resp);
+        });
+      }
     });
   };
 

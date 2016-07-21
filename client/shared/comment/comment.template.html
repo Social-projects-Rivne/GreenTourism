@@ -11,6 +11,7 @@
             <textarea class="form-control" rows="2" required
                       placeholder="Leave your comment..." maxlength="1000"
                       ng-model="$ctrl.content"></textarea>
+            <p ng-if="$ctrl.content">Left: {{1000 - $ctrl.content.length}} symbols</p>
           </div>
           <div class="col-md-2 col-lg-2 add-comment-button">
             <button type="submit" ng-disabled="!$ctrl.content">Post</button>
@@ -23,7 +24,7 @@
     Please, login for comment, update or delete message!
   </div>
   <div class="row show-comments"
-       ng-repeat="comment in $ctrl.object.comments | orderBy:'-createdAt'">
+       ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
     <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
       <img ng-src="{{comment.author.avatar}}"/>
     </div>
@@ -41,7 +42,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="commentMenu">
           <li>
-            <a href="" ng-click="$ctrl.editComment(comment._id)">Edit</a>
+            <a href="" ng-click="$ctrl.checkCommentId = comment._id">Edit</a>
           </li>
           <li>
             <a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a>
@@ -51,7 +52,7 @@
       <p class="show-comments-content"
          ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
       <div ng-if="$ctrl.checkCommentId === comment._id">
-        <textarea style="resize: vertical;" class="form-control"
+        <textarea class="form-control"
                   rows="2" required maxlength="1000" ng-model="comment.content">
           {{comment.content}}
         </textarea>

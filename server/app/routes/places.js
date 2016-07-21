@@ -19,11 +19,11 @@ router.route('/:id')
   .delete(placeController.delete);
 
 router.route('/:id/comments')
-  .get(placeController.listComments);
+  .get(placeController.listComments)
+  .post(placeController.createComment);
 
 router.route('/:id/comments/:commentId')
   .get(placeController.showComment)
-  // TODO: add POST
   .put(placeController.updateComment)
   .delete(placeController.deleteComment);
 
