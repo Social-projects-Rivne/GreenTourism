@@ -84,7 +84,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           }
         });
 
-
         /*** START tracks controller ***/
         var activeLiCounter = 4;
         this.tracksType = mapMarkingTypes.tracks;

@@ -4,7 +4,7 @@ angular.module('placeList')
       placeid: '='
     },
     template: '<br /><button class="btn btn-primary btn-md center-block"  type="button"  ng-click="$ctrl.open($ctrl.placeid)">OPEN</button>',
-    controller: ["$compile", "$scope", "$uibModal", "Place", function markerController($compile, $scope, $uibModal, Place) {
+    controller: ['$compile', '$scope', '$uibModal', 'Place', function markerController($compile, $scope, $uibModal, Place) {
       $ctrl = this;
       $ctrl.placemyid = this.placeid;
       $ctrl.dataPlace = Place.query($ctrl.placemyid);

@@ -2,7 +2,7 @@ angular.module('calendar', []);
 
 angular.module('calendar').component('calendar', {
   templateUrl: 'components/event/calendar/calendar.template.html',
-  controller: ["$http", "$scope", "eventListService", function($http, $scope, eventListService) {
+  controller: ['$http', '$scope', 'eventListService', function($http, $scope, eventListService) {
     $scope.give_event = eventListService.th;
 
     this.calendar_carent_date = new Date();

@@ -1,7 +1,7 @@
 angular.module('popularTrack', [])
   .component('popularTrack', {
     templateUrl: 'components/track/popular-track/popular-track.template.html',
-    controller: ["$http", "$rootScope", function popularTrackController($http, $rootScope) {
+    controller: ['$http', '$rootScope', function popularTrackController($http, $rootScope) {
       var popularTrackScope = this;
       popularTrackScope.search = '';
 
@@ -15,7 +15,7 @@ angular.module('popularTrack', [])
 
       console.log($rootScope.userLocationArea);
     }]
-  }).filter('popularTrackFilter', ["$filter", function($filter) {
+  }).filter('popularTrackFilter', ['$filter', function($filter) {
     return function(tracks, search) {
       var input = tracks;
       var output = [];

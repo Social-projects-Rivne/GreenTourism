@@ -32,12 +32,12 @@ angular.module('welcomePage', [])
       }).then(function() {
         Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[0].latitude +
           '&lon=' + self.outputPopularPlaces[0].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[0].location = result.display_name;
-        });
+            self.outputPopularPlaces[0].location = result.display_name;
+          });
         Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[1].latitude +
           '&lon=' + self.outputPopularPlaces[1].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[1].location = result.display_name;
-        });
+            self.outputPopularPlaces[1].location = result.display_name;
+          });
       });
 
       // Animation on click arrow
