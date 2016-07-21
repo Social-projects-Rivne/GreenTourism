@@ -18,15 +18,17 @@
                 <div class="blog-details">
                   <ul>
                     <li>By
-                                                <span class="blog-author">
-                                                    <a href="#" title="Posts by admin" rel="author">{{$ctrl.blog.userId}}</a>
-                                                </span>
+                      <span class="blog-author">
+                        <a ng-href="#" title="Posts by admin" rel="author">{{$ctrl.blog.userId}}</a>
+                      </span>
                     </li>
-                    <li><span
-                            class="blog-date">{{$ctrl.blog.createdAt | date:'dd MMMM yyyy'}}</span>
+                    <li>
+                      <span class="blog-date">
+                        {{$ctrl.blog.createdAt | date:'dd MMMM yyyy'}}
+                      </span>
                     </li>
                     <li>Category:
-                      <a href="#" class="blog-category">{{$ctrl.blog.category.name}}</a>
+                      <a ng-href="#" class="blog-category">{{$ctrl.blog.category.name}}</a>
                     </li>
                     <li>
                       {{$ctrl.blog.blogComments.length}} Comments
@@ -35,10 +37,8 @@
                       <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                       <span>{{$ctrl.blog.blogLikes.length}}</span>
                       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-
                     </li>
                   </ul>
-
                 </div>
                 <div class="blog-comments">
                   <div class="row">
@@ -55,15 +55,13 @@
                     <div class="comment-item" ng-repeat="comment in $ctrl.blog.blogComments">
                       <div class="media">
                         <div class="media-left">
-                          <a href="#">
-                            <img class="media-object avatar "
-                                 src="assets/img/welcome-page/avatar.png" alt="...">
-                          </a>
+                          <img class="media-object avatar "
+                               src="assets/img/welcome-page/avatar.png" alt="...">
                         </div>
                         <div class="media-body">
                           <h6 class="media-heading">
-                            By {{comment.userId}} at {{comment.createdAt | date:'dd MMMM
-                            yyyy'}}
+                            By {{comment.userId}} at
+                            {{comment.createdAt | date:'dd MMMM yyyy'}}
                           </h6>
 
                           <p>

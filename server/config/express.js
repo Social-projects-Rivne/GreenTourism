@@ -42,7 +42,7 @@ module.exports = function() {
   api.use('/places', require('../app/routes/places'));
   api.use('/users', require('../app/routes/users'));
   api.use('/tracks', require('../app/routes/tracks'));
-  app.use('/api/blogs', require('../app/routes/blogs'));
+  api.use('/blogs', require('../app/routes/blogs'));
 
   app.use('/api', api);
 
