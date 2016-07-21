@@ -61,9 +61,8 @@
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.routes.js"></script>
-    <script src="nav.controller.js"></script>
-    <script src="current-user.service.js"></script>
 
+    <!-- Models -->
     <script src="models/user.model.js"></script>
     <script src="models/place.model.js"></script>
     <script src="models/track.model.js"></script>
@@ -73,6 +72,9 @@
     <!-- Shared components -->
     <script src="shared/map/map.factory.js"></script>
     <script src="shared/filter-map-type/filter-map-type.component.js"></script>
+    <script src="shared/nav.controller.js"></script>
+    <script src="shared/main.controller.js"></script>
+    <script src="shared/current-user.service.js"></script>
 
     <!-- Separated components -->
     <script src="components/welcome-page/welcome-page.component.js"></script>
@@ -199,11 +201,8 @@
 
     <div ng-if="!main.routeChangeError" ng-view=""></div>
     <div ng-if="main.routeChangeError">
-      <div ng-if="main.statusCode === 401" ng-include="'401.html'"></div>
-      <div ng-if="main.statusCode === 403" ng-include="'403.html'"></div>
-      <div ng-if="main.statusCode === 404" ng-include="'404.html'"></div>
-      <div ng-if="main.statusCode === 500" ng-include="'500.html'"></div>
-      <div ng-if="main.statusCode == null">
+      <div ng-if="main.statusCode" ng-include="'shared/errors/{{main.statusCode}}.html'"></div>
+      <div ng-if="!main.statusCode">
         <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
       </div>
     </div>
