@@ -1,8 +1,8 @@
 angular.module('placeList', ['filterMapType', 'popularTracks'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'constants',
-      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser, constants) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'constants', 'Restangular',
+      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser, constants, Restangular) {
         var places = [];
         var tracks = [];
         var counter;
@@ -58,14 +58,19 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             ctrl.newPlace.owner = ctrl.user._id;
             ctrl.newPlace.location.coordinates = placesOnMap.coords;
             newPlaces.push(ctrl.newPlace);
-            Place.post(ctrl.newPlace).then(function() {
-              checkActiveType = angular.element('#' + ctrl.newPlace.type + ' span');
-              if (checkActiveType.hasClass(constants.checkedClass)) {
-                placesOnMap.showPlaces(newPlaces);
-              } else {
-                ctrl.checkType(ctrl.newPlace.type);
-              }
-              ctrl.resetAddPlaceForm(form);
+            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[0] +
+            '&lon=' + placesOnMap.coords[1] + '&addressdetails=0&zoom=10').get().then(function(result) {
+              ctrl.newPlace.address = result.display_name;
+              Place.post(ctrl.newPlace).then(function() {
+                checkActiveType = angular.element('#' + ctrl.newPlace.type + ' span');
+                if (checkActiveType.hasClass(constants.checkedClass)) {
+                  placesOnMap.showPlaces(newPlaces);
+                } else {
+                  ctrl.checkType(ctrl.newPlace.type);
+                }
+                console.log(ctrl.newPlace);
+                ctrl.resetAddPlaceForm(form);
+              });
             });
           }
         };

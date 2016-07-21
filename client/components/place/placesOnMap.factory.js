@@ -136,5 +136,11 @@ angular.module('mapModule')
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
 
+    placesOnMap.removeNewMarker = function() {
+      if (newMarker) {
+        map.removeLayer(newMarker);
+      }
+    };
+
     return placesOnMap;
   }]);
