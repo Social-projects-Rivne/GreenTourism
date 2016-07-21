@@ -1,10 +1,16 @@
 angular.module('blogDetail', []);
 angular.module('blogDetail').component('blogDetail', {
   templateUrl: 'components/blog/blog-detail/blog-detail.template.html',
-  controller: ['$route', 'Blog', function BlogDetailController($route, Blog) {
-    var ctrl = this;
-    Blog.one($route.current.params.blogId).get().then(function(response) {
-      ctrl.blog = response;
+  controller: ['$http', '$filter', '$routeParams', function BlogDetailController($http, $filter, $routeParams) {
+    var self = this;
+    self.orderProp = 'date';
+    $http.get('components/blog/blog.data.json').then(function(response) {
+      self.blog = $filter('filter')(response.data, {
+        id: $routeParams.blogId
+      });
+      self.blogs = $filter('filter')(response.data, {
+        id: '!' + $routeParams.blogId
+      });
     });
     ctrl.tab = 1;
   }]

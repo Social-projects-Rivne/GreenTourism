@@ -7,12 +7,5 @@ angular.module('blogList').component('blogList', {
     Blog.getList().then(function(responce) {
       ctrl.blogs = responce;
     });
-    //ctrl.tab = 1;
-    //ctrl.selectTab = function(setTab) {
-    //  ctrl.tab = setTab;
-    //};
-    //ctrl.isSelected = function(checkTab) {
-    //  return ctrl.tab === checkTab;
-    //};
   }]
 });

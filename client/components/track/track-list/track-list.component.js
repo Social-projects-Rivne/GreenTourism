@@ -1,7 +1,7 @@
 angular.module('trackList', ['trackFilter', 'filterMapType', 'trackMaker', 'mapModule', 'popularTrack'])
   .component('trackList', {
     templateUrl: 'components/track/track-list/track-list.template.html',
-    controller: ["$rootScope", function mapMenuController($rootScope) {
+    controller: ['$rootScope', function mapMenuController($rootScope) {
       var ctrlScope = this;
       $rootScope.menuOpen = false;
       ctrlScope.toggleMenu = function() {

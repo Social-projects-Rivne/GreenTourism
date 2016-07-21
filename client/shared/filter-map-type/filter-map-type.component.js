@@ -1,7 +1,7 @@
 angular.module('filterMapType', [])
   .component('filterMapType', {
     templateUrl: 'shared/filter-map-type/filter-map-type.template.html',
-    controller: ["mapFactory", function FilterMapTypeController(mapFactory) {
+    controller: ['mapFactory', function FilterMapTypeController(mapFactory) {
       var map;
       this.maptype = ['Streets', 'Satellite', 'Outdoors'];
 
