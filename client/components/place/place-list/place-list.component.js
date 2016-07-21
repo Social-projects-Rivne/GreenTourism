@@ -8,7 +8,88 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         var counter;
         var typesLength;
 
+        var addTrackMenu = angular.element('#add-track');
+        var addTrackForm = angular.element('form[name="trackMaker"]');
+        var addTrackMenuIsOpen = false;
+        var ctrl = this;
+
         this.user = currentUser;
+
+
+
+        // -----START ADD Track-----
+        ctrl.newTrack = {
+          name: '',
+          type: '',
+          description: '',
+          location: {
+            type: 'LineString',
+            coordinates: []
+          },
+          photos: [],
+          userId: ''
+        };
+        var emptyTrackObject = {
+          name: '',
+          type: '',
+          description: '',
+          location: {
+            type: 'LineString',
+            coordinates: []
+          },
+          photos: [],
+          userId: ''
+        };
+        ctrl.newTrackType = '';
+        ctrl.formNewTrackSubmitted = false;
+
+        function openAddTrackMenu() {
+          addTrackMenu.css({
+            display: 'block'
+          });
+          addTrackMenuIsOpen = true;
+          placesOnMap.openAddTrackMenu();
+        }
+
+        ctrl.closeAddTrackMenu = function() {
+          addTrackMenu.css({
+            display: 'none'
+          });
+          addTrackMenuIsOpen = false;
+          placesOnMap.closeAddTrackMenu();
+          addTrackMenuIsOpen = false;
+        };
+
+        ctrl.addTrack = function() {
+          if (addTrackMenuIsOpen) {
+            ctrl.closeAddTrackMenu();
+          } else {
+            ctrl.closeAddPlaceMenu();
+            openAddTrackMenu();
+          }
+        };
+
+        ctrl.createNewTrack = function(form) {
+          ctrl.formNewTrackSubmitted = true;
+          if (addTrackForm.hasClass('ng-valid')) {
+            ctrl.newTrack.type = ctrl.newTrackType.type;
+            ctrl.newTrack.userId = ctrl.user._id;
+            // ctrl.newPlace.location.coordinates = placesOnMap.coords;
+            console.log(ctrl.newPlace);
+            ctrl.resetAddTrackForm(form);
+          }
+        };
+
+        ctrl.resetAddTrackForm = function(form) {
+          if (form) {
+            ctrl.newTrack = angular.copy(emptyTrackObject);
+            ctrl.newTrackType = '';
+            form.$setPristine();
+            form.$setUntouched();
+            ctrl.formNewTrackSubmitted = false;
+          }
+        };
+        // -----END ADD Track-----
 
         this.placesType = mapMarkingTypes.places;
         typesLength = Object.keys(this.placesType).length;

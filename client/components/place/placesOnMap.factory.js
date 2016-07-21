@@ -113,5 +113,25 @@ angular.module('mapModule')
       tracks.forEach(removeTrack, 'all');
     };
 
+    /* ** START add track factory ** */
+
+    placesOnMap.removeNewMarker = function() {
+      if (newMarker) {
+        map.removeLayer(newMarker);
+      }
+    };
+
+    placesOnMap.openAddTrackMenu = function() {
+      map.on('click', addNewTrack);
+    };
+
+    placesOnMap.closeAddTrackMenu = function() {
+      map.off('click', addNewTrack);
+    };
+
+    function addNewTrack(e) {
+      console.log(true);
+    }
+
     return placesOnMap;
   }]);
