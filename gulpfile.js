@@ -161,7 +161,7 @@ gulp.task('copy-templates', function() {
 });
 
 // Copy all JSON fixtures
-gulp.task('copy-JSON', function() {
+gulp.task('copy-json', function() {
   return gulp.src(['client/components/**/*.json', 'client/shared/**/*.json'],
                    {base: 'client'})
     .pipe(gulp.dest(DEST))
