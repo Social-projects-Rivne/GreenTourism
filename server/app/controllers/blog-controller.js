@@ -19,6 +19,7 @@ exports.list = function(req, res) {
       res.status(400).json({message: err.message});
     });
 };
+
 exports.show = function(req, res) {
   Blog.blog.findOne({
     where: {id: req.params.id},
@@ -52,6 +53,7 @@ exports.category = function(req, res) {
       res.status(400).json({message: err.message});
     });
 };
+
 exports.popular = function(req, res) {
   Blog.blog.findAll({
     where: req.query,
@@ -85,6 +87,7 @@ exports.create = function(req, res) {
       });
   }
 };
+
 exports.update = function(req, res) {
   if (!req.body) {
     res.sendStatus(400);
@@ -101,6 +104,7 @@ exports.update = function(req, res) {
       });
   }
 };
+
 exports.delete = function(req, res) {
   model.destroy({where: {id: req.params.id}})
     .then(function() {

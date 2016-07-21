@@ -14,12 +14,11 @@ angular.module('blogSidebar').component('blogSidebar', {
 
     Blog.one('category').get().then(function(responce) {
       ctrl.categoryList = responce;
-      console.log(ctrl.categoryList);
     });
 
     Blog.one('popular').get().then(function(responce) {
       ctrl.popularList = responce;
-      console.log(ctrl.popularList);
     });
   }]
 });
+

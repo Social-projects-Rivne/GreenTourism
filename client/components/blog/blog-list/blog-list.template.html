@@ -5,58 +5,58 @@
         <div class="col-md-8">
           <div class="row">
 
-                        <div class="col-md-6 col-sm-6 col-xs-12"
-                             ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true">
-                            <div class="thumbnail blog-list-item">
-                                <a href="#!/blog/{{blog.id}}">
-                                    <img ng-src="{{blog.blogPhoto.url}}" alt="{{blog.title}}">
-                                </a>
+            <div class="col-md-6 col-sm-6 col-xs-12"
+                 ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true">
+              <div class="thumbnail blog-list-item">
+                <a href="#!/blog/{{blog.id}}">
+                  <img ng-src="{{blog.blogPhoto.url}}" alt="{{blog.title}}">
+                </a>
 
-                                <div class="caption">
-                                    <h3 class="blog-title">
-                                        <a href="#">{{blog.title}}</a>
-                                    </h3>
+                <div class="caption">
+                  <h3 class="blog-title">
+                    <a href="#">{{blog.title}}</a>
+                  </h3>
 
-                                    <div class="blog-details">
-                                        By
+                  <div class="blog-details">
+                    By
                         <span class="blog-author">
                             <a href="#" title="Posts by admin" rel="author">{{blog.userId}}</a>
                         </span>
                                         <span class="blog-date">
 								{{blog.createdAt | date:'dd MMMM yyyy'}}
 					</span>
-                                        <a href="#" class="blog-category">{{blog.category.name}}</a>
-                                    </div>
-                                    <div class="blog-separator"></div>
+                    <a href="#" class="blog-category">{{blog.category.name}}</a>
+                  </div>
+                  <div class="blog-separator"></div>
 
-                                    <div class="blog-content">
-                                        {{blog.content | limitTo: 140}}{{blog.content.length>140 ? '...' : ''}}
-                                    </div>
+                  <div class="blog-content">
+                    {{blog.content | limitTo: 140}}{{blog.content.length>140 ? '...' : ''}}
+                  </div>
 
-                                    <p class="blog-meta">
-                                        <a href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
-                                            <i class="fa fa-book" aria-hidden="true"></i>
-                                        </a>
+                  <p class="blog-meta">
+                    <a href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
+                      <i class="fa fa-book" aria-hidden="true"></i>
+                    </a>
                                         <span class="pull-right">
                                             <i class="fa fa-comments-o" aria-hidden="true"></i>
                                             {{blog.blogComments.length}}
                                         </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </p>
                 </div>
-            </article>
-            <aside>
-                <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <blog-sidebar></blog-sidebar>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+              </div>
+            </div>
+          </div>
         </div>
+      </article>
+      <aside>
+        <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
+          <div class="row">
+            <div class="col-md-12">
+              <blog-sidebar></blog-sidebar>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
+  </div>
 </section>
