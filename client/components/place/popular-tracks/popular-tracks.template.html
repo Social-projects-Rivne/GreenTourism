@@ -1,18 +1,18 @@
 <div class="col-xs-12 no-padding" id="sidebarBottom"> <!-- Related tracks container start -->
-	<div class="col-xs-12 no-padding">
-		<h2>Popular Tracks in location</h2>
-	</div>
-	<div class="col-xs-12 no-padding">
-		<div class="col-xs-4 place-wrapper" ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
-			<div class="place-container">
-				<img src="{{track.photos[0]}}" alt="popular Track">
-				<div class="data">
-					<h3>{{track.name}}</h3>
-					<div class="popular-track-rate">
-						<span class="glyphicon glyphicon-heart"></span> {{track.trackRate}}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="col-xs-12 no-padding">
+    <h2>Popular Tracks in location</h2>
+  </div>
+  <div class="col-xs-12 no-padding">
+    <div class="col-xs-4 place-wrapper" ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
+      <div class="place-container">
+        <img src="{{track.photos[0]}}" alt="popular Track">
+        <div class="data">
+          <h3>{{track.name}}</h3>
+          <div class="popular-track-rate">
+            <span class="glyphicon glyphicon-heart"></span> {{track.trackRate}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>	
 </div> <!-- Related tracks container end -->
