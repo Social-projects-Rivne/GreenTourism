@@ -3,7 +3,7 @@ angular.module('user').component('auth', {
   controller: [function authCtrl() {
     this.form = 'login';
 
-    angular.element('.dropdown-menu').on({
+    angular.element('.dropdown-auth').on({
       click: function(e) {
         e.stopPropagation();
       }
