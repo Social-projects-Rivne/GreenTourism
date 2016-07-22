@@ -30,12 +30,9 @@ exports.show = function(req, res) {
       {model: Blog.likes}
     ]
   })
-    .then(function(record) {
+    .then(function(err, record) {
       if(!record) {
-        res.status(404).json({
-          message: 'Record with id ' + req.params.id +
-          ' was not found!'
-        });
+        res.status(400).json(err);
       } else {
         res.json(record);
       }
