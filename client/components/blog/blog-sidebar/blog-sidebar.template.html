@@ -13,7 +13,7 @@
     </div>
   </div>
 </div>
-
+/+++
 <div class="blog-category-list">
   <div class="row">
     <div class="col-md-12">
@@ -21,7 +21,7 @@
       <ul>
         <li ng-repeat="category in $ctrl.categoryList  ">
           <a ng-href="#">
-            <i class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
+            <i ng-class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
             {{category.name}}
           </a>
         </li>
