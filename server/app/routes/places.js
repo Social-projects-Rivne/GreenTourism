@@ -3,8 +3,6 @@ var router = express.Router(); // eslint-disable-line new-cap
 
 var Place = require('mongoose').model('Place');
 var placeController = require('../controllers/default-crud-controller')(Place);
-// var defaultControllerWithOwner = require('../controllers/default-crud-controller-with-owner');
-// var authController = require('../auth/auth');
 
 router.route('/')
   .get(placeController.list)
