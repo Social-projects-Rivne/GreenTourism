@@ -1,7 +1,7 @@
 .parallax {
   position: relative;
   .parallax-background-opacity {
-    background: @brand-dark;
+    background: url("http://rvavto.com.ua/images/main.jpg") center top @brand-dark;
     margin:0;
     padding:0;
     width:100%;
@@ -42,21 +42,13 @@
     text-align: center;
     display: block;
     color: @brand-light;
-
+    width: 50px;
   }
 }
 
 .parallax a {
   top: 60vh;
 }
-@supports (-ms-accelerator:true) {
-  .parallax a {
-    display: hidden;
-    bottom: 20vh;
-  }
-
-}
-
 #welcome-page-content {
   position: relative;
   img {
