@@ -57,7 +57,15 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '<blog-list></blog-list>'
       })
       .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
-        template: '<blog-detail></blog-detail>'
+        template: '<blog-detail blog="$resolve.blog"></blog-detail>',
+        resolve: {
+          blog: ['$route', 'Blog', function BlogDetailController($route, Blog) {
+            return Blog.one($route.current.params.blogId).get()
+              .then(function(blog) {
+                return blog;
+              });
+          }]
+        }
       })
       .otherwise({
         templateUrl: 'shared/errors/404.html'
