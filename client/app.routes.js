@@ -54,7 +54,14 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event-detail></event-detail>'
       })
       .when('/blog', {  // TODO: Rename to blogs
-        template: '<blog-list></blog-list>'
+        template: '<blog-list blogs="$resolve.blogs"></blog-list>',
+        resolve: {
+          blogs: ['Blog', function BlogListController(Blog) {
+            return Blog.getList().then(function(blogs) {
+              return blogs;
+            });
+          }]
+        }
       })
       .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
         template: '<blog-detail blog="$resolve.blog"></blog-detail>',
