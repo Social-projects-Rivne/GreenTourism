@@ -31,7 +31,10 @@ exports.show = function(req, res) {
   })
     .then(function(record) {
       if (!record) {
-        res.status(404).json();
+        res.status(404).json({
+          message: 'Record with id ' + req.params.id +
+          ' was not found!'
+        });
       } else {
         res.json(record);
       }

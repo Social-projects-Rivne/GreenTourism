@@ -53,7 +53,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
       .when('/events/:eventId/:dataId', { // TODO: Remove this from routes (use query strings instead)
         template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event-detail></event-detail>'
       })
-      .when('/blog', {  // TODO: Rename to blogs
+      .when('/blog', {
         template: '<blog-list blogs="$resolve.blogs"></blog-list>',
         resolve: {
           blogs: ['Blog', function BlogListController(Blog) {
@@ -63,7 +63,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
           }]
         }
       })
-      .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
+      .when('/blog/:blogId', {
         template: '<blog-detail blog="$resolve.blog"></blog-detail>',
         resolve: {
           blog: ['$route', 'Blog', function BlogDetailController($route, Blog) {
