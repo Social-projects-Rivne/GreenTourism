@@ -62,3 +62,9 @@ build/Release
 
 # Temp css files
 *.css~
+
+# Ctags
+.tags*
+
+# CSS (Use Less)
+*.css

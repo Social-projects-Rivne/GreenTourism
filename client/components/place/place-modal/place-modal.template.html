@@ -1,0 +1,35 @@
+<div class="row place center-block">
+  <div class="modal-body">
+    <div class="center-block">
+      <button class="btn btn-warning center-block" type="button" ng-click="$ctrl.handleClose()">CLOSE</button>
+    </div>
+    <div class="row center-block">
+      <h2 class="titlem text-center">{{$ctrl.modalData.name}} </h2>
+      <h3>Place:{{$ctrl.placeid}}</h3>
+      <p>{{$ctrl.modalData.description}}</p>
+      <img class="img_modal" src="assets/{{$ctrl.modalData.photo[0]}}" alt="{{$ctrl.modalData.name}}"
+      />
+      <button type="button" class="btn btn-default btn-lg center-block">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
+      </button>
+    </div>
+    <div class="row  center-block">
+      <br>
+      <br>
+      <div class="pull-left">
+        <img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="img-circle  profile"
+        />
+      </div>
+      <p class="clearfix">Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1
+        Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1</p>
+      <p class="clearfix">.....................................................</p>
+
+    </div>
+    <div class="center-block">
+
+      <button type="button" class="btn btn-default btn-lg center-block" ng-click="$ctrl.handleClose()">
+        <a href="#!/places/{{$ctrl.placeid}}">Details >></a>
+      </button>
+    </div>
+  </div>
+</div>

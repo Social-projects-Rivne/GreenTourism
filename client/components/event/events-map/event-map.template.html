@@ -1,0 +1,102 @@
+<div class="container-fluid places">
+  <div class="row places">
+    <div class="col-xs-9 no-padding" id="main-content">
+      <div class="col-xs-12 no-padding" id="filter">
+        <!-- Filter container start -->
+        <div class="btn-group col-xs-12" role="group" id="buttons">
+          <button type="button" class="btn btn-default col-xs-2 btn-first" ng-click="$ctrl.temp_click()">Add place</button>
+          <!--div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
+                        <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Map type
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu col-xs-12 list-group no-padding">
+                            <filter-map-type></filter-map-type>
+                        </ul>
+                    </div-->
+          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+              Event type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu col-xs-12 list-group no-padding">
+              <event-map-type></event-map-type>
+            </ul>
+          </div>
+          <div class="btn-group col-xs-2 no-padding" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+              From:
+              <span class="caret"></span>
+              {{eventL.CalendarName[0].calendar_show_date | date:'dd MM yy' }}
+            </button>
+            <ul class="dropdown-menu  col-xs-12">
+              <calendar></calendar>
+            </ul>
+          </div>
+          <div class="btn-group col-xs-2 no-padding" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+              To:
+              <span class="caret"></span>
+              {{eventL.CalendarName[1].calendar_show_date | date:'dd MM yy' }}
+            </button>
+            <ul class="dropdown-menu  col-xs-12">
+              <calendar></calendar>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
+          <div class="col-xs-2"></div>
+        </div>
+      </div>
+      <!-- Filter container end -->
+      <div class="col-xs-12 no-padding">
+        <!-- Map container start-->
+        <div style="width: 100%; height: 600px;" id="mapevent"></div>
+      </div>
+      <!-- Map container end-->
+      <div class="col-xs-12 no-padding" id="sidebarBottom">
+        <!-- Related tracks container start -->
+        <div class="col-xs-12 no-padding">
+          <h2>Most near places in map center</h2>
+        </div>
+        <div class="col-xs-12 no-padding">
+          <div class="col-xs-4 place-wrapper" ng-repeat="event in closeEvent | limitTo:3">
+            <a href="#!/events/{{event.id}}/{{event.date_start}}">
+              <div class="place-container">
+                <img src="assets{{event.attachments.photo[0]}}" style="width : 100%; height: 200px;"
+                    alt="{{event.name}}" title="{{event.name}}">
+                <h6>{{event.name}}</h6>
+              </div>
+            </a>
+          </div>
+          <!--div class="col-xs-4 place-wrapper">
+                        <div class="place-container">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-4 place-wrapper">
+                        <div class="place-container">
+
+                        </div>
+                    </div-->
+        </div>
+      </div>
+      <!-- Related tracks container end -->
+    </div>
+    <div class="col-xs-3 no-padding" id="sidebar">
+      <div class="col-xs-12" id="search">
+        <div class="input-group col-xs-offset-1 col-xs-10">
+          <input class="form-control" type="text" name="search">
+          <span class="input-group-btn">
+            <button class="btn" type="button">Search</button>
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-12 no-padding" id="popularPlaces">
+
+      </div>
+    </div>
+  </div>
+</div>
