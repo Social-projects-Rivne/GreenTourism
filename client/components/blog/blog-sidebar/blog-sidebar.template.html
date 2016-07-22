@@ -21,7 +21,7 @@
       <ul>
         <li ng-repeat="category in $ctrl.categoryList  ">
           <a ng-href="#">
-            <i class="fa {{category.icon}}" aria-hidden="true"></i>
+            <i class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
             {{category.name}}
           </a>
         </li>
