@@ -77,8 +77,10 @@
       <p class="tip">Please input your password again</p>
     </div>
 
-    <h4 class="policy">By clicking Sign Up, you agree to our Terms and Policy</h4>
-    <input type="submit" class="btn btn-success btn-block submit-btn" value="Sign up"
+    <h4 class="policy">By clicking Sign Up, you agree to our Terms and Policy
+    </h4>
+    <input type="submit" class="btn btn-success btn-block submit-btn" 
+    ng-disabled="signup.$invalid" value="Sign up"
     />
   </form>
 </div>
