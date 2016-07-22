@@ -15,10 +15,8 @@ module.exports = function(Model) {
       if (err) {
         return res.status(404).json(err);
       }
-      if (req.body.content.length <= 1000) {
-        record.comments.push(req.body);
-        return res.json(record);
-      }
+      record.comments.push(req.body);
+      return res.json(record);
     });
   };
 
@@ -36,13 +34,11 @@ module.exports = function(Model) {
       if (err) {
         return res.status(400).json(err);
       }
-      if (req.body.content.length <= 1000) {
-        record.comments.id(req.params.commentId).remove();
-        record.comments.push(req.body);
-        record.save(function(err, resp) {
-          res.json(resp);
-        });
-      }
+      record.comments.id(req.params.commentId).remove();
+      record.comments.push(req.body);
+      record.save(function(err, resp) {
+        res.json(resp);
+      });
     });
   };
 
