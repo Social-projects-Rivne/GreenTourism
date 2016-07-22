@@ -4,23 +4,30 @@ angular.module('placeDetail', [])
     bindings: {
       place: '<'
     },
-    controller: ['mapFactory', function placeDetailCtrl(mapFactory) {
+    controller: function placeDetailCtrl($scope, constants) {
+      $(document).ready(function() {
+        $(".fancybox").fancybox();
+      });
+      function upload() {
+        document.getElementById("file1").click();
+      }
+
       this.map = L.map('map1', {
-        center: [50.6234, 26.2189],
-        zoom: 14
+        center: constants.mapCenter,
+        zoom: constants.defaultZoom
       });
       Streets = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       });
       this.map.addLayer(Streets);
-      this.location = this.place.getLocation();
-      this.marker = L.marker(this.location).addTo(this.map);
+      this.marker = L.marker(L.latLng(this.place.location.coordinates[0], this.place.location.coordinates[1])).addTo(this.map);
+      this.marker.bindPopup('<div class="popup"><h3>' + this.place.name +
+        '</h3><a><img class="marker-image center-block" src="'+this.place.photos[0]+'" /></a><br />').openPopup();
 
-      this.marker.bindPopup('<div><h3>' + this.place.name +
-        '</h3><a><img class="marker-image" src="assets/' + this.place.photo[0] +
-        '" /></a><br />').openPopup();
+      this.map.setView([this.place.location.coordinates[0]+0.005, this.place.location.coordinates[1]]); //0.005- for responcive design- show info on mobile
+      this.closePage = function() {
+        $scope.$emit('closePage', 'pageClass');
 
-      this.map.setView(this.location);
-    }]
+      }
+    }
   });
-
