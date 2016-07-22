@@ -12,12 +12,12 @@ angular.module('blogSidebar').component('blogSidebar', {
       return ctrl.tab === checkTab;
     };
 
-    Blog.one('category').get().then(function(responce) {
-      ctrl.categoryList = responce;
+    Blog.one('category').get().then(function(response) {
+      ctrl.categoryList = response;
     });
 
-    Blog.one('popular').get().then(function(responce) {
-      ctrl.popularList = responce;
+    Blog.one('popular').get().then(function(response) {
+      ctrl.popularList = response;
     });
   }]
 });
