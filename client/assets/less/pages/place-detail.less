@@ -37,14 +37,17 @@
 div.place {
   margin: 0px;
   .vertical-align {
-    padding: 5px 10px;
+
+    padding: 10px 5px 0px 5px;
+    margin: 0;
   }
-  button.glyphicon-heart {
-    background-color: @brand-dark;
+  button .glyphicon-heart, i.close {
+    color: @brand-dark;
   }
   h2 {
     color: @brand-dark;
     text-transform: capitalize;
+    margin-top: -10px;
   }
   .container_page {
     padding: 20px 20px;
@@ -63,22 +66,37 @@ div.place {
     i.fa {
       color: @brand-dark;
     }
-    img {
-      width: 136px;
-      padding-bottom: 5px;
-    }
     img.profile {
       width: 80px;
       height: 80px;
     }
-    .fancybox a img {
-      width: 120px;
-    }
-    div.galery{
-      text-align:center;
+
+    .gallery {
+      text-align: center;
+      a.fancybox {
+        max-height: 100px;
+        overflow: hidden;
+        display: inline-block;
+        width: 32%;
+      }
+      a img {
+        float: left;
+        width: 100%;
+        height: auto;
+        padding-bottom: 5px;
+      }
+      #firstimg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        border: none;
+
+      }
+
     }
 
   }
+
   #map1 {
     width: 100%;
     height: 430px;

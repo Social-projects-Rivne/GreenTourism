@@ -1,21 +1,23 @@
 <div class="row place">
-  <div class="col-xs-12 col-lg-12 col-md-12" style="min-width:365px;">
+  <div class="col-xs-12 col-lg-12 col-md-12">
     <div class="row vertical-align">
       <div class="col-xs-4 no-padding">
         <p class="text-left">
-          <button type="button" class="btn btn-default btn-lg">
+          <button type="button" class="btn btn-default btn-lg like">
             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like 124
           </button>
         </p>
       </div>
       <div class="col-xs-4 no-padding">
-        <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
+
       </div>
       <div class="col-xs-4 no-padding">
-        <i class="fa fa-times fa-3x  pull-right" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
+        <i class="fa fa-times fa-3x  pull-right close" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
       </div>
     </div>
     <div class="row">
+      <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
+
       <div id="map1"></div>
     </div>
   </div>
@@ -62,29 +64,44 @@
 
 
     </div>
-    <div class="col-lg-4 col-md-4 col-xs-12 galery">
+    <div class="col-lg-4 col-md-4 col-xs-12 gallery">
       <div class="row">
-        <a class="fancybox" rel="gallery1" href="{{$ctrl.place.photos[0]}}" title="{{$ctrl.place.name}}">
-          <img src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"
-               style="width:420px;"/>
+        <a id="firstimg" class="fancybox first" rel="gallery1" href="{{$ctrl.place.photos[0]}}"
+           title="{{$ctrl.place.name}}">
+          <img src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
         </a>
       </div>
 
       <div class="row">
-        <a ng-repeat="photo in $ctrl.place.photos" ng-if="$index>=1" class="fancybox" rel="gallery1"
-           href="{{photo}}" title="{{$ctrl.place.name}}">
-          <!-- <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}"/> -->
+        <!--
+          <a ng-repeat="photo in $ctrl.place.photos" ng-if="$index>=1" class="fancybox" rel="gallery1"
+             href="{{photo}}" title="{{$ctrl.place.name}}">
+            <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}"/>
         </a>
         <!-- to delete- it is for demonstrate without data in DB -->
         <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
           <img src="assets/img/places/new_1.jpg"/>
         </a>
+
         <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
-          <img src="assets/img/places/new2.jpg"/>
+          <img src="assets/img/places/oak.jpg"/>
         </a>
+        <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
+          <img src="assets/img/places/new_1.jpg"/>
+        </a>
+
         <a class="fancybox" rel="gallery1" href="assets/img/places/tonnel-lubvi-foto-3.jpg">
           <img src="assets/img/places/tonnel-lubvi-foto-3.jpg"/>
         </a>
+
+        <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
+          <img src="assets/img/places/new2.jpg"/>
+        </a>
+
+        <a class="fancybox" rel="gallery1" href="assets/img/places/tonnel-lubvi-foto-3.jpg">
+          <img src="assets/img/places/tonnel-lubvi-foto-3.jpg"/>
+        </a>
+
         <!-- to delete- it is for demonstrate without data in DB -->
       </div>
 
