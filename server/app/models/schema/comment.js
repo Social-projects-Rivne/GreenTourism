@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 module.exports = new Schema({
   content: {
     type: String,
+    maxlength: [1000, 'The value exceeds the maximum allowed length ({MAXLENGTH}).'],
     required: true
   },
   author: {

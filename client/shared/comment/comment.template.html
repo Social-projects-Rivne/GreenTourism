@@ -1,0 +1,68 @@
+<div class="container comment">
+  <div class="row add-comment" ng-if="$ctrl.currentUser">
+    <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
+      <img ng-src="{{$ctrl.currentUser.avatar}}"/>
+    </div>
+    <div class="col-md-11 col-sm-11 col-xs-11 add-comment-textarea">
+      <form class="form-inline" name="commentForm"
+            ng-submit="$ctrl.addComment($ctrl.content)" novalidate>
+        <div class="row">
+          <div class="col-md-10 col-lg-10">
+            <textarea class="form-control" rows="2" required
+                      placeholder="Leave your comment..." maxlength="1000"
+                      ng-model="$ctrl.content"></textarea>
+            <p ng-if="$ctrl.content">Left: {{1000 - $ctrl.content.length}} symbols</p>
+          </div>
+          <div class="col-md-2 col-lg-2 add-comment-button">
+            <button type="submit" ng-disabled="!$ctrl.content">Post</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="alert alert-info" ng-if="!$ctrl.currentUser">
+    Please, login for comment, update or delete message!
+  </div>
+  <div class="row show-comments"
+       ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
+    <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
+      <img ng-src="{{comment.author.avatar}}"/>
+    </div>
+    <div class="col-md-11 col-sm-11 col-xs-11">
+      <p>
+        <strong>
+          {{comment.author.firstName}} {{comment.author.lastName}}
+        </strong>
+      </p>
+      <div class="dropdown comment-menu"
+           ng-if="$ctrl.currentUser._id === comment.author._id">
+        <a class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-option-horizontal"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="commentMenu">
+          <li>
+            <a href="" ng-click="$ctrl.checkCommentId = comment._id">Edit</a>
+          </li>
+          <li>
+            <a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a>
+          </li>
+        </ul>
+      </div>
+      <p class="show-comments-content"
+         ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
+      <div ng-if="$ctrl.checkCommentId === comment._id">
+        <textarea class="form-control"
+                  rows="2" required maxlength="1000" ng-model="comment.content">
+          {{comment.content}}
+        </textarea>
+        <button type="button"
+                ng-click="$ctrl.updateComment(comment._id, comment.content)"
+                class="btn btn-default"
+                ng-disabled="!comment.content">Update
+        </button>
+      </div>
+      <p class="show-comments-timestamp">Added: {{comment.createdAt}}</p>
+    </div>
+  </div>
+</div>
