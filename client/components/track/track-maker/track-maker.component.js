@@ -1,7 +1,7 @@
 angular.module('trackMaker', [])
   .component('trackMaker', {
     templateUrl: 'components/track/track-maker/track-maker.template.html',
-    controller: ["$http", "$rootScope", function trackMakerController($http, $rootScope) {
+    controller: ['$http', '$rootScope', function trackMakerController($http, $rootScope) {
       var ctrlScope = this;
       ctrlScope.stepOneDisabled = false;
       $rootScope.stepOneActive = true;
