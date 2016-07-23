@@ -37,7 +37,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           ctrl.formNewPlaceSubmitted = true;
           if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
             ctrl.newPlace.type = ctrl.newPlaceType;
-            ctrl.newPlace.owner = ctrl.user._id;
+            ctrl.newPlace.owner = ctrl.user._id; // TODO: move into server-side
             ctrl.newPlace.location.coordinates = placesOnMap.coords;
             newPlaces.push(ctrl.newPlace);
             Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +

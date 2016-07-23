@@ -5,7 +5,7 @@
   <div class="col-xs-12 no-padding">
     <div class="col-xs-4 place-wrapper" ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
       <div class="place-container">
-        <img src="{{track.photos[0]}}" alt="popular Track">
+        <img ng-src="{{track.photos[0]}}" alt="popular Track">
         <div class="data">
           <h3>{{track.name}}</h3>
           <div class="popular-track-rate">
