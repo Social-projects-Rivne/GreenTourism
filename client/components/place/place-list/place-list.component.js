@@ -7,7 +7,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         var tracks = [];
         var counter;
         var typesLength;
-        var addPlaceForm = angular.element('form[name="placeMaker"]');
         var ctrl = this;
         ctrl.addPlaceMenuIsOpen = false;
         ctrl.coordsForNewPlace = placesOnMap.coords;
@@ -31,6 +30,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         };
 
         ctrl.createNewPlace = function(form) {
+          var addPlaceForm = angular.element('form[name="placeMaker"]');
           var checkActiveType;
           var newPlaces = [];
           ctrl.coordsIsDefined = placesOnMap.coordsIsDefined;
@@ -40,8 +40,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             ctrl.newPlace.owner = ctrl.user._id;
             ctrl.newPlace.location.coordinates = placesOnMap.coords;
             newPlaces.push(ctrl.newPlace);
-            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[0] +
-            '&lon=' + placesOnMap.coords[1] + '&addressdetails=0&zoom=10').get().then(function(result) {
+            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
+            '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
               ctrl.newPlace.address = result.display_name;
               Place.post(ctrl.newPlace).then(function() {
                 checkActiveType = angular.element('#' + ctrl.newPlace.type + ' span');
