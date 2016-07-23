@@ -116,14 +116,14 @@ angular.module('mapModule')
     /* ** START add place factory ** */
     var newMarker;
     placesOnMap.openAddPlaceMenu = function() {
-      map.on('click', addNewPlace);
+      map.on('click', addNewPlaceOnMap);
     };
 
     placesOnMap.closeAddPlaceMenu = function() {
-      map.off('click', addNewPlace);
+      map.off('click', addNewPlaceOnMap);
     };
 
-    function addNewPlace(e) {
+    function addNewPlaceOnMap(e) {
       var latitudeContainer = angular.element('#latitude');
       var longitudeContainer = angular.element('#longitude');
       placesOnMap.coords = [e.latlng.lat, e.latlng.lng];

@@ -10,7 +10,7 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
-              <a href="" class="list-group-item filter" ng-click="$ctrl.addPlace()">Add place</a>
+              <a href="" class="list-group-item filter" ng-click="$ctrl.toggleAddPlaceMenu()">Add place</a>
               <a href="" class="list-group-item filter" ng-click="$ctrl.addTrack()">Add track</a>
               <a href="" class="list-group-item filter">Add event</a>
             </ul>
@@ -92,9 +92,9 @@
           <location-places places="$ctrl.places"></location-places>
         </div>
     </div>
-    <div id="add-place" class="add-item-menu">
+    <div id="add-place" class="add-item-menu" ng-if="$ctrl.addPlaceMenuIsOpen">
       <h2>New Place</h2>
-      <a href="" ng-click="$ctrl.closeAddPlaceMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
+      <a href="" ng-click="$ctrl.toggleAddPlaceMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
       <form name="placeMaker" novalidate>
         <div class="col-xs-12">
           <span class="title">1. Choose place on map:</span><br>
@@ -135,14 +135,14 @@
         </div>
       </form>
     </div>
-    <div id="add-track" class="add-item-menu">
+    <div id="add-track" class="add-item-menu" ng-if="">
       <h2>New Track</h2>
       <a href="" ng-click="$ctrl.closeAddTrackMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
       <form name="trackMaker">
         <div class="col-xs-12">
           <span class="title">1. Choose places on map:</span><br>
           <span id="points"></span>
-          <span class="alert-input" ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTeack.location.coordinatest">Track must have at least two points!</span>
+          <span class="alert-input" ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTreack.location.coordinatest">Track must have at least two points!</span>
         </div>
         <div class="form-group col-xs-12">
           <label for="trackName"><span class="title">2. Enter track name:</span></label>

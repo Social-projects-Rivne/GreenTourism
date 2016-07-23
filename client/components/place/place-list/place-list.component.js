@@ -7,12 +7,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         var tracks = [];
         var counter;
         var typesLength;
-        var addPlaceMenu = angular.element('#add-place');
-        var newPlaceLongitude = angular.element('#longitude');
-        var newPlaceLatitude = angular.element('#latitude');
         var addPlaceForm = angular.element('form[name="placeMaker"]');
-        var addPlaceMenuIsOpen = false;
         var ctrl = this;
+        ctrl.addPlaceMenuIsOpen = false;
+        ctrl.coordsForNewPlace = placesOnMap.coords;
 
         ctrl.user = currentUser;
 
@@ -22,29 +20,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         ctrl.newPlacePhoto = '';
         ctrl.formNewPlaceSubmitted = false;
 
-        function openAddPlaceMenu() {
-          addPlaceMenu.css({
-            display: 'block'
-          });
-          addPlaceMenuIsOpen = true;
-          placesOnMap.openAddPlaceMenu();
-        }
-
-        ctrl.closeAddPlaceMenu = function() {
-          addPlaceMenu.css({
-            display: 'none'
-          });
-          addPlaceMenuIsOpen = false;
-          placesOnMap.closeAddPlaceMenu();
-          addPlaceMenuIsOpen = false;
-        };
-
-        ctrl.addPlace = function() {
-          if (addPlaceMenuIsOpen) {
-            ctrl.closeAddPlaceMenu();
+        ctrl.toggleAddPlaceMenu = function() {
+          if (ctrl.addPlaceMenuIsOpen) {
+            placesOnMap.closeAddPlaceMenu();
+            ctrl.addPlaceMenuIsOpen = false;
           } else {
-            // ctrl.closeAddTrackMenu();
-            openAddPlaceMenu();
+            placesOnMap.openAddPlaceMenu();
+            ctrl.addPlaceMenuIsOpen = true;
           }
         };
 
@@ -68,7 +50,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
                 } else {
                   ctrl.checkType(ctrl.newPlace.type);
                 }
-                console.log(ctrl.newPlace);
                 ctrl.resetAddPlaceForm(form);
               });
             });
@@ -76,6 +57,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         };
 
         ctrl.resetAddPlaceForm = function(form) {
+          var newPlaceLongitude = angular.element('#longitude');
+          var newPlaceLatitude = angular.element('#latitude');
           if (form) {
             ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
             ctrl.newPlaceType = '';
@@ -167,7 +150,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
 
 
         // *** START tracks controller ***
-        var activeLiCounter = 4;
+        var activeLiCounter = Object.keys(mapMarkingTypes.tracks).length;
+        
         ctrl.tracksType = mapMarkingTypes.tracks;
         Track.getList().then(function(result) {
           tracks = result;
