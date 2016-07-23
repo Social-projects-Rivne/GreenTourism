@@ -11,8 +11,8 @@ router.route('/me')
   .get(auth.isLoggedIn, controller.showMe);
 
 router.route('/:id')
-  .get(auth.hasAuthorization, controller.show)
-  .put(auth.hasAuthorization, controller.update)
-  .delete(auth.hasAuthorization, controller.delete);
+  .get(auth.isCurrentUser, controller.show)
+  .put(auth.isCurrentUser, controller.update)
+  .delete(auth.isCurrentUser, controller.delete);
 
 module.exports = router;

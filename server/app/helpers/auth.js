@@ -16,7 +16,7 @@ exports.isLoggedIn = function(req, res, next) {
   }
 };
 
-exports.hasAuthorization = function(req, res, next) {
+exports.isCurrentUser = function(req, res, next) {
   if (isAuthenticated(req, res)) {
     if (req.user.role === 'admin') {
       next();
