@@ -9,5 +9,30 @@ angular.module('greenTourism')
     // For Places
     constants.checkedClass = 'glyphicon glyphicon-ok';
     constants.placesOnLoad = 'featured';
+    constants.emptyPlaceModel = {
+      name: '',
+      type: '',
+      description: '',
+      location: {
+        type: 'Point',
+        coordinates: []
+      },
+      photos: [],
+      owner: '',
+      rate: 0,
+      address: ''
+    };
+    constants.emptyTrackModel = {
+      name: '',
+      type: '',
+      description: '',
+      location: {
+        type: 'LineString',
+        coordinates: []
+      },
+      photos: [],
+      userId: ''
+    };
+
     return constants;
   });
