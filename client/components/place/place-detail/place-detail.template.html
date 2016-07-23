@@ -16,21 +16,21 @@
       </div>
     </div>
     <div class=row">
-    <div class="col-xs-12">
-      <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
-    </div>
+      <div class="col-xs-12">
+        <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
+      </div>
 
       <div id="map1"></div>
     </div>
   </div>
   <div class="container_page">
     <div class="row">
-     <div class="col-lg-8 col-md-8 col-xs-12">
-      <p>{{$ctrl.place.description}}</p>
-      <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
+      <div class="col-lg-8 col-md-8 col-xs-12">
+        <p>{{$ctrl.place.description}}</p>
+        <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
 
-    </div>
-     <div class="col-lg-4 col-md-4 col-xs-12 gallery">
+      </div>
+      <div class="col-lg-4 col-md-4 col-xs-12 gallery">
         <a id="firstimg" class="fancybox first" rel="gallery1" href="{{$ctrl.place.photos[0]}}"
            title="{{$ctrl.place.name}}">
           <img src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
