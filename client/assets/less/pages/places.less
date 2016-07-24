@@ -1,108 +1,171 @@
-/*  -------- Places template ----------  */
-
-.no-padding {
-  padding: 0;
+.popular-places-div, .popular-tracks-div {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 10px;
+  padding-top: 114px;
+  background-color: #f8f8f8;
+  transition: all linear 0.5s;
+  width: 300px;
+  height: 100%;
+  &.ng-hide {
+    opacity: 0;
+  }
 }
 
-#sidebar,
-#main-content {
-  max-height: 1000px;
-  text-align: center;
-  overflow: hidden;
+.map-page-wrapper {
+  background-color: #f8f8f8;
+}
+.map-menu {
+  position: relative;
+  z-index: 3;
+  padding: 15px 0;
+  background-color: #f8f8f8;
+  .map-menu-check-button {
+    padding-top: 5px;
+    i {
+      font-size: 24px;
+      color: #999;
+      margin-right: 10px;
+      &:focus {
+        color: @brand-dark;
+      }
+      &.checked {
+        color: @brand-dark;
+      }
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+  }
+  .map-menu-popular {
+    padding-top: 5px;
+    padding-right: 10px;
+    i {
+      font-size: 24px;
+      color: #999;
+      margin-right: 5px;
+      &:focus {
+        color: @brand-dark;
+      }
+      &.checked {
+        color: @brand-dark;
+      }
+    }
+    @media (max-width: 348px) {
+      padding-left: 0;
+    }
+  }
+  .map-menu-buttons {
+    button {
+      color: @brand-dark;
+      border: 1px solid @brand-dark;
+    }
+    .dropdown-menu{
+      padding: 0;
+      border: 1px solid @brand-dark;
+      li {
+        border-bottom: 1px solid @brand-dark;
+        padding: 5px 0;
+        &:hover {
+          background-color: #f8f8f8;
+          border-radius: 4px;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+        a {
+          color: @brand-dark;
+          background-color: transparent;
+        }
+      }
+      & filter-map-type li a{
+        display: block;
+        text-decoration: none;
+        padding: 3px 20px;
+        span {
+          float: right;
+        }
+      }
+      &.place-mobile {
+        li a {
+          padding: 3px 10px;
+          span:last-child {
+            float: right;
+          }
+          img {
+            width: 10px;
+          }
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+  }
+  .map-menu-search {
+    input {
+      border: 1px solid @brand-dark;
+    }
+    button {
+      border: 1px solid @brand-dark;
+      background-color: @brand-dark;
+      color: @brand-light;
+    }
+  }
 }
 
-#sidebar {
-  text-align: center;
-  overflow: hidden;
-  border-left: 1px solid @light-green;
+.dropdown-submenu {
+  position: relative;
+  & > a:after {
+    display: block;
+    content: "";
+    float: right;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+  }
+  &:hover {
+    .dropdown-menu {
+      display: block;
+    }
+    a:after {
+      border-left-color: @brand-dark;
+    }
+  }
+  .dropdown-menu {
+    top: 0;
+    left: 100%;
+    border-radius: 0 6px 6px 6px;
+    a {
+      padding-left: 10px;
+      span:last-child {
+        float: right;
+      }
+      &:hover {
+        border-radius: 0 6px 6px 6px;
+      }
+    }
+  }
+  &.places {
+    img {
+      width: 10px;
+    }
+  }
 }
 
-#search {
-  margin: 10px 0;
+.mapwrapper {
+  position: absolute;
+  padding-top: 114px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  #map {
+    height: 100%;
+    width: 100%;
+  }
 }
-
-#search .btn {
-  background-color: @light-green;
-  color: #fff;
-}
-
-.place-wrapper {
-  height: 250px;
-  padding: 0;
-}
-
-.place-container {
-  margin: 5px;
-  height: 240px;
-  border: 1px solid #000;
-  overflow: hidden;
-}
-
-#filter {
-  height: auto;
-  border-bottom: 1px solid @light-green;
-}
-
-#buttons {
-  margin: 10px 0;;
-}
-
-.btn-first {
-  border-radius: 5px 0 0 5px !important;
-}
-
-.btn-last {
-  border-radius: 0 5px 5px 0 !important;
-}
-
-#map {
-  min-height: 600px;
-}
-
-#sidebarBottom {
-  max-height: 315px;
-  text-align: center;
-  border-top: 1px solid @light-green;
-}
-
-/*-------------- Map type and Places category filters --------------*/
-
-.filter span {
-  float: right;
-}
-
-.filter img {
-  width: 10px;
-}
-
-/*--places ------*/
-.marker-image {
-  width: 150px;
-}
-div.place {
-  margin: 10px;
-}
-.place-container img {
-  width: 250px;
-}
-.place img {
-  width: 130px;
-  padding-bottom: 5px;
-}
-.place .img_modal {
-  width: 550px;
-}
-.place img.profile {
-  width: 80px;
-  height: 80px;
-}
-.place-container img {
-  cursor: pointer;
-}
-.fancybox a img {
-  width: 120px;
-}
-.pull-left {
-  float: none;
-}
-/* place */

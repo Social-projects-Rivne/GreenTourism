@@ -1,124 +1,213 @@
-<div class="container-fluid places">
-  <div class="row places">
-    <div class="col-xs-9 no-padding" id="main-content">
-      <div class="col-xs-12 no-padding" id="filter">
-        <!-- Filter container start -->
-        <div class="btn-group col-xs-12" role="group" id="buttons">
-          <div class="col-xs-1"></div>
-          <button type="button" class="btn btn-default col-xs-2 btn-first" ng-disabled="!$ctrl.user"
-              ng-click="$ctrl.toggleAddPlace();">Add place</button>
-          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Map type
+<div class="map-page-wrapper">
+  <div class="container">
+    <div class="row map-menu">
+      <div class="col-lg-3 col-md-2 col-sm-3 col-xs-12 map-menu-check-button">
+        <a href="" ng-click="$ctrl.defaultObject('placesIcon')">
+          <i class="fa fa-map-marker placesIcon" aria-hidden="true"></i></a>
+        <a href="" ng-click="$ctrl.defaultObject('tracksIcon')">
+          <i class="fa fa-random tracksIcon" aria-hidden="true"></i></a>
+        <a href="" ng-click="$ctrl.defaultObject('events')">
+          <i class="fa fa-calendar" aria-hidden="true"></i></a>
+      </div>
+      <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+        <div class="btn-group map-menu-buttons" role="group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              New Item
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
+            <ul class="dropdown-menu">
+              <li><a href="" >Add Place</a>
+              </li>
+              <li><a href="#">Add Track</a></li>
+              <li><a href="#">Add Event</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              Map Type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdownStop">
               <filter-map-type></filter-map-type>
             </ul>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterCategory">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Places
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              Categories
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
-              <a href="" id="{{placeType}}" class="list-group-item filter" ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
-                  ng-click="$ctrl.checkType(placeType)">
-                <img ng-src="{{placeTypeValue.icon}}"> {{placeTypeValue.name}}
-                <span></span>
-              </a>
-              <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
-                <img> Check all
-                <span></span>
-              </a>
+            <ul class="dropdown-menu dropdownStop">
+              <li class="dropdown-submenu places">
+                <a href="">Places</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+                      ng-click="$ctrl.checkType(placeType)">
+                    <a class="placeFilter {{placeType}}" href="">
+                      <img ng-src="{{placeTypeValue.icon}}">
+                      {{placeTypeValue.name}}
+                      <span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="placeFilter check-all-places" href=""
+                       ng-click="$ctrl.checkAllPlaces()">
+                      Check all
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu places">
+                <a href="">Tracks</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
+                      ng-click="$ctrl.showSpecificTracks(trackType)">
+                    <a class="trackFilter {{trackType}}" href="">
+                      <span style="background-color: {{trackTypeValue.color}};">
+                      &nbsp;
+                    </span>
+                      &nbsp;{{trackTypeValue.name}}
+                      <span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="trackFilter check-all-tracks" href=""
+                       ng-click="$ctrl.checkAllTracks()">
+                      Check all
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
-          <div id="tracks-filter" class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Tracks
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu col-xs-12 dropdownFilter">
-              <li ng-repeat="(type, typeObj) in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type)">
-                <a href="" class="active" id="{{type}}">
-                  <span class="col-xs-9" style="border-left: 5px solid {{typeObj.color}}">
-                    {{typeObj.name}}
-                  </span>
-                  <span id="gi{{type}}" class="col-xs-3 glyphicon glyphicon-ok">
-                  </span>
-                </a>
-              </li>
-              <li ng-click="$ctrl.checkAllTracks()">
-                <a href="" class="active" id="all-tracks">
-                  <span class="col-xs-9">
-                    Check all tracks
-                  </span>
-                  <span id="gi-all" class="col-xs-3 glyphicon glyphicon-ok">
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
-          <div class="col-xs-2"></div>
         </div>
       </div>
-      <!-- Filter container end -->
 
-      <!-- New place form -->
-      <div style="margin-top: 55px;" ng-show="$ctrl.addPlaceState">
-        <form name="addPlace" novalidate role="form" class="simple-form well">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" ng-model="$ctrl.newPlace.name" />
+      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-9 hidden-md hidden-lg">
+        <div class="btn-group map-menu-buttons" role="group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="" >Add Place</a>
+              </li>
+              <li><a href="#">Add Track</a></li>
+              <li><a href="#">Add Event</a></li>
+            </ul>
           </div>
-          <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" ng-model="$ctrl.newPlace.description" />
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-globe" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdownStop">
+              <filter-map-type></filter-map-type>
+            </ul>
           </div>
-          <div class="form-group">
-            <label for="latitude">Latitude:</label>
-            <input type="number" step="any" name="latitude" ng-model="$ctrl.newPlace.latitude"
-            />
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+                  ng-click="$ctrl.checkType(placeType)">
+                <a class="placeFilter {{placeType}}" href="">
+                  <img ng-src="{{placeTypeValue.icon}}">
+                  {{placeTypeValue.name}}
+                  <span></span>
+                </a>
+              </li>
+              <li>
+                <a class="placeFilter check-all-places" href=""
+                   ng-click="$ctrl.checkAllPlaces()">
+                  Check all
+                  <span></span>
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="form-group">
-            <label for="longitude">Longitude:</label>
-            <input type="number" step="any" name="longitude" ng-model="$ctrl.newPlace.longitude"
-            />
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-random" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
+                  ng-click="$ctrl.showSpecificTracks(trackType)">
+                <a class="trackFilter {{trackType}}" href="">
+                  <span style="background-color: {{trackTypeValue.color}};">
+                      &nbsp;
+                    </span>
+                  &nbsp;
+                  {{trackTypeValue.name}}
+                  <span></span>
+                </a>
+              </li>
+              <li>
+                <a class="trackFilter check-all-tracks" href=""
+                   ng-click="$ctrl.checkAllTracks()">
+                  Check all
+                  <span></span>
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="form-group">
-            <label for="type">Type:</label>
-            <input type="text" name="type" ng-model="$ctrl.newPlace.type" />
-          </div>
-          <input type="submit" ng-click="$ctrl.addNewPlace($ctrl.newPlace)" class="btn btn-default"
-              value="Submit" />
-        </form>
-        <pre>place = {{$ctrl.newPlace | json}}</pre>
+
+        </div>
       </div>
-      <!-- New place form end -->
 
-      <div class="col-xs-12 no-padding">
-        <!-- Map container start-->
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9 map-menu-search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Search</button>
+        </span>
+        </div>
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 map-menu-popular">
+        <div style="float: right;">
+        <a href="" ng-click="$ctrl.checkPopularPlaces()">
+          <i id="popularPlaces" class="fa fa-flag-o" aria-hidden="true"
+             title="Places in Location"></i></a>
+        <a href="" ng-click="$ctrl.checkPopularTracks()">
+          <i id="popularTracks" class="fa fa-map-signs" aria-hidden="true"
+             title="Tracks in Location"></i></a>
+          </div>
+      </div>
+
+
+
+    </div>
+    <div class="row">
+      <div class="mapwrapper">
         <div id="map"></div>
       </div>
-      <!-- Map container end-->
+      <div class="popular-places-div" ng-hide="$ctrl.hidePopularPlaces"></div>
+      <div class="popular-tracks-div" ng-hide="$ctrl.hidePopularTracks">
 
-      <popular-tracks></popular-tracks>
-    </div>
-    <div class="col-xs-3 no-padding" id="sidebar">
-      <div class="col-xs-12" id="search">
-        <div class="input-group col-xs-offset-1 col-xs-10">
-          <input class="form-control" type="text" name="search">
-          <span class="input-group-btn">
-            <button class="btn" type="button">Search</button>
-          </span>
-        </div>
-      </div>
-      <div class="col-xs-12 no-padding" id="popularPlaces">
-        <location-places places="$ctrl.places"></location-places>
       </div>
     </div>
   </div>
