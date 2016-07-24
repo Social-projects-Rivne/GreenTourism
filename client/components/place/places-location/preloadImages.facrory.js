@@ -1,24 +1,30 @@
 angular.module('locationPlaces')
   .factory('preloadImages', ['$q', function($q) {
-    return function(url) {
-      var deffered = $q.defer(),
+    return function(imagesArr) {
+      var deffered = $q.defer();
+      var counter=0;
+
+      imagesArr.forEach(function(place) {
+
         image = new Image();
 
-      image.src = url;
-      if (image.complete) {
+        image.src = place.photos[0];
+        if (image.complete) {
+          counter++;
+          console.log(counter);
+          if(counter>=imagesArr.length-1)
+          {
+           deffered.resolve();
+          }
 
-        deffered.resolve();
+        } else {
 
-      } else {
-        image.addEventListener('load', function() {
-          deffered.resolve();
-        });
 
-        image.addEventListener('error', function() {
-          deffered.reject();
-        });
-      }
-
+          image.addEventListener('error', function() {
+            deffered.reject();
+          });
+        }
+      });
       return deffered.promise;
     }
   }]);

@@ -35,18 +35,22 @@
     color: @brand-dark;
   }
   .place-container {
-    width:100%;
-    height:200px;
-    background-size:cover;
-    margin: 10px 5px;
-    padding: 3px 3px;
-    height: 155px;
+    background: url('http://loadinggif.com/images/image-selection/27.gif') center center no-repeat;
+    height: 170px;
     overflow: hidden;
     a.name-location {
       color: @brand-light;
       background-color: rgba(61, 162, 104, 0.5);
       position: absolute;
+      img{
+        width:14px;
+      }
     }
+
+  }
+  .place-container>img{
+    height: 160px;
+    width: 100%
   }
 }
 
@@ -55,7 +59,7 @@
 }
 
 #buttons {
-  margin: 10px 0;;
+  margin: 10px 0;
 }
 
 .btn-first {
