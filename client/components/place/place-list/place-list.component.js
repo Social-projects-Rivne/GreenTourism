@@ -104,6 +104,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         };
 
         function addExistingPointIntoNewTrack() {
+          var map = placesOnMap.map;
           var existingPoint = {
             name: '',
             _id: '',
@@ -119,6 +120,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           placesOnMap.newTrackPoints.push([existingPoint]);
           ctrl.newTrackPoints = placesOnMap.newTrackPoints;
           addNewTrackOnMap(newPointsForTrack);
+          if (newPointForTrack) {
+            map.removeLayer(newPointForTrack);
+          }
           console.log(placesOnMap.newTrackPoints);
           $scope.$digest();
         };
