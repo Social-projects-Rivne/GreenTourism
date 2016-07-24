@@ -6,6 +6,7 @@ angular.module('mapModule')
     var groups = [];
     var types = [];
     var places = [];
+    placesOnMap.places = [];
 
     var marker = function(lon, lat, icon) {
       return L.marker([lat, lon], {
@@ -42,7 +43,8 @@ angular.module('mapModule')
             .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
               '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
           newPlace.name = place.name;
-          newPlace.on('click', addNewTrack);
+          newPlace._id = place._id;
+          placesOnMap.places.push(newPlace);
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(placesOnMap.map);
@@ -53,7 +55,8 @@ angular.module('mapModule')
             .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
               '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
           newPlace.name = place.name;
-          newPlace.on('click', addNewTrack);
+          newPlace._id = place._id;
+          placesOnMap.places.push(newPlace);
         });
         for (var key in types) {
           mainGroup.checkIn(groups[key]);
@@ -146,7 +149,7 @@ angular.module('mapModule')
     };
 
     /* ** START add track factory ** */
-
+    placesOnMap.newTrackPoints = [];
     /*placesOnMap.removeNewMarker = function() {
       if (newMarker) {
         placesOnMap.map.removeLayer(newMarker);
@@ -161,7 +164,7 @@ angular.module('mapModule')
       placesOnMap.map.off('click', addNewTrack);
     };*/
 
-    function addNewTrack(e) {
+    function addNewTrackPoint(e) {
       console.log(this.name);
       
       console.log(e);

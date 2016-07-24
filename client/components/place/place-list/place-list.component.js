@@ -79,29 +79,89 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         ctrl.newTrack = angular.copy(constants.emptyTrackModel);
         ctrl.newTrackType = '';
         ctrl.formNewTrackSubmitted = false;
-        $scope.newTrackPoints = [[1, 2]];
-
-        /*$scope.$watch('newTrackPoints', function(newV, oldV) {
-          console.log(newV + ' ' + oldV);
-        });*/
+        ctrl.addPointMenuIsOpen = false;
+        ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
+        ctrl.newPointType = '';
+        var newTrack;
+        var newPointForTrack;
+        var newPointsForTrack = [];
 
         ctrl.toggleAddTrackMenu = function() {
           var map = placesOnMap.map;
           if (ctrl.addTrackMenuIsOpen) {
             ctrl.addTrackMenuIsOpen = false;
-            map.off('click', addNewTrack);
+            map.off('click', addNewTrackPoint);
+            placesOnMap.places.forEach(function(place) {
+              place.off('click', addExistingPointIntoNewTrack)
+            });
           } else {
             ctrl.addTrackMenuIsOpen = true;
-            map.on('click', addNewTrack);
+            map.on('click', addNewTrackPoint);
+            placesOnMap.places.forEach(function(place) {
+              place.on('click', addExistingPointIntoNewTrack)
+            });
           }
         };
 
-        function addNewTrack(e) {
-          $scope.$apply(function() {
-            $scope.newTrackPoints.push([e.latlng.lat, e.latlng.lng]);
-          })
+        function addExistingPointIntoNewTrack() {
+          var existingPoint = {
+            name: '',
+            _id: '',
+            location: {
+              coordinates: []
+            }
+          };
+          newPointsForTrack.push([this._latlng.lat, this._latlng.lng]);
+          existingPoint.name = this.name;
+          existingPoint._id = this._id;
+          existingPoint.location.coordinates[0] = this._latlng.lng;
+          existingPoint.location.coordinates[1] = this._latlng.lat;
+          placesOnMap.newTrackPoints.push([existingPoint]);
+          ctrl.newTrackPoints = placesOnMap.newTrackPoints;
+          addNewTrackOnMap(newPointsForTrack);
+          console.log(placesOnMap.newTrackPoints);
+          $scope.$digest();
+        };
 
-          //$scope.$digest();
+        function addNewTrackPoint(e) {
+          var map = placesOnMap.map;
+          ctrl.addPointMenuIsOpen = true;
+          ctrl.newPoint.location.coordinates[0] = e.latlng.lng;
+          ctrl.newPoint.location.coordinates[1] = e.latlng.lat;
+          if (newPointForTrack) {
+            map.removeLayer(newPointForTrack);
+          }
+          addNewPointOnMap(e.latlng.lat, e.latlng.lng);
+          $scope.$digest();
+        };
+
+        function addNewTrackOnMap(points) {
+          var map = placesOnMap.map;
+          if (newTrack) {
+            map.removeLayer(newTrack);
+          }
+          newTrack = L.polyline(points, {
+            color: '#000',
+            opacity: 1
+          }).addTo(map);
+        };
+
+        function addNewPointOnMap(lat, lon) {
+          var map = placesOnMap.map;
+          newPointForTrack = L.marker([lat, lon]).addTo(map);
+        };
+
+        ctrl.createNewPointForTrack = function(form) {
+          if (ctrl.newPoint.name && ctrl.newPointType != '') {
+            ctrl.newPoint.type = ctrl.newPointType;
+            ctrl.newPoint.owner = ctrl.user._id;
+            placesOnMap.newTrackPoints.push([ctrl.newPoint]);
+            newPointsForTrack.push([ctrl.newPoint.location.coordinates[1], ctrl.newPoint.location.coordinates[0]]);
+            newPointForTrack = null;
+            console.log(placesOnMap.newTrackPoints);
+            addNewTrackOnMap(newPointsForTrack);
+            ctrl.addPointMenuIsOpen = false;
+          }
         };
 
         ctrl.createNewTrack = function(form) {

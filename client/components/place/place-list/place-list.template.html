@@ -146,9 +146,38 @@
       <form name="trackMaker">
         <div class="col-xs-12">
           <span class="title">1. Choose places on map:</span><br>
-          <span id="points">
-            <div ng-repeat="point in newTrackPoints">{{$index+1}}</div>
-          </span>
+          <div id="points">
+            <div ng-repeat="point in $ctrl.newTrackPoints">{{$index + 1 + '. ' + point[0].name}}</div>
+          </div>
+          <div id="new-point-menu" ng-if="$ctrl.addPointMenuIsOpen">
+            <h3>New Point</h3>
+            <form name="pointMaker">
+              <div class="form-group col-xs-6">
+                <label for="pointName"><span class="title">Point name:</span></label>
+                <input type="text" name="newPointName" class="form-control" ng-model="$ctrl.newPoint.name" ng-required="true">
+                <div ng-show="">
+                  <span class="alert-input" ng-show="">Please enter Point name!</span>
+                </div>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="newPointType"><span class="title">Point type:</span></label>
+                <select name="newPointType" class="form-control" ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
+                  ng-model="$ctrl.newPointType" ng-required="true">
+                  <option value="">-- Point type --</option>
+                </select>
+                <div ng-show="">
+                  <span class="alert-input" ng-show="">Please select place type!</span>
+                </div>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="newPointDescription"><span class="title">Point description (optional):</span></label>
+                <textarea name="newPointDescription" class="form-control" ng-model="$ctrl.newPoint.description"></textarea>
+              </div>
+              <div class="form-group col-xs-12">
+                <input type="button" class="btn btn-success col-xs-12" ng-click="$ctrl.createNewPointForTrack()" value="Create New Point for Track"> 
+              </div>
+            </form>
+          </div>
           <span class="alert-input" ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTrack.location.coordinatest">Track must have at least two points!</span>
         </div>
         <div class="form-group col-xs-12">
