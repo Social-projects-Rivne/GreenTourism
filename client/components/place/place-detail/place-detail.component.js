@@ -17,7 +17,7 @@ angular.module('placeDetail', ['comment'])
         zoom: constants.defaultZoom
       });
       this.map.touchZoom.disable();
-      this.map.dragging.disable();
+     // this.map.dragging.disable();
       this.map.scrollWheelZoom.disable();
       var layerStreet = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
