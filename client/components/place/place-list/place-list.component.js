@@ -1,8 +1,10 @@
 angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'currentUser', 'constants',
-      function(placesOnMap, mapMarkingTypes, Place, Track, currentUser, constants) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
+      'currentUser', 'constants', 'Restangular',
+      function(placesOnMap, mapMarkingTypes, Place, Track,
+               currentUser, constants, Restangular) {
         var ctrl = this;
         var places = [];
         var tracks = [];
@@ -11,7 +13,71 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var placeTypeLength;
         var trackTypeLength;
 
+        ctrl.addPlaceMenuIsOpen = false;
+        ctrl.coordsForNewPlace = placesOnMap.coords;
+
         ctrl.user = currentUser;
+
+        // -----START ADD Place-----
+        ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
+        ctrl.newPlaceType = '';
+        ctrl.newPlacePhoto = '';
+        ctrl.formNewPlaceSubmitted = false;
+
+        ctrl.toggleAddPlaceMenu = function() {
+          if (ctrl.addPlaceMenuIsOpen) {
+            placesOnMap.closeAddPlaceMenu();
+            ctrl.addPlaceMenuIsOpen = false;
+          } else {
+            placesOnMap.openAddPlaceMenu();
+            ctrl.addPlaceMenuIsOpen = true;
+          }
+        };
+
+        ctrl.createNewPlace = function(form) {
+          var addPlaceForm = angular.element('form[name="placeMaker"]');
+          var checkActiveType;
+          var newPlaces = [];
+          ctrl.coordsIsDefined = placesOnMap.coordsIsDefined;
+          ctrl.formNewPlaceSubmitted = true;
+          if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
+            ctrl.newPlace.type = ctrl.newPlaceType;
+            ctrl.newPlace.owner = ctrl.user._id; // TODO: move into server-side
+            ctrl.newPlace.location.coordinates = placesOnMap.coords;
+            newPlaces.push(ctrl.newPlace);
+            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
+              '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
+              ctrl.newPlace.address = result.display_name;
+              Place.post(ctrl.newPlace).then(function() {
+                checkActiveType = angular.element('.' + ctrl.newPlace.type + ' span');
+                if (checkActiveType.hasClass(constants.checkedClass)) {
+                  placesOnMap.showPlaces(newPlaces);
+                } else {
+                  ctrl.checkType(ctrl.newPlace.type);
+                }
+                ctrl.resetAddPlaceForm(form);
+              });
+            });
+          }
+        };
+
+        ctrl.resetAddPlaceForm = function(form) {
+          var newPlaceLongitude = angular.element('#longitude');
+          var newPlaceLatitude = angular.element('#latitude');
+          if (form) {
+            ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
+            ctrl.newPlaceType = '';
+            form.$setPristine();
+            form.$setUntouched();
+            ctrl.formNewPlaceSubmitted = false;
+            newPlaceLongitude.text('');
+            newPlaceLatitude.text('');
+            placesOnMap.coords = [];
+            placesOnMap.coordsIsDefined = false;
+            placesOnMap.removeNewMarker();
+          }
+        };
+        // -----END ADD Place-----
 
         // ---START---- Icons for default settings on places and Tracks
         ctrl.defaultObject = function(objectType) {
@@ -47,7 +113,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             ctrl.hidePopularPlaces = true;
           } else {
             popularPlacesIcon.addClass(constants.checkedClass);
-            angular.element('#popularTracks').removeClass(constants.checkedClass);
+            angular.element('#popularTracks')
+              .removeClass(constants.checkedClass);
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
           }
@@ -60,7 +127,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             ctrl.hidePopularTracks = true;
           } else {
             popularTracksIcon.addClass(constants.checkedClass);
-            angular.element('#popularPlaces').removeClass(constants.checkedClass);
+            angular.element('#popularPlaces')
+              .removeClass(constants.checkedClass);
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
           }
@@ -76,14 +144,17 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: constants.placesOnLoad, limit: 100}).then(function(result) {
-          placeCounter = 1;
-          places = result.concat(places);
-          placesOnMap.showPlaces(result, constants.placesOnLoad);
-          angular.element('.' + constants.placesOnLoad + ' span').addClass(constants.checkedSpanClass);
-          angular.element('.placesIcon').addClass(constants.checkedClass);
-          angular.element('#Streets span').addClass(constants.checkedSpanClass);
-        });
+        Place.getList({type: constants.placesOnLoad, limit: 100})
+          .then(function(result) {
+            placeCounter = 1;
+            places = result.concat(places);
+            placesOnMap.showPlaces(result, constants.placesOnLoad);
+            angular.element('.' + constants.placesOnLoad + ' span')
+              .addClass(constants.checkedSpanClass);
+            angular.element('.placesIcon').addClass(constants.checkedClass);
+            angular.element('#Streets span')
+              .addClass(constants.checkedSpanClass);
+          });
         // ----END---- ShowPlacesOnLoad
 
         // ----START---- FilterByOneOfType
@@ -92,7 +163,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (checkPlace.hasClass(constants.checkedSpanClass)) {
             placeCounter--;
             checkPlace.removeClass(constants.checkedSpanClass);
-            angular.element('.check-all-places span').removeClass(constants.checkedSpanClass);
+            angular.element('.check-all-places span')
+              .removeClass(constants.checkedSpanClass);
             placesOnMap.removePlaces(input);
             places = places.filter(function(place) {
               return place.type !== input;
@@ -102,7 +174,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             checkPlace.addClass(constants.checkedSpanClass);
 
             if (placeCounter === placeTypeLength)
-              angular.element('.check-all-places span').addClass(constants.checkedSpanClass);
+              angular.element('.check-all-places span')
+                .addClass(constants.checkedSpanClass);
 
             Place.getList({type: input, limit: 100}).then(function(result) {
               places = result.concat(places);
@@ -123,7 +196,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (input) checkAllPlaces.addClass(constants.checkedSpanClass);
           if (checkAllPlaces.hasClass(constants.checkedSpanClass)) {
             placeCounter = 0;
-            angular.element('.placeFilter span').removeClass(constants.checkedSpanClass);
+            angular.element('.placeFilter span')
+              .removeClass(constants.checkedSpanClass);
             angular.element('.placesIcon').removeClass(constants.checkedClass);
             placesOnMap.removePlaces();
             places = [];
@@ -131,7 +205,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             placeCounter = placeTypeLength;
             placesOnMap.removePlaces();
             places = [];
-            angular.element('.placeFilter span').addClass(constants.checkedSpanClass);
+            angular.element('.placeFilter span')
+              .addClass(constants.checkedSpanClass);
             angular.element('.placesIcon').addClass(constants.checkedClass);
 
             Place.getList({limit: 100}).then(function(result) {
@@ -151,15 +226,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
         });
 
-        /* START tracks controller ***/
+        // *** START tracks controller ***
         ctrl.tracksType = mapMarkingTypes.tracks;
         trackTypeLength = Object.keys(ctrl.tracksType).length;
         Track.getList().then(function(result) {
           trackCounter = trackTypeLength;
           tracks = result;
           placesOnMap.showTracks(tracks);
-          angular.element('.trackFilter span:last-child').addClass(constants.checkedSpanClass);
-          angular.element('.tracksIcon').addClass(constants.checkedClass);
         });
 
         ctrl.showSpecificTracks = function(tracksType) {
@@ -167,14 +240,16 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
           if (element.hasClass(constants.checkedSpanClass)) {
             element.removeClass(constants.checkedSpanClass);
-            angular.element('.check-all-tracks span').removeClass(constants.checkedSpanClass);
+            angular.element('.check-all-tracks span')
+              .removeClass(constants.checkedSpanClass);
             trackCounter--;
             placesOnMap.removeTracks(tracksType);
           } else {
             element.addClass(constants.checkedSpanClass);
             trackCounter++;
             if (trackCounter === trackTypeLength)
-              angular.element('.check-all-tracks span').addClass(constants.checkedSpanClass);
+              angular.element('.check-all-tracks span')
+                .addClass(constants.checkedSpanClass);
 
             Track.getList({type: tracksType}).then(function(result) {
               tracks = result;
@@ -193,12 +268,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (input) checkAllTracks.addClass(constants.checkedSpanClass);
           if (checkAllTracks.hasClass(constants.checkedSpanClass)) {
             trackCounter = 0;
-            angular.element('.trackFilter span').removeClass(constants.checkedSpanClass);
+            angular.element('.trackFilter span')
+              .removeClass(constants.checkedSpanClass);
             angular.element('.tracksIcon').removeClass(constants.checkedClass);
             placesOnMap.removeAllTracks();
           } else {
             trackCounter = trackTypeLength;
-            angular.element('.trackFilter span:last-child').addClass(constants.checkedSpanClass);
+            angular.element('.trackFilter span:last-child')
+              .addClass(constants.checkedSpanClass);
             angular.element('.tracksIcon').addClass(constants.checkedClass);
 
             Track.getList().then(function(result) {
@@ -207,5 +284,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             });
           }
         };
+        // *** END tracks controller ***
       }]
   });

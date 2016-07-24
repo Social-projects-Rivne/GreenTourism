@@ -10,5 +10,18 @@ angular.module('greenTourism')
     constants.checkedSpanClass = 'glyphicon glyphicon-ok';
     constants.checkedClass = 'checked';
     constants.placesOnLoad = 'featured';
+    constants.emptyPlaceModel = {
+      name: '',
+      type: '',
+      description: '',
+      location: {
+        type: 'Point',
+        coordinates: []
+      },
+      photos: [],
+      owner: '',
+      rate: 0,
+      address: ''
+    };
     return constants;
   });

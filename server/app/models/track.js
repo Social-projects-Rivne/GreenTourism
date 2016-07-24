@@ -27,10 +27,7 @@ var TrackSchema = new Schema({
     ref: 'User',
     required: true
   },
-  location: {
-    type: locSchema,
-    required: true
-  },
+  location: locSchema,
   description: String,
   trackRate: Number,
   likes: [Schema.Types.ObjectId],
