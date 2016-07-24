@@ -31,9 +31,9 @@
 
       </div>
       <div class="col-lg-4 col-md-4 col-xs-12 gallery">
-        <a id="firstimg" class="fancybox first" rel="gallery1" href="{{$ctrl.place.photos[0]}}"
+        <a id="firstimg" class="fancybox first" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}"
            title="{{$ctrl.place.name}}">
-          <img src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
+          <img ng-src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
         </a>
 
         <!--
