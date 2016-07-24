@@ -4,8 +4,7 @@
   padding: 0;
 }
 
-#sidebar,
-#main-content {
+#sidebar, #main-content {
   max-height: 1000px;
   text-align: center;
   overflow: hidden;
@@ -14,7 +13,7 @@
 #sidebar {
   text-align: center;
   overflow: hidden;
-  border-left: 1px solid @light-green;
+
 }
 
 #search {
@@ -31,16 +30,28 @@
   padding: 0;
 }
 
-.place-container {
-  margin: 5px;
-  height: 240px;
-  border: 1px solid #000;
-  overflow: hidden;
+#locationPlaces {
+  h2 {
+    color: @brand-dark;
+  }
+  .place-container {
+    width:100%;
+    height:200px;
+    background-size:cover;
+    margin: 10px 5px;
+    padding: 3px 3px;
+    height: 155px;
+    overflow: hidden;
+    a.name-location {
+      color: @brand-light;
+      background-color: rgba(61, 162, 104, 0.5);
+      position: absolute;
+    }
+  }
 }
 
 #filter {
   height: auto;
-  border-bottom: 1px solid @light-green;
 }
 
 #buttons {
@@ -48,11 +59,11 @@
 }
 
 .btn-first {
-  border-radius: 5px 0 0 5px !important;
+  border-radius: 5px 0 0 5px;
 }
 
 .btn-last {
-  border-radius: 0 5px 5px 0 !important;
+  border-radius: 0 5px 5px 0;
 }
 
 #map {
@@ -79,30 +90,3 @@
 .marker-image {
   width: 150px;
 }
-div.place {
-  margin: 10px;
-}
-.place-container img {
-  width: 250px;
-}
-.place img {
-  width: 130px;
-  padding-bottom: 5px;
-}
-.place .img_modal {
-  width: 550px;
-}
-.place img.profile {
-  width: 80px;
-  height: 80px;
-}
-.place-container img {
-  cursor: pointer;
-}
-.fancybox a img {
-  width: 120px;
-}
-.pull-left {
-  float: none;
-}
-/* place */

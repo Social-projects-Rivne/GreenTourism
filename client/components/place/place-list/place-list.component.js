@@ -24,6 +24,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
           placesOnMap.showPlaces(result, constants.placesOnLoad);
           angular.element('#' + constants.placesOnLoad + ' span').addClass(constants.checkedClass);
           angular.element('#Streets span').addClass(constants.checkedClass);
+          placesOnMap.setPlaceArr(places);
         });
         //----END---- ShowPlacesOnLoad
 
@@ -48,6 +49,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             Place.getList({type: input}).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(result, input);
+
             });
           }
         };
@@ -83,6 +85,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
             e.stopPropagation();
           }
         });
+
 
         /*** START tracks controller ***/
         var activeLiCounter = 4;
