@@ -11,13 +11,7 @@
   text-align: center;
   left: 107px;
 }
-.login {
-  left: 0;
-  top: 167px;
-  background-color: @brand-light;
-  width: 250px;
-}
-.signup {
+.login, .signup {
   left: 0;
   top: 167px;
   background-color: @brand-light;
@@ -43,27 +37,13 @@
   margin-top: 60px;
 }
 .registration{
+  input:focus {
+    border: 3px solid green;
+  }
   input {
+    border: 1px solid green;
     margin-top: -5px;
     margin-bottom: 0;
-  }
-  input[type=text]:focus {
-    border: 3px solid green;
-  }
-  input[type=text] {
-    border: 1px solid green;
-  }
-  input[type=email]:focus {
-    border: 3px solid green;
-  }
-  input[type=email] {
-    border: 1px solid green;
-  }
-  input[type=password]:focus {
-    border: 3px solid green;
-  }
-  input[type=password] {
-    border: 1px solid green;
   }
   hr {
     border-color: @brand-dark;
