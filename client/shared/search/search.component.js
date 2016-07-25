@@ -1,12 +1,15 @@
 angular.module('greenTourism')
   .component('searchPlace', {
     templateUrl: 'shared/search/search.template.html',
-    controller:['Place', function (Place) {
-      /*
-       It will be search code here
-       Place.getList({name: [input. name]}).then(function (result) {
-       console.log("search="+result);
-       });*/
+    controller: ['Search', function SearchCtrl(Search) {
 
+      this.searchPlace = function(searchname) {
+        var searchBy = 'place';
+        //Place.getList({name: [input. name]}).then(function (result)
+        Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(result) {
+          console.log("SEARCH");
+          console.log(result);
+        });
+      }
     }]
   });
