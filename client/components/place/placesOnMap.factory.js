@@ -49,7 +49,7 @@ angular.module('mapModule')
               '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
           newPlace.name = place.name;
           newPlace._id = place._id;
-          placesOnMap.places.push(newPlace);
+          placesOnMap.places[place.type].push(newPlace);
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(placesOnMap.map);
@@ -61,7 +61,7 @@ angular.module('mapModule')
               '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
           newPlace.name = place.name;
           newPlace._id = place._id;
-          placesOnMap.places.push(newPlace);
+          placesOnMap.places[place.type].push(newPlace);
         });
         for (var key in types) {
           mainGroup.checkIn(groups[key]);
@@ -78,10 +78,14 @@ angular.module('mapModule')
       if (input) {
         mainGroup.checkOut(groups[input]);
         groups[input].clearLayers();
+        placesOnMap.places[input] = [];
       } else {
         for (var key in types) {
           mainGroup.checkOut(groups[key]);
           groups[key].clearLayers();
+        }
+        for (var key2 in placesOnMap.places) {
+          placesOnMap.places[key2] = [];
         }
       }
     };

@@ -26,12 +26,9 @@ angular.module('greenTourism')
       name: '',
       type: '',
       description: '',
-      location: {
-        type: 'LineString',
-        coordinates: []
-      },
+      places: [],
       photos: [],
-      userId: ''
+      owner: ''
     };
 
     return constants;
