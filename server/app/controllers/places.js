@@ -2,7 +2,7 @@ var mongo = require('../helpers/mongo-queries');
 var Place = require('mongoose').model('Place');
 
 exports.list = function(req, res) {
-  mongo.find(res, Place);
+  mongo.find(res, Place, req.query);
 };
 
 exports.show = function(req, res) {
