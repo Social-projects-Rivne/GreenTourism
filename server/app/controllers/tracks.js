@@ -1,3 +1,4 @@
+var mongo = require('../helpers/mongo-queries');
 var Track = require('mongoose').model('Track');
 
 exports.list = function(req, res) {
@@ -49,33 +50,39 @@ exports.list = function(req, res) {
 };
 
 exports.show = function(req, res) {
-  Track.findById(req.params.id, function(err, record) {
-    if (err) {
-      res.status(404).json(err);
-    } else {
-      res.json(record);
-    }
-  });
+  mongo.findById(res, Track, req.params.id);
 };
 
 exports.create = function(req, res) {
   var record = new Track(req.body);
 
+  record.owner = req.user._id;
+
   record.save(function(err) {
     if (err) {
-      res.status(400).json(err);
-    } else {
-      res.status(201).json({message: 'Record was successfully created!',
-                record: record});
+      return res.status(400).json(err);
     }
+
+    return res.status(201).json({
+      message: 'Record was successfully created!',
+      record: record
+    });
   });
 };
 
 exports.update = function(req, res) {
-  Track.findById(req.params.id, function(err, record) {
-    if (err) {
-      res.status(400).json(err);
-    } else {
+  if (req.user.role === 'admin') {
+    mongo.update(res, Track, req.params.id, req.body);
+  } else { // eslint-disable-line eqeqeq
+    mongo.update(res, Track, req.user._id, req.body, function(err, record) {
+      if (record.owner !== req.user._id) {
+        return res.sendStatus(403);
+      }
+
+      if (err) {
+        return res.status(400).json(err);
+      }
+
       for (var key in req.body) {
         if ({}.hasOwnProperty.call(req.body, key)) {
           record.set(key, req.body[key]);
@@ -84,23 +91,40 @@ exports.update = function(req, res) {
 
       record.save(function(err) {
         if (err) {
-          res.status(400).json(err);
-        } else {
-          res.json(record);
+          return res.status(400).json(err);
         }
+
+        return res.json({
+          message: 'Record ' + req.params.id + ' was successfully updated',
+          record: record
+        });
       });
-    }
-  });
+    });
+  }
 };
 
 exports.delete = function(req, res) {
-  Track.findByIdAndRemove(req.params.id, function(err) {
-    if (err) {
-      res.status(400).json(err);
-    } else {
-      res.json({message: 'Record ' + req.params.id +
-                ' was successfully deleted'});
-    }
-  });
-};
+  if (req.user.role === 'admin') {
+    mongo.remove(res, Track, req.params.id);
+  } else { // eslint-disable-line eqeqeq
+    Track.findById(req.params.id, function(err, record) {
+      if (record.owner !== req.user._id) {
+        return res.sendStatus(403);
+      }
 
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      record.remove(function(err) {
+        if (err) {
+          return res.status(400).json(err);
+        }
+
+        return res.json({
+          message: 'Record ' + req.params.id + ' was successfully deleted'
+        });
+      });
+    });
+  }
+};
