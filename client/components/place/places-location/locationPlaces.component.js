@@ -21,8 +21,8 @@ function locationplacesCtrl(mapFactory, $scope, $rootScope, placesOnMap, constan
     var placesArr = ctrl.places;
 
     $scope.placesByLocation = placesArr.filter(function(place) {
-        latitude = place.location.coordinates[0];
-        longitude = place.location.coordinates[1];
+        latitude = place.location.coordinates[1];
+        longitude = place.location.coordinates[0];
         return (latitude > min.lat && longitude > min.lng
           && latitude < max.lat && longitude < max.lng) && place.photos[0];
       }
@@ -32,11 +32,9 @@ function locationplacesCtrl(mapFactory, $scope, $rootScope, placesOnMap, constan
     $scope.placesByLocation = $scope.placesByLocation.slice($scope.placesByLocation.length - numberOfPopularPlaces, $scope.placesByLocation.length);
     if ($scope.placesByLocation.length == 0)
       $scope.placesByLocation = ctrl.popularPlaces;
-    $timeout(function() {
 
       $scope.$apply();
 
-    }, 250);
   }
 
   this.placesFilter = function(value) {

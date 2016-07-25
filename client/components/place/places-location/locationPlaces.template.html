@@ -7,8 +7,8 @@
     </a>
     <a class="name-location" ng-href="#!/places/{{place.id}}" style="top: 0px; right:15px;">{{place.name}}</a>
     <a class="name-location" ng-href="#!/places/{{place.id}}" style="bottom: 10px; right:15px;">
-      <img src="assets/img/places/marker/green.png">
-      {{(place.location.coordinates[0] | number:4)}}, {{place.location.coordinates[1] | number:4}}
+      <img class="marker" src="assets/img/places/marker/green.png">
+      {{(place.location.coordinates[1] | number:4)}}, {{place.location.coordinates[0] | number:4}}
     </a>
 
   </div>
