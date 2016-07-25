@@ -3,8 +3,16 @@ angular.module('user').component('userProfile', {
   bindings: {
     user: '<'
   },
-  controller: ['$location', function($location) {
+  controller: ['$location', 'User', function($location, User) {
     var ctrl = this;
+
+    ctrl.user.customGET('places', {limit: 10}).then(function(places) {
+      ctrl.places = places;
+    });
+
+    ctrl.user.customGET('tracks', {limit: 10}).then(function(tracks) {
+      ctrl.places = tracks;
+    });
 
     // User editing
     ctrl.editMode = false;

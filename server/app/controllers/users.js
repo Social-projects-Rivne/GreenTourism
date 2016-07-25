@@ -42,13 +42,13 @@ exports.delete = function(req, res) {
 };
 
 exports.listPlaces = function(req, res) {
-  req.query.owner = req.user._id;
+  req.query.owner = req.params.id;
 
   mongo.find(res, Place, req.query);
 };
 
 exports.listTracks = function(req, res) {
-  req.query.owner = req.user._id;
+  req.query.owner = req.params.id;
 
   mongo.find(res, Track, req.query);
 };

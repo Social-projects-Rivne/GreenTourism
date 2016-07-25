@@ -68,9 +68,43 @@
       </div>
       <div ng-show="$ctrl.isSelected(2)">
         <h1 class="page-header">My Points</h1>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="place in $ctrl.places">
+            <div class="row">
+              <div class="col-sm-3">
+                <img ng-src="{{place.photos[0]}}" alt="Place image" class="img-responsive" />
+              </div>
+              <div class="col-sm-9">
+                <h4 class="list-group-item-heading">
+                  <a ng-href="#!/places/{{place._id}}">{{place.name}}</a>
+                </h4>
+                <p class="list-group-item-text">
+                  {{place.description}}
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <div ng-show="$ctrl.isSelected(3)">
         <h1 class="page-header">My Tracks</h1>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="track in $ctrl.tracks">
+            <div class="row">
+              <div class="col-sm-3">
+                <img ng-src="{{track.photos[0]}}" alt="Track image" class="img-responsive" />
+              </div>
+              <div class="col-sm-9">
+                <h4 class="list-group-item-heading">
+                  <a ng-href="#!/tracks/{{track._id}}">{{track.name}}</a>
+                </h4>
+                <p class="list-group-item-text">
+                  {{track.description}}
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <div ng-show="$ctrl.isSelected(4)">
         <h1 class="page-header">Favorite Events</h1>
