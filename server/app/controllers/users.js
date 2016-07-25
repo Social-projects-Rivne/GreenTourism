@@ -1,40 +1,51 @@
-var mongo = require('../helpers/mongo-queries');
 var User = require('mongoose').model('User');
+var defaultController = require('./default-crud-controller')(User);
 
-exports.list = function(req, res) {
-  mongo.find(res, User);
+exports.list = defaultController.list;
+
+exports.getById = function(req, res, next, id) {
+  var projection = [
+    '-password',
+    '-provider',
+    '-providerId',
+    '-providerData',
+    '-createdAt',
+    '-updatedAt',
+    '-role'
+  ].join(' ');
+
+  User.findById(id, projection, function(err, record) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+
+    req.record = record;
+    next();
+  });
 };
 
-exports.show = function(req, res) {
-  var projection = '-password -provider -providerId -providerData -createdAt' +
-    ' -updatedAt -role';
-
-  if (req.user.role === 'admin') {
-    mongo.findById(res, User, req.params.id, projection);
-  } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
-    mongo.findById(res, User, req.user._id, projection);
-  }
-};
+exports.show = defaultController.show;
 
 exports.showMe = function(req, res) {
-  var projection = '-password -provider -providerId -providerData -createdAt' +
-    ' -updatedAt -role';
+  var projection = [
+    '-password',
+    '-provider',
+    '-providerId',
+    '-providerData',
+    '-createdAt',
+    ' -updatedAt',
+    '-role'
+  ].join(' ');
 
-  mongo.findById(res, User, req.user._id, projection);
+  User.findById(req.user._id, projection, function(err, record) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+
+    return res.json(record);
+  });
 };
 
-exports.update = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.update(res, User, req.params.id, req.body);
-  } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
-    mongo.update(res, User, req.user._id, req.body);
-  }
-};
+exports.update = defaultController.update;
 
-exports.delete = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.remove(res, User, req.params.id);
-  } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
-    mongo.remove(res, User, req.user._id);
-  }
-};
+exports.delete = defaultController.delete;

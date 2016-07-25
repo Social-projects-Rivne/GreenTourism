@@ -15,4 +15,6 @@ router.route('/:id')
   .put(auth.isCurrentUser, controller.update)
   .delete(auth.isCurrentUser, controller.delete);
 
+router.param('id', controller.getById);
+
 module.exports = router;

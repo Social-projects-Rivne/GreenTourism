@@ -30,6 +30,20 @@ exports.isCurrentUser = function(req, res, next) {
   }
 };
 
+exports.isOwner = function(req, res, next) {
+  if (isAuthenticated(req, res)) {
+    if (req.user.role === 'admin') {
+      next();
+    } else if (req.record.owner.id !== req.user._id) {
+      return res.status(403).json({
+        message: 'User is not authorized'
+      });
+    }
+
+    next();
+  }
+};
+
 exports.isAdmin = function(req, res, next) {
   if (isAuthenticated(req, res)) {
     if (req.user.role !== 'admin') {
