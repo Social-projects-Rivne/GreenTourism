@@ -42,5 +42,21 @@ angular.module('greenTourism')
         color: '#0aff0a'
       }
     };
+
+    types.events = {
+      bicycle: {
+        name: 'Game',
+        color: 'assets/img/events/marker/green.png'
+      },
+      car: {
+        name: 'Festival',
+        color: 'assets/img/events/marker/red.png'
+      },
+      walking: {
+        name: 'Meeting',
+        color: 'assets/img/events/marker/blue.png'
+      }
+    };
+
     return types;
   });

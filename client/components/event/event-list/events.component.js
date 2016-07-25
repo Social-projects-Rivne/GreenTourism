@@ -1,22 +1,18 @@
 angular.module('eventList', [])
-  .component('eventList', {
-    templateUrl: 'components/event/event-list/event-list.template.html',
-    controller: ['$scope', '$http', 'eventListService', function($scope, $http, eventListService) {
-      $scope.eventL = eventListService.th;
-      $scope.eventL.mainControllerName = 'Events';
-      $scope.eventL.date_current = new Date();
-
-      this.data = $http.get('components/event/event-list/event.data.json').success(function(data) {
-        $scope.eventListService = data;
-        $scope.eventL.event = data;
-
-        return data;
-      }, function(data) {
-        console.log('Error : Could not load JSON Event in angular.module - event ');
-        return 'error';
-      });
-
-      $scope.give_event = eventListService.th;
-      this.danni = $scope.give_event.event;
-    }]
-  });
+    .component('eventList', {
+        templateUrl: 'components/event/event-list/event-list.template.html',
+        controller: ['$scope', '$http', 'calendarService', 'Place', 'Event', function ($scope, $http, calendarService, Place, Event) {
+            $scope.calendars = calendarService.th;
+            $scope.calendars.click = function () {
+                console.log(' Wau !!! ');
+                Event.getList().then(function (result) {
+                    $scope.calendars.events = result.concat(event);
+                    $scope.dann = $scope.calendars.events.filter(function (eve) {
+                        return new Date(eve.date_start) >= $scope.calendars.values[0] && new Date(eve.date_end) <= $scope.calendars.values[1];
+                    });
+                    console.log($scope.dan);
+                });
+            };
+            $scope.calendars.click();
+  }]
+    });
