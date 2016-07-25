@@ -71,7 +71,7 @@
     color: @brand-dark;
   }
   @media (max-width: 767px) {
-    padding-top: 200px;
+    padding-top: 160px;
   }
 }
 
@@ -100,6 +100,10 @@
     @media (max-width: 767px) {
       margin-bottom: 10px;
     }
+    @media (max-width: 530px) {
+      padding-right: 0;
+      padding-left: 5px;
+    }
   }
   .map-menu-popular {
     padding-top: 5px;
@@ -122,51 +126,60 @@
       padding-left: 0;
     }
   }
-  .map-menu-buttons {
-    button {
-      color: @brand-dark;
-      border: 1px solid @brand-dark;
-    }
-    .dropdown-menu {
-      padding: 0;
-      border: 1px solid @brand-dark;
-      li {
-        border-bottom: 1px solid @brand-dark;
-        padding: 5px 0;
-        &:hover {
-          background-color: #f8f8f8;
-          border-radius: 4px;
-        }
-        &:last-child {
-          border-bottom: none;
-        }
-        a {
-          color: @brand-dark;
-          background-color: transparent;
-        }
+  .map-menu-buttons-wrapper {
+    .map-menu-buttons {
+      button {
+        color: @brand-dark;
+        border: 1px solid @brand-dark;
       }
-      & filter-map-type li a {
-        display: block;
-        text-decoration: none;
-        padding: 3px 20px;
-        span {
-          float: right;
+      .dropdown-menu {
+        padding: 0;
+        border: 1px solid @brand-dark;
+        li {
+          border-bottom: 1px solid @brand-dark;
+          padding: 5px 0;
+          &:hover {
+            background-color: #f8f8f8;
+            border-radius: 4px;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          a {
+            color: @brand-dark;
+            background-color: transparent;
+          }
         }
-      }
-      &.place-mobile {
-        li a {
-          padding: 3px 10px;
-          span:last-child {
+        & filter-map-type li a {
+          display: block;
+          text-decoration: none;
+          padding: 3px 20px;
+          span {
             float: right;
           }
-          img {
-            width: 10px;
+        }
+        &.place-mobile {
+          left: auto;
+          right: 0;
+          li a {
+            padding: 3px 10px;
+            span:last-child {
+              float: right;
+            }
+            img {
+              width: 10px;
+            }
           }
         }
       }
+
     }
     @media (max-width: 767px) {
       margin-bottom: 10px;
+    }
+    @media (max-width: 348px) {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   .map-menu-search {
@@ -234,6 +247,11 @@
   #map {
     height: 100%;
     width: 100%;
+    @media (max-width: 767px) {
+      .leaflet-control-zoom {
+        display: none;
+      }
+    }
   }
 }
 
@@ -260,7 +278,7 @@
     font-size: 25px;
     color: @light-green;
     @media (max-width: 767px) {
-      top: 200px;
+      top: 160px;
     }
   }
   h2 {
