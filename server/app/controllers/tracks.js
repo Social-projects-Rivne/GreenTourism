@@ -1,15 +1,9 @@
-var mongo = require('../helpers/mongo-queries');
 var Track = require('mongoose').model('Track');
+var defaultController = require('./default-crud-controller')(Track);
+var sliceQueryOptions = require('../helpers/slice-query-options');
 
 exports.list = function(req, res) {
-  var limit = req.query.limit;
-  delete req.query.limit;
-
-  var sort = req.query.sort;
-  delete req.query.sort;
-
-  var skip = req.query.skip;
-  delete req.query.skip;
+  var queryAndOptions = sliceQueryOptions(req.query);
 
   var location = req.query.location;
   delete req.query.location;
@@ -37,7 +31,7 @@ exports.list = function(req, res) {
       }
     });
   } else {
-    Track.find(req.query, null, {limit: limit, skip: skip, sort: sort},
+    Track.find(queryAndOptions.query, null, queryAndOptions.options,
       function(err, records) {
         if (err) {
           res.status(400).json(err);
@@ -49,82 +43,12 @@ exports.list = function(req, res) {
   }
 };
 
-exports.show = function(req, res) {
-  mongo.findById(res, Track, req.params.id);
-};
+exports.create = defaultController.create;
 
-exports.create = function(req, res) {
-  var record = new Track(req.body);
+exports.getById = defaultController.getById;
 
-  record.owner = req.user._id;
+exports.show = defaultController.show;
 
-  record.save(function(err) {
-    if (err) {
-      return res.status(400).json(err);
-    }
+exports.update = defaultController.update;
 
-    return res.status(201).json({
-      message: 'Record was successfully created!',
-      record: record
-    });
-  });
-};
-
-exports.update = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.update(res, Track, req.params.id, req.body);
-  } else { // eslint-disable-line eqeqeq
-    mongo.update(res, Track, req.user._id, req.body, function(err, record) {
-      if (record.owner !== req.user._id) {
-        return res.sendStatus(403);
-      }
-
-      if (err) {
-        return res.status(400).json(err);
-      }
-
-      for (var key in req.body) {
-        if ({}.hasOwnProperty.call(req.body, key)) {
-          record.set(key, req.body[key]);
-        }
-      }
-
-      record.save(function(err) {
-        if (err) {
-          return res.status(400).json(err);
-        }
-
-        return res.json({
-          message: 'Record ' + req.params.id + ' was successfully updated',
-          record: record
-        });
-      });
-    });
-  }
-};
-
-exports.delete = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.remove(res, Track, req.params.id);
-  } else { // eslint-disable-line eqeqeq
-    Track.findById(req.params.id, function(err, record) {
-      if (record.owner !== req.user._id) {
-        return res.sendStatus(403);
-      }
-
-      if (err) {
-        return res.status(400).json(err);
-      }
-
-      record.remove(function(err) {
-        if (err) {
-          return res.status(400).json(err);
-        }
-
-        return res.json({
-          message: 'Record ' + req.params.id + ' was successfully deleted'
-        });
-      });
-    });
-  }
-};
+exports.delete = defaultController.delete;

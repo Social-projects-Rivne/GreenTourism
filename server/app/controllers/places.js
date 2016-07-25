@@ -1,86 +1,28 @@
-var mongo = require('../helpers/mongo-queries');
 var Place = require('mongoose').model('Place');
+var defaultController = require('./default-crud-controller')(Place);
 
-exports.list = function(req, res) {
-  mongo.find(res, Place, req.query);
-};
+exports.list = defaultController.list;
 
-exports.show = function(req, res) {
-  mongo.findById(res, Place, req.params.id);
-};
+exports.create = defaultController.create;
 
-exports.create = function(req, res) {
-  var record = new Place(req.body);
+exports.getById = defaultController.getById;
 
-  record.owner = req.user._id;
+exports.show = defaultController.show;
 
-  record.save(function(err) {
-    if (err) {
-      return res.status(400).json(err);
-    }
+exports.update = defaultController.update;
 
-    return res.status(201).json({
-      message: 'Record was successfully created!',
-      record: record
-    });
-  });
-};
+exports.delete = defaultController.delete;
 
-exports.update = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.update(res, Place, req.params.id, req.body);
-  } else { // eslint-disable-line eqeqeq
-    mongo.update(res, Place, req.user._id, req.body, function(err, record) {
-      if (record.owner !== req.user._id) {
-        return res.sendStatus(403);
-      }
+// Comments
 
-      if (err) {
-        return res.status(400).json(err);
-      }
+exports.listComments = defaultController.listComments;
 
-      for (var key in req.body) {
-        if ({}.hasOwnProperty.call(req.body, key)) {
-          record.set(key, req.body[key]);
-        }
-      }
+exports.createComment = defaultController.createComment;
 
-      record.save(function(err) {
-        if (err) {
-          return res.status(400).json(err);
-        }
+exports.getCommentById = defaultController.getCommentById;
 
-        return res.json({
-          message: 'Record ' + req.params.id + ' was successfully updated',
-          record: record
-        });
-      });
-    });
-  }
-};
+exports.showComment = defaultController.showComment;
 
-exports.delete = function(req, res) {
-  if (req.user.role === 'admin') {
-    mongo.remove(res, Place, req.params.id);
-  } else { // eslint-disable-line eqeqeq
-    Place.findById(req.params.id, function(err, record) {
-      if (record.owner !== req.user._id) {
-        return res.sendStatus(403);
-      }
+exports.updateComment = defaultController.updateComment;
 
-      if (err) {
-        return res.status(400).json(err);
-      }
-
-      record.remove(function(err) {
-        if (err) {
-          return res.status(400).json(err);
-        }
-
-        return res.json({
-          message: 'Record ' + req.params.id + ' was successfully deleted'
-        });
-      });
-    });
-  }
-};
+exports.deleteComment = defaultController.deleteComment;

@@ -11,7 +11,7 @@
           <a href="" ng-click="$ctrl.selectTab(1)">Profile</a>
         </li>
         <li ng-class="{ active: $ctrl.isSelected(2) }">
-          <a href="" ng-click="$ctrl.selectTab(2)">My Points</a>
+          <a href="" ng-click="$ctrl.selectTab(2)">My Places</a>
         </li>
         <li ng-class="{ active: $ctrl.isSelected(3) }">
           <a href="" ng-click="$ctrl.selectTab(3)">My Tracks</a>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div ng-show="$ctrl.isSelected(2)">
-        <h1 class="page-header">My Points</h1>
+        <h1 class="page-header">My Places</h1>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="place in $ctrl.places">
             <div class="row">
