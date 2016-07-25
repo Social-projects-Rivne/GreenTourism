@@ -5,8 +5,13 @@ angular.module('mapModule')
       .layerSupport({showCoverageOnHover: false});
     var groups = [];
     var types = [];
-    var places = [];
-    placesOnMap.places = [];
+    placesOnMap.places = {
+      camp: [],
+      service: [],
+      hostes: [],
+      featured: [],
+      healthcare: []
+    };
 
     var marker = function(lon, lat, icon) {
       return L.marker([lat, lon], {
