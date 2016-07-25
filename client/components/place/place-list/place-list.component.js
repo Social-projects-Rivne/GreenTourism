@@ -176,11 +176,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         ctrl.createNewTrack = function(form) {
           var addTrackForm = angular.element('form[name="trackMaker"]');
           var checkActiveType;
-          var newPoints = [];
           ctrl.formNewTrackSubmitted = true;
           if (addTrackForm.hasClass('ng-valid')) {
             ctrl.newTrack.owner = ctrl.user._id;
             placesOnMap.newTrackPoints.forEach(function(point, index) {
+            var newPoints = [];
               if (point[0]._id) {
                 ctrl.newTrack.places.push(point[0]._id);
               } else {
