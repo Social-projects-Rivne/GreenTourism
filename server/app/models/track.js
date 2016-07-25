@@ -22,7 +22,7 @@ var TrackSchema = new Schema({
     required: true
   }],
   description: String,
-  trackRate: Number,
+  rate: Number,
   likes: [Schema.Types.ObjectId],
   photos: [String],
   comments: [CommentSchema]
