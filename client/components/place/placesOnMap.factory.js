@@ -89,10 +89,14 @@ angular.module('mapModule')
       var color = mapMarkingTypes.tracks[track.type].color;
       var coordsArray = [];
       track.places.forEach(function(place, index) {
-        coordsArray[index] = place.location.coordinates;
-        console.log(place.location.coordinates);
+        var coords = [];
+        coords[0] = place.location.coordinates[1];
+        coords[1] = place.location.coordinates[0];
+        coordsArray[index] = coords;
+        console.log(coordsArray);
       });
       trackForAdding = polyline(coordsArray, color).addTo(map);
+        console.log(trackForAdding);
       tracks.push([trackForAdding, track.type]);
     };
 
