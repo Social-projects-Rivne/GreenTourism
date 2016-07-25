@@ -1,5 +1,10 @@
 /*  -------- Places template ----------  */
-
+.places {
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
 .no-padding {
   padding: 0;
 }
@@ -11,10 +16,8 @@
   overflow: hidden;
 }
 
-#sidebar {
-  text-align: center;
-  overflow: hidden;
-  border-left: 1px solid @light-green;
+#main-content {
+  border-right: 1px solid @light-green;
 }
 
 #search {
@@ -34,8 +37,32 @@
 .place-container {
   margin: 5px;
   height: 240px;
-  border: 1px solid #000;
-  overflow: hidden;
+  border: 1px solid @light-green;
+  border-radius: 5px;
+  position: relative;
+  overflow:hidden;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  div.data {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
+    border-radius: 5px;
+    text-align: right;
+    color: #fff;
+    padding: 0 15px;
+    .popular-track-rate {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 15px;
+    }
+  }
 }
 
 #filter {
@@ -82,9 +109,6 @@
 div.place {
   margin: 10px;
 }
-.place-container img {
-  width: 250px;
-}
 .place img {
   width: 130px;
   padding-bottom: 5px;
@@ -106,3 +130,34 @@ div.place {
   float: none;
 }
 /* place */
+
+/*-------------- Add place --------------*/
+.alert-input {
+  color: #f00;
+}
+.add-item-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 1000;
+  border-left: 1px solid @light-green;
+  background-color: #fff;
+  padding: 15px;
+  display: block;
+  .removeIcon {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    font-size: 25px;
+    color: @light-green;
+  }
+  h2 {
+    text-align: center;
+  }
+  .title {
+    font-weight: bold;
+    color: @light-green;
+  }
+}

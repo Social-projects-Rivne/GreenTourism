@@ -12,3 +12,17 @@ exports.show = defaultController.show;
 exports.update = defaultController.update;
 
 exports.delete = defaultController.delete;
+
+// Comments
+
+exports.listComments = defaultController.listComments;
+
+exports.createComment = defaultController.createComment;
+
+exports.getCommentById = defaultController.getCommentById;
+
+exports.showComment = defaultController.showComment;
+
+exports.updateComment = defaultController.updateComment;
+
+exports.deleteComment = defaultController.deleteComment;
