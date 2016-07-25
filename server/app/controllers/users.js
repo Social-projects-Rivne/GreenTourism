@@ -1,8 +1,10 @@
 var mongo = require('../helpers/mongo-queries');
 var User = require('mongoose').model('User');
+var Place = require('mongoose').model('Place');
+var Track = require('mongoose').model('Track');
 
 exports.list = function(req, res) {
-  mongo.find(res, User);
+  mongo.find(res, User, req.query);
 };
 
 exports.show = function(req, res) {
@@ -37,4 +39,16 @@ exports.delete = function(req, res) {
   } else if (req.params.id == req.user._id) { // eslint-disable-line eqeqeq
     mongo.remove(res, User, req.user._id);
   }
+};
+
+exports.listPlaces = function(req, res) {
+  req.query.owner = req.user._id;
+
+  mongo.find(res, Place, req.query);
+};
+
+exports.listTracks = function(req, res) {
+  req.query.owner = req.user._id;
+
+  mongo.find(res, Track, req.query);
 };

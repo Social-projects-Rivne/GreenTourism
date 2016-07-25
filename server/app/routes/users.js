@@ -15,4 +15,10 @@ router.route('/:id')
   .put(auth.isCurrentUser, controller.update)
   .delete(auth.isCurrentUser, controller.delete);
 
+router.route('/:id/places')
+  .get(auth.isLoggedIn, controller.listPlaces);
+
+router.route('/:id/tracks')
+  .get(auth.isLoggedIn, controller.listTracks);
+
 module.exports = router;
