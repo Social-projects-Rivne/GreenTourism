@@ -28,8 +28,8 @@ function locationplacesCtrl(mapFactory, $scope, $rootScope, placesOnMap, constan
       }
     );
     $scope.placesByLocation = _.sortBy($scope.placesByLocation, ['rate']);
-    $scope.placesByLocation = $scope.placesByLocation.slice($scope.placesByLocation.length - 5, $scope.placesByLocation.length);
-    console.log($scope.placesByLocation);
+    var numberOfPopularPlaces = 5;
+    $scope.placesByLocation = $scope.placesByLocation.slice($scope.placesByLocation.length - numberOfPopularPlaces, $scope.placesByLocation.length);
     if ($scope.placesByLocation.length == 0)
       $scope.placesByLocation = ctrl.popularPlaces;
     $timeout(function() {
