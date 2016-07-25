@@ -1,86 +1,85 @@
-<div class="registration container signup ">
+<div class="registration container">
   <form role="form" name="signup" method="POST" action="/api/signup"
    novalidate ng-submit="$ctrl.signup(signup.$valid)">
 
     <div class="input-group-sm">
       <label for="Name">First Name:</label>
       <input type="text" name="firstName" class="form-control"
-       ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.firstName" 
-       ng-minlength="2" ng-maxlength="15" required>
+          ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.firstName" 
+          ng-minlength="2" ng-maxlength="15" required>
       
       <p class="error" ng-show="signup.firstName.$touched && (
-      signup.firstName.$error.minlength) ">Is too short.</p>
+          signup.firstName.$error.minlength) ">Is too short.</p>
       <p class="error" ng-show="signup.firstName.$touched && (
-      signup.firstName.$error.maxlength) ">Is too long.</p>
+          signup.firstName.$error.maxlength) ">Is too long.</p>
       <p class="error" ng-show="signup.firstName.$touched && (
-      signup.firstName.$error.pattern) ">Only latina alphabet allowed</p>
+          signup.firstName.$error.pattern) ">Only latina alphabet allowed</p>
       <p class="error" ng-show="signup.firstName.$touched && (
-      signup.firstName.$error.required)">Is required</p>
+          signup.firstName.$error.required)">Is required</p>
       <p class="tip">Is your real name, sign under comments, posts</p>
     </div>
 
     <div class="input-group-sm">
       <label for="lastName">Last Name:</label>
       <input type="text" name="lastName" class="form-control" 
-      ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.lastName" 
-      ng-minlength="2" ng-maxlength="15" required> 
+          ng-pattern="/^[a-zA-Z\s]+$/" ng-model="$ctrl.user.lastName" 
+          ng-minlength="2" ng-maxlength="15" required> 
 
       <p class="error" ng-show="signup.lastName.$touched && (
-      signup.lastName.$error.minlength) ">Is too short.</p>
+          signup.lastName.$error.minlength) ">Is too short.</p>
       <p class="error" ng-show="signup.lastName.$touched && (
-      signup.lastName.$error.maxlength) ">Is too long.</p>
+          signup.lastName.$error.maxlength) ">Is too long.</p>
       <p class="error" ng-show="signup.lastName.$touched && (
-      signup.lastName.$error.pattern) ">Only latina alphabet allowed</p>
+          signup.lastName.$error.pattern) ">Only latina alphabet allowed</p>
       <p class="error" ng-show="signup.lastName.$touched && (
-      signup.lastName.$error.required)">Is required</p>
+          signup.lastName.$error.required)">Is required</p>
       <p class="tip">Is your real family name</p>
     </div>
 
     <div class="input-group-sm">
       <label for="email">Email:</label>
       <input type="email" name="email" class="form-control" 
-      ng-model="$ctrl.user.email"
-      ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/" required>
+          ng-model="$ctrl.user.email"
+          ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/" required>
       
       <p class="error" ng-show="signup.email.$touched && (
-      signup.email.$error.required)">Is required</p>
+          signup.email.$error.required)">Is required</p>
       <p class="error" ng-show="signup.email.$touched && (
-      signup.email.$error.pattern) ">Email is wrong</p>
+          signup.email.$error.pattern) ">Email is wrong</p>
     </div>
 
     <div class="input-group-sm">
       <label for="password">Password:</label>
       <input type="password" name="password" class="form-control" id="password" 
-      ng-model="$ctrl.user.password" ng-minlength="8" 
-      ng-maxlength="25" required>
+          ng-model="$ctrl.user.password" ng-minlength="8" 
+          ng-maxlength="25" required>
 
       <p class="error" ng-show="signup.password.$touched && (
-      signup.password.$error.minlength) ">Min 8 characters.</p>
+          signup.password.$error.minlength) ">Min 8 characters.</p>
       <p class="error" ng-show="signup.password.$touched && (
-      signup.password.$error.maxlength) ">Max 25 characters.</p>
+          signup.password.$error.maxlength) ">Max 25 characters.</p>
       <p class="error" ng-show="signup.password.$touched && (
-      signup.password.$error.pattern) ">Only latina alphabet allowed</p>
+          signup.password.$error.pattern) ">Only latina alphabet allowed</p>
       <p class="error" ng-show="signup.password.$touched && (
-      signup.password.$error.required)">Is required</p>
+          signup.password.$error.required)">Is required</p>
       <p class="tip">At least 8 characters required</p>
     </div>
 
     <div class="input-group-sm">
       <label for="confirmPassword">Confirm Password:</label>
       <input type="password" name="confirmPassword" class="form-control" 
-      ng-model="$ctrl.user.confirmPassword" required match="signup.password">
+          ng-model="$ctrl.user.confirmPassword" required match="signup.password">
 
       <p class="error" ng-show="signup.confirmPassword.$touched && (
-      signup.confirmPassword.$error.required)">Please confirm your password</p>
+          signup.confirmPassword.$error.required)">Please confirm your password</p>
       <p class="error" ng-show="signup.confirmPassword.$touched && (
-      signup.confirmPassword.$error.match)">Isn't match</p>
+          signup.confirmPassword.$error.match)">Isn't match</p>
       <p class="tip">Please input your password again</p>
     </div>
 
     <h4 class="policy">By clicking Sign Up, you agree to our Terms and Policy
-    </h4>
+       </h4>
     <input type="submit" class="btn btn-success btn-block submit-btn" 
-    ng-disabled="signup.$invalid" value="Sign up"
-    />
+       ng-disabled="signup.$invalid" value="Sign up"/>
   </form>
 </div>
