@@ -1,7 +1,14 @@
 <div class="row place">
   <div class="col-xs-12 col-lg-12 col-md-12">
+    <div class="closeMap">
+      <button ng-if="!isClosed" ng-click="$ctrl.hideMap()" type="button" class="btn btn-default btn-md">CLOSE MAP
+      </button>
+      <button ng-if="isClosed" ng-click="$ctrl.openMap()" type="button" class="btn btn-default btn-md">OPEN MAP
+      </button>
+    </div>
     <div class="row vertical-align">
       <div class="col-xs-4 no-padding">
+
         <p class="text-left">
           <button type="button" class="btn btn-default btn-lg like">
             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like 124
@@ -17,10 +24,11 @@
     </div>
     <div class=row">
       <div class="col-xs-12">
-        <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
+        <h2 class="title text-center">{{$ctrl.place.name}} </h2>
       </div>
+      <div id="map1" ng-class="mapClass">
 
-      <div id="map1"></div>
+      </div>
     </div>
   </div>
   <div class="container_page">
