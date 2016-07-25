@@ -93,10 +93,8 @@ angular.module('mapModule')
         coords[0] = place.location.coordinates[1];
         coords[1] = place.location.coordinates[0];
         coordsArray[index] = coords;
-        console.log(coordsArray);
       });
       trackForAdding = polyline(coordsArray, color).addTo(map);
-        console.log(trackForAdding);
       tracks.push([trackForAdding, track.type]);
     };
 
