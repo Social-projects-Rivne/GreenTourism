@@ -81,7 +81,7 @@
                   <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
                       ng-click="$ctrl.showSpecificTracks(trackType)">
                     <a class="trackFilter {{trackType}}" href="">
-                      <span style="background-color: {{trackTypeValue.color}};">
+                      <span ng-style="{'background-color': trackTypeValue.color}">
                       &nbsp;
                     </span>
                       &nbsp;{{trackTypeValue.name}}
@@ -170,7 +170,7 @@
               <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
                   ng-click="$ctrl.showSpecificTracks(trackType)">
                 <a class="trackFilter {{trackType}}" href="">
-                  <span style="background-color: {{trackTypeValue.color}};">
+                  <span ng-style="{'background-color': trackTypeValue.color}">
                       &nbsp;
                     </span>
                   &nbsp;
