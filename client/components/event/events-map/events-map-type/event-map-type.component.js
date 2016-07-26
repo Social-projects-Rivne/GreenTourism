@@ -1,7 +1,7 @@
 angular.module('eventMapType', ['event'])
   .component('eventMapType', {
     templateUrl: 'components/event/events-map/events-map-type/event-map-type.template.html',
-    controller: function($scope, $http, $rootScope, eventListService) {
+    controller: ['$scope', '$http', '$rootScope', 'eventListService', function($scope, $http, $rootScope, eventListService) {
       $scope.eventL = eventListService.th;
 
       this.data = $http.get('components/event/event-list/event.data.json').success(function(data) {
@@ -28,5 +28,5 @@ angular.module('eventMapType', ['event'])
           e.stopPropagation();
         }
       });
-    }
+    }]
   });

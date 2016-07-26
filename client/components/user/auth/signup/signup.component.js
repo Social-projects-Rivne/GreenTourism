@@ -1,6 +1,6 @@
 angular.module('user').component('signup', {
-  templateUrl: 'components/user/signup/signup.template.html',
-  controller: ['currentUser', function signupCtrl() {
+  templateUrl: 'components/user/auth/signup/signup.template.html',
+  controller: [function signupCtrl() {
     this.signup = function(isvalid) {
       if (!isvalid) {
         this.showError = true;
@@ -15,7 +15,7 @@ angular.module('user').component('signup', {
           return 'Sorry, but less then 25 characters is allowed';
         } else if (error.minlength) {
           return 'Please input more then 7 characters';
-        } else if (error.validation) {
+        } else if (error.match) {
           return 'Password isn\'t match';
         } else if (error.required) {
           return 'Please fill up this field';

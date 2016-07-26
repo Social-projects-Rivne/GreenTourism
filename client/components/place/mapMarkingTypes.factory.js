@@ -1,55 +1,46 @@
 angular.module('greenTourism')
-  .factory('mapMarkingTypes', function() {  //Renamed factory to mapMarkingTypes
-    var mapMarkingTypes = {};
-    mapMarkingTypes.placesType = [
-      {
-        type: 'camp',
+  .factory('mapMarkingTypes', function() {
+    var types = {};
+    types.places = {
+      camp: {
         name: 'Camp',
         icon: 'assets/img/places/marker/blue.png'
       },
-      {
-        type: 'service',
+      service: {
         name: 'Service',
         icon: 'assets/img/places/marker/green.png'
       },
-      {
-        type: 'hostes',
+      hostes: {
         name: 'Hostes',
         icon: 'assets/img/places/marker/red.png'
       },
-      {
-        type: 'featuredPlace',
+      featured: {
         name: 'Featured Place',
         icon: 'assets/img/places/marker/yellow.png'
       },
-      {
-        type: 'healthcare',
+      healthcare: {
         name: 'Healthcare',
         icon: 'assets/img/places/marker/violet.png'
       }
-    ];
+    };
 
-    mapMarkingTypes.tracksType = [
-      {
-        type: 'bicycle',
+    types.tracks = {
+      bicycle: {
         name: 'Bicycle',
         color: '#2f2fd0'
       },
-      {
-        type: 'car',
+      car: {
         name: 'Car',
         color: '#ff0a47'
       },
-      {
-        type: 'walking',
+      walking: {
         name: 'Walking',
         color: '#f9ff0b'
       },
-      {
-        type: 'mixed',
+      mixed: {
         name: 'Mixed',
         color: '#0aff0a'
       }
-    ];
-    return mapMarkingTypes;
+    };
+    return types;
   });

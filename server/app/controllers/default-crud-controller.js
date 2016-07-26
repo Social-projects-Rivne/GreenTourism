@@ -12,22 +12,22 @@ module.exports = function(Model) {
     delete req.query.skip;
 
     Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
-        function(err, records) {
-          if (err) {
-            res.status(400).json(err);
-          } else {
-            res.json(records);
-          }
-        });
+      function(err, records) {
+        if (err) {
+          return res.status(400).json(err);
+        }
+
+        return res.json(records);
+      });
   };
 
   controller.show = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
-        res.status(404).json(err);
-      } else {
-        res.json(record);
+        return res.status(404).json(err);
       }
+
+      return res.json(record);
     });
   };
 
@@ -36,44 +36,50 @@ module.exports = function(Model) {
 
     record.save(function(err) {
       if (err) {
-        res.status(400).json(err);
-      } else {
-        res.status(201).json({message: 'Record was successfully created!',
-                  record: record});
+        return res.status(400).json(err);
       }
+
+      return res.status(201).json({
+        message: 'Record was successfully created!',
+        record: record
+      });
     });
   };
 
   controller.update = function(req, res) {
     Model.findById(req.params.id, function(err, record) {
       if (err) {
-        res.status(400).json(err);
-      } else {
-        for (var key in req.body) {
-          if ({}.hasOwnProperty.call(req.body, key)) {
-            record.set(key, req.body[key]);
-          }
+        return res.status(400).json(err);
+      }
+
+      for (var key in req.body) {
+        if ({}.hasOwnProperty.call(req.body, key)) {
+          record.set(key, req.body[key]);
+        }
+      }
+
+      record.save(function(err) {
+        if (err) {
+          return res.status(400).json(err);
         }
 
-        record.save(function(err) {
-          if (err) {
-            res.status(400).json(err);
-          } else {
-            res.json(record);
-          }
+        return res.json({
+          message: 'Record ' + req.params.id + ' was successfully updated',
+          record: record
         });
-      }
+      });
     });
   };
 
   controller.delete = function(req, res) {
     Model.findByIdAndRemove(req.params.id, function(err) {
       if (err) {
-        res.status(400).json(err);
-      } else {
-        res.json({message: 'Record ' + req.params.id +
-                  ' was successfully deleted'});
+        return res.status(400).json(err);
       }
+
+      return res.json({
+        message: 'Record ' + req.params.id + ' was successfully deleted'
+      });
     });
   };
 

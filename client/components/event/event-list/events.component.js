@@ -1,7 +1,7 @@
 angular.module('eventList', [])
   .component('eventList', {
     templateUrl: 'components/event/event-list/event-list.template.html',
-    controller: ["$scope", "$http", "eventListService", function($scope, $http, eventListService) {
+    controller: ['$scope', '$http', 'eventListService', function($scope, $http, eventListService) {
       $scope.eventL = eventListService.th;
       $scope.eventL.mainControllerName = 'Events';
       $scope.eventL.date_current = new Date();

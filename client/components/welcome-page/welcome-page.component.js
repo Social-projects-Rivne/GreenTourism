@@ -18,8 +18,8 @@ angular.module('welcomePage', [])
             obj = {
               _id: self.popularPlaces[random]._id,
               name: self.popularPlaces[random].name,
-              latitude: self.popularPlaces[random].latitude,
-              longitude: self.popularPlaces[random].longitude,
+              latitude: self.popularPlaces[random].location.coordinates[0],
+              longitude: self.popularPlaces[random].location.coordinates[1],
               photo: self.popularPlaces[random].photos[0],
               location: ''
             };
@@ -32,12 +32,12 @@ angular.module('welcomePage', [])
       }).then(function() {
         Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[0].latitude +
           '&lon=' + self.outputPopularPlaces[0].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[0].location = result.display_name;
-        });
+            self.outputPopularPlaces[0].location = result.display_name;
+          });
         Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + self.outputPopularPlaces[1].latitude +
           '&lon=' + self.outputPopularPlaces[1].longitude + '&addressdetails=0&zoom=10').get().then(function(result) {
-          self.outputPopularPlaces[1].location = result.display_name;
-        });
+            self.outputPopularPlaces[1].location = result.display_name;
+          });
       });
 
       // Animation on click arrow
@@ -49,14 +49,6 @@ angular.module('welcomePage', [])
         }, 1000);
         return false;
       });
-
-        $('.dropdown-menu').on({  // changed selector from '#dropdownFilterCategory .dropdown-menu' to '.dropdown-menu'
-        'click': function(e) {
-          e.stopPropagation();
-        }
-
-      });
-
     }
     ]
   });

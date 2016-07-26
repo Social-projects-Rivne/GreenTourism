@@ -1,48 +1,58 @@
 <div id="addMenu">
-    <h2>New Place</h2>
-    <a href="" id="removeIcon" ng-click="$ctrl.hideMenu()"><span class="glyphicon glyphicon-remove"></span></a>
-    <form name="trackMaker">
-        <div class="col-xs-12 step">
-            1. Choose track points on map: <span class="glyphicon" id="gi1"></span>
-            <button type="button" ng-click="$ctrl.startStepTwo()" class="btn btn-success col-xs-12" ng-disabled="$ctrl.stepOneDisabled">Finish chosing points</button>
-            <span class="alertInput" ng-if="$ctrl.trackPointsAlert">Track must have at least two points!</span>
-        </div>
-        <div class="form-group col-xs-12 step">
-            <label for="placeName">2. Enter track name:</label> <span class="glyphicon" id="gi2"></span>
-            <div class="input-group">
-                <input type="text" name="newTrackName" class="form-control" id="newTrackName" ng-model="$ctrl.newTrackName" ng-disabled="$ctrl.stepTwoDisabled">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-success" ng-click="$ctrl.startStepThree()" ng-disabled="$ctrl.stepTwoDisabled">OK</button>
-                </span>
-            </div>
-            <span class="alertInput" ng-if="$ctrl.trackNameAlert">Please enter track name!</span>
-        </div>
-        <div class="form-group col-xs-12 step">
-            <label for="placeType">3. Select track type:</label> <span class="glyphicon" id="gi3"></span>
-            <div class="input-group">
-                <select name="placeType" class="form-control" ng-options="type.type for type in $ctrl.types track by type.type"
-                        ng-model="$ctrl.newTrackType" ng-change="$ctrl.selectNewPlaceType()" ng-disabled="$ctrl.stepThreeDisabled">
-                        <option value="">-- Choose track type --</option>
-                </select>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-success" ng-click="$ctrl.startStepFour()" ng-disabled="$ctrl.stepThreeDisabled">OK</button>
-                </span>
-            </div>
-            <span class="alertInput" ng-if="$ctrl.trackTypeAlert">Please select track type!</span>
-        </div>
-        <div class="form-group col-xs-12 step">
-            <label for="placeDescription">4. Enter track description:</label> <span class="glyphicon" id="gi4"></span>
-            <textarea name="placeDescription" id="placeDescription" class="form-control" ng-model="$ctrl.newTrackDescription" ng-disabled="$ctrl.stepFourDisabled"></textarea>
-        </div>
-        <div class=" col-xs-12 form-group step">
-            <label for="placePhoto">5. Upload photo (optional)</label>
-            <input type="file" id="placePhoto" ng-disabled="$ctrl.stepFourDisabled">
-        </div>
-        <div class=" col-xs-12 form-group">
-            <div class="btn-group col-xs-12 no-padding">
-                <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.resetForm()">Reset</button>
-                <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.successCreating()" ng-disabled="$ctrl.stepFourDisabled">Create New Place</button>                                                
-            </div>
-        </div>
-    </form>
+  <h2>New Place</h2>
+  <a href="" id="removeIcon" ng-click="$ctrl.hideMenu()">
+    <span class="glyphicon glyphicon-remove"></span>
+  </a>
+  <form name="trackMaker">
+    <div class="col-xs-12 step">
+      1. Choose track points on map:
+      <span class="glyphicon" id="gi1"></span>
+      <button type="button" ng-click="$ctrl.startStepTwo()" class="btn btn-success col-xs-12"
+          ng-disabled="$ctrl.stepOneDisabled">Finish chosing points</button>
+      <span class="alertInput" ng-if="$ctrl.trackPointsAlert">Track must have at least two points!</span>
+    </div>
+    <div class="form-group col-xs-12 step">
+      <label for="placeName">2. Enter track name:</label>
+      <span class="glyphicon" id="gi2"></span>
+      <div class="input-group">
+        <input type="text" name="newTrackName" class="form-control" id="newTrackName" ng-model="$ctrl.newTrackName"
+            ng-disabled="$ctrl.stepTwoDisabled">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-success" ng-click="$ctrl.startStepThree()" ng-disabled="$ctrl.stepTwoDisabled">OK</button>
+        </span>
+      </div>
+      <span class="alertInput" ng-if="$ctrl.trackNameAlert">Please enter track name!</span>
+    </div>
+    <div class="form-group col-xs-12 step">
+      <label for="placeType">3. Select track type:</label>
+      <span class="glyphicon" id="gi3"></span>
+      <div class="input-group">
+        <select name="placeType" class="form-control" ng-options="type.type for type in $ctrl.types track by type.type"
+            ng-model="$ctrl.newTrackType" ng-change="$ctrl.selectNewPlaceType()" ng-disabled="$ctrl.stepThreeDisabled">
+          <option value="">-- Choose track type --</option>
+        </select>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-success" ng-click="$ctrl.startStepFour()" ng-disabled="$ctrl.stepThreeDisabled">OK</button>
+        </span>
+      </div>
+      <span class="alertInput" ng-if="$ctrl.trackTypeAlert">Please select track type!</span>
+    </div>
+    <div class="form-group col-xs-12 step">
+      <label for="placeDescription">4. Enter track description:</label>
+      <span class="glyphicon" id="gi4"></span>
+      <textarea name="placeDescription" id="placeDescription" class="form-control" ng-model="$ctrl.newTrackDescription"
+          ng-disabled="$ctrl.stepFourDisabled"></textarea>
+    </div>
+    <div class=" col-xs-12 form-group step">
+      <label for="placePhoto">5. Upload photo (optional)</label>
+      <input type="file" id="placePhoto" ng-disabled="$ctrl.stepFourDisabled">
+    </div>
+    <div class=" col-xs-12 form-group">
+      <div class="btn-group col-xs-12 no-padding">
+        <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.resetForm()">Reset</button>
+        <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.successCreating()"
+            ng-disabled="$ctrl.stepFourDisabled">Create New Place</button>
+      </div>
+    </div>
+  </form>
 </div>
