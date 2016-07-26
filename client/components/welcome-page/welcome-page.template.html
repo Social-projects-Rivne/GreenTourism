@@ -1,19 +1,13 @@
-<script src="assets/js/videoplayer.js"></script>
 <div class="parallax hidden-xs hidden-sm">
-  <div class="parallax-background-opacity">
-    <video id="myvideo" autoplay poster="http://rvavto.com.ua/images/main.jpg" preload>
-      <source src="http://rvavto.com.ua/images/video1.mp4" type="video/mp4"/>
-    </video>
-  </div>
+  <div class="parallax-background-opacity"></div>
   <div class="parallax-title">
     <h2>Find. Plan. Travel</h2>
-    <div id="controls">
-    </div>
   </div>
   <a href="#welcome-page-content">
     <i class="fa fa-angle-down" aria-hidden="true"></i>
   </a>
 </div>
+
 <div class="container" id="welcome-page-content">
   <div class="row">
     <div class="col-md-6 welcome-page-section-img">
@@ -21,15 +15,15 @@
     </div>
     <div class="col-md-6 welcome-page-section-text">
       <h2><a href="#!/places">Find place</a></h2>
-
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
-        sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
-        nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam sodales
-        non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis. Morbi
-        mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus efficitur ut.
-        Integer ac tortor diam."</p>
-
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis,
+        magna sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis
+        dolor. Proin eleifend commodo mauris nec bibendum. Pellentesque posuere interdum
+        turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar egestas.
+        Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed
+        elementum quam sodales non. Pellentesque finibus et mauris nec commodo. Cras
+        placerat augue vel tellus accumsan venenatis. Morbi mollis pharetra ligula
+        vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus
+        efficitur ut. Integer ac tortor diam."</p>
       <div>
         <a href="#!/places">Go to search</a>
       </div>
@@ -41,12 +35,11 @@
     </div>
     <div class="col-md-6 col-md-pull-6 welcome-page-section-text">
       <h2><a href="#!/places">Plan your track</a></h2>
-
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna sed
-        aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris nec
-        bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        "</p>
-
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis,
+        magna sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis
+        dolor. Proin eleifend commodo mauris nec bibendum. Pellentesque posuere interdum
+        turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar "
+      </p>
       <div>
         <a href="#!/places">Go to search</a>
       </div>
@@ -59,41 +52,45 @@
     </div>
     <div class="col-md-6 welcome-page-section-text">
       <h2><a href="#!/events">Fun on events</a></h2>
-
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis, magna
-        sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis dolor. Proin eleifend commodo mauris
-        nec bibendum. Pellentesque posuere interdum turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar
-        egestas. Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed elementum quam sodales
-        non. Pellentesque finibus et mauris nec commodo. Cras placerat augue vel tellus accumsan venenatis. Morbi
-        mollis pharetra ligula vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus efficitur ut.
-        Integer ac tortor diam."</p>
-
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis,
+        magna sed aliquet volutpat, est sem aliquet felis, et porta odio sapien quis
+        dolor. Proin eleifend commodo mauris nec bibendum. Pellentesque posuere interdum
+        turpis, ac rhoncus enim tincidunt at. Pellentesque porta pulvinar egestas.
+        Fusce at purus quis nibh iaculis fringilla. Maecenas aliquam nibh dui, sed
+        elementum quam sodales non. Pellentesque finibus et mauris nec commodo. Cras
+        placerat augue vel tellus accumsan venenatis. Morbi mollis pharetra ligula
+        vel volutpat. Pellentesque vulputate fermentum ligula, vel faucibus risus
+        efficitur ut. Integer ac tortor diam."</p>
       <div>
         <a href="#!/events">Go to search</a>
       </div>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-md-6 welcome-page-section-img" ng-repeat="place in $ctrl.outputPopularPlaces">
-      <img src="/assets/{{place.photo}}" title="{{place.name}}" alt="{{place.name}}">
+    <div class="col-md-6 welcome-page-section-img" ng-repeat="place in $ctrl.popularPlaces">
+      <img src="{{place.photos[0]}}" title="{{place.name}}" alt="{{place.name}}">
       <a href="#!/places/{{place._id}}">
         <div class="popular-places-gradient"></div>
       </a>
       <a class="welcome-page-section-img-name" href="#!/places/{{place._id}}">{{place.name}}</a>
       <a class="welcome-page-section-img-location" href="#!/places/{{place._id}}">
-        <img src="assets/img/places/marker/green.png">
-        {{place.location}}
+        <img src="assets/img/places/marker/green.png"> {{place.address}}
       </a>
     </div>
   </div>
 </div>
+
 <footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
         <div class="footer-content">
           <a class="footer-logo" href="#/">GreenTourism</a>
-          <p>© 2001 - 2016 <a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank"><span>The GreenTourism Team</span></a>
+          <p>© 2001 - 2016
+            <a href="https://github.com/Social-projects-Rivne/GreenTourism" target="_blank">
+              <span>The GreenTourism Team</span>
+            </a>
           </p>
         </div>
       </div>

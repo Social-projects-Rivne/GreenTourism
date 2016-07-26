@@ -103,7 +103,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---END---- Icons for default settings on places and Tracks
 
         // ---START---- Popular places and tracks in location
-        ctrl.hidePopularPlaces = false;
+        ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
 
         ctrl.checkPopularPlaces = function() {
@@ -144,14 +144,18 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: constants.placesOnLoad}).then(function(result) {
-          counter = 1;
-          places = result.concat(places);
-          placesOnMap.showPlaces(result, constants.placesOnLoad);
-          angular.element('#' + constants.placesOnLoad + ' span').addClass(constants.checkedClass);
-          angular.element('#Streets span').addClass(constants.checkedClass);
-          placesOnMap.setPlaceArr(places);
-        });
+        Place.getList({type: constants.placesOnLoad, limit: 100})
+          .then(function(result) {
+            placeCounter = 1;
+            places = result.concat(places);
+            placesOnMap.showPlaces(result, constants.placesOnLoad);
+            angular.element('.' + constants.placesOnLoad + ' span')
+              .addClass(constants.checkedSpanClass);
+            angular.element('.placesIcon').addClass(constants.checkedClass);
+            angular.element('#Streets span')
+              .addClass(constants.checkedSpanClass);
+            placesOnMap.setPlaceArr(places);
+          });
 
         // ----START---- FilterByOneOfType
         ctrl.checkType = function(input) {

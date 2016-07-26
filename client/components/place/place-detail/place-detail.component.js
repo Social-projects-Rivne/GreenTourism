@@ -6,7 +6,7 @@ angular.module('placeDetail', ['comment'])
     },
     controller: function placeDetailCtrl($scope, constants) {
       angular.element(document).ready (function() {
-        $(".fancybox").fancybox();
+        $('.fancybox').fancybox();
       });
       this.map = L.map('map1', {
         center: constants.mapCenter,
@@ -23,7 +23,6 @@ angular.module('placeDetail', ['comment'])
       this.map.setView([this.place.location.coordinates[1] + deltaheight, this.place.location.coordinates[0]]); //0.005- for responcive design- show info on mobile
       this.closePage = function() {
         $scope.$emit('closePage', 'pageClass');
-
-      }
+      };
     }
   });
