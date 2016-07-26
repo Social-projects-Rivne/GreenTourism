@@ -6,5 +6,6 @@ angular.module('greenTourism', [
   'place',
   'track',
   'event',
-  'blog'
+  'blog',
+  'ngAnimate'
 ]);

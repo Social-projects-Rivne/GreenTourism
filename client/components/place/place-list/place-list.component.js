@@ -154,8 +154,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             angular.element('.placesIcon').addClass(constants.checkedClass);
             angular.element('#Streets span')
               .addClass(constants.checkedSpanClass);
+            placesOnMap.setPlaceArr(places);
           });
-        // ----END---- ShowPlacesOnLoad
 
         // ----START---- FilterByOneOfType
         ctrl.checkType = function(input) {
@@ -180,6 +180,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             Place.getList({type: input, limit: 100}).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(result, input);
+
             });
           }
           if (placeCounter > 0) {
