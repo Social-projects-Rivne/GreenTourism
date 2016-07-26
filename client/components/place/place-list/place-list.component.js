@@ -187,6 +187,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               var newPoints = [];
               if (point[0]._id) {
                 ctrl.newTrack.places.push(point[0]._id);
+                if (index == placesOnMap.newTrackPoints.length - 1) {
+                  addNewTrackIntoDB(ctrl.newTrack);
+                }
               } else {
                 newPoints.push(point[0]);
                 Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
@@ -196,9 +199,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                   Place.post(point[0]).then(function(response) {
                     console.log(response);
                     ctrl.newTrack.places.push(response.record._id);
-                    checkActiveType = angular.element('#' + point[0].type + ' span');
-                    if (checkActiveType.hasClass(constants.checkedClass)) {
+                    checkActiveType = angular.element('.' + point[0].type + ' span');
+                    if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                       placesOnMap.showPlaces(newPoints);
+                      console.log(newPoints);
                     } else {
                       ctrl.checkType(point[0].type);
                     }
@@ -215,6 +219,16 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         function addNewTrackIntoDB(object) {
           console.log(object);
+          Track.post(object).then(function(response) {
+            console.log('success');
+            var checkActiveType = angular.element('.' + object.type + ' span:last-child');
+            if (checkActiveType.hasClass(constants.checkedSpanClass)) {
+              ctrl.showSpecificTracks(object.type);
+              ctrl.showSpecificTracks(object.type);
+            } else {
+              ctrl.showSpecificTracks(object.type);
+            }
+          });
         }
 
         ctrl.resetAddTrackForm = function(form) {
@@ -222,13 +236,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           newPointsForTrack.forEach(function(point) {
             map.removeLayer(point);
           });
-          /* if (form) {
+          if (form) {
             ctrl.newTrack = angular.copy(constants.emptyTrackModel);
-            ctrl.newTrackType = '';
             form.$setPristine();
             form.$setUntouched();
             ctrl.formNewTrackSubmitted = false;
-          }*/
+            ctrl.newTrackPoints = [];
+            map.removeLayer(newTrack);
+          }
         };
         // -----END ADD Track-----
 

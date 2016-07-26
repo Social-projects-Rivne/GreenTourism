@@ -164,27 +164,5 @@ angular.module('mapModule')
       }
     };
 
-    /* ** START add track factory ** */
-    placesOnMap.newTrackPoints = [];
-    /*placesOnMap.removeNewMarker = function() {
-      if (newMarker) {
-        placesOnMap.map.removeLayer(newMarker);
-      }
-    };
-
-    placesOnMap.openAddTrackMenu = function() {
-      placesOnMap.map.on('click', addNewTrack);
-    };
-
-    placesOnMap.closeAddTrackMenu = function() {
-      placesOnMap.map.off('click', addNewTrack);
-    };*/
-
-    function addNewTrackPoint(e) {
-      console.log(this.name);
-      
-      console.log(e);
-    };
-
     return placesOnMap;
   }]);
