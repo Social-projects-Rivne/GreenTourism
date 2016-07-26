@@ -28,8 +28,10 @@
           <button type="button" class="btn btn-default" ng-click="$ctrl.toggleEditMode()">Edit</button>
         </h1>
         <div ng-hide="$ctrl.editMode">
-          <h3>{{$ctrl.user.fullName}}</h3>
-          <h4>{{$ctrl.user.nickname}}</h4>
+          <div class="user-page__name">
+            <h3>{{$ctrl.user.fullName}}</h3>
+            <h4>{{$ctrl.user.nickname}}</h4>
+          </div>
           <p><strong>Email: </strong>{{$ctrl.user.email}}</p>
           <p><strong>Phone: </strong>{{$ctrl.user.phone}}</p>
           <p><strong>Address: </strong>{{$ctrl.user.address}}</p>
