@@ -6,5 +6,6 @@ angular.module('blogList').component('blogList', {
   },
   controller: [function BlogListCtrl() {
     var ctrl = this;
+    console.log(this);
   }]
 });

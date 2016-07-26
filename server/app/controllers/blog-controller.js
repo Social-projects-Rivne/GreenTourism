@@ -1,4 +1,5 @@
 var Blog = require('../models/blog');
+var User = require('mongoose').model('User');
 
 exports.list = function(req, res) {
   Blog.blog.findAll({
@@ -13,6 +14,25 @@ exports.list = function(req, res) {
     ]
   })
     .then(function(records) {
+        records.forEach(function(item, i, arr) {
+
+          var user  = User.findById("578cb97172f290d4138fe23c", 'avatar firstName lastName', function(err, user){
+            //item.userId = "Hello";
+            //console.log("Record before: " + records[i].userId);
+            //console.log(records[i].dataValues);
+            //console.log("USER:" +  user);
+            //blogUser = user;
+            console.log("QQQQ" + typeof (user.avatar));
+            console.log("AAAAAA" + user.avatar);
+            return user;
+            //records[i].userId = user.firstName;
+            //console.log("Record after: " + records[i].userId);
+            //return records[i].dataValues;
+            //return records;
+          });
+          records[i].userId = angular.fromJson(angular.toJson(user));
+          console.log("OUUUUUUUUUUT" + user);
+        });
       res.json(records);
     })
     .catch(function(err) {
