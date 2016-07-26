@@ -235,7 +235,7 @@
 
       <!-- DIV Add places -->
       <div id="add-place" class="add-item-menu"
-           ng-if="$ctrl.addPlaceMenuIsOpen">
+           ng-hide="!$ctrl.addPlaceMenuIsOpen">
         <h2>New Place</h2>
         <a href="" ng-click="$ctrl.toggleAddPlaceMenu(placeMaker)">
           <span class="glyphicon glyphicon-remove removeIcon"></span>
@@ -310,7 +310,7 @@
       </div>
       <!-- Div Add track -->
       <div id="add-track" class="add-item-menu"
-           ng-if="$ctrl.addTrackMenuIsOpen">
+           ng-hide="!$ctrl.addTrackMenuIsOpen">
         <h2>New Track</h2>
         <a href="" ng-click="$ctrl.toggleAddTrackMenu(trackMaker)">
           <span class="glyphicon glyphicon-remove removeIcon"></span>
