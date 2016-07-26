@@ -1,93 +1,28 @@
+var sliceQueryOptions = require('../helpers/slice-query-options');
+
 module.exports = function(Model) {
   var controller = {};
 
-  controller.listComments = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(404).json(err);
-      }
-      return res.json(record.comments);
-    });
-  };
-
-  controller.createComment = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(404).json(err);
-      }
-      record.comments.push(req.body);
-      return res.json(record);
-    });
-  };
-
-  controller.showComment = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(404).json(err);
-      }
-      return res.json(record.comments.id(req.params.commentId));
-    });
-  };
-
-  controller.updateComment = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(400).json(err);
-      }
-      record.comments.id(req.params.commentId).remove();
-      record.comments.push(req.body);
-      record.save(function(err, resp) {
-        res.json(resp);
-      });
-    });
-  };
-
-  controller.deleteComment = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(400).json(err);
-      }
-      record.comments.id(req.params.commentId).remove();
-      record.save(function(err, resp) {
-        res.json(resp);
-      });
-    });
-  };
-
   controller.list = function(req, res) {
-    var limit = req.query.limit;
-    delete req.query.limit;
+    var queryAndOptions = sliceQueryOptions(req.query);
 
-    var sort = req.query.sort;
-    delete req.query.sort;
-
-    var skip = req.query.skip;
-    delete req.query.skip;
-
-    Model.find(req.query, null, {limit: limit, skip: skip, sort: sort},
+    Model.find(queryAndOptions.query, null, queryAndOptions.options,
       function(err, records) {
         if (err) {
           return res.status(400).json(err);
         }
 
         return res.json(records);
-      });
-  };
-
-  controller.show = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
-      if (err) {
-        return res.status(404).json(err);
       }
-
-      return res.json(record);
-    });
+    );
   };
 
   controller.create = function(req, res) {
+    req.body.owner = req.user._id;
+
     var record = new Model(req.body);
 
-    record.save(function(err) {
+    record.save(function(err, record) {
       if (err) {
         return res.status(400).json(err);
       }
@@ -99,33 +34,50 @@ module.exports = function(Model) {
     });
   };
 
+  controller.getById = function(req, res, next, id) {
+    Model.findById(id, function(err, record) {
+      if (err) {
+        return res.status(404).json(err);
+      } else if (record) {
+        req.record = record;
+        next();
+      } else {
+        return res.status(500).json({
+          message: 'Failed to load record ' + id
+        });
+      }
+    });
+  };
+
+  controller.show = function(req, res) {
+    return res.json(req.record);
+  };
+
   controller.update = function(req, res) {
-    Model.findById(req.params.id, function(err, record) {
+    var record = req.record;
+
+    for (var key in req.body) {
+      if ({}.hasOwnProperty.call(req.body, key)) {
+        record.set(key, req.body[key]);
+      }
+    }
+
+    record.save(function(err, record) {
       if (err) {
         return res.status(400).json(err);
       }
 
-      for (var key in req.body) {
-        if ({}.hasOwnProperty.call(req.body, key)) {
-          record.set(key, req.body[key]);
-        }
-      }
-
-      record.save(function(err) {
-        if (err) {
-          return res.status(400).json(err);
-        }
-
-        return res.json({
-          message: 'Record ' + req.params.id + ' was successfully updated',
-          record: record
-        });
+      return res.json({
+        message: 'Record ' + req.params.id + ' was successfully updated',
+        record: record
       });
     });
   };
 
   controller.delete = function(req, res) {
-    Model.findByIdAndRemove(req.params.id, function(err) {
+    var record = req.record;
+
+    record.remove(function(err) {
       if (err) {
         return res.status(400).json(err);
       }
@@ -133,6 +85,79 @@ module.exports = function(Model) {
       return res.json({
         message: 'Record ' + req.params.id + ' was successfully deleted'
       });
+    });
+  };
+
+  // Comments
+
+  controller.listComments = function(req, res) {
+    var record = req.record;
+
+    return res.json(record.comments);
+  };
+
+  controller.createComment = function(req, res) {
+    var record = req.record;
+
+    record.comments.push(req.body);
+
+    record.save(function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(record);
+    });
+  };
+
+  controller.getCommentById = function(req, res, next, id) {
+    var record = req.record;
+    var comment = record.comments.id(req.params.commentId);
+
+    if (!comment) {
+      return res.status(404).json({
+        message: 'Comment not found'
+      });
+    }
+
+    req.comment = comment;
+    next();
+  };
+
+  controller.showComment = function(req, res) {
+    var comment = req.comment;
+
+    return res.json(comment);
+  };
+
+  controller.updateComment = function(req, res) {
+    var record = req.record;
+    var comment = req.comment;
+
+    comment.remove();
+    record.comments.push(req.body);
+
+    record.save(function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(record);
+    });
+  };
+
+  controller.deleteComment = function(req, res) {
+    var record = req.record;
+    var comment = req.comment;
+
+    comment.remove();
+
+    record.save(function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(record);
     });
   };
 

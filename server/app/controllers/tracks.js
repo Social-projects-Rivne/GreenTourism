@@ -1,14 +1,9 @@
 var Track = require('mongoose').model('Track');
+var defaultController = require('./default-crud-controller')(Track);
+var sliceQueryOptions = require('../helpers/slice-query-options');
 
 exports.list = function(req, res) {
-  var limit = req.query.limit;
-  delete req.query.limit;
-
-  var sort = req.query.sort;
-  delete req.query.sort;
-
-  var skip = req.query.skip;
-  delete req.query.skip;
+  var queryAndOptions = sliceQueryOptions(req.query);
 
   var location = req.query.location;
   delete req.query.location;
@@ -36,7 +31,7 @@ exports.list = function(req, res) {
       }
     });
   } else {
-    Track.find(req.query, null, {limit: limit, skip: skip, sort: sort},
+    Track.find(queryAndOptions.query, null, queryAndOptions.options,
       function(err, records) {
         if (err) {
           res.status(400).json(err);
@@ -48,59 +43,12 @@ exports.list = function(req, res) {
   }
 };
 
-exports.show = function(req, res) {
-  Track.findById(req.params.id, function(err, record) {
-    if (err) {
-      res.status(404).json(err);
-    } else {
-      res.json(record);
-    }
-  });
-};
+exports.create = defaultController.create;
 
-exports.create = function(req, res) {
-  var record = new Track(req.body);
+exports.getById = defaultController.getById;
 
-  record.save(function(err) {
-    if (err) {
-      res.status(400).json(err);
-    } else {
-      res.status(201).json({message: 'Record was successfully created!',
-                record: record});
-    }
-  });
-};
+exports.show = defaultController.show;
 
-exports.update = function(req, res) {
-  Track.findById(req.params.id, function(err, record) {
-    if (err) {
-      res.status(400).json(err);
-    } else {
-      for (var key in req.body) {
-        if ({}.hasOwnProperty.call(req.body, key)) {
-          record.set(key, req.body[key]);
-        }
-      }
+exports.update = defaultController.update;
 
-      record.save(function(err) {
-        if (err) {
-          res.status(400).json(err);
-        } else {
-          res.json(record);
-        }
-      });
-    }
-  });
-};
-
-exports.delete = function(req, res) {
-  Track.findByIdAndRemove(req.params.id, function(err) {
-    if (err) {
-      res.status(400).json(err);
-    } else {
-      res.json({message: 'Record ' + req.params.id +
-                ' was successfully deleted'});
-    }
-  });
-};
-
+exports.delete = defaultController.delete;
