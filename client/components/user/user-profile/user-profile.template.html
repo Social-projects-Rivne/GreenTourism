@@ -1,6 +1,6 @@
 <div class="container user-page">
   <div class="row">
-    <section class="col-md-3 user-page__sidebar">
+    <section class="col-sm-3 user-page__sidebar">
       <div class="user-page__avatar">
         <img ng-src="{{$ctrl.user.avatar}}" alt="User profile picture" class="img-rounded img-responsive"
         />
@@ -21,48 +21,69 @@
         </li>
       </ul>
     </section>
-    <section class="col-md-9">
+    <section class="col-sm-9">
       <div ng-show="$ctrl.isSelected(1)">
-        <h1 class="page-header">Profile</h1>
-        <div ng-hide="$ctrl.editMode">
-          <h3>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h3>
-          <p>{{$ctrl.user.email}}</p>
+        <h1 class="page-header">
+          Profile
           <button type="button" class="btn btn-default" ng-click="$ctrl.toggleEditMode()">Edit</button>
+        </h1>
+        <div ng-hide="$ctrl.editMode">
+          <h3>{{$ctrl.user.fullName}}</h3>
+          <h4>{{$ctrl.user.nickname}}</h4>
+          <p><strong>Email: </strong>{{$ctrl.user.email}}</p>
+          <p><strong>Phone: </strong>{{$ctrl.user.phone}}</p>
+          <p><strong>Address: </strong>{{$ctrl.user.address}}</p>
         </div>
         <div ng-show="$ctrl.editMode">
           <form name="form" role="form" novalidate ng-submit="$ctrl.editUser()">
             <div class="row">
               <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error' : form.firstName.$invalid && form.firstName.$dirty }">
                   <input type="text" class="form-control" ng-model="$ctrl.editedUser.firstName" name="firstName"
-                      placeholder="First name" required="" />
-                  <p class="help-block">Help text here.</p>
+                      placeholder="First name" required />
+                  <div ng-show="form.$submitted || form.firstName.$touched">
+                    <p class="help-block" ng-show="form.firstName.$error.required">
+                      First name is required
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error' : form.lastName.$invalid && form.lastName.$dirty }">
                   <input type="text" class="form-control" ng-model="$ctrl.editedUser.lastName" name="lastName"
-                      placeholder="Last name" required="" />
-                  <p class="help-block">Help text here.</p>
+                      placeholder="Last name" required />
+                    <div ng-show="form.$submitted || form.lastName.$touched">
+                      <p class="help-block" ng-show="form.lastName.$error.required">
+                        Last name is required
+                      </p>
+                    </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <input type="email" class="form-control" ng-model="$ctrl.editedUser.email" name="email"
-                  placeholder="Email" required="" />
-              <p class="help-block">Help text here.</p>
+            <div class="form-group" ng-class="{ 'has-error' : form.nickname.$invalid && form.nickname.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.nickname" name="nickname"
+                  placeholder="Nickname" />
             </div>
 
-            <div class="form-group">
-              <input type="password" class="form-control" ng-model="$ctrl.editedUser.password"
-                  name="password" placeholder="Password" required="" />
-              <p class="help-block">Help text here.</p>
+            <div class="form-group" ng-class="{ 'has-error' : form.phone.$invalid && form.phone.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.phone" name="phone"
+                  placeholder="Phone number" ng-pattern="/\+\d{1,4}\d{9}/" />
+                <div ng-show="form.$submitted || form.phone.$touched">
+                  <p class="help-block" ng-show="form.phone.$error.pattern">
+                    Invalid phone number
+                  </p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.nickname.$invalid && form.nickname.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.address" name="address"
+                  placeholder="Address" />
             </div>
 
             <button type="button" class="btn btn-default" ng-click="$ctrl.toggleEditMode()">Cancel</button>
-            <input type="submit" class="btn btn-default" value="Change" />
+            <input type="submit" class="btn btn-default" value="Change" ng-disabled="form.$invalid" />
           </form>
         </div>
       </div>
