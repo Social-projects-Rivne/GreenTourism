@@ -1,5 +1,8 @@
 // Signin & Signup forms
-
+.dropdown-auth{
+  padding: 0;
+  border: none;
+}
 .circleuser {
   color: @brand-light;
   position: absolute;
@@ -12,27 +15,14 @@
   text-align: center;
   left: 107px;
 }
-.login {
-  position: fixed;
-  left: 0;
-  top: 167px;
-  background-color: @brand-light;
-  width: 250px;
-}
-.signup {
-  position: fixed;
-  left: 0;
-  top: 167px;
-  background-color: @brand-light;
-  width: 250px;
-}
 .signhead {
   position: fixed;
   left: 0;
-  top: 53px;
+  top: 67px;
   height: 117px;
   background-color: @brand-dark;
   width: 250px;
+  margin-top: -15px
 }
 .logotype {
   color: @brand-light;
@@ -45,35 +35,37 @@
   text-align: center;
   margin-top: 60px;
 }
-input {
-  margin-top: -5px;
-  margin-bottom: 0;
-}
-input[type=text]:focus {
-  border: 3px solid green;
-}
-input[type=text] {
-  border: 1px solid green;
-}
-input[type=email]:focus {
-  border: 3px solid green;
-}
-input[type=email] {
-  border: 1px solid green;
-}
-input[type=password]:focus {
-  border: 3px solid green;
-}
-input[type=password] {
-  border: 1px solid green;
-}
-hr {
-  border-color: @brand-dark;
-  margin: 5% -5%;
-}
-label {
-  color: @brand-dark;
-  font-size: 14px;
+.registration{
+
+  -webkit-box-shadow: 2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  -moz-box-shadow:    2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  box-shadow:         2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+
+
+  position: fixed;
+  left: 0;
+  top: 167px;
+  background-color: @brand-light;
+  width: 250px;
+  input:focus {
+    border: 1px solid green;
+    -webkit-box-shadow: 2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+    -moz-box-shadow:    2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+    box-shadow:         2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  }
+  input {
+    border: 1px solid green;
+    margin-top: -5px;
+    margin-bottom: 0;
+  }
+  hr {
+    border-color: @brand-dark;
+    margin: 5% -5%;
+  }
+  label {
+    color: @brand-dark;
+    font-size: 14px;
+  }
 }
 .btn-google {
   margin-bottom: 5%;
@@ -118,7 +110,8 @@ label {
     display: none;
   }
   .signhead {
-    height: 53px;
+    height: 57px;
+    margin-top: -17px;
   }
   .circleuser {
     display: none;
@@ -126,14 +119,12 @@ label {
   .user {
     display: none;
   }
-  .login {
-    top: 103px;
-  }
-  .signup {
-    top: 103px;
+  .registration{
+    top: 100px;
   }
   #informlog {
-    margin-top: 18px;
+    margin-top: 0px;
     font-size: 14px;
+    padding-top: 18px;
   }
 }
