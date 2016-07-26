@@ -11,27 +11,25 @@ exports.list = function(req, res) {
       {model: Blog.categories},
       {model: Blog.comment},
       {model: Blog.likes}
-    ]
+    ],
+      //raw: true
   })
     .then(function(records) {
-        records.forEach(function(item, i, arr) {
-
-          var user  = User.findById("578cb97172f290d4138fe23c", 'avatar firstName lastName', function(err, user){
-            //item.userId = "Hello";
-            //console.log("Record before: " + records[i].userId);
-            //console.log(records[i].dataValues);
-            //console.log("USER:" +  user);
+        records.forEach(function(item) {
+          User.findById("578cb97172f290d4138fe23c", 'avatar firstName lastName', {lean: true}, function(err, user){
+            console.log(item);
+            //blogUser = JSON.stringify(user);
             //blogUser = user;
-            console.log("QQQQ" + typeof (user.avatar));
-            console.log("AAAAAA" + user.avatar);
-            return user;
-            //records[i].userId = user.firstName;
-            //console.log("Record after: " + records[i].userId);
-            //return records[i].dataValues;
-            //return records;
+            ////
+            //console.log("USER INSIDE: " + blogUser);
+            //for(var k in blogUser){
+            //  console.log(blogUser[k]);
+            //}
+            ////return res.end(JSON.stringify(user));
+            //return res.end(JSON.stringify(user));
+            ////return res.end(blogUser);
+            item.userId = user;
           });
-          records[i].userId = angular.fromJson(angular.toJson(user));
-          console.log("OUUUUUUUUUUT" + user);
         });
       res.json(records);
     })

@@ -5,7 +5,7 @@ var sql = require('../../config/sequelize')();
 var BlogList = sql.define('blogs', {
   title: {type: Sequelize.TEXT, allowNull: false},
   content: {type: Sequelize.TEXT, allowNull: false},
-  userId: {type: Sequelize.INTEGER, allowNull: false},
+  userId: {type: Sequelize.TEXT, allowNull: false},
   status: {type: Sequelize.TEXT, allowNull: false}
 });
 
