@@ -9,11 +9,7 @@ angular.module('calendar').service('calendarService', [function() {
   this.names = [];
   this.events = [];
 
-  this.click ;
-
-  this.test = function() {
-    alert('test') ;
-  };
+  this.click ; // function for binding calendar whith events in other controller, empty when start
 
   this.clear = function() {
     this.names = [];
@@ -21,15 +17,14 @@ angular.module('calendar').service('calendarService', [function() {
     return;
   };
 
-  this.find_date = function(dateFind, sort) {
+  this.findDate = function(dateFind, sort) {
     return this.events.filter(function(itEvent) {
-      var temp_date = new Date(itEvent.date_start);
-      if (sort == 1) return temp_date > dateFind;
-      return temp_date.toDateString() == dateFind.toDateString();
+      var tempDate= new Date(itEvent.date_start);
+      if (sort == 1) return tempDate > dateFind;
+      return tempDate.toDateString() == dateFind.toDateString();
     });
   };
 
-  return {
-    th: this
-  };
+  return this ;
+
 }]);

@@ -6,11 +6,11 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
     controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventListService', 'calendarService', 'Event',
       function($scope, $routeParams, $http, eventMapService, eventListService, calendarService, Event) {
         $scope.mapDanni = eventMapService.th_;
-        $scope.calendars = calendarService.th;
+        $scope.calendars = calendarService;
 
 
         $scope.calendars.click = function () {
-          $scope.dann = $scope.calendars.events.filter(function (event) {
+          $scope.events = $scope.calendars.events.filter(function (event) {
             return new Date(event.date_start) >= $scope.calendars.values[0] && new Date(event.date_end) <= $scope.calendars.values[1];
           });
         };
@@ -60,7 +60,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
 
         $scope.eventL = eventListService.th;
         $scope.eventL.clear();
-        $scope.eventL.Item_type_menu = this.type;
+        $scope.eventL.itemTypeMenu = this.type;
 
         this.data = $http.get('components/event/events/event.data.json').success(function(data) {
           $scope.eventL.event = data;
@@ -74,7 +74,7 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
           $scope.eventL.event = data;
 
           $scope.eventL.all_type();
-          $scope.eventL.Type_menu[$scope.eventL.Type.indexOf($scope.eventL.Item_type_menu)].active = true;
+          $scope.eventL.TypeMenu[$scope.eventL.Type.indexOf($scope.eventL.itemTypeMenu)].active = true;
 
           return data;
         }, function(data) {
@@ -85,14 +85,14 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         $scope.eventL.mainControllerName = 'MapEvent';
 
         $scope.marker_click = function(lat, lng) {
-          $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendar_show_date, $scope.eventL.CalendarName[1].calendar_show_date, $scope.eventL.active_type());
+          $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendarShowDate, $scope.eventL.CalendarName[1].calendarShowDate, $scope.eventL.active_type());
           var clicks_arr = [];
           var sort_arr = [];
 
           for (var i = 0; i < $scope.filters.length; i++) {
             if (($scope.filters[i].event_points[0].lat == lat) && ($scope.filters[i].event_points[0].lon == lng)) {
               clicks_arr.push($scope.filters[i]); //alert($scope.filters[i].name);
-              sort_arr.push($scope.filters[i].date_start - $scope.eventL.CalendarName[0].calendar_show_date);
+              sort_arr.push($scope.filters[i].date_start - $scope.eventL.CalendarName[0].calendarShowDate);
             }
           }
 
@@ -101,11 +101,11 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         };
 
         this.temp_click = function() {
-          if ($scope.eventL.active_type().length != 0) $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendar_show_date, $scope.eventL.CalendarName[1].calendar_show_date, $scope.eventL.active_type());
+          if ($scope.eventL.active_type().length != 0) $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendarShowDate, $scope.eventL.CalendarName[1].calendarShowDate, $scope.eventL.active_type());
           else {
             if (this.type) {
               //alert('hi') ;
-              $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendar_show_date, $scope.eventL.CalendarName[1].calendar_show_date, [this.type]);
+              $scope.filters = $scope.eventL.find_event($scope.eventL.CalendarName[0].calendarShowDate, $scope.eventL.CalendarName[1].calendarShowDate, [this.type]);
             }
           }
 
@@ -186,12 +186,12 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
             marker1.addTo($scope.groups);
           }
 
-          $scope.closeEvent = $scope.eventL.find_distanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
+          $scope.closeEvent = $scope.eventL.findDistanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
           $scope.groups.addTo($scope.map);
         };
 
         var chamgeEvents = function() {
-          $scope.closeEvent = $scope.eventL.find_distanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
+          $scope.closeEvent = $scope.eventL.findDistanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
           $scope.$apply();
         };
 

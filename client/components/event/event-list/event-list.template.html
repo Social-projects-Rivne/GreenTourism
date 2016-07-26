@@ -34,54 +34,48 @@
             <ul class="dropdown-menu right-calendar">
                 <calendar></calendar>
             </ul>
-            <div class="row"></div>
         </div>
     </div>
 
 
-
 </div>
-<div class="row"></div>
 <div class="container">
 
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 show-event"
-             ng-repeat="dan in dann | orderBy: sort_by | limitTo:howMuch ">
-            <div style="display: none">{{give_event.find_date(give_event.date_current,1)}}</div>
-            <a href="#!/events/{{dan._id}}">
+             ng-repeat="event in events | orderBy: sort_by | limitTo:howMuch ">
+            <a href="#!/events/{{event._id}}">
                 <div class="text">
-                    <div class="event-title">{{dan.name}}</div>
-                    <div class="event-description">{{dan.description}}</div>
-                    <a href="#!/events/{{dan._id}}"></a>
+                    <div class="event-title">{{event.name}}</div>
+                    <div class="event-description">{{event.description}}</div>
+                    <a href="#!/events/{{event._id}}"></a>
                     <div class="event-map">
-                        <a href="#!/eventsmap/{{dan._id}}">
-                            <img src="assets{{'/img/events/map.png'}}" title="{{dan.name}}">
+                        <a href="#!/eventsmap/{{event._id}}">
+                            <img src="assets{{'/img/events/map.png'}}" title="{{event.name}}">
                         </a>
                     </div>
                     <div class="event-some-fill">
                         <div class="event-fill">Date start:</div>
-                        <div class="event-fill-text">{{dan.date_start | date:'dd MMMM yyyy'}}</div>
+                        <div class="event-fill-text">{{event.date_start | date:'dd MMMM yyyy'}}</div>
                         <div class="row"></div>
                         <div class="event-fill">Date end:</div>
-                        <div class="event-fill-text">{{dan.date_end | date:'dd MMMM yyyy'}}</div>
+                        <div class="event-fill-text">{{event.date_end | date:'dd MMMM yyyy'}}</div>
                         <div class="row"></div>
                         <div class="event-fill">Prise:</div>
-                        <div class="event-fill-text">{{dan.price}}</div>
+                        <div class="event-fill-text">{{event.price}}</div>
                         <div class="row"></div>
                         <div class="event-fill">Author:</div>
-                        <div class="event-fill-text">{{dan.owner}}</div>
+                        <div class="event-fill-text">{{event.owner}}</div>
                         <div class="row"></div>
                         <div class="event-fill">Reting:</div>
-                        <div class="event-fill-text">{{dan.rate}}</div>
+                        <div class="event-fill-text">{{event.rate}}</div>
                     </div>
                 </div>
-                <div class="fon" style="background-image: url('assets{{dan.photo[0]}}')" alt="{{dan.name}}" title="{{dan.name}}">
-                    <div class="top-title">{{dan.name}}</div>
-                    <!--div class="location">{{$ctrl.event_place(dan.event_points[0].lat,dan.event_points[0].lon)}}</div-->
+                <div class="fon" style="background-image: url('assets{{event.photo[0]}}')" alt="{{event.name}}" title="{{event.name}}">
+                    <div class="top-title">{{event.name}}</div>
                 </div>
             </a>
         </div>
-        <div class="row"></div>
 
     </div>
 

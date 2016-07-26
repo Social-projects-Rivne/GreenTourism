@@ -4,7 +4,7 @@ angular.module('eventDetail').component('eventDetail', {
     function($scope, $routeParams, calendarService, Event) {
       this._id = $routeParams.eventId;
 
-      $scope.calendars = calendarService.th;
+      $scope.calendars = calendarService;
 
       $scope.calendars.clear() ;
 
