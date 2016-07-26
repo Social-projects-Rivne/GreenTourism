@@ -4,9 +4,9 @@
 
     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchWord">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="$ctrl.hi()">Go!</button>
+                <button class="btn btn-default" type="button" ng-click="$ctrl.findWord(searchWord)">Search</button>
               </span>
         </div><!-- /input-group -->
     </div>
@@ -48,13 +48,13 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 show-event"
              ng-repeat="dan in dann | orderBy: sort_by | limitTo:howMuch ">
             <div style="display: none">{{give_event.find_date(give_event.date_current,1)}}</div>
-            <a href="#!/events/{{dan.id}}/{{dan.date_start}}">
+            <a href="#!/events/{{dan._id}}">
                 <div class="text">
                     <div class="event-title">{{dan.name}}</div>
                     <div class="event-description">{{dan.description}}</div>
-                    <a href="#!/events/{{dan.id}}/{{dan.date_start}}"></a>
+                    <a href="#!/events/{{dan._id}}"></a>
                     <div class="event-map">
-                        <a href="#!/eventsmap/{{dan.event_points[0].lat}}/{{dan.event_points[0].lon}}/{{dan.type}}/{{dan.date_start}}">
+                        <a href="#!/eventsmap/{{dan._id}}">
                             <img src="assets{{'/img/events/map.png'}}" title="{{dan.name}}">
                         </a>
                     </div>
@@ -85,11 +85,5 @@
 
     </div>
 
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
 </div>
 </span>

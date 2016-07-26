@@ -11,9 +11,12 @@ angular.module('calendar').service('calendarService', [function() {
 
   this.click ;
 
+  this.test = function() {
+    alert('test') ;
+  };
+
   this.clear = function() {
     this.names = [];
-    this.events = [];
 
     return;
   };

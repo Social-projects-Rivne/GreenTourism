@@ -1,11 +1,11 @@
-<div class="page" ng-repeat="event in eventListService | filter:{id:$ctrl.id}">
+<div class="page" ng-repeat="event in calendars.events | filter:{_id:$ctrl._id}">
   <div class="row">
     <div class="page-header text-center">
       <h3>{{event.name}}</h3>
     </div>
     <div class="col-md-2">
       <ul class="media-list">
-        <li class="media" ng-repeat="img in event.attachments.photo">
+        <li class="media" ng-repeat="img in event.photo">
           <div class="media-middle">
             <img src="assets{{img}}" ng-class="$first ? 'img-responsive' : 'media-object center-block img-small'"
                 alt="{{event.name}}">
@@ -13,7 +13,7 @@
           <div ng-if="$first" class="media-body">
             <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red">
               {{event.event_rate}}</h4>
-            <a href="#!/eventsmap/{{event.event_points[0].lat}}/{{event.event_points[0].lon}}/{{event.type}}/{{event.date_start}}">
+            <a href="#!/eventsmap/{{event._id}}">
               <h2 class="text-center center-block glyphicon glyphicon-globe" style="color: green; font-size : 50px;"></h2>
             </a>
           </div>

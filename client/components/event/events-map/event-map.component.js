@@ -3,20 +3,26 @@
 angular.module('eventsMap', ['calendar', 'eventMapType'])
   .component('eventsMap', {
     templateUrl: 'components/event/events-map/event-map.template.html',
-    controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventListService',
-      function($scope, $routeParams, $http, eventMapService, eventListService) {
+    controller: ['$scope', '$routeParams', '$http', 'eventMapService', 'eventListService', 'calendarService', 'Event',
+      function($scope, $routeParams, $http, eventMapService, eventListService, calendarService, Event) {
         $scope.mapDanni = eventMapService.th_;
+        $scope.calendars = calendarService.th;
 
-        this.lat = $routeParams.lat;
-        if (!$routeParams.lat) this.lat = 50.6234;
-        else $scope.mapDanni.x = $routeParams.lat;
-        this.lng = $routeParams.lng;
-        if (!$routeParams.lng) this.lng = 26.2189;
-        else $scope.mapDanni.y = $routeParams.lng;
-        this.type = $routeParams.type;
-        if (!$routeParams.type) this.type = 'Game';
-        this.date_start = $routeParams.date_start;
-        if (!$routeParams.type) this.date_start = new Date();
+
+        $scope.calendars.click = function () {
+          $scope.dann = $scope.calendars.events.filter(function (event) {
+            return new Date(event.date_start) >= $scope.calendars.values[0] && new Date(event.date_end) <= $scope.calendars.values[1];
+          });
+        };
+
+        if ($scope.calendars.events.length == 0)
+        {
+          Event.getList().then(function (result) {
+            $scope.calendars.events = result.concat(event);
+            $scope.calendars.click();
+          })
+        };
+
 
         $scope.map = L.map('mapevent', {
           center: [50.6234, 26.2189],
@@ -55,8 +61,6 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
         $scope.eventL = eventListService.th;
         $scope.eventL.clear();
         $scope.eventL.Item_type_menu = this.type;
-        $scope.eventL.CalendarValue[0] = this.date_start;
-        $scope.eventL.CalendarValue[1] = +this.date_start + 31 * 24 * 60 * 60 * 1000;
 
         this.data = $http.get('components/event/events/event.data.json').success(function(data) {
           $scope.eventL.event = data;
