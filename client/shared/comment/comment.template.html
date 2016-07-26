@@ -65,7 +65,7 @@
                 ng-disabled="!comment.content">Update
         </button>
       </div>
-      <p class="show-comments-timestamp">Added: {{comment.createdAt}}</p>
+      <p class="show-comments-timestamp">Added: {{comment.createdAt  | date:'yyyy-MM-dd HH:mm'}}</p>
     </div>
   </div>
 </div>
