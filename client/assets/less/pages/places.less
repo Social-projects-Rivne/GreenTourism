@@ -1,157 +1,285 @@
-/*  -------- Places template ----------  */
-.places {
+// Popular Tracks in location - Styles for popular-tracks.template
+.popular-in-location-wrapper {
   position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+  max-height: 200px;
   overflow: hidden;
-  top: 0;
-  left: 0;
-}
-.no-padding {
-  padding: 0;
-}
-
-#sidebar,
-#main-content {
-  max-height: 1000px;
-  text-align: center;
-  overflow: hidden;
-}
-
-#main-content {
-  border-right: 1px solid @light-green;
-}
-
-#search {
-  margin: 10px 0;
-}
-
-#search .btn {
-  background-color: @light-green;
-  color: #fff;
-}
-
-.place-wrapper {
-  height: 250px;
-  padding: 0;
-}
-
-.place-container {
-  margin: 5px;
-  height: 240px;
-  border: 1px solid @light-green;
-  border-radius: 5px;
-  position: relative;
-  overflow:hidden;
   img {
-    height: 100%;
     width: 100%;
+    height: auto;
   }
-  div.data {
+  .popular-in-location-gradient {
     position: absolute;
     top: 0;
-    left: 0;
+    padding-left: 50%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
-    border-radius: 5px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+  }
+  .shared-style {
+    padding: 0 4px;
+    font-weight: bold;
+    color: @brand-light;
+    position: absolute;
+  }
+  .popular-in-location-name {
+    .shared-style;
+    font-size: 18px;
+    top: 4px;
+    right: 4px;
+  }
+  .popular-in-location-address {
+    .shared-style;
+    font-size: 12px;
+    bottom: 4px;
+    right: 4px;
     text-align: right;
-    color: #fff;
-    padding: 0 15px;
-    .popular-track-rate {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding: 15px;
+    img {
+      width: 12px;
     }
   }
 }
 
-#filter {
-  height: auto;
-  border-bottom: 1px solid @light-green;
+// Icons for popular places and tracks in location
+.popular-places-wrapper, .popular-tracks-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  padding-top: 115px;
+  background-color: #f8f8f8;
+  transition: all linear 0.5s;
+  width: 300px;
+  height: 100%;
+  &.ng-hide {
+    opacity: 0;
+  }
+  a:first-child {
+    color: @brand-dark;
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    left: 5px;
+  }
+  .popular-div-style {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    text-align: center;
+    color: @brand-dark;
+  }
+  @media (max-width: 767px) {
+    padding-top: 160px;
+  }
 }
 
-#buttons {
-  margin: 10px 0;;
+.map-page-wrapper {
+  background-color: #f8f8f8;
 }
 
-.btn-first {
-  border-radius: 5px 0 0 5px !important;
+.map-menu {
+  position: relative;
+  z-index: 3;
+  padding: 15px 0;
+  background-color: #f8f8f8;
+  .map-menu-check-button {
+    padding-top: 5px;
+    i {
+      font-size: 24px;
+      color: #999;
+      margin-right: 10px;
+      &:focus {
+        color: @brand-dark;
+      }
+      &.checked {
+        color: @brand-dark;
+      }
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+    @media (max-width: 530px) {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+  }
+  .map-menu-popular {
+    padding-top: 5px;
+    padding-right: 10px;
+    div {
+      float: right;
+    }
+    i {
+      font-size: 24px;
+      color: #999;
+      margin-right: 5px;
+      &:focus {
+        color: @brand-dark;
+      }
+      &.checked {
+        color: @brand-dark;
+      }
+    }
+    @media (max-width: 348px) {
+      padding-left: 0;
+    }
+  }
+  .map-menu-buttons-wrapper {
+    .map-menu-buttons {
+      button {
+        color: @brand-dark;
+        border: 1px solid @brand-dark;
+      }
+      .dropdown-menu {
+        padding: 0;
+        border: 1px solid @brand-dark;
+        li {
+          border-bottom: 1px solid @brand-dark;
+          padding: 5px 0;
+          &:hover {
+            background-color: #f8f8f8;
+            border-radius: 4px;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          a {
+            color: @brand-dark;
+            background-color: transparent;
+          }
+        }
+        & filter-map-type li a {
+          display: block;
+          text-decoration: none;
+          padding: 3px 20px;
+          span {
+            float: right;
+          }
+        }
+        &.place-mobile {
+          left: auto;
+          right: 0;
+          li a {
+            padding: 3px 10px;
+            span:last-child {
+              float: right;
+            }
+            img {
+              width: 10px;
+            }
+          }
+        }
+      }
+
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+    @media (max-width: 348px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .map-menu-search {
+    input {
+      border: 1px solid @brand-dark;
+    }
+    button {
+      border: 1px solid @brand-dark;
+      background-color: @brand-dark;
+      color: @brand-light;
+    }
+  }
 }
 
-.btn-last {
-  border-radius: 0 5px 5px 0 !important;
+.dropdown-submenu {
+  position: relative;
+  & > a:after {
+    display: block;
+    content: "";
+    float: right;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+  }
+  &:hover {
+    .dropdown-menu {
+      display: block;
+    }
+    a:after {
+      border-left-color: @brand-dark;
+    }
+  }
+  .dropdown-menu {
+    top: 0;
+    left: 100%;
+    border-radius: 0 6px 6px 6px;
+    a {
+      padding-left: 10px;
+      span:last-child {
+        float: right;
+      }
+      &:hover {
+        border-radius: 0 6px 6px 6px;
+      }
+    }
+  }
+  &.places {
+    img {
+      width: 10px;
+    }
+  }
 }
 
-#map {
-  min-height: 600px;
+// Map on page
+.map-wrapper {
+  position: absolute;
+  padding-top: 114px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  #map {
+    height: 100%;
+    width: 100%;
+    @media (max-width: 767px) {
+      .leaflet-control-zoom {
+        display: none;
+      }
+    }
+  }
 }
-
-#sidebarBottom {
-  max-height: 315px;
-  text-align: center;
-  border-top: 1px solid @light-green;
-}
-
-/*-------------- Map type and Places category filters --------------*/
-
-.filter span {
-  float: right;
-}
-
-.filter img {
-  width: 10px;
-}
-
-/*--places ------*/
-.marker-image {
-  width: 150px;
-}
-div.place {
-  margin: 10px;
-}
-.place img {
-  width: 130px;
-  padding-bottom: 5px;
-}
-.place .img_modal {
-  width: 550px;
-}
-.place img.profile {
-  width: 80px;
-  height: 80px;
-}
-.place-container img {
-  cursor: pointer;
-}
-.fancybox a img {
-  width: 120px;
-}
-.pull-left {
-  float: none;
-}
-/* place */
 
 /*-------------- Add place --------------*/
 .alert-input {
   color: #f00;
 }
+
 .add-item-menu {
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
-  width: 25%;
-  z-index: 1000;
-  border-left: 1px solid @light-green;
-  background-color: #fff;
-  padding: 15px;
+  width: 300px;
+  z-index: 2;
+  background-color: #f8f8f8;
+  padding: 115px 15px 15px 15px;
+  overflow: auto;
   display: block;
   .removeIcon {
     position: absolute;
-    top: 15px;
+    top: 115px;
     left: 10px;
     font-size: 25px;
     color: @light-green;
+    @media (max-width: 767px) {
+      top: 160px;
+    }
   }
   h2 {
     text-align: center;
@@ -159,6 +287,10 @@ div.place {
   .title {
     font-weight: bold;
     color: @light-green;
+  }
+  @media (max-width: 767px) {
+    padding-top: 200px;
+    width: 60%;
   }
 }
 
