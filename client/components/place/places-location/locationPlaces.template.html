@@ -1,6 +1,6 @@
 <h4>Popular places in location</h4>
 <div class="popular-in-location-wrapper"
-     ng-repeat="place in placesByLocation | filter:$ctrl.placesFilter | limitTo:3  | orderBy : '-rate'">
+     ng-repeat="place in placesByLocation | filter:$ctrl.placesFilter | limitTo:4  | orderBy : '-rate'">
   <img ng-src="{{place.photos[0]}}"/>
   <a ng-href="#!/places/{{place.id}}">
     <div class="popular-in-location-gradient"></div>

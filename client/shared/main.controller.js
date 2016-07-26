@@ -11,7 +11,7 @@ angular.module('greenTourism')
 
     // TODO: Add flash messages hiding when changing route
 
-    $rootScope.$on('$routeChangeSuccess', '$scope', function(event, current, previous, $scope) {
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 
       ctrl.routeChangeError = false;
       ctrl.statusCode = 200;
