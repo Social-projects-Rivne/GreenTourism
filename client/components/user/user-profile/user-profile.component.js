@@ -16,11 +16,18 @@ angular.module('user').component('userProfile', {
 
     // User editing
     ctrl.editMode = false;
+    ctrl.editAvatarMode = false;
+
+    ctrl.toggleEditAvatarMode = function() {
+      ctrl.editAvatarMode = !ctrl.editAvatarMode;
+      ctrl.newAvatar = null;
+    };
 
     ctrl.changeAvatar = function() {
-      // TODO: Replace prompt with something different
-      ctrl.user.avatar = prompt('Enter new avatar url');
+      ctrl.user.avatar = ctrl.newAvatar;
       ctrl.user.save();
+
+      ctrl.toggleEditAvatarMode();
     };
 
     ctrl.toggleEditMode = function() {
@@ -29,15 +36,13 @@ angular.module('user').component('userProfile', {
       if (ctrl.editMode) {
         ctrl.editedUser = angular.copy(ctrl.user);
       } else {
-        delete ctrl.editedUser;
+        ctrl.editedUser = null;
       }
     };
 
     ctrl.editUser = function() {
-      // TODO: Validate before saving
       angular.merge(ctrl.user, ctrl.editedUser);
       ctrl.user.save();
-      delete ctrl.user.password;  // Password must not be stored in app
 
       ctrl.toggleEditMode();
     };
