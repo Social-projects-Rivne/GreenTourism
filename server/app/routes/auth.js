@@ -68,7 +68,7 @@ router.route('/logout').get(function(req, res) {
 
 //FACEBOOK
 router.route('/auth/facebook').get(
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { scope: ['email'] }));
 
 router.route('/auth/facebook/callback').get(
   passport.authenticate('facebook', { successRedirect: '/#!/profile',
@@ -77,12 +77,10 @@ router.route('/auth/facebook/callback').get(
 
 
 //google
-router.route('/auth/google').post(
-  passport.authenticate('google'));
-
-router.route('/auth/google/callback').post(
-  passport.authenticate( 'google', { successRedirect: '/#!/profile',
-                                     failureRedirect: '/#!/login' }));
+router.route('/auth/google').get(
+  passport.authenticate('google', {scope: [
+       'https://www.googleapis.com/auth/plus.login',
+       'https://www.googleapis.com/auth/plus.profile.emails.read'] }));
 
 
 module.exports = router;
