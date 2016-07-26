@@ -24,5 +24,14 @@ angular.module('greenTourism')
       rate: 0,
       address: ''
     };
+    constants.emptyTrackModel = {
+      name: '',
+      type: '',
+      description: '',
+      places: [],
+      photos: [],
+      owner: ''
+    };
+
     return constants;
   });
