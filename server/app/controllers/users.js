@@ -1,5 +1,8 @@
 var User = require('mongoose').model('User');
+var Place = require('mongoose').model('Place');
+var Track = require('mongoose').model('Track');
 var defaultController = require('./default-crud-controller')(User);
+var sliceQueryOptions = require('../helpers/slice-query-options');
 
 exports.list = defaultController.list;
 
@@ -49,3 +52,33 @@ exports.showMe = function(req, res) {
 exports.update = defaultController.update;
 
 exports.delete = defaultController.delete;
+
+exports.listPlaces = function(req, res) {
+  req.query.owner = req.params.id;
+
+  var queryAndOptions = sliceQueryOptions(req.query);
+
+  Place.find(queryAndOptions.query, null, queryAndOptions.options,
+    function(err, records) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(records);
+    });
+};
+
+exports.listTracks = function(req, res) {
+  req.query.owner = req.params.id;
+
+  var queryAndOptions = sliceQueryOptions(req.query);
+
+  Track.find(queryAndOptions.query, null, queryAndOptions.options,
+    function(err, records) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(records);
+    });
+};

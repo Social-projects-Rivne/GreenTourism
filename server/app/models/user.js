@@ -56,7 +56,19 @@ var UserSchema = new Schema({
   },
   providerId: String,
   providerData: {}
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
+
+UserSchema.virtual('fullName').get(function() {
+  return this.firstName + ' ' + this.lastName;
+});
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(next) {
