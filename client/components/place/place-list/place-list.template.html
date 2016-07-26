@@ -1,179 +1,384 @@
-<div class="container-fluid places">
-  <div class="row places">
-    <div class="col-xs-9 no-padding" id="main-content">
-      <div class="col-xs-12 no-padding" id="filter">
-        <!-- Filter container start -->
-        <div class="btn-group col-xs-12" role="group" id="buttons">
-          <div class="col-xs-1"></div>
-          <div class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default col-xs-12 btn-first" ng-disabled="!$ctrl.user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              New item
+<div class="map-page-wrapper">
+  <div class="container">
+    <div class="row map-menu">
+      <!-- Left-menu with icons -->
+      <div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 map-menu-check-button">
+        <a href="" ng-click="$ctrl.defaultObject('placesIcon')">
+          <i class="fa fa-map-marker placesIcon" aria-hidden="true"
+             title="Default value of Places"></i></a>
+        <a href="" ng-click="$ctrl.defaultObject('tracksIcon')">
+          <i class="fa fa-random tracksIcon checked" aria-hidden="true"
+             title="Default value of Tracks"></i></a>
+        <a href="" ng-click="$ctrl.defaultObject('eventsIcon')">
+          <i class="fa fa-calendar" aria-hidden="true"
+             title="Default value of Events"></i></a>
+      </div>
+      <!-- Main-menu -->
+      <div class="col-lg-5 col-md-5 hidden-sm hidden-xs map-menu-buttons-wrapper">
+        <div class="btn-group map-menu-buttons" role="group">
+          <!-- New Item -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    ng-disabled="!$ctrl.user"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              New Item
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
-              <a href="" class="list-group-item filter" ng-click="$ctrl.toggleAddPlaceMenu()">Add place</a>
-              <a href="" class="list-group-item filter" ng-click="$ctrl.addTrack()">Add track</a>
-              <a href="" class="list-group-item filter">Add event</a>
+            <ul class="dropdown-menu">
+              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a>
+              </li>
+              <li><a href="">Add Track</a></li>
+              <li><a href="#">Add Event</a></li>
             </ul>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterMapType">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Map type
+          <!-- Map Type -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              Map Type
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter">
+            <ul class="dropdown-menu dropdownStop">
               <filter-map-type></filter-map-type>
             </ul>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group" id="dropdownFilterCategory">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Places
+          <!-- Categories -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              Categories
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu col-xs-12 list-group no-padding dropdownFilter placeFilter">
-              <a href="" id="{{placeType}}" class="list-group-item filter" ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
-                  ng-click="$ctrl.checkType(placeType)">
-                <img ng-src="{{placeTypeValue.icon}}"> {{placeTypeValue.name}}
-                <span></span>
-              </a>
-              <a href="" id="all" class="list-group-item filter" ng-click="$ctrl.checkAll()">
-                <img> Check all
-                <span></span>
-              </a>
+            <ul class="dropdown-menu dropdownStop">
+              <!-- Categories Places -->
+              <li class="dropdown-submenu places">
+                <a href="">Places</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+                      ng-click="$ctrl.checkType(placeType)">
+                    <a class="placeFilter {{placeType}}" href="">
+                      <img ng-src="{{placeTypeValue.icon}}">
+                      {{placeTypeValue.name}}
+                      <span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="placeFilter check-all-places" href=""
+                       ng-click="$ctrl.checkAllPlaces()">
+                      Check all
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!-- Categories Tracks -->
+              <li class="dropdown-submenu places">
+                <a href="">Tracks</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
+                      ng-click="$ctrl.showSpecificTracks(trackType)">
+                    <a class="trackFilter {{trackType}}" href="">
+                      <span style="background-color: {{trackTypeValue.color}};">
+                      &nbsp;
+                    </span>
+                      &nbsp;{{trackTypeValue.name}}
+                      <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="trackFilter check-all-tracks" href=""
+                       ng-click="$ctrl.checkAllTracks()">
+                      Check all
+                      <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
-          <div id="tracks-filter" class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              Tracks
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu col-xs-12 dropdownFilter">
-              <li ng-repeat="(type, typeObj) in $ctrl.tracksType" ng-click="$ctrl.showSpecificTracks(type)">
-                <a href="" class="active" id="{{type}}">
-                  <span class="col-xs-9" style="border-left: 5px solid {{typeObj.color}}">
-                    {{typeObj.name}}
-                  </span>
-                  <span id="gi{{type}}" class="col-xs-3 glyphicon glyphicon-ok">
-                  </span>
-                </a>
-              </li>
-              <li ng-click="$ctrl.checkAllTracks()">
-                <a href="" class="active" id="all-tracks">
-                  <span class="col-xs-9">
-                    Check all tracks
-                  </span>
-                  <span id="gi-all" class="col-xs-3 glyphicon glyphicon-ok">
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
-          <div class="col-xs-2"></div>
         </div>
       </div>
-      <!-- Filter container end -->
+      <!-- Main menu for SM and XS devices -->
+      <div class="col-sm-4 col-xs-8 hidden-md hidden-lg map-menu-buttons-wrapper">
+        <div class="btn-group map-menu-buttons" role="group">
+          <!-- New Item -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    ng-disabled="!$ctrl.user"
+                    aria-expanded="false">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a>
+              </li>
+              <li><a href="#">Add Track</a></li>
+              <li><a href="#">Add Event</a></li>
+            </ul>
+          </div>
+          <!-- Map Type -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-globe" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdownStop">
+              <filter-map-type></filter-map-type>
+            </ul>
+          </div>
+          <!-- Places -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+                  ng-click="$ctrl.checkType(placeType)">
+                <a class="placeFilter {{placeType}}" href="">
+                  <img ng-src="{{placeTypeValue.icon}}">
+                  {{placeTypeValue.name}}
+                  <span></span>
+                </a>
+              </li>
+              <li>
+                <a class="placeFilter check-all-places" href=""
+                   ng-click="$ctrl.checkAllPlaces()">
+                  Check all
+                  <span></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- Tracks -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-random" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(trackType, trackTypeValue) in $ctrl.tracksType"
+                  ng-click="$ctrl.showSpecificTracks(trackType)">
+                <a class="trackFilter {{trackType}}" href="">
+                  <span style="background-color: {{trackTypeValue.color}};">
+                      &nbsp;
+                    </span>
+                  &nbsp;
+                  {{trackTypeValue.name}}
+                  <span class="glyphicon glyphicon-ok"></span>
+                </a>
+              </li>
+              <li>
+                <a class="trackFilter check-all-tracks" href=""
+                   ng-click="$ctrl.checkAllTracks()">
+                  Check all
+                  <span class="glyphicon glyphicon-ok"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-      <div class="col-xs-12 no-padding"><!-- Map container start-->
+        </div>
+      </div>
+      <!-- Search-bar -->
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9 map-menu-search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Search</button>
+        </span>
+        </div>
+      </div>
+      <!-- Right menu for Popular places and tracks in location -->
+      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 map-menu-popular">
+        <div>
+          <a href="" ng-click="$ctrl.checkPopularPlaces()">
+            <i id="popularPlaces" class="fa fa-flag-o" aria-hidden="true"
+               title="Places in Location"></i></a>
+          <a href="" ng-click="$ctrl.checkPopularTracks()">
+            <i id="popularTracks" class="fa fa-map-signs" aria-hidden="true"
+               title="Tracks in Location"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Leaflet map -->
+      <div class="map-wrapper">
         <div id="map"></div>
       </div>
-      <!-- Map container end-->
+      <!-- Div for Popular places -->
+      <div class="popular-places-wrapper" ng-hide="$ctrl.hidePopularPlaces">
+        <a href="" ng-click="$ctrl.checkPopularPlaces()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="popular-div-style">
+          <location-places places="$ctrl.places"></location-places>
+        </div>
+      </div>
+      <!-- Div for Popular tracks -->
+     <!-- <div class="popular-tracks-wrapper" ng-hide="$ctrl.hidePopularTracks">
+        <a href="" ng-click="$ctrl.checkPopularTracks()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="popular-div-style">
+          <popular-tracks></popular-tracks>
+        </div>
+      </div>-->
 
-      <popular-tracks></popular-tracks>
-    </div>
-    <div class="col-xs-3 no-padding" id="sidebar">
-     <search-place></search-place>
-      <div class="col-xs-12 no-padding" id="locationPlaces">
-        <location-places places="$ctrl.places"></location-places>
+      <!-- DIV Add places -->
+      <div id="add-place" class="add-item-menu"
+           ng-if="$ctrl.addPlaceMenuIsOpen">
+        <h2>New Place</h2>
+        <a href="" ng-click="$ctrl.toggleAddPlaceMenu()">
+          <span class="glyphicon glyphicon-remove removeIcon"></span>
+        </a>
+        <form name="placeMaker" novalidate>
+          <div>
+            <span class="title">1. Choose place on map:</span><br>
+            <span id="latitude"></span><br>
+            <span id="longitude"></span><br>
+            <span class="alert-input"
+                  ng-show="$ctrl.formNewPlaceSubmitted && !$ctrl.coordsIsDefined">
+              Please choose place on map!
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="placeName">
+              <span class="title">2. Enter place name:</span>
+            </label>
+            <input type="text" name="newPlaceName" class="form-control"
+                   id="newPlaceName" ng-model="$ctrl.newPlace.name"
+                   ng-required="true">
+            <div ng-show="$ctrl.formNewPlaceSubmitted || placeMaker.newPlaceName.$touched">
+                <span class="alert-input"
+                      ng-show="placeMaker.newPlaceName.$error.required">
+                  Please enter Place name!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newPlaceType"><span
+              class="title">3. Select place type:</span></label>
+            <select name="newPlaceType" class="form-control"
+                    ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
+                    ng-model="$ctrl.newPlaceType" ng-required="true">
+              <option value="">-- Choose place type --</option>
+            </select>
+            <div ng-show="$ctrl.formNewPlaceSubmitted || placeMaker.newPlaceType.$touched">
+                <span class="alert-input"
+                      ng-show="placeMaker.newPlaceType.$error.required">
+                  Please select place type!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newPlaceDescription">
+              <span class="title">4. Enter place description (optional):</span>
+            </label>
+            <textarea name="newPlaceDescription" id="newPlaceDescription"
+                      class="form-control"
+                      ng-model="$ctrl.newPlace.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="newPlacePhoto">
+              <span class="title">5. Upload photo (optional):</span>
+            </label>
+            <input type="file" name="newPlacePhoto" id="newPlacePhoto"
+                   ng-model="$ctrl.newPlacePhoto">
+          </div>
+
+          <div class="form-group">
+            <div class="btn-group col-xs-12 no-padding">
+              <input type="button" class="btn btn-success col-xs-6"
+                     ng-click="$ctrl.resetAddPlaceForm(placeMaker)"
+                     value="Reset">
+              <input type="button" class="btn btn-success col-xs-6"
+                     ng-click="$ctrl.createNewPlace(placeMaker)"
+                     value="Create">
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Div Add track -->
+      <div id="add-track" class="add-item-menu" ng-if="">
+        <h2>New Track</h2>
+        <a href="" ng-click="$ctrl.closeAddTrackMenu()"><span
+          class="glyphicon glyphicon-remove removeIcon"></span></a>
+        <form name="trackMaker">
+          <div class="col-xs-12">
+            <span class="title">1. Choose places on map:</span><br>
+            <span id="points"></span>
+            <span class="alert-input"
+                  ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTrack.location.coordinatest">
+              Track must have at least two points!</span>
+          </div>
+          <div class="form-group col-xs-12">
+            <label for="trackName"><span
+              class="title">2. Enter track name:</span></label>
+            <input type="text" name="newTrackName" class="form-control"
+                   id="newTrackName" ng-model="$ctrl.newTrack.name"
+                   ng-required="true">
+            <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackName.$touched">
+                <span class="alert-input"
+                      ng-show="trackMaker.newTrackName.$error.required">
+                  Please enter track name!
+                </span>
+            </div>
+          </div>
+          <div class="form-group col-xs-12">
+            <label for="newTrackType"><span
+              class="title">3. Select track type:</span></label>
+            <select name="newTrackType" id="newTrackType" class="form-control"
+                    ng-options="type.name for type in $ctrl.tracksType track by type.type"
+                    ng-model="$ctrl.newTrackType" ng-required="true">
+              <option value="">-- Choose track type --</option>
+            </select>
+            <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackType.$touched">
+                <span class="alert-input"
+                      ng-show="trackMaker.newTrackType.$error.required">
+                  Please select track type!
+                </span>
+            </div>
+          </div>
+          <div class="form-group col-xs-12">
+            <label for="newTrackDescription">
+              <span class="title">4. Enter track description (optional):</span>
+            </label>
+            <textarea name="newTrackDescription" id="newTrackDescription"
+                      class="form-control"
+                      ng-model="$ctrl.newTrack.description"></textarea>
+          </div>
+          <div class=" col-xs-12 form-group">
+            <label for="newTrackPhoto">
+              <span class="title">5. Upload photo (optional):</span>
+            </label>
+            <input type="file" id="newTrackPhoto" name="newTrackPhoto">
+          </div>
+          <div class=" col-xs-12 form-group">
+            <div class="btn-group col-xs-12 no-padding">
+              <button type="button" class="btn btn-success col-xs-6"
+                      ng-click="$ctrl.resetAddTrackForm(trackMaker)">Reset
+              </button>
+              <button type="button" class="btn btn-success col-xs-6"
+                      ng-click="$ctrl.createNewTrack(trackMaker)">Create New
+                Track
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div id="add-place" class="add-item-menu" ng-if="$ctrl.addPlaceMenuIsOpen">
-      <h2>New Place</h2>
-      <a href="" ng-click="$ctrl.toggleAddPlaceMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
-      <form name="placeMaker" novalidate>
-        <div class="col-xs-12">
-          <span class="title">1. Choose place on map:</span><br>
-          <span id="latitude"></span><br>
-          <span id="longitude"></span><br>
-          <span class="alert-input" ng-show="$ctrl.formNewPlaceSubmitted && !$ctrl.coordsIsDefined">Please choose place on map!</span>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="placeName"><span class="title">2. Enter place name:</span></label>
-          <input type="text" name="newPlaceName" class="form-control" id="newPlaceName" ng-model="$ctrl.newPlace.name" ng-required="true">
-          <div ng-show="$ctrl.formNewPlaceSubmitted || placeMaker.newPlaceName.$touched">
-            <span class="alert-input" ng-show="placeMaker.newPlaceName.$error.required">Please enter Place name!</span>
-          </div>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="newPlaceType"><span class="title">3. Select place type:</span></label>
-          <select name="newPlaceType" class="form-control" ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
-            ng-model="$ctrl.newPlaceType" ng-required="true">
-            <option value="">-- Choose place type --</option>
-          </select>
-          <div ng-show="$ctrl.formNewPlaceSubmitted || placeMaker.newPlaceType.$touched">
-            <span class="alert-input" ng-show="placeMaker.newPlaceType.$error.required">Please select place type!</span>
-          </div>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="newPlaceDescription"><span class="title">4. Enter place description (optional):</span></label>
-          <textarea name="newPlaceDescription" id="newPlaceDescription" class="form-control" ng-model="$ctrl.newPlace.description"></textarea>
-        </div>
-        <!--<div class=" col-xs-12 form-group">
-          <label for="newPlacePhoto"><span class="title">5. Upload photo (optional):</span></label>
-          <input type="file" name="newPlacePhoto" id="newPlacePhoto" ng-model="$ctrl.newPlacePhoto">
-        </div>-->
-        <div class=" col-xs-12 form-group">
-          <div class="btn-group col-xs-12 no-padding">
-            <input type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.resetAddPlaceForm(placeMaker)" value="Reset">
-            <input type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.createNewPlace(placeMaker)" value="Create New Place">                                              
-          </div>
-        </div>
-      </form>
-    </div>
-    <div id="add-track" class="add-item-menu" ng-if="">
-      <h2>New Track</h2>
-      <a href="" ng-click="$ctrl.closeAddTrackMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
-      <form name="trackMaker">
-        <div class="col-xs-12">
-          <span class="title">1. Choose places on map:</span><br>
-          <span id="points"></span>
-          <span class="alert-input" ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTrack.location.coordinatest">Track must have at least two points!</span>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="trackName"><span class="title">2. Enter track name:</span></label>
-          <input type="text" name="newTrackName" class="form-control" id="newTrackName" ng-model="$ctrl.newTrack.name" ng-required="true">
-          <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackName.$touched">
-            <span class="alert-input" ng-show="trackMaker.newTrackName.$error.required">Please enter track name!</span>
-          </div>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="newTrackType"><span class="title">3. Select track type:</span></label>
-          <select name="newTrackType" id="newTrackType" class="form-control" ng-options="type.name for type in $ctrl.tracksType track by type.type"
-            ng-model="$ctrl.newTrackType" ng-required="true">
-            <option value="">-- Choose track type --</option>
-          </select>
-          <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackType.$touched">
-            <span class="alert-input" ng-show="trackMaker.newTrackType.$error.required">Please select track type!</span>
-          </div>
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="newTrackDescription"><span class="title">4. Enter track description (optional):</span></label>
-          <textarea name="newTrackDescription" id="newTrackDescription" class="form-control" ng-model="$ctrl.newTrack.description"></textarea>
-        </div>
-        <div class=" col-xs-12 form-group">
-          <label for="newTrackPhoto"><span class="title">5. Upload photo (optional):</span></label>
-          <input type="file" id="newTrackPhoto" name="newTrackPhoto">
-        </div>
-        <div class=" col-xs-12 form-group">
-          <div class="btn-group col-xs-12 no-padding">
-            <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.resetAddTrackForm(trackMaker)">Reset</button>
-            <button type="button" class="btn btn-success col-xs-6" ng-click="$ctrl.createNewTrack(trackMaker)">Create New Track</button>                                                
-          </div>
-        </div>
-      </form>
-    </div>      
   </div>
 </div>

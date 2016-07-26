@@ -5,13 +5,9 @@ angular.module('placeDetail', ['comment'])
       place: '<'
     },
     controller: function placeDetailCtrl($scope, constants) {
-      $(document).ready(function() {
+      angular.element(document).ready (function() {
         $(".fancybox").fancybox();
       });
-      function upload() {
-        document.getElementById("file1").click();
-      }
-
       this.map = L.map('map1', {
         center: constants.mapCenter,
         zoom: constants.defaultZoom
@@ -25,19 +21,9 @@ angular.module('placeDetail', ['comment'])
         '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] + '" /></a><br />').openPopup();
       var deltaheight = 0.003;
       this.map.setView([this.place.location.coordinates[1] + deltaheight, this.place.location.coordinates[0]]); //0.005- for responcive design- show info on mobile
-
       this.closePage = function() {
         $scope.$emit('closePage', 'pageClass');
 
-      }
-      $scope.isClosed = false;
-      this.hideMap = function() {
-        $scope.mapClass = "ng-leave";
-        $scope.isClosed = true;
-      }
-      this.openMap = function() {
-        $scope.mapClass = "ng-enter";
-        $scope.isClosed = false;
       }
     }
   });

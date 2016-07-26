@@ -41,7 +41,10 @@ function locationplacesCtrl(mapFactory, $scope, $rootScope, placesOnMap, constan
     return value.type == constants.placesOnLoad && value.photos[0];
   }
 }
+this.openPage = function() {
+  $scope.$emit('openPage', 'pageClass');
 
+}
 angular.module('locationPlaces', []).
 component('locationPlaces', {
   bindings: {
