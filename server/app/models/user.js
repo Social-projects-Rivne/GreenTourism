@@ -36,23 +36,30 @@ var UserSchema = new Schema({
     required: 'Provider is required'
   },
   providerId: String,
-  providerData: {},
+  providerData: {
+    facebook: {
+      id: {
+        type: String, 
+        ref: 'User',
+      },
+      token: String,
+      email: String,
+      name: String,
+      fullname: String,
+      avatar: String,
+    },
+    google: {
+      id: String,
+      token: String,
+      email: String,
+      name: String,
+    }
+  },
   createdAt: {
     type: Date,
     default: Date.now
   },
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-  },
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-  }
+
 });
 
 // Execute before each user.save() call
