@@ -237,7 +237,7 @@
       <div id="add-place" class="add-item-menu"
            ng-if="$ctrl.addPlaceMenuIsOpen">
         <h2>New Place</h2>
-        <a href="" ng-click="$ctrl.toggleAddPlaceMenu()">
+        <a href="" ng-click="$ctrl.toggleAddPlaceMenu(placeMaker)">
           <span class="glyphicon glyphicon-remove removeIcon"></span>
         </a>
         <form name="placeMaker" novalidate>
@@ -309,64 +309,97 @@
         </form>
       </div>
       <!-- Div Add track -->
-      <div id="add-track" class="add-item-menu" ng-if="$ctrl.addTrackMenuIsOpen">
+      <div id="add-track" class="add-item-menu"
+           ng-if="$ctrl.addTrackMenuIsOpen">
         <h2>New Track</h2>
-        <a href="" ng-click="$ctrl.toggleAddTrackMenu()"><span class="glyphicon glyphicon-remove removeIcon"></span></a>
-        <div class="col-xs-12">
-          <span class="title">1. Choose places on map:</span><br>
-          <div id="points">
-            <div ng-repeat="point in $ctrl.newTrackPoints">{{$index + 1 + '. ' + point[0].name}}</div>
+        <a href="" ng-click="$ctrl.toggleAddTrackMenu(trackMaker)">
+          <span class="glyphicon glyphicon-remove removeIcon"></span>
+        </a>
+        <span class="title">1. Choose places on map:</span><br>
+        <div id="points">
+          <div ng-repeat="point in $ctrl.newTrackPoints">
+            {{$index + 1 + '. ' + point[0].name}}
           </div>
-          <div id="new-point-menu" ng-if="$ctrl.addPointMenuIsOpen">
-            <h3>New Point</h3>
-            <form name="pointMaker">
-              <div class="form-group col-xs-6">
-                <label for="pointName"><span class="title">Point name:</span></label>
-                <input type="text" name="newPointName" class="form-control" ng-model="$ctrl.newPoint.name" ng-required="true">
-                <div ng-show="">
-                  <span class="alert-input" ng-show="">Please enter Point name!</span>
-                </div>
-              </div>
-              <div class="form-group col-xs-6">
-                <label for="newPointType"><span class="title">Point type:</span></label>
-                <select name="newPointType" class="form-control" ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
-                  ng-model="$ctrl.newPoint.type" ng-required="true">
-                  <option value="">-- Point type --</option>
-                </select>
-                <div ng-show="">
-                  <span class="alert-input" ng-show="">Please select place type!</span>
-                </div>
-              </div>
-              <div class="form-group col-xs-12">
-                <label for="newPointDescription"><span class="title">Point description (optional):</span></label>
-                <textarea name="newPointDescription" class="form-control" ng-model="$ctrl.newPoint.description"></textarea>
-              </div>
-              <div class="form-group col-xs-12">
-                <input type="button" class="btn btn-success col-xs-12" ng-click="$ctrl.createNewPointForTrack()" value="Create New Point for Track"> 
-              </div>
-            </form>
-          </div>
-          <span class="alert-input" ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTrack.location.coordinatest">Track must have at least two points!</span>
         </div>
+        <div id="new-point-menu" ng-if="$ctrl.addPointMenuIsOpen">
+          <h3>New Point</h3>
+          <form name="pointMaker">
+            <div class="form-group col-xs-6">
+              <label for="pointName">
+                <span class="title">Point name:</span>
+              </label>
+              <input type="text" name="newPointName" class="form-control"
+                     ng-model="$ctrl.newPoint.name" ng-required="true">
+              <div ng-show="">
+                <span class="alert-input" ng-show="">
+                  Please enter Point name!
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-xs-6">
+              <label for="newPointType">
+                <span class="title">Point type:</span>
+              </label>
+              <select name="newPointType" class="form-control"
+                      ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
+                ng-model="$ctrl.newPoint.type" ng-required="true">
+                <option value="">-- Point type --</option>
+              </select>
+              <div ng-show="">
+                <span class="alert-input" ng-show="">
+                  Point select place type!
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-xs-12">
+              <label for="newPointDescription">
+                <span class="title">Point description (optional):</span>
+              </label>
+              <textarea name="newPointDescription" class="form-control"
+                        ng-model="$ctrl.newPoint.description"></textarea>
+            </div>
+            <div class="form-group col-xs-12">
+              <input type="button" class="btn btn-success col-xs-12"
+                     ng-click="$ctrl.createNewPointForTrack()"
+                     value="Create New Point for Track"> 
+            </div>
+          </form>
+        </div>
+        <span class="alert-input"
+              ng-show="$ctrl.formNewTrackSubmitted && !$ctrl.newTrack.location.coordinatest">
+          Track must have at least two points!
+        </span>
         <form name="trackMaker">
-          <div class="form-group col-xs-12">
-            <label for="newTrackName"><span class="title">2. Enter track name:</span></label>
-            <input type="text" name="newTrackName" class="form-control" id="newTrackName" ng-model="$ctrl.newTrack.name" ng-required="true">
+          <div class="form-group">
+            <label for="newTrackName">
+              <span class="title">2. Enter track name:</span>
+            </label>
+            <input type="text" name="newTrackName" class="form-control"
+                   id="newTrackName" ng-model="$ctrl.newTrack.name"
+                   ng-required="true">
             <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackName.$touched">
-              <span class="alert-input" ng-show="trackMaker.newTrackName.$error.required">Please enter track name!</span>
+              <span class="alert-input" ng-show="trackMaker.newTrackName.$error.required">
+                Please enter track name!
+              </span>
             </div>
           </div>
-          <div class="form-group col-xs-12">
-            <label for="newTrackType"><span class="title">3. Select track type:</span></label>
-            <select name="newTrackType" id="newTrackType" class="form-control" ng-options="type as typeObj.name for (type, typeObj) in $ctrl.tracksType track by type"
-              ng-model="$ctrl.newTrack.type" ng-required="true">
+          <div class="form-group">
+            <label for="newTrackType">
+              <span class="title">3. Select track type:</span>
+            </label>
+            <select name="newTrackType" id="newTrackType" class="form-control"
+                    ng-options="type as typeObj.name for (type, typeObj) in $ctrl.tracksType track by type"
+                    ng-model="$ctrl.newTrack.type" ng-required="true">
               <option value="">-- Choose track type --</option>
             </select>
             <div ng-show="$ctrl.formNewTrackSubmitted || trackName.newTrackType.$touched">
-              <span class="alert-input" ng-show="trackMaker.newTrackType.$error.required">Please select track type!</span>
+              <span class="alert-input"
+                    ng-show="trackMaker.newTrackType.$error.required">
+                Please select track type!
+              </span>
             </div>
           </div>
-          <div class="form-group col-xs-12">
+          <div class="form-group">
             <label for="newTrackDescription">
               <span class="title">4. Enter track description (optional):</span>
             </label>
@@ -374,13 +407,13 @@
                       class="form-control"
                       ng-model="$ctrl.newTrack.description"></textarea>
           </div>
-          <div class=" col-xs-12 form-group">
+          <div class="form-group">
             <label for="newTrackPhoto">
               <span class="title">5. Upload photo (optional):</span>
             </label>
             <input type="file" id="newTrackPhoto" name="newTrackPhoto">
           </div>
-          <div class=" col-xs-12 form-group">
+          <div class="form-group">
             <div class="btn-group col-xs-12 no-padding">
               <button type="button" class="btn btn-success col-xs-6"
                       ng-click="$ctrl.resetAddTrackForm(trackMaker)">Reset

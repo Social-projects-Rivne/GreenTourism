@@ -164,5 +164,7 @@ angular.module('mapModule')
       }
     };
 
+    placesOnMap.newTrackPoints = [];
+
     return placesOnMap;
   }]);
