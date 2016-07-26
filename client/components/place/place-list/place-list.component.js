@@ -143,7 +143,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (newPointForTrack) {
             map.removeLayer(newPointForTrack);
           }
-          console.log(placesOnMap.newTrackPoints);
           $scope.$digest();
         }
 
@@ -181,7 +180,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             placesOnMap.newTrackPoints.push([ctrl.newPoint]);
             placesForTrack.push([ctrl.newPoint.location.coordinates[1], ctrl.newPoint.location.coordinates[0]]);
             ctrl.newTrackPoints = placesOnMap.newTrackPoints;
-            console.log(placesOnMap.newTrackPoints);
             addNewTrackOnMap(placesForTrack);
             ctrl.addPointMenuIsOpen = false;
             ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
@@ -215,12 +213,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                     point[0].address = result.display_name;
                     Place.post(point[0]).then(function(response) {
                       counterByNewPoints++;
-                      console.log(response);
                       point[0]._id = response.record._id;
                       checkActiveType = angular.element('.' + point[0].type + ' span');
                       if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                         placesOnMap.showPlaces(newPoints);
-                        console.log(newPoints);
                       } else {
                         ctrl.checkType(point[0].type);
                       }
@@ -236,13 +232,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         function addNewTrackIntoDB(array, form) {
-          console.log(array);
           array.forEach(function(item) {
             ctrl.newTrack.places.push(item[0]._id);
           });
-          console.log(ctrl.newTrack);
           Track.post(ctrl.newTrack).then(function(response) {
-            console.log('success');
             var checkActiveType = angular.element('.' + ctrl.newTrack.type + ' span:last-child');
             if (checkActiveType.hasClass(constants.checkedSpanClass)) {
               ctrl.showSpecificTracks(ctrl.newTrack.type);
