@@ -52,7 +52,7 @@
   padding-top: 115px;
   background-color: #f8f8f8;
   transition: all linear 0.5s;
-  width: 300px;
+  width: 25%;
   height: 100%;
   &.ng-hide {
     opacity: 0;
@@ -74,6 +74,9 @@
   }
   @media (max-width: 767px) {
     padding-top: 160px;
+  }
+  @media (max-width: 1170px) {
+    width: 320px;
   }
 }
 
@@ -174,7 +177,6 @@
           }
         }
       }
-
     }
     @media (max-width: 767px) {
       margin-bottom: 10px;
@@ -237,6 +239,12 @@
   }
 }
 
+// Class for disable double click
+.check-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 // Map on page
 .map-wrapper {
   position: absolute;
@@ -267,12 +275,16 @@
   top: 0;
   right: 0;
   height: 100%;
-  width: 300px;
+  width: 25%;
   z-index: 2;
   background-color: #f8f8f8;
   padding: 115px 15px 15px 15px;
   overflow: auto;
   display: block;
+  transition: all linear 0.5s;
+  &.ng-hide {
+    opacity: 0;
+  }
   .removeIcon {
     position: absolute;
     top: 115px;
@@ -290,6 +302,9 @@
     font-weight: bold;
     color: @light-green;
   }
+  .no-padding {
+    padding: 0;
+  }
   @media (max-width: 767px) {
     padding-top: 200px;
     width: 60%;
@@ -297,4 +312,20 @@
 }
 .marker-image {
   width: 150px;
+}
+
+/* ------------- Add track ---------------*/
+
+
+#new-point-menu {
+  border: 1px solid @light-green;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0 10px 10px 10px;
+  input {
+    margin-top: 0;
+  }
+  h3 {
+    text-align: center;
+  }
 }

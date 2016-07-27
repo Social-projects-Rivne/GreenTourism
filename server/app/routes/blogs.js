@@ -2,8 +2,6 @@ var express = require('express');
 
 var router = express.Router(); // eslint-disable-line new-cap
 
-var Blog = require('../models/blog');
-
 var blogController = require('../controllers/blog-controller');
 
 router.route('/')
