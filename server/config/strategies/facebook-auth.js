@@ -16,8 +16,7 @@ module.exports = function() {
       },
       function(accessToken, refreshToken, profile, done) {
           process.nextTick(function() {
-              User.findOne({'profile.id': profile.id}, function (err, user, eq, res, next) {
-                //console.log(profile);
+              User.findOne({'providerData.facebook.id': profile.id}, function (err, user, eq, res, next) {
                 if (err) 
                   return done(err);
                 if (user) {
@@ -30,7 +29,7 @@ module.exports = function() {
                   user.email = profile.emails[0].value;
                   user.avatar = profile.photos[0].value;
                   user.firstName = profile.name.givenName;
-                  user.lastName =  profile.name.familyName;
+                  user.lastName = profile.name.familyName;
 
                   user.save(function(err) {
                     if(err) {

@@ -52,16 +52,13 @@ var UserSchema = new Schema({
   },
   provider: {
     type: String,
-   // required: 'Provider is required'  //has to be optional
+    //required: 'Provider is required'  //has to be optional
   },
   providerId: String,
   providerData: {
     facebook: {
       id: String,
       token: String,
-      email: String,
-      name: String,
-      avatar: String,
     },
     google: {
       id: String,

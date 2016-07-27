@@ -25,6 +25,7 @@ function(accessToken, refreshToken, profile, done) {
                   user.providerData.google.token = accessToken;
                   user.name = profile.displayName
                   user.email = profile.emails[0].value;
+                  user.provider = profile.provider;
 
                   user.save(function(err) {
                     if(err) {
