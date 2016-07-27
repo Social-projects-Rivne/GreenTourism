@@ -12,6 +12,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var trackCounter;
         var placeTypeLength;
         var trackTypeLength;
+        var key;
 
         ctrl.addPlaceMenuIsOpen = false;
         ctrl.coordsForNewPlace = placesOnMap.coords;
@@ -79,6 +80,16 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
         // -----END ADD Place-----
 
+        // ----START---- Function for add and remove html classes
+        ctrl.classAddRemove = function(tag, tagClass, add) {
+          if (add) {
+            angular.element(tag).addClass(tagClass);
+          } else {
+            angular.element(tag).removeClass(tagClass);
+          }
+        };
+        // ----END---- Function for add and remove html classes
+
         // ---START---- Icons for default settings on places and Tracks
         ctrl.defaultObject = function(objectType) {
           var objectIcon = angular.element('.' + objectType);
@@ -107,28 +118,30 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.hidePopularTracks = true;
 
         ctrl.checkPopularPlaces = function() {
+          angular.element('.popular-places-wrapper').css('display', 'block');
           var popularPlacesIcon = angular.element('#popularPlaces');
           if (popularPlacesIcon.hasClass(constants.checkedClass)) {
-            popularPlacesIcon.removeClass(constants.checkedClass);
+            ctrl.classAddRemove('#popularPlaces', constants.checkedClass);
             ctrl.hidePopularPlaces = true;
           } else {
-            popularPlacesIcon.addClass(constants.checkedClass);
-            angular.element('#popularTracks')
-              .removeClass(constants.checkedClass);
+            ctrl.classAddRemove('#popularPlaces', constants.checkedClass, 1);
+            ctrl.classAddRemove('#popularTracks', constants.checkedClass);
+
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
           }
         };
 
         ctrl.checkPopularTracks = function() {
+          angular.element('.popular-tracks-wrapper').css('display', 'block');
           var popularTracksIcon = angular.element('#popularTracks');
           if (popularTracksIcon.hasClass(constants.checkedClass)) {
-            popularTracksIcon.removeClass(constants.checkedClass);
+            ctrl.classAddRemove('#popularTracks', constants.checkedClass);
             ctrl.hidePopularTracks = true;
           } else {
-            popularTracksIcon.addClass(constants.checkedClass);
-            angular.element('#popularPlaces')
-              .removeClass(constants.checkedClass);
+            ctrl.classAddRemove('#popularTracks', constants.checkedClass, 1);
+            ctrl.classAddRemove('#popularPlaces', constants.checkedClass);
+
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
           }
@@ -144,16 +157,19 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: constants.placesOnLoad, limit: 100})
+        Place.getList({type: constants.placesOnLoad})
           .then(function(result) {
             placeCounter = 1;
+            places = [];
+            placesOnMap.removePlaces();
             places = result.concat(places);
             placesOnMap.showPlaces(result, constants.placesOnLoad);
-            angular.element('.' + constants.placesOnLoad + ' span')
-              .addClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').addClass(constants.checkedClass);
-            angular.element('#Streets span')
-              .addClass(constants.checkedSpanClass);
+            ctrl.classAddRemove('.' + constants.placesOnLoad + ' span',
+              constants.checkedSpanClass, 1);
+            ctrl.classAddRemove('.placesIcon', constants.checkedClass, 1);
+            ctrl.classAddRemove('.placesIcon', constants.checkDisabled);
+            ctrl.classAddRemove('#Streets span', constants.checkedSpanClass, 1);
+            ctrl.classAddRemove('#spinner', 'spinner');
           });
         // ----END---- ShowPlacesOnLoad
 
@@ -162,30 +178,43 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           var checkPlace = angular.element('.' + input + ' span');
           if (checkPlace.hasClass(constants.checkedSpanClass)) {
             placeCounter--;
-            checkPlace.removeClass(constants.checkedSpanClass);
-            angular.element('.check-all-places span')
-              .removeClass(constants.checkedSpanClass);
+            ctrl.classAddRemove('.' + input + ' span',
+              constants.checkedSpanClass);
+            ctrl.classAddRemove('.check-all-places span',
+              constants.checkedSpanClass);
             placesOnMap.removePlaces(input);
             places = places.filter(function(place) {
               return place.type !== input;
             });
           } else {
             placeCounter++;
-            checkPlace.addClass(constants.checkedSpanClass);
+            ctrl.classAddRemove('.' + input, constants.checkDisabled, 1);
+            ctrl.classAddRemove('.' + input + ' a span', constants.spinner, 1);
+            ctrl.classAddRemove('.placesIcon', constants.checkDisabled, 1);
+            ctrl.classAddRemove('#spinner', 'spinner', 1);
 
-            if (placeCounter === placeTypeLength)
-              angular.element('.check-all-places span')
-                .addClass(constants.checkedSpanClass);
-
-            Place.getList({type: input, limit: 100}).then(function(result) {
+            Place.getList({type: input}).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(result, input);
+
+              ctrl.classAddRemove('.' + input + ' a span', constants.spinner);
+              checkPlace.addClass(constants.checkedSpanClass);
+              if (placeCounter === placeTypeLength)
+                ctrl.classAddRemove('.check-all-places span',
+                  constants.checkedSpanClass, 1);
+
+              ctrl.classAddRemove('.' + input, constants.checkDisabled);
+              if (!angular.element('.placeFilter a span')
+                  .hasClass(constants.spinner)) {
+                ctrl.classAddRemove('#spinner', 'spinner');
+                ctrl.classAddRemove('.placesIcon', constants.checkDisabled);
+              }
             });
           }
           if (placeCounter > 0) {
-            angular.element('.placesIcon').addClass(constants.checkedClass);
+            ctrl.classAddRemove('.placesIcon', constants.checkedClass, 1);
           } else {
-            angular.element('.placesIcon').removeClass(constants.checkedClass);
+            ctrl.classAddRemove('.placesIcon', constants.checkedClass);
           }
         };
         // ----END---- FilterByOneOfType
@@ -193,26 +222,31 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ----START---- FilterCheckAll
         ctrl.checkAllPlaces = function(input) {
           var checkAllPlaces = angular.element('.check-all-places span');
-          if (input) checkAllPlaces.addClass(constants.checkedSpanClass);
+          if (input) ctrl.classAddRemove('.check-all-places span',
+            constants.checkedSpanClass, 1);
           if (checkAllPlaces.hasClass(constants.checkedSpanClass)) {
             placeCounter = 0;
-            angular.element('.placeFilter span')
-              .removeClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').removeClass(constants.checkedClass);
+            ctrl.classAddRemove('.placeFilter span',
+              constants.checkedSpanClass);
+            ctrl.classAddRemove('.placesIcon', constants.checkedClass);
             placesOnMap.removePlaces();
             places = [];
           } else {
             placeCounter = placeTypeLength;
-            placesOnMap.removePlaces();
-            places = [];
-            angular.element('.placeFilter span')
-              .addClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').addClass(constants.checkedClass);
 
-            Place.getList({limit: 100}).then(function(result) {
-              places = result.concat(places);
-              placesOnMap.showPlaces(places);
-            });
+            ctrl.classAddRemove('.check-all-places span',
+              constants.checkedSpanClass, 1);
+
+            for (key in ctrl.placesType) {
+              if ({}.hasOwnProperty.call(ctrl.placesType, key)) {
+                if (!angular.element('.' + key + ' a span')
+                    .hasClass(constants.checkedSpanClass) &&
+                    !angular.element('.' + key + ' a span')
+                    .hasClass(constants.spinner)) {
+                  ctrl.checkType(key);
+                }
+              }
+            }
           }
         };
         // ----END---- Places

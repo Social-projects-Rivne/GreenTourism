@@ -10,6 +10,8 @@ angular.module('greenTourism')
     constants.checkedSpanClass = 'glyphicon glyphicon-ok';
     constants.checkedClass = 'checked';
     constants.placesOnLoad = 'featured';
+    constants.checkDisabled = 'check-disabled';
+    constants.spinner = 'glyphicon glyphicon-refresh';
     constants.emptyPlaceModel = {
       name: '',
       type: '',
