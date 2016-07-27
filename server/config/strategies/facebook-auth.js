@@ -10,7 +10,9 @@ module.exports = function() {
           clientSecret: configAuth.facebookAuth.clientSecret,
           callbackURL: configAuth.facebookAuth.callbackURL,  //'http://greentourism.herokuapp.com/auth/facebook/callback',
           profileFields: ['emails', 'photos', 'displayName', 'name', 'gender', 'profileUrl'],
-          //enableProof: true,
+          passReqToCallback : false,
+          enableProof: true,
+          session: true,
       },
       function(accessToken, refreshToken, profile, done) {
           process.nextTick(function() {

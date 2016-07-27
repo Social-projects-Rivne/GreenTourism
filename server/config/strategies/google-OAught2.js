@@ -16,7 +16,6 @@ function(token, refreshToken, profile, done) {
         process.nextTick(function() {
 
             User.findOne({ 'google.id' : profile.id }, function(err, user) {
-                console.log(profile);
                 if (err)
                     return done(err);
 
@@ -26,14 +25,10 @@ function(token, refreshToken, profile, done) {
                 } else {
                     var newUser = new User();
 
-                    newUser.google.id    = profile.id;
-                    console.log(profile.id);
-                    newUser.google.token = token;
-                    console.log(token);
-                    newUser.google.name  = profile.displayName;
-                    console.log(profile.displayName);
-                    newUser.google.email = profile.emails[0].value; 
-                    console.log(profile.emails[0].value);
+                    newUser.providerData.google.id    = profile.id;
+                    newUser.providerData.google.token = token;
+                    newUser.providerData.google.name  = profile.displayName;
+                    newUser.providerData.google.email = profile.emails[0].value; 
 
                     
                     newUser.save(function(err) {

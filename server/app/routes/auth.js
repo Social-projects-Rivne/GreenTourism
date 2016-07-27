@@ -22,26 +22,20 @@ router.route('/auth/facebook').get(
 
 router.route('/auth/facebook/callback').get(
   passport.authenticate('facebook', { successRedirect: '/#!/profile',
-                                      failureRedirect: '/#!/login' }));
-
+                                      failureRedirect: '/#!/login' 
+                                    }));
 
 
 //google
+
 router.route('/auth/google').get(
-  passport.authenticate('google', {scope: [
-       'https://www.googleapis.com/auth/plus.login',
-       'https://www.googleapis.com/auth/plus.profile.emails.read'] }));
+  passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/#/login');
-}
+    // the callback after google has authenticated the user
+router.route('/auth/google/callback').get(
+  passport.authenticate('google', { successRedirect : '/#!/profile',
+                                    failureRedirect : '/#!/login'
+                                    }));
 
 
 module.exports = router;
