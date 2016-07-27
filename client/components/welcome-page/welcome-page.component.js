@@ -38,8 +38,9 @@ angular.module('welcomePage', [])
 
       // Animation on click arrow
       var page = angular.element('html, body');
+      var video = angular.element('.parallax');
       angular.element('a[href="#welcome-page-content"]').click(function() {
-        var heightScroll = page.outerHeight();
+        var heightScroll = video.outerHeight();
         page.animate({
           scrollTop: heightScroll
         }, 1000);
