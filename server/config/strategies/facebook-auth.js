@@ -16,16 +16,17 @@ module.exports = function() {
       },
       function(accessToken, refreshToken, profile, done) {
           process.nextTick(function() {
-              User.findOne({'email': profile.email}, function (err, user, eq, res, next) {
+              User.findOne({'profile.id': profile.id}, function (err, user, eq, res, next) {
                 //console.log(profile);
                 if (err) 
                   return done(err);
                 if (user) {
                     done(null, user);
                 } else {
+                  console.log(user)
                   var user = new User();
-                  user.providerData.facebook.fbid = profile.id;
-                  user.providerData.facebook.fbtoken = accessToken;
+                  user.providerData.facebook.id = profile.id;
+                  user.providerData.facebook.token = accessToken;
                   user.email = profile.emails[0].value;
                   user.avatar = profile.photos[0].value;
                   user.firstName = profile.name.givenName;

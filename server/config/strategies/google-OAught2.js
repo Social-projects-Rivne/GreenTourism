@@ -11,36 +11,33 @@ module.exports = function() {
         callbackURL: configAuth.googleAuth.callbackURL,
         passReqToCallback   : true
       },
-function(token, refreshToken, profile, done) {
-
-        process.nextTick(function() {
-
-            User.findOne({ 'google.id' : profile.id }, function(err, user) {
-                if (err)
-                    return done(err);
-
+function(accessToken, refreshToken, profile, done) {
+          process.nextTick(function() {
+              User.findOne({'email': profile.email}, function (err, user, eq, res, next) {
+                //console.log(profile);
+                if (err) 
+                  return done(err);
                 if (user) {
-
-                    return done(null, user);
+                    done(null, user);
                 } else {
-                    var newUser = new User();
+                  var user = new User();
+                  user.providerData.google.id = profile.id;
+                  user.providerData.google.token = accessToken;
+                  user.name = profile.displayName
+                  user.email = profile.emails[0].value;
 
-                    newUser.providerData.google.id    = profile.id;
-                    newUser.providerData.google.token = token;
-                    newUser.providerData.google.name  = profile.displayName;
-                    newUser.providerData.google.email = profile.emails[0].value; 
-
-                    
-                    newUser.save(function(err) {
-                        if (err)
-                            throw err;
-                        return done(null, newUser);
-                    });
-                    console.log(newUser);
-                }
-            });
-        });
-
-    }));
-
+                  user.save(function(err) {
+                    if(err) {
+                      console.log(err);  //handle errors!
+                     } else {
+                      console.log("saving user ...");
+                      done(null, user);
+                    }
+                  });
+                  console.log(user)
+            }
+         });
+      });
+  }
+));
 };

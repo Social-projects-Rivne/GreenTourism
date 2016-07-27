@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: 'Password is required',
+  //  required: 'Password is required',   //has to be optional due facebook etc.,  autho password is not require 
     validate: [
       function(password) {
         return password && password.length >= 8;
@@ -52,19 +52,16 @@ var UserSchema = new Schema({
   },
   provider: {
     type: String,
-    required: 'Provider is required'
+   // required: 'Provider is required'  //has to be optional
   },
   providerId: String,
   providerData: {
     facebook: {
-      fbid: {
-        type: String, 
-        ref: 'User',
-      },
-      fbtoken: String,
-      fbemail: String,
-      fbname: String,
-      fbavatar: String,
+      id: String,
+      token: String,
+      email: String,
+      name: String,
+      avatar: String,
     },
     google: {
       id: String,
