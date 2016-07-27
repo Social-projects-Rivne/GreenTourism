@@ -2,17 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var CommentSchema = require('./schema/comment');
 
-var locSchema = new Schema({
-  type: {
-    type: String,
-    required: true
-  },
-  coordinates: {
-    type: Array,
-    required: true
-  }
-});
-
 var TrackSchema = new Schema({
   name: {
     type: String,
@@ -27,16 +16,28 @@ var TrackSchema = new Schema({
     ref: 'User',
     required: true
   },
-  location: {
-    type: locSchema,
+  places: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Place',
     required: true
-  },
+  }],
   description: String,
-  trackRate: Number,
+  rate: Number,
   likes: [Schema.Types.ObjectId],
-  address: String,
   photos: [String],
   comments: [CommentSchema]
 });
+
+var autoPopulateOwner = function(next) {
+  this.populate('owner');
+  next();
+};
+TrackSchema.pre('findOne', autoPopulateOwner).pre('find', autoPopulateOwner);
+
+var autoPopulatePlaces = function(next) {
+  this.populate('places');
+  next();
+};
+TrackSchema.pre('findOne', autoPopulatePlaces).pre('find', autoPopulatePlaces);
 
 module.exports = mongoose.model('Track', TrackSchema);

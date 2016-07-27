@@ -3,5 +3,12 @@ var db = process.env.MONGO_DATABASE_URL ||
 
 module.exports = {
   db: db,
-  sessionSecret: 'developmentSessionSecret'
+  sessionSecret: 'developmentSessionSecret',
+  sql: {
+    username: 'root',
+    password: '',
+    database: 'sql_greentourism',
+    host: '127.0.0.1',
+    dialect: 'mysql'
+  }
 };

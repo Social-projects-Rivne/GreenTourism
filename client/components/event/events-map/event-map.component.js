@@ -186,12 +186,12 @@ angular.module('eventsMap', ['calendar', 'eventMapType'])
             marker1.addTo($scope.groups);
           }
 
-          $scope.closeEvent = $scope.eventL.findDistanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
+          $scope.closeEvent = $scope.eventL.findDistance($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
           $scope.groups.addTo($scope.map);
         };
 
         var chamgeEvents = function() {
-          $scope.closeEvent = $scope.eventL.findDistanse($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
+          $scope.closeEvent = $scope.eventL.findDistance($scope.map.getCenter().lat, $scope.map.getCenter().lng, $scope.filters);
           $scope.$apply();
         };
 

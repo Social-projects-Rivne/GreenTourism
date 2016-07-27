@@ -120,7 +120,7 @@
     <script src="components/blog/blog.module.js"></script>
     <script src="components/blog/blog-list/blog-list.component.js"></script>
     <script src="components/blog/blog-detail/blog-detail.component.js"></script>
-    <script src="components/blog/blog-filter.component.js"></script>
+    <script src="components/blog/blog-sidebar/blog-sidebar.component.js"></script>
     <!-- endbuild -->
 
     <title>Green Tourism</title>
@@ -128,7 +128,7 @@
   <body>
 
   <header>
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl as nav">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-style" ng-controller="NavCtrl as nav">
       <div class="container nav-padding">
         <div class="hidden-sm hidden-md hidden-lg">
           <div class="logo"><a href="#!/">GreenTourism</a></div>
@@ -136,7 +136,7 @@
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu nav-ul">
+              <ul class="dropdown-menu dropdown-auth nav-ul">
                 <% if (user) { %>
                   <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
                   <li><a href="/api/logout">Log out</a></li>
@@ -165,7 +165,7 @@
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu nav-ul">
+              <ul class="dropdown-menu dropdown-auth nav-ul">
                 <% if (user) { %>
                   <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
                   <li><a href="/api/logout">Log out</a></li>

@@ -20,7 +20,7 @@ angular.module('eventDetail').service('eventListService', ['$http', function($ht
     });
   };
 
-  this.findDistanse = function(lat, lng, event) {
+  this.findDistance = function(lat, lng, event) {
     function compareEvent(eventA, eventB) {
       var comperA = +Math.pow(Math.abs(+eventA.eventPoints[0].lat - lat), 2) + Math.pow(Math.abs(+eventA.eventPoints[0].lon - lng), 2);
       var comperB = +Math.pow(Math.abs(+eventB.eventPoints[0].lat - lat), 2) + Math.pow(Math.abs(+eventB.eventPoints[0].lon - lng), 2);

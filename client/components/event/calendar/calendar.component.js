@@ -5,7 +5,6 @@ angular.module('calendar').component('calendar', {
   controller: ["calendarService", "$scope", function(calendarService, $scope) {
 
     $scope.service = calendarService;
-    console.log('service.names.length = '+($scope.service.names.length)) ;
 
     // initialize component value
     if ($scope.service.names.length>1) return; //max calendar on page - 2
@@ -19,8 +18,6 @@ angular.module('calendar').component('calendar', {
     }
 
       $scope.service.names.push(this.name) ;
-    console.log(' this.name= ' + this.name + ' service.names['+($scope.service.names.length-1)+']= ' + $scope.service.names[$scope.service.names.length-1]) ;
-
 
     this.calendarCurrentDate = this.calendarShowDate;
 
@@ -38,12 +35,12 @@ angular.module('calendar').component('calendar', {
         return date.getDate();
       }
 
-      var startMounth = getFirstWeekDayOfMonth(someDate.getFullYear(), (someDate.getMonth()));
-      if (startMounth == 0) startMounth = 7;
+      var startMonth = getFirstWeekDayOfMonth(someDate.getFullYear(), (someDate.getMonth()));
+      if (startMonth == 0) startMonth = 7;
       var endMounth = getLastDateOfMonth(someDate.getFullYear(), (someDate.getMonth()));
 
-      for (var i = 2 - startMounth;
-        (i < endMounth + 1 || (i + startMounth - 2) % 7); i++) {
+      for (var i = 2 - startMonth;
+        (i < endMounth + 1 || (i + startMonth - 2) % 7); i++) {
         var d = new Date(someDate);
         d.setDate(i);
 
@@ -69,8 +66,8 @@ angular.module('calendar').component('calendar', {
     };
 
     this.changeMonth = function(step) {
-      var it = this.calendarShowDate.getMonth();
-      this.calendarShowDate.setMonth(it + step);
+      var month = this.calendarShowDate.getMonth();
+      this.calendarShowDate.setMonth(month + step);
       this.calendarInit(this.calendarShowDate);
       if (this.name=='To') $scope.service.values[1] = this.calendarShowDate;
       else $scope.service.values[0] = this.calendarShowDate;

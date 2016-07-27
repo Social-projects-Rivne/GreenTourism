@@ -1,17 +1,13 @@
-<div class="col-xs-12 no-padding" id="sidebarBottom">
-  <!-- Related tracks container start -->
-  <div class="col-xs-12 no-padding">
-    <h2>Popular Tracks in location</h2>
-  </div>
-  <div class="col-xs-12 no-padding">
-    <div class="col-xs-4 place-wrapper" ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
-      <div class="place-container">
-        <h3>{{track.name}}</h3>
-        <div>
-          {{track.trackRate}}
-        </div>
-      </div>
-    </div>
-  </div>
+<h4>Popular Tracks in location</h4>
+<div class="popular-in-location-wrapper"
+     ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
+  <img ng-src="{{track.photos[0]}}">
+  <a href="">
+    <div class="popular-in-location-gradient"></div>
+  </a>
+  <a class="popular-in-location-name" href="">{{track.name}}</a>
+  <a class="popular-in-location-address" href="">
+    <img src="assets/img/places/marker/green.png">
+    Rivne, Rivnenska oblastj, Ukraine
+  </a>
 </div>
-<!-- Related tracks container end -->

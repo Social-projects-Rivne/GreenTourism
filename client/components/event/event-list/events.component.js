@@ -21,7 +21,6 @@ angular.module('eventList', [])
 
   this.findWord = function(reg){
     $scope.events = $scope.calendars.events.filter(function(event) {
-      console.log('event.name'+event.name+' reg= ' + reg) ;
       if (!event.name || !event.description) return false ;
       if ((event.name.toUpperCase().search(reg.toUpperCase())>-1) || ((event.description.toUpperCase().search(reg.toUpperCase())>-1))) return true ;
     }) ;
