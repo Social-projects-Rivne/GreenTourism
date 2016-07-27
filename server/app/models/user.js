@@ -57,15 +57,14 @@ var UserSchema = new Schema({
   providerId: String,
   providerData: {
     facebook: {
-      id: {
+      fbid: {
         type: String, 
         ref: 'User',
       },
-      token: String,
-      email: String,
-      name: String,
-      fullname: String,
-      avatar: String,
+      fbtoken: String,
+      fbemail: String,
+      fbname: String,
+      fbavatar: String,
     },
     google: {
       id: String,
