@@ -24,29 +24,31 @@
               <event-map-type></event-map-type>
             </ul>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              From:
-              <span class="caret"></span>
-              {{eventL.CalendarName[0].calendar_show_date | date:'dd MM yy' }}
-            </button>
-            <ul class="dropdown-menu  col-xs-12">
-              <calendar></calendar>
-            </ul>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 nopadding calendar">
+            <div class="btn-group">
+              <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                {{calendars.names[0]}} : {{calendars.values[0] | date:'dd MMMM yyyy'}}
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              </div>
+              <ul class="dropdown-menu">
+                <calendar></calendar>
+              </ul>
+            </div>
           </div>
-          <div class="btn-group col-xs-2 no-padding" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle col-xs-12" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-              To:
-              <span class="caret"></span>
-              {{eventL.CalendarName[1].calendar_show_date | date:'dd MM yy' }}
-            </button>
-            <ul class="dropdown-menu  col-xs-12">
-              <calendar></calendar>
-            </ul>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 nopadding calendar">
+            <div class="btn-group">
+              <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              </div>
+              <ul class="dropdown-menu right-calendar">
+                <calendar></calendar>
+              </ul>
+            </div>
           </div>
-          <button type="button" class="btn btn-default col-xs-2 btn-last">Export</button>
+
           <div class="col-xs-2"></div>
         </div>
       </div>
@@ -71,32 +73,11 @@
               </div>
             </a>
           </div>
-          <!--div class="col-xs-4 place-wrapper">
-                        <div class="place-container">
-
-                        </div>
-                    </div>
-                    <div class="col-xs-4 place-wrapper">
-                        <div class="place-container">
-
-                        </div>
-                    </div-->
         </div>
       </div>
       <!-- Related tracks container end -->
     </div>
     <div class="col-xs-3 no-padding" id="sidebar">
-      <div class="col-xs-12" id="search">
-        <div class="input-group col-xs-offset-1 col-xs-10">
-          <input class="form-control" type="text" name="search">
-          <span class="input-group-btn">
-            <button class="btn" type="button">Search</button>
-          </span>
-        </div>
-      </div>
-      <div class="col-xs-12 no-padding" id="popularPlaces">
 
-      </div>
-    </div>
   </div>
 </div>
