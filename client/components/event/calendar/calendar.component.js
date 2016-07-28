@@ -2,25 +2,28 @@ angular.module('calendar', []);
 
 angular.module('calendar').component('calendar', {
   templateUrl: 'components/event/calendar/calendar.template.html',
-  controller: ['$http', '$scope', 'eventListService', function($http, $scope, eventListService) {
-    $scope.give_event = eventListService.th;
+  controller: ["calendarService", "$scope", function(calendarService, $scope) {
 
-    this.calendar_carent_date = new Date();
+    $scope.service = calendarService;
 
-    if ($scope.give_event.date_current) this.calendar_show_date = new Date($scope.give_event.date_current);
-    else this.calendar_show_date = new Date();
-
-    this.name = $scope.give_event.CalendarName.length;
-
-    if ($scope.give_event.mainControllerName == 'MapEvent') {
-      if ($scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]) this.calendar_show_date = new Date(+$scope.give_event.CalendarValue[$scope.give_event.CalendarName.length]);
+    // initialize component value
+    if ($scope.service.names.length>1) return; //max calendar on page - 2
+    if ($scope.service.names.length==0) {
+      this.name = 'From';
+      this.calendarShowDate = $scope.service.values[0];
     }
-    /**/
+    if ($scope.service.names.length==1) {
+      this.name = 'To' ;
+      this.calendarShowDate = $scope.service.values[1] ;
+    }
 
-    $scope.give_event.CalendarName.push(this);
+      $scope.service.names.push(this.name) ;
 
-    this.calendar_init = function(some_date) {
-      this.calendar_month = [];
+    this.calendarCurrentDate = this.calendarShowDate;
+
+   /**/
+    this.calendarInit = function(someDate) {
+      this.calendarMonth = [];
 
       function getFirstWeekDayOfMonth(year, month) {
         var date = new Date(year, month);
@@ -32,47 +35,44 @@ angular.module('calendar').component('calendar', {
         return date.getDate();
       }
 
-      var start_mounth = getFirstWeekDayOfMonth(some_date.getFullYear(), (some_date.getMonth()));
-      if (start_mounth == 0) start_mounth = 7;
-      var end_mounth = getLastDateOfMonth(some_date.getFullYear(), (some_date.getMonth()));
+      var startMonth = getFirstWeekDayOfMonth(someDate.getFullYear(), (someDate.getMonth()));
+      if (startMonth == 0) startMonth = 7;
+      var endMounth = getLastDateOfMonth(someDate.getFullYear(), (someDate.getMonth()));
 
-      for (var i = 2 - start_mounth;
-        (i < end_mounth + 1 || (i + start_mounth - 2) % 7); i++) {
-        var d = new Date(some_date);
+      for (var i = 2 - startMonth;
+        (i < endMounth + 1 || (i + startMonth - 2) % 7); i++) {
+        var d = new Date(someDate);
         d.setDate(i);
 
-        var push_obj = {};
-        push_obj.active = d.getMonth() == some_date.getMonth() ? 1 : 0;
-        push_obj.active = d.toDateString() == this.calendar_show_date.toDateString() ? 2 : push_obj.active;
-        push_obj.date = d;
+        var pushObj = {};
+        pushObj.active = d.getMonth() == someDate.getMonth() ? 1 : 0;
+        pushObj.active = d.toDateString() == this.calendarShowDate.toDateString() ? 2 : pushObj.active;
+        pushObj.date = d;
 
-        push_obj.events = $scope.give_event.find_date(push_obj.date);
+        pushObj.events = $scope.service.findDate(pushObj.date);
 
-        this.calendar_month.push(push_obj);
-      }
-      if (($scope.give_event.mainControllerName == 'MapEvent') && ($scope.give_event.CalendarName.length > 1)) {
-        $scope.give_event.mainController.temp_click();
+        this.calendarMonth.push(pushObj);
       }
     };
 
-    this.calendar_init(this.calendar_show_date);
+    this.calendarInit(this.calendarShowDate);
 
-    this.carent_day = function(date) {
-      this.calendar_show_date = new Date(date);
-      this.calendar_init(this.calendar_show_date);
-      $scope.give_event.date_current = this.calendar_show_date;
+    this.currentDay = function(date) {
+      this.calendarShowDate = new Date(date);
+      this.calendarInit(this.calendarShowDate);
+      if (this.name=='To') $scope.service.values[1] = this.calendarShowDate;
+      else $scope.service.values[0] = this.calendarShowDate;
+      $scope.service.click() ;
     };
 
-    this.chenge_mounth = function(step) {
-      var it = this.calendar_show_date.getMonth();
-      this.calendar_show_date.setMonth(it + step);
-      this.calendar_init(this.calendar_show_date);
-
-      $scope.give_event.date_current = this.calendar_show_date;
+    this.changeMonth = function(step) {
+      var month = this.calendarShowDate.getMonth();
+      this.calendarShowDate.setMonth(month + step);
+      this.calendarInit(this.calendarShowDate);
+      if (this.name=='To') $scope.service.values[1] = this.calendarShowDate;
+      else $scope.service.values[0] = this.calendarShowDate;
+      $scope.service.click() ;
     };
 
-    if ((this.name == '1') && ($scope.give_event.mainControllerName == 'MapEvent')) {
-      $scope.give_event.mainController.temp_click();
-    }
   }]
 });
