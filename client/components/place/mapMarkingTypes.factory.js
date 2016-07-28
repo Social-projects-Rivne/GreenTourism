@@ -46,15 +46,15 @@ angular.module('greenTourism')
     types.events = {
       game: {
         name: 'Game',
-        color: 'assets/img/events/marker/green.png'
+        icon: 'assets/img/events/marker/green.png'
       },
       festival: {
         name: 'Festival',
-        color: 'assets/img/events/marker/red.png'
+        icon: 'assets/img/events/marker/red.png'
       },
       meeting: {
         name: 'Meeting',
-        color: 'assets/img/events/marker/blue.png'
+        icon: 'assets/img/events/marker/blue.png'
       }
     };
 
