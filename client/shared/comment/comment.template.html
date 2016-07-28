@@ -11,7 +11,9 @@
             <textarea class="form-control" rows="2" required
                       placeholder="Leave your comment..." maxlength="1000"
                       ng-model="$ctrl.content"></textarea>
-            <p ng-if="$ctrl.content">Left: {{1000 - $ctrl.content.length}} symbols</p>
+            <p ng-if="$ctrl.content">
+              Left: {{1000 - $ctrl.content.length}} symbols
+            </p>
           </div>
           <div class="col-md-2 col-lg-2 add-comment-button">
             <button type="submit" ng-disabled="!$ctrl.content">Post</button>
@@ -22,6 +24,9 @@
   </div>
   <div class="alert alert-info" ng-if="!$ctrl.currentUser">
     Please, login for comment, update or delete message!
+  </div>
+  <div class="alert alert-danger" ng-if="$ctrl.showError">
+    Post failed. Please, reload this page and try again! Error: {{$ctrl.showError}}
   </div>
   <div class="row show-comments"
        ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
@@ -42,7 +47,10 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="commentMenu">
           <li>
-            <a href="" ng-click="$ctrl.checkCommentId = comment._id">Edit</a>
+            <a href=""
+               ng-click="$ctrl.showEditingMode(comment._id, comment.content)">
+              Edit
+            </a>
           </li>
           <li>
             <a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a>
@@ -56,13 +64,20 @@
                   rows="2" required maxlength="1000" ng-model="comment.content">
           {{comment.content}}
         </textarea>
+
         <button type="button"
                 ng-click="$ctrl.updateComment(comment._id, comment.content)"
                 class="btn btn-default"
                 ng-disabled="!comment.content">Update
         </button>
+        <button ng-click="$ctrl.checkCommentId = null;
+                          comment.content = $ctrl.defaultCommentContent"
+                type="button" class="btn btn-default">Close
+        </button>
       </div>
-      <p class="show-comments-timestamp">Added: {{comment.createdAt  | date:'yyyy-MM-dd HH:mm'}}</p>
+      <p class="show-comments-timestamp">
+        Added: {{comment.createdAt  | date:'yyyy-MM-dd HH:mm'}}
+      </p>
     </div>
   </div>
 </div>

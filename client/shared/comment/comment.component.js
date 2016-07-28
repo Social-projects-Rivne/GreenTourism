@@ -11,45 +11,58 @@ angular.module('comment', [])
         var MAX_COMMENT_CONTENT_LENGTH = 1000;
 
         ctrl.currentUser = currentUser;
-
+        ctrl.showError = false;
         ctrl.addComment = function(content) {
           if (content.length <= MAX_COMMENT_CONTENT_LENGTH) {
-            ctrl.content = '';
             Restangular.one(ctrl.inputObjectType + '/' +
               ctrl.inputObject._id + '/comments').customPOST(
               {
                 content: content,
                 author: ctrl.currentUser._id
-              }).then(function() {
-                Restangular.one(ctrl.inputObjectType + '/' +
-                  ctrl.inputObject._id + '/comments')
-                .get().then(function(obj) {
-                  ctrl.inputObject.comments = obj;
+              }).then(
+                function(res) {
+                  ctrl.content = '';
+                  Restangular.one(ctrl.inputObjectType + '/' +
+                    ctrl.inputObject._id + '/comments/' + res)
+                  .get().then(function(obj) {
+                    ctrl.inputObject.comments.push(obj);
+                  });
+                },
+                function(err) {
+                  ctrl.showError = err.statusText;
                 });
-              });
           }
         };
 
         ctrl.removeComment = function(id) {
           Restangular.one(ctrl.inputObjectType + '/' +
-            ctrl.inputObject._id + '/comments', id).remove().then(function() {
-              Restangular.one(ctrl.inputObjectType + '/' +
-                ctrl.inputObject._id + '/comments')
-                .get().then(function(obj) {
-                  ctrl.inputObject.comments = obj;
+            ctrl.inputObject._id + '/comments', id).remove().then(
+              function() {
+                ctrl.inputObject.comments = ctrl.inputObject.comments
+                .filter(function(comment) {
+                  return comment._id !== id;
                 });
-            });
+              },
+              function(err) {
+                ctrl.showError = err.statusText;
+              });
+        };
+
+        ctrl.showEditingMode = function(id, defaultContent) {
+          ctrl.checkCommentId = id;
+          ctrl.defaultCommentContent = defaultContent;
         };
 
         ctrl.updateComment = function(id, content) {
           if (content.length <= MAX_COMMENT_CONTENT_LENGTH) {
             Restangular.one(ctrl.inputObjectType + '/' +
               ctrl.inputObject._id + '/comments', id)
-              .get().then(function(obj) {
-                obj.content = content;
-                obj.put();
-                ctrl.checkCommentId = null;
-              });
+              .get().then(
+                function(obj) {
+                  obj.content = content;
+                  obj.put();
+                  ctrl.checkCommentId = null;
+                });
           }
         };
       }
