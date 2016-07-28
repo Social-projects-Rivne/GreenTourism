@@ -29,7 +29,9 @@ router.route('/auth/facebook/callback').get(
 //google
 
 router.route('/auth/google').get(
-  passport.authenticate('google', { scope : ['profile', 'email'] }));
+  passport.authenticate('google', { scope : ['https://www.googleapis.com/auth/userinfo.email', 
+                                             'https://www.googleapis.com/auth/userinfo.profile'] 
+                                    }));
 
     // the callback after google has authenticated the user
 router.route('/auth/google/callback').get(

@@ -5,8 +5,8 @@ module.exports = {
     'callbackURL' : 'http://localhost:8080/api/auth/facebook/callback'
   },
   'googleAuth':{
-    'clientID':'667176710255-52fda4hfgf2hephaiku1tnc2ks2nt8v4.apps.googleusercontent.com',
-    'clientSecret' : 'gwQexiT7DK0vO8KXFVGPyyYn',
+    'clientID':'54757690485-qi1sur7efphqrii06aoafdon990k1vr0.apps.googleusercontent.com',
+    'clientSecret' : 'Bk0dYxY_fU6GIk1UBxxEIcSz',
     'project_id':'greentourism-1374',
     'callbackURL':'http://localhost:8080/api/auth/google/callback',
   },

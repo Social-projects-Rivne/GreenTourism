@@ -63,8 +63,6 @@ var UserSchema = new Schema({
     google: {
       id: String,
       token: String,
-      email: String,
-      name: String,
     }
   },
   createdAt: {

@@ -9,12 +9,14 @@ module.exports = function() {
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
         callbackURL: configAuth.googleAuth.callbackURL,
-        passReqToCallback   : true
+        // profileFields: ['emails', 'photos', 'displayName', 'name', 'gender'],
+        // passReqToCallback : false,
+        // enableProof: true,
+        // session: true,
       },
 function(accessToken, refreshToken, profile, done) {
           process.nextTick(function() {
-              User.findOne({'email': profile.email}, function (err, user, eq, res, next) {
-                //console.log(profile);
+              User.findOne({'providerData.google.id': profile.id}, function (err, user, eq, res, next) {
                 if (err) 
                   return done(err);
                 if (user) {
@@ -23,13 +25,14 @@ function(accessToken, refreshToken, profile, done) {
                   var user = new User();
                   user.providerData.google.id = profile.id;
                   user.providerData.google.token = accessToken;
-                  user.name = profile.displayName
                   user.email = profile.emails[0].value;
-                  user.provider = profile.provider;
+                  user.avatar = profile.photos[0].value;
+                  user.firstName = profile.name.givenName;
+                  user.lastName = profile.name.familyName;
 
                   user.save(function(err) {
                     if(err) {
-                      console.log(err);  //handle errors!
+                      console.log(err);  //handle errors
                      } else {
                       console.log("saving user ...");
                       done(null, user);
