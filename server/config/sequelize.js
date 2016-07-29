@@ -2,7 +2,7 @@ var config = require('./config');
 var Sequelize = require('sequelize');
 
 module.exports = function() {
-  var sql = new Sequelize(config.sql.database,config.sql.username, config.sql.password, {
+  var sql = new Sequelize(config.sql.database, config.sql.username, config.sql.password, {
     host: config.sql.host,
     dialect: config.sql.dialect,
     define: {

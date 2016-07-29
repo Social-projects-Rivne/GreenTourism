@@ -7,12 +7,20 @@ var auth = require('../helpers/auth.js');
 router.route('/')
   .get(auth.isAdmin, controller.list);
 
+router.route('/:id')
+  .get(auth.isCurrentUser, controller.show)
+  .put(auth.isCurrentUser, controller.update)
+  .delete(auth.isCurrentUser, controller.delete);
+
+router.param('id', controller.getById);
+
 router.route('/me')
   .get(auth.isLoggedIn, controller.showMe);
 
-router.route('/:id')
-  .get(auth.hasAuthorization, controller.show)
-  .put(auth.hasAuthorization, controller.update)
-  .delete(auth.hasAuthorization, controller.delete);
+router.route('/:id/places')
+  .get(auth.isLoggedIn, controller.listPlaces);
+
+router.route('/:id/tracks')
+  .get(auth.isLoggedIn, controller.listTracks);
 
 module.exports = router;
