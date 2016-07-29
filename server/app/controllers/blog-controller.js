@@ -12,11 +12,10 @@ exports.list = function (req, res) {
       {model: Blog.comment},
       {model: Blog.likes}
     ],
-    raw: true
   })
       .then(function(records) {
         records.forEach(function (item, index) {
-          User.findById("5796858fdb537888027dea86", 'avatar firstName lastName', {lean: true}, function (err, user) {
+          User.findById(item.userId, 'avatar firstName lastName', {lean: true}, function (err, user) {
             item.userId = user;
             if(index == records.length-1){
               res.json(records);
