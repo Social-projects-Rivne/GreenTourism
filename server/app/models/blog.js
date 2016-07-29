@@ -38,6 +38,7 @@ BlogComment.belongsTo(BlogList);
 BlogList.hasMany(BlogLikes);
 
 BlogLikes.belongsTo(BlogList);
+
 //Categories.sync({force: true});
 //BlogList.sync({force: true});
 //BlogPhotos.sync({force: true});

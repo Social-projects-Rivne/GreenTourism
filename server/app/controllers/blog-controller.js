@@ -1,7 +1,7 @@
 var Blog = require('../models/blog');
 var User = require('mongoose').model('User');
 
-exports.list = function (req, res) {
+exports.list = function(req, res) {
   Blog.blog.findAll({
     where: req.query,
     order: 'createdAt ASC',
@@ -11,23 +11,23 @@ exports.list = function (req, res) {
       {model: Blog.categories},
       {model: Blog.comment},
       {model: Blog.likes}
-    ],
+    ]
   })
-      .then(function (records) {
-        records.forEach(function (item, index) {
-          User.findById(item.userId, 'firstName lastName', {lean: true}, function (err, user) {
+      .then(function(records) {
+        records.forEach(function(item, index) {
+          User.findById(item.userId, 'firstName lastName', {lean: true}, function(err, user) {
             item.userId = user;
-            if (index == records.length - 1) {
+            if (index === records.length - 1) {
               res.json(records);
             }
           });
         });
       })
-      .catch(function (err) {
+      .catch(function(err) {
         res.status(400).json({message: err.message});
       });
 };
-exports.show = function (req, res) {
+exports.show = function(req, res) {
   Blog.blog.findOne({
     where: {id: req.params.id},
     include: [
@@ -39,7 +39,7 @@ exports.show = function (req, res) {
   })
       .then(function(record) {
         if (record) {
-          User.findById(record.userId, 'firstName lastName', {lean: true}, function (err, user) {
+          User.findById(record.userId, 'firstName lastName', {lean: true}, function(err, user) {
             record.userId = user;
             res.json(record);
           });
@@ -52,18 +52,18 @@ exports.show = function (req, res) {
       });
 };
 
-exports.category = function (req, res) {
+exports.category = function(req, res) {
   Blog.categories.findAll({
     where: req.query
   })
-      .then(function (records) {
+      .then(function(records) {
         res.json(records);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         res.status(400).json({message: err.message});
       });
 };
-exports.popular = function (req, res) {
+exports.popular = function(req, res) {
   Blog.blog.findAll({
     where: req.query,
     include: [
@@ -72,55 +72,55 @@ exports.popular = function (req, res) {
       {model: Blog.likes}
     ]
   })
-      .then(function (records) {
+      .then(function(records) {
         res.json(records);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         res.status(400).json({message: err.message});
       });
 };
 
-exports.create = function (req, res) {
-  if (!req.body) {
-    res.sendStatus(400);
-  } else {
-    model.create(req.body)
-        .then(function (record) {
+exports.create = function(req, res) {
+  if (req.body) {
+    mosdel.create(req.body)
+        .then(function(record) {
           res.status(201).json({
             message: 'Record was successfully created!',
             record: record
           });
         })
-        .catch(function (err) {
+        .catch(function(err) {
           res.status(400).json({message: err.message, errors: err.errors});
         });
+  } else {
+    res.sendStatus(400);
   }
 };
-exports.update = function (req, res) {
+exports.update = function(req, res) {
   if (!req.body) {
     res.sendStatus(400);
   } else {
     model.update(req.body, {where: {id: req.params.id}})
-        .then(function () {
+        .then(function() {
           res.status(200).json({
             message: 'Record ' + req.params.id +
             ' was successfully updated'
           });
         })
-        .catch(function (err) {
+        .catch(function(err) {
           res.status(400).json({message: err.message, errors: err.errors});
         });
   }
 };
-exports.delete = function (req, res) {
+exports.delete = function(req, res) {
   model.destroy({where: {id: req.params.id}})
-      .then(function () {
+      .then(function() {
         res.status(200).json({
           message: 'Record ' + req.params.id +
           ' was successfully deleted'
         });
       })
-      .catch(function (err) {
+      .catch(function(err) {
         res.status(400).json({message: err.message});
       });
 };
