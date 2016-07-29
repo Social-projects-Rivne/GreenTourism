@@ -13,11 +13,11 @@ exports.list = function (req, res) {
       {model: Blog.likes}
     ],
   })
-      .then(function(records) {
+      .then(function (records) {
         records.forEach(function (item, index) {
           User.findById(item.userId, 'firstName lastName', {lean: true}, function (err, user) {
             item.userId = user;
-            if(index == records.length-1){
+            if (index == records.length - 1) {
               res.json(records);
             }
           });
@@ -37,14 +37,17 @@ exports.show = function (req, res) {
       {model: Blog.likes}
     ]
   })
-      .then(function (record) {
-        if (!record) {
+      .then(function(record) {
+        if (record) {
+          User.findById(record.userId, 'firstName lastName', {lean: true}, function (err, user) {
+            record.userId = user;
+            res.json(record);
+          });
+        } else {
           res.status(404).json({
             message: 'Record with id ' + req.params.id +
             ' was not found!'
           });
-        } else {
-          res.json(record);
         }
       });
 };
