@@ -20,7 +20,7 @@
                   <div class="blog-details">
                     By
                     <span class="blog-author">
-                      <a ng-href="#" title="Posts by admin" rel="author">{{blog.userId.firstName + " " +blog.userId.lastName}}</a>
+                      <a ng-href="#" title="Posts by admin" rel="author">{{blog.fullName}}</a>
                     </span>
                     <span class="blog-date">
                       {{blog.createdAt | date:'dd MMMM yyyy'}}
@@ -29,8 +29,6 @@
                   </div>
                   <div class="blog-separator"></div>
                   <div class="blog-content">
-                    <!--{{blog}}-->
-
                     {{blog.content | limitTo: 140}}{{blog.content.length>140 ? '...' : ''}}
                   </div>
 

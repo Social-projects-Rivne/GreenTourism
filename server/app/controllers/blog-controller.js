@@ -15,7 +15,7 @@ exports.list = function (req, res) {
   })
       .then(function(records) {
         records.forEach(function (item, index) {
-          User.findById(item.userId, 'avatar firstName lastName', {lean: true}, function (err, user) {
+          User.findById(item.userId, 'firstName lastName', {lean: true}, function (err, user) {
             item.userId = user;
             if(index == records.length-1){
               res.json(records);
