@@ -19,12 +19,12 @@ var Categories = sql.define('categories', {
 });
 
 var BlogLikes = sql.define('blogLikes', {
-  userId: {type: Sequelize.INTEGER, allowNull: false}
+  userId: {type: Sequelize.TEXT, allowNull: false}
 });
 
 var BlogComment = sql.define('blogComment', {
   text: {type: Sequelize.TEXT, allowNull: false},
-  userId: {type: Sequelize.INTEGER, allowNull: false}
+  userId: {type: Sequelize.TEXT, allowNull: false}
 });
 
 BlogList.hasOne(BlogPhotos);
@@ -38,14 +38,11 @@ BlogComment.belongsTo(BlogList);
 BlogList.hasMany(BlogLikes);
 
 BlogLikes.belongsTo(BlogList);
-
-/**
-*BlogList.sync({force: true});
-*BlogPhotos.sync({force: true});
-*Categories.sync({force: true});
-*BlogLikes.sync({force: true});
-*BlogComment.sync({force: true});
-*/
+//Categories.sync({force: true});
+//BlogList.sync({force: true});
+//BlogPhotos.sync({force: true});
+//BlogLikes.sync({force: true});
+//BlogComment.sync({force: true});
 
 var Blog = {blog: BlogList, photos: BlogPhotos, categories: Categories, likes: BlogLikes, comment: BlogComment};
 
