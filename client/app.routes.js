@@ -29,7 +29,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
       })
       .when('/places/:placeId', {
         template: '<place-detail place="$resolve.place"></place-detail>',
-        controller: 'placeDetailCtrl',
         resolve: {
           place: ['$route', 'Place', function getPlace($route, Place) {
             return Place.one($route.current.params.placeId).get()
@@ -79,6 +78,3 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         templateUrl: 'shared/errors/404.html'
       });
   }]);
-angular.module('greenTourism').controller('placeDetailCtrl', function($scope) {
-  $scope.pageClass = 'page-detail';
-});
