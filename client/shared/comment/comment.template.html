@@ -26,7 +26,8 @@
     Please, login for comment, update or delete message!
   </div>
   <div class="alert alert-danger" ng-if="$ctrl.showError">
-    Post failed. Please, reload this page and try again! Error: {{$ctrl.showError}}
+    Post failed. Please, reload this page and try again!
+    Error: {{$ctrl.showError}}
   </div>
   <div class="row show-comments"
        ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
@@ -36,7 +37,7 @@
     <div class="col-md-11 col-sm-11 col-xs-11">
       <p>
         <strong>
-          {{comment.author.firstName}} {{comment.author.lastName}}
+          {{comment.author.fullName}}
         </strong>
       </p>
       <div class="dropdown comment-menu"
