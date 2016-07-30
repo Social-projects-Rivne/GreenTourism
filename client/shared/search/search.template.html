@@ -1,10 +1,12 @@
-<div class="col-xs-12" id="search">
   <div class="input-group col-xs-offset-1 col-xs-10">
     <form class="form-inline" name="searchForm"
           novalidate>
-      <input class="form-control" ng-model="searchname" type="text" name="search">
-          <span class="input-group-btn">
-            <button class="btn" ng-click="$ctrl.searchPlace(searchname)" type="submit">Search</button>
-          </span>
+      <input placeholder="Enter Place" type="text" ng-model="placesearch" typeahead-editable="false" uib-typeahead="place.name for place in placesforsearch | filter:$viewValue | limitTo:8" class="form-control" typeahead-min-length="0" typeahead-no-results="noResults">
+
+   <span ng-if="noResults" uib-dropdown uib-dropdown-toggle auto-close="disabled" is-open="true">
+      <ul class="uib-dropdown-menu" >
+        <li><a href>no results</a></li>
+      </ul>
+    </span>
+    </form>
   </div>
-</div>

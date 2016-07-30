@@ -457,8 +457,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
         // ----END---- Places
 
-        ctrl.places = places;
-
         // Don't hide dropdown if clicked
         angular.element('.dropdownStop').on({
           click: function(e) {

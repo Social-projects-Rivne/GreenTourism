@@ -46,6 +46,24 @@ angular.module('welcomePage', [])
         }, 1000);
         return false;
       });
+      // video
+      angular.element(document).ready(function () {
+        var controls = {
+          video: angular.element("#myvideo")
+        };
+        var video = controls.video[0];
+        angular.element("#myvideo").on('click', angular.element("#myvideo"), function () {
+          video = angular.element("#myvideo")[0];
+          if (video.paused && video) {
+            video.play();
+
+          } else {
+            video.pause();
+          }
+
+        });
+
+      });
     }
     ]
   });

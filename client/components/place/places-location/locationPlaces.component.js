@@ -1,4 +1,4 @@
-function locationplacesCtrl(mapFactory, $scope, $rootScope, placesOnMap, constants, Place, $timeout) {
+function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place) {
   var ctrl = $scope;
   var latitude;
   var longitude;

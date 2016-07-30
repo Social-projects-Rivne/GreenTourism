@@ -4,7 +4,7 @@
   position: absolute;
   width: 100%;
   top: 0;
-  background-color:@page-bg-color;
+  background-color: #FFF;
 }
 
 @keyframes slideInUp {
@@ -24,15 +24,15 @@
     transform: translateY(100%);
   }
 }
-.ng-enter       { z-index: 8888; }
-.ng-leave       { z-index: 9999; }
 
 .page-detail.ng-enter {
   animation: slideInUp 0.5s both ease-in;
+  z-index: 8888;
 }
 
 .page-detail.ng-leave {
   animation: slideInOut 0.5s both ease-in;
+  z-index: 9999;
 }
 
 div.place {
@@ -51,7 +51,7 @@ div.place {
     margin-top: -10px;
   }
   .container_page {
-    padding: 20px 20px;
+    padding: 20px;
     div .vertical-align {
       margin-right: 20px;
     }
@@ -59,7 +59,7 @@ div.place {
       border: 1px solid @brand-dark;
     }
     button#post {
-      border-radius: 0px;
+      border-radius: 0;
       background-color: @brand-dark;
       color: white;
       width: 150px;
@@ -71,7 +71,6 @@ div.place {
       width: 80px;
       height: 80px;
     }
-
     .gallery {
       text-align: center;
       a.fancybox {
@@ -93,40 +92,14 @@ div.place {
         border: none;
         display: block;
       }
-
-    }
-  }
-  @keyframes closeMap {
-    from {
-      height: 430px;
-    }
-    to {
-      height: 0;
-    }
-  }
-  @keyframes openMap {
-    from {
-      height: 0px;
-    }
-    to {
-      height: 430px;
     }
   }
   #map1 {
     width: 100%;
     height: 430px;
-
+    margin-top: 20px;
   }
   i#close, i.fa {
     cursor: pointer;
   }
-
-  .closeMap {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    z-index: 10000000;
-  }
 }
-
-/* place-page */
