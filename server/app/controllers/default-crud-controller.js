@@ -4,6 +4,23 @@ module.exports = function(Model) {
   var controller = {};
 
   controller.list = function(req, res) {
+    if (req.query.type) {
+      req.query.type = {$in: req.query.type};
+    }
+    if (req.query.locationSW && req.query.locationNE) {
+      req.query.location = {
+        $geoWithin: {
+          $box: [
+            req.query.locationSW,
+            req.query.locationNE
+          ]
+        }
+      };
+    }
+
+    delete req.query.locationSW;
+    delete req.query.locationNE;
+
     var queryAndOptions = sliceQueryOptions(req.query);
 
     Model.find(queryAndOptions.query, null, queryAndOptions.options,
