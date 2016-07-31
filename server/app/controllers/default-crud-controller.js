@@ -4,6 +4,14 @@ module.exports = function(Model) {
   var controller = {};
 
   controller.list = function(req, res) {
+    var projection = [
+      '-description',
+      '-comments',
+      '-owner',
+      '-createdAt',
+      '-updatedAt'
+    ].join(' ');
+
     if (req.query.type) {
       req.query.type = {$in: req.query.type};
     }
@@ -23,7 +31,7 @@ module.exports = function(Model) {
 
     var queryAndOptions = sliceQueryOptions(req.query);
 
-    Model.find(queryAndOptions.query, null, queryAndOptions.options,
+    Model.find(queryAndOptions.query, projection, queryAndOptions.options,
       function(err, records) {
         if (err) {
           return res.status(400).json(err);
@@ -52,18 +60,22 @@ module.exports = function(Model) {
   };
 
   controller.getById = function(req, res, next, id) {
-    Model.findById(id, function(err, record) {
-      if (err) {
-        return res.status(404).json(err);
-      } else if (record) {
-        req.record = record;
-        next();
-      } else {
-        return res.status(500).json({
-          message: 'Failed to load record ' + id
-        });
-      }
-    });
+    Model.findById(id).populate({
+      path: 'comments.author',
+      select: 'firstName lastName fullName avatar'
+    })
+      .exec(function(err, record) {
+        if (err) {
+          return res.status(404).json(err);
+        } else if (record) {
+          req.record = record;
+          next();
+        } else {
+          return res.status(500).json({
+            message: 'Failed to load record ' + id
+          });
+        }
+      });
   };
 
   controller.show = function(req, res) {

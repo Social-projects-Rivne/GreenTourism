@@ -184,9 +184,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           ctrl.mapBounds = map.getBounds();
           angular.element('#spinner').addClass('spinner');
 
-          if (realPlacesType.length === 0) {
-            angular.element('#spinner').removeClass('spinner');
-          } else {
+          if (realPlacesType.length) {
             Place.getList({
               type: realPlacesType,
               locationNE: [
@@ -204,6 +202,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               placesOnMap.showPlaces(places);
               angular.element('#spinner').removeClass('spinner');
             });
+          } else {
+            angular.element('#spinner').removeClass('spinner');
           }
         }
         // ---END--- Function which get data from DB only on special area
