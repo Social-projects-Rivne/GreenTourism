@@ -135,7 +135,7 @@
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu nav-ul">
+              <ul class="dropdown-menu dropdown-auth nav-ul">
                 <% if (user) { %>
                   <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
                   <li><a href="/api/logout">Log out</a></li>
@@ -164,7 +164,7 @@
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false"><i class="fa fa-user navtop" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu nav-ul">
+              <ul class="dropdown-menu dropdown-auth nav-ul">
                 <% if (user) { %>
                   <li ng-class="{ active: nav.isActive('/profile')}"><a href="#!/profile">Profile</a></li>
                   <li><a href="/api/logout">Log out</a></li>
@@ -204,7 +204,7 @@
     <div ng-if="main.routeChangeError">
       <div ng-if="main.statusCode" ng-include="'shared/errors/' + main.statusCode + '.html'"></div>
       <div ng-if="!main.statusCode">
-        <h1 class="text-center">Looks like there is some problems with our app! 😕</h1>
+        <h1 class="text-center">Looks like there is some problems with our app! (╯°□°）╯︵ ┻━┻</h1>
       </div>
     </div>
   </main>

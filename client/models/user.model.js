@@ -3,7 +3,7 @@ angular.module('userModel', ['restangular'])
     var User = Restangular.service('users');
 
     // Custom methods goes here
-    Restangular.extendModel('places', function(model) {
+    Restangular.extendModel('users', function(model) {
       model.getFullName = function() {
         return this.firstName + ' ' + this.lastName;
       };
