@@ -18,7 +18,7 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place) {
     var max = bounds.getNorthEast().wrap();
     $scope.placesByLocation = [];
     ctrl.places = placesOnMap.getPlaceArr();
-    var placesArr = ctrl.places;
+    var placesArr =  _.sortBy(ctrl.places, ['rate']);
 
     $scope.placesByLocation = placesArr.filter(function(place) {
         latitude = place.location.coordinates[1];
@@ -27,7 +27,6 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place) {
           && latitude < max.lat && longitude < max.lng) && place.photos[0];
       }
     );
-    $scope.placesByLocation = _.sortBy($scope.placesByLocation, ['rate']);
     var numberOfPopularPlaces = 5;
     $scope.placesByLocation = $scope.placesByLocation.slice($scope.placesByLocation.length - numberOfPopularPlaces, $scope.placesByLocation.length);
     if ($scope.placesByLocation.length == 0)

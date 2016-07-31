@@ -353,7 +353,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               constants.checkedSpanClass, 1);
             ctrl.classAddRemove('.placesIcon', constants.checkedClass, 1);
             ctrl.classAddRemove('#Streets span', constants.checkedSpanClass, 1);
-
             placesOnMap.setPlaceArr(places);
           });
 

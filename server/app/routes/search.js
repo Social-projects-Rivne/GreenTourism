@@ -6,5 +6,7 @@ var controller = require('../controllers/search');
 router.route('/')
   .get(controller.list);
 router.route('/search')
-  .get(controller.list)
+  .get(controller.list);
+router.route('/tracks')
+  .get(controller.searchTracks);
 module.exports = router;
