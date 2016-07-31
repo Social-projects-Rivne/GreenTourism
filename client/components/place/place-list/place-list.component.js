@@ -24,6 +24,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.addPlaceMenuIsOpen = false;
 
         ctrl.toggleAddPlaceMenu = function(form) {
+          angular.element('#add-place').css('display', 'block');
           if (ctrl.addPlaceMenuIsOpen) {
             placesOnMap.closeAddPlaceMenu();
             ctrl.addPlaceMenuIsOpen = false;
@@ -92,6 +93,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var newPointsForTrack = [];
 
         ctrl.toggleAddTrackMenu = function(form) {
+          angular.element('#add-track').css('display', 'block');
           var map = placesOnMap.map;
           if (ctrl.addTrackMenuIsOpen) {
             ctrl.addTrackMenuIsOpen = false;
@@ -199,33 +201,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             } else {
               placesOnMap.newTrackPoints.forEach(function(point, index) {
                 var newPoints = [];
-                /*if (point[0]._id) {
-                  ctrl.newTrack.places.push(point[0]._id);
-                  if (index == placesOnMap.newTrackPoints.length - 1) {
-                    addNewTrackIntoDB(ctrl.newTrack);
-                  }
-                } else {
-                  newPoints.push(point[0]);
-                  Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
-                  '&lon=' + point[0].location.coordinates[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
-                    point[0].address = result.display_name;
-                    console.log(point);
-                    Place.post(point[0]).then(function(response) {
-                      console.log(response);
-                      ctrl.newTrack.places.push(response.record._id);
-                      checkActiveType = angular.element('.' + point[0].type + ' span');
-                      if (checkActiveType.hasClass(constants.checkedSpanClass)) {
-                        placesOnMap.showPlaces(newPoints);
-                        console.log(newPoints);
-                      } else {
-                        ctrl.checkType(point[0].type);
-                      }
-                      if (index == placesOnMap.newTrackPoints.length - 1) {
-                        addNewTrackIntoDB(ctrl.newTrack);
-                      }
-                    });
-                  });
-                }*/
                 if (!point[0]._id)  {
                   newPoints.push(point[0]);
                   Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
