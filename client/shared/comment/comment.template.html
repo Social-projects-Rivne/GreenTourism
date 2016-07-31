@@ -8,7 +8,7 @@
             ng-submit="$ctrl.addComment($ctrl.content)" novalidate>
         <div class="row">
           <div class="col-md-10 col-lg-10">
-            <textarea class="form-control" rows="2" required
+            <textarea ng-keyup="$ctrl.textareaPostResize()" class="form-control" required
                       placeholder="Leave your comment..." maxlength="1000"
                       ng-model="$ctrl.content"></textarea>
             <p ng-if="$ctrl.content">
@@ -42,9 +42,9 @@
       </p>
       <div class="dropdown comment-menu"
            ng-if="$ctrl.currentUser._id === comment.author._id">
-        <a class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
+        <a href="" class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="true">
-          <span class="glyphicon glyphicon-option-horizontal"></span>
+          <span class="glyphicon glyphicon-edit"></span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="commentMenu">
           <li>
@@ -60,9 +60,10 @@
       </div>
       <p class="show-comments-content"
          ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
-      <div ng-if="$ctrl.checkCommentId === comment._id">
-        <textarea class="form-control"
-                  rows="2" required maxlength="1000" ng-model="comment.content">
+      <div class="show-comments-edit-content" ng-if="$ctrl.checkCommentId === comment._id">
+        <textarea ng-keyup="$ctrl.textareaEditResize()"
+                  class="form-control edit-textarea"
+                  required maxlength="1000" ng-model="comment.content">
           {{comment.content}}
         </textarea>
 
