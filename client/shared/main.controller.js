@@ -16,9 +16,9 @@ angular.module('greenTourism')
 
           // Check if current or previous route matching place detail page
           if (isPlaceDetailCurrentRoute || isPlaceDetailPreviousRoute) {
-            angular.element('#js-router').addClass('page-detail');
+            ctrl.placeDetailPage = true;
           } else {
-            angular.element('#js-router').removeClass('page-detail');
+            ctrl.placeDetailPage = false;
           }
 
           ctrl.routeChangeError = false;
