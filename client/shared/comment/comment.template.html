@@ -1,5 +1,5 @@
-<div class="container comment">
-  <div class="row add-comment" ng-if="$ctrl.currentUser">
+<div class="comment">
+  <div class="row add-comment comment" ng-if="$ctrl.currentUser">
     <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
       <img ng-src="{{$ctrl.currentUser.avatar}}"/>
     </div>
@@ -11,6 +11,7 @@
             <textarea class="form-control" rows="2" required
                       placeholder="Leave your comment..." maxlength="1000"
                       ng-model="$ctrl.content"></textarea>
+
             <p ng-if="$ctrl.content">Left: {{1000 - $ctrl.content.length}} symbols</p>
           </div>
           <div class="col-md-2 col-lg-2 add-comment-button">
@@ -34,6 +35,7 @@
           {{comment.author.firstName}} {{comment.author.lastName}}
         </strong>
       </p>
+
       <div class="dropdown comment-menu"
            ng-if="$ctrl.currentUser._id === comment.author._id">
         <a class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
@@ -51,6 +53,7 @@
       </div>
       <p class="show-comments-content"
          ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
+
       <div ng-if="$ctrl.checkCommentId === comment._id">
         <textarea class="form-control"
                   rows="2" required maxlength="1000" ng-model="comment.content">

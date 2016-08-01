@@ -1,73 +1,75 @@
 <div class="row place">
+  <div class="col-xs-12 col-lg-12 col-md-12">
+    <div class="row vertical-align">
+      <div class="col-xs-4 no-padding">
 
-  <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
-  <h3>Place:{{$ctrl.place.id}}</h3>
-
-
-  <div class="col-lg-3 col-md-3 col-xs-12 " style="overflow: hidden">
-    <div class="row">
-      <a class="fancybox" rel="gallery1" href="assets/{{$ctrl.place.photo[0]}}" title="{{$ctrl.place.name}}">
-        <img src="assets/{{$ctrl.place.photo[0]}}" alt="" style="min-width:300px; max-width:600px; width:400px;"
-        />
-      </a>
-    </div>
-
-    <div class="row">
-      <a ng-repeat="photo in $ctrl.place.photo" ng-if="$index>=1" class="fancybox" rel="gallery1"
-          href="assets/{{photo}}" title="{{$ctrl.place.name}}">
-        <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}" />
-      </a>
-
-    </div>
-    <button type="button" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
-    </button>
-  </div>
-  <div class="col-ls-5 col-md-5   col-xs-12 " style="min-width:400px;">
-    <div class="row">
-      <div class="col-xs-12">
-        <p>{{$ctrl.place.description}}</p>
-        <br>
-        <br>
-
-        <form>
-          <div class="form-group">
-            <label for="comment">Comment</label>
-            <textarea class="form-control" id="comment" rows="3"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-default">Add Comment</button>
-        </form>
-        <br>
-        <br>
-        <div class="pull-left">
-          <img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="img-circle  profile"
-          />
-        </div>
-        <p class="clearfix">Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1
-          Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1</p>
-
-        <div class="pull-left">
-          <img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="img-circle  profile"
-          />
-        </div>
-        <p class="clearfix">Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2
-          Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2
+        <p class="text-left">
+          <button type="button" class="btn btn-default btn-lg like">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like 124
+          </button>
         </p>
+      </div>
+      <div class="col-xs-4 no-padding">
+
+      </div>
+      <div class="col-xs-4 no-padding">
+        <i class="fa fa-times fa-3x  pull-right close" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
+      </div>
+    </div>
+    <div class=row">
+      <div class="col-xs-12">
+        <h2 class="title text-center">{{$ctrl.place.name}} </h2>
       </div>
 
     </div>
   </div>
-  <div class="col-xs-4 col-lg-4 col-md-4" style="min-width:500px;">
-    <div class="col-xs-12 no-padding">
-      <!-- Map container start-->
-      <div id="map1"></div>
+  <div class="container_page">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-xs-12">
+        <p>{{$ctrl.place.description}}</p>
+        <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
+
+      </div>
+      <div class="col-lg-4 col-md-4 col-xs-12 gallery">
+        <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}">
+          <img ng-src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
+        </a>
+
+        <!--
+          <a ng-repeat="photo in $ctrl.place.photos" ng-if="$index>=1" class="fancybox" rel="gallery1"
+             href="{{photo}}" title="{{$ctrl.place.name}}">
+            <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}"/>
+        </a>
+        <!-- to delete- it is for demonstrate without data about other photo in DB -->
+        <a class="fancybox" rel="gallery1" href="assets/img/places/new_1.jpg">
+          <img src="assets/img/places/new_1.jpg"/>
+        </a>
+
+        <a class="fancybox" rel="gallery1" href="http://rvavto.com.ua/images/oak.jpg">
+          <img src="http://rvavto.com.ua/images/oak.jpg"/>
+        </a>
+        <a class="fancybox" rel="gallery1" href="assets/img/places/new_1.jpg">
+          <img src="assets/img/places/new_1.jpg"/>
+        </a>
+
+        <a class="fancybox" rel="gallery1" href="assets/img/places/tonnel-lubvi-foto-3.jpg">
+          <img src="assets/img/places/tonnel-lubvi-foto-3.jpg"/>
+        </a>
+
+        <a class="fancybox" rel="gallery1" href="assets/img/places/new2.jpg">
+          <img src="assets/img/places/new2.jpg"/>
+        </a>
+
+        <a class="fancybox" rel="gallery1" href="assets/img/places/tonnel-lubvi-foto-3.jpg">
+          <img src="assets/img/places/tonnel-lubvi-foto-3.jpg"/>
+        </a>
+
+        <!-- to delete- it is for demonstrate without data in DB -->
+      </div>
+    </div>
+    <div id="map1">
+
     </div>
   </div>
+</div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-    });
-
-  </script>

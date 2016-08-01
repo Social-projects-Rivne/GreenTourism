@@ -5,8 +5,13 @@ angular.module('mapModule')
       .layerSupport({showCoverageOnHover: false});
     var groups = [];
     var types = [];
-    var places = [];
-    var map;
+    placesOnMap.places = {
+      camp: [],
+      service: [],
+      hostes: [],
+      featured: [],
+      healthcare: []
+    };
 
     var marker = function(lon, lat, icon) {
       return L.marker([lat, lon], {
@@ -22,7 +27,7 @@ angular.module('mapModule')
     };
 
     placesOnMap.showMap = function() {
-      map = mapFactory.showMap();
+      placesOnMap.map = mapFactory.showMap();
     };
 
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
@@ -35,42 +40,62 @@ angular.module('mapModule')
     };
 
     placesOnMap.showPlaces = function(places, input) {
-      mainGroup.addTo(map);
+      mainGroup.addTo(placesOnMap.map);
       if (input) {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
+          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
             .addTo(groups[input])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+            .bindPopup('<div class=\'popup\'><h3>' + place.name + '</h3>' +
+              '<a href=\'#!/places/' + place._id + '\'><img class=\'marker-image  center-block\' src=\''+place.photos[0]+'\' \/></a>' +
+              '<button type=\'button\' class=\'btn btn-default btn-md center-block\'> ' +
+              '<a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+          newPlace.name = place.name;
+          newPlace._id = place._id;
+          placesOnMap.places[place.type].push(newPlace);
         });
         mainGroup.checkIn(groups[input]);
-        groups[input].addTo(map);
+        groups[input].addTo(placesOnMap.map);
       } else {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
+          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
             .addTo(groups[place.type])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+            .bindPopup('<div class=\'popup\'><h3>' + place.name + '</h3>' +
+              '<a href=\'#!/places/' + place._id + '\'><img class=\'marker-image  center-block\' src=\''+place.photos[0]+'\' \/></a>' +
+              '<button type=\'button\' class=\'btn btn-default btn-md center-block\'> ' +
+              '<a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+          newPlace.name = place.name;
+          newPlace._id = place._id;
+          placesOnMap.places[place.type].push(newPlace);
         });
         for (var key in types) {
           mainGroup.checkIn(groups[key]);
-          groups[key].addTo(map);
+          groups[key].addTo(placesOnMap.map);
         }
       }
 
-      map.on('click move', function() {
-        map.closePopup();
+      placesOnMap.map.on('click move', function() {
+        placesOnMap.map.closePopup();
       });
     };
-
+    placesOnMap.placeArr = [];
+    placesOnMap.setPlaceArr = function(place) {
+      placesOnMap.placeArr = place;
+    };
+    placesOnMap.getPlaceArr = function() {
+      return placesOnMap.placeArr;
+    };
     placesOnMap.removePlaces = function(input) {
       if (input) {
         mainGroup.checkOut(groups[input]);
         groups[input].clearLayers();
+        placesOnMap.places[input] = [];
       } else {
         for (var key in types) {
           mainGroup.checkOut(groups[key]);
           groups[key].clearLayers();
+        }
+        for (var key2 in placesOnMap.places) {
+          placesOnMap.places[key2] = [];
         }
       }
     };
@@ -94,16 +119,16 @@ angular.module('mapModule')
         coords[1] = place.location.coordinates[0];
         coordsArray[index] = coords;
       });
-      trackForAdding = polyline(coordsArray, color).addTo(map);
+      trackForAdding = polyline(coordsArray, color).addTo(placesOnMap.map);
       tracks.push([trackForAdding, track.type]);
     };
 
     var removeTrack = function(track) {
       if (this == 'all') {
-        map.removeLayer(track[0]);
+        placesOnMap.map.removeLayer(track[0]);
       } else {
         if (track[1] == this) {
-          map.removeLayer(track[0]);
+          placesOnMap.map.removeLayer(track[0]);
         }
       }
     };
@@ -123,11 +148,11 @@ angular.module('mapModule')
     /* ** START add place factory ** */
     var newMarker;
     placesOnMap.openAddPlaceMenu = function() {
-      map.on('click', addNewPlaceOnMap);
+      placesOnMap.map.on('click', addNewPlaceOnMap);
     };
 
     placesOnMap.closeAddPlaceMenu = function() {
-      map.off('click', addNewPlaceOnMap);
+      placesOnMap.map.off('click', addNewPlaceOnMap);
     };
 
     function addNewPlaceOnMap(e) {
@@ -136,18 +161,20 @@ angular.module('mapModule')
       placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
       placesOnMap.coordsIsDefined = true;
       if (newMarker) {
-        map.removeLayer(newMarker);
+        placesOnMap.map.removeLayer(newMarker);
       }
-      newMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
+      newMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(placesOnMap.map);
       latitudeContainer.text('Latitude: ' + newMarker._latlng.lat);
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
 
     placesOnMap.removeNewMarker = function() {
       if (newMarker) {
-        map.removeLayer(newMarker);
+        placesOnMap.map.removeLayer(newMarker);
       }
     };
+
+    placesOnMap.newTrackPoints = [];
 
     return placesOnMap;
   }]);
