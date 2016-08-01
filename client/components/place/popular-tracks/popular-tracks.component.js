@@ -5,7 +5,7 @@ angular.module('popularTracks', [])
       var self = this;
       self.popularTracks = [];
       var userLocation;
-      
+
       if (mapFactory.popularTracks) {
         self.popularTracks = mapFactory.popularTracks;
       } else {
