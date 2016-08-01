@@ -97,6 +97,26 @@
                   </li>
                 </ul>
               </li>
+              <li class="dropdown-submenu events">
+                <a href="">Events</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(eventType, eventTypeValue) in $ctrl.eventsType"
+                      ng-click="$ctrl.checkEventType(eventType)">
+                    <a class="placeFilter {{eventType}}" href="">
+                      <img ng-src="{{eventTypeValue.icon}}">
+                      {{eventTypeValue.name}}
+                      <span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="placeFilter check-all-places" href=""
+                       ng-click="$ctrl.checkAllEvents()">
+                      Check all
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

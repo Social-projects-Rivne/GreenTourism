@@ -130,6 +130,22 @@ angular.module('mapModule')
       map.off('click', addNewPlaceOnMap);
     };
 
+    placesOnMap.showEvents = function(events, input) {
+      var pix = mapMarkingTypes.events[input].icon;
+      var groupeE = L.layerGroup();
+          //console.log(events);
+          //console.log(input);
+      events.forEach(function(events) {
+        console.log(events.location.coordinates[0]+' - '+ events.location.coordinates[1] + ' ' + pix);
+
+        marker(events.location.coordinates[1], events.location.coordinates[0], pix)
+        .addTo(groupeE);
+       }) ;
+          //  console.log('Fire!') ;
+       console.log(groupeE) ;
+       groupeE.addTo(map);
+     } ;
+
     function addNewPlaceOnMap(e) {
       var latitudeContainer = angular.element('#latitude');
       var longitudeContainer = angular.element('#longitude');

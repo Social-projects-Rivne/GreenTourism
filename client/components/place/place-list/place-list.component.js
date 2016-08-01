@@ -2,16 +2,19 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
-      'currentUser', 'constants', 'Restangular',
+      'currentUser', 'constants', 'Restangular', 'Event',
       function(placesOnMap, mapMarkingTypes, Place, Track,
-               currentUser, constants, Restangular) {
+               currentUser, constants, Restangular, Event) {
         var ctrl = this;
         var places = [];
         var tracks = [];
+        var events = [];
         var placeCounter;
         var trackCounter;
+        var eventCounter;
         var placeTypeLength;
         var trackTypeLength;
+        var eventTypeLength;
 
         ctrl.addPlaceMenuIsOpen = false;
         ctrl.coordsForNewPlace = placesOnMap.coords;
@@ -87,6 +90,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             if (objectType === 'placesIcon') {
               ctrl.checkAllPlaces(objectIcon);
             }
+            if (objectType === 'eventsIcon') {
+              ctrl.checkAllEvents(objectIcon);
+            }
             if (objectType === 'tracksIcon') {
               ctrl.checkAllTracks(objectIcon);
             }
@@ -94,6 +100,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             objectIcon.addClass(constants.checkedClass);
             if (objectType === 'placesIcon') {
               ctrl.checkType(constants.placesOnLoad);
+            }
+            if (objectType === 'eventsIcon') {
+              ctrl.checkAllEvents();
             }
             if (objectType === 'tracksIcon') {
               ctrl.checkAllTracks();
@@ -285,5 +294,29 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
         };
         // *** END tracks controller ***
+
+        // *** START tracks controller ***
+        ctrl.eventsType = mapMarkingTypes.events;
+        eventsTypeLength = Object.keys(ctrl.eventsType).length;
+        Event.getList().then(function(result) {
+          eventCounter = eventTypeLength;
+          events = result;
+          placesOnMap.showEvents(events,'game');
+        });
+
+        ctrl.checkAllEvents = function(input) {
+          alert('Hi') ;
+          placesOnMap.showEvents(events,'game');
+        }
+
+        // ----START---- FilterByOneOfType
+        ctrl.checkEventType = function(input) {
+            alert(input) ;
+        };
+        // ----END---- FilterByOneOfType
+
+
+        // ***
+
       }]
   });
