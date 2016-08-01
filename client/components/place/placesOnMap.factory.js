@@ -23,6 +23,7 @@ angular.module('mapModule')
 
     placesOnMap.showMap = function() {
       map = mapFactory.showMap();
+      return map;
     };
 
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
