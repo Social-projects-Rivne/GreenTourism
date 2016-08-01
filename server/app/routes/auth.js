@@ -28,17 +28,22 @@ router.route('/auth/facebook/callback').get(
     failureRedirect: '/'
   })
 );
-/*
-router.route('/auth/google').get(
-  passport.authenticate('google', { scope : ['https://www.googleapis.com/auth/userinfo.email',
-                                             'https://www.googleapis.com/auth/userinfo.profile']
-                                    }));
 
-    // the callback after google has authenticated the user
+router.route('/auth/google').get(
+  passport.authenticate('google', {
+    failureRedirect: '/',
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+  })
+);
+
 router.route('/auth/google/callback').get(
-  passport.authenticate('google', { successRedirect : '/#!/profile',
-                                    failureRedirect : '/#!/login'
-                                    }));
-*/
+  passport.authenticate('google', {
+    successRedirect: '/#!/profile',
+    failureRedirect: '/'
+  })
+);
 
 module.exports = router;
