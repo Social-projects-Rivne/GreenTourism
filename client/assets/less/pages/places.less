@@ -270,7 +270,7 @@
   background-color: #f8f8f8;
   padding: 115px 15px 15px 15px;
   overflow: auto;
-  display: none;
+  display: block;
   &.ng-hide-add,
   &.ng-hide-remove {
     transition: all linear 0.5s;
@@ -298,6 +298,23 @@
   .no-padding {
     padding: 0;
   }
+  .inactive-add-item-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 3;
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all linear 0.5s;
+    }
+    &.ng-hide {
+      opacity: 0;
+    }
+  }
   @media (max-width: 767px) {
     padding-top: 200px;
     width: 60%;
@@ -306,14 +323,25 @@
 
 /* ------------- Add track ---------------*/
 #new-point-menu {
+  position: relative;
+  height: 300px;
+  background-color: #f8f8f8;
   border: 1px solid @light-green;
   border-radius: 5px;
   overflow: hidden;
   padding: 0 10px 10px 10px;
+  z-index: 4;
   input {
     margin-top: 0;
   }
   h3 {
     text-align: center;
+  }
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  &.ng-hide {
+    height: 0;
   }
 }
