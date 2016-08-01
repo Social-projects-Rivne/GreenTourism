@@ -21,7 +21,6 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-  //  required: 'Password is required',   //has to be optional due facebook etc.,  autho password is not require 
     validate: [
       function(password) {
         return password && password.length >= 8;
@@ -52,25 +51,11 @@ var UserSchema = new Schema({
   },
   provider: {
     type: String,
-    //required: 'Provider is required'  //has to be optional
+    required: 'Provider is required'
   },
   providerId: String,
-  providerData: {
-    facebook: {
-      id: String,
-      token: String,
-    },
-    google: {
-      id: String,
-      token: String,
-    }
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-
-});
+  providerData: {}
+}, {timestamps: true});
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(next) {

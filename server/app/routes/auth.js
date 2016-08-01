@@ -16,21 +16,22 @@ router.route('/login').post(
 
 router.route('/logout').get(authController.logout);
 
-//FACEBOOK
 router.route('/auth/facebook').get(
-  passport.authenticate('facebook', { scope: ['email'] }));
+  passport.authenticate('facebook', {
+    failureRedirect: '/'
+  }
+));
 
 router.route('/auth/facebook/callback').get(
-  passport.authenticate('facebook', { successRedirect: '/#!/profile',
-                                      failureRedirect: '/#!/login' 
-                                    }));
-
-
-//google
-
+  passport.authenticate('facebook', {
+    successRedirect: '/#!/profile',
+    failureRedirect: '/'
+  })
+);
+/*
 router.route('/auth/google').get(
-  passport.authenticate('google', { scope : ['https://www.googleapis.com/auth/userinfo.email', 
-                                             'https://www.googleapis.com/auth/userinfo.profile'] 
+  passport.authenticate('google', { scope : ['https://www.googleapis.com/auth/userinfo.email',
+                                             'https://www.googleapis.com/auth/userinfo.profile']
                                     }));
 
     // the callback after google has authenticated the user
@@ -38,6 +39,6 @@ router.route('/auth/google/callback').get(
   passport.authenticate('google', { successRedirect : '/#!/profile',
                                     failureRedirect : '/#!/login'
                                     }));
-
+*/
 
 module.exports = router;
