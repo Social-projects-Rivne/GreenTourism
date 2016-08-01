@@ -317,10 +317,27 @@
           <span class="glyphicon glyphicon-remove removeIcon"></span>
         </a>
         <span class="title">1. Choose places on map:</span><br>
-        <div id="points">
-          <div ng-repeat="point in $ctrl.newTrackPoints">
+        <div id="pointsForNewTrack">
+          <table ng-repeat="point in $ctrl.newTrackPoints">
+            <tr ng-if="$index != 0">
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="col-lg-1">
+                  <a href=""><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i></a>
+                </div>
+                <div class="pointName col-lg-10">{{$index + 1 + '. ' + point[0].name}}</div>
+                <div class="col-lg-1">
+                  <a href=""><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <!--<div ng-repeat="point in $ctrl.newTrackPoints">
             {{$index + 1 + '. ' + point[0].name}}
-          </div>
+          </div> -->
         </div>
         <div id="new-point-menu" class="ng-hide" ng-show="$ctrl.addPointMenuIsOpen">
           <h3>New Point</h3>

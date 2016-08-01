@@ -345,3 +345,47 @@
     height: 0;
   }
 }
+
+#pointsForNewTrack {
+  padding: 10px;
+  color: #fff;
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    tr:nth-child(even) td, th {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+    tr:nth-child(odd) td:first-child {
+      border-right: 3px solid @light-green;
+      height: 10px;
+    }
+    tr:nth-child(odd) td {
+      width: 50%;
+    }
+  }
+  table:first-child {
+    td {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+  }
+  .pointName {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  .fa-map-marker {
+    margin-left: -15px;
+  }
+  a {
+    color: #fff;
+  }
+}
