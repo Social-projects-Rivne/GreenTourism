@@ -4,18 +4,24 @@ var CommentSchema = require('./schema/comment');
 var LocationSchema = require('./schema/location');
 
 var PlaceSchema = new Schema({
-  // TODO: add required for almost all fields
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   description: String,
   location: LocationSchema,
   address: String,
-  type: String,
+  type: {
+    type: String,
+    required: true
+  },
   photos: [String],
   likes: [Schema.Types.ObjectId],
   comments: [CommentSchema],
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   rate: Number
 }, {
@@ -26,12 +32,6 @@ var PlaceSchema = new Schema({
     virtuals: true
   }
 });
-
-var autoPopulateAuthor = function(next) {
-  this.populate('comments.author');
-  next();
-};
-PlaceSchema.pre('findOne', autoPopulateAuthor).pre('find', autoPopulateAuthor);
 
 PlaceSchema.virtual('stars').get(function() {
   this.rate = this.likes.length;

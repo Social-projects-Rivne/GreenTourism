@@ -8,10 +8,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var ctrl = this;
         var places = [];
         var tracks = [];
-        var placeCounter;
+        var placeCounter = 1;
         var trackCounter;
         var placeTypeLength;
         var trackTypeLength;
+        var activePlacesTypes = [];
+        var key;
 
         ctrl.addPlaceMenuIsOpen = false;
         ctrl.coordsForNewPlace = placesOnMap.coords;
@@ -115,6 +117,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             popularPlacesIcon.addClass(constants.checkedClass);
             angular.element('#popularTracks')
               .removeClass(constants.checkedClass);
+
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
           }
@@ -129,6 +132,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             popularTracksIcon.addClass(constants.checkedClass);
             angular.element('#popularPlaces')
               .removeClass(constants.checkedClass);
+
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
           }
@@ -139,54 +143,126 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.placesType = mapMarkingTypes.places;
         placeTypeLength = Object.keys(ctrl.placesType).length;
         placesOnMap.removePlaces();
-        placesOnMap.showMap();
         placesOnMap.initGroupsOfPlaces(ctrl.placesType);
+        var map = placesOnMap.showMap();
 
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        Place.getList({type: constants.placesOnLoad, limit: 100})
-          .then(function(result) {
-            placeCounter = 1;
-            places = result.concat(places);
-            placesOnMap.showPlaces(result, constants.placesOnLoad);
-            angular.element('.' + constants.placesOnLoad + ' span')
-              .addClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').addClass(constants.checkedClass);
-            angular.element('#Streets span')
-              .addClass(constants.checkedSpanClass);
-          });
+        ctrl.mapBounds = map.getBounds();
+        Place.getList({
+          type: [constants.placesOnLoad],
+          locationNE: [
+            ctrl.mapBounds._northEast.lng,
+            ctrl.mapBounds._northEast.lat
+          ],
+          locationSW: [
+            ctrl.mapBounds._southWest.lng,
+            ctrl.mapBounds._southWest.lat
+          ]
+        }).then(function(result) {
+          activePlacesTypes.push(constants.placesOnLoad);
+          places = [];
+          placesOnMap.removePlaces();
+          places = result;
+          placesOnMap.showPlaces(places);
+          angular.element('.' + constants.placesOnLoad + ' span')
+            .addClass(constants.checkedSpanClass);
+          angular.element('.placesIcon').addClass(constants.checkedClass);
+          angular.element('.placesIcon').removeClass(constants.checkDisabled);
+          angular.element('#Streets span')
+            .addClass(constants.checkedSpanClass);
+          angular.element('#spinner').removeClass('spinner');
+        });
         // ----END---- ShowPlacesOnLoad
+
+        // ---START--- Function which get data from DB only on special area
+        function onMove() {
+          ctrl.mapBounds = map.getBounds();
+          if (activePlacesTypes.length) {
+            angular.element('#spinner').addClass('spinner');
+            Place.getList({
+              type: activePlacesTypes,
+              locationNE: [
+                ctrl.mapBounds._northEast.lng,
+                ctrl.mapBounds._northEast.lat
+              ],
+              locationSW: [
+                ctrl.mapBounds._southWest.lng,
+                ctrl.mapBounds._southWest.lat
+              ]
+            }).then(function(result) {
+              places = [];
+              placesOnMap.removePlaces();
+              places = result;
+              placesOnMap.showPlaces(places);
+              angular.element('#spinner').removeClass('spinner');
+            });
+          } else {
+            angular.element('#spinner').removeClass('spinner');
+          }
+        }
+        // ---END--- Function which get data from DB only on special area
+
+        map.on('moveend', onMove);
 
         // ----START---- FilterByOneOfType
         ctrl.checkType = function(input) {
           var checkPlace = angular.element('.' + input + ' span');
           if (checkPlace.hasClass(constants.checkedSpanClass)) {
             placeCounter--;
-            checkPlace.removeClass(constants.checkedSpanClass);
+            angular.element('.' + input + ' span')
+              .removeClass(constants.checkedSpanClass);
             angular.element('.check-all-places span')
               .removeClass(constants.checkedSpanClass);
             placesOnMap.removePlaces(input);
             places = places.filter(function(place) {
               return place.type !== input;
             });
+            activePlacesTypes = activePlacesTypes.filter(function(type) {
+              return type !== input;
+            });
           } else {
+            activePlacesTypes.push(input);
             placeCounter++;
-            checkPlace.addClass(constants.checkedSpanClass);
+            angular.element('.' + input).addClass(constants.checkDisabled);
+            checkPlace.addClass(constants.spinner);
+            angular.element('.placesIcon')
+              .addClass(constants.checkDisabled +
+                ' ' + constants.checkedClass);
+            angular.element('#spinner').addClass('spinner');
 
-            if (placeCounter === placeTypeLength)
-              angular.element('.check-all-places span')
-                .addClass(constants.checkedSpanClass);
-
-            Place.getList({type: input, limit: 100}).then(function(result) {
+            Place.getList({
+              type: input,
+              locationNE: [
+                ctrl.mapBounds._northEast.lng,
+                ctrl.mapBounds._northEast.lat
+              ],
+              locationSW: [
+                ctrl.mapBounds._southWest.lng,
+                ctrl.mapBounds._southWest.lat
+              ]
+            }).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(result, input);
+
+              checkPlace.removeClass(constants.spinner);
+              checkPlace.addClass(constants.checkedSpanClass);
+              angular.element('.' + input)
+                .removeClass(constants.checkDisabled);
+              if (placeCounter === placeTypeLength)
+                angular.element('.check-all-places span')
+                  .addClass(constants.checkedSpanClass);
+
+              if (!angular.element('.placeFilter a span')
+                  .hasClass(constants.spinner)) {
+                angular.element('#spinner').removeClass('spinner');
+                angular.element('.placesIcon')
+                  .removeClass(constants.checkDisabled);
+              }
             });
           }
-          if (placeCounter > 0) {
-            angular.element('.placesIcon').addClass(constants.checkedClass);
-          } else {
+          if (placeCounter === 0)
             angular.element('.placesIcon').removeClass(constants.checkedClass);
-          }
         };
         // ----END---- FilterByOneOfType
 
@@ -198,21 +274,25 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             placeCounter = 0;
             angular.element('.placeFilter span')
               .removeClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').removeClass(constants.checkedClass);
+            angular.element('.placesIcon')
+              .removeClass(constants.checkedClass);
             placesOnMap.removePlaces();
             places = [];
+            activePlacesTypes = [];
           } else {
             placeCounter = placeTypeLength;
-            placesOnMap.removePlaces();
-            places = [];
-            angular.element('.placeFilter span')
-              .addClass(constants.checkedSpanClass);
-            angular.element('.placesIcon').addClass(constants.checkedClass);
+            checkAllPlaces.addClass(constants.checkedSpanClass);
 
-            Place.getList({limit: 100}).then(function(result) {
-              places = result.concat(places);
-              placesOnMap.showPlaces(places);
-            });
+            for (key in ctrl.placesType) {
+              if ({}.hasOwnProperty.call(ctrl.placesType, key)) {
+                if (!angular.element('.' + key + ' a span')
+                    .hasClass(constants.checkedSpanClass) &&
+                    !angular.element('.' + key + ' a span')
+                    .hasClass(constants.spinner)) {
+                  ctrl.checkType(key);
+                }
+              }
+            }
           }
         };
         // ----END---- Places
