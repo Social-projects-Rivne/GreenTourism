@@ -24,6 +24,7 @@ module.exports = function() {
                 } else {
                   console.log(user)
                   var user = new User();
+                  user.provider = 'facebook';
                   user.providerData.facebook.id = profile.id;
                   user.providerData.facebook.token = accessToken;
                   user.email = profile.emails[0].value;

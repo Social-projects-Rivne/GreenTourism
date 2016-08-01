@@ -23,6 +23,7 @@ function(accessToken, refreshToken, profile, done) {
                     done(null, user);
                 } else {
                   var user = new User();
+                  user.provider ='google'; 
                   user.providerData.google.id = profile.id;
                   user.providerData.google.token = accessToken;
                   user.email = profile.emails[0].value;
