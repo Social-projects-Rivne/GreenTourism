@@ -1,11 +1,16 @@
-<div class="col-xs-12" id="search">
-  <div class="input-group col-xs-offset-1 col-xs-10">
-    <form class="form-inline" name="searchForm"
-          novalidate>
-      <input class="form-control" ng-model="searchname" type="text" name="search">
+<div class="input-group" id="search">
+  <form class="form-inline" name="searchForm" novalidate>
+    <div class="form-group">
+      <span class="input-group-addon spinner">
+        <i class="fa" ng-class="{true:'fa-spinner fa-spin', false:'fa-search'}[loading]"></i>
+      </span>
+      <input ng-model="searchname" type="text"  class="typeahead form-control" placeholder="Search for..." typeahead-no-results="noResults">
           <span class="input-group-btn">
-            <button class="btn" ng-click="$ctrl.searchPlace(searchname)" type="submit">Search</button>
-          </span>
-      </form>
-  </div>
+          <button class="btn" ng-click="$ctrl.searchPlace(searchname)" type="submit">Search</button>
+        </span>
+      <span ng-show="noResults" dropdown dropdown-toggle auto-close="disabled" is-open="true">
+        no results
+    </span>
+    </div>
+  </form>
 </div>
