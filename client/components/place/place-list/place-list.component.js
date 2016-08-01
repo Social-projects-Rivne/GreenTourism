@@ -9,7 +9,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks'])
         var typesLength;
 
         this.user = currentUser;
-        console.log(currentUser);
 
         this.placesType = mapMarkingTypes.places;
         typesLength = Object.keys(this.placesType).length;
