@@ -9,10 +9,6 @@ module.exports = function() {
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
         callbackURL: configAuth.googleAuth.callbackURL,
-        // profileFields: ['emails', 'photos', 'displayName', 'name', 'gender'],
-        // passReqToCallback : false,
-        // enableProof: true,
-        // session: true,
       },
 function(accessToken, refreshToken, profile, done) {
           process.nextTick(function() {
@@ -30,16 +26,12 @@ function(accessToken, refreshToken, profile, done) {
                   user.avatar = profile.photos[0].value;
                   user.firstName = profile.name.givenName;
                   user.lastName = profile.name.familyName;
-
                   user.save(function(err) {
                     if(err) {
-                      console.log(err);  //handle errors
                      } else {
-                      console.log("saving user ...");
                       done(null, user);
                     }
                   });
-                  console.log(user)
             }
          });
       });

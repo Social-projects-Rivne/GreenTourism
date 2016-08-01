@@ -3,7 +3,6 @@ var passport = require('passport');
 var User = require('mongoose').model('User');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy    = require('passport-local').Strategy;
-
 module.exports = function() {
   passport.use(new FacebookStrategy({
           clientID: configAuth.facebookAuth.clientID,
@@ -22,7 +21,6 @@ module.exports = function() {
                 if (user) {
                     done(null, user);
                 } else {
-                  console.log(user)
                   var user = new User();
                   user.provider = 'facebook';
                   user.providerData.facebook.id = profile.id;
@@ -31,16 +29,12 @@ module.exports = function() {
                   user.avatar = profile.photos[0].value;
                   user.firstName = profile.name.givenName;
                   user.lastName = profile.name.familyName;
-
                   user.save(function(err) {
                     if(err) {
-                      console.log(err);  //handle errors!
                      } else {
-                      console.log("saving user ...");
                       done(null, user);
                     }
                   });
-                  console.log(user)
             }
          });
       });
