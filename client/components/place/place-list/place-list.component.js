@@ -152,7 +152,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             angular.element('.' + constants.placesOnLoad + ' span')
               .addClass(constants.checkedSpanClass);
             angular.element('.placesIcon').addClass(constants.checkedClass);
-            angular.element('#Streets span')
+            angular.element('#streets span')
               .addClass(constants.checkedSpanClass);
           });
         // ----END---- ShowPlacesOnLoad
