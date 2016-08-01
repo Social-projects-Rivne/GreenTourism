@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router(); // eslint-disable-line new-cap
 
 var Event = require('mongoose').model('Event');
-var EventController = require('../controllers/default-crud-controller')(Event);
+var EventController = require('../controllers/events');
 
 router.route('/')
   .get(EventController.list)
