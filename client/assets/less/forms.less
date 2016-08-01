@@ -1,0 +1,130 @@
+// Signin & Signup forms
+.dropdown-auth{
+  padding: 0;
+  border: none;
+}
+.circleuser {
+  color: @brand-light;
+  position: absolute;
+  text-align: center;
+  left: 106px;
+}
+.user {
+  color: @brand-dark;
+  position: absolute;
+  text-align: center;
+  left: 107px;
+}
+.signhead {
+  position: fixed;
+  left: 0;
+  top: 67px;
+  height: 117px;
+  background-color: @brand-dark;
+  width: 250px;
+  margin-top: -15px
+}
+.logotype {
+  color: @brand-light;
+  font-size: 20px;
+  text-align: center;
+}
+#informlog {
+  color: @brand-light;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 60px;
+}
+.registration{
+
+  -webkit-box-shadow: 2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  -moz-box-shadow:    2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  box-shadow:         2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+
+
+  position: fixed;
+  left: 0;
+  top: 167px;
+  background-color: @brand-light;
+  width: 250px;
+  input:focus {
+    border: 1px solid green;
+    -webkit-box-shadow: 2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+    -moz-box-shadow:    2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+    box-shadow:         2px 2px 11px 0px rgba(50, 206, 102, 0.75);
+  }
+  input {
+    border: 1px solid green;
+    margin-top: -5px;
+    margin-bottom: 0;
+  }
+  hr {
+    border-color: @brand-dark;
+    margin: 5% -5%;
+  }
+  label {
+    color: @brand-dark;
+    font-size: 14px;
+  }
+}
+.btn-google {
+  margin-bottom: 5%;
+}
+.submit-btn {
+  background-color: @brand-dark;
+  border: none;
+  color: @brand-light;
+  margin-bottom: 7%;
+  font-size: 15px;
+}
+.no-account {
+  text-align: center;
+}
+.link {
+  color: @brand-light;
+}
+.link:hover {
+  color: @brand-light;
+}
+.link:active {
+  color: @brand-light;
+}
+.link:visited {
+  color: @brand-light;
+}
+.tip {
+  color: @brand-dark;
+  font-size: 10px;
+  margin-bottom: -5px;
+}
+.error {
+  color: red;
+  font-size: 9px;
+}
+.policy {
+  font-size: 9px;
+}
+
+@media screen and (max-width: 480px) {
+  .logotype {
+    display: none;
+  }
+  .signhead {
+    height: 57px;
+    margin-top: -17px;
+  }
+  .circleuser {
+    display: none;
+  }
+  .user {
+    display: none;
+  }
+  .registration{
+    top: 100px;
+  }
+  #informlog {
+    margin-top: 0px;
+    font-size: 14px;
+    padding-top: 18px;
+  }
+}
