@@ -1,78 +1,151 @@
-<div class="blog-item-page" ng-repeat="blog in $ctrl.blog ">
+<div class="blog-item-page">
   <section class="blog-page-content">
     <div class="container">
       <div class="row">
         <article>
-          <div class="col-md-12">
+          <div class="col-md-8">
             <div class="blog-wrapper">
-              <img ng-src="{{blog.images}}" alt="{{blog.title}}">
+              <img ng-src="{{$ctrl.blog.blogPhoto.url}}" alt="{{$ctrl.blog.title}}">
 
               <div class="">
-                <h3 class="blog-title">
-                  {{blog.title}}
-                </h3>
+                <h2 class="blog-title">
+                  {{$ctrl.blog.title}}
+                </h2>
 
-                <div class="blog-details">
-                  By
-                  <span class="blog-author">
-                    <a href="#" title="Posts by admin" rel="author">{{blog.author}}</a>
-                  </span>
-                  <span class="blog-date">{{blog.date | date:'dd MMMM yyyy'}}</span>
-                  <a href="#" class="blog-category">{{blog.category}}</a>
-                </div>
                 <div class="blog-content">
-                  {{blog.content}}
+                  {{$ctrl.blog.content}}
+                </div>
+                <div class="blog-details">
+                  <ul>
+                    <li>By
+                      <span class="blog-author">
+                        <a ng-href="#" title="Posts by admin" rel="author">{{$ctrl.blog.userId}}</a>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="blog-date">
+                        {{$ctrl.blog.createdAt | date:'dd MMMM yyyy'}}
+                      </span>
+                    </li>
+                    <li>Category:
+                      <a ng-href="#" class="blog-category">{{$ctrl.blog.category.name}}</a>
+                    </li>
+                    <li>
+                      {{$ctrl.blog.blogComments.length}} Comments
+                    </li>
+                    <li class="pull-right likes-container">
+                      <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                      <span>{{$ctrl.blog.blogLikes.length}}</span>
+                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    </li>
+                  </ul>
+                </div>
+                <div class="blog-comments">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h3 class="title-heading">
+                        Comments
+                      </h3>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="title-sep"></div>
+                    </div>
+                  </div>
+                  <div class="comment-list">
+                    <div class="comment-item" ng-repeat="comment in $ctrl.blog.blogComments">
+                      <div class="media">
+                        <div class="media-left">
+                          <img class="media-object avatar "
+                               src="assets/img/welcome-page/avatar.png" alt="...">
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">
+                            By {{comment.userId}} at
+                            {{comment.createdAt | date:'dd MMMM yyyy'}}
+                          </h6>
+
+                          <p>
+                            {{comment.text}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h3 class="title-heading">
+                        Leave A Comment
+                      </h3>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="title-sep"></div>
+                    </div>
+                  </div>
+                  <form name="reviewForm" ng-submit="">
+                    <textarea ng-model="newComment"></textarea>
+                    <button type="submit" class="btn">Post Comment</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-  <section class="related-posts">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="fusion-title">
-            <h3 class="title-heading-left">Related Posts</h3>
-            <div class="title-sep-container">
-              <div class="title-sep sep-double"></div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="blog in $ctrl.blogs | limitTo:3">
-              <a href="#!/blog/{{blog.id}}">
-		                        {{blog.title}}
-        	                    <img alt="{{blog.title}}" ng-src="{{blog.images}}" class="media-object" style="width:50px;height:50px;"/>
-	                        </a>
+        <aside>
+          <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
+            <div class="row">
+              <div class="col-md-12">
+                <blog-sidebar></blog-sidebar>
+              </div>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </section>
-  <br/>
-  <section class="post-comments" id="post-comments">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="title-heading-left">Comments</h3>
-          <div class="comment-item" ng-repeat="comment in blog.comments">
-            <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="..."> {{comment}}
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <form name="reviewForm" ng-submit="">
-            <div class="col-md-12">
-              <img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="..."> {{newComment}}
-            </div>
-            <textarea ng-model="newComment"></textarea>
-            <input type="submit" value="Comment">
-          </form>
-        </div>
-      </div>
-    </div>
-
-  </section>
+  <!--<section class="related-posts">-->
+  <!--<div class="container">-->
+  <!--<div class="row">-->
+  <!--<div class="col-md-12">-->
+  <!--<div class="fusion-title">-->
+  <!--<h3 class="title-heading-left">Related Posts</h3>-->
+  <!--<div class="title-sep-container">-->
+  <!--<div class="title-sep sep-double"></div>-->
+  <!--</div>-->
+  <!--<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="blog in $ctrl.blogs | limitTo:3" >-->
+  <!--<a href="#!/blog/{{blog.id}}">-->
+  <!--{{blog.title}}-->
+  <!--<img alt="{{blog.title}}" ng-src="{{blog.images}}" class="media-object" style="width:50px;height:50px;"/>-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</section>-->
+  <!--<br/>-->
+  <!--<section class="post-comments" id="post-comments">-->
+  <!--<div class="container">-->
+  <!--<div class="row">-->
+  <!--<div class="col-md-12">-->
+  <!--<h3 class="title-heading-left">Comments</h3>-->
+  <!--<div class="comment-item" ng-repeat="comment in blog.comments">-->
+  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
+  <!--{{comment}}-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>    -->
+  <!--<div class="row">-->
+  <!--<div class="col-md-12">-->
+  <!--<form name="reviewForm" ng-submit=""> -->
+  <!--<div class="col-md-12">-->
+  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
+  <!--{{newComment}}-->
+  <!--</div>-->
+  <!--<textarea ng-model="newComment"></textarea>-->
+  <!--<input type="submit" value="Comment">-->
+  <!--</form>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</section>-->
 </div>

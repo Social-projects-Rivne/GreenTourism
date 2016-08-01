@@ -53,11 +53,26 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
       .when('/events/:eventId/:dataId', { // TODO: Remove this from routes (use query strings instead)
         template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event-detail></event-detail>'
       })
-      .when('/blog', {  // TODO: Rename to blogs
-        template: '<blog-list></blog-list>'
+      .when('/blog', {
+        template: '<blog-list blogs="$resolve.blogs"></blog-list>',
+        resolve: {
+          blogs: ['Blog', function BlogListController(Blog) {
+            return Blog.getList().then(function(blogs) {
+              return blogs;
+            });
+          }]
+        }
       })
-      .when('/blog/:blogId', {  // TODO: Rename to blogs/:blogId
-        template: '<blog-detail></blog-detail>'
+      .when('/blog/:blogId', {
+        template: '<blog-detail blog="$resolve.blog"></blog-detail>',
+        resolve: {
+          blog: ['$route', 'Blog', function BlogDetailController($route, Blog) {
+            return Blog.one($route.current.params.blogId).get()
+              .then(function(blog) {
+                return blog;
+              });
+          }]
+        }
       })
       .otherwise({
         templateUrl: 'shared/errors/404.html'

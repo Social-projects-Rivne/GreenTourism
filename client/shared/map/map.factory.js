@@ -27,7 +27,7 @@ angular.module('mapModule', [])
 
       function locationArea(coords) {
         if (userLocation) {
-          map.setView(coords);
+          map.setView(coords, constants.defaultZoom);
         }
       }
 

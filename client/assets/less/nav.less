@@ -1,6 +1,10 @@
 /***************************************************************
   NAVBAR
 ****************************************************************/
+.navbar-style {
+  border-bottom-width: 2px;
+}
+
 .nav-padding {
   padding-left: 0;
 }
@@ -104,5 +108,20 @@
 @media screen and (max-width: 321px) {
   .footer .footer-content {
     padding: 30px 0 0 0;
+  }
+}
+
+/***************************************************************
+  Nav pills
+****************************************************************/
+
+.nav-pills {
+  & > li.active {
+    & > a,
+    & > a:hover,
+    & > a:focus {
+      background-color: @brand-dark;
+      color: #fff;
+    }
   }
 }

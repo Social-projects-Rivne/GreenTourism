@@ -8,7 +8,7 @@ angular.module('mapModule')
     var places = [];
     var map;
 
-    var marker = function(lat, lon, icon) {
+    var marker = function(lon, lat, icon) {
       return L.marker([lat, lon], {
         icon: L.icon({
           iconUrl: icon,
@@ -23,6 +23,7 @@ angular.module('mapModule')
 
     placesOnMap.showMap = function() {
       map = mapFactory.showMap();
+      return map;
     };
 
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
@@ -87,7 +88,14 @@ angular.module('mapModule')
 
     var addTrack = function(track) {
       var color = mapMarkingTypes.tracks[track.type].color;
-      trackForAdding = polyline(track.location.coordinates, color).addTo(map);
+      var coordsArray = [];
+      track.places.forEach(function(place, index) {
+        var coords = [];
+        coords[0] = place.location.coordinates[1];
+        coords[1] = place.location.coordinates[0];
+        coordsArray[index] = coords;
+      });
+      trackForAdding = polyline(coordsArray, color).addTo(map);
       tracks.push([trackForAdding, track.type]);
     };
 
@@ -111,6 +119,35 @@ angular.module('mapModule')
 
     placesOnMap.removeAllTracks = function() {
       tracks.forEach(removeTrack, 'all');
+    };
+
+    /* ** START add place factory ** */
+    var newMarker;
+    placesOnMap.openAddPlaceMenu = function() {
+      map.on('click', addNewPlaceOnMap);
+    };
+
+    placesOnMap.closeAddPlaceMenu = function() {
+      map.off('click', addNewPlaceOnMap);
+    };
+
+    function addNewPlaceOnMap(e) {
+      var latitudeContainer = angular.element('#latitude');
+      var longitudeContainer = angular.element('#longitude');
+      placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
+      placesOnMap.coordsIsDefined = true;
+      if (newMarker) {
+        map.removeLayer(newMarker);
+      }
+      newMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
+      latitudeContainer.text('Latitude: ' + newMarker._latlng.lat);
+      longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
+    }
+
+    placesOnMap.removeNewMarker = function() {
+      if (newMarker) {
+        map.removeLayer(newMarker);
+      }
     };
 
     return placesOnMap;

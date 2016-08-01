@@ -3,6 +3,13 @@ var db = process.env.MONGO_DATABASE_URL ||
 
 module.exports = {
   db: db,
+  sql: {
+    username: 'root',
+    password: '',
+    database: 'sql_greentourism',
+    host: '127.0.0.1',
+    dialect: 'mysql'
+  },
   sessionSecret: 'developmentSessionSecret',
   facebook: {
     clientID: '1626051384389779',
@@ -12,7 +19,7 @@ module.exports = {
   google: {
     clientID: '54757690485-qi1sur7efphqrii06aoafdon990k1vr0.apps.googleusercontent.com',
     clientSecret: 'Bk0dYxY_fU6GIk1UBxxEIcSz',
-    project_id: 'greentourism-1374',
+    // project_id: 'greentourism-1374',
     callbackURL: 'http://localhost:8080/api/auth/google/callback'
   }
 };
