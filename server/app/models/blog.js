@@ -5,7 +5,7 @@ var sql = require('../../config/sequelize')();
 var BlogList = sql.define('blogs', {
   title: {type: Sequelize.TEXT, allowNull: false},
   content: {type: Sequelize.TEXT, allowNull: false},
-  userId: {type: Sequelize.TEXT, allowNull: false},
+  owner: {type: Sequelize.TEXT, allowNull: false},
   status: {type: Sequelize.TEXT, allowNull: false}
 });
 
@@ -19,12 +19,12 @@ var Categories = sql.define('categories', {
 });
 
 var BlogLikes = sql.define('blogLikes', {
-  userId: {type: Sequelize.TEXT, allowNull: false}
+  author: {type: Sequelize.TEXT, allowNull: false}
 });
 
 var BlogComment = sql.define('blogComment', {
   text: {type: Sequelize.TEXT, allowNull: false},
-  userId: {type: Sequelize.TEXT, allowNull: false}
+  author: {type: Sequelize.TEXT, allowNull: false}
 });
 
 BlogList.hasOne(BlogPhotos);

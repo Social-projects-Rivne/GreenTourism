@@ -15,8 +15,8 @@ exports.list = function(req, res) {
   })
       .then(function(records) {
         records.forEach(function(item, index) {
-          User.findById(item.userId, 'firstName lastName fullName', function(err, user) {
-            item.userId = user;
+          User.findById(item.owner, 'firstName lastName fullName', function(err, user) {
+            item.owner = user;
             if (index === records.length - 1) {
               res.json(records);
             }
@@ -39,8 +39,8 @@ exports.show = function(req, res) {
   })
       .then(function(record) {
         if (record) {
-          User.findById(record.userId, 'firstName lastName fullName', function(err, user) {
-            record.userId = user;
+          User.findById(record.owner, 'firstName lastName fullName', function(err, user) {
+            record.owner = user;
             res.json(record);
           });
         } else {
