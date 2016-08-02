@@ -164,6 +164,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           places = [];
           placesOnMap.removePlaces();
           places = result;
+          placesOnMap.setPlaceArr(places);
           placesOnMap.showPlaces(places);
           angular.element('.' + constants.placesOnLoad + ' span')
             .addClass(constants.checkedSpanClass);
@@ -194,6 +195,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               places = [];
               placesOnMap.removePlaces();
               places = result;
+              placesOnMap.setPlaceArr(places);
               placesOnMap.showPlaces(places);
               angular.element('#spinner').removeClass('spinner');
             });

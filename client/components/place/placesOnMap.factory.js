@@ -75,7 +75,13 @@ angular.module('mapModule')
         }
       }
     };
-
+    placesOnMap.placeArr = [];
+    placesOnMap.setPlaceArr = function(place) {
+      placesOnMap.placeArr = place;
+    };
+    placesOnMap.getPlaceArr = function() {
+      return placesOnMap.placeArr;
+    };
     /* ** START tracks factory ** */
     var tracks = [];
     var trackForAdding;
