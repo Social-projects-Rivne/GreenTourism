@@ -1,24 +1,36 @@
 angular.module('greenTourism')
-  .controller('MainCtrl', ['$rootScope', '$scope', '$location', function MainCtrl($rootScope, $scope, $location) {
-    var ctrl = this;
+  .controller('MainCtrl', ['$rootScope', '$location',
+    function MainCtrl($rootScope, $location) {
+      var ctrl = this;
 
-    if ($location.path().split('/').slice(1, 2).join('/') != "places") {
-      $scope.pageClass = 'page';
+      // TODO: Add flash messages hiding when changing route
+
+      $rootScope.$on('$routeChangeSuccess',
+        function(event, current, previous) {
+          var placeDetailRoute = /^\/places\/\.*/;
+
+          var isPlaceDetailCurrentRoute = placeDetailRoute.test(
+            current.$$route.originalPath);
+          var isPlaceDetailPreviousRoute = previous &&
+            placeDetailRoute.test(previous.$$route.originalPath);
+
+          // Check if current or previous route matching place detail page
+          if (isPlaceDetailCurrentRoute || isPlaceDetailPreviousRoute) {
+            ctrl.placeDetailPage = true;
+          } else {
+            ctrl.placeDetailPage = false;
+          }
+
+          ctrl.routeChangeError = false;
+          ctrl.statusCode = 200;
+        }
+      );
+
+      $rootScope.$on('$routeChangeError',
+        function(event, current, previous, rejection) {
+          ctrl.routeChangeError = true;
+          ctrl.statusCode = rejection.status;
+        }
+      );
     }
-    $scope.$on('closePage', function(event, data) {
-      location.href = "#!/places";
-    });
-
-    // TODO: Add flash messages hiding when changing route
-
-    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-      ctrl.routeChangeError = false;
-      ctrl.statusCode = 200;
-    });
-
-    $rootScope.$on('$routeChangeError', function(event, current, previous,
-                                                 rejection) {
-      ctrl.routeChangeError = true;
-      ctrl.statusCode = rejection.status;
-    });
-  }]);
+]);

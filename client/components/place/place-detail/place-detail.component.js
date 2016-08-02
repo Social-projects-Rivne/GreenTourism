@@ -24,10 +24,5 @@ angular.module('placeDetail', ['comment'])
         '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] + '" /></a><br />').openPopup();
       var deltaheight = 0.1;
       this.map.setView([this.place.location.coordinates[1]+ deltaheight, this.place.location.coordinates[0]]); //0.1- for responcive design- show info on mobile
-
-      this.closePage = function() {
-        $scope.$emit('closePage', 'pageClass');
-      };
     }
   });
-
