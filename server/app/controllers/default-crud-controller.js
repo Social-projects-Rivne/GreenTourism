@@ -161,5 +161,34 @@ module.exports = function(Model) {
     });
   };
 
+  // Likes
+
+  controller.listLikes = function(req, res) {
+    var record = req.record;
+
+    return res.json(record.likes);
+  };
+
+  controller.createDeleteLike = function(req, res) {
+    var record = req.record;
+
+    if (req.body.id === req.user.id) {
+      record.likes.push(req.body.id);
+    }
+    if (req.body.deleteId === req.user.id) {
+      record.likes = record.likes.filter(function(like) {
+        return like !== req.body.deleteId;
+      });
+    }
+
+    record.save(function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(record);
+    });
+  };
+
   return controller;
 };
