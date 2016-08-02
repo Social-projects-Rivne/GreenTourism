@@ -7,7 +7,11 @@ angular.module('filterMapType', [])
         ctrl.layers = mapMarkingTypes.layers;
 
         var map = mapFactory.map;
-        map.addLayer(ctrl.layers.streets.layer);
+        map.addLayer(
+          L.tileLayer(ctrl.layers.streets.link, {
+            attribution: ctrl.layers.streets.attribute
+          })
+        );
 
         this.showTileLayer = function(input) {
           angular.element('.map-layer span')
@@ -18,9 +22,17 @@ angular.module('filterMapType', [])
           for (var key in ctrl.layers) {
             if ({}.hasOwnProperty.call(ctrl.layers, key)) {
               if (key === input) {
-                map.addLayer(ctrl.layers[key].layer);
+                map.addLayer(
+                  L.tileLayer(ctrl.layers[key].link, {
+                    attribution: ctrl.layers[key].attribute
+                  })
+                );
               } else {
-                map.removeLayer(ctrl.layers[key].layer);
+                map.removeLayer(
+                  L.tileLayer(ctrl.layers[key].link, {
+                    attribution: ctrl.layers[key].attribute
+                  })
+                );
               }
             }
           }
