@@ -1,11 +1,11 @@
-angular.module('placeDetail', [])
+angular.module('placeDetail', ['comment'])
   .component('placeDetail', {
     templateUrl: 'components/place/place-detail/place-detail.template.html',
     bindings: {
       place: '<'
     },
     controller: ['mapFactory', function placeDetailCtrl(mapFactory) {
-      this.map = L.map('map1', {
+      /*this.map = L.map('map1', {
         center: [50.6234, 26.2189],
         zoom: 14
       });
@@ -20,7 +20,7 @@ angular.module('placeDetail', [])
         '</h3><a><img class="marker-image" src="assets/' + this.place.photo[0] +
         '" /></a><br />').openPopup();
 
-      this.map.setView(this.location);
+      this.map.setView(this.location);*/
     }]
   });
 
