@@ -6,8 +6,6 @@ angular.module('blogList').component('blogList', {
   },
   controller: [function BlogListCtrl() {
     var ctrl = this;
-    ctrl.blogs.forEach(function(item){
-      item.fullName = item.userId.firstName + ' ' + item.userId.lastName;
-    });
+    console.log(ctrl);
   }]
 });

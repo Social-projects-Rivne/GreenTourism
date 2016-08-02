@@ -15,7 +15,7 @@ exports.list = function(req, res) {
   })
       .then(function(records) {
         records.forEach(function(item, index) {
-          User.findById(item.userId, 'firstName lastName', {lean: true}, function(err, user) {
+          User.findById(item.userId, 'firstName lastName fullName', function(err, user) {
             item.userId = user;
             if (index === records.length - 1) {
               res.json(records);
@@ -39,7 +39,7 @@ exports.show = function(req, res) {
   })
       .then(function(record) {
         if (record) {
-          User.findById(record.userId, 'firstName lastName', {lean: true}, function(err, user) {
+          User.findById(record.userId, 'firstName lastName fullName', function(err, user) {
             record.userId = user;
             res.json(record);
           });
@@ -82,7 +82,7 @@ exports.popular = function(req, res) {
 
 exports.create = function(req, res) {
   if (req.body) {
-    mosdel.create(req.body)
+    model.create(req.body)
         .then(function(record) {
           res.status(201).json({
             message: 'Record was successfully created!',
