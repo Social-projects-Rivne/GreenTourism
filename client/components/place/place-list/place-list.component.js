@@ -212,9 +212,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
           map.removeLayer(newTrack);
           addNewTrackOnMap(placesForTrack);
-          console.log(pointIndexInArray);
-          console.log(removedPoints.length);
-          console.log(newPointsForTrack.length);
         };
 
         ctrl.createNewTrack = function(form) {
@@ -241,12 +238,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                     point[0].address = result.display_name;
                     Place.post(point[0]).then(function(response) {
                       counterByNewPoints++;
-                      console.log(response);
                       point[0]._id = response.record._id;
                       checkActiveType = angular.element('.' + point[0].type + ' span');
                       if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                         placesOnMap.showPlaces(newPoints);
-                        console.log(newPoints);
                       } else {
                         ctrl.checkType(point[0].type);
                       }
@@ -262,13 +257,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         function addNewTrackIntoDB(array, form) {
-          console.log(array);
           array.forEach(function(item) {
             ctrl.newTrackObject.places.push(item[0]._id);
           });
-          console.log(ctrl.newTrackObject);
           Track.post(ctrl.newTrackObject).then(function(response) {
-            console.log('success');
             var checkActiveType = angular.element('.' + ctrl.newTrackObject.type + ' span:last-child');
             if (checkActiveType.hasClass(constants.checkedSpanClass)) {
               ctrl.showSpecificTracks(ctrl.newTrackObject.type);
