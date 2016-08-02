@@ -28,10 +28,6 @@ angular.module('eventList', [])
     } ;
 
     this.__findWord = function(reg){
-      /*{ name: { $regex: /acme.*corp/, $options: "si" } }
-        reg = reg+"\\w+" ;
-       { $text: { $search: "coffee" } } )
-        */
         console.log('reg= '+reg) ;
         //Event.getList({name: reg, limit: 100}).then(function (result) {
         Event.getList({name: { $search: reg }}).then(function (result) {

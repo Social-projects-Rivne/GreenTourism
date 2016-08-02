@@ -298,11 +298,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // *** START tracks controller ***
         ctrl.eventsType = mapMarkingTypes.events;
         eventsTypeLength = Object.keys(ctrl.eventsType).length;
-        Event.getList().then(function(result) {
+/*        Event.getList().then(function(result) {
           eventCounter = eventTypeLength;
           events = result;
+          console.log(events) ;
           placesOnMap.showEvents(events,'game');
-        });
+        })*/;
 
         ctrl.checkAllEvents = function(input) {
           alert('Hi') ;
@@ -311,7 +312,35 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         // ----START---- FilterByOneOfType
         ctrl.checkEventType = function(input) {
-            alert(input) ;
+          var checkEvent = angular.element('.' + input + ' span');
+          if (checkEvent.hasClass(constants.checkedSpanClass)) {
+            eventCounter--;
+            checkEvent.removeClass(constants.checkedSpanClass);
+            angular.element('.check-all-events span')
+                .removeClass(constants.checkedEventClass);
+            placesOnMap.removeEvents(input);
+            events = events.filter(function(place) {
+              return event.type !== input;
+            });
+          } else {
+            eventCounter++;
+            checkEvent.addClass(constants.checkedSpanClass);
+
+            if (eventCounter === eventTypeLength)
+              angular.element('.check-all-events span')
+                  .addClass(constants.checkedEventClass);
+            console.log('events'+input);
+            Event.getList({type: input, limit: 100}).then(function(result) {
+              events = result.concat(events);
+              console.log(events);
+              placesOnMap.showEvents(result, input);
+            });
+          }
+          if (eventCounter > 0) {
+            angular.element('.placesIcon').addClass(constants.checkedClass);
+          } else {
+            angular.element('.placesIcon').removeClass(constants.checkedClass);
+          }
         };
         // ----END---- FilterByOneOfType
 

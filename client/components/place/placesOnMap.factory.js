@@ -6,6 +6,7 @@ angular.module('mapModule')
     var groups = [];
     var types = [];
     var places = [];
+    var groupeE = L.layerGroup();
     var map;
 
     var marker = function(lon, lat, icon) {
@@ -132,7 +133,7 @@ angular.module('mapModule')
 
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
-      var groupeE = L.layerGroup();
+
           //console.log(events);
           //console.log(input);
       events.forEach(function(events) {
@@ -141,10 +142,26 @@ angular.module('mapModule')
         marker(events.location.coordinates[1], events.location.coordinates[0], pix)
         .addTo(groupeE);
        }) ;
-          //  console.log('Fire!') ;
+
+       console.log('On map: ') ;
        console.log(groupeE) ;
        groupeE.addTo(map);
      } ;
+
+      placesOnMap.removeEvents = function(input) {
+        if (input) {
+          console.log('Del from map: ') ;
+          console.log(groupeE) ;
+          //mainGroup.checkOut(groups[input]);
+          groupeE[input].clearLayers();
+          map.removeLayer(newMarker);
+        } else {
+          for (var key in types) {
+           // mainGroup.checkOut(groups[key]);
+           groupeE[input].clearLayers();
+          }
+        }
+      };
 
     function addNewPlaceOnMap(e) {
       var latitudeContainer = angular.element('#latitude');
