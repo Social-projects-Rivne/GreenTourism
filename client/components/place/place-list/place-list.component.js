@@ -300,7 +300,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             form.$setUntouched();
             ctrl.addPointMenuIsOpen = false;
             ctrl.newTrackPoints = [];
-            ctrl.newTrackPoints = [];
             placesForTrack = [];
           }
         };

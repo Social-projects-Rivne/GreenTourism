@@ -432,7 +432,7 @@
               <span class="title">2. Enter track name:</span>
             </label>
             <input type="text" name="newTrackName" class="form-control"
-                   id="newTrackName" ng-model="$ctrl.newTrack.name"
+                   id="newTrackName" ng-model="$ctrl.newTrackObject.name"
                    ng-required="true">
             <div ng-show="trackMaker.$submitted || trackMaker.newTrackName.$touched">
               <span class="alert-input"
@@ -447,7 +447,7 @@
             </label>
             <select name="newTrackType" id="newTrackType" class="form-control"
                     ng-options="type as typeObj.name for (type, typeObj) in $ctrl.tracksType track by type"
-                    ng-model="$ctrl.newTrack.type" ng-required="true">
+                    ng-model="$ctrl.newTrackObject.type" ng-required="true">
               <option value="">-- Choose track type --</option>
             </select>
             <div ng-show="trackMaker.$submitted || trackMaker.newTrackType.$touched">
@@ -463,7 +463,7 @@
             </label>
             <textarea name="newTrackDescription" id="newTrackDescription"
                       class="form-control"
-                      ng-model="$ctrl.newTrack.description"></textarea>
+                      ng-model="$ctrl.newTrackObject.description"></textarea>
           </div>
           <div class="form-group">
             <label for="newTrackPhoto">
