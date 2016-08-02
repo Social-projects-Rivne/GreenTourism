@@ -1,6 +1,6 @@
-<li ng-repeat="maptype in $ctrl.maptype">
-  <a href="" id="{{maptype}}" ng-click="$ctrl.showTileLayer(maptype)">
-    {{maptype}}
+<li ng-repeat="(layer, layerValue) in $ctrl.layers">
+  <a href="" id="{{layer}}" class="map-layer" ng-click="$ctrl.showTileLayer(layer)">
+    {{layerValue.name}}
     <span></span>
   </a>
 </li>

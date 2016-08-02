@@ -170,7 +170,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             .addClass(constants.checkedSpanClass);
           angular.element('.placesIcon').addClass(constants.checkedClass);
           angular.element('.placesIcon').removeClass(constants.checkDisabled);
-          angular.element('#Streets span')
+          angular.element('#streets span')
             .addClass(constants.checkedSpanClass);
           angular.element('#spinner').removeClass('spinner');
         });
