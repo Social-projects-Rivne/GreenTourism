@@ -16,4 +16,34 @@ router.route('/login').post(
 
 router.route('/logout').get(authController.logout);
 
+router.route('/auth/facebook').get(
+  passport.authenticate('facebook', {
+    failureRedirect: '/'
+  }
+));
+
+router.route('/auth/facebook/callback').get(
+  passport.authenticate('facebook', {
+    successRedirect: '/#!/profile',
+    failureRedirect: '/'
+  })
+);
+
+router.route('/auth/google').get(
+  passport.authenticate('google', {
+    failureRedirect: '/',
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+  })
+);
+
+router.route('/auth/google/callback').get(
+  passport.authenticate('google', {
+    successRedirect: '/#!/profile',
+    failureRedirect: '/'
+  })
+);
+
 module.exports = router;
