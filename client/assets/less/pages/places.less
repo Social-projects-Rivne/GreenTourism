@@ -262,13 +262,13 @@
 
 .add-item-menu {
   position: absolute;
-  top: 0;
+  top: 114px;
+  bottom: 0;
   right: 0;
-  height: 100%;
   width: 25%;
   z-index: 2;
   background-color: #f8f8f8;
-  padding: 115px 15px 15px 15px;
+  padding: 0 15px 15px 15px;
   overflow: auto;
   display: block;
   &.ng-hide-add,
@@ -280,12 +280,12 @@
   }
   .removeIcon {
     position: absolute;
-    top: 115px;
+    top: 5px;
     left: 10px;
     font-size: 25px;
     color: @light-green;
     @media (max-width: 767px) {
-      top: 160px;
+      top: 50px;
     }
   }
   h2 {
@@ -299,13 +299,12 @@
     padding: 0;
   }
   .inactive-add-item-menu {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 114px;
     right: 0;
-    width: 100%;
+    width: 25%;
     height: 100%;
-    background-color: #000;
-    opacity: 0.5;
+    background-color: rgba( 0, 0, 0, 0.5);
     z-index: 3;
     &.ng-hide-add,
     &.ng-hide-remove {
@@ -314,37 +313,40 @@
     &.ng-hide {
       opacity: 0;
     }
+    #new-point-menu {
+      position: relative;
+      background-color: #f8f8f8;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      overflow: hidden;
+      padding: 0 10px 10px 10px;
+      margin: 65px 15px 0 15px; 
+      z-index: 4;
+      input {
+        margin-top: 0;
+      }
+      h3 {
+        text-align: center;
+      }
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        transition: all linear 0.5s;
+      }
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 60%;
+    }
   }
   @media (max-width: 767px) {
-    padding-top: 200px;
+    padding-top: 50px;
     width: 60%;
   }
 }
 
 /* ------------- Add track ---------------*/
-#new-point-menu {
-  position: relative;
-  height: 300px;
-  background-color: #f8f8f8;
-  border: 1px solid @light-green;
-  border-radius: 5px;
-  overflow: hidden;
-  padding: 0 10px 10px 10px;
-  z-index: 4;
-  input {
-    margin-top: 0;
-  }
-  h3 {
-    text-align: center;
-  }
-  &.ng-hide-add,
-  &.ng-hide-remove {
-    transition: all linear 0.5s;
-  }
-  &.ng-hide {
-    height: 0;
-  }
-}
 
 #pointsForNewTrack {
   padding: 10px;

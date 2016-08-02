@@ -81,7 +81,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // -----END ADD Place-----
 
         // -----START ADD Track-----
-        ctrl.newTrack = angular.copy(constants.emptyTrackModel);
+        ctrl.newTrackObject = angular.copy(constants.emptyTrackModel);
         ctrl.addPointMenuIsOpen = false;
         ctrl.addTrackMenuIsOpen = false;
         ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
@@ -89,13 +89,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var newPointForTrack;
         var placesForTrack = [];
         var newPointsForTrack = [];
+        placesOnMap.newTrackPoints = [];
 
         ctrl.toggleAddTrackMenu = function(form) {
           map = placesOnMap.map;
           if (ctrl.addTrackMenuIsOpen) {
             ctrl.addTrackMenuIsOpen = false;
             ctrl.resetAddTrackForm(form);
-            map.off('click', addNewTrackPoint);
+            map.off('click', addNewTrackPointOnMap);
             for (var key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
                 place.off('click', addExistingPointIntoNewTrack);
@@ -104,7 +105,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           } else {
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
-            map.on('click', addNewTrackPoint);
+            map.on('click', addNewTrackPointOnMap);
             for (var key2 in placesOnMap.places) {
               placesOnMap.places[key2].forEach(function(place) {
                 place.on('click', addExistingPointIntoNewTrack);
@@ -133,11 +134,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (newPointForTrack) {
             map.removeLayer(newPointForTrack);
           }
-          console.log(placesOnMap.newTrackPoints);
+          newPointsForTrack.push(null);
           $scope.$digest();
         }
 
-        function addNewTrackPoint(e) {
+        function addNewTrackPointOnMap(e) {
           map = placesOnMap.map;
           ctrl.addPointMenuIsOpen = true;
           ctrl.newPoint.location.coordinates[0] = e.latlng.lng;
@@ -162,7 +163,28 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         function addNewPointOnMap(lat, lon) {
           map = placesOnMap.map;
-          newPointForTrack = L.marker([lat, lon]).addTo(map);
+          newPointForTrack = L.marker([lat, lon], {
+            icon: L.icon({
+              iconUrl: 'assets/img/places/marker/grey.png',
+              shadowUrl: 'assets/img/places/marker/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            })
+          }).addTo(map);
+        };
+
+        ctrl.createNewPointForTrack = function(form) {
+          if (form.$valid) {
+            ctrl.newPoint.owner = ctrl.user._id; // TODO: move into server side
+            placesOnMap.newTrackPoints.push([ctrl.newPoint]);
+            placesForTrack.push([ctrl.newPoint.location.coordinates[1], ctrl.newPoint.location.coordinates[0]]);
+            ctrl.newTrackPoints = placesOnMap.newTrackPoints;
+            addNewTrackOnMap(placesForTrack);
+            newPointsForTrack.push(newPointForTrack);
+            ctrl.cancelNewPointForTrackMenu(form);
+          }
         };
 
         ctrl.cancelNewPointForTrackMenu = function(form, deleteMarker) {
@@ -177,17 +199,25 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           newPointForTrack = null;
         };
 
-        ctrl.createNewPointForTrack = function(form) {
-          if (ctrl.newPoint.name && ctrl.newPoint.type) {
-            ctrl.newPoint.owner = ctrl.user._id;
-            placesOnMap.newTrackPoints.push([ctrl.newPoint]);
-            placesForTrack.push([ctrl.newPoint.location.coordinates[1], ctrl.newPoint.location.coordinates[0]]);
-            ctrl.newTrackPoints = placesOnMap.newTrackPoints;
-            console.log(placesOnMap.newTrackPoints);
-            addNewTrackOnMap(placesForTrack);
-            newPointsForTrack.push(newPointForTrack);
-            ctrl.cancelNewPointForTrackMenu(form);
+        ctrl.removePointFromNewPointsArray = function(pointIndexInArray) {
+          var removedPoints = newPointsForTrack.slice(pointIndexInArray, newPointsForTrack.length);
+          newPointsForTrack.splice(pointIndexInArray, placesOnMap.newTrackPoints.length - pointIndexInArray);
+          placesForTrack.splice(pointIndexInArray, placesOnMap.newTrackPoints.length - pointIndexInArray);
+          placesOnMap.newTrackPoints.splice(pointIndexInArray, placesOnMap.newTrackPoints.length - pointIndexInArray);
+          ctrl.newTrackPoints = placesOnMap.newTrackPoints;
+          removedPoints.forEach(function(point) {
+            if (point) {
+              map.removeLayer(point);
+            }
+          });
+          if (newPointForTrack) {
+            map.removeLayer(newPointForTrack);
           }
+          map.removeLayer(newTrack);
+          addNewTrackOnMap(placesForTrack);
+          console.log(pointIndexInArray);
+          console.log(removedPoints.length);
+          console.log(newPointsForTrack.length);
         };
 
         ctrl.createNewTrack = function(form) {
@@ -196,7 +226,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           var newPointsCounter = 0;
           var counterByNewPoints = 0;
           if (addTrackForm.hasClass('ng-valid')) {
-            ctrl.newTrack.owner = ctrl.user._id;
+            ctrl.newTrackObject.owner = ctrl.user._id;
             placesOnMap.newTrackPoints.forEach(function(point) {
               if (!point[0]._id) {
                 newPointsCounter++;
@@ -237,17 +267,17 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         function addNewTrackIntoDB(array, form) {
           console.log(array);
           array.forEach(function(item) {
-            ctrl.newTrack.places.push(item[0]._id);
+            ctrl.newTrackObject.places.push(item[0]._id);
           });
-          console.log(ctrl.newTrack);
-          Track.post(ctrl.newTrack).then(function(response) {
+          console.log(ctrl.newTrackObject);
+          Track.post(ctrl.newTrackObject).then(function(response) {
             console.log('success');
-            var checkActiveType = angular.element('.' + ctrl.newTrack.type + ' span:last-child');
+            var checkActiveType = angular.element('.' + ctrl.newTrackObject.type + ' span:last-child');
             if (checkActiveType.hasClass(constants.checkedSpanClass)) {
-              ctrl.showSpecificTracks(ctrl.newTrack.type);
-              ctrl.showSpecificTracks(ctrl.newTrack.type);
+              ctrl.showSpecificTracks(ctrl.newTrackObject.type);
+              ctrl.showSpecificTracks(ctrl.newTrackObject.type);
             } else {
-              ctrl.showSpecificTracks(ctrl.newTrack.type);
+              ctrl.showSpecificTracks(ctrl.newTrackObject.type);
             }
             ctrl.resetAddTrackForm(form);
           });
@@ -257,7 +287,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           map = placesOnMap.map;
           if (form) {
             newPointsForTrack.forEach(function(point) {
-              map.removeLayer(point);
+              if (point) {
+                map.removeLayer(point);
+              }
             });
             if (newTrack) {
               map.removeLayer(newTrack);
@@ -265,7 +297,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             if (newPointForTrack) {
               map.removeLayer(newPointForTrack);
             }
-            ctrl.newTrack = angular.copy(constants.emptyTrackModel);
+            ctrl.newTrackObject = angular.copy(constants.emptyTrackModel);
             ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
             form.$setPristine();
             form.$setUntouched();
