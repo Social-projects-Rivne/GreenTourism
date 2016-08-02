@@ -215,11 +215,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         ctrl.createNewTrack = function(form) {
-          var addTrackForm = angular.element('form[name="trackMaker"]');
           var checkActiveType;
           var newPointsCounter = 0;
           var counterByNewPoints = 0;
-          if (addTrackForm.hasClass('ng-valid')) {
+          if (form.$valid) {
             ctrl.newTrackObject.owner = ctrl.user._id;
             ctrl.newTrackPoints.forEach(function(point) {
               if (!point[0]._id) {
@@ -263,7 +262,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           Track.post(ctrl.newTrackObject).then(function(response) {
             var checkActiveType = angular.element('.' + ctrl.newTrackObject.type + ' span:last-child');
             if (checkActiveType.hasClass(constants.checkedSpanClass)) {
-              ctrl.showSpecificTracks(ctrl.newTrackObject.type);
+              ctrl.showSpecificTracks(ctrl.newTrackObject.type); //TODO: Change to placesOnMap.showTracks after refactoring server track model
               ctrl.showSpecificTracks(ctrl.newTrackObject.type);
             } else {
               ctrl.showSpecificTracks(ctrl.newTrackObject.type);
