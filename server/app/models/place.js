@@ -16,7 +16,7 @@ var PlaceSchema = new Schema({
     required: true
   },
   photos: [String],
-  likes: [String],
+  likes: [Schema.Types.ObjectId],
   comments: [CommentSchema],
   owner: {
     type: Schema.Types.ObjectId,

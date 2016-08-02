@@ -21,7 +21,7 @@ router.route('/:id/comments')
 
 router.route('/:id/likes')
   .get(controller.listLikes)
-  .post(auth.isLoggedIn, controller.createDeleteLike);
+  .post(auth.isLoggedIn, controller.addOrDeleteLike);
 
 router.route('/:id/comments/:commentId')
   .get(controller.showComment)

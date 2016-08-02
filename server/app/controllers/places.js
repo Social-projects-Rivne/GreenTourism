@@ -86,4 +86,4 @@ exports.deleteComment = defaultController.deleteComment;
 
 exports.listLikes = defaultController.listLikes;
 
-exports.createDeleteLike = defaultController.createDeleteLike;
+exports.addOrDeleteLike = defaultController.addOrDeleteLike;

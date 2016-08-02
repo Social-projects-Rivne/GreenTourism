@@ -169,7 +169,7 @@ module.exports = function(Model) {
     return res.json(record.likes);
   };
 
-  controller.createDeleteLike = function(req, res) {
+  controller.addOrDeleteLike = function(req, res) {
     var record = req.record;
 
     if (req.body.id === req.user.id) {
@@ -177,7 +177,7 @@ module.exports = function(Model) {
     }
     if (req.body.deleteId === req.user.id) {
       record.likes = record.likes.filter(function(like) {
-        return like !== req.body.deleteId;
+        return like != req.body.deleteId;
       });
     }
 
