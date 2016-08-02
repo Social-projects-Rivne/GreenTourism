@@ -18,7 +18,8 @@ router.route('/logout').get(authController.logout);
 
 router.route('/auth/facebook').get(
   passport.authenticate('facebook', {
-    failureRedirect: '/'
+    failureRedirect: '/',
+    scope: ['email']
   }
 ));
 

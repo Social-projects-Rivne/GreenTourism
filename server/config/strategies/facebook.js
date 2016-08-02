@@ -9,7 +9,7 @@ module.exports = function() {
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
     passReqToCallback: true,
-    profileFields: ['emails', 'photos', 'name']
+    profileFields: ['id', 'name', 'photos', 'emails']
   },
   function(req, accessToken, refreshToken, profile, done) {
     var providerData = profile._json;
