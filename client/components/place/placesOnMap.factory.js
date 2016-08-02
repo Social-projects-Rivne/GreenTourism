@@ -63,9 +63,9 @@ angular.module('mapModule')
           newPlace._id = place._id;
           placesOnMap.places[place.type].push(newPlace);
         });
-        for (var key in types) {
-          mainGroup.checkIn(groups[key]);
-          groups[key].addTo(placesOnMap.map);
+        for (var type in types) {
+          mainGroup.checkIn(groups[type]);
+          groups[type].addTo(placesOnMap.map);
         }
       }
 
@@ -80,12 +80,12 @@ angular.module('mapModule')
         groups[input].clearLayers();
         placesOnMap.places[input] = [];
       } else {
-        for (var key in types) {
-          mainGroup.checkOut(groups[key]);
-          groups[key].clearLayers();
+        for (var type in types) {
+          mainGroup.checkOut(groups[type]);
+          groups[type].clearLayers();
         }
-        for (var key2 in placesOnMap.places) {
-          placesOnMap.places[key2] = [];
+        for (var placeType in placesOnMap.places) {
+          placesOnMap.places[placeType] = [];
         }
       }
     };

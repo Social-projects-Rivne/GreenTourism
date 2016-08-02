@@ -225,7 +225,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                 newPointsCounter++;
               }
             });
-            if (newPointsCounter == 0) {
+            if (newPointsCounter === 0) {
               addNewTrackIntoDB(ctrl.newTrackPoints, form);
             } else {
               ctrl.newTrackPoints.forEach(function(point, index) {
@@ -450,7 +450,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               .addClass(constants.checkedSpanClass);
             angular.element('.placesIcon').addClass(constants.checkedClass);
 
-            Place.getList({}).then(function(result) {
+            Place.getList().then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(places);
               for (key in placesOnMap.places) {
