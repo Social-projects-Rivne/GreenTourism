@@ -78,3 +78,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         templateUrl: 'shared/errors/404.html'
       });
   }]);
+angular.module('greenTourism').controller('placeDetailCtrl', function($scope) {
+  $scope.pageClass = 'page-detail';
+});
