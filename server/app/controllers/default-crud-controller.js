@@ -105,8 +105,7 @@ module.exports = function(Model) {
       if (err) {
         return res.status(400).json(err);
       }
-
-      return res.json(record);
+      return res.json(record.comments[record.comments.length - 1]._id);
     });
   };
 

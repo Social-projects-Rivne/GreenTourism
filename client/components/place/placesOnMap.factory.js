@@ -5,6 +5,7 @@ angular.module('mapModule')
       .layerSupport({showCoverageOnHover: false});
     var groups = [];
     var types = [];
+    var map;
     placesOnMap.places = {
       camp: [],
       service: [],
@@ -27,7 +28,8 @@ angular.module('mapModule')
     };
 
     placesOnMap.showMap = function() {
-      placesOnMap.map = mapFactory.showMap();
+      map = mapFactory.showMap();
+      return map;
     };
 
     placesOnMap.initGroupsOfPlaces = function(inpTypes) {
@@ -40,7 +42,7 @@ angular.module('mapModule')
     };
 
     placesOnMap.showPlaces = function(places, input) {
-      mainGroup.addTo(placesOnMap.map);
+      mainGroup.addTo(map);
       if (input) {
         places.forEach(function(place) {
           var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
@@ -52,7 +54,7 @@ angular.module('mapModule')
           placesOnMap.places[place.type].push(newPlace);
         });
         mainGroup.checkIn(groups[input]);
-        groups[input].addTo(placesOnMap.map);
+        groups[input].addTo(map);
       } else {
         places.forEach(function(place) {
           var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
@@ -65,12 +67,12 @@ angular.module('mapModule')
         });
         for (var type in types) {
           mainGroup.checkIn(groups[type]);
-          groups[type].addTo(placesOnMap.map);
+          groups[type].addTo(map);
         }
       }
 
-      placesOnMap.map.on('click move', function() {
-        placesOnMap.map.closePopup();
+      map.on('click move', function() {
+        map.closePopup();
       });
     };
 
@@ -109,16 +111,16 @@ angular.module('mapModule')
         coords[1] = place.location.coordinates[0];
         coordsArray[index] = coords;
       });
-      trackForAdding = polyline(coordsArray, color).addTo(placesOnMap.map);
+      trackForAdding = polyline(coordsArray, color).addTo(map);
       tracks.push([trackForAdding, track.type]);
     };
 
     var removeTrack = function(track) {
       if (this == 'all') {
-        placesOnMap.map.removeLayer(track[0]);
+        map.removeLayer(track[0]);
       } else {
         if (track[1] == this) {
-          placesOnMap.map.removeLayer(track[0]);
+          map.removeLayer(track[0]);
         }
       }
     };
@@ -138,11 +140,11 @@ angular.module('mapModule')
     /* ** START add place factory ** */
     var newMarker;
     placesOnMap.openAddPlaceMenu = function() {
-      placesOnMap.map.on('click', addNewPlaceOnMap);
+      map.on('click', addNewPlaceOnMap);
     };
 
     placesOnMap.closeAddPlaceMenu = function() {
-      placesOnMap.map.off('click', addNewPlaceOnMap);
+      map.off('click', addNewPlaceOnMap);
     };
 
     function addNewPlaceOnMap(e) {
@@ -151,16 +153,16 @@ angular.module('mapModule')
       placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
       placesOnMap.coordsIsDefined = true;
       if (newMarker) {
-        placesOnMap.map.removeLayer(newMarker);
+        map.removeLayer(newMarker);
       }
-      newMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(placesOnMap.map);
+      newMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
       latitudeContainer.text('Latitude: ' + newMarker._latlng.lat);
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
 
     placesOnMap.removeNewMarker = function() {
       if (newMarker) {
-        placesOnMap.map.removeLayer(newMarker);
+        map.removeLayer(newMarker);
       }
     };
 
