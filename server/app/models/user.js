@@ -21,7 +21,6 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: 'Password is required',
     validate: [
       function(password) {
         return password && password.length >= 8;

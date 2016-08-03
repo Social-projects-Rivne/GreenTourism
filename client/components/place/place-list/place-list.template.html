@@ -3,7 +3,7 @@
     <div class="row map-menu">
       <!-- Left-menu with icons -->
       <div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 map-menu-check-button">
-        <a href="" ng-click="$ctrl.defaultObject('placesIcon')">
+        <a href="" class="placesIcon check-disabled" ng-click="$ctrl.defaultObject('placesIcon')">
           <i class="fa fa-map-marker placesIcon" aria-hidden="true"
              title="Default value of Places"></i></a>
         <a href="" ng-click="$ctrl.defaultObject('tracksIcon')">
@@ -26,9 +26,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a>
-              </li>
-              <li><a href="">Add Track</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
               <li><a href="#">Add Event</a></li>
             </ul>
           </div>
@@ -57,9 +56,10 @@
               <li class="dropdown-submenu places">
                 <a href="">Places</a>
                 <ul class="dropdown-menu">
-                  <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+                  <li class="placeFilter {{placeType}}"
+                      ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
                       ng-click="$ctrl.checkType(placeType)">
-                    <a class="placeFilter {{placeType}}" href="">
+                    <a href="">
                       <img ng-src="{{placeTypeValue.icon}}">
                       {{placeTypeValue.name}}
                       <span></span>
@@ -114,9 +114,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a>
-              </li>
-              <li><a href="#">Add Track</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
               <li><a href="#">Add Event</a></li>
             </ul>
           </div>
@@ -141,9 +140,10 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu place-mobile dropdownStop">
-              <li ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
+              <li class="placeFilter {{placeType}}"
+                  ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType"
                   ng-click="$ctrl.checkType(placeType)">
-                <a class="placeFilter {{placeType}}" href="">
+                <a href="">
                   <img ng-src="{{placeTypeValue.icon}}">
                   {{placeTypeValue.name}}
                   <span></span>
@@ -213,21 +213,26 @@
     </div>
 
     <div class="row">
+      <!-- Spinner -->
+      <div id="spinner" class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
       <!-- Leaflet map -->
       <div class="map-wrapper">
         <div id="map"></div>
       </div>
       <!-- Div for Popular places -->
-      <div class="popular-places-wrapper" ng-hide="$ctrl.hidePopularPlaces">
-        <a href="" ng-click="$ctrl.checkPopularPlaces()">
+      <div class="popular-places-wrapper ng-hide" ng-hide="$ctrl.hidePopularPlaces">
+        <a href="" class="close-button" ng-click="$ctrl.checkPopularPlaces()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
         <div class="popular-div-style">
         </div>
       </div>
       <!-- Div for Popular tracks -->
-      <div class="popular-tracks-wrapper" ng-hide="$ctrl.hidePopularTracks">
-        <a href="" ng-click="$ctrl.checkPopularTracks()">
+      <div class="popular-tracks-wrapper ng-hide" ng-hide="$ctrl.hidePopularTracks">
+        <a href="" class="close-button" ng-click="$ctrl.checkPopularTracks()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
         <div class="popular-div-style">
