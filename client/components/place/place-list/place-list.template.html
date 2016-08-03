@@ -403,30 +403,28 @@
         </a>
         <span class="title">1. Choose places on map:</span><br>
         <div id="pointsForNewTrack">
-          <table ng-repeat="point in $ctrl.newTrackPoints">
-            <tr ng-if="$index != 0">
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <div class="col-lg-1">
-                  <a href="">
-                    <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                  </a>
-                </div>
-                <div class="pointName col-lg-10">
-                  {{$index + 1 + '. ' + point[0].name}}
-                </div>
-                <div class="col-lg-1">
-                  <a href=""
-                     ng-click="$ctrl.removePointFromNewPointsArray($index)">
-                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
+          <div class="pointsList col-xs-12" ng-repeat="point in $ctrl.newTrackPoints">
+            <div class="row" ng-if="$index != 0">
+              <div class="col-xs-6"></div>
+              <div class="col-xs-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 visible-lg">
+                <a href="">
+                  <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="pointName col-xs-10 col-lg-8 no-padding">
+                {{$index + 1 + '. ' + point[0].name}}
+              </div>
+              <div class="col-xs-2 no-padding">
+                <a href=""
+                    ng-click="$ctrl.removePointFromNewPointsArray($index)">
+                  <i class="fa fa-times fa-2x pull-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
         <span class="alert-input"
               ng-show="trackMaker.$submitted && ($ctrl.newTrackPoints.length < 2 || !$ctrl.newTrackPoints.length)">

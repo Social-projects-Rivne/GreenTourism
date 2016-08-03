@@ -422,32 +422,30 @@
 #pointsForNewTrack {
   padding: 10px;
   color: #fff;
-  table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;
-    tr:nth-child(even) td, th {
+  overflow: hidden; 
+  .pointsList {
+    .row:nth-child(even) {
       background-color: @light-green;
       border: 1px solid @light-green;
       border-radius: 5px;
       text-align: left;
       padding: 3px 10px;
     }
-    tr:nth-child(odd) td:first-child {
+    .row:nth-child(odd) div:first-child {
       border-right: 3px solid @light-green;
       height: 10px;
     }
-    tr:nth-child(odd) td {
-      width: 50%;
-    }
   }
-  table:first-child {
-    td {
+  .pointsList:first-child {
+    .row {
       background-color: @light-green;
       border: 1px solid @light-green;
       border-radius: 5px;
       text-align: left;
       padding: 3px 10px;
+      div:first-child {
+        border: none;
+      }
     }
   }
   .pointName {

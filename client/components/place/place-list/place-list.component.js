@@ -94,7 +94,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.newTrackPoints = [];
 
         ctrl.toggleAddTrackMenu = function(form) {
-          //map = placesOnMap.map;
           if (ctrl.addTrackMenuIsOpen) {
             ctrl.addTrackMenuIsOpen = false;
             ctrl.resetAddTrackForm(form);
@@ -117,7 +116,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         function addExistingPointIntoNewTrack() {
-          //map = placesOnMap.map;
           var existingPoint = {
             name: '',
             _id: '',
@@ -135,12 +133,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           if (newPointForTrack) {
             map.removeLayer(newPointForTrack);
           }
+          ctrl.cancelNewPointForTrackMenu();
           newPointsForTrack.push(null);
           $scope.$digest();
         }
 
         function addNewTrackPointOnMap(e) {
-          //map = placesOnMap.map;
           ctrl.addPointMenuIsOpen = true;
           ctrl.newPoint.location.coordinates[0] = e.latlng.lng;
           ctrl.newPoint.location.coordinates[1] = e.latlng.lat;
@@ -152,7 +150,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         }
 
         function addNewTrackOnMap(points) {
-          //map = placesOnMap.map;
           if (newTrack) {
             map.removeLayer(newTrack);
           }
@@ -163,7 +160,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         }
 
         function addNewPointOnMap(lat, lon) {
-          //map = placesOnMap.map;
           newPointForTrack = L.marker([lat, lon], {
             icon: L.icon({
               iconUrl: 'assets/img/places/marker/grey.png',
@@ -188,15 +184,23 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         ctrl.cancelNewPointForTrackMenu = function(form, deleteMarker) {
-          //map = placesOnMap.map;
-          ctrl.addPointMenuIsOpen = false;
-          ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
-          form.$setPristine();
-          form.$setUntouched();
-          if (deleteMarker) {
-            map.removeLayer(newPointForTrack);
+          if (form) {
+            ctrl.addPointMenuIsOpen = false;
+            ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
+            form.$setPristine();
+            form.$setUntouched();
+            if (deleteMarker) {
+              map.removeLayer(newPointForTrack);
+            }
+            newPointForTrack = null;
+          } else {
+            ctrl.addPointMenuIsOpen = false;
+            ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
+            if (newPointForTrack) {
+              map.removeLayer(newPointForTrack);
+            }
+            newPointForTrack = null;
           }
-          newPointForTrack = null;
         };
 
         ctrl.removePointFromNewPointsArray = function(pointIndexInArray) {
@@ -274,7 +278,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         }
 
         ctrl.resetAddTrackForm = function(form) {
-          //map = placesOnMap.map;
           if (form) {
             newPointsForTrack.forEach(function(point) {
               if (point) {
