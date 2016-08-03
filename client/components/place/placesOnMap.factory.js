@@ -115,26 +115,20 @@ angular.module('mapModule')
       tracks.push([trackForAdding, track.type]);
     };
 
-    var removeTrack = function(track) {
-      if (this == 'all') {
-        map.removeLayer(track[0]);
-      } else {
-        if (track[1] == this) {
-          map.removeLayer(track[0]);
-        }
-      }
-    };
-
     placesOnMap.showTracks = function(tracksArray) {
       tracksArray.forEach(addTrack);
     };
 
     placesOnMap.removeTracks = function(tracksType) {
-      tracks.forEach(removeTrack, tracksType);
-    };
-
-    placesOnMap.removeAllTracks = function() {
-      tracks.forEach(removeTrack, 'all');
+      tracks.forEach(function(track) {
+        if (tracksType) {
+          if (track[1] == tracksType) {
+            map.removeLayer(track[0]);
+          }
+        } else {
+          map.removeLayer(track[0]);
+        }
+      });
     };
 
     /* ** START add place factory ** */

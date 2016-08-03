@@ -617,7 +617,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             angular.element('.trackFilter span')
               .removeClass(constants.checkedSpanClass);
             angular.element('.tracksIcon').removeClass(constants.checkedClass);
-            placesOnMap.removeAllTracks();
+            placesOnMap.removeTracks();
           } else {
             trackCounter = trackTypeLength;
             angular.element('.trackFilter span:last-child')
