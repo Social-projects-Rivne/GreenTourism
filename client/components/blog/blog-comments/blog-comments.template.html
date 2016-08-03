@@ -1,5 +1,35 @@
 <div class="blog-comments">
   <div class="row">
+    <div class="col-md-3">
+      <h3 class="title-heading">
+        Leave A Comment
+      </h3>
+    </div>
+    <div class="col-md-9">
+      <div class="title-sep"></div>
+    </div>
+  </div>
+  <div class="alert alert-info" ng-if="!$ctrl.currentUser">
+    Please, login for comment, update or delete message!
+  </div>
+  <div class="alert alert-danger" ng-if="$ctrl.showError">
+    Post failed. Please, reload this page and try again!
+    Error: {{$ctrl.showError}}
+  </div>
+  <div class="add-comment" ng-if="$ctrl.currentUser">
+    <form class="form-inline" name="commentForm"
+          ng-submit="$ctrl.addComment($ctrl.content)" novalidate>
+            <textarea ng-keyup="$ctrl.textareaPostResize()" required
+                      placeholder="Leave your comment..." maxlength="1000"
+                      ng-model="$ctrl.content"></textarea>
+
+      <p ng-if="$ctrl.content" class="pull-right">
+        Left: {{1000 - $ctrl.content.length}} symbols
+      </p>
+      <button type="submit" class="btn pull-left" ng-disabled="!$ctrl.content">Post Comment</button>
+    </form>
+  </div>
+  <div class="row">
     <div class="col-md-2">
       <h3 class="title-heading">
         Comments
@@ -10,37 +40,58 @@
     </div>
   </div>
   <div class="comment-list">
-    <div class="comment-item" ng-repeat="comment in $ctrl.blog.blogComments">
+    <div class="comment-item" ng-repeat="comment in $ctrl.blogcomment | orderBy:'-createdAt'">
       <div class="media">
         <div class="media-left">
           <img class="media-object avatar "
-               src="assets/img/welcome-page/avatar.png" alt="...">
+               ng-src="{{comment.author.avatar}}" alt="{{comment.author.fullName}}">
         </div>
         <div class="media-body">
           <h6 class="media-heading">
-            By {{comment.userId}} at
-            {{comment.createdAt | date:'dd MMMM yyyy'}}
+            By {{comment.author.fullName}} at {{comment.createdAt | date:'dd MMMM yyyy'}}
           </h6>
-
-          <p>
+          <div class="dropdown comment-menu"
+               ng-if="$ctrl.currentUser._id === comment.author._id">
+            <a href="" class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="true">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="commentMenu">
+              <li>
+                <a href=""
+                   ng-click="$ctrl.showEditingMode(comment._id, comment.content)">
+                  Edit
+                </a>
+              </li>
+              <li>
+                <a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a>
+              </li>
+            </ul>
+          </div>
+          <p class="show-comments-content" ng-if="!($ctrl.checkCommentId === comment.id)">
             {{comment.text}}
           </p>
+          <div class="show-comments-edit-content" ng-if="$ctrl.checkCommentId === comment.id">
+        <textarea ng-keyup="$ctrl.textareaEditResize()"
+                  class="form-control edit-textarea"
+                  required maxlength="1000" ng-model="comment.content">
+          {{comment.text}}
+        </textarea>
+            <div class="btn-group pull-right">
+              <button ng-click="$ctrl.checkCommentId = null;
+                          comment.text = $ctrl.defaultCommentContent"
+                      type="button" class="btn btn-default">Close
+              </button>
+              <button type="button"
+                      ng-click="$ctrl.updateComment(comment.id, comment.text)"
+                      class="btn btn-default"
+                      ng-disabled="!comment.text">Update
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-3">
-      <h3 class="title-heading">
-        Leave A Comment
-      </h3>
-    </div>
-    <div class="col-md-9">
-      <div class="title-sep"></div>
-    </div>
-  </div>
-  <form name="reviewForm" ng-submit="">
-    <textarea ng-model="newComment"></textarea>
-    <button type="submit" class="btn">Post Comment</button>
-  </form>
 </div>
+

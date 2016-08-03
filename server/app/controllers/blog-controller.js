@@ -41,7 +41,14 @@ exports.show = function(req, res) {
         if (record) {
           User.findById(record.owner, 'firstName lastName fullName', function(err, user) {
             record.owner = user;
-            res.json(record);
+            record.blogComments.forEach(function(item, index) {
+              User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
+                item.author = user;
+                if (index === record.blogComments.length - 1) {
+                  res.json(record);
+                }
+              });
+            });
           });
         } else {
           res.status(404).json({
@@ -124,3 +131,5 @@ exports.delete = function(req, res) {
         res.status(400).json({message: err.message});
       });
 };
+
+exports.comment = function(req, res){};
