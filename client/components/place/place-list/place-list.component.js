@@ -45,7 +45,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           ctrl.formNewPlaceSubmitted = true;
           if (addPlaceForm.hasClass('ng-valid') && placesOnMap.coords) {
             ctrl.newPlace.type = ctrl.newPlaceType;
-            ctrl.newPlace.owner = ctrl.user._id; // TODO: move into server-side
             ctrl.newPlace.location.coordinates = placesOnMap.coords;
             newPlaces.push(ctrl.newPlace);
             Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
@@ -174,7 +173,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
         ctrl.createNewPointForTrack = function(form) {
           if (form.$valid) {
-            ctrl.newPoint.owner = ctrl.user._id; // TODO: move into server side
             ctrl.newTrackPoints.push([ctrl.newPoint]);
             placesForTrack.push([ctrl.newPoint.location.coordinates[1], ctrl.newPoint.location.coordinates[0]]);
             addNewTrackOnMap(placesForTrack);
@@ -225,7 +223,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           var newPointsCounter = 0;
           var counterByNewPoints = 0;
           if (form.$valid) {
-            ctrl.newTrackObject.owner = ctrl.user._id;
             ctrl.newTrackPoints.forEach(function(point) {
               if (!point[0]._id) {
                 newPointsCounter++;
