@@ -6,7 +6,7 @@ angular.module('mapModule')
     var groups = [];
     var types = [];
     var places = [];
-    var groupeE = L.layerGroup();
+    var groupeE = [];
     var map;
 
     var marker = function(lon, lat, icon) {
@@ -131,21 +131,29 @@ angular.module('mapModule')
       map.off('click', addNewPlaceOnMap);
     };
 
+    placesOnMap.initGroupsOfEvents = function(inpTypes) {
+        var type = inpTypes;
+        for (var key in type) {
+          if ({}.hasOwnProperty.call(type, key)) {
+            groupeE[key] = L.layerGroup();
+          }
+        }
+      };
+
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
-
           //console.log(events);
           //console.log(input);
       events.forEach(function(events) {
         console.log(events.location.coordinates[0]+' - '+ events.location.coordinates[1] + ' ' + pix);
 
         marker(events.location.coordinates[1], events.location.coordinates[0], pix)
-        .addTo(groupeE);
+        .addTo(groupeE[input]);
        }) ;
 
        console.log('On map: ') ;
-       console.log(groupeE) ;
-       groupeE.addTo(map);
+       console.log(groupeE[input]) ;
+      groupeE[input].addTo(map);
      } ;
 
       placesOnMap.removeEvents = function(input) {
@@ -154,7 +162,7 @@ angular.module('mapModule')
           console.log(groupeE) ;
           //mainGroup.checkOut(groups[input]);
           groupeE[input].clearLayers();
-          map.removeLayer(newMarker);
+          //map.removeLayer(newMarker);
         } else {
           for (var key in types) {
            // mainGroup.checkOut(groups[key]);

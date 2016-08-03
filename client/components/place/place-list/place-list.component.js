@@ -114,6 +114,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
+        ctrl.toolsOfEvents = true;
 
         ctrl.checkPopularPlaces = function() {
           var popularPlacesIcon = angular.element('#popularPlaces');
@@ -138,6 +139,20 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             popularTracksIcon.addClass(constants.checkedClass);
             angular.element('#popularPlaces')
               .removeClass(constants.checkedClass);
+            ctrl.hidePopularTracks = false;
+            ctrl.hidePopularPlaces = true;
+          }
+        };
+
+        ctrl.checkPopularEvents = function() {
+          var popularEventsIcon = angular.element('#toolsOfEvents');
+          if (popularEventsIcon.hasClass(constants.checkedClass)) {
+            popularEventsIcon.removeClass(constants.checkedClass);
+            ctrl.toolsOfEvents = true;
+          } else {
+            popularEventsIcon.addClass(constants.checkedClass);
+            angular.element('#toolsOfEvents')
+                .removeClass(constants.checkedClass);
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
           }
@@ -298,12 +313,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // *** START tracks controller ***
         ctrl.eventsType = mapMarkingTypes.events;
         eventsTypeLength = Object.keys(ctrl.eventsType).length;
-/*        Event.getList().then(function(result) {
-          eventCounter = eventTypeLength;
-          events = result;
-          console.log(events) ;
-          placesOnMap.showEvents(events,'game');
-        })*/;
+     //   placesOnMap.removeEvents();
+        placesOnMap.initGroupsOfEvents(ctrl.eventsType);
 
         ctrl.checkAllEvents = function(input) {
           alert('Hi') ;
@@ -343,6 +354,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
         };
         // ----END---- FilterByOneOfType
+
+
 
 
         // ***
