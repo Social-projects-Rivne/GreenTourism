@@ -6,8 +6,13 @@ angular.module('blogComments').component('blogComments', {
   },
   controller: ['currentUser', 'Restangular',
     function BlogCommentsCtrl(currentUser, Restangular) {
-    var ctrl = this,
-        heightAfterContent = 10;
+      console.log(this);
+      var ctrl = this;
+      var heightAfterContent = 10;
+
+      ctrl.currentUser = currentUser;
+
+      ctrl.showError = false;
 
       ctrl.textareaPostResize = function() {
         var textareaObject = angular.element('textarea');
@@ -23,8 +28,6 @@ angular.module('blogComments').component('blogComments', {
             heightAfterContent + textareaObject.prop('scrollHeight') + 'px');
       };
 
-      ctrl.currentUser = currentUser;
-      ctrl.showError = false;
       ctrl.addComment = function(content) {
         angular.element('textarea').css('height', '50px');
         Restangular.one(ctrl.inputObjectType + '/' +
@@ -44,13 +47,24 @@ angular.module('blogComments').component('blogComments', {
             });
       };
 
-      ctrl.removeComment = function(id) {
-        Restangular.one(ctrl.inputObjectType + '/' +
-            ctrl.inputObject._id + '/comments', id).remove().then(function() {
-          ctrl.inputObject.comments = ctrl.inputObject.comments
-              .filter(function(comment) {
-                return comment._id !== id;
-              });
+      //ctrl.removeComment = function(id) {
+      //  Restangular.one(ctrl.inputObjectType + '/' +
+      //      ctrl.inputObject._id + '/comments', id).remove().then(function() {
+      //    ctrl.inputObject.comments = ctrl.inputObject.comments
+      //        .filter(function(comment) {
+      //          return comment._id !== id;
+      //        });
+      //  }, function(err) {
+      //    ctrl.showError = err.statusText;
+      //  });
+      //};
+
+      ctrl.removeBlogComment = function(id) {
+        Restangular.one('blogs/comment', id).remove().then(function() {
+          //ctrl.inputObject.comments = ctrl.inputObject.comments
+          //    .filter(function(comment) {
+          //      return comment.id !== id;
+          //    });
         }, function(err) {
           ctrl.showError = err.statusText;
         });
@@ -71,6 +85,5 @@ angular.module('blogComments').component('blogComments', {
       };
 
       ctrl.currentUser = currentUser;
-
-  }]
+    }]
 });

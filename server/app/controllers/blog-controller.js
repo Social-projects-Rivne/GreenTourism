@@ -132,4 +132,15 @@ exports.delete = function(req, res) {
       });
 };
 
-exports.comment = function(req, res){};
+exports.deleteComments = function(req, res) {
+  Blog.comment.destroy({where: {id: req.params.id}})
+      .then(function(comment) {
+        res.status(200).json({
+          message: 'Record ' + req.params.id +
+          ' was successfully deleted'
+        });
+      })
+      .catch(function(err) {
+        res.status(400).json({message: err.message});
+      });
+};

@@ -19,9 +19,7 @@ router.route('/:id')
   .put(blogController.update)
   .delete(blogController.delete);
 
-router.route('')
-  .post(blogController.createComment)
-  .put(blogController.updateComment)
-  .delete(blogController.deleteComment)
+router.route('/comment/:id')
+  .delete(blogController.deleteComments);
 
 module.exports = router;
