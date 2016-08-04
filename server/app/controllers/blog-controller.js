@@ -1,5 +1,6 @@
 var Blog = require('../models/blog');
 var User = require('mongoose').model('User');
+var _ = require('../../../client/bower_components/lodash');
 
 exports.list = function(req, res) {
   Blog.blog.findAll({
@@ -41,8 +42,9 @@ exports.show = function(req, res) {
         if (record) {
           User.findById(record.owner, 'firstName lastName fullName', function(err, user) {
             record.owner = user;
-            console.log();
-            if(record.blogComments.length !== 0){
+            if (_.isEmpty(record.blogComments)) {
+              res.json(record);
+            }else {
               record.blogComments.forEach(function(item, index) {
                 User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
                   item.author = user;
@@ -51,8 +53,6 @@ exports.show = function(req, res) {
                   }
                 });
               });
-            }else{
-              res.json(record);
             }
           });
         } else {
