@@ -44,7 +44,7 @@ exports.show = function(req, res) {
             record.owner = user;
             if (_.isEmpty(record.blogComments)) {
               res.json(record);
-            }else {
+            } else {
               record.blogComments.forEach(function(item, index) {
                 User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
                   item.author = user;
@@ -139,7 +139,7 @@ exports.delete = function(req, res) {
 
 exports.showComment = function(req, res) {
   Blog.comment.findOne({
-    where: {id: req.params.id},
+    where: {id: req.params.id}
   })
       .then(function(record) {
         if (record) {
@@ -193,9 +193,38 @@ exports.createComment = function(req, res) {
 };
 exports.deleteComment = function(req, res) {
   Blog.comment.destroy({where: {id: req.params.id}})
-      .then(function(comment) {
+      .then(function() {
         res.status(200).json({
           message: 'Record ' + req.params.id +
+          ' was successfully deleted'
+        });
+      })
+      .catch(function(err) {
+        res.status(400).json({message: err.message});
+      });
+};
+
+exports.addLike = function(req, res) {
+  if (req.body) {
+    Blog.likes.create(req.body)
+        .then(function(like) {
+          res.status(201).json({
+            message: 'Record was successfully created!',
+            record: like
+          });
+        })
+        .catch(function(err) {
+          res.status(400).json({message: err.message, errors: err.errors});
+        });
+  } else {
+    res.sendStatus(400);
+  }
+};
+exports.removeLike = function(req, res) {
+  Blog.likes.destroy({where: {author: req.params.id}})
+      .then(function() {
+        res.status(200).json({
+          message: 'Like ' + req.params.id +
           ' was successfully deleted'
         });
       })

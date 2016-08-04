@@ -26,4 +26,9 @@ router.route('/comment/:id')
   .put(blogController.editComment)
   .delete(blogController.deleteComment);
 
+router.route('/like')
+    .post(blogController.addLike);
+router.route('/like/:id')
+    .delete(blogController.removeLike);
+
 module.exports = router;
