@@ -272,8 +272,9 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="newPlaceType"><span
-                    class="title">3. Select place type:</span></label>
+            <label for="newPlaceType">
+              <span class="title">3. Select place type:</span>
+            </label>
             <select name="newPlaceType" class="form-control"
                     ng-options="type as typeObj.name for (type, typeObj) in $ctrl.placesType track by type"
                     ng-model="$ctrl.newPlaceType" ng-required="true">
@@ -297,10 +298,11 @@
 
           <div class="form-group">
             <label for="newPlacePhoto">
-              <span class="title">5. Upload photo (optional):</span>
+              <span class="title">5. Add photo (optional):</span>
             </label>
-            <input type="file" name="newPlacePhoto" id="newPlacePhoto"
-                   ng-model="$ctrl.newPlacePhoto">
+            <input type="text" name="newPlacePhoto" id="newPlacePhoto"
+                   class="form-control" ng-model="$ctrl.newPlace.photos[0]"
+                   placeholder="Photo URL">
           </div>
 
           <div class="form-group visible-lg">
@@ -472,9 +474,11 @@
           </div>
           <div class="form-group">
             <label for="newTrackPhoto">
-              <span class="title">5. Upload photo (optional):</span>
+              <span class="title">5. Add photo (optional):</span>
             </label>
-            <input type="file" id="newTrackPhoto" name="newTrackPhoto">
+            <input type="Photo" id="newTrackPhoto" name="newTrackPhoto"
+                   class="form-control" ng-model="$ctrl.newTrackObject.photos[0]"
+                   placeholder="Photo URL">
           </div>
           <div class="form-group visible-lg">
             <div class="btn-group col-xs-12 no-padding">
