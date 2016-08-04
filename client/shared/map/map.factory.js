@@ -18,8 +18,7 @@ angular.module('mapModule', [])
       }
 
       function getPopularTracks() {
-        Track.getList({location: [userLocation.lat, userLocation.lng], radius:
-          constants.radiusForPopularItems}).then(function(result) {
+        Track.getList({location: [userLocation.lat, userLocation.lng], radius: constants.radiusForPopularItems}).then(function(result) {
             popularTracks = result;
             mapFactory.popularTracks = popularTracks;
           });

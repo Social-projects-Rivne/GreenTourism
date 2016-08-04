@@ -1,6 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var CommentSchema = require('./schema/comment');
+var LocationSchema = new Schema({
+  type: {
+    type: String,
+    default: 'LineString',
+    enums: ['LineString'],
+    required: true
+  },
+  coordinates: {
+    type: [[Number]],
+    required: true
+  }
+});
 
 var TrackSchema = new Schema({
   name: {
@@ -16,6 +28,7 @@ var TrackSchema = new Schema({
     ref: 'User',
     required: true
   },
+  location: LocationSchema,
   places: [{
     type: Schema.Types.ObjectId,
     ref: 'Place',

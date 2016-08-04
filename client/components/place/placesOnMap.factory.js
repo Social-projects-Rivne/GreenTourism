@@ -97,26 +97,34 @@ angular.module('mapModule')
     var trackForAdding;
     var polyline = function(trackPoints, color) {
       return L.polyline(trackPoints, {
-        color: color,
+        color: (color ? color : '#000'),
         opacity: 1
       });
     };
 
-    var addTrack = function(track) {
-      var color = mapMarkingTypes.tracks[track.type].color;
-      var coordsArray = [];
-      track.places.forEach(function(place, index) {
-        var coords = [];
-        coords[0] = place.location.coordinates[1];
-        coords[1] = place.location.coordinates[0];
-        coordsArray[index] = coords;
+    placesOnMap.showTracks = function(tracksArray, isCreateMode) {
+      if (isCreateMode && placesOnMap.newTrack) {
+        map.removeLayer(placesOnMap.newTrack);
+      }
+      tracksArray.forEach(function(track) {
+        if (track.type) {
+          var color = mapMarkingTypes.tracks[track.type].color;
+        }
+        var coordsArray = [];
+        if (track.location) {
+          track.location.coordinates.forEach(function(coord, index) {
+            var coords = [];
+            coords[0] = coord[1];
+            coords[1] = coord[0];
+            coordsArray[index] = coords;
+          });
+        }
+        trackForAdding = polyline(coordsArray, color).addTo(map);
+        if (isCreateMode) {
+          placesOnMap.newTrack = trackForAdding;
+        }
+        tracks.push([trackForAdding, track.type]);
       });
-      trackForAdding = polyline(coordsArray, color).addTo(map);
-      tracks.push([trackForAdding, track.type]);
-    };
-
-    placesOnMap.showTracks = function(tracksArray) {
-      tracksArray.forEach(addTrack);
     };
 
     placesOnMap.removeTracks = function(tracksType) {
