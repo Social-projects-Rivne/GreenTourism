@@ -23,6 +23,7 @@ router.route('/comment')
   .post(blogController.createComment);
 router.route('/comment/:id')
   .get(blogController.showComment)
+  .put(blogController.editComment)
   .delete(blogController.deleteComment);
 
 module.exports = router;

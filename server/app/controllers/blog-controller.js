@@ -133,28 +133,34 @@ exports.delete = function(req, res) {
 };
 
 exports.showComment = function(req, res) {
-  Blog.blog.findOne({
+  Blog.comment.findOne({
     where: {id: req.params.id},
-    include: [
-      {model: Blog.photos},
-      {model: Blog.categories},
-      {model: Blog.comment},
-      {model: Blog.likes}
-    ]
   })
       .then(function(record) {
         if (record) {
-          User.findById(record.owner, 'firstName lastName fullName', function(err, user) {
-            record.owner = user;
-            record.blogComments.forEach(function(item, index) {
-              User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
-                item.author = user;
-                if (index === record.blogComments.length - 1) {
-                  res.json(record);
-                }
-              });
-            });
+          User.findById(record.author, 'firstName lastName fullName avatar', function(err, user) {
+            record.author = user;
+            res.json(record);
           });
+        } else {
+          res.status(404).json({
+            message: 'Record with id ' + req.params.id +
+            ' was not found!'
+          });
+        }
+      });
+};
+exports.editComment = function(req, res) {
+  Blog.comment.update(
+      {
+        text: req.body.content
+      },
+      {
+        where: {id: req.params.id}
+      })
+      .then(function(record) {
+        if (record) {
+          res.json(record);
         } else {
           res.status(404).json({
             message: 'Record with id ' + req.params.id +
@@ -167,11 +173,10 @@ exports.createComment = function(req, res) {
   if (req.body) {
     Blog.comment.create(req.body)
         .then(function(record) {
-          //res.status(201).json({
-          //  message: 'Record was successfully created!',
-          //  record: record
-          //});
-          res.json(record);
+          res.status(201).json({
+            message: 'Record was successfully created!',
+            record: record
+          });
         })
         .catch(function(err) {
           res.status(400).json({message: err.message, errors: err.errors});

@@ -8,7 +8,7 @@ angular.module('blogComments').component('blogComments', {
   controller: ['currentUser', 'Restangular',
     function BlogCommentsCtrl(currentUser, Restangular) {
         var ctrl = this;
-        console.log(ctrl);
+
         var heightAfterContent = 10;
 
         ctrl.currentUser = currentUser;
@@ -38,8 +38,8 @@ angular.module('blogComments').component('blogComments', {
                 blogId: ctrl.blogid
               }).then(function(res) {
                 ctrl.content = '';
-                res.author = currentUser;
-                ctrl.blogcomment.push(res);
+                res.record.author = currentUser;
+                ctrl.blogcomment.push(res.record);
               }, function(err) {
                 ctrl.showError = err.statusText;
               });
@@ -61,14 +61,12 @@ angular.module('blogComments').component('blogComments', {
         };
 
         ctrl.updateComment = function(id, content) {
-          Restangular.one(ctrl.inputObjectType + '/' +
-              ctrl.inputObject._id + '/comments', id).get().then(function(obj) {
-            obj.content = content;
-            obj.put();
+          Restangular.one('blogs/comment', id).customPUT ({
+            content
+          }).then(function(obj) {
+            obj.text = content;
             ctrl.checkCommentId = null;
           });
         };
-
-        ctrl.currentUser = currentUser;
     }]
 });

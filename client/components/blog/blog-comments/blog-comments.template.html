@@ -59,7 +59,7 @@
             <ul class="dropdown-menu" aria-labelledby="commentMenu">
               <li>
                 <a href=""
-                   ng-click="$ctrl.showEditingMode(comment._id, comment.content)">
+                   ng-click="$ctrl.showEditingMode(comment.id, comment.text)">
                   Edit
                 </a>
               </li>
@@ -74,7 +74,7 @@
           <div class="show-comments-edit-content" ng-if="$ctrl.checkCommentId === comment.id">
         <textarea ng-keyup="$ctrl.textareaEditResize()"
                   class="form-control edit-textarea"
-                  required maxlength="1000" ng-model="comment.content">
+                  required maxlength="1000" ng-model="comment.text">
           {{comment.text}}
         </textarea>
             <div class="btn-group pull-right">
