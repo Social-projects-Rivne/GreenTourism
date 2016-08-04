@@ -4,30 +4,48 @@ angular.module('placeDetail', ['comment'])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl($scope, constants) {
+    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout) {
       angular.element(document).ready(function() {
-        $('.fancybox').fancybox();
+        angular.element('.fancybox').fancybox();
       });
       this.map = L.map('map1', {
         center: constants.mapCenter,
-        zoom: constants.defaultZoom-6
+        zoom: constants.defaultZoom - 6,
+        touchZoom: false,
+        dragging: false,
+        scrollWheelZoom: false
       });
-      this.map.touchZoom.disable();
-      this.map.dragging.disable();
-      this.map.scrollWheelZoom.disable();
-      var layerStreet = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      var layerStreet = L.tileLayer(mapMarkingTypes.layers.streets.link, {
+        attribution: mapMarkingTypes.layers.streets.attribute
       });
       this.map.addLayer(layerStreet);
-      this.marker = L.marker(L.latLng(this.place.location.coordinates[1], this.place.location.coordinates[0])).addTo(this.map);
+      this.marker = L.marker(L.latLng(this.place.location.coordinates[1],
+        this.place.location.coordinates[0])).addTo(this.map);
       this.marker.bindPopup('<div class="popup"><h3>' + this.place.name +
-        '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] + '" /></a><br />').openPopup();
+        '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] +
+        '" /></a><br />').openPopup();
       var deltaheight = 0.1;
-      this.map.setView([this.place.location.coordinates[1]+ deltaheight, this.place.location.coordinates[0]]); //0.1- for responcive design- show info on mobile
-
-      this.closePage = function() {
-        $scope.$emit('closePage', 'pageClass');
-      };
+      this.map.setView([this.place.location.coordinates[1] + deltaheight,
+        this.place.location.coordinates[0]]);
+      this.indexBegin = 1;
+      $scope.numberOfphoto = 9;
+      $scope.loading = false;
+      var arrForPreload = _.slice(this.place.photos, $scope.numberOfphoto - 9, $scope.numberOfphoto);
+      this.morePhotos = function() {
+        $scope.loading = true;
+        preloadImages(arrForPreload).then(
+          $timeout(function() {
+            $scope.numberOfphoto = $scope.numberOfphoto + 9;
+            $scope.loading = false;
+            $scope.$apply();
+            var page = angular.element('.container_page');
+            var heightScroll = $scope.numberOfphoto / 3 * 150;
+            page.animate({
+              scrollTop: heightScroll
+            }, 1000);
+          })
+        );
+      }
     }
   });
 
