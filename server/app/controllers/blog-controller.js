@@ -41,14 +41,19 @@ exports.show = function(req, res) {
         if (record) {
           User.findById(record.owner, 'firstName lastName fullName', function(err, user) {
             record.owner = user;
-            record.blogComments.forEach(function(item, index) {
-              User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
-                item.author = user;
-                if (index === record.blogComments.length - 1) {
-                  res.json(record);
-                }
+            console.log();
+            if(record.blogComments.length !== 0){
+              record.blogComments.forEach(function(item, index) {
+                User.findById(item.author, 'firstName lastName fullName avatar', function(err, user) {
+                  item.author = user;
+                  if (index === record.blogComments.length - 1) {
+                    res.json(record);
+                  }
+                });
               });
-            });
+            }else{
+              res.json(record);
+            }
           });
         } else {
           res.status(404).json({
