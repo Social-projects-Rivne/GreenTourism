@@ -146,20 +146,52 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         placesOnMap.initGroupsOfPlaces(ctrl.placesType);
         var map = placesOnMap.showMap();
 
+        var placeRequest = function(placesForLoad) {
+          var arrayToShow = [];
+          var bounds = map.getBounds();
+          var zoom = map.getZoom();
+          if (placesForLoad) arrayToShow.push(placesForLoad); else
+            arrayToShow = activePlacesTypes;
+
+          var request = {
+            type: arrayToShow,
+            locationNE: [
+              bounds._northEast.lng,
+              bounds._northEast.lat
+            ],
+            locationSW: [
+              bounds._southWest.lng,
+              bounds._southWest.lat
+            ],
+            sort: '-rate'
+          };
+
+          switch (zoom) {
+            case 5:
+              request.limit = 200;
+              break;
+            case 4:
+              request.limit = 100;
+              break;
+            case 3:
+              request.limit = 50;
+              break;
+            case 2:
+              request.limit = 25;
+              break;
+            default:
+              delete request.sort;
+              break;
+          }
+
+          return request;
+        };
+
         // ---START---- ShowPlacesOnLoad
         // TODO: Move this inside resolve
-        ctrl.mapBounds = map.getBounds();
-        Place.getList({
-          type: [constants.placesOnLoad],
-          locationNE: [
-            ctrl.mapBounds._northEast.lng,
-            ctrl.mapBounds._northEast.lat
-          ],
-          locationSW: [
-            ctrl.mapBounds._southWest.lng,
-            ctrl.mapBounds._southWest.lat
-          ]
-        }).then(function(result) {
+        Place.getList(
+          placeRequest(constants.placesOnLoad)
+        ).then(function(result) {
           activePlacesTypes.push(constants.placesOnLoad);
           places = [];
           placesOnMap.removePlaces();
@@ -176,21 +208,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ----END---- ShowPlacesOnLoad
 
         // ---START--- Function which get data from DB only on special area
-        function onMove() {
-          ctrl.mapBounds = map.getBounds();
+        map.on('moveend', function() {
           if (activePlacesTypes.length) {
             angular.element('#spinner').addClass('spinner');
-            Place.getList({
-              type: activePlacesTypes,
-              locationNE: [
-                ctrl.mapBounds._northEast.lng,
-                ctrl.mapBounds._northEast.lat
-              ],
-              locationSW: [
-                ctrl.mapBounds._southWest.lng,
-                ctrl.mapBounds._southWest.lat
-              ]
-            }).then(function(result) {
+            Place.getList(placeRequest()).then(function(result) {
               places = [];
               placesOnMap.removePlaces();
               places = result;
@@ -200,10 +221,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           } else {
             angular.element('#spinner').removeClass('spinner');
           }
-        }
+        });
         // ---END--- Function which get data from DB only on special area
-
-        map.on('moveend', onMove);
 
         // ----START---- FilterByOneOfType
         ctrl.checkType = function(input) {
@@ -231,17 +250,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                 ' ' + constants.checkedClass);
             angular.element('#spinner').addClass('spinner');
 
-            Place.getList({
-              type: input,
-              locationNE: [
-                ctrl.mapBounds._northEast.lng,
-                ctrl.mapBounds._northEast.lat
-              ],
-              locationSW: [
-                ctrl.mapBounds._southWest.lng,
-                ctrl.mapBounds._southWest.lat
-              ]
-            }).then(function(result) {
+            Place.getList(placeRequest(input)).then(function(result) {
               places = result.concat(places);
               placesOnMap.showPlaces(result, input);
 
