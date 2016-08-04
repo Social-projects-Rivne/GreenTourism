@@ -6,8 +6,8 @@ angular.module('blogComments').component('blogComments', {
   },
   controller: ['currentUser', 'Restangular',
     function BlogCommentsCtrl(currentUser, Restangular) {
-      console.log(this);
       var ctrl = this;
+      console.log(ctrl.blogcomment);
       var heightAfterContent = 10;
 
       ctrl.currentUser = currentUser;
@@ -46,25 +46,11 @@ angular.module('blogComments').component('blogComments', {
               ctrl.showError = err.statusText;
             });
       };
-
-      //ctrl.removeComment = function(id) {
-      //  Restangular.one(ctrl.inputObjectType + '/' +
-      //      ctrl.inputObject._id + '/comments', id).remove().then(function() {
-      //    ctrl.inputObject.comments = ctrl.inputObject.comments
-      //        .filter(function(comment) {
-      //          return comment._id !== id;
-      //        });
-      //  }, function(err) {
-      //    ctrl.showError = err.statusText;
-      //  });
-      //};
-
       ctrl.removeBlogComment = function(id) {
         Restangular.one('blogs/comment', id).remove().then(function() {
-          //ctrl.inputObject.comments = ctrl.inputObject.comments
-          //    .filter(function(comment) {
-          //      return comment.id !== id;
-          //    });
+          ctrl.blogcomment = ctrl.blogcomment.filter(function(comment) {
+            return comment.id !== id;
+          });
         }, function(err) {
           ctrl.showError = err.statusText;
         });
