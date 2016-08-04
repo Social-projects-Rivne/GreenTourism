@@ -7,19 +7,17 @@ angular.module('blogDetail').component('blogDetail', {
   controller: ['currentUser', 'Restangular', function BlogDetailCtrl(currentUser, Restangular) {
     var ctrl = this;
     ctrl.currentUser = currentUser;
-    ctrl.likesLength = ctrl.blog.blogLikes.length;
     if (ctrl.currentUser) {
       if (_.some(ctrl.blog.blogLikes, {author: ctrl.currentUser._id})) {
         angular.element('.likes').addClass('added');
       }
+      angular.element('.likes').removeClass('disabled');
     }
-
-    ctrl.likesToggle = function(id) {
+    ctrl.likesToggle = function() {
       if (_.some(ctrl.blog.blogLikes, {author: ctrl.currentUser._id})) {
-          Restangular.one('blogs/like', id).remove()
+          Restangular.one('blogs/like', currentUser._id).remove()
               .then(function() {
                 ctrl.blog.blogLikes = _.without(ctrl.blog.blogLikes, _.find(ctrl.blog.blogLikes, {author: ctrl.currentUser._id}));
-                angular.element('.like').css('background-color', '#fff');
                 angular.element('.likes').removeClass('added');
               });
       } else {

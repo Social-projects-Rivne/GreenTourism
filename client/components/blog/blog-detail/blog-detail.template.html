@@ -34,9 +34,9 @@
                       {{$ctrl.blog.blogComments.length}} Comments
                     </li>
                     <li class="pull-right likes-container">
-                      <a ng-click="$ctrl.likesToggle($ctrl.currentUser._id)" ng-disabled="!$ctrl.currentUser" class="likes">
+                      {{$ctrl.blog.blogLikes.length}}
+                      <a ng-click="$ctrl.likesToggle()" ng-disabled="!$ctrl.currentUser" class="likes disabled">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true">
-                          {{$ctrl.blog.blogLikes.length}}
                         </span>
                       </a>
                     </li>
