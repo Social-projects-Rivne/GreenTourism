@@ -140,6 +140,10 @@ angular.module('mapModule')
         }
       };
 
+    $scope.eventClick = function(id) {
+      location.href = '#!/events/' + id;
+    };
+
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
           //console.log(events);
@@ -148,8 +152,17 @@ angular.module('mapModule')
         console.log(events.location.coordinates[0]+' - '+ events.location.coordinates[1] + ' ' + pix);
 
         marker(events.location.coordinates[1], events.location.coordinates[0], pix)
-        .addTo(groupeE[input]);
+        .addTo(groupeE[input]).on('click', function onClick(e) {
+          $scope.marker_click(this._id);
+        });
+        ;
        }) ;
+
+      /*
+
+
+      */
+
 
        console.log('On map: ') ;
        console.log(groupeE[input]) ;

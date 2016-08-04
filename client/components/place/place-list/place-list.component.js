@@ -1,4 +1,4 @@
-angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
+angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
@@ -114,7 +114,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.toolsOfEvents = true;
+        ctrl.hidePopularEvents = true;
 
         ctrl.checkPopularPlaces = function() {
           var popularPlacesIcon = angular.element('#popularPlaces');
@@ -145,15 +145,16 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         ctrl.checkPopularEvents = function() {
-          var popularEventsIcon = angular.element('#toolsOfEvents');
+          var popularEventsIcon = angular.element('#popularEvents');
           if (popularEventsIcon.hasClass(constants.checkedClass)) {
             popularEventsIcon.removeClass(constants.checkedClass);
-            ctrl.toolsOfEvents = true;
+            ctrl.hidePopularEvents = true;
           } else {
             popularEventsIcon.addClass(constants.checkedClass);
             angular.element('#toolsOfEvents')
                 .removeClass(constants.checkedClass);
-            ctrl.hidePopularTracks = false;
+            ctrl.hidePopularEvents = false;
+            ctrl.hidePopularTracks = true;
             ctrl.hidePopularPlaces = true;
           }
         };
@@ -311,6 +312,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // *** END tracks controller ***
 
         // *** START tracks controller ***
+
         ctrl.eventsType = mapMarkingTypes.events;
         eventsTypeLength = Object.keys(ctrl.eventsType).length;
      //   placesOnMap.removeEvents();

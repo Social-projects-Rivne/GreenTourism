@@ -228,7 +228,7 @@
             <i id="popularTracks" class="fa fa-map-signs" aria-hidden="true"
                title="Tracks in Location"></i></a>
         <a href="" ng-click="$ctrl.checkPopularEvents()">
-          <i id="toolsOfEvents" class="fa fa-map-signs" aria-hidden="true"
+          <i id="popularEvents" class="fa fa-calendar" aria-hidden="true"
              title="Maps filters and popukar Events in Location"></i></a>
       </div>
     </div>
@@ -254,6 +254,16 @@
         </a>
         <div class="popular-div-style">
           <popular-tracks></popular-tracks>
+        </div>
+      </div>
+
+      <!-- Div for Popular tracks -->
+      <div class="popular-tracks-wrapper" ng-hide="$ctrl.hidePopularEvents">
+        <a href="" ng-click="$ctrl.checkPopularEvents()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="popular-div-style">
+          <popular-events></popular-events>
         </div>
       </div>
 
