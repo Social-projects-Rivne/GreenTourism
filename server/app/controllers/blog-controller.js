@@ -151,9 +151,10 @@ exports.showComment = function(req, res) {
       });
 };
 exports.editComment = function(req, res) {
+
   Blog.comment.update(
       {
-        text: req.body.content
+        text: req.body.data
       },
       {
         where: {id: req.params.id}
