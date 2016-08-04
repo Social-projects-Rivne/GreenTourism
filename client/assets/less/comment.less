@@ -9,7 +9,8 @@
     .add-comment-textarea {
       textarea {
         width: 100%;
-        resize: vertical;
+        resize: none;
+        overflow: hidden;
       }
       .add-comment-button {
         margin-top: 5px;
@@ -20,6 +21,9 @@
           border: none;
           width: 100px;
           height: 40px;
+          &:disabled {
+            background-color: #999;
+          }
         }
       }
     }
@@ -34,10 +38,17 @@
     margin-bottom: 10px;
     padding: 8px;
     textarea {
-      resize: vertical;
+      resize: none;
+      overflow: hidden;
+      margin-bottom: 10px;
     }
     .show-comments-content {
       text-align: justify;
+      margin-right: 15px;
+      word-break: break-all;
+    }
+    .show-comments-edit-content {
+      margin-right: 15px;
     }
     .show-comments-timestamp {
       font-size: 10px;
@@ -61,10 +72,6 @@
         right: 0;
         left: auto;
       }
-    }
-    button {
-      position: absolute;
-      right: 5%;
     }
   }
   .comment-image {

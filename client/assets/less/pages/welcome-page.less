@@ -1,3 +1,6 @@
+@row-height-lg: 329px;
+@row-height-md: 272px;
+
 .parallax {
   background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
   .parallax-background-opacity {
@@ -38,6 +41,14 @@
   .welcome-page-section-img {
     padding: 0;
     overflow: hidden;
+    min-height: @row-height-lg;
+    @media all and (max-width: 1200px) and (min-width: 992px) {
+      min-height: @row-height-md;
+      max-height: @row-height-md;
+    }
+    @media (max-width: 992px) {
+      min-height: 100%;
+    }
     img {
       width: 100%;
       height: auto;
@@ -76,7 +87,7 @@
   }
   .welcome-page-section-text {
     text-align: justify;
-    min-height: 375px;
+    min-height: @row-height-lg;
     padding: 20px 40px 40px 40px;
     h2 {
       font-weight: bold;
@@ -84,6 +95,15 @@
       text-align: center;
       a {
         color: @footer-bg-color;
+      }
+    }
+    @media all and (max-width: 1200px) and (min-width: 992px) {
+      min-height: @row-height-md;
+      max-height: @row-height-md;
+      padding: 0 10px 0 10px;
+      h2 {
+        margin-bottom: 5px;
+        font-size: 14px;
       }
     }
     div {
@@ -94,6 +114,9 @@
         font-weight: bold;
         color: @brand-dark;
       }
+      @media (max-width: 1200px) {
+        bottom: 10px;
+      }
     }
   }
   .row {
@@ -103,16 +126,5 @@
 @supports (-ms-accelerator:true) {
   .parallax a {
     display: none;
-  }
-}
-
-@media screen and (min-width: 991px) {
-  .welcome-page-section-img {
-    max-height: 375px;
-  }
-}
-@media screen and (max-width: 991px) {
-  #welcome-page-content .welcome-page-section-text {
-    min-height: auto;
   }
 }
