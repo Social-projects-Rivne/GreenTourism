@@ -32,5 +32,13 @@ angular.module('blogDetail').component('blogDetail', {
             });
       }
     };
+
+    Restangular.one('blogs/').get({categoryId: ctrl.blog.categoryId})
+        .then(function(res) {
+          ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
+        });
+
+    console.log(this)
+
   }]
 });

@@ -8,13 +8,6 @@
               <img ng-src="{{$ctrl.blog.blogPhoto.url}}" alt="{{$ctrl.blog.title}}">
 
               <div class="">
-                <h2 class="blog-title">
-                  {{$ctrl.blog.title}}
-                </h2>
-
-                <div class="blog-content">
-                  {{$ctrl.blog.content}}
-                </div>
                 <div class="blog-details">
                   <ul>
                     <li>By
@@ -42,6 +35,56 @@
                     </li>
                   </ul>
                 </div>
+                <h2 class="blog-title">
+                  {{$ctrl.blog.title}}
+                </h2>
+
+                <div class="blog-content">
+                  {{$ctrl.blog.content}}
+                </div>
+                <section class="related-posts">
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h3 class="title-heading">
+                          Related Posts
+                        </h3>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="title-sep"></div>
+                      </div>
+                      </div>
+                      <div class="row">
+                        <div class="fusion-title">
+                          <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="related in $ctrl.relatedPost">
+
+                            <div class="media blog-aside-items ng-scope">
+                                <a href="#!/blog/{{related.id}}" class="pull-left">
+                                <img alt="{{related.title}}" ng-src="{{related.blogPhoto.url}}" class="media-object"
+                                     style="width:50px;height:50px;"/>
+                              </a>
+                              <div class="media-body">
+                                <h4 class="media-heading">
+                                  <a href="#!/blog/{{related.id}}">
+                                    {{related.title}}
+                                  </a>
+                                </h4>
+                                <div class="media-date ng-binding">
+                                  {{related.createdAt | date:'dd MMMM yyyy'}}
+                                </div>
+                              </div>
+                            </div>
+
+                            <!--<a href="#!/blog/{{related.id}}">-->
+                              <!--{{related.title}}-->
+                              <!--{{related.createdAt | date:'dd MMMM yyyy'}}-->
+                              <!--<img alt="{{related.title}}" ng-src="{{related.blogPhoto.url}}" class="media-object"-->
+                                   <!--style="width:50px;height:50px;"/>-->
+                            <!--</a>-->
+                          </div>
+                        </div>
+                      </div>
+                </section>
                 <blog-comments blogcomment="$ctrl.blog.blogComments" blogid="$ctrl.blog.id"></blog-comments>
               </div>
             </div>
@@ -59,50 +102,5 @@
       </div>
     </div>
   </section>
-  <!--<section class="related-posts">-->
-  <!--<div class="container">-->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<div class="fusion-title">-->
-  <!--<h3 class="title-heading-left">Related Posts</h3>-->
-  <!--<div class="title-sep-container">-->
-  <!--<div class="title-sep sep-double"></div>-->
-  <!--</div>-->
-  <!--<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="blog in $ctrl.blogs | limitTo:3" >-->
-  <!--<a href="#!/blog/{{blog.id}}">-->
-  <!--{{blog.title}}-->
-  <!--<img alt="{{blog.title}}" ng-src="{{blog.images}}" class="media-object" style="width:50px;height:50px;"/>-->
-  <!--</a>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</section>-->
-  <!--<br/>-->
-  <!--<section class="post-comments" id="post-comments">-->
-  <!--<div class="container">-->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<h3 class="title-heading-left">Comments</h3>-->
-  <!--<div class="comment-item" ng-repeat="comment in blog.comments">-->
-  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
-  <!--{{comment}}-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>    -->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<form name="reviewForm" ng-submit=""> -->
-  <!--<div class="col-md-12">-->
-  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
-  <!--{{newComment}}-->
-  <!--</div>-->
-  <!--<textarea ng-model="newComment"></textarea>-->
-  <!--<input type="submit" value="Comment">-->
-  <!--</form>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</section>-->
+
 </div>
