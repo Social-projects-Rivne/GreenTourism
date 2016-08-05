@@ -19,6 +19,6 @@ module.exports = {
   google: {
     clientID: '54757690485-qi1sur7efphqrii06aoafdon990k1vr0.apps.googleusercontent.com',
     clientSecret: 'Bk0dYxY_fU6GIk1UBxxEIcSz',
-    callbackURL: 'https://green-tourism.herokuapp.com/api/auth/facebook/callback'
+    callbackURL: 'https://green-tourism.herokuapp.com/api/auth/google/callback'
   }
 };

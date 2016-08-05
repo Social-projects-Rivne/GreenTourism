@@ -16,6 +16,18 @@ var TrackSchema = new Schema({
     ref: 'User',
     required: true
   },
+  location: {
+    type: {
+      type: String,
+      default: 'LineString',
+      enums: ['LineString'],
+      required: true
+    },
+    coordinates: {
+      type: [[Number]],
+      required: true
+    }
+  },
   places: [{
     type: Schema.Types.ObjectId,
     ref: 'Place',

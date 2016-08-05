@@ -44,6 +44,21 @@ exports.isOwner = function(req, res, next) {
   }
 };
 
+exports.isCommentAuthor = function(req, res, next) {
+  if (isAuthenticated(req, res)) {
+    if (req.user.role === 'admin') {
+      next();
+    }
+    if (req.comment.author.id !== req.user.id) {
+      return res.status(403).json({
+        message: 'User is not authorized'
+      });
+    }
+
+    next();
+  }
+};
+
 exports.isAdmin = function(req, res, next) {
   if (isAuthenticated(req, res)) {
     if (req.user.role !== 'admin') {

@@ -64,10 +64,12 @@ angular.module('comment', [])
 
         ctrl.updateComment = function(id, content) {
           Restangular.one(ctrl.inputObjectType + '/' +
-            ctrl.inputObject._id + '/comments', id).get().then(function(obj) {
-              obj.content = content;
-              obj.put();
+            ctrl.inputObject._id + '/comments', id).customPUT({
+              content: content
+            }).then(function() {
               ctrl.checkCommentId = null;
+            }, function(err) {
+              ctrl.showError = err.statusText;
             });
         };
       }
