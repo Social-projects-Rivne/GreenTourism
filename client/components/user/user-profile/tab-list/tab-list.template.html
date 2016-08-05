@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-9">
         <h4 class="list-group-item-heading">
-          <a ng-href="#!/items/{{item._id}}">{{item.name}}</a>
+          <a ng-href="#!/{{$ctrl.route}}{{item._id}}">{{item.name}}</a>
         </h4>
         <p class="list-group-item-text">
           {{item.description}}

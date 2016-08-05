@@ -109,11 +109,11 @@
       </div>
       <div ng-show="$ctrl.isSelected(2)">
         <h1 class="page-header">My Places</h1>
-        <tab-list items="$ctrl.places"></tab-list>
+        <tab-list route="'places/'" items="$ctrl.places"></tab-list>
       </div>
       <div ng-show="$ctrl.isSelected(3)">
         <h1 class="page-header">My Tracks</h1>
-        <tab-list items="$ctrl.tracks"></tab-list>
+        <tab-list route="'tracks/'" items="$ctrl.tracks"></tab-list>
       </div>
       <div ng-show="$ctrl.isSelected(4)">
         <h1 class="page-header">Favorite Places</h1>
