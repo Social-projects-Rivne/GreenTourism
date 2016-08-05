@@ -127,6 +127,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               .removeClass(constants.checkedClass);
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
+            ctrl.hidePopularEvents = true;
           }
         };
 
@@ -141,6 +142,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               .removeClass(constants.checkedClass);
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
+            ctrl.hidePopularEvents = true;
           }
         };
 
