@@ -1,9 +1,8 @@
-<div class="place-page">
+<div class="place-page container">
   <div class="row place">
     <div class="col-xs-12 col-lg-12 col-md-12">
       <div class="row vertical-align">
         <div class="col-xs-4 no-padding">
-
           <p class="text-left">
             <button type="button" class="btn btn-default btn-lg like">
               <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like 124
@@ -17,17 +16,17 @@
           <i class="fa fa-times fa-3x  pull-right close" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
         </div>
       </div>
-
     </div>
     <div class="container_page">
       <div class=row">
         <div class="col-xs-12">
           <h2 class="title text-center">{{$ctrl.place.name}} </h2>
-          <p  class="text-center">{{$ctrl.place.description}}</p>
+
+          <p class="text-center">{{$ctrl.place.description}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-xs-12 gallery">
+        <div class="col-lg-6 col-md-6 col-xs-12 gallery">
           <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}">
             <img ng-src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
           </a>
@@ -37,18 +36,38 @@
             <img ng-src="{{photo}}" alt="{{$ctrl.place.name}}"/>
           </a>
           <a ng-if="numberOfphoto<$ctrl.place.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
-            photos >></a>
+            photos <i class="fa fa-chevron-right fa-md"></i></a>
         <span ng-if="loading" class="center-block">
             <i class="fa fa-spinner fa-spin  fa-4x"></i>
         </span>
-
         </div>
-        <div class="col-lg-8 col-md-8 col-xs-12">
-          <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+          <div id="abovemap"></div>
+          <div id="map1">
+          </div>
+          <h4>Popular places in location</h4>
+
+          <div
+            ng-repeat="placeInLocation in $ctrl.placesInLocationArr | filter:$ctrl.placesFilter | limitTo:3 | orderBy : 'rate'"
+            class="popular-in-location-wrapper">
+            <img ng-src="{{placeInLocation.photos[0]}}"/>
+            <a ng-href="#!/places/{{placeInLocation.id}}">
+            </a>
+            <a class="popular-in-location-name" ng-href="#!/places/{{placeInLocation.id}}">{{placeInLocation.name}}</a>
+            <a class="popular-in-location-address" ng-href="#!/places/{{placeInLocation.id}}">
+              <img src="assets/img/places/marker/green.png">
+              {{(placeInLocation.location.coordinates[1] | number:4)}}, {{placeInLocation.location.coordinates[0] |
+              number:4}}
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
-    <div class="navbar-fixed-bottom" id="map1">
+    <div class=row">
+      <div class="col-xs-12">
+        <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
+      </div>
     </div>
   </div>
 </div>

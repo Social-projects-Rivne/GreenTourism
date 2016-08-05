@@ -21,6 +21,7 @@ angular.module('popularTracks', [])
       }
 
       function getPopularTracks() {
+        console.log("PopularTracks"+userLocation.lat+" ");
         Track.getList({location: [userLocation.lat, userLocation.lng], radius: 5000}).then(function(result) {
           self.popularTracks = result;
         });

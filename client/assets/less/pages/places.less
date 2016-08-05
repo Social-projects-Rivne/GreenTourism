@@ -1,4 +1,5 @@
 @map-page-bg: #f8f8f8;
+
 .map-page-wrapper {
   background-color: @map-page-bg;
   .map-menu {
@@ -332,23 +333,30 @@
 
 .add-item-menu {
   position: absolute;
-  top: 0;
+  top: 114px;
+  bottom: 0;
   right: 0;
-  height: 100%;
-  width: 300px;
+  width: 25%;
   z-index: 2;
   background-color: @map-page-bg;
-  padding: 115px 15px 15px 15px;
+  padding: 0 15px 15px 15px;
   overflow: auto;
   display: block;
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
   .removeIcon {
     position: absolute;
-    top: 115px;
+    top: 5px;
     left: 10px;
     font-size: 25px;
     color: @light-green;
     @media (max-width: 767px) {
-      top: 160px;
+      top: 50px;
     }
   }
   h2 {
@@ -358,8 +366,97 @@
     font-weight: bold;
     color: @light-green;
   }
+  .no-padding {
+    padding: 0;
+  }
+  .inactive-add-item-menu {
+    position: fixed;
+    top: 114px;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0.5);
+    z-index: 3;
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all linear 0.5s;
+    }
+    &.ng-hide {
+      opacity: 0;
+    }
+    #new-point-menu {
+      position: relative;
+      background-color: #f8f8f8;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      overflow: hidden;
+      padding: 0 10px 10px 10px;
+      margin: 65px 15px 0 15px;
+      z-index: 4;
+      input {
+        margin-top: 0;
+      }
+      h3 {
+        text-align: center;
+      }
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        transition: all linear 0.5s;
+      }
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 60%;
+    }
+  }
   @media (max-width: 767px) {
-    padding-top: 200px;
+    padding-top: 50px;
     width: 60%;
+  }
+}
+
+/* ------------- Add track ---------------*/
+
+#pointsForNewTrack {
+  padding: 10px;
+  color: #fff;
+  overflow: hidden;
+  .pointsList {
+    .row:nth-child(even) {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+    .row:nth-child(odd) div:first-child {
+      border-right: 3px solid @light-green;
+      height: 10px;
+    }
+  }
+  .pointsList:first-child {
+    .row {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+      div:first-child {
+        border: none;
+      }
+    }
+  }
+  .pointName {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  .fa-map-marker {
+    margin-left: -15px;
+  }
+  a {
+    color: #fff;
   }
 }

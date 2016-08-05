@@ -24,7 +24,6 @@ exports.list = function(req, res) {
       }
     };
   }
-
   delete req.query.locationSW;
   delete req.query.locationNE;
 

@@ -1,7 +1,6 @@
 .page-detail {
   bottom: 0;
   padding-top: 50px;
-  position: absolute;
   width: 100%;
   top: 0;
   background-color: #FFF;
@@ -63,9 +62,6 @@
 }
 
 div.place {
-  .navbar-fixed-bottom {
-    margin-bottom: -200px;
-  }
   margin: 0;
   .vertical-align {
 
@@ -81,13 +77,8 @@ div.place {
     margin-top: -10px;
   }
   .container_page {
-    position: fixed;
-    min-height:400px;
-    top: 120px;
-    bottom: 250px;
     left: 0;
     right: 0;
-    overflow: auto;
     overflow-x: hidden;
     padding: 20px;
     div .vertical-align {
@@ -106,12 +97,14 @@ div.place {
       color: @brand-dark;
     }
     .gallery {
+      max-height: 700px;
+      overflow: auto;
       text-align: center;
       a.fancybox {
         max-height: 100px;
         overflow: hidden;
         display: inline-block;
-        width: 32%;
+        width: 32.7%;
       }
       a img {
         float: left;
@@ -130,23 +123,68 @@ div.place {
   }
   #map1 {
     width: 100%;
+    height: 415px;
+  }
+  #abovemap {
+    position: absolute;
+    width: 100%;
     height: 430px;
-    margin-top: 20px;
+    background: blue;
+    opacity: 0;
+    top: 10px;
+    left: 50px;
+    z-index: 1111
+  }
+  .popular-in-location-wrapper {
+    position: relative;
+    width: 32%;
+    margin: 2px;
+    float: left;
+    max-height: 110px;
+    overflow: hidden;
+    img {
+      width: 100%;
+
+    }
+    .shared-style {
+      padding: 4px 4px;
+      font-weight: bold;
+      color: @brand-light;
+      position: absolute;
+    }
+    .popular-in-location-name {
+      .shared-style;
+      font-size: 1em;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, rgba(94, 225, 1, 0) 0%, @brand-dark 100%);
+    }
+    .popular-in-location-address {
+      .shared-style;
+      font-size: 0.8em;
+      bottom: 0;
+      right: 4px;
+      img {
+        width: 12px;
+      }
+    }
   }
   i#close, i.fa {
     cursor: pointer;
   }
-  @media (max-width: 700px) and (orientation: landscape), (max-width: 430px) {
-    #map1 {
-      position: relative;
+  @media (max-width: 700px) and (orientation: landscape), (max-width: 600px) {
+    .popular-in-location-address {
+      display: none;
+    }
+    .gallery a.fancybox {
+      width: 30%;
     }
     .container_page {
-      bottom: 0px;
+      bottom: 0;
       position: relative;
       margin-bottom: 0;
       top: 0;
     }
-
   }
 }
 
