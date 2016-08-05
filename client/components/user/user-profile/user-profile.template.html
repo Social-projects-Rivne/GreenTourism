@@ -30,7 +30,10 @@
             <a href="" ng-click="$ctrl.selectTab(3)">My Tracks</a>
           </li>
           <li ng-class="{ active: $ctrl.isSelected(4) }">
-            <a href="" ng-click="$ctrl.selectTab(4)">Favorite Events</a>
+            <a href="" ng-click="$ctrl.selectTab(4)">Favorite Places</a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(5) }">
+            <a href="" ng-click="$ctrl.selectTab(5)">Favorite Tracks</a>
           </li>
         </ul>
       </div>
@@ -106,46 +109,19 @@
       </div>
       <div ng-show="$ctrl.isSelected(2)">
         <h1 class="page-header">My Places</h1>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="place in $ctrl.places">
-            <div class="row">
-              <div class="col-sm-3">
-                <img ng-src="{{place.photos[0]}}" alt="Place image" class="img-responsive" />
-              </div>
-              <div class="col-sm-9">
-                <h4 class="list-group-item-heading">
-                  <a ng-href="#!/places/{{place._id}}">{{place.name}}</a>
-                </h4>
-                <p class="list-group-item-text">
-                  {{place.description}}
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <tab-list items="$ctrl.places"></tab-list>
       </div>
       <div ng-show="$ctrl.isSelected(3)">
         <h1 class="page-header">My Tracks</h1>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="track in $ctrl.tracks">
-            <div class="row">
-              <div class="col-sm-3">
-                <img ng-src="{{track.photos[0]}}" alt="Track image" class="img-responsive" />
-              </div>
-              <div class="col-sm-9">
-                <h4 class="list-group-item-heading">
-                  <a ng-href="#!/tracks/{{track._id}}">{{track.name}}</a>
-                </h4>
-                <p class="list-group-item-text">
-                  {{track.description}}
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <tab-list items="$ctrl.tracks"></tab-list>
       </div>
       <div ng-show="$ctrl.isSelected(4)">
-        <h1 class="page-header">Favorite Events</h1>
+        <h1 class="page-header">Favorite Places</h1>
+        <tab-list items="$ctrl.favPlaces"></tab-list>
+      </div>
+      <div ng-show="$ctrl.isSelected(5)">
+        <h1 class="page-header">Favorite Tracks</h1>
+        <tab-list items="$ctrl.favTracks"></tab-list>
       </div>
     </section>
   </div>
