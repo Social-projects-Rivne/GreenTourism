@@ -4,12 +4,12 @@ exports.list = function(req, res) {
 
   var name = req.query.name;
   var regex = new RegExp(req.query.name, 'i');
-  delete req.query.name;
+ // delete req.query.name;
 
   var searchBy = req.query.searchBy;
-  delete req.query.searchBy;
+  //delete req.query.searchBy;
   if (searchBy == 'place') {
-    console.log("search by Places");
+    //console.log("search by Places");
     Search.find({name: regex},
       function(err, records) {
         if (err) {
@@ -20,13 +20,13 @@ exports.list = function(req, res) {
       });
   }
   else if (searchBy == 'track') {
-    var name = req.query.name;
-    var regex = new RegExp(req.query.name, 'i');
-    delete req.query.name;
+   // var name = req.query.name;
+   // var regex = new RegExp(req.query.name, 'i');
+    //delete req.query.name;
 
-    var searchBy = req.query.searchBy;
-    delete req.query.searchBy;
-    console.log("search by Tracks");
+   // var searchBy = req.query.searchBy;
+   // delete req.query.searchBy;
+   // console.log("search by Tracks");
     Track.find({name: regex},
       function(err, records) {
         if (err) {
