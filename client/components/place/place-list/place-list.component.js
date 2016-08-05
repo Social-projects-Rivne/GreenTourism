@@ -150,8 +150,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           var arrayToShow = [];
           var bounds = map.getBounds();
           var zoom = map.getZoom();
-          if (placesForLoad) arrayToShow.push(placesForLoad); else
-            arrayToShow = activePlacesTypes;
+          if (placesForLoad) arrayToShow.push(placesForLoad);
+          else arrayToShow = activePlacesTypes;
 
           var request = {
             type: arrayToShow,
