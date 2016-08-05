@@ -14,7 +14,7 @@ angular.module('eventDetail').service('eventListService', ['$http', function($ht
 
   this.findDate = function(dateFind, sort) {
     return this.event.filter(function(itEvent) {
-      var tempDate = new Date(itEvent.date_start);
+      var tempDate = new Date(itEvent.dateStart);
       if (sort == 1) return tempDate > dateFind;
       return tempDate.toDateString() == dateFind.toDateString();
     });
@@ -31,8 +31,8 @@ angular.module('eventDetail').service('eventListService', ['$http', function($ht
 
   this.find_event = function(dateStart, dateEnd, type) {
     return this.event.filter(function(itEvent) {
-      var _startDate = new Date(itEvent.date_start);
-      var _endDate = new Date(itEvent.date_end);
+      var _startDate = new Date(itEvent.dateStart);
+      var _endDate = new Date(itEvent.dateEnd);
       var _type = itEvent.type;
       if (_startDate >= dateStart && _endDate <= dateEnd) {
         for (i = 0; i < type.length; i++)

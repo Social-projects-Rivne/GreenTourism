@@ -19,7 +19,7 @@ angular.module('calendar').service('calendarService', [function() {
 
   this.findDate = function(dateFind, sort) {
     return this.events.filter(function(itEvent) {
-      var tempDate= new Date(itEvent.date_start);
+      var tempDate= new Date(itEvent.dateStart);
       if (sort == 1) return tempDate > dateFind;
       return tempDate.toDateString() == dateFind.toDateString();
     });

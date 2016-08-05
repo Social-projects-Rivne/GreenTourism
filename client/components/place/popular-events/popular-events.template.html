@@ -29,7 +29,7 @@
 
   <div class="container-fluid main-centr">
     <div class="row">
-      <div class="col-xs-4 col-md-2" ng-repeat="event in $ctrl.events | filter:$ctrl.eventsFilter | limitTo:6">
+      <div class="col-xs-4 col-md-2" ng-repeat="event in events ">
         <!--<div class="green-places" ng-style="{'background-image':'url(assets/{{place.photo[0]}})'}"></div> -->
         <div class="img-block">
           <h3 class="text-center">{{event.name}}</h3>

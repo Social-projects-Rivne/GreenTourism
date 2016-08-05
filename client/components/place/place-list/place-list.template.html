@@ -108,11 +108,28 @@
                     </a>
                   </li>
                   <li>
-                    <a class="placeFilter check-all-places" href=""
-                       ng-click="$ctrl.checkAllEvents()">
-                      Check all
-                      <span></span>
-                    </a>
+                    <div class="btn-group">
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                        {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                      </div>
+                      <ul class="dropdown-menu right-calendar">
+                        <calendar></calendar>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="btn-group">
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                        {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                      </div>
+                      <ul class="dropdown-menu right-calendar">
+                        <calendar></calendar>
+                      </ul>
+                    </div>
                   </li>
                 </ul>
               </li>
