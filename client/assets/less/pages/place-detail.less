@@ -82,7 +82,8 @@ div.place {
   }
   .container_page {
     position: fixed;
-    top: 150px;
+    min-height:400px;
+    top: 120px;
     bottom: 250px;
     left: 0;
     right: 0;
@@ -134,6 +135,18 @@ div.place {
   }
   i#close, i.fa {
     cursor: pointer;
+  }
+  @media (max-width: 700px) and (orientation: landscape), (max-width: 430px) {
+    #map1 {
+      position: relative;
+    }
+    .container_page {
+      bottom: 0px;
+      position: relative;
+      margin-bottom: 0;
+      top: 0;
+    }
+
   }
 }
 

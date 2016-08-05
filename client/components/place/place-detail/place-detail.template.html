@@ -17,14 +17,15 @@
           <i class="fa fa-times fa-3x  pull-right close" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
         </div>
       </div>
+
+    </div>
+    <div class="container_page">
       <div class=row">
         <div class="col-xs-12">
           <h2 class="title text-center">{{$ctrl.place.name}} </h2>
+          <p  class="text-center">{{$ctrl.place.description}}</p>
         </div>
-
       </div>
-    </div>
-    <div class="container_page">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-xs-12 gallery">
           <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}">
@@ -43,7 +44,6 @@
 
         </div>
         <div class="col-lg-8 col-md-8 col-xs-12">
-          <p>{{$ctrl.place.description}}</p>
           <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
         </div>
       </div>
