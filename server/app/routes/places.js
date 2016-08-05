@@ -19,6 +19,10 @@ router.route('/:id/comments')
   .get(controller.listComments)
   .post(controller.createComment);
 
+router.route('/:id/likes')
+  .get(controller.listLikes)
+  .post(auth.isLoggedIn, controller.addOrDeleteLike);
+
 router.route('/:id/comments/:commentId')
   .get(controller.showComment)
   .put(controller.updateComment) // TODO: Only author should hace access to change comment
