@@ -37,27 +37,44 @@ angular.module('mapModule')
 
     placesOnMap.showPlaces = function(places, input) {
       mainGroup.addTo(map);
+
+      function createPopup(place) {
+        return [
+          '<div class="popup">',
+          '<h3>',
+          place.name,
+          '</h3>',
+          '<a href="#!/places/',
+          place._id,
+          '">',
+          '<img class="marker-image center-block" src="',
+          place.photos[0],
+          '" />',
+          '</a>',
+          '<a class="btn btn-default btn-md center-block" href="#!/places/',
+          place._id,
+          '">',
+          'Details >>',
+          '</a>',
+          '</div>'
+        ].join('');
+      }
+
       if (input) {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
+          marker(place.location.coordinates[0], place.location.coordinates[1],
+              types[input].icon)
             .addTo(groups[input])
-            .bindPopup('<div class=\'popup\'><h3>' + place.name + '</h3>' +
-              '<a href=\'#!/places/' + place._id + '\'><img class=\'marker-image  center-block\' ' +
-              'src=\''+place.photos[0]+'\' \/></a>' +
-              '<button type=\'button\' class=\'btn btn-default btn-md center-block\'> ' +
-              '<a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+            .bindPopup(createPopup(place), {autoPan: false});
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(map);
       } else {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
+          marker(place.location.coordinates[0], place.location.coordinates[1],
+              types[place.type].icon)
             .addTo(groups[place.type])
-            .bindPopup('<div class=\'popup\'><h3>' + place.name + '</h3>' +
-              '<a href=\'#!/places/' + place._id + '\'><img class=\'marker-image  center-block\'' +
-              ' src=\''+place.photos[0]+'\' \/></a>' +
-              '<button type=\'button\' class=\'btn btn-default btn-md center-block\'> ' +
-              '<a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
+            .bindPopup(createPopup(place), {autoPan: false});
         });
         for (var key in types) {
           mainGroup.checkIn(groups[key]);

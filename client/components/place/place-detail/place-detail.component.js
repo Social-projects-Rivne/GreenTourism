@@ -22,7 +22,8 @@ angular.module('placeDetail', ['comment'])
       this.marker = L.marker(L.latLng(this.place.location.coordinates[1],
         this.place.location.coordinates[0])).addTo(this.map);
       this.marker.bindPopup('<div class="popup"><h3>' + this.place.name +
-        '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] +
+        '</h3><a><img class="marker-image center-block" src="' +
+        this.place.photos[0] +
         '" /></a><br />').openPopup();
       var deltaheight = 0.1;
       this.map.setView([this.place.location.coordinates[1] + deltaheight,
@@ -48,4 +49,3 @@ angular.module('placeDetail', ['comment'])
       }
     }
   });
-

@@ -14,13 +14,14 @@
 
         </div>
         <div class="col-xs-4 no-padding">
-          <i class="fa fa-times fa-3x  pull-right close" aria-hidden="true" id="close" ng-click="$ctrl.closePage()"></i>
+          <a href="#!/places">
+            <i class="fa fa-times fa-3x pull-right close" aria-hidden="true" id="close"></i>
+          </a>
         </div>
       </div>
-
     </div>
     <div class="container_page">
-      <div class=row">
+      <div class="row">
         <div class="col-xs-12">
           <h2 class="title text-center">{{$ctrl.place.name}} </h2>
           <p  class="text-center">{{$ctrl.place.description}}</p>
@@ -36,8 +37,10 @@
              ng-href="{{photo}}" title="{{$ctrl.place.name}}">
             <img ng-src="{{photo}}" alt="{{$ctrl.place.name}}"/>
           </a>
-          <a ng-if="numberOfphoto<$ctrl.place.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
-            photos >></a>
+          <a ng-if="numberOfphoto<$ctrl.place.photos.length-1"
+             ng-click="$ctrl.morePhotos()" id="morephotos" href="">
+              More photos &gt;&gt;
+           </a>
         <span ng-if="loading" class="center-block">
             <i class="fa fa-spinner fa-spin  fa-4x"></i>
         </span>
