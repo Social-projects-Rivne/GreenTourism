@@ -2,8 +2,6 @@ angular.module('mapModule', [])
   .factory('mapFactory', ['Track', 'constants', function(Track, constants) {
     var mapFactory = {};
     var map;
-    var userLocation;
-    var popularTracks = [];
     mapFactory.showMap = function() {
       map = L.map('map', {
         center: constants.mapCenter,
@@ -13,37 +11,19 @@ angular.module('mapModule', [])
         worldCopyJump: true
       });
 
-      if (userLocation) {
-        locationArea(userLocation);
-        getPopularTracks();
+      if (mapFactory.userLocation) {
+        map.setView(mapFactory.userLocation, constants.defaultZoom);
       } else {
         map.locate({setView: true, maxZoom: constants.defaultZoom});
       }
 
-      function getPopularTracks() {
-        Track.getList({location: [userLocation.lat, userLocation.lng], radius:
-          constants.radiusForPopularItems}).then(function(result) {
-            popularTracks = result;
-            mapFactory.popularTracks = popularTracks;
-          });
-      }
-
-      function locationArea(coords) {
-        if (userLocation) {
-          map.setView(coords, constants.defaultZoom);
-        }
-      }
-
       function onLocationFound(e) {
         var coords = e.latlng;
-        locationArea(coords);
-        userLocation = coords;
-        getPopularTracks();
+        mapFactory.userLocation = coords;
       }
 
       map.on('locationfound', onLocationFound);
       mapFactory.map = map;
-      mapFactory.userLocation = userLocation;
       return map;
     };
 
