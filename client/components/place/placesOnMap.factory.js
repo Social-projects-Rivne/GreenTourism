@@ -2,7 +2,7 @@ angular.module('mapModule')
   .factory('placesOnMap', ['mapFactory', 'mapMarkingTypes', function(mapFactory, mapMarkingTypes) {
     var placesOnMap = {};
     var mainGroup = L.markerClusterGroup
-      .layerSupport({showCoverageOnHover: false});
+      .layerSupport({showCoverageOnHover: false, maxClusterRadius: 40});
     var groups = [];
     var types = [];
     var places = [];

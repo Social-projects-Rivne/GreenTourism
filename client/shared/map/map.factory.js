@@ -7,7 +7,10 @@ angular.module('mapModule', [])
     mapFactory.showMap = function() {
       map = L.map('map', {
         center: constants.mapCenter,
-        zoom: constants.defaultZoom
+        zoom: constants.defaultZoom,
+        minZoom: 2,
+        maxZoom: 18,
+        worldCopyJump: true
       });
 
       if (userLocation) {
