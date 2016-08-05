@@ -38,6 +38,8 @@ var TrackSchema = new Schema({
   likes: [Schema.Types.ObjectId],
   photos: [String],
   comments: [CommentSchema]
+}, {
+  timestamps: true
 });
 
 var autoPopulateOwner = function(next) {
