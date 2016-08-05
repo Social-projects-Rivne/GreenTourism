@@ -21,7 +21,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // -----START ADD Place-----
         ctrl.newPlace = angular.copy(constants.emptyPlaceModel);
         ctrl.newPlaceType = '';
-        ctrl.newPlacePhoto = '';
         ctrl.formNewPlaceSubmitted = false;
         ctrl.addPlaceMenuIsOpen = false;
 
@@ -86,7 +85,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.addPointMenuIsOpen = false;
         ctrl.addTrackMenuIsOpen = false;
         ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
-        var newTrack;
         var newPointForTrack;
         var newPointsForTrack = [];
         ctrl.newTrackPoints = [];
