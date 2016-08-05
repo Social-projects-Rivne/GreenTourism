@@ -1,6 +1,6 @@
 var Blog = require('../models/blog');
 var User = require('mongoose').model('User');
-var _ = require('../../../client/bower_components/lodash');
+var _ = require('lodash');
 
 exports.list = function(req, res) {
   Blog.blog.findAll({
