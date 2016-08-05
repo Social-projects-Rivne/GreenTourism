@@ -16,6 +16,7 @@ angular.module('searchPlace',['ui.bootstrap'])
             placesOnMap.removeAllTracks();
             placesOnMap.showTracks(resultTracks);
             $scope.loading = false;
+            console.log(resultTracks);
             searchBy = 'place';
             if(resultPlaces.length==0&&resultTracks.length==0)
               $scope.noResults = true;
