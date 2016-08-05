@@ -28,7 +28,8 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-12 gallery">
           <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}">
-            <img ng-src="{{$ctrl.place.photos[0]}}" alt="{{$ctrl.place.name}}"/>
+            <img ng-src="{{$ctrl.place.photos[0]|| $ctrl.noname}}"
+                 alt="{{$ctrl.place.name}}"/>
           </a>
           <a ng-repeat="photo in $ctrl.place.photos  | limitTo:($ctrl.indexBegin+numberOfphoto) track by $index"
              ng-if="$index>=$ctrl.indexBegin" class="fancybox" rel="gallery1"

@@ -113,6 +113,7 @@ div.place {
         padding-bottom: 5px;
       }
       #firstimg {
+        background-image: url('http://homyachok.com.ua/images/noimage.png');
         width: 100%;
         height: auto;
         max-height: 100%;
@@ -140,10 +141,11 @@ div.place {
     width: 32%;
     margin: 2px;
     float: left;
-    max-height: 110px;
+    height: 110px;
     overflow: hidden;
-    img {
+    img:first-child {
       width: 100%;
+      height: 110px;
 
     }
     .shared-style {
@@ -165,7 +167,8 @@ div.place {
       bottom: 0;
       right: 4px;
       img {
-        width: 12px;
+        height: 14px;
+        width:auto;
       }
     }
   }

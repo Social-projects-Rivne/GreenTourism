@@ -15,6 +15,7 @@ angular.module('placeDetail', ['comment'])
         dragging: false,
         scrollWheelZoom: false
       });
+      this.noname = 'http://homyachok.com.ua/images/noimage.png';
       var layerStreet = L.tileLayer(mapMarkingTypes.layers.streets.link, {
         attribution: mapMarkingTypes.layers.streets.attribute
       });
@@ -22,8 +23,8 @@ angular.module('placeDetail', ['comment'])
       this.marker = L.marker(L.latLng(this.place.location.coordinates[1],
         this.place.location.coordinates[0])).addTo(this.map);
       this.marker.bindPopup('<div class="popup"><h3>' + this.place.name +
-        '</h3><a><img class="marker-image center-block" src="' + this.place.photos[0] +
-        '" /></a><br />').openPopup();
+        '</h3><a><img class="marker-image center-block" ng-src="{{' + this.place.photos[0] || '' +
+        '}}" /></a><br />').openPopup();
       var deltaheight = 0.5;
       this.map.setView([this.place.location.coordinates[1] + deltaheight,
         this.place.location.coordinates[0]]);
@@ -62,13 +63,13 @@ angular.module('placeDetail', ['comment'])
           ]
         }).then(function(result) {
           ctrl.placesInLocationArr = result;
-          console.log(result);
         });
       }
 
       getPlacesInLocation();
       ctrl.placesFilter = function(value) {
-        return (value.type == constants.placesOnLoad || value.type == ctrl.place.type) && value.photos && value.id != ctrl.place.id;
+        return (value.type == constants.placesOnLoad || value.type == ctrl.place.type) && value.photos
+          && value.id != ctrl.place.id;
       };
     }
   });
