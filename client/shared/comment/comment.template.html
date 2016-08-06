@@ -1,25 +1,23 @@
 <div class="container comment">
-  <div class="row add-comment" ng-if="$ctrl.currentUser">
-    <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
-      <img ng-src="{{$ctrl.currentUser.avatar}}"/>
+  <div class="row media add-comment" ng-if="$ctrl.currentUser">
+    <div class="media-left">
+      <img class="media-object" ng-src="{{$ctrl.currentUser.avatar}}"
+           alt="{{$ctrl.currentUser.fullName}}">
     </div>
-    <div class="col-md-11 col-sm-11 col-xs-11 add-comment-textarea">
-      <form class="form-inline" name="commentForm"
-            ng-submit="$ctrl.addComment($ctrl.content)" novalidate>
-        <div class="row">
-          <div class="col-md-10 col-lg-10">
-            <textarea ng-keyup="$ctrl.textareaPostResize()" class="form-control" required
-                      placeholder="Leave your comment..." maxlength="1000"
-                      ng-model="$ctrl.content"></textarea>
-            <p ng-if="$ctrl.content">
-              Left: {{1000 - $ctrl.content.length}} symbols
-            </p>
-          </div>
-          <div class="col-md-2 col-lg-2 add-comment-button">
-            <button type="submit" ng-disabled="!$ctrl.content">Post</button>
-          </div>
-        </div>
-      </form>
+
+    <div class="row media-body">
+      <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+        <textarea ng-keyup="$ctrl.textareaPostResize()" class="form-control"
+                  required placeholder="Leave your comment..." maxlength="1000"
+                  ng-model="$ctrl.content"></textarea>
+        <p ng-if="$ctrl.content" class="pull-right">
+          Left: {{1000 - $ctrl.content.length}} symbols
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 add-comment-button">
+        <button type="button" ng-disabled="!$ctrl.content"
+                ng-click="$ctrl.addComment($ctrl.content)">Post</button>
+      </div>
     </div>
   </div>
   <div class="alert alert-info" ng-if="!$ctrl.currentUser">
@@ -29,38 +27,41 @@
     Post failed. Please, reload this page and try again!
     Error: {{$ctrl.showError}}
   </div>
-  <div class="row show-comments"
-       ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
-    <div class="col-md-1 col-sm-1 col-xs-1 comment-image">
-      <img ng-src="{{comment.author.avatar}}"/>
-    </div>
-    <div class="col-md-11 col-sm-11 col-xs-11">
-      <p>
-        <strong>
-          {{comment.author.fullName}}
-        </strong>
-      </p>
-      <div class="dropdown comment-menu"
-           ng-if="$ctrl.currentUser._id === comment.author._id">
-        <a href="" class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="true">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="commentMenu">
-          <li>
-            <a href=""
-               ng-click="$ctrl.showEditingMode(comment._id, comment.content)">
-              Edit
-            </a>
-          </li>
-          <li>
-            <a href="" ng-click="$ctrl.removeComment(comment._id)">Delete</a>
-          </li>
-        </ul>
+
+  <div class="row media show-comments"
+      ng-repeat="comment in $ctrl.inputObject.comments | orderBy:'-createdAt'">
+    <div class="confirm-remove well well-sm" ng-if="$ctrl.showConfirm &&
+                $ctrl.currentUser._id === comment.author._id &&
+                $ctrl.checkCommentId1 === comment._id">
+      <p>Are you sure?</p>
+      <div class="btn-group">
+        <button class="btn btn-default btn-xs" type="button"
+                ng-click="$ctrl.removeComment(comment._id)">Yes</button>
+        <button class="btn btn-default btn-xs" type="button"
+                ng-click="$ctrl.showConfirm = false">No</button>
       </div>
-      <p class="show-comments-content"
-         ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
-      <div class="show-comments-edit-content" ng-if="$ctrl.checkCommentId === comment._id">
+    </div>
+    <div class="media-left">
+      <img class="media-object" ng-src="{{comment.author.avatar}}"
+           alt="{{comment.author.fullName}}">
+    </div>
+
+    <div class="media-body text-justify show-comments-content">
+      <h5 class="media-heading">{{comment.author.fullName}}</h5>
+
+      <a href="" ng-click="$ctrl.showConfirmMessage(comment._id)"
+         ng-if="$ctrl.currentUser._id === comment.author._id"
+         class="pull-right" title="Remove">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </a>
+      <a href="" ng-click="$ctrl.showEditingMode(comment._id, comment.content)"
+         ng-if="$ctrl.currentUser._id === comment.author._id"
+         class="pull-right" title="Edit">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </a>
+
+      <p ng-if="!($ctrl.checkCommentId === comment._id)">{{comment.content}}</p>
+      <div ng-if="$ctrl.checkCommentId === comment._id">
         <textarea ng-keyup="$ctrl.textareaEditResize()"
                   class="form-control edit-textarea"
                   required maxlength="1000" ng-model="comment.content">
@@ -73,14 +74,12 @@
           </button>
           <button type="button"
                   ng-click="$ctrl.updateComment(comment._id, comment.content)"
-                  class="btn btn-default"
-                  ng-disabled="!comment.content">Update
+                  class="btn btn-default" ng-disabled="!comment.content">Update
           </button>
         </div>
       </div>
-      <p class="show-comments-timestamp">
-        Added: {{comment.createdAt  | date:'yyyy-MM-dd HH:mm'}}
-      </p>
+      <p>Added: {{comment.createdAt | date:'yyyy-MM-dd HH:mm'}}</p>
     </div>
   </div>
 </div>
+
