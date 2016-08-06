@@ -52,14 +52,14 @@
           <div
             ng-repeat="placeInLocation in $ctrl.placesInLocationArr | filter:$ctrl.placesFilter | limitTo:3 | orderBy : '-rate'"
             class="popular-in-location-wrapper">
-            <img ng-src="{{placeInLocation.photos[0]}}"/>
             <a ng-href="#!/places/{{placeInLocation.id}}">
+            <img ng-src="{{placeInLocation.photos[0]}}"/>
             </a>
             <a class="popular-in-location-name" ng-href="#!/places/{{placeInLocation.id}}">{{placeInLocation.name}}</a>
-            <a class="popular-in-location-address" ng-href="#!/places/{{placeInLocation.id}}">
-              <i class="fa fa-heart" aria-hidden="true"></i>
+            <span class="popular-in-location-address">
+              <i  class="fa fa-heart" aria-hidden="true"></i>
               {{placeInLocation.rate}}
-            </a>
+            </span>
           </div>
         </div>
       </div>
