@@ -105,8 +105,7 @@ module.exports = function(Model) {
       if (err) {
         return res.status(400).json(err);
       }
-
-      return res.json(record);
+      return res.json(record.comments[record.comments.length - 1]._id);
     });
   };
 
@@ -134,8 +133,7 @@ module.exports = function(Model) {
     var record = req.record;
     var comment = req.comment;
 
-    comment.remove();
-    record.comments.push(req.body);
+    comment.content = req.body.content;
 
     record.save(function(err, record) {
       if (err) {
@@ -151,6 +149,35 @@ module.exports = function(Model) {
     var comment = req.comment;
 
     comment.remove();
+
+    record.save(function(err, record) {
+      if (err) {
+        return res.status(400).json(err);
+      }
+
+      return res.json(record);
+    });
+  };
+
+  // Likes
+
+  controller.listLikes = function(req, res) {
+    var record = req.record;
+
+    return res.json(record.likes);
+  };
+
+  controller.addOrDeleteLike = function(req, res) {
+    var record = req.record;
+
+    if (req.body.id === req.user.id) {
+      record.likes.push(req.body.id);
+    }
+    if (req.body.deleteId === req.user.id) {
+      record.likes = record.likes.filter(function(like) {
+        return like != req.body.deleteId;
+      });
+    }
 
     record.save(function(err, record) {
       if (err) {

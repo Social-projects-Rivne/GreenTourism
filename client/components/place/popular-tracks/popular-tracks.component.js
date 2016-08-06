@@ -1,28 +1,41 @@
 angular.module('popularTracks', [])
   .component('popularTracks', {
     templateUrl: 'components/place/popular-tracks/popular-tracks.template.html',
-    controller: ['Track', 'mapFactory', function popularTracksController(Track, mapFactory) {
-      var self = this;
-      self.popularTracks = [];
+    controller: ['Track', 'mapFactory', 'constants', function popularTracksController(Track, mapFactory, constants) {
+      var ctrl = this;
+      ctrl.popularTracks = [];
       var userLocation;
+      var locationFound = false;
+      var allTrackRecived = false;
 
       if (mapFactory.popularTracks) {
-        self.popularTracks = mapFactory.popularTracks;
+        ctrl.popularTracks = mapFactory.popularTracks;
       } else {
         Track.getList().then(function(result) {
-          self.popularTracks = result;
+          allTrackRecived = true;
+          ctrl.popularTracks = result;
+          mapFactory.popularTracks = result;
+          if (locationFound) {
+            getPopularTracks();
+          }
         });
         mapFactory.map.on('locationfound', onLocationFound);
       }
 
       function onLocationFound(e) {
+        locationFound = true;
         userLocation = e.latlng;
-        getPopularTracks();
+        if (allTrackRecived) {
+          getPopularTracks();
+        }
       }
 
       function getPopularTracks() {
-        Track.getList({location: [userLocation.lat, userLocation.lng], radius: 5000}).then(function(result) {
-          self.popularTracks = result;
+        Track.getList({location: [userLocation.lng, userLocation.lat], radius: constants.radiusForPopularItems}).then(function(result) {
+          if (result.length > 0) {
+            ctrl.popularTracks = result;
+            mapFactory.popularTracks = result;
+          }
         });
       }
     }]

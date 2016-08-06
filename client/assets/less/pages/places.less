@@ -1,236 +1,226 @@
-// Popular Tracks in location - Styles for popular-tracks.template
-.popular-in-location-wrapper {
-  position: relative;
-  width: 100%;
-  margin-bottom: 15px;
-  max-height: 200px;
-  overflow: hidden;
-  img {
-    width: 100%;
-    height: auto;
-  }
-  .popular-in-location-gradient {
-    position: absolute;
-    top: 0;
-    padding-left: 50%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
-  }
-  .shared-style {
-    padding: 0 4px;
-    font-weight: bold;
-    color: @brand-light;
-    position: absolute;
-  }
-  .popular-in-location-name {
-    .shared-style;
-    font-size: 18px;
-    top: 4px;
-    right: 4px;
-  }
-  .popular-in-location-address {
-    .shared-style;
-    font-size: 12px;
-    bottom: 4px;
-    right: 4px;
-    text-align: right;
-    img {
-      width: 12px;
-    }
-  }
-}
-
-// Icons for popular places and tracks in location
-.popular-places-wrapper, .popular-tracks-wrapper {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  padding-top: 115px;
-  background-color: #f8f8f8;
-  transition: all linear 0.5s;
-  width: 300px;
-  height: 100%;
-  &.ng-hide {
-    opacity: 0;
-  }
-  a:first-child {
-    color: @brand-dark;
-    display: block;
-    font-size: 24px;
-    position: absolute;
-    left: 5px;
-  }
-  .popular-div-style {
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    text-align: center;
-    color: @brand-dark;
-  }
-  @media (max-width: 767px) {
-    padding-top: 160px;
-  }
-}
+@map-page-bg: #f8f8f8;
 
 .map-page-wrapper {
-  background-color: #f8f8f8;
-}
+  background-color: @map-page-bg;
+  .map-menu {
+    position: relative;
+    z-index: 3;
+    padding: 15px 0;
+    background-color: @map-page-bg;
 
-.map-menu {
-  position: relative;
-  z-index: 3;
-  padding: 15px 0;
-  background-color: #f8f8f8;
-  .map-menu-check-button {
-    padding-top: 5px;
-    i {
-      font-size: 24px;
-      color: #999;
-      margin-right: 10px;
-      &:focus {
-        color: @brand-dark;
-      }
-      &.checked {
-        color: @brand-dark;
-      }
-    }
-    @media (max-width: 767px) {
-      margin-bottom: 10px;
-    }
-    @media (max-width: 530px) {
-      padding-right: 0;
-      padding-left: 5px;
-    }
-  }
-  .map-menu-popular {
-    padding-top: 5px;
-    padding-right: 10px;
-    div {
-      float: right;
-    }
-    i {
-      font-size: 24px;
-      color: #999;
-      margin-right: 5px;
-      &:focus {
-        color: @brand-dark;
-      }
-      &.checked {
-        color: @brand-dark;
-      }
-    }
-    @media (max-width: 348px) {
-      padding-left: 0;
-    }
-  }
-  .map-menu-buttons-wrapper {
-    .map-menu-buttons {
-      button {
-        color: @brand-dark;
-        border: 1px solid @brand-dark;
-      }
-      .dropdown-menu {
-        padding: 0;
-        border: 1px solid @brand-dark;
-        li {
-          border-bottom: 1px solid @brand-dark;
-          padding: 5px 0;
-          &:hover {
-            background-color: #f8f8f8;
-            border-radius: 4px;
-          }
-          &:last-child {
-            border-bottom: none;
-          }
-          a {
-            color: @brand-dark;
-            background-color: transparent;
-          }
+    .map-menu-check-button {
+      padding-top: 5px;
+      i {
+        font-size: 24px;
+        color: #999;
+        margin-right: 10px;
+        &:focus, &.checked {
+          color: @brand-dark;
         }
-        & filter-map-type li a {
-          display: block;
-          text-decoration: none;
-          padding: 3px 20px;
-          span {
-            float: right;
-          }
+      }
+      @media (max-width: 767px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 480px) {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+    }
+
+    .map-menu-buttons-wrapper {
+      .map-menu-buttons {
+        button {
+          color: @brand-dark;
+          border: 1px solid @brand-dark;
         }
-        &.place-mobile {
-          left: auto;
-          right: 0;
-          li a {
-            padding: 3px 10px;
-            span:last-child {
+        .dropdown-menu {
+          padding: 0;
+          border: 1px solid @brand-dark;
+          li {
+            border-bottom: 1px solid @brand-dark;
+            padding: 5px 0;
+            &:hover {
+              background-color: @map-page-bg;
+              border-radius: 4px;
+            }
+            &:last-child {
+              border-bottom: none;
+            }
+            a {
+              color: @brand-dark;
+              background-color: transparent;
+            }
+          }
+          & filter-map-type li a {
+            display: block;
+            text-decoration: none;
+            padding: 3px 20px;
+            span {
               float: right;
             }
-            img {
-              width: 10px;
+          }
+          &.place-mobile {
+            left: auto;
+            right: 0;
+            li a {
+              padding: 3px 10px;
+              span:last-child {
+                float: right;
+                &.glyphicon-refresh {
+                  animation: spinnerLittle .8s linear infinite;
+                }
+              }
+              img {
+                width: 10px;
+              }
             }
           }
         }
       }
+      @media (max-width: 767px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 348px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
 
+      .dropdown-submenu {
+        position: relative;
+        & > a:after {
+          display: block;
+          content: "";
+          float: right;
+          border-color: transparent;
+          border-style: solid;
+          border-width: 5px 0 5px 5px;
+          border-left-color: #ccc;
+          margin-top: 5px;
+        }
+        &:hover {
+          .dropdown-menu {
+            display: block;
+          }
+          a:after {
+            border-left-color: @brand-dark;
+          }
+        }
+        .dropdown-menu {
+          top: 0;
+          left: 100%;
+          border-radius: 0 4px 4px 4px;
+          a {
+            padding-left: 10px;
+            span:last-child {
+              float: right;
+              &.glyphicon-refresh {
+                animation: spinnerLittle .8s linear infinite;
+              }
+            }
+            &:hover {
+              border-radius: 4px;
+            }
+          }
+        }
+        &.places {
+          img {
+            width: 10px;
+          }
+        }
+        @-moz-document url-prefix() {
+          & .dropdown-menu a span:last-child {
+            top: -18px;
+          }
+          & > a:after {
+            margin-top: -18px;
+          }
+          .place-mobile li a span:last-child {
+            top: -18px;
+          }
+        }
+      }
     }
-    @media (max-width: 767px) {
-      margin-bottom: 10px;
+
+    .map-menu-search {
+      input {
+        border: 1px solid @brand-dark;
+      }
+      button {
+        border: 1px solid @brand-dark;
+        background-color: @brand-dark;
+        color: @brand-light;
+      }
     }
-    @media (max-width: 348px) {
-      padding-left: 0;
-      padding-right: 0;
+
+    .map-menu-popular {
+      padding-top: 5px;
+      padding-right: 10px;
+      div {
+        float: right;
+      }
+      i {
+        font-size: 24px;
+        color: #999;
+        margin-right: 5px;
+        &:focus, &.checked {
+          color: @brand-dark;
+        }
+      }
+      @media (max-width: 348px) {
+        padding-left: 0;
+      }
     }
-  }
-  .map-menu-search {
-    input {
-      border: 1px solid @brand-dark;
-    }
-    button {
-      border: 1px solid @brand-dark;
-      background-color: @brand-dark;
-      color: @brand-light;
+    // Class for disable double click
+    .check-disabled {
+      pointer-events: none;
+      cursor: default;
     }
   }
 }
 
-.dropdown-submenu {
-  position: relative;
-  & > a:after {
-    display: block;
-    content: "";
-    float: right;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
-    margin-top: 5px;
-  }
-  &:hover {
-    .dropdown-menu {
-      display: block;
-    }
-    a:after {
-      border-left-color: @brand-dark;
-    }
-  }
-  .dropdown-menu {
+//Spinner
+.spinner {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 50px;
+  top: 130px;
+  z-index: 5;
+  animation: sk-rotate 2.0s infinite linear;
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
     top: 0;
-    left: 100%;
-    border-radius: 0 6px 6px 6px;
-    a {
-      padding-left: 10px;
-      span:last-child {
-        float: right;
-      }
-      &:hover {
-        border-radius: 0 6px 6px 6px;
-      }
+    background-color: #777;
+    border-radius: 100%;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1.0s;
+  }
+  @media (max-width: 767px) {
+    top: 170px;
+  }
+  @keyframes sk-rotate {
+    100% {
+      transform: rotate(360deg);
     }
   }
-  &.places {
-    img {
-      width: 10px;
+  @keyframes sk-bounce {
+    0%, 100% {
+      transform: scale(0.0);
+    }
+    50% {
+      transform: scale(1.0);
+    }
+  }
+  @keyframes spinnerLittle {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
@@ -249,7 +239,88 @@
     width: 100%;
     @media (max-width: 767px) {
       .leaflet-control-zoom {
-        display: none;
+        top: 50px;
+      }
+    }
+  }
+}
+
+// Popular places and tracks in location
+.popular-places-wrapper, .popular-tracks-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  padding-top: 115px;
+  background-color: @map-page-bg;
+  transition: all linear 0.5s;
+  width: 25%;
+  height: 100%;
+  &.ng-hide {
+    opacity: 0;
+  }
+  .close-button {
+    color: @brand-dark;
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    left: 5px;
+    z-index: 5;
+  }
+  .popular-div-style {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    text-align: center;
+    color: @brand-dark;
+  }
+  @media (max-width: 767px) {
+    padding-top: 160px;
+  }
+  @media (max-width: 1170px) {
+    width: 320px;
+  }
+
+  // Popular Tracks in location - Styles for popular-tracks.template
+  .popular-in-location-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+    max-height: 200px;
+    min-height: 160px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .popular-in-location-gradient {
+      position: absolute;
+      top: 0;
+      padding-left: 50%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+    }
+    .shared-style {
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      position: absolute;
+    }
+    .popular-in-location-name {
+      .shared-style;
+      font-size: 18px;
+      top: 4px;
+      right: 4px;
+    }
+    .popular-in-location-address {
+      .shared-style;
+      font-size: 12px;
+      bottom: 4px;
+      right: 4px;
+      img {
+        width: 12px;
       }
     }
   }
@@ -262,23 +333,30 @@
 
 .add-item-menu {
   position: absolute;
-  top: 0;
+  top: 114px;
+  bottom: 0;
   right: 0;
-  height: 100%;
-  width: 300px;
+  width: 25%;
   z-index: 2;
-  background-color: #f8f8f8;
-  padding: 115px 15px 15px 15px;
+  background-color: @map-page-bg;
+  padding: 0 15px 15px 15px;
   overflow: auto;
   display: block;
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
   .removeIcon {
     position: absolute;
-    top: 115px;
+    top: 5px;
     left: 10px;
     font-size: 25px;
     color: @light-green;
     @media (max-width: 767px) {
-      top: 160px;
+      top: 50px;
     }
   }
   h2 {
@@ -288,8 +366,53 @@
     font-weight: bold;
     color: @light-green;
   }
+  .no-padding {
+    padding: 0;
+  }
+  .inactive-add-item-menu {
+    position: fixed;
+    top: 114px;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0.5);
+    z-index: 3;
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all linear 0.5s;
+    }
+    &.ng-hide {
+      opacity: 0;
+    }
+    #new-point-menu {
+      position: relative;
+      background-color: #f8f8f8;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      overflow: hidden;
+      padding: 0 10px 10px 10px;
+      margin: 65px 15px 0 15px; 
+      z-index: 4;
+      input {
+        margin-top: 0;
+      }
+      h3 {
+        text-align: center;
+      }
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        transition: all linear 0.5s;
+      }
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 60%;
+    }
+  }
   @media (max-width: 767px) {
-    padding-top: 200px;
+    padding-top: 50px;
     width: 60%;
   }
 }
@@ -327,3 +450,48 @@
 .event-map-poster .main-centr a{
   position: relative;
 }
+
+/* ------------- Add track ---------------*/
+
+#pointsForNewTrack {
+  padding: 10px;
+  color: #fff;
+  overflow: hidden; 
+  .pointsList {
+    .row:nth-child(even) {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+    .row:nth-child(odd) div:first-child {
+      border-right: 3px solid @light-green;
+      height: 10px;
+    }
+  }
+  .pointsList:first-child {
+    .row {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+      div:first-child {
+        border: none;
+      }
+    }
+  }
+  .pointName {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  .fa-map-marker {
+    margin-left: -15px;
+  }
+  a {
+    color: #fff;
+  }
+}
+
