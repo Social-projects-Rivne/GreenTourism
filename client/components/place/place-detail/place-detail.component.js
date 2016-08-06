@@ -46,7 +46,7 @@ angular.module('placeDetail', ['comment'])
             }, 1000);
           })
         );
-      }
+      };
       var ctrl = this;
       ctrl.placesInLocationArr = [];
       function getPlacesInLocation() {
@@ -65,7 +65,6 @@ angular.module('placeDetail', ['comment'])
           ctrl.placesInLocationArr = result;
         });
       }
-
       getPlacesInLocation();
       ctrl.placesFilter = function(value) {
         return (value.type == constants.placesOnLoad || value.type == ctrl.place.type) && value.photos
@@ -73,4 +72,3 @@ angular.module('placeDetail', ['comment'])
       };
     }
   });
-

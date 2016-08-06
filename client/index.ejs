@@ -202,7 +202,7 @@
       </div>
     <% } %>
 
-    <div ng-if="!main.routeChangeError" ng-view="" ng-class="pageClass"></div>
+    <div ng-if="!main.routeChangeError" ng-view="" ng-class="{'page-detail': main.placeDetailPage}"></div>
     <div ng-if="main.routeChangeError">
       <div ng-if="main.statusCode" ng-include="'shared/errors/' + main.statusCode + '.html'"></div>
       <div ng-if="!main.statusCode">
