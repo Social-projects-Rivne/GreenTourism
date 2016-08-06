@@ -245,7 +245,7 @@
 }
 
 // Popular places and tracks in location
-.popular-places-wrapper, .popular-tracks-wrapper {
+.popular-places-wrapper, .popular-tracks-wrapper, .search-places-wrapper {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -364,7 +364,7 @@
   }
 }
 #search {
-  span:last-child {
+  span.err {
     border: 1px solid @light-green;
     border-top: 0;
     width: 70%;
@@ -373,6 +373,9 @@
     position: absolute;
     color: red;
     background: #FFF
+  }
+  span.transparent{
+    display:none;
   }
   width: 100%;
   margin: 0;
@@ -384,5 +387,8 @@
     width: 100px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+  }
+  ul li{
+    list-style-type: none;
   }
 }

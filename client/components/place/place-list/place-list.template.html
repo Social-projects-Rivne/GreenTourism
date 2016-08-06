@@ -218,6 +218,14 @@
         <div id="map"></div>
       </div>
       <!-- Div for Popular places -->
+      <div class="search-places-wrapper" ng-hide="$ctrl.hideSearchPlaces">
+        <a href="" class="close-button" ng-click="$ctrl.checkSearchPlaces()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div id="searchPlaces" class="popular-div-style">
+        </div>
+      </div>
+      <!-- Div for Popular places -->
       <div class="popular-places-wrapper ng-hide" ng-hide="$ctrl.hidePopularPlaces">
         <a href="" class="close-button" ng-click="$ctrl.checkPopularPlaces()">
           <i class="fa fa-times" aria-hidden="true"></i>

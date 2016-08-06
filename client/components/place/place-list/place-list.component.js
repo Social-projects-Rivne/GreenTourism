@@ -107,6 +107,23 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
+        ctrl.hideSearchPlaces = false;
+
+        ctrl.checkSearchPlaces = function() {
+          var searchPlacesIcon = angular.element('#searchPlaces');
+          if (searchPlacesIcon.hasClass(constants.checkedClass)) {
+            searchPlacesIcon.removeClass(constants.checkedClass);
+            ctrl.hideSearchPlaces = true;
+          } else {
+            searchPlacesIcon.addClass(constants.checkedClass);
+            angular.element('#popularTracks')
+              .removeClass(constants.checkedClass);
+
+            ctrl.hideSearchPlaces = false;
+            ctrl.hidePopularPlaces = true;
+            ctrl.hidePopularTracks = true;
+          }
+        };
 
         ctrl.checkPopularPlaces = function() {
           var popularPlacesIcon = angular.element('#popularPlaces');
@@ -120,6 +137,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
+            ctrl.hideSearchPlaces = true;
           }
         };
 
@@ -135,6 +153,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
+            ctrl.hideSearchPlaces = true;
           }
         };
         // ---END---- Popular places and tracks in location

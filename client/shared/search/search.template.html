@@ -9,9 +9,13 @@
            <i ng-if="loading" class="fa fa-spinner fa-spin"></i>
          </button>
         </span>
-      <span ng-show="noResults" dropdown dropdown-toggle auto-close="disabled" is-open="true">
+      <span class="err" ng-show="noResults" dropdown dropdown-toggle auto-close="disabled" is-open="true">
         no results
+      </span>
+      <span  class="err" ng-show="minchars" dropdown dropdown-toggle auto-close="disabled" is-open="true">
+        Please, enter > 2 chars
     </span>
+
     </div>
   </form>
 </div>
