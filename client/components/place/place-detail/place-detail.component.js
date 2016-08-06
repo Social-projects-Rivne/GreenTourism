@@ -4,30 +4,41 @@ angular.module('placeDetail', ['comment'])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place) {
+    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place, $route) {
       angular.element(document).ready(function() {
         angular.element('.fancybox').fancybox();
       });
-      this.map = L.map('map1', {
+      var ctrl = this;
+
+      document.getElementById('mapcontainer').innerHTML = "<div id='map1' style='width:500px; height:400px;'>" + "</div>";
+      if (ctrl.map != undefined) {
+        ctrl.map.remove();
+      }
+      this.addMap = function() {
+        $route.reload();
+      }
+      ctrl.map = L.map('map1', {
         center: constants.mapCenter,
         zoom: constants.defaultZoom - 8,
         touchZoom: false,
         dragging: false,
         scrollWheelZoom: false
       });
-      this.noname = 'http://homyachok.com.ua/images/noimage.png';
+      ctrl.noname = 'http://homyachok.com.ua/images/noimage.png';
       var layerStreet = L.tileLayer(mapMarkingTypes.layers.streets.link, {
         attribution: mapMarkingTypes.layers.streets.attribute
       });
-      this.map.addLayer(layerStreet);
-      this.marker = L.marker(L.latLng(this.place.location.coordinates[1],
-        this.place.location.coordinates[0])).addTo(this.map);
-      this.marker.bindPopup('<div class="popup"><h3>' + this.place.name +
-        '</h3><a><img class="marker-image center-block" ng-src="{{' + this.place.photos[0] || '' +
+
+      ctrl.map.addLayer(layerStreet);
+      ctrl.marker = L.marker(L.latLng(ctrl.place.location.coordinates[1],
+        ctrl.place.location.coordinates[0])).addTo(ctrl.map);
+      ctrl.marker.bindPopup('<div class="popup"><h3>' + ctrl.place.name +
+        '</h3><a><img class="marker-image center-block" ng-src="{{' + ctrl.place.photos[0] || '' +
         '}}" /></a><br />').openPopup();
       var deltaheight = 0.5;
-      this.map.setView([this.place.location.coordinates[1] + deltaheight,
-        this.place.location.coordinates[0]]);
+      ctrl.map.setView([ctrl.place.location.coordinates[1] + deltaheight,
+        ctrl.place.location.coordinates[0]]);
+
       this.indexBegin = 1;
       $scope.numberOfphoto = 6;
       $scope.loading = false;
@@ -47,7 +58,7 @@ angular.module('placeDetail', ['comment'])
           })
         );
       };
-      var ctrl = this;
+
       ctrl.placesInLocationArr = [];
       function getPlacesInLocation() {
         ctrl.mapBounds = ctrl.map.getBounds();
@@ -65,6 +76,7 @@ angular.module('placeDetail', ['comment'])
           ctrl.placesInLocationArr = result;
         });
       }
+
       getPlacesInLocation();
       ctrl.placesFilter = function(value) {
         return (value.type == constants.placesOnLoad || value.type == ctrl.place.type) && value.photos
