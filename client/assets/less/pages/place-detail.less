@@ -1,6 +1,5 @@
 .page-detail {
   bottom: 0;
-  padding-top: 50px;
   width: 100%;
   top: 0;
   background-color: #FFF;
@@ -146,7 +145,6 @@ div.place {
     img:first-child {
       width: 100%;
       height: 110px;
-
     }
     .shared-style {
       padding: 4px 4px;
@@ -168,19 +166,24 @@ div.place {
       right: 4px;
       img {
         height: 14px;
-        width:auto;
+        width: auto;
       }
     }
   }
   i#close, i.fa {
     cursor: pointer;
   }
-  @media (max-width: 700px) and (orientation: landscape), (max-width: 600px) {
+  @media (max-width: 400px) {
     .popular-in-location-address {
-      display: none;
+
     }
     .gallery a.fancybox {
-      width: 30%;
+      height: 50px;
+    }
+    .popular-in-location-wrapper {
+      height: 100px;
+      width: 100%;
+      border: 1px solid @brand-dark;
     }
     .container_page {
       bottom: 0;

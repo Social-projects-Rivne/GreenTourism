@@ -39,9 +39,9 @@ angular.module('placeDetail', ['comment'])
             $scope.numberOfphoto = $scope.numberOfphoto + 6;
             $scope.loading = false;
             $scope.$apply();
-            var page = angular.element('.gallery');
+            var gallery = angular.element('.gallery');
             var heightScroll = $scope.numberOfphoto / 3 * 150;
-            page.animate({
+            gallery.animate({
               scrollTop: heightScroll
             }, 1000);
           })
