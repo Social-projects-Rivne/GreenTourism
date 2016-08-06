@@ -4,26 +4,21 @@ angular.module('placeDetail', ['comment'])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place, $route) {
+    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place, mapPlaceFactory) {
       angular.element(document).ready(function() {
         angular.element('.fancybox').fancybox();
       });
       var ctrl = this;
 
-      document.getElementById('mapcontainer').innerHTML = "<div id='map1' style='width:500px; height:400px;'>" + "</div>";
-      if (ctrl.map != undefined) {
-        ctrl.map.remove();
-      }
-      this.addMap = function() {
-        $route.reload();
-      }
-      ctrl.map = L.map('map1', {
+     document.getElementById('mapcontainer').innerHTML = "<div id='map1' style='width:500px; height:400px;'>" + "</div>";
+      ctrl.map=mapPlaceFactory.showMap();
+      /*ctrl.map = L.map('map1', {
         center: constants.mapCenter,
         zoom: constants.defaultZoom - 8,
         touchZoom: false,
         dragging: false,
         scrollWheelZoom: false
-      });
+      });*/
       ctrl.noname = 'http://homyachok.com.ua/images/noimage.png';
       var layerStreet = L.tileLayer(mapMarkingTypes.layers.streets.link, {
         attribution: mapMarkingTypes.layers.streets.attribute
