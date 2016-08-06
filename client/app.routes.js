@@ -38,6 +38,17 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
           }]
         }
       })
+      .when('/tracks/:trackId', {
+        template: '<track-detail track="$resolve.track"></track-detail>',
+        resolve: {
+          track: ['$route', 'Track', function getPlace($route, Track) {
+            return Track.one($route.current.params.trackId).get()
+              .then(function(track) {
+                return track;
+              });
+          }]
+        }
+      })
       .when('/events', {
         template: '<event-list></event-list>'
       })

@@ -1,0 +1,74 @@
+<div class="place-page container">
+  <div class="row place">
+    <div class="col-xs-12 col-lg-12 col-md-12">
+      <div class="row vertical-align">
+        <div class="col-xs-4 no-padding">
+          <p class="text-left">
+            <button type="button" class="btn btn-default btn-lg like">
+              <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like {{$ctrl.track.rate}}
+            </button>
+          </p>
+        </div>
+        <div class="col-xs-4 no-padding">
+        </div>
+        <div class="col-xs-4 no-padding">
+          <a href="#!/places">
+            <i class="fa fa-times fa-3x pull-right close" aria-hidden="true" id="close"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container_page">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="title text-center">{{$ctrl.track.name}} </h2>
+          <p class="text-center">{{$ctrl.track.description}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-12 gallery">
+          <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.track.photos[0]}}">
+            <img ng-src="{{$ctrl.track.photos[0]|| $ctrl.noname}}"
+                 alt="{{$ctrl.track.name}}"/>
+          </a>
+          <a ng-repeat="photo in $ctrl.track.photos  | limitTo:($ctrl.indexBegin+numberOfphoto) track by $index"
+             ng-if="$index>=$ctrl.indexBegin" class="fancybox" rel="gallery1"
+             ng-href="{{photo}}" title="{{$ctrl.track.name}}">
+            <img ng-src="{{photo}}" alt="{{$ctrl.track.name}}"/>
+          </a>
+          <a ng-if="numberOfphoto<$ctrl.track.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
+            photos </a>
+          <i class="fa fa-arrow-down fa-md"></i>
+        <span ng-if="loading" class="center-block">
+            <i class="fa fa-spinner fa-spin  fa-4x"></i>
+        </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+          <div id="abovemap"></div>
+          <div id="map1">
+          </div>
+          <h4>Popular tracks in location</h4>
+
+          <div
+            ng-repeat="trackInLocation in $ctrl.tracksInLocationArr | filter:$ctrl.tracksFilter | limitTo:3 | orderBy : '-rate'"
+            class="popular-in-location-wrapper">
+            <a ng-href="#!/tracks/{{trackInLocation.id}}">
+            <img ng-src="{{trackInLocation.photos[0]}}"/>
+            </a>
+            <a class="popular-in-location-name" ng-href="#!/tracks/{{trackInLocation.id}}">{{trackInLocation.name}}</a>
+            <span class="popular-in-location-address">
+              <i  class="fa fa-heart" aria-hidden="true"></i>
+              {{trackInLocation.rate}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class=row">
+      <div class="col-xs-12">
+        <comment input-object="$ctrl.track" input-object-type="'tracks'"></comment>
+      </div>
+    </div>
+  </div>
+</div>

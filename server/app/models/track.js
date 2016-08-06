@@ -34,17 +34,21 @@ var TrackSchema = new Schema({
     required: true
   }],
   description: String,
-  rate: Number,
   likes: [Schema.Types.ObjectId],
   photos: [String],
   comments: [CommentSchema]
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
-var autoPopulateOwner = function(next) {
-  this.populate('owner');
-  next();
-};
-TrackSchema.pre('findOne', autoPopulateOwner).pre('find', autoPopulateOwner);
+TrackSchema.virtual('rate').get(function() {
+  return this.likes.length;
+});
 
 var autoPopulatePlaces = function(next) {
   this.populate('places');

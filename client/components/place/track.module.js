@@ -1,3 +1,4 @@
 angular.module('track', [
-  'trackModel'
+  'trackModel',
+  'trackDetail'
 ]);

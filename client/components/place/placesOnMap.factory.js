@@ -119,7 +119,8 @@ angular.module('mapModule')
             coordsArray[index] = coords;
           });
         }
-        trackForAdding = polyline(coordsArray, color).addTo(map);
+        trackForAdding = polyline(coordsArray, color).addTo(map).bindPopup('<div class=\'popup  center-block\'><h3>' + track.name + '</h3><a><img class=\'marker-image\' src=' + track.photos[0] + '\' \/></a>' +
+              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/tracks/' + track._id + '\'>Details >></a> </button></div>', {autoPan: false});
         if (isCreateMode) {
           placesOnMap.newTrack = trackForAdding;
         }
