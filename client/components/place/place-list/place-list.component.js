@@ -103,6 +103,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           } else {
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
+            ctrl.checkAllPlaces();
             map.on('click', addNewTrackPointOnMap);
             for (key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
@@ -113,6 +114,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         function addExistingPointIntoNewTrack() {
+          ctrl.isAlredyAdded = false;
           var existingPoint = {
             name: '',
             _id: '',
@@ -120,22 +122,34 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               coordinates: []
             }
           };
-          ctrl.newTrackObject.location.coordinates.push([this._latlng.lng, this._latlng.lat]);
           existingPoint.name = this.name;
           existingPoint._id = this._id;
           existingPoint.location.coordinates[0] = this._latlng.lng;
           existingPoint.location.coordinates[1] = this._latlng.lat;
-          ctrl.newTrackPoints.push([existingPoint]);
-          placesOnMap.showTracks([ctrl.newTrackObject], true);
-          if (newPointForTrack) {
-            map.removeLayer(newPointForTrack);
+          /*if (!_.includes(ctrl.newTrackPoints, existingPoint)) {
+            console.log(true);
+          }*/
+          ctrl.newTrackPoints.forEach(function(point) {
+            if (existingPoint._id == point[0]._id) {
+              ctrl.isAlredyAdded = true;
+              $scope.$digest();
+            }
+          })
+          if (!ctrl.isAlredyAdded) {
+            ctrl.newTrackObject.location.coordinates.push([this._latlng.lng, this._latlng.lat]);
+            ctrl.newTrackPoints.push([existingPoint]);
+            placesOnMap.showTracks([ctrl.newTrackObject], true);
+            if (newPointForTrack) {
+              map.removeLayer(newPointForTrack);
+            }
+            ctrl.cancelNewPointForTrackMenu();
+            newPointsForTrack.push(null);
+            $scope.$digest();
           }
-          ctrl.cancelNewPointForTrackMenu();
-          newPointsForTrack.push(null);
-          $scope.$digest();
         }
 
         function addNewTrackPointOnMap(e) {
+          ctrl.isAlredyAdded = false;
           ctrl.addPointMenuIsOpen = true;
           ctrl.newPoint.location.coordinates[0] = e.latlng.lng;
           ctrl.newPoint.location.coordinates[1] = e.latlng.lat;
@@ -190,10 +204,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
 
         ctrl.removePointFromNewPointsArray = function(pointIndexInArray) {
-          var removedPoints = newPointsForTrack.slice(pointIndexInArray, newPointsForTrack.length);
-          newPointsForTrack.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
-          ctrl.newTrackObject.location.coordinates.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
-          ctrl.newTrackPoints.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
+          ctrl.isAlredyAdded = false;
+          var removedPoints = newPointsForTrack.slice(pointIndexInArray, pointIndexInArray + 1);
+          newPointsForTrack.splice(pointIndexInArray, 1);
+          ctrl.newTrackObject.location.coordinates.splice(pointIndexInArray, 1);
+          ctrl.newTrackPoints.splice(pointIndexInArray, 1);
           removedPoints.forEach(function(point) {
             if (point) {
               map.removeLayer(point);
