@@ -23,7 +23,7 @@
         <div class="col-xs-12">
           <h2 class="title text-center">{{$ctrl.place.name}} </h2>
 
-          <p class="text-center">{{$ctrl.place.description}}</p>
+          <p class="text-center desc">{{$ctrl.place.description}}</p>
         </div>
       </div>
       <div class="row">
@@ -38,8 +38,10 @@
             <img ng-src="{{photo}}" alt="{{$ctrl.place.name}}"/>
           </a>
           <a ng-if="numberOfphoto<$ctrl.place.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
-            photos </a>
-          <i class="fa fa-arrow-down fa-md"></i>
+            photos
+            <i class="fa fa-arrow-down fa-md"></i>
+          </a>
+
         <span ng-if="loading" class="center-block">
             <i class="fa fa-spinner fa-spin  fa-4x"></i>
         </span>
@@ -47,13 +49,13 @@
         <div class="col-lg-6 col-md-6 col-xs-12">
           <div id="abovemap"></div>
           <div id="mapcontainer">
-           <div id="map1" class="map-container"></div>
+            <div id="map1" class="map-container"></div>
           </div>
           <h4>Popular places in location</h4>
 
           <div
-               ng-repeat="placeInLocation in $ctrl.placesInLocationArr | filter:$ctrl.placesFilter | limitTo:3 | orderBy : '-rate'"
-               class="popular-in-location-wrapper">
+            ng-repeat="placeInLocation in $ctrl.placesInLocationArr | filter:$ctrl.placesFilter | limitTo:3 | orderBy : '-rate'"
+            class="popular-in-location-wrapper">
             <a ng-href="#!/places/{{placeInLocation.id}}">
               <img ng-src="{{placeInLocation.photos[0]}}"/>
             </a>

@@ -10,7 +10,6 @@ angular.module('placeDetail', ['comment'])
       });
       var ctrl = this;
 
-    // document.getElementById('mapcontainer').innerHTML = "<div id='map1' style='width:500px; height:400px;'>" + "</div>";
       if(ctrl.marker){
         ctrl.marker.clearLayers();
         ctrl.map.removeLayer(layerStreet);
