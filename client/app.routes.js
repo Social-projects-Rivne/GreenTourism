@@ -43,6 +43,9 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
       .when('/events/:eventId', {
         template: '<event-detail></event-detail>'
       })
+      .when('/editevent/:eventId', {
+       template: '<edit-event></edit-event>'
+      })
       .when('/blog', {
         template: '<blog-list blogs="$resolve.blogs"></blog-list>',
         resolve: {

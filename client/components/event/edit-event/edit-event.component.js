@@ -1,8 +1,14 @@
-angular.module('eventDetail').component('eventDetail', {
-  templateUrl: 'components/event/event-detail/event-detail.template.html',
+angular.module('editEvent', []);
+angular.module('editEvent').component('editEvent', {
+  templateUrl: 'components/event/edit-event/edit-event.template.html',
   controller: ['$scope', '$routeParams', 'calendarService', 'Event',
     function($scope, $routeParams, calendarService, Event) {
       this._id = $routeParams.eventId;
+
+      Event.one(id).get()
+        .then(function(event) {
+                // Робиш все що хочеш з прийшовшим івентом
+        });
 
       $scope.calendars = calendarService;
 

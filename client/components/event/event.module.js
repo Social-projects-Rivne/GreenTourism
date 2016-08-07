@@ -3,5 +3,6 @@ angular.module('event', [
   'eventList',
   'eventDetail',
   'mapModule',
+  'editEvent',
   'calendar'
 ]);
