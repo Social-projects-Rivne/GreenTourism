@@ -15,7 +15,7 @@ angular.module('searchPlace',['ui.bootstrap'])
         }, 100);
 
        // console.log(mapFactory.map._layers[131]._latlng.lat);
-        console.log(ctrl.markers);
+      /*
         L.marker([lat, lon], {
           icon: L.icon({
             iconUrl: 'assets/img/places/marker/red.png',
@@ -26,7 +26,15 @@ angular.module('searchPlace',['ui.bootstrap'])
             shadowSize: [41, 41],
             zIndexOffset: 100000
           })
-        }).addTo(mapFactory.map);
+        }).addTo(mapFactory.map);*/
+        console.log(ctrl.markers);
+        ctrl.markersarr= _.filter(ctrl.markers, function(marker) { return marker._latlng.lat==lat ; });
+
+        //ctrl.markersarr =ctrl.markers.filter(function(marker) {
+           // return (marker.lat==lat && marker.lng==lon);
+         // }
+        //);
+        console.log( ctrl.markersarr);
       }
       this.searchPlace = function(searchname) {
         angular.element( document.querySelector( '#searchPlaces' ) ).empty();
