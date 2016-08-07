@@ -12,7 +12,8 @@ angular.module('trackDetail', ['comment', 'like'])
         angular.element(document).ready(function() {
           angular.element('.fancybox').fancybox();
         });
-        ctrl.map = L.map('map1', {
+        angular.element('#map1').attr('id', ctrl.track._id);
+        ctrl.map = L.map(ctrl.track._id, {
           center: constants.mapCenter,
           zoom: constants.defaultZoom,
           touchZoom: false,

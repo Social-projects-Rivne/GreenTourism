@@ -112,7 +112,7 @@ angular.module('mapModule')
           '<h3>',
           track.name,
           '</h3>',
-          '<a href="#!/places/',
+          '<a href="#!/tracks/',
           track._id,
           '">',
           '<img class="marker-image center-block" src="',
