@@ -48,7 +48,12 @@ module.exports = function() {
 
   app.get('/', function(req, res) {
     res.render('index', {
-      messages: req.flash('error') || req.flash('info'),
+      messages: {
+        danger: req.flash('error'),
+        warning: req.flash('warning'),
+        info: req.flash('info'),
+        success: req.flash('success')
+      },
       user: JSON.stringify(req.user)
     });
   });

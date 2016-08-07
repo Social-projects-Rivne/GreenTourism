@@ -191,11 +191,13 @@
   </header>
 
   <main ng-controller="MainCtrl as main" id="main">
-    <% for (var i in messages) { %>
-      <div class="alert alert-danger text-center">
-        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <%= messages[i] %>
-      </div>
+    <% for (var type in messages) { %>
+      <% for (var i in messages[type]) %>
+        <div class="alert alert-<%= type %> text-center">
+          <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= messages[type][i] %>
+        </div>
+      <% } %>
     <% } %>
 
     <div ng-if="!main.routeChangeError" ng-view=""></div>
