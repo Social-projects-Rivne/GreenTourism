@@ -4,7 +4,7 @@ angular.module('placeDetail', ['comment'])
     bindings: {
       place: '<'
     },
-    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place, mapPlaceFactory) {
+    controller: function placeDetailCtrl($scope, constants, mapMarkingTypes, preloadImages, $timeout, Place) {
       angular.element(document).ready(function() {
         angular.element('.fancybox').fancybox();
       });
@@ -15,7 +15,11 @@ angular.module('placeDetail', ['comment'])
         ctrl.marker.clearLayers();
         ctrl.map.removeLayer(layerStreet);
       }
-      ctrl.map = mapPlaceFactory;
+      angular.element('#map1').attr('id', ctrl.place._id);
+      ctrl.map =  L.map(ctrl.place._id, {
+        center: constants.mapCenter,
+        zoom: constants.defaultZoom-8
+      });
       ctrl.noname = 'http://homyachok.com.ua/images/noimage.png';
       var layerStreet = L.tileLayer(mapMarkingTypes.layers.streets.link, {
         attribution: mapMarkingTypes.layers.streets.attribute
