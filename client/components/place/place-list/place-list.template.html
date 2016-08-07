@@ -429,6 +429,10 @@
           </div>
         </div>
         <span class="alert-input"
+              ng-show="$ctrl.isAlredyAdded">
+          This point is alredy added!
+        </span>
+        <span class="alert-input"
               ng-show="trackMaker.$submitted && ($ctrl.newTrackPoints.length < 2 || !$ctrl.newTrackPoints.length)">
           Track must have at least two points!
         </span>
