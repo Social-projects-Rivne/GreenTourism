@@ -133,8 +133,7 @@ module.exports = function(Model) {
     var record = req.record;
     var comment = req.comment;
 
-    comment.remove();
-    record.comments.push(req.body);
+    comment.content = req.body.content;
 
     record.save(function(err, record) {
       if (err) {
