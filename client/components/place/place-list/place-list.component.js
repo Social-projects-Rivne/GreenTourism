@@ -57,7 +57,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                     ctrl.checkType(ctrl.newPlace.type);
                   }
                   ctrl.resetAddPlaceForm(form);
-                  ctrl.addPlaceMenuIsOpen = false;
+                  ctrl.toggleAddPlaceMenu(form);
                 });
               });
           }
@@ -257,6 +257,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               ctrl.showSpecificTracks(ctrl.newTrackObject.type);
             }
             ctrl.resetAddTrackForm(form);
+            ctrl.toggleAddTrackMenu(form);
           });
         }
 
