@@ -103,7 +103,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           } else {
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
-            ctrl.checkAllPlaces();
+            var checkAllPlaces = angular.element('.check-all-places span');
+            if (!checkAllPlaces.hasClass(constants.checkedSpanClass)) {
+              ctrl.checkAllPlaces();
+            }
             map.on('click', addNewTrackPointOnMap);
             for (key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
@@ -126,15 +129,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           existingPoint._id = this._id;
           existingPoint.location.coordinates[0] = this._latlng.lng;
           existingPoint.location.coordinates[1] = this._latlng.lat;
-          /*if (!_.includes(ctrl.newTrackPoints, existingPoint)) {
-            console.log(true);
-          }*/
           ctrl.newTrackPoints.forEach(function(point) {
             if (existingPoint._id == point[0]._id) {
               ctrl.isAlredyAdded = true;
-              $scope.$digest();
             }
-          })
+          });
+          ctrl.cancelNewPointForTrackMenu();
           if (!ctrl.isAlredyAdded) {
             ctrl.newTrackObject.location.coordinates.push([this._latlng.lng, this._latlng.lat]);
             ctrl.newTrackPoints.push([existingPoint]);
@@ -142,10 +142,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             if (newPointForTrack) {
               map.removeLayer(newPointForTrack);
             }
-            ctrl.cancelNewPointForTrackMenu();
             newPointsForTrack.push(null);
-            $scope.$digest();
           }
+          $scope.$digest();
         }
 
         function addNewTrackPointOnMap(e) {
@@ -171,7 +170,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               shadowSize: [41, 41]
             })
           }).addTo(map);
-        };
+        }
 
         ctrl.createNewPointForTrack = function(form) {
           if (form.$valid) {
@@ -235,7 +234,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             } else {
               ctrl.newTrackPoints.forEach(function(point, index) {
                 var newPoints = [];
-                if (!point[0]._id)  {
+                if (!point[0]._id) {
                   newPoints.push(point[0]);
                   Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
                   '&lon=' + point[0].location.coordinates[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
