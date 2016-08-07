@@ -68,46 +68,26 @@ angular.module('mapModule')
 
       if (input) {
         places.forEach(function(place) {
-<<<<<<< HEAD
           marker(place.location.coordinates[0], place.location.coordinates[1],
               types[input].icon)
             .addTo(groups[input])
             .bindPopup(createPopup(place), {autoPan: false});
-=======
-          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
-            .addTo(groups[input])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
-          newPlace.name = place.name;
-          newPlace._id = place._id;
-          placesOnMap.places[place.type].push(newPlace);
->>>>>>> dev
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(map);
       } else {
         places.forEach(function(place) {
-<<<<<<< HEAD
           marker(place.location.coordinates[0], place.location.coordinates[1],
               types[place.type].icon)
             .addTo(groups[place.type])
             .bindPopup(createPopup(place), {autoPan: false});
-=======
-          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
-            .addTo(groups[place.type])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
-          newPlace.name = place.name;
-          newPlace._id = place._id;
-          placesOnMap.places[place.type].push(newPlace);
->>>>>>> dev
+
         });
         for (var type in types) {
           mainGroup.checkIn(groups[type]);
           groups[type].addTo(map);
         }
       }
-
       map.on('click move', function() {
         map.closePopup();
       });
