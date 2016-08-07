@@ -1,4 +1,4 @@
-angular.module('trackDetail', ['comment'])
+angular.module('trackDetail', ['comment', 'like'])
   .component('trackDetail', {
     templateUrl: 'components/place/track-detail/track-detail.template.html',
     bindings: {
