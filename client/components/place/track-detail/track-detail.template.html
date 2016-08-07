@@ -42,21 +42,21 @@
         </span>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-12">
-          <div id="abovemap"></div>
-          <div id="map1">
+          <div id="map1" ng-mouseleave="$ctrl.mouseLeavePlace(placeInTrack)">
           </div>
-          <h4>Popular tracks in location</h4>
+          <h4>Places in track</h4>
 
-          <div
-            ng-repeat="trackInLocation in $ctrl.tracksInLocationArr | filter:$ctrl.tracksFilter | limitTo:3 | orderBy : '-rate'"
-            class="popular-in-location-wrapper">
-            <a ng-href="#!/tracks/{{trackInLocation.id}}">
-            <img ng-src="{{trackInLocation.photos[0]}}"/>
+          <div ng-repeat="placeInTrack in $ctrl.placesInTrack"
+               class="popular-in-location-wrapper"
+               ng-mouseover="$ctrl.mouseOverPlace(placeInTrack, $index)"
+               ng-mouseleave="$ctrl.mouseLeavePlace(placeInTrack)">
+            <a ng-href="#!/tracks/{{placeInTrack.id}}">
+            <img ng-src="{{placeInTrack.photos[0]}}"/>
             </a>
-            <a class="popular-in-location-name" ng-href="#!/tracks/{{trackInLocation.id}}">{{trackInLocation.name}}</a>
+            <a class="popular-in-location-name" ng-href="#!/places/{{placeInTrack.id}}">{{$index + 1 + '. ' + placeInTrack.name}}</a>
             <span class="popular-in-location-address">
               <i  class="fa fa-heart" aria-hidden="true"></i>
-              {{trackInLocation.rate}}
+              {{placeInTrack.rate}}
             </span>
           </div>
         </div>
