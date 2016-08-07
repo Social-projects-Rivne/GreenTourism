@@ -4,7 +4,7 @@ angular.module('blogDetail').component('blogDetail', {
   bindings: {
     blog: '<'
   },
-  controller: ['currentUser', 'Restangular', function BlogDetailCtrl(currentUser, Restangular) {
+  controller: ['Blog', 'currentUser', 'Restangular', function BlogDetailCtrl(Blog, currentUser, Restangular) {
     var ctrl = this;
     ctrl.currentUser = currentUser;
     if (ctrl.currentUser) {
@@ -33,8 +33,12 @@ angular.module('blogDetail').component('blogDetail', {
       }
     };
 
-    Restangular.one('blogs/').get({categoryId: ctrl.blog.categoryId})
-        .then(function(res) {
+    //Restangular.one('blogs/').get({categoryId: ctrl.blog.categoryId})
+    //    .then(function(res) {
+    //      ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
+    //    });
+
+    Blog.getList({categoryId: ctrl.blog.categoryId, limit: 4}).then(function(res) {
           ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
         });
 

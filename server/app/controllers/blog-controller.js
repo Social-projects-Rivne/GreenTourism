@@ -1,12 +1,14 @@
 var Blog = require('../models/blog');
 var User = require('mongoose').model('User');
 var _ = require('lodash');
+var sliceQueryOptions = require('../helpers/slice-query-options');
 
 exports.list = function(req, res) {
+  var queryAndOptions = sliceQueryOptions(req.query);
   Blog.blog.findAll({
-    where: req.query,
+    where: queryAndOptions.query,
     order: 'createdAt ASC',
-    limit: 10,
+    limit: _.toNumber(queryAndOptions.options.limit) || 10,
     include: [
       {model: Blog.photos},
       {model: Blog.categories},

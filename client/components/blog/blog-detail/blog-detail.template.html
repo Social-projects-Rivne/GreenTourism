@@ -56,7 +56,7 @@
                       </div>
                       <div class="row">
                         <div class="fusion-title">
-                          <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="related in $ctrl.relatedPost">
+                          <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="related in $ctrl.relatedPost | limitTo: 3">
 
                             <div class="media blog-aside-items ng-scope">
                                 <a href="#!/blog/{{related.id}}" class="pull-left">
