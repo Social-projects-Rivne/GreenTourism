@@ -107,6 +107,26 @@ angular.module('mapModule')
         map.removeLayer(placesOnMap.newTrack);
       }
       tracksArray.forEach(function(track) {
+        var popup = [
+          '<div class="popup">',
+          '<h3>',
+          track.name,
+          '</h3>',
+          '<a href="#!/places/',
+          track._id,
+          '">',
+          '<img class="marker-image center-block" src="',
+          track.photos[0],
+          '" />',
+          '</a>',
+          '<a class="btn btn-default btn-md center-block" href="#!/tracks/',
+          track._id,
+          '">',
+          'Details >>',
+          '</a>',
+          '</div>'
+        ].join('');
+
         if (track.type) {
           var color = mapMarkingTypes.tracks[track.type].color;
         }
@@ -119,8 +139,7 @@ angular.module('mapModule')
             coordsArray[index] = coords;
           });
         }
-        trackForAdding = polyline(coordsArray, color).addTo(map).bindPopup('<div class=\'popup  center-block\'><h3>' + track.name + '</h3><a><img class=\'marker-image\' src=' + track.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/tracks/' + track._id + '\'>Details >></a> </button></div>', {autoPan: false});
+        trackForAdding = polyline(coordsArray, color).addTo(map).bindPopup(popup, {autoPan: false});
         if (isCreateMode) {
           placesOnMap.newTrack = trackForAdding;
         }
