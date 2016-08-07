@@ -107,19 +107,21 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.hideSearchPlaces = false;
+        $rootScope.hideSearchPlaces=true;
+        ctrl.hideSearchPlaces = $rootScope.hideSearchPlaces;
 
         ctrl.checkSearchPlaces = function() {
           var searchPlacesIcon = angular.element('#searchPlaces');
           if (searchPlacesIcon.hasClass(constants.checkedClass)) {
             searchPlacesIcon.removeClass(constants.checkedClass);
             ctrl.hideSearchPlaces = true;
+            ctrl.hidePopularTracks = true;
           } else {
             searchPlacesIcon.addClass(constants.checkedClass);
             angular.element('#popularTracks')
               .removeClass(constants.checkedClass);
 
-            ctrl.hideSearchPlaces = false;
+            ctrl.hideSearchPlaces = true;
             ctrl.hidePopularPlaces = true;
             ctrl.hidePopularTracks = true;
           }

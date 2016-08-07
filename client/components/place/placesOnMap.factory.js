@@ -67,6 +67,8 @@ angular.module('mapModule')
       map.on('click move', function() {
         map.closePopup();
       });
+      placesOnMap.groupClusters={};
+      placesOnMap.groupClusters=mainGroup;
       return  markers;
     };
 
