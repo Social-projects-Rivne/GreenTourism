@@ -3,5 +3,6 @@ angular.module('blog', [
   'blogList',
   'blogDetail',
   'blogSidebar',
-  'blogComments'
+  'blogComments',
+  'blogManager'
 ]);
