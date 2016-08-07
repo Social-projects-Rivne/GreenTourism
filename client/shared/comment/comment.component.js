@@ -26,7 +26,10 @@ angular.module('comment', [])
 
         ctrl.currentUser = currentUser;
         ctrl.showError = false;
+        ctrl.showConfirm = false;
+
         ctrl.addComment = function(content) {
+          ctrl.showConfirm = false;
           angular.element('textarea').css('height', '50px');
           Restangular.one(ctrl.inputObjectType + '/' +
             ctrl.inputObject._id + '/comments').customPOST(
@@ -45,6 +48,11 @@ angular.module('comment', [])
             });
         };
 
+        ctrl.showConfirmMessage = function(id) {
+          ctrl.showConfirm = true;
+          ctrl.checkCommentId1 = id;
+        };
+
         ctrl.removeComment = function(id) {
           Restangular.one(ctrl.inputObjectType + '/' +
             ctrl.inputObject._id + '/comments', id).remove().then(function() {
@@ -60,6 +68,7 @@ angular.module('comment', [])
         ctrl.showEditingMode = function(id, defaultContent) {
           ctrl.checkCommentId = id;
           ctrl.defaultCommentContent = defaultContent;
+          ctrl.showConfirm = false;
         };
 
         ctrl.updateComment = function(id, content) {
