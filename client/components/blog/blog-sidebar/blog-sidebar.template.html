@@ -19,7 +19,7 @@
       <h3>Categories</h3>
       <ul>
         <li ng-repeat="category in $ctrl.categoryList  ">
-          <a ng-href="#">
+          <a ng-href="#!/blog/categoryId/{{category.id}}">
             <i class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
             {{category.name}}
           </a>

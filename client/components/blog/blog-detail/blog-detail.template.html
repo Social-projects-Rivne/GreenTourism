@@ -12,7 +12,7 @@
                   <ul>
                     <li>By
                       <span class="blog-author">
-                        <a ng-href="#" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
+                        <a ng-href="#!/blog/owner/{{blog.owner.id}}" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
                       </span>
                     </li>
                     <li>
@@ -74,13 +74,6 @@
                                 </div>
                               </div>
                             </div>
-
-                            <!--<a href="#!/blog/{{related.id}}">-->
-                              <!--{{related.title}}-->
-                              <!--{{related.createdAt | date:'dd MMMM yyyy'}}-->
-                              <!--<img alt="{{related.title}}" ng-src="{{related.blogPhoto.url}}" class="media-object"-->
-                                   <!--style="width:50px;height:50px;"/>-->
-                            <!--</a>-->
                           </div>
                         </div>
                       </div>

@@ -20,12 +20,12 @@
                   <div class="blog-details">
                     By
                     <span class="blog-author">
-                      <a ng-href="#" title="Posts by admin" rel="author">{{blog.owner.fullName}}</a>
+                      <a ng-href="#!/blog/owner/{{blog.owner.id}}" title="Posts by admin" rel="author">{{blog.owner.fullName}}</a>
                     </span>
                     <span class="blog-date">
                       {{blog.createdAt | date:'dd MMMM yyyy'}}
                     </span>
-                    <a ng-href="#" class="blog-category">{{blog.category.name}}</a>
+                    <a ng-href="#!/blog/categoryId/{{blog.category.id}}" class="blog-category">{{blog.category.name}}</a>
                   </div>
                   <div class="blog-separator"></div>
                   <div class="blog-content">
