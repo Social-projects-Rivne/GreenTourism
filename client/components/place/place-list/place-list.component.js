@@ -51,12 +51,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
                 ctrl.newPlace.address = result.display_name;
                 Place.post(ctrl.newPlace).then(function() {
                   checkActiveType = angular.element('.' + ctrl.newPlace.type + ' span');
-                  if (checkActiveType.hasClass(constants.checkedClass)) {
+                  if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                     placesOnMap.showPlaces(newPlaces);
                   } else {
                     ctrl.checkType(ctrl.newPlace.type);
                   }
                   ctrl.resetAddPlaceForm(form);
+                  ctrl.addPlaceMenuIsOpen = false;
                 });
               });
           }
