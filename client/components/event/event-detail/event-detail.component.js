@@ -1,8 +1,10 @@
 angular.module('eventDetail').component('eventDetail', {
   templateUrl: 'components/event/event-detail/event-detail.template.html',
-  controller: ['$scope', '$routeParams', 'calendarService', 'Event',
-    function($scope, $routeParams, calendarService, Event) {
+  controller: ['$scope', 'currentUser', '$routeParams', 'calendarService', 'Event',
+    function($scope, currentUser, $routeParams, calendarService, Event) {
       this._id = $routeParams.eventId;
+      this.user = currentUser;
+        console.log(currentUser) ;
 
       $scope.calendars = calendarService;
 

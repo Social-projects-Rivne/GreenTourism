@@ -28,7 +28,7 @@
             <ul class="dropdown-menu">
               <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
               <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
-              <li><a href="#">Add Event</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddEventMenu()">Add Event</a></li>
             </ul>
           </div>
           <!-- Map Type -->
@@ -108,30 +108,6 @@
                       <span></span>
                     </a>
                   </li>
-                  <li>
-                    <div class="btn-group">
-                      <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                        {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                      </div>
-                      <ul class="dropdown-menu right-calendar">
-                        <calendar></calendar>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="btn-group">
-                      <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                        {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                      </div>
-                      <ul class="dropdown-menu right-calendar">
-                        <calendar></calendar>
-                      </ul>
-                    </div>
-                  </li>
                 </ul>
               </li>
             </ul>
@@ -153,7 +129,7 @@
             <ul class="dropdown-menu">
               <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
               <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
-              <li><a href="#">Add Event</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddEventMenu()">Add Event</a></li>
             </ul>
           </div>
           <!-- Map Type -->
@@ -372,6 +348,115 @@
                      value="Reset">
               <input type="button" class="btn btn-success col-md-12"
                      ng-click="$ctrl.createNewPlace(placeMaker)"
+                     value="Create">
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- DIV Add events -->
+      <div id="add-event" class="add-item-menu ng-hide"
+           ng-show="$ctrl.addEventMenuIsOpen">
+        <h2>New Event</h2>
+        <a href="" ng-click="$ctrl.toggleAddEventMenu(eventMaker)">
+          <span class="glyphicon glyphicon-remove removeIcon"></span>
+        </a>
+        <form name="eventMaker" novalidate>
+          <div>
+            <span class="title">1. Choose event on map:</span><br>
+            <span id="latitudeE"></span><br>
+            <span id="longitudeE"></span><br>
+            <span class="alert-input"
+                  ng-show="$ctrl.formNewEventSubmitted && !$ctrl.coordsIsDefined">
+              Please choose event on map!
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="eventName">
+              <span class="title">2. Enter event name:</span>
+            </label>
+            <input type="text" name="newEventName" class="form-control"
+                   id="newEventName" ng-model="$ctrl.newEvent.name"
+                   ng-required="true">
+            <div ng-show="$ctrl.formNewEventSubmitted || eventMaker.newEventName.$touched">
+                <span class="alert-input"
+                      ng-show="eventMaker.newEventName.$error.required">
+                  Please enter Event name!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newEventType">
+              <span class="title">3. Select event type:</span>
+            </label>
+            <select name="newEventType" class="form-control"
+                    ng-options="type as typeObj.name for (type, typeObj) in $ctrl.eventsType track by type"
+                    ng-model="$ctrl.newEventType" ng-required="true">
+              <option value="">-- Choose event type --</option>
+            </select>
+            <div ng-show="$ctrl.formNewEventSubmitted || eventMaker.newEventType.$touched">
+                <span class="alert-input"
+                      ng-show="eventMaker.newEventType.$error.required">
+                  Please select event type!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="DateStart">
+              <span class="title">4. Select date {{calendars.names[0]}} : {{calendars.values[0] | date:'dd MMMM yyyy'}}</span>
+            </label>
+            <calendar></calendar>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="DateEnd">
+              <span class="title">5. Select date {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}</span>
+            </label>
+            <calendar></calendar>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="newEventPrice">
+              <span class="title">6. Enter price of event (optional):</span>
+            </label>
+            <input type="number" min="0" max="99999" name="newEventPrice" id="newEventPrice"
+                      class="form-control"
+                      ng-model="$ctrl.newEvent.price">
+          </div>
+          <div class="form-group">
+            <label for="newEventDescription">
+              <span class="title">7. Enter event description (optional):</span>
+            </label>
+            <textarea name="newEventDescription" id="newEventDescription"
+                      class="form-control"
+                      ng-model="$ctrl.newEvent.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="newEventPhoto">
+              <span class="title">8. Add photo (optional):</span>
+            </label>
+            <input type="text" name="newEventPhoto" id="newEventPhoto"
+                   class="form-control" ng-model="$ctrl.newEvent.photos[0]"
+                   eventholder="Photo URL">
+          </div>
+
+          <div class="form-group visible-lg">
+            <div class="btn-group col-xs-12 no-padding">
+              <input type="button" class="btn btn-success col-lg-6"
+                     ng-click="$ctrl.resetAddEventForm(eventMaker)"
+                     value="Reset">
+              <input type="button" class="btn btn-success col-lg-6"
+                     ng-click="$ctrl.createNewEvent(eventMaker)"
+                     value="Create">
+            </div>
+          </div>
+          <div class="form-group hidden-lg">
+            <div class="btn-group-vertical col-xs-12 no-padding">
+              <input type="button" class="btn btn-success col-md-12"
+                     ng-click="$ctrl.resetAddEventForm(eventMaker)"
+                     value="Reset">
+              <input type="button" class="btn btn-success col-md-12"
+                     ng-click="$ctrl.createNewEvent(eventMaker)"
                      value="Create">
             </div>
           </div>

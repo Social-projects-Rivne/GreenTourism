@@ -1,19 +1,24 @@
 angular.module('eventList', [])
   .component('eventList', {
   templateUrl: 'components/event/event-list/event-list.template.html',
-  controller: ['$scope', 'calendarService', 'Event', function ($scope, calendarService, Event) {
+  controller: ['$scope', 'calendarService','Event', function ($scope, calendarService, Event) {
+
     $scope.calendars = calendarService;
     $scope.calendars.clear() ;
 
     $scope.calendars.click = function () {
-    $scope.events = $scope.calendars.events.filter(function (event) {
-    return new Date(event.dateStart) >= $scope.calendars.values[0] && new Date(event.dateEnd) <= $scope.calendars.values[1];
-    });
-  };
+      console.log('From: ' + Date.parse($scope.calendars.values[0])) ;
+      console.log('To: ' + Date.parse($scope.calendars.values[1])) ;
+        Event.getList({From:Date.parse($scope.calendars.values[0]),To:Date.parse($scope.calendars.values[1])}).then(function (result) {
+          $scope.calendars.events = result.concat();
+          $scope.events = $scope.calendars.events;
+        })
+    };
 
   if ($scope.calendars.events.length == 0)
     {
       Event.getList().then(function (result) {
+  //    Event.getList({dateStart:$scope.calendars.values[0],dateEnd:$scope.calendars.values[1]}).then(function (result) {
       $scope.calendars.events = result.concat();
       $scope.calendars.click();
     })

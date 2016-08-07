@@ -5,6 +5,8 @@ angular.module('calendar').service('calendarService', [function() {
   this.values[0] = new Date();
   this.values[1] = new Date();
   this.values[1].setDate(this.values[0].getDate() + 60);
+  this.values[2] = this.values[0];
+  this.values[3] = this.values[1];
 
   this.names = [];
   this.events = [];

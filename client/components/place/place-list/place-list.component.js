@@ -1,9 +1,9 @@
 angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'calendarService',
       'currentUser', 'constants', 'Restangular', 'Event', '$scope',
-      function(placesOnMap, mapMarkingTypes, Place, Track,
+      function(placesOnMap, mapMarkingTypes, Place, Track, calendarService,
                currentUser, constants, Restangular, Event, $scope) {
         var ctrl = this;
         var places = [];
@@ -19,6 +19,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         var activePlacesTypes = [];
         var key;
 
+        $scope.calendars = calendarService;
+        $scope.calendars.clear() ;
+
         ctrl.user = currentUser;
 
         // -----START ADD Place-----
@@ -26,6 +29,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         ctrl.newPlaceType = '';
         ctrl.formNewPlaceSubmitted = false;
         ctrl.addPlaceMenuIsOpen = false;
+        ctrl.addEventMenuIsOpen = false;
 
         ctrl.toggleAddPlaceMenu = function(form) {
           if (ctrl.addPlaceMenuIsOpen) {
@@ -36,6 +40,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             placesOnMap.openAddPlaceMenu();
             ctrl.addPlaceMenuIsOpen = true;
             ctrl.addTrackMenuIsOpen = false;
+            ctrl.addEventMenuIsOpen = false;
           }
         };
 
@@ -83,10 +88,82 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         };
         // -----END ADD Place-----
 
+        // -----START ADD Event-----
+        ctrl.newEvent = angular.copy(constants.emptyEventModel);
+        ctrl.newEventType = '';
+        ctrl.formNewEventSubmitted = false;
+        ctrl.addEventMenuIsOpen = false;
+        ctrl.addPlaceMenuIsOpen = false;
+
+        ctrl.toggleAddEventMenu = function(form) {
+          if (ctrl.addEventMenuIsOpen) {
+            placesOnMap.closeAddEventMenu();
+            ctrl.addEventMenuIsOpen = false;
+            ctrl.resetAddEventForm(form);
+          } else {
+            placesOnMap.openAddEventMenu();
+            ctrl.addEventMenuIsOpen = true;
+            ctrl.addTrackMenuIsOpen = false;
+            ctrl.addPlaceMenuIsOpen = false;
+          }
+        };
+
+        ctrl.createNewEvent = function(form) {
+          var addEventForm = angular.element('form[name="eventMaker"]');
+          var checkEventType;
+          var newEvents = [];
+          ctrl.coordsIsDefined = placesOnMap.coordsIsDefined;
+          ctrl.formNewEventSubmitted = true;
+          if (addEventForm.hasClass('ng-valid') && placesOnMap.coords) {
+            ctrl.newEvent.type = ctrl.newEventType;
+            ctrl.newEvent.dateStart = Date.parse($scope.calendars.values[0]) ;
+            ctrl.newEvent.dateEnd = Date.parse($scope.calendars.values[1]) ;
+            console.log( " placesOnMap.coords -> " + placesOnMap.coords + ' $scope.calendars.values[0] ->' + $scope.calendars.values[0]) ;
+            console.log(Date.parse($scope.calendars.values[0])) ;
+            ctrl.newEvent.location.coordinates = placesOnMap.coords;
+            newEvents.push(ctrl.newEvent);
+            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
+                '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
+              ctrl.newEvent.address = result.display_name;
+              Event.post(ctrl.newEvent).then(function() {
+                checkEventType = angular.element('.' + ctrl.newEvent.type + ' span');
+                if (checkEventType.hasClass(constants.checkedClass)) {
+                  placesOnMap.showEvents(newEvents);
+                } else {
+                  ctrl.checkEventType(ctrl.newEvent.type);
+                }
+                ctrl.resetAddEventForm(form);
+
+              });
+            });
+          }
+        };
+
+        ctrl.resetAddEventForm = function(form) {
+          var newEventLongitude = angular.element('#longitudeE');
+          var newEventLatitude = angular.element('#latitudeE');
+          if (form) {
+            ctrl.newEvent = angular.copy(constants.emptyEventModel);
+            ctrl.newEventType = '';
+            form.$setPristine();
+            form.$setUntouched();
+            ctrl.formNewEventSubmitted = false;
+            newEventLongitude.text('');
+            newEventLatitude.text('');
+            placesOnMap.coords = [];
+            placesOnMap.coordsIsDefined = false;
+            placesOnMap.removeNewEventMarker();
+          }
+        };
+
+
+        // -----END ADD Event-----        
+        
         // -----START ADD Track-----
         ctrl.newTrackObject = angular.copy(constants.emptyTrackModel);
         ctrl.addPointMenuIsOpen = false;
         ctrl.addTrackMenuIsOpen = false;
+        ctrl.addEventMenuIsOpen = false;
         ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
         var newPointForTrack;
         var newPointsForTrack = [];
@@ -105,6 +182,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
           } else {
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
+            ctrl.addEventMenuIsOpen = false;
             map.on('click', addNewTrackPointOnMap);
             for (key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
@@ -653,7 +731,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
 
         ctrl.eventsType = mapMarkingTypes.events;
         eventsTypeLength = Object.keys(ctrl.eventsType).length;
-     //   placesOnMap.removeEvents();
         placesOnMap.initGroupsOfEvents(ctrl.eventsType);
 
         ctrl.checkAllEvents = function(input) {

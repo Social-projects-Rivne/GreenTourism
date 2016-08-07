@@ -13,14 +13,11 @@ var EventSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  date_start: Number,
-  date_end: Number,
+  dateStart: Number,
+  dateEnd: Number,
   location: LocationSchema,
   price:Number,
-  track:String
-  /*{
-    ref: 'Track'
-  }*/,
+  track:String,
   status: String,
   rate: Number,
   comments: [CommentSchema]

@@ -7,12 +7,12 @@ angular.module('calendar').component('calendar', {
     $scope.service = calendarService;
 
     // initialize component value
-    if ($scope.service.names.length>1) return; //max calendar on page - 2
-    if ($scope.service.names.length==0) {
+    if ($scope.service.names.length>3) return; //max calendar on page - 2
+    if (($scope.service.names.length==0)||($scope.service.names.length==2)) {
       this.name = 'From';
       this.calendarShowDate = $scope.service.values[0];
     }
-    if ($scope.service.names.length==1) {
+    if (($scope.service.names.length==1) || ($scope.service.names.length==3)) {
       this.name = 'To' ;
       this.calendarShowDate = $scope.service.values[1] ;
     }

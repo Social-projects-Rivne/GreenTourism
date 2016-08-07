@@ -5,21 +5,27 @@ var sliceQueryOptions = require('../helpers/slice-query-options');
 exports.list = function(req, res) {
     var queryAndOptions = sliceQueryOptions(req.query);
 
-    var location = req.query.location;
-    delete req.query.location;
+    var From = req.query.From;
+    delete req.query.From;
 
-    var radius = req.query.radius;
-    delete req.query.radius;
+    var To = req.query.To;
+    delete req.query.To;
 
     var search = req.query.search;
     delete req.query.search;
 
     if (search) {
             Event.find({
-                    name: {
-                        $regex: search,
-                        $options: 'i'
-                    }
+                    $or: [
+                        {name: {
+                            $regex: search,
+                            $options: 'i'
+                        }},
+                        {description: {
+                            $regex: search,
+                            $options: 'i'
+                        }}
+                    ]
                 },
             function (err, records) {
             console.log('search >> '+search) ;
@@ -32,19 +38,10 @@ exports.list = function(req, res) {
     }
     else
         {
-            if (location) {
-                Event.find({
-                    location: {
-                        $near: {
-                            $geometry: {
-                                type: 'Point',
-                                coordinates: location
-                            },
-                            $maxDistance: radius,
-                            $minDistance: 0
-                        }
-                    }
-                }, function (err, records) {
+            if (From) {
+              //  Event.find({ dateStart: {$lte : From },dateEnd : {$gte : To }}
+                Event.find({ dateStart: {$gte : From }, dateEnd: {$lte : To }}
+                , function (err, records) {
                     if (err) {
                         res.status(400).json(err);
                     } else {

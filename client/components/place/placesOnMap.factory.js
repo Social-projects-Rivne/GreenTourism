@@ -160,35 +160,27 @@ angular.module('mapModule')
         }
       };
 
-/*    $scope.marker_click = function(id) {
-      location.href = '#!/events/' + id;
-    };*/
+      /* Events */
+      placesOnMap.openAddEventMenu = function() {
+          map.on('click', addNewEventOnMap);
+      };
+
+      placesOnMap.closeAddEventMenu = function() {
+          map.off('click', addNewEventOnMap);
+      };
 
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
-          //console.log(events);
-          //console.log(input);
+        console.log('events:'); console.log(events);
       events.forEach(function(event) {
-        console.log(event.location.coordinates[0]+' - '+ event.location.coordinates[1] + ' ' + pix+ ' event.photos[0]=' +event.photos[0]);
+        console.log(event.location.coordinates[1]+' - '+ event.location.coordinates[0] + ' ' + pix+ ' event.photos[0]=' +event.photos[0]);
 
-        marker(event.location.coordinates[1], event.location.coordinates[0], pix)
+        marker(event.location.coordinates[0], event.location.coordinates[1], pix)
         .addTo(groupeE[input])
-        .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + event.photo[0] + '\' \/></a>' +
+        .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + event.photos[0] + '\' \/></a>' +
                 '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/events/' + event._id + '\'>Details >></a> </button></div>', {autoPan: false});
 
-
-/*          .on('click', function onClick(e) {
-
-          $scope.marker_click(this._id);
-        });*/
-        ;
        }) ;
-
-      /*
-
-
-      */
-
 
        console.log('On map: ') ;
        console.log(groupeE[input]) ;
@@ -223,11 +215,31 @@ angular.module('mapModule')
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
 
-    placesOnMap.removeNewMarker = function() {
-      if (newMarker) {
-        map.removeLayer(newMarker);
+      placesOnMap.removeNewMarker = function() {
+          if (newMarker) {
+              map.removeLayer(newMarker);
+          }
+      };
+      var newEventMarker;
+      function addNewEventOnMap(e) {
+          var latitudeContainer = angular.element('#latitudeE');
+          var longitudeContainer = angular.element('#longitudeE');
+          placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
+          console.log(e.latlng.lng + ' = ' + e.latlng.lat + " -> " + placesOnMap.coords ) ;
+          placesOnMap.coordsIsDefined = true;
+          if (newEventMarker) {
+              map.removeLayer(newEventMarker);
+          }
+          newEventMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
+          latitudeContainer.text('Latitude: ' + newEventMarker._latlng.lat);
+          longitudeContainer.text('Longitude: ' + newEventMarker._latlng.lng);
       }
-    };
+
+      placesOnMap.removeNewEventMarker = function() {
+          if (newEventMarker) {
+              map.removeLayer(newEventMarker);
+          }
+      };
 
     return placesOnMap;
   }]);
