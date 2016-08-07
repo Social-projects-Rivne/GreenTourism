@@ -2,9 +2,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
-      'currentUser', 'constants', 'Restangular',
+      'currentUser', 'constants', 'Restangular', '$rootScope',
       function(placesOnMap, mapMarkingTypes, Place, Track,
-               currentUser, constants, Restangular) {
+               currentUser, constants, Restangular, $rootScope) {
         var ctrl = this;
         var places = [];
         var tracks = [];
@@ -14,7 +14,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         var trackTypeLength;
         var activePlacesTypes = [];
         var key;
-
+        $rootScope.stopFlag=false;
         ctrl.addPlaceMenuIsOpen = false;
         ctrl.coordsForNewPlace = placesOnMap.coords;
 
@@ -196,7 +196,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ----END---- ShowPlacesOnLoad
 
         // ---START--- Function which get data from DB only on special area
-        function onMove() {
+        function onMove(e) {
+          if ($rootScope.stopFlag) {
+            return;
+          }
+          else{
           ctrl.mapBounds = map.getBounds();
           if (activePlacesTypes.length) {
             angular.element('#spinner').addClass('spinner');
@@ -220,6 +224,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             });
           } else {
             angular.element('#spinner').removeClass('spinner');
+          }
           }
         }
         // ---END--- Function which get data from DB only on special area

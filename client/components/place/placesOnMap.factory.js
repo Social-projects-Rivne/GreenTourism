@@ -7,9 +7,9 @@ angular.module('mapModule')
     var types = [];
     var places = [];
     var map;
-
+    markers=[];
     var marker = function(lon, lat, icon) {
-      return L.marker([lat, lon], {
+      markerobj=L.marker([lat, lon], {
         icon: L.icon({
           iconUrl: icon,
           shadowUrl: 'assets/img/places/marker/marker-shadow.png',
@@ -19,6 +19,9 @@ angular.module('mapModule')
           shadowSize: [41, 41]
         })
       });
+      markers.push(markerobj);
+      return markerobj;
+
     };
 
     placesOnMap.showMap = function() {
@@ -46,6 +49,7 @@ angular.module('mapModule')
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(map);
+
       } else {
         places.forEach(function(place) {
           marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
@@ -57,11 +61,13 @@ angular.module('mapModule')
           mainGroup.checkIn(groups[key]);
           groups[key].addTo(map);
         }
+
       }
 
       map.on('click move', function() {
         map.closePopup();
       });
+      return  markers;
     };
 
     placesOnMap.removePlaces = function(input) {
