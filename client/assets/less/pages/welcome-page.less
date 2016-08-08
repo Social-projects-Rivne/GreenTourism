@@ -38,10 +38,44 @@
   img {
     width: 100%;
   }
+  .popular-places-images {
+    position: relative;
+    .slide-arrow {
+      position: absolute;
+      top: 44%;
+      font-size: 40px;
+      z-index: 10;
+      &:hover, &:focus, &:active {
+        color: @light-green;
+      }
+    }
+    .slide-arrow-right {
+      right: 0;
+    }
+    .slide-arrow-left {
+      left: 0;
+    }
+    /*div.ng-enter {
+      opacity: 0;
+      animation: 3s appear;
+    }
+    div.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+    @keyframes appear {
+      from {
+        opacity: 0.5;
+      }
+      to {
+        opacity: 1;
+      }
+    }*/
+  }
   .welcome-page-section-img {
     padding: 0;
     overflow: hidden;
     min-height: @row-height-lg;
+    max-height: @row-height-lg;
     @media all and (max-width: 1200px) and (min-width: 992px) {
       min-height: @row-height-md;
       max-height: @row-height-md;
