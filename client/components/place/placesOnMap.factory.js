@@ -45,39 +45,62 @@ angular.module('mapModule')
 
     placesOnMap.showPlaces = function(places, input) {
       mainGroup.addTo(map);
+
+      function createPopup(place) {
+        return [
+          '<div class="popup">',
+          '<h3>',
+          place.name,
+          '</h3>',
+          '<a href="#!/places/',
+          place._id,
+          '">',
+          '<img class="marker-image center-block" src="',
+          place.photos[0],
+          '" />',
+          '</a>',
+          '<a class="btn btn-default btn-md center-block" href="#!/places/',
+          place._id,
+          '">',
+          'Details >>',
+          '</a>',
+          '</div>'
+        ].join('');
+      }
+
       if (input) {
         places.forEach(function(place) {
-          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[input].icon)
+          marker(place.location.coordinates[0], place.location.coordinates[1],
+              types[input].icon)
             .addTo(groups[input])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
-          newPlace.name = place.name;
-          newPlace._id = place._id;
-          placesOnMap.places[place.type].push(newPlace);
+            .bindPopup(createPopup(place), {autoPan: false});
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(map);
       } else {
         places.forEach(function(place) {
-          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1], types[place.type].icon)
+          marker(place.location.coordinates[0], place.location.coordinates[1],
+              types[place.type].icon)
             .addTo(groups[place.type])
-            .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + place.photos[0] + '\' \/></a>' +
-              '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/places/' + place._id + '\'>Details >></a> </button></div>', {autoPan: false});
-          newPlace.name = place.name;
-          newPlace._id = place._id;
-          placesOnMap.places[place.type].push(newPlace);
+            .bindPopup(createPopup(place), {autoPan: false});
+
         });
         for (var type in types) {
           mainGroup.checkIn(groups[type]);
           groups[type].addTo(map);
         }
       }
-
       map.on('click move', function() {
         map.closePopup();
       });
     };
-
+    placesOnMap.placeArr = [];
+    placesOnMap.setPlaceArr = function(place) {
+      placesOnMap.placeArr = place;
+    };
+    placesOnMap.getPlaceArr = function() {
+      return placesOnMap.placeArr;
+    };
     placesOnMap.removePlaces = function(input) {
       if (input) {
         mainGroup.checkOut(groups[input]);
