@@ -136,7 +136,7 @@ angular.module('mapModule')
         this.track.name,
         '</h3>',
         '<a href="#!/tracks/',
-        this._id,
+        this.track._id,
         '">',
         '<img class="marker-image center-block" src="',
         this.track.photos[0],
