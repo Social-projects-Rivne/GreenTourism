@@ -28,8 +28,13 @@ angular.module('user').component('userProfile', {
         ctrl.favTracks = tracks;
       });
 
-    // User editing
-    ctrl.editMode = false;
+    ctrl.resetForm = function(form) {
+      form.$setPristine();
+      form.$setUntouched();
+    };
+
+    // ********************** Edit avatar
+
     ctrl.editAvatarMode = false;
 
     ctrl.toggleEditAvatarMode = function() {
@@ -47,11 +52,19 @@ angular.module('user').component('userProfile', {
       ctrl.toggleEditAvatarMode();
     };
 
+    // ************************ Edit profile information
+
+    ctrl.editMode = false;
+
     ctrl.toggleEditMode = function() {
       if (ctrl.editMode) {
         ctrl.editedUser = null;
       } else {
         ctrl.editedUser = angular.copy(ctrl.user);
+      }
+
+      if (ctrl.changePasswordMode) {
+        ctrl.toggleChangePassword();
       }
 
       ctrl.editMode = !ctrl.editMode;
@@ -67,7 +80,33 @@ angular.module('user').component('userProfile', {
       ctrl.toggleEditMode();
     };
 
-    // Tab switching
+    // ********************** Change password
+
+    ctrl.changePasswordMode = false;
+    ctrl.toggleChangePassword = function() {
+      if (ctrl.changePassword) {
+        ctrl.newPassword = null;
+        ctrl.confirmPassword = null;
+      }
+
+      if (ctrl.editMode) {
+        ctrl.toggleEditMode();
+      }
+
+      ctrl.changePasswordMode = !ctrl.changePasswordMode;
+    };
+
+    ctrl.changePassword = function() {
+      ctrl.user.password = ctrl.newPassword;
+
+      ctrl.user.save();
+      delete ctrl.user.password;
+
+      ctrl.toggleChangePassword();
+    };
+
+    // ************************** Switch tabs
+
     ctrl.tab = 1;
 
     ctrl.selectTab = function(setTab) {
