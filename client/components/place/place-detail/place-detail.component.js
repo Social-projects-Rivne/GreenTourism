@@ -1,4 +1,4 @@
-angular.module('placeDetail', ['comment'])
+angular.module('placeDetail', ['comment', 'like'])
   .component('placeDetail', {
     templateUrl: 'components/place/place-detail/place-detail.template.html',
     bindings: {
