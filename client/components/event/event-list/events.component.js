@@ -7,8 +7,6 @@ angular.module('eventList', [])
     $scope.calendars.clear() ;
 
     $scope.calendars.click = function () {
-      console.log('From: ' + Date.parse($scope.calendars.values[0])) ;
-      console.log('To: ' + Date.parse($scope.calendars.values[1])) ;
         Event.getList({From:Date.parse($scope.calendars.values[0]),To:Date.parse($scope.calendars.values[1])}).then(function (result) {
           $scope.calendars.events = result.concat();
           $scope.events = $scope.calendars.events;
@@ -25,10 +23,8 @@ angular.module('eventList', [])
   };
 
     this.findWord = function(reg){
-      console.log('reg= '+reg) ;
         Event.getList({search: reg }).then(function (result) {
         $scope.events = result.concat();
-        console.log('num= '+$scope.events.length) ;
       }) ;
     } ;
 

@@ -786,8 +786,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             if (eventCounter === eventTypeLength)
               angular.element('.check-all-events span')
                   .addClass(constants.checkedEventClass);
+            console.log('events'+input);
             Event.getList({type: input, limit: 100}).then(function(result) {
               events = result.concat(events);
+              console.log(events);
               placesOnMap.showEvents(result, input);
             });
           }

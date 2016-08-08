@@ -4,6 +4,7 @@ angular.module('eventDetail').component('eventDetail', {
     function($scope, currentUser, $routeParams, calendarService, Event) {
       this._id = $routeParams.eventId;
       this.user = currentUser;
+        console.log(currentUser) ;
 
       $scope.calendars = calendarService;
 
