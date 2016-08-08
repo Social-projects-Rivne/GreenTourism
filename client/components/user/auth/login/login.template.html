@@ -1,36 +1,42 @@
 <div class="registration container">
   <form role="form" name="login" novalidate method="POST" action="/api/login">
+
     <div class="form-group input-group-sm">
       <label for="email">E-mail</label>
-      <input type="email" name="email" class="form-control" 
-      ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/"
-          ng-model="$ctrl.user.email" required>
-      <p class="help-block error" 
-          ng-show="login.email.$touched && 
-          (login.email.$invalid && login.email.$dirty)">
-        <span ng-show="login.email.$error.pattern">Please input correct email
-              </span>
-        <span ng-show="login.email.$error.required">Email is required</span>
-      </p>
+      <input type="email" name="email" class="form-control"
+          ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/"
+          ng-model="user.email" required>
+      <p class="text-danger" ng-show="login.email.$touched &&
+          login.email.$error.pattern">Invalid email</p>
+      <p class="text-danger" ng-show="login.email.$touched &&
+          login.email.$error.required">Email is required</p>
     </div>
+
     <div class="form-group input-group-sm">
       <label for="password">Password</label>
       <input type="password" name="password" class="form-control"
-          ng-model="$ctrl.user.password"required>
-      <p class="help-block error" 
-          ng-show="login.password.$touched && login.password.$dirty">
-        <span ng-show="login.password.$touched && 
-            login.password.$error.required">Password is required</span>
-      </p>
+          ng-model="user.password" required>
+      <p class="text-danger" ng-show="login.password.$touched &&
+          login.password.$error.required">Password is required</p>
     </div>
-    <input type="submit" 
-      class="btn btn-success btn-block submit-btn" ng-disabled="login.$invalid" value="Login" />
+
+    <input type="submit" class="btn btn-success btn-block submit-btn"
+        ng-disabled="login.$invalid" value="Login" />
   </form>
 
+  <p class="text-center forgot"><a href="">Forgot password?</a></p>
+
   <hr/>
-  <a class="btn btn-block btn-social btn-facebook" href="/api/auth/facebook">
-    <span class="fa fa-facebook"></span>Login with facebook</a>
-  <hr/>
-  <a class="btn btn-block btn-social btn-google" href="api/auth/google">
-    <span class="fa fa-google"></span>Login with google</a>
+
+  <p>
+    <a class="btn btn-block btn-social btn-facebook" href="/api/auth/facebook">
+      <span class="fa fa-facebook"></span>Login with Facebook
+    </a>
+  </p>
+
+  <p>
+    <a class="btn btn-block btn-social btn-google" href="api/auth/google">
+      <span class="fa fa-google"></span>Login with Google
+    </a>
+  </p>
 </div>

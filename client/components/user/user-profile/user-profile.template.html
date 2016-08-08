@@ -62,7 +62,7 @@
                   <input type="text" class="form-control" ng-model="$ctrl.editedUser.firstName" name="firstName"
                       placeholder="First name" required />
                   <div ng-show="form.$submitted || form.firstName.$touched">
-                    <p class="help-block" ng-show="form.firstName.$error.required">
+                    <p class="text-danger" ng-show="form.firstName.$error.required">
                       First name is required
                     </p>
                   </div>
@@ -74,7 +74,7 @@
                   <input type="text" class="form-control" ng-model="$ctrl.editedUser.lastName" name="lastName"
                       placeholder="Last name" required />
                     <div ng-show="form.$submitted || form.lastName.$touched">
-                      <p class="help-block" ng-show="form.lastName.$error.required">
+                      <p class="text-danger" ng-show="form.lastName.$error.required">
                         Last name is required
                       </p>
                     </div>
@@ -91,7 +91,7 @@
               <input type="text" class="form-control" ng-model="$ctrl.editedUser.phone" name="phone"
                   placeholder="Phone number" ng-pattern="/\+\d{1,4}\d{9}/" />
                 <div ng-show="form.$submitted || form.phone.$touched">
-                  <p class="help-block" ng-show="form.phone.$error.pattern">
+                  <p class="text-danger" ng-show="form.phone.$error.pattern">
                     Invalid phone number
                   </p>
                 </div>
