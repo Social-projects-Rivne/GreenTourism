@@ -20,6 +20,7 @@ var PlaceSchema = new Schema({
   },
   type: {
     type: String,
+    enum: ['camp', 'service', 'hostes', 'featured', 'healthcare'],
     required: true
   },
   photos: [String],
