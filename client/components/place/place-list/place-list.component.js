@@ -388,10 +388,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               ctrl.checkAllPlaces(objectIcon);
             }
             if (objectType === 'eventsIcon') {
-              ctrl.checkAllEvents(objectIcon);
+              ctrl.checkAllEvents('game');
             }
             if (objectType === 'tracksIcon') {
-              ctrl.checkEventType('game') ;
+              ctrl.checkAllTracks(objectIcon);
             }
           } else {
             objectIcon.addClass(constants.checkedClass);
@@ -750,11 +750,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         placesOnMap.initGroupsOfEvents(ctrl.eventsType);
 
         ctrl.checkAllEvents = function(input) {
-          var checkAll = angular.element('.eventsIcon');
+          var checkAllEvent = angular.element('.eventsIcon');
           var checkEvent1 = angular.element('Game');
           var checkEvent2 = angular.element('Festival');
           var checkEvent3 = angular.element('Meeting');
-          if (checkAll.hasClass(constants.checkedClass))
+          if (checkAllEvent.hasClass(constants.checkedClass))
           {
             angular.element('.eventsIcon')
                 .removeClass(constants.checkedSpanClass);
