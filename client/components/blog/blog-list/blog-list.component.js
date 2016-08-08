@@ -6,27 +6,34 @@ angular.module('blogList').component('blogList', {
   },
   controller: ['currentUser', 'Blog', 'Restangular', function BlogListCtrl(currentUser, Blog, Restangular) {
     var ctrl = this;
-    console.log(this);
     ctrl.currentUser = currentUser;
 
     Blog.one('category').get().then(function(response) {
       ctrl.categoryList = response;
     });
     var addPlaceForm = angular.element('form[name="blogPost"]');
-
     ctrl.showCreateForm = true;
-    ctrl.toggleCreatePost = function(form){
-      ctrl.showCreateForm = ctrl.showCreateForm === false ? true: false;
-      form.$setPristine();
-    };
-
-    ctrl.clearPostForm = function(form){
+    ctrl.blogPost = {}
+    ctrl.reset = function(form){
+      ctrl.blogPost = angular.copy(ctrl.master);
       form.$setPristine();
       form.$setUntouched();
-      //toggleCreatePost();
     };
+
+    ctrl.toggleCreatePost = function(form){
+      ctrl.showCreateForm = ctrl.showCreateForm === false ? true: false;
+      ctrl.master = {
+        blogImg: '',
+        categoryId: '',
+        title: '',
+        content: ''
+      };
+      ctrl.reset(form);
+    };
+
+
+
     ctrl.createPost = function(form) {
-      //angular.element('textarea').css('height', '50px');
       Restangular.one('blogs/').customPOST(
           {
             title: title.value,
@@ -38,11 +45,18 @@ angular.module('blogList').component('blogList', {
       ).then(function(res) {
             res.record.owner = currentUser;
             ctrl.blogs.push(res.record);
+            //ctrl.toggleCreatePost(form);
           }, function(err) {
             ctrl.showError = err.statusText;
           });
     };
-
-
+    ctrl.deletePost = function(id){
+      Restangular.one('blogs/', id).remove().then(function(res){
+        console.log(res);
+        ctrl.blogs = ctrl.blogs.filter(function(res) {
+          return res.id !== id;
+        });
+      });
+    }
   }]
 });

@@ -29,13 +29,13 @@
         <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
           <div class="row">
             <div class="col-md-12">
-              <form name="blogPost" role="form" novalidate ng-submit="$ctrl.createPost(blogPost)"
-                    ng-hide="$ctrl.showCreateForm">
+              <form name="blogPost"  role="form" novalidate ng-submit="$ctrl.createPost(blogPost)"
+                    ng-hide="$ctrl.showCreateForm" class="blogPost">
                 <div class="form-group"
                      ng-class="{ 'has-error' : blogPost.blogImg.$invalid && blogPost.blogImg.$dirty }">
                   <label for="blogImg">Photo</label>
                   <input type="text" class="form-control" id="blogImg" placeholder="photo" name="blogImg"
-                         ng-model="$ctrl.createPost.blogImg" required>
+                         ng-model="$ctrl.blogPost.blogImg" required>
 
                   <div ng-show="blogPost.$submitted || blogPost.blogImg.$touched">
                     <p class="help-block" ng-show="blogPost.blogImg.$error.required">
@@ -46,14 +46,12 @@
                 <div class="form-group"
                      ng-class="{ 'has-error' : blogPost.categoryId.$invalid && blogPost.categoryId.$touched }">
                   <label for="categoryId">Category</label>
-                  <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.createPost.categoryId"
+                  <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.blogPost.categoryId"
                           required>
                     <option value="">-- Choose category --</option>
                     <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
                       {{category.name}}
                     </option>
-                    <!--<select ng-options="item as item.name for item in $ctrl.categoryList track by item.id" ng-model="selected"></select>-->
-                    <!--<select ng-options="for category.name in $ctrl.categoryList" ng-model="selected"></select>-->
                   </select>
 
                   <div ng-show="blogPost.$submitted || blogPost.categoryId.$touched">
@@ -65,7 +63,7 @@
                 <div class="form-group" ng-class="{ 'has-error' : blogPost.title.$invalid && blogPost.title.$dirty }">
                   <label for="title">title</label>
                   <input type="text" class="form-control" id="title" placeholder="title" name="title"
-                         ng-model="$ctrl.createPost.title" required>
+                         ng-model="$ctrl.blogPost.title" required>
 
                   <div ng-show="blogPost.$submitted || blogPost.title.$touched">
                     <p class="help-block" ng-show="blogPost.title.$error.required">
@@ -77,7 +75,7 @@
                      ng-class="{ 'has-error' : blogPost.content.$invalid && blogPost.content.$dirty }">
                   <label for="content">content</label>
                   <textarea class="form-control" rows="3" name="content" id="content"
-                            ng-model="$ctrl.createPost.content" required></textarea>
+                            ng-model="$ctrl.blogPost.content" required></textarea>
 
                   <div ng-show="blogPost.$submitted || blogPost.content.$touched">
                     <p class="help-block" ng-show="blogPost.content.$error.required">
@@ -86,8 +84,8 @@
                   </div>
                 </div>
                 <input type="hidden" name="owner" value="{{$ctrl.currentUser._id}}">
-                <button type="submit" class="btn btn-default">Submit</button>
-                <button type="button" class="btn btn-default" ng-click="$ctrl.clearPostForm(blogPost)">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info" ng-click="$ctrl.reset(blogPost)">Reset</button>
               </form>
             </div>
           </div>
@@ -102,6 +100,7 @@
                 <div class="caption">
                   <h3 class="blog-title">
                     <a ng-href="#!/blog/{{blog.id}}">{{blog.title}}</a>
+                    <a href="" ng-click="$ctrl.deletePost(blog.id)" class="pull-right" ng-if="$ctrl.currentUser._id === blog.owner.id"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                   </h3>
 
                   <div class="blog-details">

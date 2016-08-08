@@ -119,6 +119,16 @@
       }
     }
   }
+  .blogPost{
+    .btn{
+      border-radius: 0;
+      margin-bottom: 10px;
+    }
+    .btn-primary{
+      background-color: @blog-prim-color;
+      border: none;
+    }
+  }
 }
 
 .blog-list-item {
@@ -222,6 +232,9 @@
               border-right: none;
             }
             &.likes-container {
+              .added{
+                color: @blog-prim-color;
+              }
               .disabled{
                 pointer-events:none;
               }

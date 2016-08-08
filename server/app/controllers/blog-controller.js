@@ -126,11 +126,11 @@ exports.update = function(req, res) {
   }
 };
 exports.delete = function(req, res) {
-  model.destroy({where: {id: req.params.id}})
+  Blog.blog.destroy({where: {id: req.params.id}})
       .then(function() {
         res.status(200).json({
-          message: 'Record ' + req.params.id +
-          ' was successfully deleted'
+          message: 'Record ' + req.params.id + ' was successfully deleted',
+          id: req.params.id
         });
       })
       .catch(function(err) {
