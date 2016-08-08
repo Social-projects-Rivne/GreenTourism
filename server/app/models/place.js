@@ -6,11 +6,18 @@ var LocationSchema = require('./schema/location');
 var PlaceSchema = new Schema({
   name: {
     type: String,
+    maxlength: [100, 'The value exceeds the maximum allowed length ({MAXLENGTH}).'],
     required: true
   },
-  description: String,
+  description: {
+    type: String,
+    maxlength: [1000, 'The value exceeds the maximum allowed length ({MAXLENGTH}).']
+  },
   location: LocationSchema,
-  address: String,
+  address: {
+    type: String,
+    maxlength: [100, 'The value exceeds the maximum allowed length ({MAXLENGTH}).']
+  },
   type: {
     type: String,
     required: true
