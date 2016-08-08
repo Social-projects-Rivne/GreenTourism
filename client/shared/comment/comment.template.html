@@ -7,7 +7,8 @@
 
     <div class="row media-body">
       <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        <textarea ng-keyup="$ctrl.textareaPostResize()" class="form-control"
+        <textarea ng-keyup="$ctrl.textareaPostResize()"
+                  class="form-control textarea-post"
                   required placeholder="Leave your comment..." maxlength="1000"
                   ng-model="$ctrl.content"></textarea>
         <p ng-if="$ctrl.content" class="pull-right">
