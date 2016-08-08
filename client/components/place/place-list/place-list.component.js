@@ -56,18 +56,18 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             newPlaces.push(ctrl.newPlace);
             Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
               '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
-                ctrl.newPlace.address = result.display_name;
-                Place.post(ctrl.newPlace).then(function() {
-                  checkActiveType = angular.element('.' + ctrl.newPlace.type + ' span');
-                  if (checkActiveType.hasClass(constants.checkedSpanClass)) {
-                    placesOnMap.showPlaces(newPlaces);
-                  } else {
-                    ctrl.checkType(ctrl.newPlace.type);
-                  }
-                  ctrl.resetAddPlaceForm(form);
-                  ctrl.toggleAddPlaceMenu(form);
-                });
+              ctrl.newPlace.address = result.display_name;
+              Place.post(ctrl.newPlace).then(function() {
+                checkActiveType = angular.element('.' + ctrl.newPlace.type + ' span');
+                if (checkActiveType.hasClass(constants.checkedSpanClass)) {
+                  placesOnMap.showPlaces(newPlaces);
+                } else {
+                  ctrl.checkType(ctrl.newPlace.type);
+                }
+                ctrl.resetAddPlaceForm(form);
+                ctrl.toggleAddPlaceMenu(form);
               });
+            });
           }
         };
 
@@ -122,7 +122,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.newEvent.location.coordinates = placesOnMap.coords;
             newEvents.push(ctrl.newEvent);
             Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
-                '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
+              '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
               ctrl.newEvent.address = result.display_name;
               Event.post(ctrl.newEvent).then(function() {
                 checkEventType = angular.element('.' + ctrl.newEvent.type + ' span');
@@ -156,8 +156,8 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         };
 
 
-        // -----END ADD Event-----        
-        
+        // -----END ADD Event-----
+
         // -----START ADD Track-----
         ctrl.newTrackObject = angular.copy(constants.emptyTrackModel);
         ctrl.addPointMenuIsOpen = false;
@@ -318,7 +318,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
                 if (!point[0]._id) {
                   newPoints.push(point[0]);
                   Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
-                  '&lon=' + point[0].location.coordinates[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
+                    '&lon=' + point[0].location.coordinates[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
                     point[0].address = result.display_name;
                     Place.post(point[0]).then(function(response) {
                       counterByNewPoints++;
@@ -411,7 +411,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
+        ctrl.hidePopularTracks = true;
         ctrl.hidePopularEvents = true;
+        ctrl.hideSearchPlaces = true;
+        $scope.$on('search', function(event, data) {
+          ctrl.hideSearchPlaces = data;
+        });
 
         ctrl.checkPopularPlaces = function() {
           var popularPlacesIcon = angular.element('#popularPlaces');
@@ -426,6 +431,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
             ctrl.hidePopularEvents = true;
+            ctrl.hideSearchPlaces = true;
           }
         };
 
@@ -442,6 +448,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
             ctrl.hidePopularEvents = true;
+            ctrl.hideSearchPlaces =  true;
           }
         };
 
@@ -453,11 +460,20 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
           } else {
             popularEventsIcon.addClass(constants.checkedClass);
             angular.element('#toolsOfEvents')
-                .removeClass(constants.checkedClass);
+              .removeClass(constants.checkedClass);
             ctrl.hidePopularEvents = false;
             ctrl.hidePopularTracks = true;
             ctrl.hidePopularPlaces = true;
+            ctrl.hideSearchPlaces = true;
           }
+        };
+
+        ctrl.checkSearchPlaces = function() {
+            ctrl.hidePopularPlaces = true;
+            ctrl.hidePopularTracks = true;
+            ctrl.hidePopularEvents = true;
+            ctrl.hideSearchPlaces = true;
+            $scope.$broadcast('searchClose', ctrl.hideSearchPlaces);
         };
         // ---END---- Popular places and tracks in location
 
@@ -524,6 +540,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
           }
           placesOnMap.removePlaces();
           places = result;
+          placesOnMap.setPlaceArr(places);
           placesOnMap.showPlaces(places);
           for (key in placesOnMap.places) {
             if (ctrl.addTrackMenuIsOpen) {
@@ -557,6 +574,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               }
               placesOnMap.removePlaces();
               places = result;
+              placesOnMap.setPlaceArr(places);
               placesOnMap.showPlaces(places);
               for (key in placesOnMap.places) {
                 if (ctrl.addTrackMenuIsOpen) {
@@ -664,7 +682,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               if ({}.hasOwnProperty.call(ctrl.placesType, key)) {
                 if (!angular.element('.' + key + ' a span')
                     .hasClass(constants.checkedSpanClass) &&
-                    !angular.element('.' + key + ' a span')
+                  !angular.element('.' + key + ' a span')
                     .hasClass(constants.spinner)) {
                   ctrl.checkType(key);
                 }
@@ -757,14 +775,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
           if (checkAllEvent.hasClass(constants.checkedClass))
           {
             angular.element('.eventsIcon')
-                .removeClass(constants.checkedSpanClass);
+              .removeClass(constants.checkedSpanClass);
           }
           else
           {
             angular.element('.eventsIcon')
-                .addClass(constants.checkedSpanClass);
+              .addClass(constants.checkedSpanClass);
           } ;
-                ctrl.checkEventType('game');
+          ctrl.checkEventType('game');
         };
 
         // ----START---- FilterByOneOfType
@@ -774,7 +792,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             eventCounter--;
             checkEvent.removeClass(constants.checkedSpanClass);
             angular.element('.check-all-events span')
-                .removeClass(constants.checkedEventClass);
+              .removeClass(constants.checkedEventClass);
             placesOnMap.removeEvents(input);
             events = events.filter(function(event) {
               return event.type !== input;
@@ -785,7 +803,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
 
             if (eventCounter === eventTypeLength)
               angular.element('.check-all-events span')
-                  .addClass(constants.checkedEventClass);
+                .addClass(constants.checkedEventClass);
             Event.getList({type: input, limit: 100}).then(function(result) {
               events = result.concat(events);
               placesOnMap.showEvents(result, input);
