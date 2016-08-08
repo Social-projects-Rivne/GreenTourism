@@ -113,8 +113,12 @@ exports.update = function(req, res) {
   if (!req.body) {
     res.sendStatus(400);
   } else {
-    model.update(req.body, {where: {id: req.params.id}})
+    Blog.blog.update(req.body, {where: {id: req.params.id}})
         .then(function() {
+
+          for (var key in req.body){
+            console.log("REQ BODY: " + key + ":" + req.body.key);
+          }
           res.status(200).json({
             message: 'Record ' + req.params.id +
             ' was successfully updated'

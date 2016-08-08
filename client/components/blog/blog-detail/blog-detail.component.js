@@ -7,6 +7,7 @@ angular.module('blogDetail').component('blogDetail', {
   controller: ['Blog', 'currentUser', 'Restangular', function BlogDetailCtrl(Blog, currentUser, Restangular) {
     var ctrl = this;
     ctrl.currentUser = currentUser;
+    ctrl.master = ctrl.blog;
     if (ctrl.currentUser) {
       if (_.some(ctrl.blog.blogLikes, {author: ctrl.currentUser._id})) {
         angular.element('.likes').addClass('added');
@@ -35,5 +36,24 @@ angular.module('blogDetail').component('blogDetail', {
     Blog.getList({categoryId: ctrl.blog.categoryId, limit: 4}).then(function(res) {
       ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
     });
+    Blog.one('category').get().then(function(response) {
+      ctrl.categoryList = response;
+    });
+
+    ctrl.showEditForm = true;
+
+    ctrl.toggleEditPost = function(form){
+      ctrl.showEditForm = ctrl.showEditForm === false ? true: false;
+      //ctrl.reset(form);
+    };
+
+    ctrl.editPost = function(blogPost){
+      console.log(blogPost);
+
+      Blog.one(blogPost.id).customPUT({blogPost}).then(function(res){
+        console.log(res);
+      })
+    }
+
   }]
 });

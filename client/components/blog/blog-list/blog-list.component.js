@@ -11,15 +11,17 @@ angular.module('blogList').component('blogList', {
     Blog.one('category').get().then(function(response) {
       ctrl.categoryList = response;
     });
-    var addPlaceForm = angular.element('form[name="blogPost"]');
+    Blog.one('category').get().then(function(response) {
+      ctrl.categoryList = response;
+    });
+
     ctrl.showCreateForm = true;
-    ctrl.blogPost = {}
+    ctrl.blogPost = {};
     ctrl.reset = function(form){
       ctrl.blogPost = angular.copy(ctrl.master);
       form.$setPristine();
       form.$setUntouched();
     };
-
     ctrl.toggleCreatePost = function(form){
       ctrl.showCreateForm = ctrl.showCreateForm === false ? true: false;
       ctrl.master = {
@@ -30,9 +32,6 @@ angular.module('blogList').component('blogList', {
       };
       ctrl.reset(form);
     };
-
-
-
     ctrl.createPost = function(form) {
       Restangular.one('blogs/').customPOST(
           {
@@ -57,6 +56,6 @@ angular.module('blogList').component('blogList', {
           return res.id !== id;
         });
       });
-    }
+    };
   }]
 });

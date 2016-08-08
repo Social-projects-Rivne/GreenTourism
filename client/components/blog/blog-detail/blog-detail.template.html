@@ -4,6 +4,7 @@
       <div class="row">
         <aside>
           <div class="col-sm-push-8 col-md-offset-1 col-md-3 col-sm-4">
+            <button ng-click="$ctrl.toggleEditPost(blogPost)" class="btn editToggle hidden-xs" ng-if="$ctrl.currentUser">Edit post</button>
             <div class="row">
               <div class="col-md-12">
                 <blog-sidebar></blog-sidebar>
@@ -13,6 +14,67 @@
         </aside>
         <article>
           <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
+            <div class="row">
+              <div class="col-md-12">
+                <form name="blogPost"  role="form" novalidate ng-submit="$ctrl.editPost($ctrl.blog)"
+                      ng-hide="$ctrl.showEditForm" class="blogPost">
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.blogImg.$invalid && blogPost.blogImg.$dirty }">
+                    <label for="blogImg">Photo</label>
+                    <input type="text" class="form-control" id="blogImg"  name="blogImg"
+                           ng-model="$ctrl.blog.blogImg" value="{{$ctrl.blog.blogImg}}" required>
+
+                    <div ng-show="blogPost.$submitted || blogPost.blogImg.$touched">
+                      <p class="help-block" ng-show="blogPost.blogImg.$error.required">
+                        blog image is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.categoryId.$invalid && blogPost.categoryId.$touched }">
+                    <label for="categoryId">Category</label>
+                    <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.blogPost.categoryId"
+                            required>
+                      <option value="">-- Choose category --</option>
+                      <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
+                        {{category.name}}
+                      </option>
+                    </select>
+
+                    <div ng-show="blogPost.$submitted || blogPost.categoryId.$touched">
+                      <p class="help-block" ng-show="blogPost.categoryId.$error.required">
+                        blog category is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error' : blogPost.title.$invalid && blogPost.title.$dirty }">
+                    <label for="title">title</label>
+                    <input type="text" class="form-control" id="title" placeholder="title" name="title"
+                           ng-model="$ctrl.blog.title" value="{{$ctrl.blog.title}}" required>
+
+                    <div ng-show="blogPost.$submitted || blogPost.title.$touched">
+                      <p class="help-block" ng-show="blogPost.title.$error.required">
+                        blog title is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.content.$invalid && blogPost.content.$dirty }">
+                    <label for="content">content</label>
+                  <textarea class="form-control" rows="3" name="content" id="content"
+                            ng-model="$ctrl.blog.content" required>{{$ctrl.blog.content}}</textarea>
+
+                    <div ng-show="blogPost.$submitted || blogPost.content.$touched">
+                      <p class="help-block" ng-show="blogPost.content.$error.required">
+                        blog content is required
+                      </p>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-info" ng-click="$ctrl.reset(blogPost)">Cancel</button>
+                </form>
+              </div>
+            </div>
             <div class="blog-wrapper">
               <img ng-src="{{$ctrl.blog.blogImg}}" alt="{{$ctrl.blog.title}}">
 
