@@ -59,12 +59,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
                 ctrl.newPlace.address = result.display_name;
                 Place.post(ctrl.newPlace).then(function() {
                   checkActiveType = angular.element('.' + ctrl.newPlace.type + ' span');
-                  if (checkActiveType.hasClass(constants.checkedClass)) {
+                  if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                     placesOnMap.showPlaces(newPlaces);
                   } else {
                     ctrl.checkType(ctrl.newPlace.type);
                   }
                   ctrl.resetAddPlaceForm(form);
+                  ctrl.toggleAddPlaceMenu(form);
                 });
               });
           }
@@ -183,6 +184,12 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
             ctrl.addEventMenuIsOpen = false;
+
+            var checkAllPlaces = angular.element('.check-all-places span');
+            if (!checkAllPlaces.hasClass(constants.checkedSpanClass)) {
+              ctrl.checkAllPlaces();
+            }
+
             map.on('click', addNewTrackPointOnMap);
             for (key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
@@ -193,6 +200,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         };
 
         function addExistingPointIntoNewTrack() {
+          ctrl.isAlredyAdded = false;
           var existingPoint = {
             name: '',
             _id: '',
@@ -200,22 +208,30 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               coordinates: []
             }
           };
-          ctrl.newTrackObject.location.coordinates.push([this._latlng.lng, this._latlng.lat]);
           existingPoint.name = this.name;
           existingPoint._id = this._id;
           existingPoint.location.coordinates[0] = this._latlng.lng;
           existingPoint.location.coordinates[1] = this._latlng.lat;
-          ctrl.newTrackPoints.push([existingPoint]);
-          placesOnMap.showTracks([ctrl.newTrackObject], true);
-          if (newPointForTrack) {
-            map.removeLayer(newPointForTrack);
-          }
+          ctrl.newTrackPoints.forEach(function(point) {
+            if (existingPoint._id == point[0]._id) {
+              ctrl.isAlredyAdded = true;
+            }
+          });
           ctrl.cancelNewPointForTrackMenu();
-          newPointsForTrack.push(null);
+          if (!ctrl.isAlredyAdded) {
+            ctrl.newTrackObject.location.coordinates.push([this._latlng.lng, this._latlng.lat]);
+            ctrl.newTrackPoints.push([existingPoint]);
+            placesOnMap.showTracks([ctrl.newTrackObject], true);
+            if (newPointForTrack) {
+              map.removeLayer(newPointForTrack);
+            }
+            newPointsForTrack.push(null);
+          }
           $scope.$digest();
         }
 
         function addNewTrackPointOnMap(e) {
+          ctrl.isAlredyAdded = false;
           ctrl.addPointMenuIsOpen = true;
           ctrl.newPoint.location.coordinates[0] = e.latlng.lng;
           ctrl.newPoint.location.coordinates[1] = e.latlng.lat;
@@ -237,7 +253,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               shadowSize: [41, 41]
             })
           }).addTo(map);
-        };
+        }
 
         ctrl.createNewPointForTrack = function(form) {
           if (form.$valid) {
@@ -270,10 +286,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         };
 
         ctrl.removePointFromNewPointsArray = function(pointIndexInArray) {
-          var removedPoints = newPointsForTrack.slice(pointIndexInArray, newPointsForTrack.length);
-          newPointsForTrack.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
-          ctrl.newTrackObject.location.coordinates.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
-          ctrl.newTrackPoints.splice(pointIndexInArray, ctrl.newTrackPoints.length - pointIndexInArray);
+          ctrl.isAlredyAdded = false;
+          var removedPoints = newPointsForTrack.slice(pointIndexInArray, pointIndexInArray + 1);
+          newPointsForTrack.splice(pointIndexInArray, 1);
+          ctrl.newTrackObject.location.coordinates.splice(pointIndexInArray, 1);
+          ctrl.newTrackPoints.splice(pointIndexInArray, 1);
           removedPoints.forEach(function(point) {
             if (point) {
               map.removeLayer(point);
@@ -300,7 +317,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             } else {
               ctrl.newTrackPoints.forEach(function(point, index) {
                 var newPoints = [];
-                if (!point[0]._id)  {
+                if (!point[0]._id) {
                   newPoints.push(point[0]);
                   Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + point[0].location.coordinates[1] +
                   '&lon=' + point[0].location.coordinates[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
@@ -337,6 +354,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               ctrl.showSpecificTracks(ctrl.newTrackObject.type);
             }
             ctrl.resetAddTrackForm(form);
+            ctrl.toggleAddTrackMenu(form);
           });
         }
 

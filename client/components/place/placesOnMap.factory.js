@@ -97,11 +97,26 @@ angular.module('mapModule')
     /* ** START tracks factory ** */
     var tracks = [];
     var trackForAdding;
+    var boldLine;
     var polyline = function(trackPoints, color) {
       return L.polyline(trackPoints, {
         color: (color ? color : '#000'),
         opacity: 1
       });
+    };
+
+    function overPolyline() {
+      map.removeLayer(this);
+      boldLine = L.polyline(this._latlngs, {
+        color: '#000',
+        opacity: 0.8,
+        weight: 8
+      }).addTo(map);
+      this.addTo(map);
+    };
+
+    function leavePolyline() {
+      map.removeLayer(boldLine);
     };
 
     placesOnMap.showTracks = function(tracksArray, isCreateMode) {
@@ -122,6 +137,8 @@ angular.module('mapModule')
           });
         }
         trackForAdding = polyline(coordsArray, color).addTo(map);
+        trackForAdding.on('mouseover', overPolyline); 
+        trackForAdding.on('mouseout', leavePolyline); 
         if (isCreateMode) {
           placesOnMap.newTrack = trackForAdding;
         }
