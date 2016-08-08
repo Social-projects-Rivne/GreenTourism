@@ -3,6 +3,7 @@ var Place = require('mongoose').model('Place');
 var Track = require('mongoose').model('Track');
 var defaultController = require('./default-crud-controller')(User);
 var sliceQueryOptions = require('../helpers/slice-query-options');
+var callbacks = require('../helpers/default-callbacks');
 
 exports.list = defaultController.list;
 
@@ -53,32 +54,38 @@ exports.update = defaultController.update;
 
 exports.delete = defaultController.delete;
 
-exports.listPlaces = function(req, res) {
+exports.myPlaces = function(req, res) {
   req.query.owner = req.params.id;
 
   var queryAndOptions = sliceQueryOptions(req.query);
 
   Place.find(queryAndOptions.query, null, queryAndOptions.options,
-    function(err, records) {
-      if (err) {
-        return res.status(400).json(err);
-      }
-
-      return res.json(records);
-    });
+    callbacks.find(res));
 };
 
-exports.listTracks = function(req, res) {
+exports.myTracks = function(req, res) {
   req.query.owner = req.params.id;
 
   var queryAndOptions = sliceQueryOptions(req.query);
 
   Track.find(queryAndOptions.query, null, queryAndOptions.options,
-    function(err, records) {
-      if (err) {
-        return res.status(400).json(err);
-      }
+    callbacks.find(res));
+};
 
-      return res.json(records);
-    });
+exports.favoritePlaces = function(req, res) {
+  req.query.likes = req.params.id;
+
+  var queryAndOptions = sliceQueryOptions(req.query);
+
+  Place.find(queryAndOptions.query, null, queryAndOptions.options,
+    callbacks.find(res));
+};
+
+exports.favoriteTracks = function(req, res) {
+  req.query.likes = req.params.id;
+
+  var queryAndOptions = sliceQueryOptions(req.query);
+
+  Track.find(queryAndOptions.query, null, queryAndOptions.options,
+    callbacks.find(res));
 };

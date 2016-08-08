@@ -62,7 +62,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
           angular.element(document.querySelector('#searchPlaces')).empty();
           if (searchname.length >= 3) {
             $scope.hideSearchPlaces = false;
-            $scope.$emit('eventEmitedName', $scope.hideSearchPlaces);
+            $scope.$emit('search', $scope.hideSearchPlaces);
             $scope.loading = true;
             Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultPlaces) {
               ctrl.resultPlaces = resultPlaces;
@@ -70,7 +70,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
               searchBy = 'track';
               Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultTracks) {
                 ctrl.resultTracks = resultTracks;
-                placesOnMap.removeAllTracks();
+                placesOnMap.removeTracks();
                 placesOnMap.showTracks(resultTracks);
                 $scope.loading = false;
                 searchBy = 'place';

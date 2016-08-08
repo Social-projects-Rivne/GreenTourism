@@ -25,6 +25,7 @@ var PlaceSchema = new Schema({
   },
   rate: Number
 }, {
+  timestamps: true,
   toObject: {
     virtuals: true
   },

@@ -37,7 +37,9 @@
     "leaflet.markercluster.layersupport": "https://github.com/ghybs/Leaflet.MarkerCluster.LayerSupport.git#leaflet-0.7",
     "bootstrap-social": "^5.0.0",
     "fancybox": "^2.1.5",
-    "angular-validation-match": "^1.9.0"
+    "angular-validation-match": "^1.9.0",
+    "lodash": "^4.14.1",
+    "angular-messages": "^1.5.x"
   },
   "overrides": {
     "bootstrap": {
@@ -61,5 +63,8 @@
   },
   "devDependencies": {
     "less": "^2.7.1"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }

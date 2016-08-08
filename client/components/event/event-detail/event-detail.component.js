@@ -1,24 +1,27 @@
 angular.module('eventDetail').component('eventDetail', {
   templateUrl: 'components/event/event-detail/event-detail.template.html',
-  controller: ['$scope', '$routeParams', '$http', 'eventListService',
-    function($scope, $routeParams, $http, eventListService) {
-      this.id = $routeParams.eventId;
-      if ($routeParams.dataId) this.date = +$routeParams.dataId;
-      else this.date = new Date();
+  controller: ['$scope', 'currentUser', '$routeParams', 'calendarService', 'Event',
+    function($scope, currentUser, $routeParams, calendarService, Event) {
+      this._id = $routeParams.eventId;
+      this.user = currentUser;
 
-      $scope.eventL = eventListService.th;
-      $scope.eventL.mainControllerName = 'Event';
+      $scope.calendars = calendarService;
 
-      $scope.eventL.date_current = new Date(this.date);
+      $scope.calendars.clear() ;
 
-      this.data = $http.get('components/event/event-list/event.data.json').success(function(data) {
-        $scope.eventListService = data;
-        $scope.eventL.event = data;
-        return data;
-      }, function(data) {
-        console.log('Error : Could not load JSON Event in angular.module - event ');
-        return 'error';
-      });
-    }
-  ]
+      if ($scope.calendars.events.length == 0)
+      {
+          Event.getList().then(function (result) {
+          $scope.calendars.events = result.concat(event);
+        })
+      };
+
+      $scope.imgPath = function(str){
+        if (!indexOf('http')) return str ;
+        else return
+      }
+
+      $scope.eventListService = $scope.calendars.events;
+
+   }]
 });

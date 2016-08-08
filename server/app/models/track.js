@@ -16,23 +16,42 @@ var TrackSchema = new Schema({
     ref: 'User',
     required: true
   },
+  location: {
+    type: {
+      type: String,
+      default: 'LineString',
+      enums: ['LineString'],
+      required: true
+    },
+    coordinates: {
+      type: [[Number]],
+      required: true
+    }
+  },
   places: [{
     type: Schema.Types.ObjectId,
     ref: 'Place',
     required: true
   }],
   description: String,
-  rate: Number,
   likes: [Schema.Types.ObjectId],
   photos: [String],
-  comments: [CommentSchema]
+  comments: [CommentSchema],
+  rate: Number
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
-var autoPopulateOwner = function(next) {
-  this.populate('owner');
-  next();
-};
-TrackSchema.pre('findOne', autoPopulateOwner).pre('find', autoPopulateOwner);
+TrackSchema.virtual('stars').get(function() {
+  this.rate = this.likes.length;
+  this.save();
+});
 
 var autoPopulatePlaces = function(next) {
   this.populate('places');

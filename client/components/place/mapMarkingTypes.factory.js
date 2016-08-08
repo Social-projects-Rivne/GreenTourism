@@ -43,31 +43,42 @@ angular.module('greenTourism')
       }
     };
 
+    types.events = {
+      game: {
+        name: 'Game',
+        icon: 'assets/img/events/marker/green.png'
+      },
+      festival: {
+        name: 'Festival',
+        icon: 'assets/img/events/marker/red.png'
+      },
+      meeting: {
+        name: 'Meeting',
+        icon: 'assets/img/events/marker/blue.png'
+      }
+    };
+
     types.layers = {
       streets: {
         name: 'Streets',
-        layer: L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://osm.org/copyright">' +
-          'OpenStreetMap</a> contributors'
-        })
+        link: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        attribute: '&copy; <a href="http://osm.org/copyright">' +
+        'OpenStreetMap</a> contributors'
       },
       outdoors: {
         name: 'Outdoors',
-        layer: L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/' +
-          '{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.thunderforest.com/">' +
-            'Thunderforest</a>, &copy; ' +
-            '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          })
+        link: 'http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png',
+        attribute: '&copy; <a href="http://www.thunderforest.com/">' +
+        'Thunderforest</a>, &copy; ' +
+        '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       },
       satellite: {
         name: 'Satellite',
-        layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/' +
-          'services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, ' +
-            'USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, ' +
-            'UPR-EGP, and the GIS User Community'
-          })
+        link: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
+        'World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attribute: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, ' +
+        'USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, ' +
+        'and the GIS User Community'
       }
     };
     return types;

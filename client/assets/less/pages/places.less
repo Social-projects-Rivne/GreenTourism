@@ -1,4 +1,5 @@
 @map-page-bg: #f8f8f8;
+
 .map-page-wrapper {
   background-color: @map-page-bg;
   .map-menu {
@@ -169,12 +170,13 @@
         padding-left: 0;
       }
     }
-    // Class for disable double click
-    .check-disabled {
-      pointer-events: none;
-      cursor: default;
-    }
   }
+}
+
+// Class for disable double click
+.check-disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 //Spinner
@@ -293,6 +295,17 @@
       width: 100%;
       height: auto;
     }
+    .popular-track-rate {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      color: #fff;
+      background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+      padding: 5px 10px;
+      .fa-heart {
+        color: @light-green;
+      }
+    }
     .popular-in-location-gradient {
       position: absolute;
       top: 0;
@@ -332,23 +345,30 @@
 
 .add-item-menu {
   position: absolute;
-  top: 0;
+  top: 114px;
+  bottom: 0;
   right: 0;
-  height: 100%;
-  width: 300px;
+  width: 25%;
   z-index: 2;
   background-color: @map-page-bg;
-  padding: 115px 15px 15px 15px;
+  padding: 0 15px 15px 15px;
   overflow: auto;
   display: block;
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
   .removeIcon {
     position: absolute;
-    top: 115px;
+    top: 5px;
     left: 10px;
     font-size: 25px;
     color: @light-green;
     @media (max-width: 767px) {
-      top: 160px;
+      top: 50px;
     }
   }
   h2 {
@@ -358,17 +378,62 @@
     font-weight: bold;
     color: @light-green;
   }
+  .no-padding {
+    padding: 0;
+  }
+  .inactive-add-item-menu {
+    position: fixed;
+    top: 114px;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0.5);
+    z-index: 3;
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all linear 0.5s;
+    }
+    &.ng-hide {
+      opacity: 0;
+    }
+    #new-point-menu {
+      position: relative;
+      background-color: #f8f8f8;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      overflow: hidden;
+      padding: 0 10px 10px 10px;
+      margin: 65px 15px 0 15px;
+      z-index: 4;
+      input {
+        margin-top: 0;
+      }
+      h3 {
+        text-align: center;
+      }
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        transition: all linear 0.5s;
+      }
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 60%;
+    }
+  }
   @media (max-width: 767px) {
-    padding-top: 200px;
+    padding-top: 50px;
     width: 60%;
   }
 }
-
+/*--------search-----*/
 #search {
   span.err {
     border: 1px solid @light-green;
     border-top: 0;
-    width: 70%;
+    width: 200px;
     text-align: center;
     height: 20px;
     position: absolute;
@@ -378,14 +443,14 @@
   span.transparent {
     display: none;
   }
-  width: 100%;
+  width: 200px;
   margin: 0;
   padding: 0;
   input {
     width: 60%;
   }
   button {
-    width: 100px;
+    width: 80px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
   }
@@ -419,3 +484,81 @@
     background-color: #46bd78;
   }
 }
+/*-----------------event on map ----------------*/
+.event-map-poster .calendar {
+  margin: 5px 12px;
+  padding: 3px;
+  font-size:18px;
+  border: 1px solid green;
+}
+.event-map-poster .calendar .dropdown-menu {
+  position: relative;
+}
+.event-map-poster .img-block {
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: relative;
+  margin: 5px auto;
+  display: block;
+}
+.event-map-poster .img-block img {
+  height: 300px;
+  width: 100%;
+}
+.event-map-poster .img-block h3{
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: absolute;
+}
+.event-map-poster .main-centr a{
+  position: relative;
+}
+
+/* ------------- Add track ---------------*/
+
+#pointsForNewTrack {
+  padding: 10px;
+  color: #fff;
+  overflow: hidden;
+  .pointsList {
+    .row:nth-child(even) {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+    .row:nth-child(odd) div:first-child {
+      border-right: 3px solid @light-green;
+      height: 10px;
+    }
+  }
+  .pointsList:first-child {
+    .row {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+      div:first-child {
+        border: none;
+      }
+    }
+  }
+  .pointName {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  .fa-map-marker {
+    margin-left: -15px;
+  }
+  a {
+    color: #fff;
+  }
+}
+
