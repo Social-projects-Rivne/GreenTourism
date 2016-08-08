@@ -41,7 +41,7 @@ angular.module('trackDetail', ['comment', 'like'])
         };
 
         ctrl.updateTrack = function(track) {
-          angular.element('#show-message').removeClass('alert-info');
+          angular.element('#show-message').removeClass();
           ctrl.message = '';
           if (track) {
             var trackObject = {
@@ -72,9 +72,9 @@ angular.module('trackDetail', ['comment', 'like'])
                     .addClass('alert alert-success text-center');
                   ctrl.message = 'Your changes was saved successfully!';
                   ctrl.showMessage = true;
+                  ctrl.newPhoto = '';
                   redrawTrack();
                 }, function() {
-                  angular.element('#show-message').removeClass();
                   angular.element('#show-message')
                     .addClass('alert alert-danger text-center');
                   ctrl.message = 'There is some problem. ' +
@@ -87,11 +87,11 @@ angular.module('trackDetail', ['comment', 'like'])
               ctrl.message = 'Nothing to change';
             }
           } else {
-            angular.element('#show-message').removeClass();
             ctrl.message = '';
             ctrl.showMessage = false;
             ctrl.track = angular.copy(ctrl.defaultTrack);
             ctrl.track.type = ctrl.currentTrackType;
+            ctrl.newPhoto = '';
             ctrl.track.photos.forEach(function(track, index) {
               ctrl.fotoIsNotCovered[index] = true;
             });
@@ -116,16 +116,29 @@ angular.module('trackDetail', ['comment', 'like'])
         };
 
         ctrl.addPhoto = function(track) {
-          if (_.includes(ctrl.track.photos, track)) {
-            ctrl.message = 'Nothing to change';
-            ctrl.showMessage = true;
+          if (track) {
+            if (_.includes(ctrl.track.photos, track)) {
+              angular.element('#show-message')
+                .addClass('alert alert-danger text-center');
+              ctrl.message = 'This URL is already exist. Please, paste another URL';
+              ctrl.showMessage = true;
+            } else {
+              angular.element('#show-message')
+                  .removeClass();
+              ctrl.message = '';
+              ctrl.showMessage = false;
+              ctrl.track.photos.push(ctrl.newPhoto);
+              ctrl.newPhoto = '';
+            }
+            ctrl.track.photos.forEach(function(track, index) {
+              ctrl.fotoIsNotCovered[index] = true;
+            });
           } else {
-            ctrl.track.photos.push(ctrl.newPhoto);
-            ctrl.newPhoto = '';
+            angular.element('#show-message')
+                .addClass('alert alert-danger text-center');
+            ctrl.message = 'You did not attach any image URL';
+            ctrl.showMessage = true;
           }
-          ctrl.track.photos.forEach(function(track, index) {
-            ctrl.fotoIsNotCovered[index] = true;
-          });
         };
 
         ctrl.mouseOverPhoto = function(index) {
@@ -165,10 +178,6 @@ angular.module('trackDetail', ['comment', 'like'])
           coordsArray[index] = coords;
         });
         var currenTrack = drawTrack(coordsArray, color);
-        /* L.polyline(coordsArray, {
-          color: color,
-          opacity: 1
-        }).addTo(ctrl.map);*/
 
         ctrl.map.fitBounds(coordsArray);
 
