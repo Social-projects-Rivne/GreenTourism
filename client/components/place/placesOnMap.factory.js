@@ -130,14 +130,32 @@ angular.module('mapModule')
 
     function overPolyline() {
       map.removeLayer(this);
+      var popup = [
+        '<div class="popup">',
+        '<h3>',
+        this.track.name,
+        '</h3>',
+        '<a href="#!/tracks/',
+        this._id,
+        '">',
+        '<img class="marker-image center-block" src="',
+        this.track.photos[0],
+        '" />',
+        '</a>',
+        '<a class="btn btn-default btn-md center-block" href="#!/tracks/',
+        this.track._id,
+        '">',
+        'Details >>',
+        '</a>',
+        '</div>'
+      ].join('');
       boldLine = L.polyline(this._latlngs, {
         color: '#000',
         opacity: 0.8,
         weight: 8
       }).addTo(map);
-      this.addTo(map);
+      this.addTo(map).bindPopup(popup, {autoPan: false});
     };
-
     function leavePolyline() {
       map.removeLayer(boldLine);
     };
@@ -147,6 +165,26 @@ angular.module('mapModule')
         map.removeLayer(placesOnMap.newTrack);
       }
       tracksArray.forEach(function(track) {
+        var popup = [
+          '<div class="popup">',
+          '<h3>',
+          track.name,
+          '</h3>',
+          '<a href="#!/tracks/',
+          track._id,
+          '">',
+          '<img class="marker-image center-block" src="',
+          track.photos[0],
+          '" />',
+          '</a>',
+          '<a class="btn btn-default btn-md center-block" href="#!/tracks/',
+          track._id,
+          '">',
+          'Details >>',
+          '</a>',
+          '</div>'
+        ].join('');
+
         if (track.type) {
           var color = mapMarkingTypes.tracks[track.type].color;
         }
@@ -160,6 +198,7 @@ angular.module('mapModule')
           });
         }
         trackForAdding = polyline(coordsArray, color).addTo(map);
+        trackForAdding.track = track;
         trackForAdding.on('mouseover', overPolyline); 
         trackForAdding.on('mouseout', leavePolyline); 
         if (isCreateMode) {
