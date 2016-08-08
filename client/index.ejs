@@ -2,10 +2,10 @@
 
 <% for (var type in messages) { %>
   <% for (var i in messages[type]) { %>
-  <div class="alert alert-<%= type %> text-center">
-      <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <%= messages[type][i] %>
-  </div>
+    <div class="alert alert-<%= type %> text-center">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%= messages[type][i] %>
+    </div>
   <% } %>
 <% } %>
 
