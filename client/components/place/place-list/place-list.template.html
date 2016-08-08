@@ -10,7 +10,7 @@
           <i class="fa fa-random tracksIcon checked" aria-hidden="true"
              title="Default value of Tracks"></i></a>
         <a href="" ng-click="$ctrl.defaultObject('eventsIcon')">
-          <i class="fa fa-calendar" aria-hidden="true"
+          <i class="fa fa-book eventsIcon" aria-hidden="true"
              title="Default value of Events"></i></a>
       </div>
       <!-- Main-menu -->
@@ -28,7 +28,7 @@
             <ul class="dropdown-menu">
               <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
               <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
-              <li><a href="#">Add Event</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddEventMenu()">Add Event</a></li>
             </ul>
           </div>
           <!-- Map Type -->
@@ -97,15 +97,28 @@
                   </li>
                 </ul>
               </li>
+              <li class="dropdown-submenu events">
+                <a href="">Events</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="(eventType, eventTypeValue) in $ctrl.eventsType"
+                      ng-click="$ctrl.checkEventType(eventType)">
+                    <a class="placeFilter {{eventType}}" href="">
+                      <img ng-src="{{eventTypeValue.icon}}">
+                      {{eventTypeValue.name}}
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
       </div>
       <!-- Main menu for SM and XS devices -->
-      <div class="col-sm-4 col-xs-8 hidden-md hidden-lg map-menu-buttons-wrapper">
+      <div class="col-sm-5 col-xs-8 hidden-md hidden-lg map-menu-buttons-wrapper">
         <div class="btn-group map-menu-buttons" role="group">
           <!-- New Item -->
-          <div class="btn-group" role="group">
+          <div class="btn-group hidden-xs" role="group">
             <button type="button" class="btn btn-default dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true"
                     ng-disabled="!$ctrl.user"
@@ -116,7 +129,7 @@
             <ul class="dropdown-menu">
               <li><a href="" ng-click="$ctrl.toggleAddPlaceMenu()">Add Place</a></li>
               <li><a href="" ng-click="$ctrl.toggleAddTrackMenu()">Add Track</a></li>
-              <li><a href="#">Add Event</a></li>
+              <li><a href="" ng-click="$ctrl.toggleAddEventMenu()">Add Event</a></li>
             </ul>
           </div>
           <!-- Map Type -->
@@ -187,20 +200,33 @@
               </li>
             </ul>
           </div>
-
+          <!-- Events -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-bicycle" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(eventType, eventTypeValue) in $ctrl.eventsType"
+                  ng-click="$ctrl.checkEventType(eventType)">
+                <a class="placeFilter {{eventType}}" href="">
+                  <img ng-src="{{eventTypeValue.icon}}">
+                  {{eventTypeValue.name}}
+                  <span></span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- Search-bar -->
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9 map-menu-search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Search</button>
-        </span>
-        </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-7 map-menu-search" style="margin:0; pading:0;">
+        <search-place></search-place>
       </div>
       <!-- Right menu for Popular places and tracks in location -->
-      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 map-menu-popular">
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 map-menu-popular">
         <div>
           <a href="" ng-click="$ctrl.checkPopularPlaces()">
             <i id="popularPlaces" class="fa fa-flag-o" aria-hidden="true"
@@ -208,6 +234,9 @@
           <a href="" ng-click="$ctrl.checkPopularTracks()">
             <i id="popularTracks" class="fa fa-map-signs" aria-hidden="true"
                title="Tracks in Location"></i></a>
+          <a href="" ng-click="$ctrl.checkPopularEvents()">
+            <i id="popularEvents" class="fa fa-calendar" aria-hidden="true"
+               title="Maps filters and popukar Events in Location"></i></a>
         </div>
       </div>
     </div>
@@ -230,6 +259,15 @@
         <div class="popular-div-style">
         </div>
       </div>
+      <!-- Div for Search-->
+      <div class="popular-tracks-wrapper ng-hide" ng-hide="$ctrl.hideSearchPlaces">
+        <a href="" class="close-button" ng-click="$ctrl.checkSearchPlaces()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="popular-div-style" id="searchPlaces">
+
+        </div>
+      </div>
       <!-- Div for Popular tracks -->
       <div class="popular-tracks-wrapper ng-hide" ng-hide="$ctrl.hidePopularTracks">
         <a href="" class="close-button" ng-click="$ctrl.checkPopularTracks()">
@@ -237,6 +275,16 @@
         </a>
         <div class="popular-div-style">
           <popular-tracks></popular-tracks>
+        </div>
+      </div>
+
+      <!-- Div for Popular tracks -->
+      <div class="popular-tracks-wrapper" ng-hide="$ctrl.hidePopularEvents">
+        <a href="" ng-click="$ctrl.checkPopularEvents()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="popular-div-style">
+          <popular-events></popular-events>
         </div>
       </div>
 
@@ -327,6 +375,115 @@
           </div>
         </form>
       </div>
+      <!-- DIV Add events -->
+      <div id="add-event" class="add-item-menu ng-hide"
+           ng-show="$ctrl.addEventMenuIsOpen">
+        <h2>New Event</h2>
+        <a href="" ng-click="$ctrl.toggleAddEventMenu(eventMaker)">
+          <span class="glyphicon glyphicon-remove removeIcon"></span>
+        </a>
+        <form name="eventMaker" novalidate>
+          <div>
+            <span class="title">1. Choose event on map:</span><br>
+            <span id="latitudeE"></span><br>
+            <span id="longitudeE"></span><br>
+            <span class="alert-input"
+                  ng-show="$ctrl.formNewEventSubmitted && !$ctrl.coordsIsDefined">
+              Please choose event on map!
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="eventName">
+              <span class="title">2. Enter event name:</span>
+            </label>
+            <input type="text" name="newEventName" class="form-control"
+                   id="newEventName" ng-model="$ctrl.newEvent.name"
+                   ng-required="true">
+            <div ng-show="$ctrl.formNewEventSubmitted || eventMaker.newEventName.$touched">
+                <span class="alert-input"
+                      ng-show="eventMaker.newEventName.$error.required">
+                  Please enter Event name!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newEventType">
+              <span class="title">3. Select event type:</span>
+            </label>
+            <select name="newEventType" class="form-control"
+                    ng-options="type as typeObj.name for (type, typeObj) in $ctrl.eventsType track by type"
+                    ng-model="$ctrl.newEventType" ng-required="true">
+              <option value="">-- Choose event type --</option>
+            </select>
+            <div ng-show="$ctrl.formNewEventSubmitted || eventMaker.newEventType.$touched">
+                <span class="alert-input"
+                      ng-show="eventMaker.newEventType.$error.required">
+                  Please select event type!
+                </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="DateStart">
+              <span class="title">4. Select date {{calendars.names[0]}} : {{calendars.values[0] | date:'dd MMMM yyyy'}}</span>
+            </label>
+            <calendar></calendar>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="DateEnd">
+              <span class="title">5. Select date {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}</span>
+            </label>
+            <calendar></calendar>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="newEventPrice">
+              <span class="title">6. Enter price of event (optional):</span>
+            </label>
+            <input type="number" min="0" max="99999" name="newEventPrice" id="newEventPrice"
+                   class="form-control"
+                   ng-model="$ctrl.newEvent.price">
+          </div>
+          <div class="form-group">
+            <label for="newEventDescription">
+              <span class="title">7. Enter event description (optional):</span>
+            </label>
+            <textarea name="newEventDescription" id="newEventDescription"
+                      class="form-control"
+                      ng-model="$ctrl.newEvent.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="newEventPhoto">
+              <span class="title">8. Add photo (optional):</span>
+            </label>
+            <input type="text" name="newEventPhoto" id="newEventPhoto"
+                   class="form-control" ng-model="$ctrl.newEvent.photos[0]"
+                   eventholder="Photo URL">
+          </div>
+
+          <div class="form-group visible-lg">
+            <div class="btn-group col-xs-12 no-padding">
+              <input type="button" class="btn btn-success col-lg-6"
+                     ng-click="$ctrl.resetAddEventForm(eventMaker)"
+                     value="Reset">
+              <input type="button" class="btn btn-success col-lg-6"
+                     ng-click="$ctrl.createNewEvent(eventMaker)"
+                     value="Create">
+            </div>
+          </div>
+          <div class="form-group hidden-lg">
+            <div class="btn-group-vertical col-xs-12 no-padding">
+              <input type="button" class="btn btn-success col-md-12"
+                     ng-click="$ctrl.resetAddEventForm(eventMaker)"
+                     value="Reset">
+              <input type="button" class="btn btn-success col-md-12"
+                     ng-click="$ctrl.createNewEvent(eventMaker)"
+                     value="Create">
+            </div>
+          </div>
+        </form>
+      </div>
       <!-- Div Add track -->
       <div id="add-track" class="add-item-menu ng-hide"
            ng-show="$ctrl.addTrackMenuIsOpen">
@@ -384,7 +541,7 @@
                          ng-click="$ctrl.cancelNewPointForTrackMenu(pointMaker, true)"
                          value="Cancel">
                   <input type="submit" class="btn btn-success col-lg-6"
-                         value="Create Point"> 
+                         value="Create Point">
                 </div>
               </div>
               <div class="form-group hidden-lg">
@@ -393,12 +550,12 @@
                          ng-click="$ctrl.cancelNewPointForTrackMenu(pointMaker, true)"
                          value="Cancel">
                   <input type="submit" class="btn btn-success col-md-12"
-                         value="Create Point"> 
+                         value="Create Point">
                 </div>
               </div>
             </form>
           </div>
-        </div>   
+        </div>
         <h2>New Track</h2>
         <a href="" ng-click="$ctrl.toggleAddTrackMenu(trackMaker)">
           <span class="glyphicon glyphicon-remove removeIcon"></span>
@@ -421,13 +578,17 @@
               </div>
               <div class="col-xs-2 no-padding">
                 <a href=""
-                    ng-click="$ctrl.removePointFromNewPointsArray($index)">
+                   ng-click="$ctrl.removePointFromNewPointsArray($index)">
                   <i class="fa fa-times fa-2x pull-right" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
           </div>
         </div>
+        <span class="alert-input"
+              ng-show="$ctrl.isAlredyAdded">
+          This point is alredy added!
+        </span>
         <span class="alert-input"
               ng-show="trackMaker.$submitted && ($ctrl.newTrackPoints.length < 2 || !$ctrl.newTrackPoints.length)">
           Track must have at least two points!

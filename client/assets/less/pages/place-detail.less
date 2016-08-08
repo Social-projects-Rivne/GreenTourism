@@ -1,3 +1,83 @@
+// Edit-place
+.edit-button, .edit-button:focus {
+  color: #777;
+  &:hover {
+    color: @brand-dark;
+  }
+  i {
+    padding-top: 10px;
+  }
+}
+.edit-mode-active, .edit-mode-active:active, .edit-mode-active:focus {
+  color: @brand-dark;
+}
+
+#editPlaceForm {
+  display: none;
+  padding: 10px;
+  background-color: #e7e7e7;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all linear 1s;
+  top: 0;
+  textarea {
+    resize: none;
+  }
+  &.ng-hide {
+    opacity: 0;
+    top: -500px;
+  }
+  .current-type {
+    padding-top: 7px;
+    p span {
+      color: @brand-dark;
+      font-weight: bold;
+    }
+  }
+  .validation-form {
+    color: maroon;
+  }
+  #photos {
+    img {
+      width: 110px;
+      &:hover {
+        opacity: 0.2;
+      }
+    }
+    div {
+      p {
+        color: @brand-dark;
+      }
+      div {
+        position: relative;
+        float: left;
+        height: 60px;
+        overflow: hidden;
+        i {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          color: @brand-dark;
+        }
+        &:hover {
+          i {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+  .add-photo {
+    p {
+      color: @brand-dark;
+    }
+    span {
+      color: maroon;
+    }
+  }
+}
+
+// Place-page
 .page-detail {
   bottom: 0;
   width: 100%;
@@ -7,31 +87,26 @@
     position: absolute;
     top: 0;
     left: 50%;
-    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
   }
-  @-webkit-keyframes spin {
+  @keyframes spin {
     0% {
-      -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
     100% {
-      -webkit-transform: rotate(359deg);
       transform: rotate(359deg);
     }
   }
   @keyframes spin {
     0% {
-      -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
     100% {
-      -webkit-transform: rotate(359deg);
       transform: rotate(359deg);
     }
   }
 }
-
 @keyframes slideInUp {
   from {
     transform: translateY(100%);
@@ -40,7 +115,6 @@
     transform: translateY(0);
   }
 }
-
 @keyframes slideInOut {
   from {
     transform: translateY(0%);
@@ -49,17 +123,14 @@
     transform: translateY(100%);
   }
 }
-
 .page-detail.ng-enter {
   animation: slideInUp 0.5s both ease-in;
   z-index: 8888;
 }
-
 .page-detail.ng-leave {
   animation: slideInOut 0.5s both ease-in;
   z-index: 9999;
 }
-
 div.place {
   margin: 0;
   .vertical-align {
@@ -67,7 +138,7 @@ div.place {
     padding: 10px 5px 0 5px;
     margin: 0;
   }
-  button .glyphicon-heart, i.close {
+  button i.close {
     color: @brand-dark;
   }
   h2 {
@@ -126,14 +197,12 @@ div.place {
     height: 415px;
   }
   #abovemap {
+    z-index:5;
     position: absolute;
     width: 100%;
     height: 430px;
     background: blue;
     opacity: 0;
-    top: 10px;
-    left: 50px;
-    z-index: 1111
   }
   .popular-in-location-wrapper {
     position: relative;
@@ -175,9 +244,10 @@ div.place {
     cursor: pointer;
   }
   @media (max-width: 400px) {
-    .popular-in-location-address {
-
+    .desc {
+      text-align: justify;
     }
+
     .gallery a.fancybox {
       height: 50px;
     }

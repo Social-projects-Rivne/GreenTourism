@@ -116,7 +116,7 @@ gulp.task('less', function() {
 
 // Add bower deps to index.ejs
 gulp.task('bower', function() {
-  return gulp.src('client/index.ejs')
+  return gulp.src('client/header.ejs')
     .pipe(plumber({errorHandler: onError}))
     .pipe(wiredep())
     .pipe(gulp.dest('client/'))
@@ -133,14 +133,14 @@ gulp.task('clean', function() {
 // Build index.html, css, js
 gulp.task('build-assets', ['bower', 'less'], function() {
   return gulp.src('client/*.html')
-      .pipe(useref())
-      .pipe(gulpif('*.js', ngAnnotate()))
-      .pipe(gulpif('*.js', uglify()))
-      .pipe(gulpif('*.css', autoprefixer({browsers: ['last 2 versions'],
-                                          cascade: false})))
-      .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
-      .pipe(gulp.dest(DEST))
-      .pipe(notify({message: 'Assets builded!', onLast: true}));
+    .pipe(useref())
+    .pipe(gulpif('*.js', ngAnnotate()))
+    .pipe(gulpif('*.js', uglify()))
+    .pipe(gulpif('*.css', autoprefixer({browsers: ['last 2 versions'],
+                                        cascade: false})))
+    .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
+    .pipe(gulp.dest(DEST))
+    .pipe(notify({message: 'Assets builded!', onLast: true}));
 });
 
 // Copy all images and minify them

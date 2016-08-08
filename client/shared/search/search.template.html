@@ -1,0 +1,22 @@
+<div class="input-group" id="search">
+    <div class="form-group">
+      <input ng-model="searchname" type="text" class="typeahead form-control" placeholder="Search for..."
+             typeahead-no-results="noResults">
+          <span class="input-group-btn">
+         <button type="button" ng-click="$ctrl.searchPlace(searchname)"
+                 ng-class="{true:'btn btn-default disabled', false:'btn btn-default'}[loading]" ng-disabled="loading">Search
+           <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
+         </button>
+        </span>
+      <span class="err" ng-show="noResults" dropdown dropdown-toggle auto-close="disabled" is-open="true">
+        no results
+      </span>
+      <span  class="err" ng-show="minchars" dropdown dropdown-toggle auto-close="disabled" is-open="true">
+        Please, enter > 2 chars
+    </span>
+    </div>
+</div>
+
+
+
+

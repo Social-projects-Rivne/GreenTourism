@@ -170,12 +170,13 @@
         padding-left: 0;
       }
     }
-    // Class for disable double click
-    .check-disabled {
-      pointer-events: none;
-      cursor: default;
-    }
   }
+}
+
+// Class for disable double click
+.check-disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 //Spinner
@@ -246,7 +247,7 @@
 }
 
 // Popular places and tracks in location
-.popular-places-wrapper, .popular-tracks-wrapper {
+.popular-places-wrapper, .popular-tracks-wrapper, .search-places-wrapper {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -402,7 +403,7 @@
       border-radius: 5px;
       overflow: hidden;
       padding: 0 10px 10px 10px;
-      margin: 65px 15px 0 15px; 
+      margin: 65px 15px 0 15px;
       z-index: 4;
       input {
         margin-top: 0;
@@ -427,13 +428,106 @@
     width: 60%;
   }
 }
+/*--------search-----*/
+#search {
+  div{
+    margin:0;
+    padding:0;
+  }
+  span.err {
+    border: 1px solid @light-green;
+    border-top: 0;
+    width: 200px;
+    text-align: center;
+    height: 20px;
+    position: absolute;
+    color: red;
+    background: #FFF
+  }
+  span.transparent {
+    display: none;
+  }
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  input {
+    width: 110px;
+  }
+  button {
+    width: 80px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  ul li {
+    list-style-type: none;
+  }
+}
+
+#searchPlaces {
+  li button {
+    color: white;
+    width: 100%;
+    background-color: #3da268;
+    a, h3 {
+      color: white;
+    }
+    .search-in-location-address {
+      color: white;
+      text-align: left;
+    }
+    i.fa:hover, i.fa:active, i.fa:focus, i.fa:default {
+      color: white !important;
+      background-color: white !important;
+      text-align: left !important;
+    }
+  }
+  button.activeSearchResult {
+    background-color: #46bd78;
+  }
+  button:hover {
+    background-color: #46bd78;
+  }
+}
+/*-----------------event on map ----------------*/
+.event-map-poster .calendar {
+  margin: 5px 12px;
+  padding: 3px;
+  font-size:18px;
+  border: 1px solid green;
+}
+.event-map-poster .calendar .dropdown-menu {
+  position: relative;
+}
+.event-map-poster .img-block {
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: relative;
+  margin: 5px auto;
+  display: block;
+}
+.event-map-poster .img-block img {
+  height: 300px;
+  width: 100%;
+}
+.event-map-poster .img-block h3{
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: absolute;
+}
+.event-map-poster .main-centr a{
+  position: relative;
+}
 
 /* ------------- Add track ---------------*/
 
 #pointsForNewTrack {
   padding: 10px;
   color: #fff;
-  overflow: hidden; 
+  overflow: hidden;
   .pointsList {
     .row:nth-child(even) {
       background-color: @light-green;
@@ -471,3 +565,4 @@
     color: #fff;
   }
 }
+

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var crypto = require('crypto');
 var SALT_ROUNDS = 5;
 
 var UserSchema = new Schema({
@@ -54,7 +55,9 @@ var UserSchema = new Schema({
     required: 'Provider is required'
   },
   providerId: String,
-  providerData: {}
+  providerData: {},
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 }, {
   timestamps: true,
   toObject: {
@@ -72,6 +75,12 @@ UserSchema.virtual('fullName').get(function() {
 // Execute before each user.save() call
 UserSchema.pre('save', function(next) {
   var user = this;
+
+  // Set gravatar if no avatar provided by user
+  if (!user.avatar) {
+    var gravatar = crypto.createHash('md5').update(user.email).digest('hex');
+    user.avatar = 'https://secure.gravatar.com/avatar/' + gravatar + '?s=480';
+  }
 
   // Break out if the password hasn't changed
   if (!user.isModified('password')) return next();

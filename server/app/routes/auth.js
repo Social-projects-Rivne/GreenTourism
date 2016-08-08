@@ -16,6 +16,12 @@ router.route('/login').post(
 
 router.route('/logout').get(authController.logout);
 
+router.route('/forgot').post(authController.forgot);
+
+router.route('/reset/:token').get(authController.getReset);
+
+router.route('/reset/:token').post(authController.postReset);
+
 router.route('/auth/facebook').get(
   passport.authenticate('facebook', {
     failureRedirect: '/',
