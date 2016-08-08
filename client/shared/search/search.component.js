@@ -54,6 +54,12 @@ angular.module('searchPlace',['ui.bootstrap'])
         }
       });
       this.searchPlace = function(searchname) {
+        if(ctrl.markers&&ctrl.markers.length!=0){
+          for(i=0;i<ctrl.markers.length;i++) {
+            mapFactory.map.removeLayer(ctrl.markers[i]);
+          }
+
+        }
         angular.element( document.querySelector( '#searchPlaces' ) ).empty();
         if(searchname.length>=3)
         {
@@ -63,13 +69,15 @@ angular.module('searchPlace',['ui.bootstrap'])
           $scope.loading = true;
           searchBy = 'track';
           Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultTracks) {
-            ctrl.resultTracks=resultTracks;
+            ctrl.resultTracks = resultTracks;
             placesOnMap.removeAllTracks();
             placesOnMap.showTracks(resultTracks);
             $scope.loading = false;
             searchBy = 'place';
-            if(ctrl.resultPlaces.length==0&&ctrl.resultTracks.length==0)
-              $scope.noResults = true;
+            if (ctrl.resultPlaces.length == 0 && ctrl.resultTracks.length == 0) {
+            $scope.noResults = true;
+            showSearchResault();
+          }
             else{
               placesOnMap.removePlaces();
               ctrl.markers=showPlaces(ctrl.resultPlaces);
@@ -85,15 +93,19 @@ angular.module('searchPlace',['ui.bootstrap'])
     };
       function showSearchResault(resultPlaces){
         var strResult="";
-        strResult+="<h2>Search resault:</h2>";
-        strResult+="<ul class='list-unstyled'>";
-        resultPlaces.forEach(function(place) {
-          var lat=place.location.coordinates[1];
-          var lon=place.location.coordinates[0];
-          strResult+="<li><a ng-mouseover='showMarker("+lat+","+lon+",$event"+")'" +
-            "ng-href='#!/places/"+place.id+"' id='"+place.id+"'>"+place.name+"</a></li>";
-        });
-        strResult+="</ul>";
+        if(!resultPlaces)
+          strResult+="<h2>Search resault: </h2><h3>There are no such places and tracks, try else please</h3>";
+       else {
+          strResult += "<h2>Search resault:</h2>";
+          strResult += "<ul class='list-unstyled'>";
+          resultPlaces.forEach(function(place) {
+            var lat = place.location.coordinates[1];
+            var lon = place.location.coordinates[0];
+            strResult += "<li><a ng-mouseover='showMarker(" + lat + "," + lon + ",$event" + ")'" +
+              "ng-href='#!/places/" + place.id + "' id='" + place.id + "'>" + place.name + "</a></li>";
+          });
+          strResult += "</ul>";
+        }
         angular.element( document.querySelector( '#searchPlaces' ) ).append($compile(strResult)($scope));
       }
 
