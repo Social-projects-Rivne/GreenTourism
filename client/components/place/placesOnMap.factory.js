@@ -46,7 +46,6 @@ angular.module('mapModule')
     placesOnMap.showPlaces = function(places, input) {
       mainGroup.addTo(map);
 
-          console.log('yes');
       function createPopup(place) {
         return [
           '<div class="popup">',
@@ -71,7 +70,6 @@ angular.module('mapModule')
 
       if (input) {
         places.forEach(function(place) {
-          console.log(placesOnMap.places);
           var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1],
               types[input].icon)
             .addTo(groups[input])
@@ -84,7 +82,6 @@ angular.module('mapModule')
         groups[input].addTo(map);
       } else {
         places.forEach(function(place) {
-          console.log(placesOnMap.places);
           var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1],
               types[place.type].icon)
             .addTo(groups[place.type])
