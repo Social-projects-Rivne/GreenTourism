@@ -1,13 +1,14 @@
 <h4>Popular Tracks in location</h4>
 <div class="popular-in-location-wrapper"
-     ng-repeat="track in $ctrl.popularTracks | orderBy: '-trackRate'">
+     ng-repeat="track in $ctrl.popularTracks | orderBy: '-rate'">
   <img ng-src="{{track.photos[0]}}">
-  <a href="">
+  <a ng-href="#!/tracks/{{track.id}}">
     <div class="popular-in-location-gradient"></div>
   </a>
-  <a class="popular-in-location-name" href="">{{track.name}}</a>
-  <a class="popular-in-location-address" href="">
+  <span class="popular-track-rate"><i class="fa fa-heart"></i> {{track.rate}}</span>
+  <a class="popular-in-location-name" ng-href="#!/tracks/{{track.id}}">{{track.name}}</a>
+  <a class="popular-in-location-address" ng-href="#!/tracks/{{track.id}}">
     <img src="assets/img/places/marker/green.png">
-    Rivne, Rivnenska oblastj, Ukraine
+    {{track.places[0].address}}
   </a>
 </div>

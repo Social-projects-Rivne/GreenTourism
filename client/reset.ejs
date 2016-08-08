@@ -1,0 +1,37 @@
+<% include header.ejs %>
+
+<div class="container reset">
+  <form role="form" name="forgot" method="POST" action="" novalidate>
+    <legend>Reset password</legend>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" class="form-control"
+          ng-model="user.password" ng-minlength="8" required>
+
+      <p class="text-danger" ng-show="forgot.password.$touched &&
+          forgot.password.$error.minlength">
+          Password should be longer than 8 characters</p>
+      <p class="text-danger" ng-show="forgot.password.$touched &&
+          forgot.password.$error.required">Password is required</p>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" class="form-control"
+          ng-model="user.confirmPassword" required match="forgot.password">
+
+      <p class="text-danger" ng-show="forgot.confirmPassword.$touched &&
+          forgot.confirmPassword.$error.match">Passwords doesn't match</p>
+      <p class="tip" ng-hide="forgot.confirmPassword.$touched">
+        Please, repeat your password</p>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-success"
+          ng-disabled="forgot.$invalid" value="Update Password" />
+    </div>
+  </form>
+</div>
+
+<% include footer.ejs %>

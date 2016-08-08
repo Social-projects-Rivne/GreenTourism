@@ -18,7 +18,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
                     return user;
                   });
               }
-
               $location.path('/');
             }
           ]
@@ -38,20 +37,25 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
           }]
         }
       })
+      .when('/tracks/:trackId', {
+        template: '<track-detail track="$resolve.track"></track-detail>',
+        resolve: {
+          track: ['$route', 'Track', function getPlace($route, Track) {
+            return Track.one($route.current.params.trackId).get()
+              .then(function(track) {
+                return track;
+              });
+          }]
+        }
+      })
       .when('/events', {
         template: '<event-list></event-list>'
       })
       .when('/events/:eventId', {
-        template: '{{$ctrl.eventId}}<event-detail></event-detail>'  // TODO: Remove $ctrl.eventId from here (use resolve instead)
+        template: '{{ctrl.eventId}}<event-detail></event-detail>'
       })
-      .when('/eventsmap', {
-        template: '<events-map></events-map>'
-      })
-      .when('/eventsmap/:lat/:lng/:type/:date_start', {  // TODO: Remove this from routes (use query strings instead)
-        template: '{{$ctrl.lat}}{{$ctrl.lng}}{{$ctrl.type}}{{$ctrl.date_start}}<events-map></events-map>'  // TODO: Leave only <events-map> here
-      })
-      .when('/events/:eventId/:dataId', { // TODO: Remove this from routes (use query strings instead)
-        template: '{{$ctrl.eventId}}{{$ctrl.dataId}}<event-detail></event-detail>'
+      .when('/editevent/:eventId', {
+       template: '<edit-event></edit-event>'
       })
       .when('/blog', {
         template: '<blog-list blogs="$resolve.blogs"></blog-list>',

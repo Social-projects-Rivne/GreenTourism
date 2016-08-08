@@ -1,73 +1,191 @@
-<div class="row place">
+<div class="place-page container">
+  <div class="row place">
+    <div class="col-xs-12 col-lg-12 col-md-12">
+      <div class="row vertical-align">
+        <div class="col-xs-4 no-padding">
+          <p class="text-left">
+            <like input-object="$ctrl.place" input-object-type="'places'"></like>
+          </p>
+        </div>
+        <div class="col-xs-2 no-padding">
+        </div>
+        <div class="col-xs-6 no-padding">
+          <a href="/#!/places/">
+            <i class="fa fa-times fa-3x pull-right close" aria-hidden="true" id="close"></i>
+          </a>
+          <a class="edit-button" href=""
+             ng-if="$ctrl.currentUser._id === $ctrl.place.owner"
+             title="Enable Edit Mode" ng-click="$ctrl.enableEditMode()">
+            <i class="fa fa-pencil-square-o fa-2x pull-right"
+               aria-hidden="true"></i>
+          </a>
+        </div>
 
-  <h2 class="titlem text-center">{{$ctrl.place.name}} </h2>
-  <h3>Place:{{$ctrl.place.id}}</h3>
-
-
-  <div class="col-lg-3 col-md-3 col-xs-12 " style="overflow: hidden">
-    <div class="row">
-      <a class="fancybox" rel="gallery1" href="assets/{{$ctrl.place.photo[0]}}" title="{{$ctrl.place.name}}">
-        <img src="assets/{{$ctrl.place.photo[0]}}" alt="" style="min-width:300px; max-width:600px; width:400px;"
-        />
-      </a>
-    </div>
-
-    <div class="row">
-      <a ng-repeat="photo in $ctrl.place.photo" ng-if="$index>=1" class="fancybox" rel="gallery1"
-          href="assets/{{photo}}" title="{{$ctrl.place.name}}">
-        <img src="assets/{{photo}}" alt="{{$ctrl.place.name}}" />
-      </a>
-
-    </div>
-    <button type="button" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
-    </button>
-  </div>
-  <div class="col-ls-5 col-md-5   col-xs-12 " style="min-width:400px;">
-    <div class="row">
-      <div class="col-xs-12">
-        <p>{{$ctrl.place.description}}</p>
-        <br>
-        <br>
-
-        <form>
+        <form name="editPlaceForm" id="editPlaceForm"
+              class="form-horizontal col-xs-12" ng-hide="$ctrl.hideForm">
           <div class="form-group">
-            <label for="comment">Comment</label>
-            <textarea class="form-control" id="comment" rows="3"></textarea>
+            <label for="name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name"
+                     ng-required="true" ng-minlength="3"
+                     ng-maxlength="100" ng-model="$ctrl.place.name"
+                     value="{{$ctrl.place.name}}">
+              <div class="validation-form"
+                   ng-messages="editPlaceForm.name.$error" role="alert">
+                <div ng-message="minlength">
+                  Your name is too short! Give longer name</div>
+                <div ng-message="maxlength">
+                  Your name is too long! Give shorter name</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">
+              Description:</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" maxlength="1000"
+                        rows="5" ng-model="$ctrl.place.description"
+                        id="description">{{$ctrl.place.description}}</textarea>
+              <p ng-if="$ctrl.place.description" class="pull-right">
+                Left: {{1000 - $ctrl.place.description.length}} symbols
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">Address:</label>
+            <div class="col-sm-10">
+              <input type="text" ng-minlength="20" ng-maxlength="100"
+                     class="form-control" id="address" name="address"
+                     ng-model="$ctrl.place.address"
+                     value="{{$ctrl.place.address}}">
+              <div class="validation-form"
+                   ng-messages="editPlaceForm.address.$error" role="alert">
+                <div ng-message="minlength">Your address is too short!</div>
+                <div ng-message="maxlength">
+                  Your address is too long! Give shorter address
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sel" class="col-sm-2 control-label">
+              Select type:</label>
+            <div class="col-sm-2">
+              <select class="form-control" id="sel" ng-model="$ctrl.place.type1">
+                <option ng-value="placeType"
+                        ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType">
+                  {{placeTypeValue.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4 current-type">
+              <p>Current type:
+                <span>{{$ctrl.placesType[$ctrl.place.type].name}}</span></p>
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-default">Add Comment</button>
-        </form>
-        <br>
-        <br>
-        <div class="pull-left">
-          <img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="img-circle  profile"
-          />
-        </div>
-        <p class="clearfix">Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1
-          Comment1 Comment1 Comment1 Comment1 Comment1 Comment1 Comment1</p>
 
-        <div class="pull-left">
-          <img src="assets/img/user-profile/anderson.jpeg" alt="Aniston" class="img-circle  profile"
-          />
+          <div class="form-group" id="photos">
+            <label for="photos" class="col-sm-2 control-label">Photos:</label>
+
+            <div class="col-sm-10">
+              <p>Click on image to remove it</p>
+              <div ng-repeat="image in $ctrl.place.photos">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <img ng-src="{{image}}"  id="{{image}}" ng-click="$ctrl.removePhoto(image)" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group add-photo">
+            <label for="add-photo" class="col-sm-2 control-label">Add image:</label>
+            <div class="col-sm-6">
+              <p>Paste image URL and click Add</p>
+              <div class="input-group">
+                <input type="text" class="form-control" id="add-photo" name="add-photo"
+                       ng-model="photo" value="">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="$ctrl.addPhoto(photo)">Add</button>
+                </span>
+              </div>
+              <span>{{$ctrl.error}}</span>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <div class="btn-group" >
+              <button ng-disabled="!editPlaceForm.$valid" type="button"
+                      class="btn btn-default"
+                      ng-click="$ctrl.updatePlace($ctrl.place)">Confirm</button>
+              <button type="button" class="btn btn-default"
+                      title="Reset to default values"
+                      ng-click="$ctrl.updatePlace()">Reset</button>
+              <button type="button" class="btn btn-default"
+                      title="Close EditingMode"
+                      ng-click="$ctrl.enableEditMode()">Close</button>
+            </div>
+          </div>
+          <div id="show-message" ng-show="$ctrl.showMessage">
+            {{$ctrl.message}}
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="container_page">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="title text-center">{{$ctrl.place.name}} </h2>
+
+          <p class="text-center desc">{{$ctrl.place.description}}</p>
         </div>
-        <p class="clearfix">Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2
-          Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2 Comment2
-        </p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-12 gallery">
+          <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.place.photos[0]}}">
+            <img ng-src="{{$ctrl.place.photos[0]|| $ctrl.noname}}"
+                 alt="{{$ctrl.place.name}}"/>
+          </a>
+          <a ng-repeat="photo in $ctrl.place.photos  | limitTo:($ctrl.indexBegin+numberOfphoto) track by $index"
+             ng-if="$index>=$ctrl.indexBegin" class="fancybox" rel="gallery1"
+             ng-href="{{photo}}" title="{{$ctrl.place.name}}">
+            <img ng-src="{{photo}}" alt="{{$ctrl.place.name}}"/>
+          </a>
+          <a ng-if="numberOfphoto<$ctrl.place.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
+            photos
+            <i class="fa fa-arrow-down fa-md"></i>
+          </a>
+
+        <span ng-if="loading" class="center-block">
+            <i class="fa fa-spinner fa-spin  fa-4x"></i>
+        </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+          <div id="abovemap"></div>
+          <div id="mapcontainer">
+            <div id="map1" class="map-container"></div>
+          </div>
+          <h4>Popular places in location</h4>
+
+          <div
+            ng-repeat="placeInLocation in $ctrl.placesInLocationArr | filter:$ctrl.placesFilter | limitTo:3 | orderBy : '-rate'"
+            class="popular-in-location-wrapper">
+            <a ng-href="#!/places/{{placeInLocation.id}}">
+              <img ng-src="{{placeInLocation.photos[0]}}"/>
+            </a>
+            <a class="popular-in-location-name" ng-href="#!/places/{{placeInLocation.id}}">{{placeInLocation.name}}</a>
+            <span class="popular-in-location-address">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              {{placeInLocation.rate}}
+            </span>
+          </div>
+        </div>
       </div>
 
     </div>
-  </div>
-  <div class="col-xs-4 col-lg-4 col-md-4" style="min-width:500px;">
-    <div class="col-xs-12 no-padding">
-      <!-- Map container start-->
-      <div id="map1"></div>
+    <div class=row">
+      <div class="col-xs-12">
+        <comment input-object="$ctrl.place" input-object-type="'places'"></comment>
+      </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-    });
-
-  </script>
+</div>
