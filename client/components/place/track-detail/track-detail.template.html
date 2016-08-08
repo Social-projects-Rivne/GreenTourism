@@ -11,10 +11,14 @@
         </div>
         <div class="col-xs-4 no-padding">
           <a href="#!/places">
-            <i class="fa fa-times fa-3x pull-right close" aria-hidden="true" id="close"></i>
+            <i class="fa fa-times fa-3x pull-right close" aria-hidden="true"
+               id="close"></i>
           </a>
-          <a class="edit-button" href="" ng-if="$ctrl.currentUser._id === $ctrl.track.owner" title="Enable Edit Mode" ng-click="$ctrl.enableEditMode()">
-            <i style="padding-top: 10px;" class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true" id="editMode"></i>
+          <a class="edit-button" href=""
+             ng-if="$ctrl.currentUser._id === $ctrl.track.owner"
+             title="Enable Edit Mode" ng-click="$ctrl.enableEditMode()">
+            <i class="fa fa-pencil-square-o fa-2x pull-right"
+               aria-hidden="true" id="editMode"></i>
           </a>
         </div>
       </div>
@@ -22,29 +26,41 @@
     <div class="container_page">
       <div class="row">
         <div class="col-xs-12">
-          <form id="editPlaceForm" class="form-horizontal col-xs-12 " ng-hide="$ctrl.hideForm">
+          <form id="editPlaceForm" class="form-horizontal col-xs-12 "
+                ng-hide="$ctrl.hideForm">
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Name:</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="name"
                         ng-required="true" minlength="3" ng-trim="true"
-                        maxlength="100" ng-model="$ctrl.track.name" value="{{$ctrl.track.name}}">
+                        maxlength="100" ng-model="$ctrl.track.name"
+                        value="{{$ctrl.track.name}}">
               </div>
             </div>
             <div class="form-group">
-              <label for="description" class="col-sm-2 control-label">Description:</label>
+              <label for="description" class="col-sm-2 control-label">
+                Description:
+              </label>
               <div class="col-sm-10">
                 <textarea class="form-control" ng-trim="true"
                           maxlength="1000"
-                          rows="5" ng-model="$ctrl.track.description" id="description">{{$ctrl.track.description}}</textarea>
+                          rows="5" ng-model="$ctrl.track.description"
+                          id="description">
+                  {{$ctrl.track.description}}
+                </textarea>
               </div>
             </div>
             <div class="form-group">
-              <label for="sel1" class="col-sm-2 control-label">Select type:</label>
+              <label for="sel1" class="col-sm-2 control-label">
+                Select type:
+              </label>
               <div class="col-sm-4 col-md-3 col-lg-2">
-                <select class="form-control" id="sel1" ng-model="$ctrl.track.type">
+                <select class="form-control" id="sel1"
+                        ng-model="$ctrl.track.type">
                   <option ng-value="trackType"
-                    ng-repeat="(trackType, trackTypeValue) in $ctrl.trackTypes">{{trackTypeValue.name}}</option>
+                    ng-repeat="(trackType, trackTypeValue) in $ctrl.trackTypes">
+                    {{trackTypeValue.name}}
+                  </option>
                 </select>
               </div>
               <div class="col-sm-6 current-type">
@@ -54,15 +70,24 @@
             <div class="form-group">
               <span id="photoLabel" class="col-sm-2">Photos:</span>
               <div class="col-sm-10">
-                <div class="photo col-lg-2 col-md-3 col-xs-4" ng-repeat="photo in $ctrl.track.photos"
+                <div class="photo col-lg-2 col-md-3 col-xs-4"
+                     ng-repeat="photo in $ctrl.track.photos"
                      ng-mouseover="$ctrl.mouseOverPhoto($index)">
-                  <div class="fotoCovered" ng-hide="$ctrl.fotoIsNotCovered[$index]" ng-mouseout="$ctrl.mouseOutPhoto($index)"><a href="" ng-click="$ctrl.deletePhoto($index)"><i class="fa fa-trash fa-4x"></a></i></div>
+                  <div class="fotoCovered"
+                       ng-hide="$ctrl.fotoIsNotCovered[$index]"
+                       ng-mouseout="$ctrl.mouseOutPhoto($index)">
+                    <a href="" ng-click="$ctrl.deletePhoto($index)">
+                      <i class="fa fa-trash fa-4x"></i>
+                    </a>
+                  </div>
                   <img src="{{photo}}" alt="Track photo">
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="name" class="col-sm-2 control-label">Add Photo:</label>
+              <label for="name" class="col-sm-2 control-label">
+                Add Photo:
+              </label>
               <div class="col-sm-10">
                 <div class="input-group">
                   <input type="text" class="form-control" id="photo"
@@ -78,9 +103,20 @@
             </div>
             <div class="form-group text-center">
               <div class="btn-group" >
-                <button type="button" class="btn btn-default" ng-click="$ctrl.updateTrack($ctrl.track)">Confirm</button>
-                <button type="button" class="btn btn-default" title="Reset to default values" ng-click="$ctrl.updateTrack()">Reset</button>
-                <button type="button" class="btn btn-default" title="Close EditingMode" ng-click="$ctrl.enableEditMode()">Close</button>
+                <button type="button" class="btn btn-default"
+                        ng-click="$ctrl.updateTrack($ctrl.track)">
+                  Confirm
+                </button>
+                <button type="button" class="btn btn-default"
+                        title="Reset to default values"
+                        ng-click="$ctrl.updateTrack()">
+                  Reset
+                </button>
+                <button type="button" class="btn btn-default"
+                        title="Close EditingMode"
+                        ng-click="$ctrl.enableEditMode()">
+                  Close
+                </button>
               </div>
             </div>
             <div id="show-message" ng-show="$ctrl.showMessage">
@@ -95,7 +131,8 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-12 gallery">
-          <a id="firstimg" class="fancybox" rel="gallery1" ng-href="{{$ctrl.track.photos[0]}}">
+          <a id="firstimg" class="fancybox" rel="gallery1"
+             ng-href="{{$ctrl.track.photos[0]}}">
             <img ng-src="{{$ctrl.track.photos[0]|| $ctrl.noname}}"
                  alt="{{$ctrl.track.name}}"/>
           </a>
@@ -104,15 +141,18 @@
              ng-href="{{photo}}" title="{{$ctrl.track.name}}">
             <img ng-src="{{photo}}" alt="{{$ctrl.track.name}}"/>
           </a>
-          <a ng-if="numberOfphoto<$ctrl.track.photos.length-1" ng-click="$ctrl.morePhotos()" id="morephotos" href="">More
-            photos </a>
+          <a ng-if="numberOfphoto<$ctrl.track.photos.length-1"
+             ng-click="$ctrl.morePhotos()" id="morephotos" href="">
+             More photos
+          </a>
           <i class="fa fa-arrow-down fa-md"></i>
         <span ng-if="loading" class="center-block">
             <i class="fa fa-spinner fa-spin  fa-4x"></i>
         </span>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-12">
-          <div id="map1" class="map-container" ng-mouseleave="$ctrl.mouseLeavePlace(placeInTrack)">
+          <div id="map1" class="map-container"
+               ng-mouseleave="$ctrl.mouseLeavePlace(placeInTrack)">
           </div>
           <h4>Places in track</h4>
 
@@ -123,7 +163,10 @@
             <a ng-href="#!/tracks/{{placeInTrack.id}}">
             <img ng-src="{{placeInTrack.photos[0]}}"/>
             </a>
-            <a class="popular-in-location-name" ng-href="#!/places/{{placeInTrack.id}}">{{$index + 1 + '. ' + placeInTrack.name}}</a>
+            <a class="popular-in-location-name"
+               ng-href="#!/places/{{placeInTrack.id}}">
+              {{$index + 1 + '. ' + placeInTrack.name}}
+            </a>
             <span class="popular-in-location-address">
               <i  class="fa fa-heart" aria-hidden="true"></i>
               {{placeInTrack.rate}}
