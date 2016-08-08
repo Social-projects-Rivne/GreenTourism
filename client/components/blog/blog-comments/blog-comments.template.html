@@ -17,9 +17,9 @@
     Error: {{$ctrl.showError}}
   </div>
   <div class="add-comment" ng-if="$ctrl.currentUser">
-    <form class="form-inline" name="commentForm"
+    <form class="form-inline " name="commentForm"
           ng-submit="$ctrl.addComment($ctrl.content)" novalidate>
-            <textarea ng-keyup="$ctrl.textareaPostResize()" required
+            <textarea class="comment-textarea" ng-keyup="$ctrl.textareaPostResize()" required
                       placeholder="Leave your comment..." maxlength="1000"
                       ng-model="$ctrl.content"></textarea>
 
@@ -50,7 +50,7 @@
           <h6 class="media-heading">
             By {{comment.author.fullName}} at {{comment.createdAt | date:'dd MMMM yyyy'}}
           </h6>
-          <div class="dropdown comment-menu"
+          <div class="dropdown comment-menu pull-right"
                ng-if="$ctrl.currentUser._id === comment.author._id">
             <a href="" class="dropdown-toggle" id="commentMenu" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="true">
@@ -72,17 +72,15 @@
             {{comment.text}}
           </p>
           <div class="show-comments-edit-content" ng-if="$ctrl.checkCommentId === comment.id">
-        <textarea ng-keyup="$ctrl.textareaEditResize()"
-                  class="form-control edit-textarea"
-                  required maxlength="1000" ng-model="comment.text">
-          {{comment.text}}
-        </textarea>
+            <textarea ng-keyup="$ctrl.textareaEditResize()" class="form-control edit-textarea" required maxlength="1000" ng-model="comment.text">
+              {{comment.text}}
+            </textarea>
             <div class="btn-group pull-right">
-              <button ng-click="$ctrl.checkCommentId = null;
+              <button class="btn btn-info" ng-click="$ctrl.checkCommentId = null;
                           comment.text = $ctrl.defaultCommentContent"
                       type="button" class="btn btn-default">Close
               </button>
-              <button type="button"
+              <button class="btn " type="button"
                       ng-click="$ctrl.updateComment(comment.id, comment.text)"
                       class="btn btn-default"
                       ng-disabled="!comment.text">Update

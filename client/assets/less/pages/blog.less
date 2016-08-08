@@ -1,5 +1,16 @@
 /*blog list style*/
 .blog-page-content {
+  .btn {
+    border-radius: 0;
+    background-color: @blog-prim-color;
+    color: #fff;
+  }
+  .btn-info{
+    border-radius: 0;
+    background-color: #31b0d5;
+    color: #fff;
+    border: 1px solid #31b0d5;
+  }
   padding: 50px 0;
   a {
     color: @blog-text-color;
@@ -263,10 +274,19 @@
             height: 54px;
           }
           .media-body {
+            padding-bottom: 15px;
+            padding-top: 10px;
             .media-heading {
               font-size: 13px;
               margin-bottom: 5px;
               font-weight: 600;
+              display: inline-block;
+            }
+            .pull-right > .dropdown-menu{
+              top: -10px;
+            }
+            .edit-textarea{
+              margin-bottom: 10px;
             }
             p {
               font-size: 13px;
@@ -288,11 +308,7 @@
           resize: none;
         }
         //@todo remove buttin style
-        .btn {
-          border-radius: 0;
-          background-color: @blog-prim-color;
-          color: #fff;
-        }
+
       }
     }
     .title-sep.sep-double {

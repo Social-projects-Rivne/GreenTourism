@@ -15,7 +15,7 @@ angular.module('blogComments').component('blogComments', {
       ctrl.showError = false;
 
       ctrl.textareaPostResize = function() {
-        var textareaObject = angular.element('textarea');
+        var textareaObject = angular.element('.comment-textarea');
         textareaObject.css('height', '50px');
         textareaObject.css('height',
             heightAfterContent + textareaObject.prop('scrollHeight') + 'px');
