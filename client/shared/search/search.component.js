@@ -92,7 +92,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
           }
         };
         function showSearchResault(resultPlaces, resultTracks) {
-          var strResult = "<h2>Search resault:</h2>";
+          var strResult = "<h2>Search result:</h2>";
           if (!resultPlaces || !resultTracks)
             strResult += "<h3>There are no such places and tracks, try else please</h3>";
           else {
