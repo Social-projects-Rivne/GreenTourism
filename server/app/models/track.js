@@ -39,6 +39,7 @@ var TrackSchema = new Schema({
   comments: [CommentSchema],
   rate: Number
 }, {
+  timestamps: true,
   toObject: {
     virtuals: true
   },

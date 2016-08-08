@@ -27,10 +27,7 @@ module.exports = function(Model) {
         return res.status(400).json(err);
       }
 
-      return res.status(201).json({
-        message: 'Record was successfully created!',
-        record: record
-      });
+      return res.status(201).json(record);
     });
   };
 
@@ -67,10 +64,7 @@ module.exports = function(Model) {
         return res.status(400).json(err);
       }
 
-      return res.json({
-        message: 'Record ' + req.params.id + ' was successfully updated',
-        record: record
-      });
+      return res.json(record);
     });
   };
 

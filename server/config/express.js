@@ -33,7 +33,9 @@ module.exports = function() {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(express.static(path.join(__dirname, '../../client')));
+  // TODO: Find out how to link all view to one absolute static path
+  app.use(express.static(path.join(__dirname, '/../../client')));
+  app.use('/api/reset', express.static(path.join(__dirname, '/../../client')));
 
   // Routes
   var api = express.Router();  // eslint-disable-line new-cap
@@ -49,7 +51,12 @@ module.exports = function() {
 
   app.get('/', function(req, res) {
     res.render('index', {
-      messages: req.flash('error') || req.flash('info'),
+      messages: {
+        danger: req.flash('error'),
+        warning: req.flash('warning'),
+        info: req.flash('info'),
+        success: req.flash('success')
+      },
       user: JSON.stringify(req.user)
     });
   });

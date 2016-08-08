@@ -1,8 +1,6 @@
-var db = process.env.MONGO_DATABASE_URL ||
-  'mongodb://user:qwerty1234@ds019664.mlab.com:19664/test_greentourism';
-
 module.exports = {
-  db: db,
+  db: process.env.MONGO_DATABASE_URL ||
+    'mongodb://user:qwerty1234@ds019664.mlab.com:19664/test_greentourism',
   sql: {
     username: 'root',
     password: '',
@@ -20,5 +18,11 @@ module.exports = {
     clientID: '54757690485-qi1sur7efphqrii06aoafdon990k1vr0.apps.googleusercontent.com',
     clientSecret: 'Bk0dYxY_fU6GIk1UBxxEIcSz',
     callbackURL: 'https://green-tourism.herokuapp.com/api/auth/google/callback'
+  },
+  mail: {
+    auth: {
+      api_user: 'green_tourism',
+      api_key: 'rv017.webui'
+    }
   }
 };

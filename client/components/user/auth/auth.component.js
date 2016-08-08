@@ -1,5 +1,5 @@
 angular.module('user').component('auth', {
-  templateUrl: 'components/user/auth/auth/auth.template.html',
+  templateUrl: 'components/user/auth/auth.template.html',
   controller: [function authCtrl() {
     this.form = 'login';
 
