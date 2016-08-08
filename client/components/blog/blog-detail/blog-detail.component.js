@@ -7,7 +7,6 @@ angular.module('blogDetail').component('blogDetail', {
   controller: ['Blog', 'currentUser', 'Restangular', function BlogDetailCtrl(Blog, currentUser, Restangular) {
     var ctrl = this;
     ctrl.currentUser = currentUser;
-    console.log(ctrl);
     if (ctrl.currentUser) {
       if (_.some(ctrl.blog.blogLikes, {author: ctrl.currentUser._id})) {
         angular.element('.likes').addClass('added');
@@ -46,7 +45,7 @@ angular.module('blogDetail').component('blogDetail', {
       ctrl.showEditForm = ctrl.showEditForm === false ? true: false;
       ctrl.master = angular.copy(ctrl.blog);
     };
-    ctrl.cancelEditForm = function(blogPost){2
+    ctrl.cancelEditForm = function(blogPost){
       ctrl.blog = angular.copy(ctrl.master);
     };
 
