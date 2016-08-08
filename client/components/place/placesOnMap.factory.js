@@ -7,9 +7,9 @@ angular.module('mapModule')
     var types = [];
     var places = [];
     var map;
-    markers=[];
+    markers = [];
     var marker = function(lon, lat, icon) {
-      markerobj=L.marker([lat, lon], {
+      markerobj = L.marker([lat, lon], {
         icon: L.icon({
           iconUrl: icon,
           shadowUrl: 'assets/img/places/marker/marker-shadow.png',
@@ -21,7 +21,6 @@ angular.module('mapModule')
       });
       markers.push(markerobj);
       return markerobj;
-
     };
 
     placesOnMap.showMap = function() {
@@ -67,9 +66,9 @@ angular.module('mapModule')
       map.on('click move', function() {
         map.closePopup();
       });
-      placesOnMap.groupClusters={};
-      placesOnMap.groupClusters=mainGroup;
-      return  markers;
+      placesOnMap.groupClusters = {};
+      placesOnMap.groupClusters = mainGroup;
+      return markers;
     };
 
     placesOnMap.removePlaces = function(input) {

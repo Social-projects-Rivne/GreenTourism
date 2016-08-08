@@ -106,7 +106,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.hideSearchPlaces=false;
+        ctrl.hideSearchPlaces = false;
 
         ctrl.checkSearchPlaces = function() {
           var searchPlacesIcon = angular.element('#searchPlaces');
@@ -224,6 +224,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
 
         }
+
         // ---END--- Function which get data from DB only on special area
 
         map.on('moveend', onMove);
@@ -309,8 +310,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             for (key in ctrl.placesType) {
               if ({}.hasOwnProperty.call(ctrl.placesType, key)) {
                 if (!angular.element('.' + key + ' a span')
-                    .hasClass(constants.checkedSpanClass) &&
-                    !angular.element('.' + key + ' a span')
+                    .hasClass(constants.checkedSpanClass) && !angular.element('.' + key + ' a span')
                     .hasClass(constants.spinner)) {
                   ctrl.checkType(key);
                 }
