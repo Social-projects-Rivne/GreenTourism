@@ -7,31 +7,26 @@
     position: absolute;
     top: 0;
     left: 50%;
-    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
   }
-  @-webkit-keyframes spin {
+  @keyframes spin {
     0% {
-      -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
     100% {
-      -webkit-transform: rotate(359deg);
       transform: rotate(359deg);
     }
   }
   @keyframes spin {
     0% {
-      -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
     100% {
-      -webkit-transform: rotate(359deg);
       transform: rotate(359deg);
     }
   }
 }
-
 @keyframes slideInUp {
   from {
     transform: translateY(100%);
@@ -40,7 +35,6 @@
     transform: translateY(0);
   }
 }
-
 @keyframes slideInOut {
   from {
     transform: translateY(0%);
@@ -49,17 +43,14 @@
     transform: translateY(100%);
   }
 }
-
 .page-detail.ng-enter {
   animation: slideInUp 0.5s both ease-in;
   z-index: 8888;
 }
-
 .page-detail.ng-leave {
   animation: slideInOut 0.5s both ease-in;
   z-index: 9999;
 }
-
 div.place {
   margin: 0;
   .vertical-align {
@@ -67,7 +58,7 @@ div.place {
     padding: 10px 5px 0 5px;
     margin: 0;
   }
-  button .glyphicon-heart, i.close {
+  button i.close {
     color: @brand-dark;
   }
   h2 {
@@ -126,14 +117,12 @@ div.place {
     height: 415px;
   }
   #abovemap {
+    z-index:5;
     position: absolute;
     width: 100%;
     height: 430px;
     background: blue;
     opacity: 0;
-    top: 10px;
-    left: 50px;
-    z-index: 1111
   }
   .popular-in-location-wrapper {
     position: relative;
@@ -175,9 +164,10 @@ div.place {
     cursor: pointer;
   }
   @media (max-width: 400px) {
-    .popular-in-location-address {
-
+    .desc {
+      text-align: justify;
     }
+
     .gallery a.fancybox {
       height: 50px;
     }

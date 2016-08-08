@@ -2,7 +2,7 @@
 
 .event_block {
   width: 90%;
-  height: 450px;
+  height: 250px;
   background-image: linear-gradient(to top left, rgb(236, 255, 244),
   rgb(24, 255, 197), rgb(236, 255, 244));
   margin: 2px auto;
@@ -29,7 +29,7 @@
   font-weight: bold;
 }
 
-.event_block .title_event {
+.event_block .title_event{
   text-align: center;
   font-size: 18px;
   font-weight: bolder;
@@ -55,7 +55,7 @@
 }
 
 .event_block .tag_event {
-  border: outset 1px white;
+  border: outset 1px white ;
 }
 
 .event_block .tag_event_right {
@@ -73,7 +73,7 @@
 }
 
 .event_block .hoverer:hover {
-  text-shadow: 1px 1px 0 #fff, 2px 2px 0 rgba(0,0,0,0.15);
+  text-shadow: 1px 1px 0px #fff, 2px 2px 0px rgba(0,0,0,0.15);
   cursor: pointer;
 }
 
@@ -88,12 +88,196 @@
   text-decoration: none;
 }
 
-.bs-box a:active,
-.bs-box a:hover,
-.bs-box a:focus {
+.bs-box a:active, .bs-box a:hover, .bs-box a:focus{
   text-decoration: none;
 }
 
 t5 {
   font-weight: bolder;
+}
+
+.event-poster .fon {
+  height:200px;
+  background:black;
+  background-size:100% 200px;
+  margin: 10px auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location {
+  display: block;
+  position: absolute;
+  bottom: 35px;
+  right: 15px;
+  text-align: right;
+  max-width: 180px;
+  background: rgba(256, 256, 256, 0.71);
+  color: black;
+  height: 30px;
+  padding: 0 0px 4px 10px;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-poster .top-title {
+  display: block;
+  text-align: left;
+  position: absolute;
+  top: 20px;
+  max-width: 180px;
+  background: rgba(0, 128, 0, 0.61);
+  color: white;
+  height: 30px;
+  padding: 0 10px 4px 0px;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fon img {
+  height:200px;
+  width: 100%;
+}
+
+.text {
+  left: 0px;
+  top: 0px;
+  height:200px;
+  width: 100%;
+  display: none;
+  background: rgba(20, 20, 20, 0.86);
+  margin: 10px auto;
+  color: #e8fff0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  z-index: 999;
+}
+.event-map{
+  width: 80px;
+  height: 80px;
+  background-size:80px 80px;
+  margin-left: 5px;
+  float: left;
+}
+.event-map img {
+  width: 80px;
+  height: 80px;
+}
+
+.event-some-fill {
+  padding-left: 10px;
+  width: 195px;
+  float: left;
+  right: 10px;
+  position: absolute;
+}
+.event-fill{
+  display: block;
+  font-weight: 500;
+  font-size: 12px;
+  float: left;
+  width: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+.event-fill-text{
+  display: block;
+  font-weight: 100;
+  font-size: 12px;
+  height: 15px;
+  padding-left: 10px;
+  width: 105px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+.event-title{
+  font-size: 14px;
+  text-align: center;
+  margin: 5px auto;
+  float: none;
+}
+.event-description {
+  margin: 7px;
+  margin-bottom: 5px;
+  height: 55px;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.show-event {
+  position: relative;
+}
+.show-event:hover .text{
+  display: block;
+  position: absolute;
+}
+.h20px {
+  margin: 20px auto;
+}
+.show-event A {
+  text-decoration: none;
+  color: white;
+}
+.show-event A:hover {
+  color: #ffe611;
+}
+.w100 {
+  width: 100%;
+}
+.nopadding:hover ul{
+  display: block;
+}
+
+.event-poster .dropdown-menu {
+  margin: 4px 0 0 0;
+  width: 190px;
+}
+
+.event-poster ul li {
+  padding: 0px 3px;
+  float: none;
+  clear: both;
+}
+.event-poster ul li button {
+  float: left;
+}
+.event-poster .w100px {
+  width: 100px;
+  float: left;
+  text-align: center;
+  padding-top: 4px;
+}
+.event-poster .nopadding {
+  height: 52px;
+  border: 1px solid palegreen;
+  padding: 5px;
+  padding-top: 11px;
+  text-align: left;
+}
+.event-on-page {
+  width: 40px;
+}
+.nopadding + .calendar {
+  padding-top: 17px;
+}
+.event-poster .calendar .dropdown-menu{
+  margin-left: -8px;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.event-poster .calendar .right-calendar{
+  margin-left: 0px;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.img-center {
+  width: 99%;
+  margin-left:1%;
+  margin-right: 1%;
 }

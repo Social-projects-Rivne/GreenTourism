@@ -170,12 +170,13 @@
         padding-left: 0;
       }
     }
-    // Class for disable double click
-    .check-disabled {
-      pointer-events: none;
-      cursor: default;
-    }
   }
+}
+
+// Class for disable double click
+.check-disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 //Spinner
@@ -402,7 +403,7 @@
       border-radius: 5px;
       overflow: hidden;
       padding: 0 10px 10px 10px;
-      margin: 65px 15px 0 15px; 
+      margin: 65px 15px 0 15px;
       z-index: 4;
       input {
         margin-top: 0;
@@ -428,12 +429,46 @@
   }
 }
 
+/*-----------------event on map ----------------*/
+.event-map-poster .calendar {
+  margin: 5px 12px;
+  padding: 3px;
+  font-size:18px;
+  border: 1px solid green;
+}
+.event-map-poster .calendar .dropdown-menu {
+  position: relative;
+}
+.event-map-poster .img-block {
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: relative;
+  margin: 5px auto;
+  display: block;
+}
+.event-map-poster .img-block img {
+  height: 300px;
+  width: 100%;
+}
+.event-map-poster .img-block h3{
+  height: 300px;
+  width: 100%;
+  clear: both;
+  float: none;
+  position: absolute;
+}
+.event-map-poster .main-centr a{
+  position: relative;
+}
+
 /* ------------- Add track ---------------*/
 
 #pointsForNewTrack {
   padding: 10px;
   color: #fff;
-  overflow: hidden; 
+  overflow: hidden;
   .pointsList {
     .row:nth-child(even) {
       background-color: @light-green;
@@ -471,3 +506,4 @@
     color: #fff;
   }
 }
+

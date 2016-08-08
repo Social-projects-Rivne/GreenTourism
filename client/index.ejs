@@ -96,12 +96,10 @@
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
     <script src="components/place/track-detail/track-detail.component.js"></script>
-    <script src="components/place/place-modal/place-modal.component.js"></script>
-    <script src="components/place/place-list/marker-places.component.js"></script>
-    <script src="components/place/place-modal/place-modal.component.js"></script>
     <script src="components/place/popular-places/popularPlaces.component.js"></script>
     <script src="components/place/places-location/locationPlaces.component.js"></script>
     <script src="components/place/popular-tracks/popular-tracks.component.js"></script>
+    <script src="components/place/popular-events/popular-events.component.js"></script>
     <script src="components/place/constants.factory.js"></script>
     <script src="components/place/preloadImages.factory.js"></script>
 
@@ -110,9 +108,9 @@
     <script src="components/event/event-list/events.component.js"></script>
     <script src="components/event/event-detail/event-list.js"></script>
     <script src="components/event/event-detail/event-detail.component.js"></script>
+    <script src="components/event/edit-event/edit-event.component.js"></script>
     <script src="components/event/calendar/calendar.component.js"></script>
-    <script src="components/event/events-map/event-map.component.js"></script>
-    <script src="components/event/events-map/events-map-type/event-map-type.component.js"></script>
+    <script src="components/event/calendar/calendar.service.js"></script>
 
     <!-- BLOG -->
     <script src="components/blog/blog.module.js"></script>
@@ -129,7 +127,7 @@
     <nav class="navbar navbar-default navbar-fixed-top navbar-style" ng-controller="NavCtrl as nav">
       <div class="container nav-padding">
         <div class="hidden-sm hidden-md hidden-lg">
-          <div class="logo"><a href="#!/">GreenTourism</a></div>
+          <div class="logo"><a href="#!/">primewritings.org</a></div>
           <ul class="nav left-mobile-menu">
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -185,7 +183,7 @@
               </ul>
             </li>
           </ul>
-          <div class="hidden-xs logo"><a href="#!/">GreenTourism</a></div>
+          <div class="hidden-xs logo"><a href="#!/">Green Tourism</a></div>
         </div>
       </div>
     </nav>
@@ -199,7 +197,7 @@
       </div>
     <% } %>
 
-    <div ng-if="!main.routeChangeError" ng-view=""></div>
+    <div ng-if="!main.routeChangeError" ng-view="" ng-class="{'page-detail': main.placeDetailPage}"></div>
     <div ng-if="main.routeChangeError">
       <div ng-if="main.statusCode" ng-include="'shared/errors/' + main.statusCode + '.html'"></div>
       <div ng-if="!main.statusCode">

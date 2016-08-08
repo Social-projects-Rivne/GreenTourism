@@ -12,6 +12,7 @@ angular.module('greenTourism')
     constants.placesOnLoad = 'featured';
     constants.checkDisabled = 'check-disabled';
     constants.spinner = 'glyphicon glyphicon-refresh';
+    constants.date = new Date();
     constants.emptyPlaceModel = {
       name: '',
       type: '',
@@ -37,6 +38,21 @@ angular.module('greenTourism')
       rate: 0,
       owner: ''
     };
-
+      constants.emptyEventModel = {
+          name: '',
+          description: '',
+          photos: [],
+          type: '',
+          owner: '',
+          dateStart: 0,
+          dateEnd: 0,
+          location: {
+              type: 'Point',
+              coordinates: []
+          },
+          price: 0,
+          track: 0,
+          rate: 0,
+       };
     return constants;
   });
