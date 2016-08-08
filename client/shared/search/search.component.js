@@ -2,10 +2,21 @@ angular.module('searchPlace', ['ui.bootstrap'])
   .component('searchPlace', {
     templateUrl: 'shared/search/search.template.html',
     controller: ['Search', 'Track', '$scope', 'placesOnMap', '$timeout', 'mapFactory', '$compile', 'Place', '$rootScope',
-      function SearchCtrl(Search, Track, $scope, placesOnMap, $timeout, mapFactory, $compile, Place, $rootScope) {
+      '$location',
+      function SearchCtrl(Search, Track, $scope, placesOnMap, $timeout, mapFactory, $compile, Place, $rootScope, $location) {
         var ctrl = this;
         markers = [];
-
+        $scope.$on('searchClose', function(event, data) {
+          ctrl.hideSearchPlaces = data;
+          if (ctrl.hideSearchPlaces == true && ctrl.markers) {
+            if (ctrl.markers && ctrl.markers.length != 0) {
+              for (i = 0; i < ctrl.markers.length; i++) {
+                mapFactory.map.removeLayer(ctrl.markers[i]);
+              }
+              placesOnMap.showPlaces(placesOnMap.getPlaceArr());
+            }
+          }
+        });
         $scope.loading = false;
         $scope.noResults = false;
         $scope.minchars = false;
@@ -81,6 +92,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
                 else {
                   placesOnMap.removePlaces();
                   ctrl.markers = showPlaces(ctrl.resultPlaces);
+                  ctrl.oldmarkers = ctrl.markers;
                   showSearchResault(ctrl.resultPlaces, ctrl.resultTracks);
                 }
               });
@@ -104,7 +116,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
                 var lat = place.location.coordinates[1];
                 var lon = place.location.coordinates[0];
                 strResult += "<li ng-mouseover='showMarker(" + lat + "," + lon + ",$event" + ")'" + "id='" + place.id + "'>" +
-                  "<button type='button'>" +
+                  "<button  type='button'>" +
                   "<span class='search-in-location-address pull-left'> <i class='fa fa-heart' aria-hidden='true'>" +
                   "</i>&nbsp" + place.rate + "</span><h3>" +
                   "<a ng-href='#!/places/" + place.id + "'>" + place.name + "</a></h3>" +

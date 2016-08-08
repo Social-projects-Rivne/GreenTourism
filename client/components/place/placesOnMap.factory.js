@@ -224,6 +224,7 @@ angular.module('mapModule')
         tracks.push([trackForAdding, track.type]);
       });
     };
+
     placesOnMap.removeTracks = function(tracksType) {
       tracks.forEach(function(track) {
         if (tracksType) {
@@ -249,28 +250,28 @@ angular.module('mapModule')
     placesOnMap.initGroupsOfEvents = function(inpTypes) {
       var type = inpTypes;
       for (var key in type) {
-          if ({}.hasOwnProperty.call(type, key)) {
-            groupeE[key] = L.layerGroup();
-          }
+        if ({}.hasOwnProperty.call(type, key)) {
+          groupeE[key] = L.layerGroup();
         }
+      }
     };
 
-      /* Events */
+    /* Events */
     placesOnMap.openAddEventMenu = function() {
-        map.on('click', addNewEventOnMap);
-      };
+      map.on('click', addNewEventOnMap);
+    };
 
     placesOnMap.closeAddEventMenu = function() {
-        map.off('click', addNewEventOnMap);
-      };
+      map.off('click', addNewEventOnMap);
+    };
 
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
       events.forEach(function(event) {
         marker(event.location.coordinates[0], event.location.coordinates[1], pix)
-        .addTo(groupeE[input])
-        .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src="' + event.photos[0] + '"></a>' +
-                '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/events/' + event._id + '\'>Details >></a> </button></div>', {autoPan: false});
+          .addTo(groupeE[input])
+          .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src="' + event.photos[0] + '"></a>' +
+            '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/events/' + event._id + '\'>Details >></a> </button></div>', {autoPan: false});
 
       });
 
@@ -278,14 +279,14 @@ angular.module('mapModule')
     };
 
     placesOnMap.removeEvents = function(input) {
-        if (input) {
+      if (input) {
+        groupeE[input].clearLayers();
+      } else {
+        for (var key in types) {
           groupeE[input].clearLayers();
-        } else {
-          for (var key in types) {
-            groupeE[input].clearLayers();
-          }
         }
-      };
+      }
+    };
 
     function addNewPlaceOnMap(e) {
       var latitudeContainer = angular.element('#latitude');
@@ -301,29 +302,29 @@ angular.module('mapModule')
     }
 
     placesOnMap.removeNewMarker = function() {
-        if (newMarker) {
-            map.removeLayer(newMarker);
-          }
-      };
+      if (newMarker) {
+        map.removeLayer(newMarker);
+      }
+    };
     var newEventMarker;
     function addNewEventOnMap(e) {
-        var latitudeContainer = angular.element('#latitudeE');
-        var longitudeContainer = angular.element('#longitudeE');
-        placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
-        placesOnMap.coordsIsDefined = true;
-        if (newEventMarker) {
-            map.removeLayer(newEventMarker);
-          }
-        newEventMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
-        latitudeContainer.text('Latitude: ' + newEventMarker._latlng.lat);
-        longitudeContainer.text('Longitude: ' + newEventMarker._latlng.lng);
+      var latitudeContainer = angular.element('#latitudeE');
+      var longitudeContainer = angular.element('#longitudeE');
+      placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
+      placesOnMap.coordsIsDefined = true;
+      if (newEventMarker) {
+        map.removeLayer(newEventMarker);
       }
+      newEventMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
+      latitudeContainer.text('Latitude: ' + newEventMarker._latlng.lat);
+      longitudeContainer.text('Longitude: ' + newEventMarker._latlng.lng);
+    }
 
     placesOnMap.removeNewEventMarker = function() {
-        if (newEventMarker) {
-            map.removeLayer(newEventMarker);
-          }
-      };
+      if (newEventMarker) {
+        map.removeLayer(newEventMarker);
+      }
+    };
 
     return placesOnMap;
   }]);

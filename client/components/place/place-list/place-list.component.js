@@ -473,6 +473,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.hidePopularTracks = true;
             ctrl.hidePopularEvents = true;
             ctrl.hideSearchPlaces = true;
+            $scope.$broadcast('searchClose', ctrl.hideSearchPlaces);
         };
         // ---END---- Popular places and tracks in location
 
