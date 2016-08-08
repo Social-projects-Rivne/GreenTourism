@@ -102,7 +102,7 @@ exports.postReset = function(req, res) {
 
     if (!user) {
       req.flash('error', 'Password reset token is invalid or has expired.');
-      return res.redirect('back');
+      return res.redirect('/');
     }
 
     user.password = req.body.password;
