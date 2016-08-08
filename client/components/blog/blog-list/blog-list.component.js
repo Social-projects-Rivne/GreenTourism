@@ -9,11 +9,30 @@ angular.module('blogList').component('blogList', {
     console.log(this);
     ctrl.currentUser = currentUser;
 
+    ctrl.searchBlog = function(query){
+      Blog.getList({title: query}).then(function(blogs) {
+        console.log(blogs);
+        ctrl.blogs = blogs;
+      });
+    };
+
     Blog.one('category').get().then(function(response) {
       ctrl.categoryList = response;
     });
+    var addPlaceForm = angular.element('form[name="blogPost"]');
 
-    ctrl.createPost = function() {
+    ctrl.showCreateForm = true;
+    ctrl.toggleCreatePost = function(form){
+      ctrl.showCreateForm = ctrl.showCreateForm === false ? true: false;
+      form.$setPristine();
+    };
+
+    ctrl.clearPostForm = function(form){
+      form.$setPristine();
+      form.$setUntouched();
+      //toggleCreatePost();
+    };
+    ctrl.createPost = function(form) {
       //angular.element('textarea').css('height', '50px');
       Restangular.one('blogs/').customPOST(
           {
@@ -24,14 +43,13 @@ angular.module('blogList').component('blogList', {
             categoryId: categoryId.value
           }
       ).then(function(res) {
-            console.log(res);
-            //ctrl.content = '';
             res.record.owner = currentUser;
             ctrl.blogs.push(res.record);
           }, function(err) {
             ctrl.showError = err.statusText;
           });
     };
+
 
   }]
 });

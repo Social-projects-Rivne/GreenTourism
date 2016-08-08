@@ -5,32 +5,66 @@
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
-              <form name="form" role="form" novalidate ng-submit="$ctrl.createPost()">
-                <div class="form-group">
+              <form name="blogPost" role="form" novalidate ng-submit="$ctrl.createPost(blogPost)"
+                    ng-hide="$ctrl.showCreateForm">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.blogImg.$invalid && blogPost.blogImg.$dirty }">
                   <label for="blogImg">Photo</label>
-                  <input type="text" class="form-control" id="blogImg" placeholder="photo" name="blogImg" ng-model="$ctrl.createPost.blogImg" >
+                  <input type="text" class="form-control" id="blogImg" placeholder="photo" name="blogImg"
+                         ng-model="$ctrl.createPost.blogImg" required>
+
+                  <div ng-show="blogPost.$submitted || blogPost.blogImg.$touched">
+                    <p class="help-block" ng-show="blogPost.blogImg.$error.required">
+                      blog image is required
+                    </p>
+                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.categoryId.$invalid && blogPost.categoryId.$touched }">
                   <label for="categoryId">Category</label>
-                  <select class="form-control" id="categoryId" ng-model="$ctrl.createPost.categoryId" name="categoryId">
+                  <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.createPost.categoryId"
+                          required>
+                    <option value="">-- Choose category --</option>
                     <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
-                        {{category.name}}
+                      {{category.name}}
                     </option>
+                    <!--<select ng-options="item as item.name for item in $ctrl.categoryList track by item.id" ng-model="selected"></select>-->
+                    <!--<select ng-options="for category.name in $ctrl.categoryList" ng-model="selected"></select>-->
                   </select>
+
+                  <div ng-show="blogPost.$submitted || blogPost.categoryId.$touched">
+                    <p class="help-block" ng-show="blogPost.categoryId.$error.required">
+                      blog category is required
+                    </p>
+                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error' : blogPost.title.$invalid && blogPost.title.$dirty }">
                   <label for="title">title</label>
-                  <input type="text" class="form-control" id="title" placeholder="title" name="title">
+                  <input type="text" class="form-control" id="title" placeholder="title" name="title"
+                         ng-model="$ctrl.createPost.title" required>
+
+                  <div ng-show="blogPost.$submitted || blogPost.title.$touched">
+                    <p class="help-block" ng-show="blogPost.title.$error.required">
+                      blog title is required
+                    </p>
+                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.content.$invalid && blogPost.content.$dirty }">
                   <label for="content">content</label>
-                  <textarea class="form-control" rows="3" name="content" id="content"></textarea>
+                  <textarea class="form-control" rows="3" name="content" id="content"
+                            ng-model="$ctrl.createPost.content" required></textarea>
+
+                  <div ng-show="blogPost.$submitted || blogPost.content.$touched">
+                    <p class="help-block" ng-show="blogPost.content.$error.required">
+                      blog content is required
+                    </p>
+                  </div>
                 </div>
                 <input type="hidden" name="owner" value="{{$ctrl.currentUser._id}}">
                 <button type="submit" class="btn btn-default">Submit</button>
-                <button type="submit" class="btn btn-default">Cancel</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.clearPostForm(blogPost)">Cancel</button>
               </form>
-
 
 
             </div>
@@ -81,10 +115,25 @@
       </article>
       <aside>
         <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-
-          <button>Add new post</button>
+          <button ng-click="$ctrl.toggleCreatePost(blogPost)">Add new post</button>
           <div class="row">
             <div class="col-md-12">
+              <div class="blog-find">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <form ng-submit="$ctrl.searchBlog($ctrl.query)">
+                        <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog" ng->
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <blog-sidebar></blog-sidebar>
             </div>
           </div>
