@@ -7,13 +7,128 @@
             <like input-object="$ctrl.place" input-object-type="'places'"></like>
           </p>
         </div>
-        <div class="col-xs-4 no-padding">
+        <div class="col-xs-2 no-padding">
         </div>
-        <div class="col-xs-4 no-padding">
+        <div class="col-xs-6 no-padding">
           <a href="/#!/places/">
             <i class="fa fa-times fa-3x pull-right close" aria-hidden="true" id="close"></i>
           </a>
+          <a class="edit-button" href=""
+             ng-if="$ctrl.currentUser._id === $ctrl.place.owner"
+             title="Enable Edit Mode" ng-click="$ctrl.enableEditMode()">
+            <i class="fa fa-pencil-square-o fa-2x pull-right"
+               aria-hidden="true"></i>
+          </a>
         </div>
+
+        <form name="editPlaceForm" id="editPlaceForm"
+              class="form-horizontal col-xs-12" ng-hide="$ctrl.hideForm">
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name"
+                     ng-required="true" ng-minlength="3"
+                     ng-maxlength="100" ng-model="$ctrl.place.name"
+                     value="{{$ctrl.place.name}}">
+              <div class="validation-form"
+                   ng-messages="editPlaceForm.name.$error" role="alert">
+                <div ng-message="minlength">
+                  Your name is too short! Give longer name</div>
+                <div ng-message="maxlength">
+                  Your name is too long! Give shorter name</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">
+              Description:</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" maxlength="1000"
+                        rows="5" ng-model="$ctrl.place.description"
+                        id="description">{{$ctrl.place.description}}</textarea>
+              <p ng-if="$ctrl.place.description" class="pull-right">
+                Left: {{1000 - $ctrl.place.description.length}} symbols
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">Address:</label>
+            <div class="col-sm-10">
+              <input type="text" ng-minlength="20" ng-maxlength="100"
+                     class="form-control" id="address" name="address"
+                     ng-model="$ctrl.place.address"
+                     value="{{$ctrl.place.address}}">
+              <div class="validation-form"
+                   ng-messages="editPlaceForm.address.$error" role="alert">
+                <div ng-message="minlength">Your address is too short!</div>
+                <div ng-message="maxlength">
+                  Your address is too long! Give shorter address
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sel" class="col-sm-2 control-label">
+              Select type:</label>
+            <div class="col-sm-2">
+              <select class="form-control" id="sel" ng-model="$ctrl.place.type1">
+                <option ng-value="placeType"
+                        ng-repeat="(placeType, placeTypeValue) in $ctrl.placesType">
+                  {{placeTypeValue.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4 current-type">
+              <p>Current type:
+                <span>{{$ctrl.placesType[$ctrl.place.type].name}}</span></p>
+            </div>
+          </div>
+
+
+          <div class="form-group" id="photos">
+            <label for="photos" class="col-sm-2 control-label">Photos:</label>
+
+            <div class="col-sm-10">
+              <p>Click on image to remove it</p>
+              <div ng-repeat="image in $ctrl.place.photos">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <img ng-src="{{image}}"  id="{{image}}" ng-click="$ctrl.removePhoto(image)" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group add-photo">
+            <label for="add-photo" class="col-sm-2 control-label">Add image:</label>
+            <div class="col-sm-6">
+              <p>Paste image URL and click Add</p>
+              <div class="input-group">
+                <input type="text" class="form-control" id="add-photo" name="add-photo"
+                       ng-model="photo" value="">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="$ctrl.addPhoto(photo)">Add</button>
+                </span>
+              </div>
+              <span>{{$ctrl.error}}</span>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <div class="btn-group" >
+              <button ng-disabled="!editPlaceForm.$valid" type="button"
+                      class="btn btn-default"
+                      ng-click="$ctrl.updatePlace($ctrl.place)">Confirm</button>
+              <button type="button" class="btn btn-default"
+                      title="Reset to default values"
+                      ng-click="$ctrl.updatePlace()">Reset</button>
+              <button type="button" class="btn btn-default"
+                      title="Close EditingMode"
+                      ng-click="$ctrl.enableEditMode()">Close</button>
+            </div>
+          </div>
+          <div id="show-message" ng-show="$ctrl.showMessage">
+            {{$ctrl.message}}
+          </div>
+        </form>
+
       </div>
     </div>
     <div class="container_page">

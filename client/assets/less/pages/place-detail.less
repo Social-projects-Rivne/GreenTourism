@@ -1,3 +1,83 @@
+// Edit-place
+.edit-button, .edit-button:focus {
+  color: #777;
+  &:hover {
+    color: @brand-dark;
+  }
+  i {
+    padding-top: 10px;
+  }
+}
+.edit-mode-active, .edit-mode-active:active, .edit-mode-active:focus {
+  color: @brand-dark;
+}
+
+#editPlaceForm {
+  display: none;
+  padding: 10px;
+  background-color: #e7e7e7;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all linear 1s;
+  top: 0;
+  textarea {
+    resize: none;
+  }
+  &.ng-hide {
+    opacity: 0;
+    top: -500px;
+  }
+  .current-type {
+    padding-top: 7px;
+    p span {
+      color: @brand-dark;
+      font-weight: bold;
+    }
+  }
+  .validation-form {
+    color: maroon;
+  }
+  #photos {
+    img {
+      width: 110px;
+      &:hover {
+        opacity: 0.2;
+      }
+    }
+    div {
+      p {
+        color: @brand-dark;
+      }
+      div {
+        position: relative;
+        float: left;
+        height: 60px;
+        overflow: hidden;
+        i {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          color: @brand-dark;
+        }
+        &:hover {
+          i {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+  .add-photo {
+    p {
+      color: @brand-dark;
+    }
+    span {
+      color: maroon;
+    }
+  }
+}
+
+// Place-page
 .page-detail {
   bottom: 0;
   width: 100%;
