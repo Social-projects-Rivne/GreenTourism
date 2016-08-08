@@ -47,7 +47,7 @@ module.exports = function() {
   api.use('/blogs', require('../app/routes/blogs'));
   api.use('/search', require('../app/routes/search'));
   api.use('/events', require('../app/routes/events'));
-  
+
   app.use('/api', api);
 
   app.get('/', function(req, res) {
