@@ -96,13 +96,7 @@ exports.create = function(req, res) {
     for(var key in req.body){
       console.log("!!!!!!: " + key);
     }
-    Blog.blog.create({
-          blogImg: req.body.blogImg,
-          title: req.body.title,
-          content: req.body.content,
-          owner: req.body.owner,
-          categoryId: req.body.categoryId,
-        }).then(function(record) {
+    Blog.blog.create(req.body).then(function(record) {
           res.status(201).json({
             message: 'Record was successfully created!',
             record: record

@@ -1,4 +1,4 @@
-<section class="blog-page-content">
+<section class="blog-page-content" categoryList="categoryList">
   <div class="container">
     <div class="row">
       <article>
@@ -7,16 +7,15 @@
             <div class="col-md-12">
               <form name="form" role="form" novalidate ng-submit="$ctrl.createPost()">
                 <div class="form-group">
-                  <label for="title">Photo</label>
-                  <input type="text" class="form-control" id="photo" placeholder="photo" name="photo" ng-model="$ctrl.createPost.photo" >
+                  <label for="blogImg">Photo</label>
+                  <input type="text" class="form-control" id="blogImg" placeholder="photo" name="blogImg" ng-model="$ctrl.createPost.blogImg" >
                 </div>
                 <div class="form-group">
-                  <label for="category">Category</label>
-                  <select class="form-control" id="category" ng-model="$ctrl.createPost.category" name="category">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                  <label for="categoryId">Category</label>
+                  <select class="form-control" id="categoryId" ng-model="$ctrl.createPost.categoryId" name="categoryId">
+                    <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
+                        {{category.name}}
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -27,6 +26,7 @@
                   <label for="content">content</label>
                   <textarea class="form-control" rows="3" name="content" id="content"></textarea>
                 </div>
+                <input type="hidden" name="owner" value="{{$ctrl.currentUser._id}}">
                 <button type="submit" class="btn btn-default">Submit</button>
                 <button type="submit" class="btn btn-default">Cancel</button>
               </form>
@@ -81,6 +81,8 @@
       </article>
       <aside>
         <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
+
+          <button>Add new post</button>
           <div class="row">
             <div class="col-md-12">
               <blog-sidebar></blog-sidebar>
