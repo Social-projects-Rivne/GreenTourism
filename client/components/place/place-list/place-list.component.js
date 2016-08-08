@@ -322,7 +322,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
                     point[0].address = result.display_name;
                     Place.post(point[0]).then(function(response) {
                       counterByNewPoints++;
-                      point[0]._id = response.record._id;
+                      point[0]._id = response._id;
                       checkActiveType = angular.element('.' + point[0].type + ' span');
                       if (checkActiveType.hasClass(constants.checkedSpanClass)) {
                         placesOnMap.showPlaces(newPoints);
