@@ -63,21 +63,20 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
           }]
         }
       })
-        .when('/blog/:selector/:id', {
-          template: '<blog-list blogs="$resolve.blogs"></blog-list>',
-          resolve: {
-            blogs: ['$route', 'Blog', function BlogListController($route , Blog) {
-
-              var myId = $route.current.params.id;
-              var mySelector = $route.current.params.selector;
-              var params = {};
-              params[mySelector] = myId;
-              return Blog.getList(params).then(function(blogs) {
-                return blogs;
-              });
-            }]
-          }
-        })
+      .when('/blog/:selector/:id', {
+        template: '<blog-list blogs="$resolve.blogs"></blog-list>',
+        resolve: {
+          blogs: ['$route', 'Blog', function BlogListController($route , Blog) {
+            var myId = $route.current.params.id;
+            var mySelector = $route.current.params.selector;
+            var params = {};
+            params[mySelector] = myId;
+            return Blog.getList(params).then(function(blogs) {
+              return blogs;
+            });
+          }]
+        }
+      })
       .when('/blog/:blogId', {
         template: '<blog-detail blog="$resolve.blog"></blog-detail>',
         resolve: {
@@ -88,6 +87,9 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
               });
           }]
         }
+      })
+     .when('/blog-manager', {
+        template: '<blog-manager></blog-manager>'
       })
       .otherwise({
         templateUrl: 'shared/errors/404.html'

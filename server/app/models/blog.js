@@ -3,14 +3,10 @@ var Sequelize = require('sequelize');
 var sql = require('../../config/sequelize')();
 
 var BlogList = sql.define('blogs', {
+  blogImg: {type: Sequelize.TEXT, allowNull: false},
   title: {type: Sequelize.TEXT, allowNull: false},
   content: {type: Sequelize.TEXT, allowNull: false},
-  owner: {type: Sequelize.TEXT, allowNull: false},
-  status: {type: Sequelize.TEXT, allowNull: false}
-});
-
-var BlogPhotos = sql.define('blogPhotos', {
-  url: {type: Sequelize.TEXT, allowNull: false}
+  owner: {type: Sequelize.TEXT, allowNull: false}
 });
 
 var Categories = sql.define('categories', {
@@ -27,8 +23,6 @@ var BlogComment = sql.define('blogComment', {
   author: {type: Sequelize.TEXT, allowNull: false}
 });
 
-BlogList.hasOne(BlogPhotos);
-
 BlogList.belongsTo(Categories);
 
 BlogList.hasMany(BlogComment);
@@ -41,10 +35,9 @@ BlogLikes.belongsTo(BlogList);
 
 //Categories.sync({force: true});
 //BlogList.sync({force: true});
-//BlogPhotos.sync({force: true});
 //BlogLikes.sync({force: true});
 //BlogComment.sync({force: true});
 
-var Blog = {blog: BlogList, photos: BlogPhotos, categories: Categories, likes: BlogLikes, comment: BlogComment};
+var Blog = {blog: BlogList, categories: Categories, likes: BlogLikes, comment: BlogComment};
 
 module.exports = Blog;

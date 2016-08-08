@@ -25,24 +25,15 @@ angular.module('blogDetail').component('blogDetail', {
           author: ctrl.currentUser._id,
           blogId: ctrl.blog.id
         })
-            .then(function(res) {
-              ctrl.blog.blogLikes.push(res.record);
-              ctrl.likesLength += 1;
-              angular.element('.likes').addClass('added');
-            });
+          .then(function(res) {
+            ctrl.blog.blogLikes.push(res.record);
+            ctrl.likesLength += 1;
+            angular.element('.likes').addClass('added');
+          });
       }
     };
-
-    //Restangular.one('blogs/').get({categoryId: ctrl.blog.categoryId})
-    //    .then(function(res) {
-    //      ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
-    //    });
-
     Blog.getList({categoryId: ctrl.blog.categoryId, limit: 4}).then(function(res) {
-          ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
-        });
-
-    console.log(this)
-
+      ctrl.relatedPost = _.without(res, _.find(res, {id: ctrl.blog.id}));
+    });
   }]
 });

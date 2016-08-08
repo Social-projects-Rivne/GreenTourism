@@ -52,7 +52,7 @@
                  ng-repeat="blog in $ctrl.popularList | orderBy: 'blogLikes':true | limitTo: 3">
               <a href="#!/blog/{{blog.id}}" class="pull-left">
                 <img alt="{{blog.title}}"
-                     ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
               </a>
               <div class="media-body">
                 <h4 class="media-heading">
@@ -72,7 +72,7 @@
                  ng-repeat="blog in $ctrl.popularList | orderBy: 'blogComments':true | limitTo: 3">
               <a href="#!/blog/{{blog.id}}" class="pull-left">
                 <img alt="{{blog.title}}"
-                     ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
               </a>
               <div class="media-body">
                 <h4 class="media-heading">

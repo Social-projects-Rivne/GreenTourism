@@ -8,9 +8,8 @@ exports.list = function(req, res) {
   Blog.blog.findAll({
     where: queryAndOptions.query,
     order: 'createdAt ASC',
-    limit: _.toNumber(queryAndOptions.options.limit) || 10,
+    limit: _.toNumber(queryAndOptions.options.limit) || 100,
     include: [
-      {model: Blog.photos},
       {model: Blog.categories},
       {model: Blog.comment},
       {model: Blog.likes}
@@ -34,7 +33,6 @@ exports.show = function(req, res) {
   Blog.blog.findOne({
     where: {id: req.params.id},
     include: [
-      {model: Blog.photos},
       {model: Blog.categories},
       {model: Blog.comment},
       {model: Blog.likes}
@@ -81,7 +79,6 @@ exports.popular = function(req, res) {
   Blog.blog.findAll({
     where: req.query,
     include: [
-      {model: Blog.photos},
       {model: Blog.comment},
       {model: Blog.likes}
     ]
@@ -96,8 +93,16 @@ exports.popular = function(req, res) {
 
 exports.create = function(req, res) {
   if (req.body) {
-    model.create(req.body)
-        .then(function(record) {
+    for(var key in req.body){
+      console.log("!!!!!!: " + key);
+    }
+    Blog.blog.create({
+          blogImg: req.body.blogImg,
+          title: req.body.title,
+          content: req.body.content,
+          owner: req.body.owner,
+          categoryId: req.body.categoryId,
+        }).then(function(record) {
           res.status(201).json({
             message: 'Record was successfully created!',
             record: record
