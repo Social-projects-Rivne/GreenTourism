@@ -34,7 +34,7 @@ exports.isOwner = function(req, res, next) {
   if (isAuthenticated(req, res)) {
     if (req.user.role === 'admin') {
       next();
-    } else if (req.record.owner.id !== req.user._id) {
+    } else if (req.record.owner != req.user.id) {
       return res.status(403).json({
         message: 'User is not authorized'
       });
