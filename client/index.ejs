@@ -95,13 +95,11 @@
     <script src="components/place/mapMarkingTypes.factory.js"></script>
     <script src="components/place/place-list/place-list.component.js"></script>
     <script src="components/place/place-detail/place-detail.component.js"></script>
-    <script src="components/place/place-modal/place-modal.component.js"></script>
-    <script src="components/place/place-list/marker-places.component.js"></script>
-    <script src="components/place/place-modal/place-modal.component.js"></script>
     <script src="components/place/popular-places/popularPlaces.component.js"></script>
     <script src="components/place/places-location/locationPlaces.component.js"></script>
     <script src="components/place/popular-tracks/popular-tracks.component.js"></script>
     <script src="components/place/constants.factory.js"></script>
+    <script src="components/place/preloadImages.factory.js"></script>
 
     <!-- EVENT -->
     <script src="components/event/event.module.js"></script>
@@ -197,7 +195,7 @@
       </div>
     <% } %>
 
-    <div ng-if="!main.routeChangeError" ng-view=""></div>
+    <div ng-if="!main.routeChangeError" ng-view="" ng-class="{'page-detail': main.placeDetailPage}"></div>
     <div ng-if="main.routeChangeError">
       <div ng-if="main.statusCode" ng-include="'shared/errors/' + main.statusCode + '.html'"></div>
       <div ng-if="!main.statusCode">

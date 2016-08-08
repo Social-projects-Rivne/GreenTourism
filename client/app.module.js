@@ -1,5 +1,6 @@
 angular.module('greenTourism', [
-  'ngRoute',  // Routing
+  'ngRoute',
+  'ngAnimate',
 
   'welcomePage',
   'user',
