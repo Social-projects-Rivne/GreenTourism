@@ -22,7 +22,6 @@ angular.module('greenTourism')
       },
       photos: [],
       owner: '',
-      rate: 0,
       address: ''
     };
     constants.emptyTrackModel = {
@@ -35,6 +34,7 @@ angular.module('greenTourism')
       },
       places: [],
       photos: [],
+      rate: 0,
       owner: ''
     };
 
