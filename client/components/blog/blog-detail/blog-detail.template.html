@@ -2,8 +2,17 @@
   <section class="blog-page-content">
     <div class="container">
       <div class="row">
+        <aside>
+          <div class="col-sm-push-8 col-md-offset-1 col-md-3 col-sm-4">
+            <div class="row">
+              <div class="col-md-12">
+                <blog-sidebar></blog-sidebar>
+              </div>
+            </div>
+          </div>
+        </aside>
         <article>
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
             <div class="blog-wrapper">
               <img ng-src="{{$ctrl.blog.blogImg}}" alt="{{$ctrl.blog.title}}">
 
@@ -12,7 +21,7 @@
                   <ul>
                     <li>By
                       <span class="blog-author">
-                        <a ng-href="#!/blog/owner/{{blog.owner.id}}" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
+                        <a ng-href="#!/blog/owner/{{$ctrl.blog.owner.id}}" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
                       </span>
                     </li>
                     <li>
@@ -41,6 +50,7 @@
 
                 <div class="blog-content">
                   {{$ctrl.blog.content}}
+
                 </div>
                 <section class="related-posts">
 
@@ -50,18 +60,17 @@
                           Related Posts
                         </h3>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 hidden-xs">
                         <div class="title-sep"></div>
                       </div>
                       </div>
                       <div class="row">
                         <div class="fusion-title">
-                          <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="related in $ctrl.relatedPost | limitTo: 3">
+                          <div class="col-md-4 col-sm-4 col-xs-12 related-items" ng-repeat="related in $ctrl.relatedPost | limitTo: 3">
 
                             <div class="media blog-aside-items ng-scope">
                                 <a href="#!/blog/{{related.id}}" class="pull-left">
-                                <img alt="{{related.title}}" ng-src="{{related.blogImg}}" class="media-object"
-                                     style="width:50px;height:50px;"/>
+                                <img alt="{{related.title}}" ng-src="{{related.blogImg}}" class="media-object"/>
                               </a>
                               <div class="media-body">
                                 <h4 class="media-heading">
@@ -83,15 +92,6 @@
             </div>
           </div>
         </article>
-        <aside>
-          <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-            <div class="row">
-              <div class="col-md-12">
-                <blog-sidebar></blog-sidebar>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </div>
   </section>

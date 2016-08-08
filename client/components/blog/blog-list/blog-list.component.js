@@ -9,13 +9,6 @@ angular.module('blogList').component('blogList', {
     console.log(this);
     ctrl.currentUser = currentUser;
 
-    ctrl.searchBlog = function(query){
-      Blog.getList({title: query}).then(function(blogs) {
-        console.log(blogs);
-        ctrl.blogs = blogs;
-      });
-    };
-
     Blog.one('category').get().then(function(response) {
       ctrl.categoryList = response;
     });

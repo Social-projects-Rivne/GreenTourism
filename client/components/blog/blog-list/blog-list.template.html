@@ -1,8 +1,32 @@
 <section class="blog-page-content" categoryList="categoryList">
   <div class="container">
     <div class="row">
+      <aside>
+        <div class="col-sm-push-8 col-md-offset-1 col-md-3 col-sm-4">
+          <button ng-click="$ctrl.toggleCreatePost(blogPost)" class="btn createToggle hidden-xs" ng-if="$ctrl.currentUser">Add new post</button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="blog-find">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog" ng->
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <blog-sidebar></blog-sidebar>
+            </div>
+          </div>
+        </div>
+      </aside>
       <article>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
           <div class="row">
             <div class="col-md-12">
               <form name="blogPost" role="form" novalidate ng-submit="$ctrl.createPost(blogPost)"
@@ -65,8 +89,6 @@
                 <button type="submit" class="btn btn-default">Submit</button>
                 <button type="button" class="btn btn-default" ng-click="$ctrl.clearPostForm(blogPost)">Cancel</button>
               </form>
-
-
             </div>
           </div>
           <div class="row">
@@ -74,7 +96,7 @@
                  ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true">
               <div class="thumbnail blog-list-item">
                 <a ng-href="#!/blog/{{blog.id}}">
-                  <img ng-src="{{blog.blogImg}}" alt="{{blog.title}}">
+                  <img ng-src="{{blog.blogImg}}" alt="{{blog.title}}" class="item-img">
                 </a>
 
                 <div class="caption">
@@ -113,32 +135,7 @@
           </div>
         </div>
       </article>
-      <aside>
-        <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-          <button ng-click="$ctrl.toggleCreatePost(blogPost)">Add new post</button>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="blog-find">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="input-group">
-                      <form ng-submit="$ctrl.searchBlog($ctrl.query)">
-                        <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog" ng->
-                          <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                              <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                          </span>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <blog-sidebar></blog-sidebar>
-            </div>
-          </div>
-        </div>
-      </aside>
+
     </div>
   </div>
 </section>

@@ -1,6 +1,6 @@
 <div class="blog-category-list">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 hidden-xs">
       <h3>Categories</h3>
       <ul>
         <li ng-repeat="category in $ctrl.categoryList  ">
@@ -26,7 +26,7 @@
           </li>
           <li ng-class="{ active: $ctrl.isSelected(2) }">
             <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)">
-              Most discussed
+              Discussed
             </a>
           </li>
         </ul>
