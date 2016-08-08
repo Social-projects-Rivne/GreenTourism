@@ -1,8 +1,9 @@
-<div class="registration container">
-  <form role="form" name="login" novalidate method="POST" action="/api/login">
+<div class="container registration">
+  <form ng-hide="$ctrl.forgotPassword" role="form" name="login" method="POST"
+      action="/api/login" novalidate>
 
     <div class="form-group input-group-sm">
-      <label for="email">E-mail</label>
+      <label for="email">E-mail:</label>
       <input type="email" name="email" class="form-control"
           ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/"
           ng-model="user.email" required>
@@ -13,7 +14,7 @@
     </div>
 
     <div class="form-group input-group-sm">
-      <label for="password">Password</label>
+      <label for="password">Password:</label>
       <input type="password" name="password" class="form-control"
           ng-model="user.password" required>
       <p class="text-danger" ng-show="login.password.$touched &&
@@ -24,7 +25,9 @@
         ng-disabled="login.$invalid" value="Login" />
   </form>
 
-  <p class="text-center forgot"><a href="">Forgot password?</a></p>
+  <p ng-hide="$ctrl.forgotPassword" class="text-center forgot">
+    <a href="" ng-click="$ctrl.form = 'forgot'">Forgot password?</a>
+  </p>
 
   <hr/>
 
