@@ -41,7 +41,7 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
         template: '<event-list></event-list>'
       })
       .when('/events/:eventId', {
-        template: '<event-detail></event-detail>'
+        template: '{{ctrl.eventId}}<event-detail></event-detail>'
       })
       .when('/editevent/:eventId', {
        template: '<edit-event></edit-event>'

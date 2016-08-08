@@ -17,6 +17,11 @@ angular.module('eventDetail').component('eventDetail', {
         })
       };
 
+      $scope.imgPath = function(str){
+        if (!indexOf('http')) return str ;
+        else return
+      }
+
       $scope.eventListService = $scope.calendars.events;
 
    }]

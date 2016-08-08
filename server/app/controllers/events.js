@@ -14,52 +14,49 @@ exports.list = function(req, res) {
     var search = req.query.search;
     delete req.query.search;
 
-    if (search) {
-            Event.find({
-                    $or: [
-                        {name: {
-                            $regex: search,
-                            $options: 'i'
-                        }},
-                        {description: {
-                            $regex: search,
-                            $options: 'i'
-                        }}
-                    ]
-                },
+    var id = req.query.id;
+    delete req.query.id;
+
+    var findDb = function(searchString){
+        return Event.find(searchString,
             function (err, records) {
-            console.log('search >> '+search) ;
-            if (err) {
-                res.status(400).json(err);
-            } else {
-                res.json(records);
-            }
-        });
-    }
-    else
-        {
-            if (From) {
-              //  Event.find({ dateStart: {$lte : From },dateEnd : {$gte : To }}
-                Event.find({ dateStart: {$gte : From }, dateEnd: {$lte : To }}
-                , function (err, records) {
-                    if (err) {
-                        res.status(400).json(err);
-                    } else {
-                        res.json(records);
-                    }
-                });
-            } else {
-                Event.find(queryAndOptions.query, null, queryAndOptions.options,
-                    function (err, records) {
-                        if (err) {
-                            res.status(400).json(err);
-                        } else {
-                            res.json(records);
-                        }
-                    }
-                );
-            }
-        }
+                console.log('search >> '+search) ;
+                if (err) {
+                    res.status(400).json(err);
+                } else {
+                    res.json(records);
+                }
+            });
+    } ;
+
+    if (search) {
+        findDb({$or:
+            [
+                {name: {
+                    $regex: search,
+                    $options: 'i'
+                }},
+                {description: {
+                    $regex: search,
+                    $options: 'i'
+                }}
+            ]
+        }) ;
+        return ;
+    };
+
+    if (id) {
+        findDb({_id: id});
+        return ;
+    } ;
+
+    if (From) {
+        findDb({dateStart: {$gte: From}, dateEnd: {$lte: To}});
+        return ;
+    } ;
+
+    findDb(queryAndOptions.query, null, queryAndOptions.options) ;
+
 };
 
 exports.create = defaultController.create;

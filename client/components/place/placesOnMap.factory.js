@@ -177,7 +177,7 @@ angular.module('mapModule')
 
         marker(event.location.coordinates[0], event.location.coordinates[1], pix)
         .addTo(groupeE[input])
-        .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src=\'assets/' + event.photos[0] + '\' \/></a>' +
+        .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src="' + event.photos[0] + '"></a>' +
                 '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/events/' + event._id + '\'>Details >></a> </button></div>', {autoPan: false});
 
        }) ;

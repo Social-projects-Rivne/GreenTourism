@@ -10,7 +10,7 @@
           <i class="fa fa-random tracksIcon checked" aria-hidden="true"
              title="Default value of Tracks"></i></a>
         <a href="" ng-click="$ctrl.defaultObject('eventsIcon')">
-          <i class="fa fa-calendar" aria-hidden="true"
+          <i class="fa fa-book eventsIcon" aria-hidden="true"
              title="Default value of Events"></i></a>
       </div>
       <!-- Main-menu -->
@@ -115,10 +115,10 @@
         </div>
       </div>
       <!-- Main menu for SM and XS devices -->
-      <div class="col-sm-4 col-xs-8 hidden-md hidden-lg map-menu-buttons-wrapper">
+      <div class="col-sm-5 col-xs-8 hidden-md hidden-lg map-menu-buttons-wrapper">
         <div class="btn-group map-menu-buttons" role="group">
           <!-- New Item -->
-          <div class="btn-group" role="group">
+          <div class="btn-group hidden-xs" role="group">
             <button type="button" class="btn btn-default dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true"
                     ng-disabled="!$ctrl.user"
@@ -200,11 +200,29 @@
               </li>
             </ul>
           </div>
-
+          <!-- Events -->
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fa fa-bicycle" aria-hidden="true"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu place-mobile dropdownStop">
+              <li ng-repeat="(eventType, eventTypeValue) in $ctrl.eventsType"
+                  ng-click="$ctrl.checkEventType(eventType)">
+                <a class="placeFilter {{eventType}}" href="">
+                  <img ng-src="{{eventTypeValue.icon}}">
+                  {{eventTypeValue.name}}
+                  <span></span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- Search-bar -->
-      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-9 map-menu-search">
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-7 map-menu-search" style="margin:0; pading:0;">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search for...">
           <span class="input-group-btn">
@@ -213,7 +231,7 @@
         </div>
       </div>
       <!-- Right menu for Popular places and tracks in location -->
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 map-menu-popular">
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 map-menu-popular">
         <div>
           <a href="" ng-click="$ctrl.checkPopularPlaces()">
             <i id="popularPlaces" class="fa fa-flag-o" aria-hidden="true"
