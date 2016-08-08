@@ -5,7 +5,7 @@ module.exports = new Schema({
   type: {
     type: String,
     default: 'Point',
-    enums: ['Point'],
+    enum: ['Point'],
     required: true
     // TODO: Add validation - not more 2 elements in array
   },

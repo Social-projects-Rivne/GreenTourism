@@ -71,21 +71,26 @@ angular.module('mapModule')
 
       if (input) {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1],
+          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1],
               types[input].icon)
             .addTo(groups[input])
             .bindPopup(createPopup(place), {autoPan: false});
+          newPlace.name = place.name;
+          newPlace._id = place._id;
+          placesOnMap.places[place.type].push(newPlace);
         });
         mainGroup.checkIn(groups[input]);
         groups[input].addTo(map);
 
       } else {
         places.forEach(function(place) {
-          marker(place.location.coordinates[0], place.location.coordinates[1],
+          var newPlace = marker(place.location.coordinates[0], place.location.coordinates[1],
               types[place.type].icon)
             .addTo(groups[place.type])
             .bindPopup(createPopup(place), {autoPan: false});
-
+          newPlace.name = place.name;
+          newPlace._id = place._id;
+          placesOnMap.places[place.type].push(newPlace);
         });
         for (var type in types) {
           mainGroup.checkIn(groups[type]);
@@ -148,7 +153,7 @@ angular.module('mapModule')
         this.track.name,
         '</h3>',
         '<a href="#!/tracks/',
-        this._id,
+        this.track._id,
         '">',
         '<img class="marker-image center-block" src="',
         this.track.photos[0],
@@ -167,10 +172,10 @@ angular.module('mapModule')
         weight: 8
       }).addTo(map);
       this.addTo(map).bindPopup(popup, {autoPan: false});
-    };
+    }
     function leavePolyline() {
       map.removeLayer(boldLine);
-    };
+    }
 
     placesOnMap.showTracks = function(tracksArray, isCreateMode) {
       if (isCreateMode && placesOnMap.newTrack) {
@@ -211,8 +216,8 @@ angular.module('mapModule')
         }
         trackForAdding = polyline(coordsArray, color).addTo(map);
         trackForAdding.track = track;
-        trackForAdding.on('mouseover', overPolyline); 
-        trackForAdding.on('mouseout', leavePolyline); 
+        trackForAdding.on('mouseover', overPolyline);
+        trackForAdding.on('mouseout', leavePolyline);
         if (isCreateMode) {
           placesOnMap.newTrack = trackForAdding;
         }
@@ -242,21 +247,21 @@ angular.module('mapModule')
     };
 
     placesOnMap.initGroupsOfEvents = function(inpTypes) {
-        var type = inpTypes;
-        for (var key in type) {
+      var type = inpTypes;
+      for (var key in type) {
           if ({}.hasOwnProperty.call(type, key)) {
             groupeE[key] = L.layerGroup();
           }
         }
-      };
+    };
 
       /* Events */
-      placesOnMap.openAddEventMenu = function() {
-          map.on('click', addNewEventOnMap);
+    placesOnMap.openAddEventMenu = function() {
+        map.on('click', addNewEventOnMap);
       };
 
-      placesOnMap.closeAddEventMenu = function() {
-          map.off('click', addNewEventOnMap);
+    placesOnMap.closeAddEventMenu = function() {
+        map.off('click', addNewEventOnMap);
       };
 
     placesOnMap.showEvents = function(events, input) {
@@ -267,17 +272,17 @@ angular.module('mapModule')
         .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src="' + event.photos[0] + '"></a>' +
                 '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> <a href=\'#!/events/' + event._id + '\'>Details >></a> </button></div>', {autoPan: false});
 
-       }) ;
+      });
 
       groupeE[input].addTo(map);
-     } ;
+    };
 
-      placesOnMap.removeEvents = function(input) {
+    placesOnMap.removeEvents = function(input) {
         if (input) {
           groupeE[input].clearLayers();
         } else {
           for (var key in types) {
-           groupeE[input].clearLayers();
+            groupeE[input].clearLayers();
           }
         }
       };
@@ -295,28 +300,28 @@ angular.module('mapModule')
       longitudeContainer.text('Longitude: ' + newMarker._latlng.lng);
     }
 
-      placesOnMap.removeNewMarker = function() {
-          if (newMarker) {
-              map.removeLayer(newMarker);
+    placesOnMap.removeNewMarker = function() {
+        if (newMarker) {
+            map.removeLayer(newMarker);
           }
       };
-      var newEventMarker;
-      function addNewEventOnMap(e) {
-          var latitudeContainer = angular.element('#latitudeE');
-          var longitudeContainer = angular.element('#longitudeE');
-          placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
-          placesOnMap.coordsIsDefined = true;
-          if (newEventMarker) {
-              map.removeLayer(newEventMarker);
+    var newEventMarker;
+    function addNewEventOnMap(e) {
+        var latitudeContainer = angular.element('#latitudeE');
+        var longitudeContainer = angular.element('#longitudeE');
+        placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
+        placesOnMap.coordsIsDefined = true;
+        if (newEventMarker) {
+            map.removeLayer(newEventMarker);
           }
-          newEventMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
-          latitudeContainer.text('Latitude: ' + newEventMarker._latlng.lat);
-          longitudeContainer.text('Longitude: ' + newEventMarker._latlng.lng);
+        newEventMarker = L.marker([placesOnMap.coords[1], placesOnMap.coords[0]]).addTo(map);
+        latitudeContainer.text('Latitude: ' + newEventMarker._latlng.lat);
+        longitudeContainer.text('Longitude: ' + newEventMarker._latlng.lng);
       }
 
-      placesOnMap.removeNewEventMarker = function() {
-          if (newEventMarker) {
-              map.removeLayer(newEventMarker);
+    placesOnMap.removeNewEventMarker = function() {
+        if (newEventMarker) {
+            map.removeLayer(newEventMarker);
           }
       };
 
