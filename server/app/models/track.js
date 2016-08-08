@@ -36,7 +36,8 @@ var TrackSchema = new Schema({
   description: String,
   likes: [Schema.Types.ObjectId],
   photos: [String],
-  comments: [CommentSchema]
+  comments: [CommentSchema],
+  rate: Number
 }, {
   toObject: {
     virtuals: true
@@ -46,8 +47,9 @@ var TrackSchema = new Schema({
   }
 });
 
-TrackSchema.virtual('rate').get(function() {
-  return this.likes.length;
+TrackSchema.virtual('stars').get(function() {
+  this.rate = this.likes.length;
+  this.save();
 });
 
 var autoPopulatePlaces = function(next) {
