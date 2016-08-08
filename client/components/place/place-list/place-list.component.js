@@ -2,9 +2,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
     controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
-      'currentUser', 'constants', 'Restangular',
+      'currentUser', 'constants', 'Restangular', '$scope',
       function(placesOnMap, mapMarkingTypes, Place, Track,
-               currentUser, constants, Restangular) {
+               currentUser, constants, Restangular, $scope) {
         var ctrl = this;
         var places = [];
         var tracks = [];
@@ -106,7 +106,11 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.hideSearchPlaces = false;
+        ctrl.hideSearchPlaces = true;
+        $scope.$on('eventEmitedName', function(event, data) {
+         ctrl.hideSearchPlaces = data;
+          console.log(ctrl.hideSearchPlaces);
+        });
 
         ctrl.checkSearchPlaces = function() {
           var searchPlacesIcon = angular.element('#searchPlaces');

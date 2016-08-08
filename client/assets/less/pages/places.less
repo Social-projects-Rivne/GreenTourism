@@ -394,7 +394,28 @@
   }
 }
 
-.activeSearchResult {
-  font-weight: bold;
-  font-size: 18px;
+#searchPlaces {
+  li button {
+    color: white;
+    width: 100%;
+    background-color: #3da268;
+    a, h3 {
+      color: white;
+    }
+    .search-in-location-address {
+      color: white;
+      text-align: left;
+    }
+    i.fa:hover, i.fa:active, i.fa:focus, i.fa:default {
+      color: white !important;
+      background-color: white !important;
+      text-align: left !important;
+    }
+  }
+  button.activeSearchResult {
+    background-color: #46bd78;
+  }
+  button:hover {
+    background-color: #46bd78;
+  }
 }

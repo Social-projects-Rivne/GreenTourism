@@ -5,7 +5,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
       function SearchCtrl(Search, Track, $scope, placesOnMap, $timeout, mapFactory, $compile, Place, $rootScope) {
         var ctrl = this;
         markers = [];
-        //$rootScope.stopFlag=true;
+
         $scope.loading = false;
         $scope.noResults = false;
         $scope.minchars = false;
@@ -41,6 +41,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
 
             $timeout(function() {
               mapFactory.map.panTo(new L.LatLng(lat, lon), animate = true);
+              // mapFactory.map.setView([lat, lon], 6);
             }, 100);
           }
         };
@@ -60,6 +61,8 @@ angular.module('searchPlace', ['ui.bootstrap'])
           }
           angular.element(document.querySelector('#searchPlaces')).empty();
           if (searchname.length >= 3) {
+            $scope.hideSearchPlaces = false;
+            $scope.$emit('eventEmitedName', $scope.hideSearchPlaces);
             $scope.loading = true;
             Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultPlaces) {
               ctrl.resultPlaces = resultPlaces;
@@ -88,28 +91,37 @@ angular.module('searchPlace', ['ui.bootstrap'])
             return [];
           }
         };
-        function showSearchResault(resultPlaces,resultTracks) {
+        function showSearchResault(resultPlaces, resultTracks) {
           var strResult = "<h2>Search resault:</h2>";
-          if (!resultPlaces||!resultTracks)
+          if (!resultPlaces || !resultTracks)
             strResult += "<h3>There are no such places and tracks, try else please</h3>";
           else {
-            if(ctrl.resultPlaces.length>0){
-            strResult += "<h3>Places</h3>";
-            strResult += "<ul class='list-unstyled'>";
-            resultPlaces.forEach(function(place) {
-              var lat = place.location.coordinates[1];
-              var lon = place.location.coordinates[0];
-              strResult += "<li><a ng-mouseover='showMarker(" + lat + "," + lon + ",$event" + ")'" +
-                "ng-href='#!/places/" + place.id + "' id='" + place.id + "'>" + place.name + "</a></li>";
-            });
-            strResult += "</ul>";
-           }
-            if(ctrl.resultTracks.length>0) {
+            if (ctrl.resultPlaces.length > 0) {
+              resultPlaces = _.orderBy(resultPlaces, ['rate'], ['desc']);
+              strResult += "<h3>Places</h3>";
+              strResult += "<ul class='list-unstyled'>";
+              resultPlaces.forEach(function(place) {
+                var lat = place.location.coordinates[1];
+                var lon = place.location.coordinates[0];
+                strResult += "<li ng-mouseover='showMarker(" + lat + "," + lon + ",$event" + ")'" + "id='" + place.id + "'>" +
+                  "<button type='button'>" +
+                  "<span class='search-in-location-address pull-left'> <i class='fa fa-heart' aria-hidden='true'>" +
+                  "</i>&nbsp" + place.rate + "</span><h3>" +
+                  "<a ng-href='#!/places/" + place.id + "'>" + place.name + "</a></h3>" +
+                  "" + place.address + "</button></li>";
+              });
+              strResult += "</ul>";
+            }
+            if (ctrl.resultTracks.length > 0) {
+              resultTracks = _.orderBy(resultTracks, ['rate'], ['desc']);
               strResult += "<h3>Tracks</h3>";
               strResult += "<ul class='list-unstyled'>";
               resultTracks.forEach(function(track) {
-
-                strResult += "<li><a ng-href='#!/tracks/" + track._id+"'>" + track.name + "</a></li>";
+                strResult += "<li>" +
+                  "<button type='button'>" +
+                  "<span class='search-in-location-address pull-left'> <i class='fa fa-heart' aria-hidden='true'>" +
+                  "</i>&nbsp" + track.rate + "</span><h3>" +
+                  "<a ng-href='#!/tracks/" + track._id + "'>" + track.name + "</a></h3></button></li>";
               });
               strResult += "</ul>";
 
