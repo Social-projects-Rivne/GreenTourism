@@ -11,7 +11,7 @@ angular.module('comment', [])
         var heightAfterContent = 10;
 
         ctrl.textareaPostResize = function() {
-          var textareaObject = angular.element('textarea');
+          var textareaObject = angular.element('.textarea-post');
           textareaObject.css('height', '50px');
           textareaObject.css('height',
             heightAfterContent + textareaObject.prop('scrollHeight') + 'px');
