@@ -93,9 +93,6 @@ exports.popular = function(req, res) {
 
 exports.create = function(req, res) {
   if (req.body) {
-    for(var key in req.body){
-      console.log("!!!!!!: " + key);
-    }
     Blog.blog.create(req.body).then(function(record) {
           res.status(201).json({
             message: 'Record was successfully created!',
@@ -115,10 +112,6 @@ exports.update = function(req, res) {
   } else {
     Blog.blog.update(req.body, {where: {id: req.params.id}})
         .then(function() {
-
-          for (var key in req.body){
-            console.log("REQ BODY: " + key + ":" + req.body.key);
-          }
           res.status(200).json({
             message: 'Record ' + req.params.id +
             ' was successfully updated'
