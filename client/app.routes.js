@@ -88,9 +88,6 @@ angular.module('greenTourism').config(['$routeProvider', '$locationProvider',
           }]
         }
       })
-     .when('/blog-manager', {
-        template: '<blog-manager></blog-manager>'
-      })
       .otherwise({
         templateUrl: 'shared/errors/404.html'
       });
