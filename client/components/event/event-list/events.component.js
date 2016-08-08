@@ -1,22 +1,33 @@
 angular.module('eventList', [])
   .component('eventList', {
-    templateUrl: 'components/event/event-list/event-list.template.html',
-    controller: ['$scope', '$http', 'eventListService', function($scope, $http, eventListService) {
-      $scope.eventL = eventListService.th;
-      $scope.eventL.mainControllerName = 'Events';
-      $scope.eventL.date_current = new Date();
+  templateUrl: 'components/event/event-list/event-list.template.html',
+  controller: ['$scope', 'calendarService','Event', function ($scope, calendarService, Event) {
 
-      this.data = $http.get('components/event/event-list/event.data.json').success(function(data) {
-        $scope.eventListService = data;
-        $scope.eventL.event = data;
+    $scope.calendars = calendarService;
+    $scope.calendars.clear() ;
 
-        return data;
-      }, function(data) {
-        console.log('Error : Could not load JSON Event in angular.module - event ');
-        return 'error';
-      });
+    $scope.calendars.click = function () {
+        Event.getList({From:Date.parse($scope.calendars.values[0]),To:Date.parse($scope.calendars.values[1])}).then(function (result) {
+          $scope.calendars.events = result.concat();
+          $scope.events = $scope.calendars.events;
+        })
+    };
 
-      $scope.give_event = eventListService.th;
-      this.danni = $scope.give_event.event;
-    }]
-  });
+  if ($scope.calendars.events.length == 0)
+    {
+      Event.getList().then(function (result) {
+  //    Event.getList({dateStart:$scope.calendars.values[0],dateEnd:$scope.calendars.values[1]}).then(function (result) {
+      $scope.calendars.events = result.concat();
+      $scope.calendars.click();
+    })
+  };
+
+    this.findWord = function(reg){
+        Event.getList({search: reg }).then(function (result) {
+        $scope.events = result.concat();
+      }) ;
+    } ;
+
+  $scope.calendars.click();
+  }]
+});

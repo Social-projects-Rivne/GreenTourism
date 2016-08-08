@@ -1,20 +1,26 @@
-angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
+angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 'ngAnimate'])
   .component('placeList', {
     templateUrl: 'components/place/place-list/place-list.template.html',
-    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track',
-      'currentUser', 'constants', 'Restangular', '$scope',
-      function(placesOnMap, mapMarkingTypes, Place, Track,
-               currentUser, constants, Restangular, $scope) {
+    controller: ['placesOnMap', 'mapMarkingTypes', 'Place', 'Track', 'calendarService',
+      'currentUser', 'constants', 'Restangular', 'Event', '$scope',
+      function(placesOnMap, mapMarkingTypes, Place, Track, calendarService,
+               currentUser, constants, Restangular, Event, $scope) {
         var ctrl = this;
         var places = [];
         var tracks = [];
+        var events = [];
         var placeCounter = 1;
         var trackCounter;
+        var eventCounter;
         var placeTypeLength;
         var trackTypeLength;
+        var eventTypeLength;
         var map = placesOnMap.showMap();
         var activePlacesTypes = [];
         var key;
+
+        $scope.calendars = calendarService;
+        $scope.calendars.clear() ;
 
         ctrl.user = currentUser;
 
@@ -23,6 +29,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         ctrl.newPlaceType = '';
         ctrl.formNewPlaceSubmitted = false;
         ctrl.addPlaceMenuIsOpen = false;
+        ctrl.addEventMenuIsOpen = false;
 
         ctrl.toggleAddPlaceMenu = function(form) {
           if (ctrl.addPlaceMenuIsOpen) {
@@ -33,6 +40,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             placesOnMap.openAddPlaceMenu();
             ctrl.addPlaceMenuIsOpen = true;
             ctrl.addTrackMenuIsOpen = false;
+            ctrl.addEventMenuIsOpen = false;
           }
         };
 
@@ -81,10 +89,80 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         };
         // -----END ADD Place-----
 
+        // -----START ADD Event-----
+        ctrl.newEvent = angular.copy(constants.emptyEventModel);
+        ctrl.newEventType = '';
+        ctrl.formNewEventSubmitted = false;
+        ctrl.addEventMenuIsOpen = false;
+        ctrl.addPlaceMenuIsOpen = false;
+
+        ctrl.toggleAddEventMenu = function(form) {
+          if (ctrl.addEventMenuIsOpen) {
+            placesOnMap.closeAddEventMenu();
+            ctrl.addEventMenuIsOpen = false;
+            ctrl.resetAddEventForm(form);
+          } else {
+            placesOnMap.openAddEventMenu();
+            ctrl.addEventMenuIsOpen = true;
+            ctrl.addTrackMenuIsOpen = false;
+            ctrl.addPlaceMenuIsOpen = false;
+          }
+        };
+
+        ctrl.createNewEvent = function(form) {
+          var addEventForm = angular.element('form[name="eventMaker"]');
+          var checkEventType;
+          var newEvents = [];
+          ctrl.coordsIsDefined = placesOnMap.coordsIsDefined;
+          ctrl.formNewEventSubmitted = true;
+          if (addEventForm.hasClass('ng-valid') && placesOnMap.coords) {
+            ctrl.newEvent.type = ctrl.newEventType;
+            ctrl.newEvent.dateStart = Date.parse($scope.calendars.values[0]) ;
+            ctrl.newEvent.dateEnd = Date.parse($scope.calendars.values[1]) ;
+            ctrl.newEvent.location.coordinates = placesOnMap.coords;
+            newEvents.push(ctrl.newEvent);
+            Restangular.oneUrl('location', 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + placesOnMap.coords[1] +
+                '&lon=' + placesOnMap.coords[0] + '&addressdetails=0&zoom=10').get().then(function(result) {
+              ctrl.newEvent.address = result.display_name;
+              Event.post(ctrl.newEvent).then(function() {
+                checkEventType = angular.element('.' + ctrl.newEvent.type + ' span');
+                if (checkEventType.hasClass(constants.checkedClass)) {
+                  placesOnMap.showEvents(newEvents);
+                } else {
+                  ctrl.checkEventType(ctrl.newEvent.type);
+                }
+                ctrl.resetAddEventForm(form);
+
+              });
+            });
+          }
+        };
+
+        ctrl.resetAddEventForm = function(form) {
+          var newEventLongitude = angular.element('#longitudeE');
+          var newEventLatitude = angular.element('#latitudeE');
+          if (form) {
+            ctrl.newEvent = angular.copy(constants.emptyEventModel);
+            ctrl.newEventType = '';
+            form.$setPristine();
+            form.$setUntouched();
+            ctrl.formNewEventSubmitted = false;
+            newEventLongitude.text('');
+            newEventLatitude.text('');
+            placesOnMap.coords = [];
+            placesOnMap.coordsIsDefined = false;
+            placesOnMap.removeNewEventMarker();
+          }
+        };
+
+
+        // -----END ADD Event-----        
+        
         // -----START ADD Track-----
         ctrl.newTrackObject = angular.copy(constants.emptyTrackModel);
         ctrl.addPointMenuIsOpen = false;
         ctrl.addTrackMenuIsOpen = false;
+        ctrl.addEventMenuIsOpen = false;
         ctrl.newPoint = angular.copy(constants.emptyPlaceModel);
         var newPointForTrack;
         var newPointsForTrack = [];
@@ -103,10 +181,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           } else {
             ctrl.addTrackMenuIsOpen = true;
             ctrl.addPlaceMenuIsOpen = false;
+            ctrl.addEventMenuIsOpen = false;
+
             var checkAllPlaces = angular.element('.check-all-places span');
             if (!checkAllPlaces.hasClass(constants.checkedSpanClass)) {
               ctrl.checkAllPlaces();
             }
+
             map.on('click', addNewTrackPointOnMap);
             for (key in placesOnMap.places) {
               placesOnMap.places[key].forEach(function(place) {
@@ -306,6 +387,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             if (objectType === 'placesIcon') {
               ctrl.checkAllPlaces(objectIcon);
             }
+            if (objectType === 'eventsIcon') {
+              ctrl.checkAllEvents('game');
+            }
             if (objectType === 'tracksIcon') {
               ctrl.checkAllTracks(objectIcon);
             }
@@ -313,6 +397,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
             objectIcon.addClass(constants.checkedClass);
             if (objectType === 'placesIcon') {
               ctrl.checkType(constants.placesOnLoad);
+            }
+            if (objectType === 'eventsIcon') {
+              ctrl.checkAllEvents();
             }
             if (objectType === 'tracksIcon') {
               ctrl.checkAllTracks();
@@ -324,6 +411,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
+        ctrl.hidePopularEvents = true;
 
         ctrl.checkPopularPlaces = function() {
           var popularPlacesIcon = angular.element('#popularPlaces');
@@ -337,6 +425,7 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
 
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
+            ctrl.hidePopularEvents = true;
           }
         };
 
@@ -351,6 +440,22 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
               .removeClass(constants.checkedClass);
 
             ctrl.hidePopularTracks = false;
+            ctrl.hidePopularPlaces = true;
+            ctrl.hidePopularEvents = true;
+          }
+        };
+
+        ctrl.checkPopularEvents = function() {
+          var popularEventsIcon = angular.element('#popularEvents');
+          if (popularEventsIcon.hasClass(constants.checkedClass)) {
+            popularEventsIcon.removeClass(constants.checkedClass);
+            ctrl.hidePopularEvents = true;
+          } else {
+            popularEventsIcon.addClass(constants.checkedClass);
+            angular.element('#toolsOfEvents')
+                .removeClass(constants.checkedClass);
+            ctrl.hidePopularEvents = false;
+            ctrl.hidePopularTracks = true;
             ctrl.hidePopularPlaces = true;
           }
         };
@@ -637,5 +742,60 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'ngAnimate'])
           }
         };
         // *** END tracks controller ***
+
+        // *** START tracks controller ***
+
+        ctrl.eventsType = mapMarkingTypes.events;
+        eventsTypeLength = Object.keys(ctrl.eventsType).length;
+        placesOnMap.initGroupsOfEvents(ctrl.eventsType);
+
+        ctrl.checkAllEvents = function(input) {
+          var checkAllEvent = angular.element('.eventsIcon');
+          var checkEvent1 = angular.element('Game');
+          var checkEvent2 = angular.element('Festival');
+          var checkEvent3 = angular.element('Meeting');
+          if (checkAllEvent.hasClass(constants.checkedClass))
+          {
+            angular.element('.eventsIcon')
+                .removeClass(constants.checkedSpanClass);
+          }
+          else
+          {
+            angular.element('.eventsIcon')
+                .addClass(constants.checkedSpanClass);
+          } ;
+                ctrl.checkEventType('game');
+        };
+
+        // ----START---- FilterByOneOfType
+        ctrl.checkEventType = function(input) {
+          var checkEvent = angular.element('.' + input + ' span');
+          if (checkEvent.hasClass(constants.checkedSpanClass)) {
+            eventCounter--;
+            checkEvent.removeClass(constants.checkedSpanClass);
+            angular.element('.check-all-events span')
+                .removeClass(constants.checkedEventClass);
+            placesOnMap.removeEvents(input);
+            events = events.filter(function(event) {
+              return event.type !== input;
+            });
+          } else {
+            eventCounter++;
+            checkEvent.addClass(constants.checkedSpanClass);
+
+            if (eventCounter === eventTypeLength)
+              angular.element('.check-all-events span')
+                  .addClass(constants.checkedEventClass);
+            Event.getList({type: input, limit: 100}).then(function(result) {
+              events = result.concat(events);
+              placesOnMap.showEvents(result, input);
+            });
+          }
+          if (eventCounter > 0) {
+            angular.element('.eventsIcon').addClass(constants.checkedClass);
+          } else {
+            angular.element('.eventsIcon').removeClass(constants.checkedClass);
+          }
+        };
       }]
   });
