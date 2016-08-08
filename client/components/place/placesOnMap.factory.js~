@@ -188,7 +188,10 @@ angular.module('mapModule')
 
     placesOnMap.showEvents = function(events, input) {
       var pix = mapMarkingTypes.events[input].icon;
+        console.log('events:'); console.log(events);
       events.forEach(function(event) {
+        console.log(event.location.coordinates[1]+' - '+ event.location.coordinates[0] + ' ' + pix+ ' event.photos[0]=' +event.photos[0]);
+
         marker(event.location.coordinates[0], event.location.coordinates[1], pix)
         .addTo(groupeE[input])
         .bindPopup('<div class=\'popup  center-block\'><h3>' + event.name + '</h3><a><img class=\'marker-image\' src="' + event.photos[0] + '"></a>' +
@@ -196,14 +199,21 @@ angular.module('mapModule')
 
        }) ;
 
+       console.log('On map: ') ;
+       console.log(groupeE[input]) ;
       groupeE[input].addTo(map);
      } ;
 
       placesOnMap.removeEvents = function(input) {
         if (input) {
+          console.log('Del from map: ') ;
+          console.log(groupeE) ;
+          //mainGroup.checkOut(groups[input]);
           groupeE[input].clearLayers();
+          //map.removeLayer(newMarker);
         } else {
           for (var key in types) {
+           // mainGroup.checkOut(groups[key]);
            groupeE[input].clearLayers();
           }
         }
@@ -232,6 +242,7 @@ angular.module('mapModule')
           var latitudeContainer = angular.element('#latitudeE');
           var longitudeContainer = angular.element('#longitudeE');
           placesOnMap.coords = [e.latlng.lng, e.latlng.lat];
+          console.log(e.latlng.lng + ' = ' + e.latlng.lat + " -> " + placesOnMap.coords ) ;
           placesOnMap.coordsIsDefined = true;
           if (newEventMarker) {
               map.removeLayer(newEventMarker);
