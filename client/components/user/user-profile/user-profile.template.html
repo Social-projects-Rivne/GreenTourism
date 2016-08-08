@@ -148,11 +148,11 @@
       </div>
       <div ng-show="$ctrl.isSelected(4)">
         <h1 class="page-header">Favorite Places</h1>
-        <tab-list items="$ctrl.favPlaces"></tab-list>
+        <tab-list route="'places/'" items="$ctrl.favPlaces"></tab-list>
       </div>
       <div ng-show="$ctrl.isSelected(5)">
         <h1 class="page-header">Favorite Tracks</h1>
-        <tab-list items="$ctrl.favTracks"></tab-list>
+        <tab-list route="'tracks/'" items="$ctrl.favTracks"></tab-list>
       </div>
     </section>
   </div>
