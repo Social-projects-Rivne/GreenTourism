@@ -20,7 +20,6 @@ exports.list = function(req, res) {
     var findDb = function(searchString){
         return Event.find(searchString,
             function (err, records) {
-                console.log('search >> '+search) ;
                 if (err) {
                     res.status(400).json(err);
                 } else {
