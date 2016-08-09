@@ -1,0 +1,164 @@
+@row-height-lg: 329px;
+@row-height-md: 272px;
+
+.parallax {
+  background: url('/assets/img/welcome-page/main.jpg') center no-repeat fixed;
+  .parallax-background-opacity {
+    opacity: 0.3;
+    background: @brand-dark;
+    height: 100vh;
+  }
+  .aligncenter {
+    position: absolute;
+    margin: 0 auto 0 auto;
+    left: 0;
+    right: 0;
+  }
+  .parallax-title {
+    top: 40%;
+    .aligncenter;
+    h2 {
+      font-size: 70px;
+      font-weight: bold;
+      text-align: center;
+      color: @brand-light;
+    }
+  }
+  a {
+    font-size: 70px;
+    text-align: center;
+    display: block;
+    color: @brand-light;
+    bottom: 5%;
+    .aligncenter;
+  }
+}
+
+#welcome-page-content {
+  img {
+    width: 100%;
+  }
+  .popular-places-images {
+    position: relative;
+    .slide-arrow {
+      position: absolute;
+      top: 44%;
+      font-size: 40px;
+      z-index: 10;
+      &:hover, &:focus, &:active {
+        color: @light-green;
+      }
+    }
+    .slide-arrow-right {
+      right: 0;
+    }
+    .slide-arrow-left {
+      left: 0;
+    }
+    /*div.ng-enter {
+      opacity: 0;
+      animation: 3s appear;
+    }
+    div.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+    @keyframes appear {
+      from {
+        opacity: 0.5;
+      }
+      to {
+        opacity: 1;
+      }
+    }*/
+  }
+  .welcome-page-section-img {
+    padding: 0;
+    overflow: hidden;
+    min-height: @row-height-lg;
+    max-height: @row-height-lg;
+    @media all and (max-width: 1200px) and (min-width: 992px) {
+      min-height: @row-height-md;
+      max-height: @row-height-md;
+    }
+    @media (max-width: 992px) {
+      min-height: 100%;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+    }
+    .popular-places-gradient {
+      position: absolute;
+      top: 0;
+      padding-left: 50%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+    }
+    .name-location {
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      position: absolute;
+    }
+    .welcome-page-section-img-name {
+      .name-location;
+      font-size: 18px;
+      top: 4px;
+      right: 4px;
+    }
+    .welcome-page-section-img-location {
+      .name-location;
+      font-size: 12px;
+      bottom: 4px;
+      right: 4px;
+      text-align: right;
+      img {
+        width: 12px;
+      }
+    }
+  }
+  .welcome-page-section-text {
+    text-align: justify;
+    min-height: @row-height-lg;
+    padding: 20px 40px 40px 40px;
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      a {
+        color: @footer-bg-color;
+      }
+    }
+    @media all and (max-width: 1200px) and (min-width: 992px) {
+      min-height: @row-height-md;
+      max-height: @row-height-md;
+      padding: 0 10px 0 10px;
+      h2 {
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+    }
+    div {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      a {
+        font-weight: bold;
+        color: @brand-dark;
+      }
+      @media (max-width: 1200px) {
+        bottom: 10px;
+      }
+    }
+  }
+  .row {
+    background-color: #f7f4ea;
+  }
+}
+@supports (-ms-accelerator:true) {
+  .parallax a {
+    display: none;
+  }
+}

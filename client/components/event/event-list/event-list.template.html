@@ -1,0 +1,82 @@
+<span class="event-poster">
+<div class="container h20px">
+    <div class="row"></div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchWord">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="$ctrl.findWord(searchWord)">Search</button>
+              </span>
+        </div><!-- /input-group -->
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 nopadding calendar">
+        <div class="btn-group">
+            <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                {{calendars.names[0]}} : {{calendars.values[0] | date:'dd MMMM yyyy'}}
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            </div>
+            <ul class="dropdown-menu">
+                <calendar></calendar>
+            </ul>
+            <div class="row"></div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 nopadding calendar">
+        <div class="btn-group">
+            <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                {{calendars.names[1]}} : {{calendars.values[1] | date:'dd MMMM yyyy'}}
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            </div>
+            <ul class="dropdown-menu right-calendar">
+                <calendar></calendar>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 show-event"
+             ng-repeat="event in events | orderBy: sort_by | limitTo:howMuch ">
+            <a href="#!/events/{{event._id}}">
+                <div class="text">
+                    <div class="event-title">{{event.name}}</div>
+                    <div class="event-description">{{event.description}}</div>
+                    <a href="#!/events/{{event._id}}"></a>
+                    <div class="event-map">
+                        <a href="#!/places/">
+                            <img src="assets{{'/img/events/map.png'}}" title="{{event.name}}">
+                        </a>
+                    </div>
+                    <div class="event-some-fill">
+                        <div class="event-fill">Date start:</div>
+                        <div class="event-fill-text">{{event.dateStart | date:'dd MMMM yyyy'}}</div>
+                        <div class="row"></div>
+                        <div class="event-fill">Date end:</div>
+                        <div class="event-fill-text">{{event.dateEnd | date:'dd MMMM yyyy'}}</div>
+                        <div class="row"></div>
+                        <div class="event-fill">Prise:</div>
+                        <div class="event-fill-text">{{event.price}}</div>
+                        <div class="row"></div>
+                        <div class="event-fill">Author:</div>
+                        <div class="event-fill-text">{{event.owner}}</div>
+                        <div class="row"></div>
+                        <div class="event-fill">Reting:</div>
+                        <div class="event-fill-text">{{event.rate}}</div>
+                    </div>
+                </div>
+                <div class="fon" style="background-image: url('{{event.photos[0]}}')" alt="{{event.name}}" title="{{event.name}}">
+                    <div class="top-title">{{event.name}}</div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+</span>

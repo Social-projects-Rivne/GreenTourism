@@ -1,0 +1,32 @@
+<div class="bs-box">
+
+    <div class="bs-date row">
+        <div class="bs-date-header btn-group mounth-line row" role="group">
+            <button class="glyphicon glyphicon-backward  btn-default btn-xs" ng-click="$ctrl.changeMonth(-12)"></button>
+            <button class="glyphicon glyphicon-triangle-left  btn-default btn-xs" ng-click="$ctrl.changeMonth(-1)"></button>
+            <input type="text" class="mounth" disabled value="{{$ctrl.calendarShowDate | date:'MMMM yyyy'}}" />
+            <button class="glyphicon glyphicon-triangle-right  btn-default btn-xs" ng-click="$ctrl.changeMonth(1)"></button>
+            <button class="glyphicon glyphicon glyphicon-forward  btn-default btn-xs" ng-click="$ctrl.changeMonth(12)"></button>
+        </div>
+        <div class="bs-date-header">
+            <div class="bs-day" ng-repeat="dateCalendar in $ctrl.calendarMonth | limitTo:7 ">{{dateCalendar.date
+                | date:'EEE'}}
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="bs-day bs-active{{dateCalendar.active}}" ng-repeat="dateCalendar in $ctrl.calendarMonth" ng-click="$ctrl.currentDay(dateCalendar.date)">
+            <button class="btn-danger btn btn-xs"  ng-if="dateCalendar.events.length" ng-mousedown="$ctrl.show=dateCalendar.events">
+                {{dateCalendar.date | date:'dd'}}
+            </button>
+            <button ng-if="!dateCalendar.events.length" class="btn btn-default btn-xs">
+                {{dateCalendar.date | date:'dd'}}
+            </button>
+        </div>
+    </div>
+    <!--button class="btn-warning btn btn-xs"><a href="#!/events/"><span class="menu_l">Go to all events</span></a></button-->
+    <button class="btn-warning btn btn-xs btn-event-link btn-event-link" ng-repeat="dateCalendar in $ctrl.show">
+        <a href="#!/events/{{dateCalendar._id}}"><span class="menu_l">{{dateCalendar.name}}</span></a>
+    </button>
+        </ul>
+    </div>
+</div></div>

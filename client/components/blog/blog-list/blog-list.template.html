@@ -1,0 +1,138 @@
+<section class="blog-page-content" categoryList="categoryList">
+  <div class="container">
+    <div class="row">
+      <aside>
+        <div class="col-sm-push-8 col-md-offset-1 col-md-3 col-sm-4">
+          <button ng-click="$ctrl.toggleCreatePost(blogPost)" class="btn createToggle hidden-xs" ng-if="$ctrl.currentUser">Add new post</button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="blog-find">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Search blog">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <blog-sidebar></blog-sidebar>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <article>
+        <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
+          <div class="row">
+            <div class="col-md-12">
+              <form name="blogPost"  role="form" novalidate ng-submit="$ctrl.createPost(blogPost)"
+                    ng-hide="$ctrl.showCreateForm" class="blogPost">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.blogImg.$invalid && blogPost.blogImg.$dirty }">
+                  <label for="blogImg">Photo</label>
+                  <input type="text" class="form-control" id="blogImg" placeholder="photo" name="blogImg"
+                         ng-model="$ctrl.blogPost.blogImg" required>
+
+                  <div ng-show="blogPost.$submitted || blogPost.blogImg.$touched">
+                    <p class="help-block" ng-show="blogPost.blogImg.$error.required">
+                      blog image is required
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.categoryId.$invalid && blogPost.categoryId.$touched }">
+                  <label for="categoryId">Category</label>
+                  <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.blogPost.categoryId"
+                          required>
+                    <option value="">-- Choose category --</option>
+                    <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
+                      {{category.name}}
+                    </option>
+                  </select>
+
+                  <div ng-show="blogPost.$submitted || blogPost.categoryId.$touched">
+                    <p class="help-block" ng-show="blogPost.categoryId.$error.required">
+                      blog category is required
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : blogPost.title.$invalid && blogPost.title.$dirty }">
+                  <label for="title">title</label>
+                  <input type="text" class="form-control" id="title" placeholder="title" name="title"
+                         ng-model="$ctrl.blogPost.title" required>
+
+                  <div ng-show="blogPost.$submitted || blogPost.title.$touched">
+                    <p class="help-block" ng-show="blogPost.title.$error.required">
+                      blog title is required
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : blogPost.content.$invalid && blogPost.content.$dirty }">
+                  <label for="content">content</label>
+                  <textarea class="form-control" rows="3" name="content" id="content"
+                            ng-model="$ctrl.blogPost.content" required></textarea>
+
+                  <div ng-show="blogPost.$submitted || blogPost.content.$touched">
+                    <p class="help-block" ng-show="blogPost.content.$error.required">
+                      blog content is required
+                    </p>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info" ng-click="$ctrl.reset(blogPost)">Reset</button>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12"
+                 ng-repeat="blog in $ctrl.blogs | filter:$ctrl.query | orderBy:$ctrl.dateProp:true">
+              <div class="thumbnail blog-list-item">
+                <a ng-href="#!/blog/{{blog.id}}">
+                  <img ng-src="{{blog.blogImg}}" alt="{{blog.title}}" class="item-img">
+                </a>
+
+                <div class="caption">
+                  <h3 class="blog-title">
+                    <a ng-href="#!/blog/{{blog.id}}">{{blog.title}}</a>
+                    <a href="" ng-click="$ctrl.deletePost(blog.id)" class="pull-right" ng-if="$ctrl.currentUser._id === blog.owner.id"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  </h3>
+
+                  <div class="blog-details">
+                    By
+                    <span class="blog-author">
+                      <a ng-href="#!/blog/owner/{{blog.owner.id}}" rel="author">{{blog.owner.fullName}}</a>
+                    </span>
+                    <span class="blog-date">
+                      {{blog.createdAt | date:'dd MMMM yyyy'}}
+                    </span>
+                    <a ng-href="#!/blog/categoryId/{{blog.category.id}}"
+                       class="blog-category">{{blog.category.name}}</a>
+                  </div>
+                  <div class="blog-separator"></div>
+                  <div class="blog-content">
+                    {{blog.content | limitTo: 140}}{{blog.content.length>140 ? '...' : ''}}
+                  </div>
+
+                  <p class="blog-meta">
+                    <a ng-href="#!/blog/{{blog.id}}" class="blog-read-more">Read more
+                      <i class="fa fa-book" aria-hidden="true"></i>
+                    </a>
+                    <span class="pull-right">
+                      <i class="fa fa-comments-o" aria-hidden="true"></i>
+                      {{blog.blogComments.length}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+<h4>Popular places in location</h4>
+<div class="popular-in-location-wrapper"
+     ng-repeat="place in placesByLocation | filter:$ctrl.placesFilter | limitTo:4  | orderBy : '-rate'">
+  <div ng-mouseover="showMarker(place.location.coordinates[1],place.location.coordinates[0], place)">
+    <img ng-src="{{place.photos[0]}}"/>
+    <a ng-href="#!/places/{{place.id}}">
+      <div class="popular-in-location-gradient"></div>
+    </a>
+    <a class="popular-in-location-name" ng-href="#!/places/{{place.id}}">{{place.name}}</a>
+    <a class="popular-in-location-address" ng-href="#!/places/{{place.id}}">
+      <a class="popular-in-location-name" ng-href="#!/places/{{place.id}}">{{place.name}}</a>
+      <span class="popular-in-location-address">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              {{place.rate}}
+            </span>
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,577 @@
+@map-page-bg: #f8f8f8;
+
+.map-page-wrapper {
+  background-color: @map-page-bg;
+  .map-menu {
+    position: relative;
+    z-index: 3;
+    padding: 15px 0;
+    background-color: @map-page-bg;
+
+    .map-menu-check-button {
+      padding-top: 5px;
+      i {
+        font-size: 24px;
+        color: #999;
+        margin-right: 10px;
+        &:focus, &.checked {
+          color: @brand-dark;
+        }
+      }
+      @media (max-width: 767px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 480px) {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+    }
+
+    .map-menu-buttons-wrapper {
+      .map-menu-buttons {
+        button {
+          color: @brand-dark;
+          border: 1px solid @brand-dark;
+        }
+        .dropdown-menu {
+          padding: 0;
+          border: 1px solid @brand-dark;
+          li {
+            border-bottom: 1px solid @brand-dark;
+            padding: 5px 0;
+            &:hover {
+              background-color: @map-page-bg;
+              border-radius: 4px;
+            }
+            &:last-child {
+              border-bottom: none;
+            }
+            a {
+              color: @brand-dark;
+              background-color: transparent;
+            }
+          }
+          & filter-map-type li a {
+            display: block;
+            text-decoration: none;
+            padding: 3px 20px;
+            span {
+              float: right;
+            }
+          }
+          &.place-mobile {
+            left: auto;
+            right: 0;
+            li a {
+              padding: 3px 10px;
+              span:last-child {
+                float: right;
+                &.glyphicon-refresh {
+                  animation: spinnerLittle .8s linear infinite;
+                }
+              }
+              img {
+                width: 10px;
+              }
+            }
+          }
+        }
+      }
+      @media (max-width: 767px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width: 348px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .dropdown-submenu {
+        position: relative;
+        & > a:after {
+          display: block;
+          content: "";
+          float: right;
+          border-color: transparent;
+          border-style: solid;
+          border-width: 5px 0 5px 5px;
+          border-left-color: #ccc;
+          margin-top: 5px;
+        }
+        &:hover {
+          .dropdown-menu {
+            display: block;
+          }
+          a:after {
+            border-left-color: @brand-dark;
+          }
+        }
+        .dropdown-menu {
+          top: 0;
+          left: 100%;
+          border-radius: 0 4px 4px 4px;
+          a {
+            padding-left: 10px;
+            span:last-child {
+              float: right;
+              &.glyphicon-refresh {
+                animation: spinnerLittle .8s linear infinite;
+              }
+            }
+            &:hover {
+              border-radius: 4px;
+            }
+          }
+        }
+        &.places {
+          img {
+            width: 10px;
+          }
+        }
+        @-moz-document url-prefix() {
+          & .dropdown-menu a span:last-child {
+            top: -18px;
+          }
+          & > a:after {
+            margin-top: -18px;
+          }
+          .place-mobile li a span:last-child {
+            top: -18px;
+          }
+        }
+      }
+    }
+
+    .map-menu-search {
+      input {
+        border: 1px solid @brand-dark;
+      }
+      button {
+        border: 1px solid @brand-dark;
+        background-color: @brand-dark;
+        color: @brand-light;
+      }
+    }
+
+    .map-menu-popular {
+      padding-top: 5px;
+      padding-right: 10px;
+      div {
+        float: right;
+      }
+      i {
+        font-size: 24px;
+        color: #999;
+        margin-right: 5px;
+        &:focus, &.checked {
+          color: @brand-dark;
+        }
+      }
+      @media (max-width: 348px) {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+// Class for disable double click
+.check-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+//Spinner
+.spinner {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 50px;
+  top: 130px;
+  z-index: 5;
+  animation: sk-rotate 2.0s infinite linear;
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #777;
+    border-radius: 100%;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1.0s;
+  }
+  @media (max-width: 767px) {
+    top: 170px;
+  }
+  @keyframes sk-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes sk-bounce {
+    0%, 100% {
+      transform: scale(0.0);
+    }
+    50% {
+      transform: scale(1.0);
+    }
+  }
+  @keyframes spinnerLittle {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// Map on page
+.map-wrapper {
+  position: absolute;
+  padding-top: 114px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  #map {
+    height: 100%;
+    width: 100%;
+    @media (max-width: 767px) {
+      .leaflet-control-zoom {
+        top: 50px;
+      }
+    }
+  }
+}
+
+// Popular places and tracks in location
+.popular-places-wrapper, .popular-tracks-wrapper, .popular-events-wrapper, .search-places-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  padding-top: 115px;
+  background-color: @map-page-bg;
+  transition: all linear 0.5s;
+  width: 25%;
+  height: 100%;
+  &.ng-hide {
+    opacity: 0;
+  }
+  .close-button {
+    color: @brand-dark;
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    left: 5px;
+    z-index: 5;
+  }
+  .popular-div-style {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    text-align: center;
+    color: @brand-dark;
+  }
+  @media (max-width: 767px) {
+    padding-top: 160px;
+  }
+  @media (max-width: 1170px) {
+    width: 320px;
+  }
+
+  // Popular Tracks in location - Styles for popular-tracks.template
+  .popular-in-location-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+    max-height: 200px;
+    min-height: 160px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .popular-track-rate {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      color: #fff;
+      background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+      padding: 5px 10px;
+      .fa-heart {
+        color: @light-green;
+      }
+    }
+    .popular-in-location-gradient {
+      position: absolute;
+      top: 0;
+      padding-left: 50%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+    }
+    .shared-style {
+      padding: 0 4px;
+      font-weight: bold;
+      color: @brand-light;
+      position: absolute;
+    }
+    .popular-in-location-name {
+      .shared-style;
+      font-size: 18px;
+      top: 4px;
+      right: 4px;
+    }
+    .popular-in-location-address {
+      .shared-style;
+      font-size: 12px;
+      bottom: 4px;
+      right: 4px;
+      img {
+        width: 12px;
+      }
+    }
+  }
+}
+
+/*-------------- Add place --------------*/
+.alert-input {
+  color: #f00;
+}
+
+.add-item-menu {
+  position: absolute;
+  top: 114px;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  z-index: 2;
+  background-color: @map-page-bg;
+  padding: 0 15px 15px 15px;
+  overflow: auto;
+  display: block;
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
+  .removeIcon {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 25px;
+    color: @light-green;
+    @media (max-width: 767px) {
+      top: 50px;
+    }
+  }
+  h2 {
+    text-align: center;
+  }
+  .title {
+    font-weight: bold;
+    color: @light-green;
+  }
+  .no-padding {
+    padding: 0;
+  }
+  .inactive-add-item-menu {
+    position: fixed;
+    top: 114px;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0.5);
+    z-index: 3;
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all linear 0.5s;
+    }
+    &.ng-hide {
+      opacity: 0;
+    }
+    #new-point-menu {
+      position: relative;
+      background-color: #f8f8f8;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      overflow: hidden;
+      padding: 0 10px 10px 10px;
+      margin: 65px 15px 0 15px;
+      z-index: 4;
+      input {
+        margin-top: 0;
+      }
+      h3 {
+        text-align: center;
+      }
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        transition: all linear 0.5s;
+      }
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 60%;
+    }
+  }
+  @media (max-width: 767px) {
+    padding-top: 50px;
+    width: 60%;
+  }
+}
+/*--------search-----*/
+#search {
+  div{
+    margin:0;
+    padding:0;
+  }
+  span.err {
+    border: 1px solid @light-green;
+    border-top: 0;
+    width: 200px;
+    text-align: center;
+    height: 20px;
+    position: absolute;
+    color: red;
+    background: #FFF
+  }
+  span.transparent {
+    display: none;
+  }
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  input {
+    width: 110px;
+  }
+  button {
+    width: 80px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  ul li {
+    list-style-type: none;
+  }
+}
+
+#searchPlaces {
+  li button {
+    color: white;
+    width: 100%;
+    background-color: #3da268;
+    a, h3 {
+      color: white;
+    }
+    .search-in-location-address {
+      color: white;
+      text-align: left;
+    }
+    i.fa:hover, i.fa:active, i.fa:focus, i.fa:default {
+      color: white !important;
+      background-color: white !important;
+      text-align: left !important;
+    }
+  }
+  button.activeSearchResult {
+    background-color: #46bd78;
+  }
+  button:hover {
+    background-color: #46bd78;
+  }
+}
+/*-----------------event on map ----------------*/
+.event-map-poster {
+  margin-left: 0;
+  margin-right: 0;
+}
+.event-map-poster .calendar {
+  margin: 5px 12px;
+  padding: 3px;
+  font-size:14px;
+  border: 1px solid green;
+}
+.event-map-poster .calendar .dropdown-menu {
+  position: relative;
+}
+.event-map-poster .img-block {
+  height: 200px;
+  width: 200px;
+  clear: both;
+  float: none;
+  position: relative;
+  margin: 25px;
+  display: block;
+}
+.event-map-poster .img-block img {
+  height: 200px;
+  width: 200px;
+}
+.event-map-poster .img-block h3{
+  width: 100%;
+  clear: both;
+  float: none;
+  position: absolute;
+  color: aliceblue;
+  background: rgba(0, 255, 78, 0.62);
+}
+.event-map-poster .main-centr a{
+  position: relative;
+}
+.event-map-poster i {
+  font-size: 23px;
+}
+.placeFilter img {
+  height: 20px;
+}
+/* ------------- Add track ---------------*/
+
+#pointsForNewTrack {
+  padding: 10px;
+  color: #fff;
+  overflow: hidden;
+  .pointsList {
+    .row:nth-child(even) {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+    }
+    .row:nth-child(odd) div:first-child {
+      border-right: 3px solid @light-green;
+      height: 10px;
+    }
+  }
+  .pointsList:first-child {
+    .row {
+      background-color: @light-green;
+      border: 1px solid @light-green;
+      border-radius: 5px;
+      text-align: left;
+      padding: 3px 10px;
+      div:first-child {
+        border: none;
+      }
+    }
+  }
+  .pointName {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  .fa-map-marker {
+    margin-left: -15px;
+  }
+  a {
+    color: #fff;
+  }
+}

@@ -1,0 +1,159 @@
+<div class="container user-page">
+  <div class="row">
+    <section class="col-sm-3">
+      <div class="user-page__avatar">
+        <img ng-src="{{$ctrl.user.avatar}}" alt="User profile picture"
+            class="img-rounded img-responsive" />
+        <form ng-show="$ctrl.editAvatarMode" ng-submit="$ctrl.changeAvatar()"
+            role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="$ctrl.newAvatar"
+                  name="avatar" placeholder="Avatar URL" />
+            </div>
+            <input type="submit" class="btn btn-default user-page__avatar-button" value="Confirm" />
+        </form>
+        <button type="button" class="btn btn-default user-page__avatar-button"
+            ng-click="$ctrl.toggleEditAvatarMode()">
+          <span ng-hide="$ctrl.editAvatarMode">Change</span>
+          <span ng-show="$ctrl.editAvatarMode">Cancel</span>
+        </button>
+      </div>
+      <div>
+        <ul class="nav nav-pills nav-stacked">
+          <li ng-class="{ active: $ctrl.isSelected(1) }">
+            <a href="" ng-click="$ctrl.selectTab(1)">Profile</a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(2) }">
+            <a href="" ng-click="$ctrl.selectTab(2)">My Places</a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(3) }">
+            <a href="" ng-click="$ctrl.selectTab(3)">My Tracks</a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(4) }">
+            <a href="" ng-click="$ctrl.selectTab(4)">Favorite Places</a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(5) }">
+            <a href="" ng-click="$ctrl.selectTab(5)">Favorite Tracks</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="col-sm-9">
+      <div ng-show="$ctrl.isSelected(1)">
+        <h1 class="page-header">
+          Profile
+          <button type="button" class="btn btn-default"
+              ng-click="$ctrl.toggleEditMode()">Edit</button>
+          <button type="button" class="btn btn-default"
+              ng-click="$ctrl.toggleChangePassword()">Change password</button>
+        </h1>
+        <div ng-hide="$ctrl.editMode || $ctrl.changePasswordMode">
+          <div class="user-page__name">
+            <h3>{{$ctrl.user.fullName}}</h3>
+            <h4>{{$ctrl.user.nickname}}</h4>
+          </div>
+          <p><strong>Email: </strong>{{$ctrl.user.email}}</p>
+          <p><strong>Phone: </strong>{{$ctrl.user.phone}}</p>
+          <p><strong>Address: </strong>{{$ctrl.user.address}}</p>
+        </div>
+        <div ng-show="$ctrl.editMode && !$ctrl.changePasswordMode">
+          <form name="form" role="form" novalidate ng-submit="$ctrl.editUser(); $ctrl.resetForm(form);">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error' : form.firstName.$invalid && form.firstName.$dirty }">
+                  <input type="text" class="form-control" ng-model="$ctrl.editedUser.firstName" name="firstName"
+                      placeholder="First name" required />
+                  <div ng-show="form.$submitted || form.firstName.$touched">
+                    <p class="text-danger" ng-show="form.firstName.$error.required">
+                      First name is required
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error' : form.lastName.$invalid && form.lastName.$dirty }">
+                  <input type="text" class="form-control" ng-model="$ctrl.editedUser.lastName" name="lastName"
+                      placeholder="Last name" required />
+                    <div ng-show="form.$submitted || form.lastName.$touched">
+                      <p class="text-danger" ng-show="form.lastName.$error.required">
+                        Last name is required
+                      </p>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.nickname.$invalid && form.nickname.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.nickname" name="nickname"
+                  placeholder="Nickname" />
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.phone.$invalid && form.phone.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.phone" name="phone"
+                  placeholder="Phone number" ng-pattern="/\+\d{1,4}\d{9}/" />
+                <div ng-show="form.$submitted || form.phone.$touched">
+                  <p class="text-danger" ng-show="form.phone.$error.pattern">
+                    Invalid phone number
+                  </p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.nickname.$invalid && form.nickname.$dirty }">
+              <input type="text" class="form-control" ng-model="$ctrl.editedUser.address" name="address"
+                  placeholder="Address" />
+            </div>
+
+            <button type="button" class="btn btn-default" ng-click="$ctrl.toggleEditMode(); $ctrl.resetForm(form);">Cancel</button>
+            <input type="submit" class="btn btn-default" value="Change" ng-disabled="form.$invalid" />
+          </form>
+        </div>
+        <div ng-show="$ctrl.changePasswordMode">
+          <form name="changepass" role="form" novalidate ng-submit="$ctrl.changePassword(); $ctrl.resetForm(changepass);">
+            <div class="form-group" ng-class="{ 'has-error' : changepass.password.$invalid && changepass.password.$dirty }">
+              <input type="password" class="form-control" ng-model="$ctrl.newPassword" name="password"
+                  placeholder="New password" ng-minlength="8" required />
+              <div ng-show="changepass.password.$touched">
+                <p class="text-danger" ng-show="changepass.password.$error.required">
+                  Password required
+                </p>
+                <p class="text-danger" ng-show="changepass.password.$error.minlength">
+                  Password should be longer than 8 characters
+                </p>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : changepass.confirmpassword.$invalid && changepass.confirmpassword.$dirty }">
+              <input type="password" class="form-control" ng-model="$ctrl.confirmPassword" name="confirmpassword"
+                  placeholder="Confirm password" match="changepass.password" />
+              <div ng-show="changepass.confirmpassword.$touched">
+                <p class="text-danger" ng-show="changepass.confirmpassword.$error.match">
+                  Passwords doesn't match
+                </p>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-default" ng-click="$ctrl.toggleChangePassword(); $ctrl.resetForm(changepass);">Cancel</button>
+            <input type="submit" class="btn btn-default" value="Change" ng-disabled="changepass.$invalid" />
+          </form>
+        </div>
+      </div>
+      <div ng-show="$ctrl.isSelected(2)">
+        <h1 class="page-header">My Places</h1>
+        <tab-list route="'places/'" items="$ctrl.places"></tab-list>
+      </div>
+      <div ng-show="$ctrl.isSelected(3)">
+        <h1 class="page-header">My Tracks</h1>
+        <tab-list route="'tracks/'" items="$ctrl.tracks"></tab-list>
+      </div>
+      <div ng-show="$ctrl.isSelected(4)">
+        <h1 class="page-header">Favorite Places</h1>
+        <tab-list route="'places/'" items="$ctrl.favPlaces"></tab-list>
+      </div>
+      <div ng-show="$ctrl.isSelected(5)">
+        <h1 class="page-header">Favorite Tracks</h1>
+        <tab-list route="'tracks/'" items="$ctrl.favTracks"></tab-list>
+      </div>
+    </section>
+  </div>
+</div>

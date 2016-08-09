@@ -1,0 +1,84 @@
+<div class="blog-category-list">
+  <div class="row">
+    <div class="col-md-12 hidden-xs">
+      <h3>Categories</h3>
+      <ul>
+        <li ng-repeat="category in $ctrl.categoryList  ">
+          <a ng-href="#!/blog/categoryId/{{category.id}}">
+            <i class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
+            {{category.name}}
+          </a>
+        </li>
+        <li>
+          <a href="#!/blog/">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            all
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="blog-panel">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tabbable" id="tabs-blog">
+        <ul class="nav nav-tabs">
+          <li class="active" ng-class="{ active: $ctrl.isSelected(1) }">
+            <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(1)">
+              Popular
+            </a>
+          </li>
+          <li ng-class="{ active: $ctrl.isSelected(2) }">
+            <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)">
+              Discussed
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(1) }"
+               id="panel-popular">
+            <div class="media blog-aside-items"
+                 ng-repeat="blog in $ctrl.popularList | orderBy: 'blogLikes':true | limitTo: 3">
+              <a href="#!/blog/{{blog.id}}" class="pull-left">
+                <img alt="{{blog.title}}"
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="#!/blog/{{blog.id}}">
+                    {{blog.title}}
+                  </a>
+                </h4>
+                <div class="media-date">
+                  {{blog.createdAt | date:'dd MMMM yyyy'}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" ng-class="{ active: $ctrl.isSelected(2) }"
+               id="panel-recent">
+            <div class="media blog-aside-items"
+                 ng-repeat="blog in $ctrl.popularList | orderBy: 'blogComments':true | limitTo: 3">
+              <a href="#!/blog/{{blog.id}}" class="pull-left">
+                <img alt="{{blog.title}}"
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="#!/blog/{{blog.id}}">
+                    {{blog.title}}
+                  </a>
+                </h4>
+                <div class="media-date">
+                  {{blog.createdAt | date:'dd MMMM yyyy'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

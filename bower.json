@@ -1,14 +1,20 @@
 {
   "name": "green-tourism",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "private": true,
   "main": [
-    "app.modules.js",
-    "app/assets/less/main.less"
+    "client/app.modules.js",
+    "client/assets/less/main.less"
   ],
   "authors": [
-    "Rv-017.UI"
+    "Yury Kozhenov <yurykozhenov@gmail.com>",
+    "Andriy Zhuk <astrosferatu@gmail.com>",
+    "Denys Gudakov <denysgud@gmail.com>",
+    "Olena Martynchyk <martyn4uk@gmail.com>",
+    "Maksym Yushchuk <max.yushchuk@gmail.com>",
+    "Sergii Semenkiv <ssv260689@gmail.com>",
+    "Taras Rudyk <rudyktaras@gmail.com>"
   ],
   "license": "ISC",
   "homepage": "https://github.com/Social-projects-Rivne/GreenTourism",
@@ -24,17 +30,22 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^1.12.3",
-    "bootstrap": "^3.3.6",
-    "angular": "~1.5.5",
-    "angular-route": "~1.5.5",
-    "leaflet": "^0.7.7",
-    "font-awesome": "^4.6.3",
+    "jquery": "1.x",
+    "bootstrap": "3.3.x",
+    "angular": "1.5.x",
+    "angular-route": "1.5.x",
+    "leaflet": "0.7.x",
+    "font-awesome": "4.5.x",
     "leaflet.markercluster": "^0.5.0",
-    "angular-animate": "^1.5.7",
-    "angular-resource": "^1.5.7",
+    "angular-animate": "1.5.x",
+    "restangular": "1.5.x",
     "angular-bootstrap": "^1.3.3",
-    "leaflet.markercluster.layersupport": "https://github.com/ghybs/Leaflet.MarkerCluster.LayerSupport.git#leaflet-0.7"
+    "leaflet.markercluster.layersupport": "https://github.com/ghybs/Leaflet.MarkerCluster.LayerSupport.git#leaflet-0.7",
+    "bootstrap-social": "^5.0.0",
+    "fancybox": "^2.1.5",
+    "angular-validation-match": "^1.9.0",
+    "lodash": "^4.14.1",
+    "angular-messages": "^1.5.x"
   },
   "overrides": {
     "bootstrap": {
@@ -48,6 +59,15 @@
     },
     "leaflet.markercluster.layersupport": {
       "main": "leaflet.markercluster.layersupport-src.js"
+    },
+    "fancybox": {
+      "main": [
+        "source/jquery.fancybox.css",
+        "source/jquery.fancybox.js"
+      ]
     }
+  },
+  "devDependencies": {
+    "less": "^2.7.1"
   }
 }

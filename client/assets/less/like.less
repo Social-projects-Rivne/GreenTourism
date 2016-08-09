@@ -1,0 +1,21 @@
+@default-text-color: #777;
+.like {
+  color: @default-text-color;
+  &:disabled:hover {
+    color: @default-text-color;
+    .glyphicon-heart {
+      color: @default-text-color;
+    }
+  }
+  &:active, &:focus {
+    background-color: #fff;
+    .glyphicon-heart {
+      color: @default-text-color;
+    }
+  }
+  &:hover, &.like-true{
+    .glyphicon-heart {
+      color: @brand-dark;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="page" ng-repeat="event in calendars.events | filter:{_id:$ctrl._id}">
+  <div class="row">
+    <div class="page-header text-center">
+      <h3>{{event.name}}</h3>
+    </div>
+    <div class="col-md-2">
+      <ul class="media-list">
+        <h2 style="color: red; text-align: center;">{{event.type}}</h2>
+         <li class="media" ng-repeat="img in event.photos">
+          <div class="media-middle">
+            <img src="{{img}}" ng-class="$first ? 'img-responsive img-center' : 'media-object center-block img-small'"
+                alt="{{event.name}}">
+          </div>
+          <div ng-if="$first" class="media-body">
+            <h4 class="text-center center-block glyphicon glyphicon-heart" style="color: red">
+              {{event.rate}}</h4>
+            <a href="#!/places/">
+              <h2 class="text-center center-block glyphicon glyphicon-globe" style="color: green; font-size : 50px;"></h2>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-7 text-event">
+      <p>{{event.description}}</p>
+      <p></p>
+    </div>
+    <div class="col-md-3">
+      <calendar></calendar>
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-middle">
+            <a href="">
+              <h3>Prise: {{event.price}} UAH</h3>
+            </a>
+          </div>
+          <div class="media-middle">
+            <a href="">
+              <h3>Date start: {{event.dateStart | date:'dd MMMM yyyy'}}</h3>
+            </a>
+          </div>
+          <div class="media-middle">
+            <a href="">
+              <h3>Date end: {{event.dateEnd | date:'dd MMMM yyyy'}}</h3>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

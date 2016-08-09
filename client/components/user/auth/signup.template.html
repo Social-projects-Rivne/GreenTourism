@@ -1,0 +1,74 @@
+<div class="container registration">
+  <form role="form" name="signup" method="POST" action="/api/signup" novalidate>
+
+    <div class="input-group-sm">
+      <label for="Name">First Name:</label>
+      <input type="text" name="firstName" class="form-control"
+          ng-model="user.firstName" ng-minlength="2" ng-maxlength="15" required>
+
+      <p class="text-danger" ng-show="signup.firstName.$touched &&
+          signup.firstName.$error.minlength">First name is too short</p>
+      <p class="text-danger" ng-show="signup.firstName.$touched &&
+          signup.firstName.$error.maxlength">First name is too long</p>
+      <p class="text-danger" ng-show="signup.firstName.$touched &&
+          signup.firstName.$error.required">First name is required</p>
+    </div>
+
+    <div class="input-group-sm">
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName" class="form-control"
+          ng-model="user.lastName" ng-minlength="2" ng-maxlength="15" required>
+
+      <p class="text-danger" ng-show="signup.lastName.$touched &&
+          signup.lastName.$error.minlength">Last name is too short</p>
+      <p class="text-danger" ng-show="signup.lastName.$touched &&
+          signup.lastName.$error.maxlength">Last name is too long</p>
+      <p class="text-danger" ng-show="signup.lastName.$touched &&
+          signup.lastName.$error.required">Last name is required</p>
+    </div>
+
+    <div class="input-group-sm">
+      <label for="email">Email:</label>
+      <input type="email" name="email" class="form-control"
+          ng-model="user.email" required
+          ng-pattern="/^[\w][\w\.\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/">
+
+      <p class="text-danger" ng-show="signup.email.$touched &&
+          signup.email.$error.required">Email is required</p>
+      <p class="text-danger" ng-show="signup.email.$touched &&
+          signup.email.$error.pattern">Invalid email</p>
+    </div>
+
+    <div class="input-group-sm">
+      <label for="password">Password:</label>
+      <input type="password" name="password" class="form-control"
+          ng-model="user.password" ng-minlength="8" required>
+
+      <p class="text-danger" ng-show="signup.password.$touched &&
+          signup.password.$error.minlength">
+          Password should be longer than 8 characters</p>
+      <p class="text-danger" ng-show="signup.password.$touched &&
+          signup.password.$error.required">Password is required</p>
+      <p class="tip" ng-hide="signup.password.$touched">
+        At least 8 characters required</p>
+    </div>
+
+    <div class="input-group-sm">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" class="form-control"
+          ng-model="user.confirmPassword" required match="signup.password">
+
+      <p class="text-danger" ng-show="signup.confirmPassword.$touched &&
+          signup.confirmPassword.$error.match">Passwords doesn't match</p>
+      <p class="tip" ng-hide="signup.confirmPassword.$touched">
+        Please, repeat your password</p>
+    </div>
+
+    <h6 class="policy">
+      By clicking Sign Up, you agree to our Terms and Policy
+    </h6>
+
+    <input type="submit" class="btn btn-success btn-block submit-btn"
+       ng-disabled="signup.$invalid" value="Sign Up"/>
+  </form>
+</div>
