@@ -247,7 +247,7 @@
 }
 
 // Popular places and tracks in location
-.popular-places-wrapper, .popular-tracks-wrapper, .search-places-wrapper {
+.popular-places-wrapper, .popular-tracks-wrapper, .popular-events-wrapper, .search-places-wrapper {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -489,39 +489,49 @@
   }
 }
 /*-----------------event on map ----------------*/
+.event-map-poster {
+  margin-left: 0;
+  margin-right: 0;
+}
 .event-map-poster .calendar {
   margin: 5px 12px;
   padding: 3px;
-  font-size:18px;
+  font-size:14px;
   border: 1px solid green;
 }
 .event-map-poster .calendar .dropdown-menu {
   position: relative;
 }
 .event-map-poster .img-block {
-  height: 300px;
-  width: 100%;
+  height: 200px;
+  width: 200px;
   clear: both;
   float: none;
   position: relative;
-  margin: 5px auto;
+  margin: 25px;
   display: block;
 }
 .event-map-poster .img-block img {
-  height: 300px;
-  width: 100%;
+  height: 200px;
+  width: 200px;
 }
 .event-map-poster .img-block h3{
-  height: 300px;
   width: 100%;
   clear: both;
   float: none;
   position: absolute;
+  color: aliceblue;
+  background: rgba(0, 255, 78, 0.62);
 }
 .event-map-poster .main-centr a{
   position: relative;
 }
-
+.event-map-poster i {
+  font-size: 23px;
+}
+.placeFilter img {
+  height: 20px;
+}
 /* ------------- Add track ---------------*/
 
 #pointsForNewTrack {
@@ -565,4 +575,3 @@
     color: #fff;
   }
 }
-
