@@ -1,49 +1,90 @@
-function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place) {
-  var ctrl = $scope;
+function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $timeout) {
+  var ctrl = this;
   var latitude;
   var longitude;
   Place.getList({sort: '-rate', limit: 10}).then(function(popularPlaces) {
     ctrl.popularPlaces = popularPlaces;
     $scope.placesByLocation = popularPlaces;
     $scope.placesByLocation = _.shuffle($scope.placesByLocation);
+    ctrl.markers = placesOnMap.showPlaces($scope.placesByLocation);
   });
 
   $scope.map = mapFactory.map;
   $scope.map.on('moveend', setLocationPlaces);
 
   function setLocationPlaces() {
-    $scope.center = $scope.map.getCenter();
-    var bounds = $scope.map.getBounds();
-    var min = bounds.getSouthWest().wrap();
-    var max = bounds.getNorthEast().wrap();
+    //$scope.center = $scope.map.getCenter();
     $scope.placesByLocation = [];
-    ctrl.places = placesOnMap.getPlaceArr();
-    var placesArr =  _.sortBy(ctrl.places, ['rate']);
+    $scope.placesByLocation = placesOnMap.getPlaceArr();
+    // ctrl.markers=getAllMarkers();
+    $timeout(function() {
 
-    $scope.placesByLocation = placesArr.filter(function(place) {
-        latitude = place.location.coordinates[1];
-        longitude = place.location.coordinates[0];
-        return (latitude > min.lat && longitude > min.lng
-          && latitude < max.lat && longitude < max.lng) && place.photos[0];
-      }
-    );
-    var numberOfPopularPlaces = 5;
-    $scope.placesByLocation = $scope.placesByLocation.slice($scope.placesByLocation.length - numberOfPopularPlaces, $scope.placesByLocation.length);
-    if ($scope.placesByLocation.length == 0)
-      $scope.placesByLocation = ctrl.popularPlaces;
-
-    $scope.$apply();
-
+      $scope.$apply();
+    }, 10000);
   }
 
   this.placesFilter = function(value) {
     return value.type == constants.placesOnLoad && value.photos[0];
   }
-}
-this.openPage = function() {
-  $scope.$emit('openPage', 'pageClass');
+
+  $scope.showMarker = function(lat, lon, place) {
+    if (ctrl.marker_new) {
+      console.log(ctrl.marker_new);
+      mapFactory.map.removeLayer(ctrl.marker_new);
+    }
+    $timeout(function() {
+      mapFactory.map.panTo(new L.LatLng(lat, lon), animate = true);
+    }, 100);
+    var iconmarker = "assets/img/places/marker/search.png";
+    var noname = 'http://homyachok.com.ua/images/noimage.png';
+    photo = place.photos[0];
+    if (!place.photos[0])
+      photo = noname;
+    ctrl.marker_new = marker(lon, lat, iconmarker)
+      .addTo(mapFactory.map)
+      .bindPopup('<div class=\'popup  center-block\'><h3>' + place.name + '</h3><a>' +
+        '<img class=\'marker-image  center-block\' src=\'' + photo + '\' /></a>' +
+        '<br /><br /><button type=\'button\' class=\'btn btn-default btn-md center-block\'> ' +
+        '<a href=\'#!/places/' + place._id + '\'>Details >></a> ' +
+        '</button></div>', {autoPan: false});
+  };
+
+  var marker = function(lon, lat, iconmarker) {
+    var newIcon = L.icon({
+      iconUrl: iconmarker,
+      shadowUrl: 'assets/img/places/marker/marker-shadow.png',
+      iconSize: [30, 46],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+
+    });
+    markerobj = L.marker([lat, lon], newIcon, zIndexOffset = 50);
+    markerobj.setIcon(newIcon);
+    markerobj.setZIndexOffset(5000);
+    markers.push(markerobj);
+    return markerobj;
+
+  };
+
+  function getAllMarkers() {
+
+    var allMarkersObjArray = [];
+    $.each(mapFactory.map._layers, function(ml) {
+      if (this._latlng)
+        allMarkersObjArray.push(this)
+      else $.each(mapFactory.map._layers, function(ml) {
+        if (this._latlng)
+          allMarkersObjArray.push(this);
+      })
+    })
+    return allMarkersObjArray;
+
+  };
+
 
 }
+
 angular.module('locationPlaces', []).
 component('locationPlaces', {
   bindings: {

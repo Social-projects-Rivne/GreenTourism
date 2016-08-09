@@ -411,11 +411,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.hidePopularTracks = true;
         ctrl.hidePopularEvents = true;
         ctrl.hideSearchPlaces = true;
         $scope.$on('search', function(event, data) {
           ctrl.hideSearchPlaces = data;
+          ctrl.hidePopularPlaces = true;
+          ctrl.hidePopularTracks = true;
+          ctrl.hidePopularEvents = true;
         });
 
         ctrl.checkPopularPlaces = function() {

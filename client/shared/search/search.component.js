@@ -42,8 +42,12 @@ angular.module('searchPlace', ['ui.bootstrap'])
 
           if (ctrl.markernew) {
             if (ctrl.markerOld) {
-              var oldIcon = ctrl.markernew[0].options.icon;
-              ctrl.markerOld[0].setIcon(oldIcon);
+              console.log(ctrl.markerOld);
+              $timeout(function() {
+                var oldIcon = ctrl.markernew[0].options.icon;
+                ctrl.markerOld[0].setIcon(oldIcon);
+              }, 5000);
+
               ctrl.markerOld[0].setZIndexOffset(5000);
             }
             ctrl.markernew[0].setZIndexOffset(10000);
