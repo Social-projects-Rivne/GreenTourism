@@ -2,10 +2,11 @@ module.exports = {
   db: process.env.MONGO_DATABASE_URL ||
     'mongodb://user:qwerty1234@ds019664.mlab.com:19664/test_greentourism',
   sql: {
-    username: 'root',
-    password: '',
-    database: 'sql_greentourism',
-    host: '127.0.0.1',
+    username: 'sql8130683',
+    password: '1k5qHjg5jP',
+    database: 'sql8130683',
+    host: 'sql8.freesqldatabase.com',
+    port: '3306',
     dialect: 'mysql'
   },
   sessionSecret: 'developmentSessionSecret',

@@ -4,6 +4,7 @@ var Sequelize = require('sequelize');
 module.exports = function() {
   var sql = new Sequelize(config.sql.database, config.sql.username, config.sql.password, {
     host: config.sql.host,
+    port: config.sql.port,
     dialect: config.sql.dialect,
     define: {
       timestamps: true
