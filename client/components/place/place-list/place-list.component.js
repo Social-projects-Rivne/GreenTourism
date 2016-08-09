@@ -751,20 +751,21 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
 
         ctrl.checkAllEvents = function(input) {
           var checkAllEvent = angular.element('.eventsIcon');
+          console.log(checkAllEvent) ;
           var checkEvent1 = angular.element('Game');
           var checkEvent2 = angular.element('Festival');
           var checkEvent3 = angular.element('Meeting');
-          if (checkAllEvent.hasClass(constants.checkedClass))
+          if (checkAllEvent.hasClass(constants.checkedSpanClass))
           {
-            angular.element('.eventsIcon')
-                .removeClass(constants.checkedSpanClass);
+            checkAllEvent.removeClass(constants.checkedSpanClass);
+            console.log('rem') ;
           }
           else
           {
-            angular.element('.eventsIcon')
-                .addClass(constants.checkedSpanClass);
+            checkAllEvent.addClass(constants.checkedSpanClass);
+
           } ;
-                ctrl.checkEventType('game');
+            ctrl.checkEventType('game');
         };
 
         // ----START---- FilterByOneOfType
@@ -790,11 +791,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               events = result.concat(events);
               placesOnMap.showEvents(result, input);
             });
-          }
-          if (eventCounter > 0) {
-            angular.element('.eventsIcon').addClass(constants.checkedClass);
-          } else {
-            angular.element('.eventsIcon').removeClass(constants.checkedClass);
           }
         };
       }]
