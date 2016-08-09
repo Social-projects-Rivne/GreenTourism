@@ -772,16 +772,13 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
           var checkEvent1 = angular.element('Game');
           var checkEvent2 = angular.element('Festival');
           var checkEvent3 = angular.element('Meeting');
-          if (checkAllEvent.hasClass(constants.checkedClass))
+          if (checkAllEvent.hasClass(constants.checkedSpanClass))
           {
-            angular.element('.eventsIcon')
-              .removeClass(constants.checkedSpanClass);
+            checkAllEvent.removeClass(constants.checkedSpanClass);
           }
-          else
-          {
-            angular.element('.eventsIcon')
-              .addClass(constants.checkedSpanClass);
-          } ;
+          else {
+            checkAllEvent.addClass(constants.checkedSpanClass);
+          }
           ctrl.checkEventType('game');
         };
 
@@ -808,11 +805,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
               events = result.concat(events);
               placesOnMap.showEvents(result, input);
             });
-          }
-          if (eventCounter > 0) {
-            angular.element('.eventsIcon').addClass(constants.checkedClass);
-          } else {
-            angular.element('.eventsIcon').removeClass(constants.checkedClass);
           }
         };
       }]
