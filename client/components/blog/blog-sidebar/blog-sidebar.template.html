@@ -1,25 +1,10 @@
-<div class="blog-find">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="input-group">
-        <input ng-model="$ctrl.query" type="text" class="form-control"
-               placeholder="Search blog">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </span>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="blog-category-list">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 hidden-xs">
       <h3>Categories</h3>
       <ul>
         <li ng-repeat="category in $ctrl.categoryList  ">
-          <a ng-href="#">
+          <a ng-href="#!/blog/categoryId/{{category.id}}">
             <i class="{{'fa ' + category.icon}}" aria-hidden="true"></i>
             {{category.name}}
           </a>
@@ -41,7 +26,7 @@
           </li>
           <li ng-class="{ active: $ctrl.isSelected(2) }">
             <a href="" data-toggle="tab" ng-click="$ctrl.selectTab(2)">
-              Most discussed
+              Discussed
             </a>
           </li>
         </ul>
@@ -52,7 +37,7 @@
                  ng-repeat="blog in $ctrl.popularList | orderBy: 'blogLikes':true | limitTo: 3">
               <a href="#!/blog/{{blog.id}}" class="pull-left">
                 <img alt="{{blog.title}}"
-                     ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
               </a>
               <div class="media-body">
                 <h4 class="media-heading">
@@ -72,7 +57,7 @@
                  ng-repeat="blog in $ctrl.popularList | orderBy: 'blogComments':true | limitTo: 3">
               <a href="#!/blog/{{blog.id}}" class="pull-left">
                 <img alt="{{blog.title}}"
-                     ng-src="{{blog.blogPhoto.url}}" class="media-object"/>
+                     ng-src="{{blog.blogImg}}" class="media-object"/>
               </a>
               <div class="media-body">
                 <h4 class="media-heading">

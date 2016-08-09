@@ -2,24 +2,88 @@
   <section class="blog-page-content">
     <div class="container">
       <div class="row">
+        <aside>
+          <div class="col-sm-push-8 col-md-offset-1 col-md-3 col-sm-4">
+            <button ng-click="$ctrl.toggleEditPost($ctrl.blog)" class="btn editToggle hidden-xs" ng-if="$ctrl.currentUser._id === $ctrl.blog.owner.id">Edit post</button>
+            <div class="row">
+              <div class="col-md-12">
+                <blog-sidebar></blog-sidebar>
+              </div>
+            </div>
+          </div>
+        </aside>
         <article>
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-8 col-md-pull-4 col-sm-pull-4">
+            <div class="row">
+              <div class="col-md-12">
+                <form name="blogPost"  role="form" novalidate ng-submit="$ctrl.editPost($ctrl.blog)"
+                      ng-hide="$ctrl.showEditForm" class="blogPost">
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.blogImg.$invalid && blogPost.blogImg.$dirty }">
+                    <label for="blogImg">Photo</label>
+                    <input type="text" class="form-control" id="blogImg"  name="blogImg"
+                           ng-model="$ctrl.blog.blogImg" value="{{$ctrl.blog.blogImg}}" required>
+
+                    <div ng-show="blogPost.$submitted || blogPost.blogImg.$touched">
+                      <p class="help-block" ng-show="blogPost.blogImg.$error.required">
+                        blog image is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.categoryId.$invalid && blogPost.categoryId.$touched }">
+                    <label for="categoryId">Category</label>
+                    <select class="form-control" id="categoryId" name="categoryId" ng-model="$ctrl.blogPost.categoryId"
+                            required>
+                      <option value="">-- Choose category --</option>
+                      <option ng-repeat="category in $ctrl.categoryList" value="{{category.id}}">
+                        {{category.name}}
+                      </option>
+                    </select>
+
+                    <div ng-show="blogPost.$submitted || blogPost.categoryId.$touched">
+                      <p class="help-block" ng-show="blogPost.categoryId.$error.required">
+                        blog category is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error' : blogPost.title.$invalid && blogPost.title.$dirty }">
+                    <label for="title">title</label>
+                    <input type="text" class="form-control" id="title" placeholder="title" name="title"
+                           ng-model="$ctrl.blog.title" value="{{$ctrl.blog.title}}" required>
+
+                    <div ng-show="blogPost.$submitted || blogPost.title.$touched">
+                      <p class="help-block" ng-show="blogPost.title.$error.required">
+                        blog title is required
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : blogPost.content.$invalid && blogPost.content.$dirty }">
+                    <label for="content">content</label>
+                  <textarea class="form-control" rows="3" name="content" id="content"
+                            ng-model="$ctrl.blog.content" required>{{$ctrl.blog.content}}</textarea>
+
+                    <div ng-show="blogPost.$submitted || blogPost.content.$touched">
+                      <p class="help-block" ng-show="blogPost.content.$error.required">
+                        blog content is required
+                      </p>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-info" ng-click="$ctrl.cancelEditForm($ctrl.blog)">Cancel</button>
+                </form>
+              </div>
+            </div>
             <div class="blog-wrapper">
-              <img ng-src="{{$ctrl.blog.blogPhoto.url}}" alt="{{$ctrl.blog.title}}">
+              <img ng-src="{{$ctrl.blog.blogImg}}" alt="{{$ctrl.blog.title}}">
 
               <div class="">
-                <h2 class="blog-title">
-                  {{$ctrl.blog.title}}
-                </h2>
-
-                <div class="blog-content">
-                  {{$ctrl.blog.content}}
-                </div>
                 <div class="blog-details">
                   <ul>
                     <li>By
                       <span class="blog-author">
-                        <a ng-href="#" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
+                        <a ng-href="#!/blog/owner/{{$ctrl.blog.owner.id}}" title="Posts by admin" rel="author">{{$ctrl.blog.owner.fullName}}</a>
                       </span>
                     </li>
                     <li>
@@ -34,118 +98,66 @@
                       {{$ctrl.blog.blogComments.length}} Comments
                     </li>
                     <li class="pull-right likes-container">
-                      <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                      <span>{{$ctrl.blog.blogLikes.length}}</span>
-                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+
+                      Like it:
+                      <a ng-click="$ctrl.likesToggle()" ng-disabled="!$ctrl.currentUser" class="likes disabled">
+                      {{$ctrl.blog.blogLikes.length}}
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true">
+                        </span>
+                      </a>
                     </li>
                   </ul>
                 </div>
-                <div class="blog-comments">
-                  <div class="row">
-                    <div class="col-md-2">
-                      <h3 class="title-heading">
-                        Comments
-                      </h3>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="title-sep"></div>
-                    </div>
-                  </div>
-                  <div class="comment-list">
-                    <div class="comment-item" ng-repeat="comment in $ctrl.blog.blogComments">
-                      <div class="media">
-                        <div class="media-left">
-                          <img class="media-object avatar "
-                               src="assets/img/welcome-page/avatar.png" alt="...">
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">
-                            By {{comment.userId}} at
-                            {{comment.createdAt | date:'dd MMMM yyyy'}}
-                          </h6>
+                <h2 class="blog-title">
+                  {{$ctrl.blog.title}}
+                </h2>
 
-                          <p>
-                            {{comment.text}}
-                          </p>
+                <div class="blog-content">
+                  {{$ctrl.blog.content}}
+
+                </div>
+                <section class="related-posts">
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h3 class="title-heading">
+                          Related Posts
+                        </h3>
+                      </div>
+                      <div class="col-md-9 hidden-xs">
+                        <div class="title-sep"></div>
+                      </div>
+                      </div>
+                      <div class="row">
+                        <div class="fusion-title">
+                          <div class="col-md-4 col-sm-4 col-xs-12 related-items" ng-repeat="related in $ctrl.relatedPost | limitTo: 3">
+
+                            <div class="media blog-aside-items ng-scope">
+                                <a href="#!/blog/{{related.id}}" class="pull-left">
+                                <img alt="{{related.title}}" ng-src="{{related.blogImg}}" class="media-object"/>
+                              </a>
+                              <div class="media-body">
+                                <h4 class="media-heading">
+                                  <a href="#!/blog/{{related.id}}">
+                                    {{related.title}}
+                                  </a>
+                                </h4>
+                                <div class="media-date ng-binding">
+                                  {{related.createdAt | date:'dd MMMM yyyy'}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h3 class="title-heading">
-                        Leave A Comment
-                      </h3>
-                    </div>
-                    <div class="col-md-9">
-                      <div class="title-sep"></div>
-                    </div>
-                  </div>
-                  <form name="reviewForm" ng-submit="">
-                    <textarea ng-model="newComment"></textarea>
-                    <button type="submit" class="btn">Post Comment</button>
-                  </form>
-                </div>
+                </section>
+                <blog-comments blogcomment="$ctrl.blog.blogComments" blogid="$ctrl.blog.id"></blog-comments>
               </div>
             </div>
           </div>
         </article>
-        <aside>
-          <div class="col-md-offset-1 col-md-3 col-sm-4 hidden-xs">
-            <div class="row">
-              <div class="col-md-12">
-                <blog-sidebar></blog-sidebar>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </div>
   </section>
-  <!--<section class="related-posts">-->
-  <!--<div class="container">-->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<div class="fusion-title">-->
-  <!--<h3 class="title-heading-left">Related Posts</h3>-->
-  <!--<div class="title-sep-container">-->
-  <!--<div class="title-sep sep-double"></div>-->
-  <!--</div>-->
-  <!--<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="blog in $ctrl.blogs | limitTo:3" >-->
-  <!--<a href="#!/blog/{{blog.id}}">-->
-  <!--{{blog.title}}-->
-  <!--<img alt="{{blog.title}}" ng-src="{{blog.images}}" class="media-object" style="width:50px;height:50px;"/>-->
-  <!--</a>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</section>-->
-  <!--<br/>-->
-  <!--<section class="post-comments" id="post-comments">-->
-  <!--<div class="container">-->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<h3 class="title-heading-left">Comments</h3>-->
-  <!--<div class="comment-item" ng-repeat="comment in blog.comments">-->
-  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
-  <!--{{comment}}-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>    -->
-  <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-  <!--<form name="reviewForm" ng-submit=""> -->
-  <!--<div class="col-md-12">-->
-  <!--<img class="media-object avatar " src="assets/img/welcome-page/avatar.png" alt="...">-->
-  <!--{{newComment}}-->
-  <!--</div>-->
-  <!--<textarea ng-model="newComment"></textarea>-->
-  <!--<input type="submit" value="Comment">-->
-  <!--</form>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</section>-->
+
 </div>
