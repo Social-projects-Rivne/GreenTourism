@@ -4,5 +4,7 @@ angular.module('place', [
   'placeDetail',
   'locationPlaces',  // TODO: Move this to places dependencies (or remove)
   'popularPlaces',  // TODO: Move this to places dependencies (or remove)
-  'mapModule'
+  'mapModule',
+  'searchModel',
+  'searchPlace'
 ]);

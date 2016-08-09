@@ -247,7 +247,7 @@
 }
 
 // Popular places and tracks in location
-.popular-places-wrapper, .popular-tracks-wrapper {
+.popular-places-wrapper, .popular-tracks-wrapper, .search-places-wrapper {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -428,7 +428,66 @@
     width: 60%;
   }
 }
+/*--------search-----*/
+#search {
+  div{
+    margin:0;
+    padding:0;
+  }
+  span.err {
+    border: 1px solid @light-green;
+    border-top: 0;
+    width: 200px;
+    text-align: center;
+    height: 20px;
+    position: absolute;
+    color: red;
+    background: #FFF
+  }
+  span.transparent {
+    display: none;
+  }
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  input {
+    width: 110px;
+  }
+  button {
+    width: 80px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  ul li {
+    list-style-type: none;
+  }
+}
 
+#searchPlaces {
+  li button {
+    color: white;
+    width: 100%;
+    background-color: #3da268;
+    a, h3 {
+      color: white;
+    }
+    .search-in-location-address {
+      color: white;
+      text-align: left;
+    }
+    i.fa:hover, i.fa:active, i.fa:focus, i.fa:default {
+      color: white !important;
+      background-color: white !important;
+      text-align: left !important;
+    }
+  }
+  button.activeSearchResult {
+    background-color: #46bd78;
+  }
+  button:hover {
+    background-color: #46bd78;
+  }
+}
 /*-----------------event on map ----------------*/
 .event-map-poster .calendar {
   margin: 5px 12px;
