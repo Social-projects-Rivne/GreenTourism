@@ -16,6 +16,10 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
     //$scope.center = $scope.map.getCenter();
     $scope.placesByLocation = [];
     $scope.placesByLocation = placesOnMap.getPlaceArr();
+
+    if ($scope.placesByLocation.length == 0)
+      $scope.placesByLocation = ctrl.popularPlaces;
+
     $timeout(function() {
 
       $scope.$apply();
