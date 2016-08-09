@@ -16,7 +16,6 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
     //$scope.center = $scope.map.getCenter();
     $scope.placesByLocation = [];
     $scope.placesByLocation = placesOnMap.getPlaceArr();
-    // ctrl.markers=getAllMarkers();
     $timeout(function() {
 
       $scope.$apply();
@@ -29,7 +28,6 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
 
   $scope.showMarker = function(lat, lon, place) {
     if (ctrl.marker_new) {
-      console.log(ctrl.marker_new);
       mapFactory.map.removeLayer(ctrl.marker_new);
     }
     $timeout(function() {
@@ -67,21 +65,14 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
 
   };
 
-  function getAllMarkers() {
-
-    var allMarkersObjArray = [];
-    $.each(mapFactory.map._layers, function(ml) {
-      if (this._latlng)
-        allMarkersObjArray.push(this)
-      else $.each(mapFactory.map._layers, function(ml) {
-        if (this._latlng)
-          allMarkersObjArray.push(this);
-      })
-    })
-    return allMarkersObjArray;
-
-  };
-
+  $scope.$on('placesLocationClose', function(event, data) {
+    ctrl.hidePopularPlaces = data;
+    if (ctrl.marker_new) {
+      if (ctrl.marker_new) {
+        mapFactory.map.removeLayer(ctrl.marker_new);
+      }
+    }
+  });
 
 }
 
