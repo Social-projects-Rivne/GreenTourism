@@ -98,8 +98,10 @@
                       {{$ctrl.blog.blogComments.length}} Comments
                     </li>
                     <li class="pull-right likes-container">
-                      {{$ctrl.blog.blogLikes.length}}
+
+                      Like it:
                       <a ng-click="$ctrl.likesToggle()" ng-disabled="!$ctrl.currentUser" class="likes disabled">
+                      {{$ctrl.blog.blogLikes.length}}
                         <span class="glyphicon glyphicon-heart" aria-hidden="true">
                         </span>
                       </a>

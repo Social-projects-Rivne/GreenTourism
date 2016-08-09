@@ -162,6 +162,8 @@
     padding: 30px 25px 0 25px;
     .blog-title {
       margin: 0 0 5px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .blog-details{
       height: 40px;
@@ -177,6 +179,7 @@
       min-width: 80px;
       height: 60px;
       overflow: hidden;
+      word-wrap: break-word;
     }
     .blog-meta {
       margin: 20px 0;
@@ -250,6 +253,7 @@
               border-right: none;
             }
             &.likes-container {
+              cursor: pointer;
               .added{
                 color: @blog-prim-color;
               }
