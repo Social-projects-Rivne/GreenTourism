@@ -411,7 +411,6 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         // ---START---- Popular places and tracks in location
         ctrl.hidePopularPlaces = true;
         ctrl.hidePopularTracks = true;
-        ctrl.hidePopularTracks = true;
         ctrl.hidePopularEvents = true;
         ctrl.hideSearchPlaces = true;
         $scope.$on('search', function(event, data) {
@@ -424,9 +423,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             popularPlacesIcon.removeClass(constants.checkedClass);
             ctrl.hidePopularPlaces = true;
           } else {
-            popularPlacesIcon.addClass(constants.checkedClass);
-            angular.element('#popularTracks')
+            angular.element('.map-menu-popular i')
               .removeClass(constants.checkedClass);
+            popularPlacesIcon.addClass(constants.checkedClass);
 
             ctrl.hidePopularPlaces = false;
             ctrl.hidePopularTracks = true;
@@ -441,14 +440,14 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             popularTracksIcon.removeClass(constants.checkedClass);
             ctrl.hidePopularTracks = true;
           } else {
-            popularTracksIcon.addClass(constants.checkedClass);
-            angular.element('#popularPlaces')
+            angular.element('.map-menu-popular i')
               .removeClass(constants.checkedClass);
+            popularTracksIcon.addClass(constants.checkedClass);
 
             ctrl.hidePopularTracks = false;
             ctrl.hidePopularPlaces = true;
             ctrl.hidePopularEvents = true;
-            ctrl.hideSearchPlaces =  true;
+            ctrl.hideSearchPlaces = true;
           }
         };
 
@@ -458,9 +457,10 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             popularEventsIcon.removeClass(constants.checkedClass);
             ctrl.hidePopularEvents = true;
           } else {
-            popularEventsIcon.addClass(constants.checkedClass);
-            angular.element('#toolsOfEvents')
+            angular.element('.map-menu-popular i')
               .removeClass(constants.checkedClass);
+            popularEventsIcon.addClass(constants.checkedClass);
+
             ctrl.hidePopularEvents = false;
             ctrl.hidePopularTracks = true;
             ctrl.hidePopularPlaces = true;
