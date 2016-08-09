@@ -5,6 +5,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
       '$location',
       function SearchCtrl(Search, Track, $scope, placesOnMap, $timeout, mapFactory, $compile, Place, $rootScope, $location) {
         var ctrl = this;
+        ctrl.loadsearch = false;
         markers = [];
         $scope.$on('searchClose', function(event, data) {
           ctrl.hideSearchPlaces = data;
@@ -17,7 +18,7 @@ angular.module('searchPlace', ['ui.bootstrap'])
             }
           }
         });
-        $scope.loading = false;
+
         $scope.noResults = false;
         $scope.minchars = false;
         var searchBy = 'place';
@@ -74,16 +75,16 @@ angular.module('searchPlace', ['ui.bootstrap'])
           if (searchname.length >= 3) {
             $scope.hideSearchPlaces = false;
             $scope.$emit('search', $scope.hideSearchPlaces);
-            $scope.loading = true;
+            ctrl.loadsearch = true;
             Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultPlaces) {
               ctrl.resultPlaces = resultPlaces;
-              $scope.loading = true;
+              ctrl.loadsearch= true;
               searchBy = 'track';
               Search.getList({name: [searchname], searchBy: [searchBy]}).then(function(resultTracks) {
                 ctrl.resultTracks = resultTracks;
                 placesOnMap.removeTracks();
                 placesOnMap.showTracks(resultTracks);
-                $scope.loading = false;
+                ctrl.loadsearch = false;
                 searchBy = 'place';
                 if (ctrl.resultPlaces.length == 0 && ctrl.resultTracks.length == 0) {
                   $scope.noResults = true;

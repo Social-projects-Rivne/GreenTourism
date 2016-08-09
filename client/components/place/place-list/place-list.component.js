@@ -415,6 +415,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
         ctrl.hideSearchPlaces = true;
         $scope.$on('search', function(event, data) {
           ctrl.hideSearchPlaces = data;
+          ctrl.hidePopularPlaces = true;
+          ctrl.hidePopularTracks = true;
+          ctrl.hidePopularEvents = true;
         });
 
         ctrl.checkPopularPlaces = function() {
@@ -431,7 +434,9 @@ angular.module('placeList', ['filterMapType', 'popularTracks', 'popularEvents', 
             ctrl.hidePopularTracks = true;
             ctrl.hidePopularEvents = true;
             ctrl.hideSearchPlaces = true;
+
           }
+          $scope.$broadcast('placesLocationClose', ctrl.hidePopularPlaces);
         };
 
         ctrl.checkPopularTracks = function() {
