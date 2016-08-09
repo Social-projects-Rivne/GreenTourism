@@ -65,6 +65,3 @@ build/Release
 
 # Ctags
 .tags*
-
-# CSS (Use Less)
-*.css
