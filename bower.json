@@ -1,6 +1,6 @@
 {
   "name": "green-tourism",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "private": true,
   "main": [
@@ -8,7 +8,13 @@
     "client/assets/less/main.less"
   ],
   "authors": [
-    "Rv-017.UI"
+    "Yury Kozhenov <yurykozhenov@gmail.com>",
+    "Andriy Zhuk <astrosferatu@gmail.com>",
+    "Denys Gudakov <denysgud@gmail.com>",
+    "Olena Martynchyk <martyn4uk@gmail.com>",
+    "Maksym Yushchuk <max.yushchuk@gmail.com>",
+    "Sergii Semenkiv <ssv260689@gmail.com>",
+    "Taras Rudyk <rudyktaras@gmail.com>"
   ],
   "license": "ISC",
   "homepage": "https://github.com/Social-projects-Rivne/GreenTourism",
