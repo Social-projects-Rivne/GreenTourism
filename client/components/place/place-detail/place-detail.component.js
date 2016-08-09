@@ -94,6 +94,7 @@ angular.module('placeDetail', ['comment', 'like', 'ngAnimate', 'ngMessages'])
         } else {
           angular.element('#show-message').removeClass();
           ctrl.message = '';
+          ctrl.error = '';
           ctrl.showMessage = false;
           ctrl.place = angular.copy(ctrl.defaultPlace);
         }
