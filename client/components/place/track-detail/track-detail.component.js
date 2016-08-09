@@ -66,7 +66,7 @@ angular.module('trackDetail', ['comment', 'like'])
             if (Object.keys(trackObject).length) {
               Track.one(ctrl.track._id).customPUT(trackObject)
                 .then(function(obj) {
-                  ctrl.defaultTrack = angular.copy(obj.record);
+                  ctrl.defaultTrack = angular.copy(obj);
                   ctrl.track = angular.copy(ctrl.defaultTrack);
                   angular.element('#show-message')
                     .addClass('alert alert-success text-center');
@@ -74,6 +74,8 @@ angular.module('trackDetail', ['comment', 'like'])
                   ctrl.showMessage = true;
                   ctrl.newPhoto = '';
                   redrawTrack();
+                  ctrl.currentTrackType = obj.type;
+                  $timeout(ctrl.enableEditMode, 1500);
                 }, function() {
                   angular.element('#show-message')
                     .addClass('alert alert-danger text-center');
