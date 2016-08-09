@@ -1,13 +1,22 @@
 {
   "name": "green-tourism",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "private": true,
   "main": "server/server.js",
-  "author": "Rv-017.UI",
+  "author": "Rv-017.WebUI",
+  "contributors": [
+    "Yury Kozhenov <yurykozhenov@gmail.com>",
+    "Andriy Zhuk <astrosferatu@gmail.com>",
+    "Denys Gudakov <denysgud@gmail.com>",
+    "Olena Martynchyk <martyn4uk@gmail.com>",
+    "Maksym Yushchuk <max.yushchuk@gmail.com>",
+    "Sergii Semenkiv <ssv260689@gmail.com>",
+    "Taras Rudyk <rudyktaras@gmail.com>"
+  ],
   "license": "ISC",
   "engines": {
-    "node": "4.4.4"
+    "node": "~4.4.4"
   },
   "homepage": "https://github.com/Social-projects-Rivne/GreenTourism#readme",
   "repository": {
@@ -27,6 +36,7 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bower": "^1.7.9",
     "body-parser": "^1.15.1",
     "connect-flash": "^0.1.1",
     "ejs": "^2.4.2",
@@ -47,7 +57,6 @@
     "sequelize": "^3.23.3"
   },
   "devDependencies": {
-    "bower": "^1.7.9",
     "eslint": "^3.0.0",
     "eslint-config-angular": "^0.5.0",
     "eslint-config-google": "^0.6.0",
