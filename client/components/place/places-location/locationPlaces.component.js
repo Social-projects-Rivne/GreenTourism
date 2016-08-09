@@ -1,7 +1,5 @@
 function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $timeout) {
   var ctrl = this;
-  var latitude;
-  var longitude;
   Place.getList({sort: '-rate', limit: 10}).then(function(popularPlaces) {
     ctrl.popularPlaces = popularPlaces;
     $scope.placesByLocation = popularPlaces;
@@ -13,7 +11,6 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
   $scope.map.on('moveend', setLocationPlaces);
 
   function setLocationPlaces() {
-    //$scope.center = $scope.map.getCenter();
     $scope.placesByLocation = [];
     $scope.placesByLocation = placesOnMap.getPlaceArr();
 
@@ -23,7 +20,7 @@ function locationplacesCtrl(mapFactory, $scope, placesOnMap, constants, Place, $
     $timeout(function() {
 
       $scope.$apply();
-    }, 10000);
+    },5000);
   }
 
   this.placesFilter = function(value) {
