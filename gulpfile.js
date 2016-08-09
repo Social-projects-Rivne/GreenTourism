@@ -136,7 +136,7 @@ gulp.task('build-assets', ['bower', 'less'], function() {
     .pipe(useref())
     .pipe(gulpif('*.js', ngAnnotate()))
     .pipe(gulpif('*.js', uglify()))
-    .pipe(gulpif('*.css', autoprefixer({browsers: ['last 2 versions'],
+    .pipe(gulpif('*.css', autoprefixer({browsers: ['last 2 versions', '>1%'],
                                         cascade: false})))
     .pipe(gulpif('*.css', cleanCSS({keepSpecialComments: 0})))
     .pipe(gulp.dest(DEST))
