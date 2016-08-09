@@ -1,7 +1,7 @@
 <div class="row event-map-poster">
   <div class="panel-title"> Most popular Events</div>
 
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calendar">
+  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 calendar">
     <div class="btn-group">
       <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
@@ -14,7 +14,7 @@
       <div class="row"></div>
     </div>
   </div>
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calendar">
+  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 calendar">
     <div class="btn-group">
       <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
@@ -29,7 +29,7 @@
 
   <div class="container-fluid main-centr">
     <div class="row">
-      <div class="col-xs-12 col-md-12" ng-repeat="event in events ">
+      <div class="col-xs-12 col-md-12" ng-repeat="event in events | limitTo:3">
         <!--<div class="green-places" ng-style="{'background-image':'url(assets/{{place.photo[0]}})'}"></div> -->
         <a ng-href="#!/events/{{event._id}}">
           <div class="img-block">
